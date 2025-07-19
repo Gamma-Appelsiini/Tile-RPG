@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://do44fnv3jbpyo"]
+
+[ext_resource type="PackedScene" uid="uid://dok2fbe3dlibd" path="res://Tile-RPG/GameCharacters/Player/player.tscn" id="1_7j3ou"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
+size = Vector2(5, 5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7j3ou"]
+data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5, -2.5, 0, -2.5, 2.5, 0, -2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7j3ou"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_686us"]
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_a52sh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_7j3ou")
+
+[node name="Player" parent="." instance=ExtResource("1_7j3ou")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03872, 0)
+light_energy = 6.911
+omni_range = 27.243
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.0776)
+mesh = SubResource("BoxMesh_7j3ou")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.89966, 0, -0.0629866)
+mesh = SubResource("CylinderMesh_686us")

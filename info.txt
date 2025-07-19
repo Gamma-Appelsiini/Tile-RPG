@@ -1,0 +1,5 @@
+Collision layers
+1: Floor
+2: Wall
+3: Props
+4: GameCharacters
