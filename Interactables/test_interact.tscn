@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://wdj2pbvpp1yp"]
+
+[ext_resource type="Script" uid="uid://c4u1ans204je" path="res://Tile-RPG/Interactables/test_interact.gd" id="1_lln1e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lln1e"]
+albedo_color = Color(1, 0.196078, 0.298039, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_40efd"]
+material = SubResource("StandardMaterial3D_lln1e")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r6nvx"]
+
+[node name="TestInteract" type="Node3D" node_paths=PackedStringArray("interact_area", "indicator_place")]
+script = ExtResource("1_lln1e")
+interact_area = NodePath("Area3D")
+indicator_place = NodePath("Node3D")
+interact_text = "Test"
+oneshot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_40efd")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
+shape = SubResource("BoxShape3D_r6nvx")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600727, 0.618978, 0)

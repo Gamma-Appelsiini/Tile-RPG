@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=7 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Script" uid="uid://cur80jd0cr7os" path="res://Tile-RPG/Camera/player_camera.gd" id="2_42kgy"]
+[ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
 height = 1.8
@@ -12,10 +13,13 @@ size = Vector3(0.1, 0.1, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42kgy"]
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "visual_mesh")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "visual_mesh", "interact_handler")]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_1iwi1")
 player_camera = NodePath("CameraPivot/PlayerCamera")
 visual_mesh = NodePath("MeshInstance3D")
+interact_handler = NodePath("InteractHandler")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -25,6 +29,10 @@ mesh = SubResource("CapsuleMesh_51u2s")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885344, 0.487823)
 mesh = SubResource("BoxMesh_42kgy")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_42kgy")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.15003, 0)
@@ -39,6 +47,5 @@ far = 839.66
 script = ExtResource("2_42kgy")
 pivot = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_42kgy")
+[node name="InteractHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_51u2s")]
+player = NodePath("..")

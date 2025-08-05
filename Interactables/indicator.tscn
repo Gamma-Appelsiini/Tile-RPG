@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0rkde0u5wckd"]
+
+[ext_resource type="Script" uid="uid://cc6psujqsof0m" path="res://Tile-RPG/Interactables/indicator.gd" id="1_jqgcn"]
+[ext_resource type="Shader" uid="uid://b5egmwjwx1j6r" path="res://Tile-RPG/Shaders/glow_seethrough.gdshader" id="1_reiaa"]
+[ext_resource type="ArrayMesh" uid="uid://c2bc7m6lvnu6y" path="res://Tile-RPG/Interactables/indicator_mesh.res" id="2_jqgcn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_reiaa"]
+render_priority = 0
+shader = ExtResource("1_reiaa")
+shader_parameter/emission_color = Color(0.911745, 0.481679, 0, 1)
+shader_parameter/emission_amount = 2.5
+shader_parameter/rim_sharpness = 0.65
+
+[node name="Indicator" type="Node3D"]
+top_level = true
+script = ExtResource("1_jqgcn")
+
+[node name="IndicatorMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.6, 0, 0, 0, -3.49691e-08, -0.8, 0, 0.8, -3.49691e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_reiaa")
+mesh = ExtResource("2_jqgcn")

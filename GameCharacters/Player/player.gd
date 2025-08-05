@@ -4,8 +4,9 @@ class_name Player
 @export var movement_speed:float = 8
 @export var acceleration:float = 20
 @export var player_camera:Camera3D
-
 @export var visual_mesh:MeshInstance3D
+@export var interact_handler:InteractHandler
+
 var _last_move_dir: Vector3 = Vector3.BACK
 
 func _physics_process(delta: float) -> void:
