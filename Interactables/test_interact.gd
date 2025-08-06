@@ -1,5 +1,5 @@
 extends Interactable
 class_name TestInteractable
 
-func interact():
+func interact() -> void:
 	pass

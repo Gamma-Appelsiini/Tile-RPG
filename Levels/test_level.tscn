@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=8 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="PackedScene" uid="uid://dok2fbe3dlibd" path="res://Tile-RPG/GameCharacters/Player/player.tscn" id="1_7j3ou"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
+[ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
 size = Vector2(5, 5)
@@ -25,6 +26,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_7j3ou")
 
 [node name="Player" parent="." instance=ExtResource("1_7j3ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64815, 0, 1.86965)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03872, 0)
@@ -41,3 +43,6 @@ mesh = SubResource("CylinderMesh_686us")
 
 [node name="TestInteract" parent="." instance=ExtResource("2_686us")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.38504, -9.53674e-07, 1.4866)
+
+[node name="WoodDoor" parent="." instance=ExtResource("3_176yf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

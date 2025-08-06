@@ -10,9 +10,13 @@ class_name Interactable
 
 var used:bool = false
 var player:Player = null
+var indicator:Indicator = null
+var label:Label3D = null
 
 func _ready() -> void:
-	#interact_area.collision_mask = 4
+	#Set to scan GameCharacters
+	interact_area.set_collision_mask_value(3,true)
+	if audio_player_3d: audio_player_3d.stream = interact_sound
 	interact_text = "(" + get_input_string("Interact") + ")" + interact_text
 	#TODO sub to signal when keybinds changed
 	interact_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
@@ -27,6 +31,26 @@ func _on_Area3D_body_exited(body: Node) -> void:
 	if body is Player:
 		var exited_player:Player = body as Player
 		exited_player.interact_handler.remove_interactable(self)
+
+func show_indicator(ind:Indicator, lab:Label3D) -> void:
+	indicator = ind
+	label = lab
+
+	lab.text = self.interact_text
+	lab.global_position = self.indicator_place.global_position
+	ind.global_position = self.indicator_place.global_position + Vector3(0,0.1,0)
+	lab.show()
+	ind.show_indicator()
+
+func hide_indicator() -> void:
+	if indicator == null: return
+	if label == null: return
+	
+	label.hide()
+	indicator.hide_indicator()
+	
+	indicator = null
+	label = null
 
 #Override this
 func interact() -> void:

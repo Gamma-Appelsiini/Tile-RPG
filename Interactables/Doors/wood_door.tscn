@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://drhisncpw1b5d"]
+
+[ext_resource type="Script" uid="uid://dhbk2lg2t2ydq" path="res://Tile-RPG/Interactables/Doors/Door.gd" id="1_a60df"]
+[ext_resource type="ArrayMesh" uid="uid://u8fwn3bcjjwh" path="res://Tile-RPG/Interactables/Doors/wood_door.res" id="2_we8qq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_juyni"]
+size = Vector3(1, 2, 0.102539)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a60df"]
+size = Vector3(1, 1.87256, 1.99121)
+
+[node name="WoodDoor" type="Node3D" node_paths=PackedStringArray("side_1", "side_2", "pivot", "interact_area", "indicator_place", "audio_player_3d")]
+script = ExtResource("1_a60df")
+side_1 = NodePath("Hinge/Point1")
+side_2 = NodePath("Hinge/Point2")
+pivot = NodePath("Hinge")
+interact_area = NodePath("Hinge/Area3D")
+indicator_place = NodePath("Hinge/Point1")
+interact_text = "Open"
+audio_player_3d = NodePath("Hinge/AudioStreamPlayer3D")
+
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.000488281)
+shape = SubResource("BoxShape3D_juyni")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0.05)
+mesh = ExtResource("2_we8qq")
+skeleton = NodePath("../..")
+
+[node name="Point1" type="Node3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497079, 0.88758, -0.380507)
+
+[node name="Point2" type="Node3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795608, 0.878922, 0.337645)
+
+[node name="Interact" type="Node3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0)
+
+[node name="Area3D" type="Area3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959717, 0)
+shape = SubResource("BoxShape3D_a60df")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.133856, 0, 0)

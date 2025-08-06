@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	_turn_player(move_direction)
 	
 
-func _turn_player(move_direction:Vector3):
+func _turn_player(move_direction:Vector3) -> void:
 	if move_direction.length() > 0.2:
 		_last_move_dir = move_direction
 		

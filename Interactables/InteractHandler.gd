@@ -38,16 +38,6 @@ func _interact_with_interactable() -> void:
 		current_interactee.handle_oneshot()
 		_show_right_interactee()
 		
-func _hide_indicator() -> void:
-	indicator.hide_indicator()
-	label.hide()
-
-func _show_indicator(inter:Interactable) -> void:
-	label.text = inter.interact_text
-	label.global_position = inter.indicator_place.global_position
-	indicator.global_position = inter.indicator_place.global_position + Vector3(0,0.1,0)
-	label.show()
-	indicator.show_indicator()
 
 func add_interactable(inter:Interactable) -> void:
 	interactables.append(inter)
@@ -62,15 +52,18 @@ func remove_interactable(inter:Interactable) -> void:
 func _show_right_interactee() -> void:
 	if interactables.is_empty():
 		if current_interactee == null: return
-		_hide_indicator()
+		current_interactee.hide_indicator()
 		current_interactee = null
 		return
 
 	var closest:Interactable = _get_closest_interactee()
 	if current_interactee != closest:
-		if current_interactee != null: _hide_indicator()
+		if current_interactee != null:
+			current_interactee.hide_indicator()
+
+		#TODO fix indicator hiding in multiple interaction areas
 		current_interactee = closest
-		_show_indicator(current_interactee)
+		current_interactee.show_indicator(indicator,label)
 		
 func _get_closest_interactee() -> Interactable:
 	var closest:Interactable = interactables[0]
