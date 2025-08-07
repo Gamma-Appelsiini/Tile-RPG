@@ -80,14 +80,49 @@ func level_up() -> void:
 	leveled_up.emit()
 	stats_changed.emit()
 	
-func increase_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
+func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 	main_stats[main_stat] += amount
-	#TODO individual stat increases
+	#Might = armor, physical dmg, crit dmg
+	if main_stat == Stats.MainStat.MIGHT:
+		defences[Stats.Defence.ARMOR] += 3 * amount
+		dmg_increases[Stats.DmgIncreases.PHYSICAL] += 2 * amount
+		secondary_stats[Stats.SecondaryStat.GLOBAL_CRIT_MULTIPLIER] += 2 * amount
+	#Agility = evasion, toxic dmg, initiative
+	elif main_stat == Stats.MainStat.AGILITY:
+		defences[Stats.Defence.EVASION] += 3 * amount
+		dmg_increases[Stats.DmgIncreases.TOXIC] += 2 * amount
+		secondary_stats[Stats.SecondaryStat.INITIATIVE] += 1 * amount
+	#Endurace = hp, vigor
+	elif main_stat == Stats.MainStat.ENDURANCE:
+		resources[Stats.ResourceStat.MAX_HP] += 2 * amount
+		resources[Stats.ResourceStat.CURRENT_HP] += 2 * amount
+		skill_stats[Stats.SkillStat.VIGOR] += 1 * amount
+	#Mystic = ward, mystical dmg, spell crit multi
+	elif main_stat == Stats.MainStat.MYSTIC:
+		defences[Stats.Defence.WARD] += 2 * amount
+		dmg_increases[Stats.DmgIncreases.MYSTICAL] += 2 * amount
+		secondary_stats[Stats.SecondaryStat.SPELL_CRIT_MULTIPLIER] += 2 * amount
+	#Skill = focus, frost dmg, accuracy
+	elif main_stat == Stats.MainStat.SKILL:
+		skill_stats[Stats.SkillStat.FOCUS] += 1 * amount
+		dmg_increases[Stats.DmgIncreases.FROST] += 2 * amount
+		secondary_stats[Stats.SecondaryStat.ACCURACY] += 2 * amount
+	#Luck = lightning dmg, crit chance, greed
+	elif main_stat == Stats.MainStat.LUCK:
+		secondary_stats[Stats.SecondaryStat.GREED] += 1 * amount
+		dmg_increases[Stats.DmgIncreases.LIGHTNING] += 2 * amount
+		secondary_stats[Stats.SecondaryStat.GLOBAL_CRIT_CHANCE] += 3 * amount
+	#Valor = fire dmg, insight, spirit
+	elif main_stat == Stats.MainStat.VALOR:
+		skill_stats[Stats.SkillStat.INSIGHT] += 1 * amount
+		dmg_increases[Stats.DmgIncreases.FIRE] += 2 * amount
+		resources[Stats.ResourceStat.MAX_SPIRIT] += 1 * amount
+		resources[Stats.ResourceStat.CURRENT_SPIRIT] += 1 * amount
 
 func update_stat(type:int, amount:int) -> void:
 	
 	if type in Stats.MainStat.values():
-		self.increase_main_stat(type,amount)
+		self.update_main_stat(type,amount)
 	elif type in Stats.SecondaryStat.values():
 		self.secondary_stats[type] += amount
 	elif type in Stats.CharStat.values():
@@ -159,7 +194,7 @@ func _string_keys_to_enum_dict(dict: Dictionary, enum_type: Dictionary) -> Dicti
 
 func set_stats_from_resource(res:StatResource) -> void:
 	for stat:int in res.main_stats:
-		self.main_stats[stat] = res.main_stats[stat]
+		update_main_stat(stat,res.main_stats[stat])
 		
 	for stat:int in res.skill_stats:
 		self.skill_stats[stat] = res.skill_stats[stat]
