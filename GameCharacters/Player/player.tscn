@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=8 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
+[ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
 [ext_resource type="Script" uid="uid://cur80jd0cr7os" path="res://Tile-RPG/Camera/player_camera.gd" id="2_42kgy"]
 [ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
 
@@ -20,6 +21,7 @@ script = ExtResource("1_1iwi1")
 player_camera = NodePath("CameraPivot/PlayerCamera")
 visual_mesh = NodePath("MeshInstance3D")
 interact_handler = NodePath("InteractHandler")
+stat_resource = ExtResource("2_3oamb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

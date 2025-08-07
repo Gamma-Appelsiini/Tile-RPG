@@ -1,0 +1,183 @@
+class_name StatHandler
+
+signal stats_changed
+signal leveled_up
+signal health_changed(sh:StatHandler)
+
+const POINTS_PER_LVL:int = 3
+const XP_INCREASE:float = 1.5
+
+var main_stats:Dictionary[Stats.MainStat,int] = {
+	Stats.MainStat.AGILITY: 1,
+	Stats.MainStat.ENDURANCE: 1,
+	Stats.MainStat.LUCK: 1,
+	Stats.MainStat.MIGHT: 1,
+	Stats.MainStat.MYSTIC: 1,
+	Stats.MainStat.SKILL: 1,
+	Stats.MainStat.VALOR: 1,
+}
+
+var char_stats:Dictionary[Stats.CharStat,int] = {
+	Stats.CharStat.STATS_TO_ALLOCATE: 0,
+	Stats.CharStat.CURRENT_XP: 0,
+	Stats.CharStat.MAX_XP: 100,
+	Stats.CharStat.CURRENT_LEVEL: 1
+}
+
+var skill_stats:Dictionary[Stats.SkillStat,int] = {
+	Stats.SkillStat.INSIGHT: 1,
+	Stats.SkillStat.VIGOR: 1,
+	Stats.SkillStat.FOCUS: 1,
+}
+
+var defences:Dictionary[Stats.Defence,int] = {
+	Stats.Defence.ARMOR: 0,
+	Stats.Defence.EVASION: 0,
+	Stats.Defence.WARD: 0,
+	Stats.Defence.BLOCK: 0,
+	Stats.Defence.SPELL_BLOCK: 0,
+	Stats.Defence.GLANCE: 0,
+	Stats.Defence.DODGE: 0,
+	Stats.Defence.SPELL_DODGE: 0
+}
+
+var resources:Dictionary[Stats.ResourceStat,int] = {
+	Stats.ResourceStat.CURRENT_HP: 5,
+	Stats.ResourceStat.CURRENT_AP: 1,
+	Stats.ResourceStat.CURRENT_SPIRIT: 1,
+	Stats.ResourceStat.CURRENT_MOVEMENT: 1,
+	Stats.ResourceStat.MAX_HP: 5,
+	Stats.ResourceStat.MAX_AP: 1,
+	Stats.ResourceStat.MAX_SPIRIT: 1,
+	Stats.ResourceStat.MAX_MOVEMENT: 1
+}
+
+var secondary_stats:Dictionary[Stats.SecondaryStat,int] = {}
+var resistances:Dictionary[Stats.DmgType,int] = {}
+var dmg_increases:Dictionary[Stats.DmgIncreases,int] = {}
+
+
+func _init() -> void:
+	for stat in Stats.SecondaryStat.values():
+		secondary_stats[stat] = 0
+	for stat in Stats.DmgType.values():
+		resistances[stat] = 0
+	
+	update_stat(Stats.DmgType.FIRE,2)
+	var js:String = save_to_json()
+	print(js)
+
+func add_xp(amount:int) -> void:
+	char_stats[Stats.CharStat.CURRENT_XP] += amount
+	if char_stats[Stats.CharStat.CURRENT_XP] >= char_stats[Stats.CharStat.MAX_XP]:
+		level_up()
+
+func level_up() -> void:
+	char_stats[Stats.CharStat.CURRENT_XP] = char_stats[Stats.CharStat.CURRENT_XP] - char_stats[Stats.CharStat.MAX_XP]
+	char_stats[Stats.CharStat.MAX_XP] = int(char_stats[Stats.CharStat.MAX_XP] * XP_INCREASE)
+	char_stats[Stats.CharStat.CURRENT_LEVEL] += 1
+	char_stats[Stats.CharStat.STATS_TO_ALLOCATE] += POINTS_PER_LVL
+	leveled_up.emit()
+	stats_changed.emit()
+	
+func increase_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
+	main_stats[main_stat] += amount
+	#TODO individual stat increases
+
+func update_stat(type:int, amount:int) -> void:
+	
+	if type in Stats.MainStat.values():
+		self.increase_main_stat(type,amount)
+	elif type in Stats.SecondaryStat.values():
+		self.secondary_stats[type] += amount
+	elif type in Stats.CharStat.values():
+		self.char_stats[type] += amount
+	elif type in Stats.ResourceStat.values():
+		self.resources[type] += amount
+		if resources[Stats.ResourceStat.CURRENT_HP] > resources[Stats.ResourceStat.MAX_HP]:
+			resources[Stats.ResourceStat.CURRENT_HP] = resources[Stats.ResourceStat.MAX_HP]
+		health_changed.emit(self)
+	elif type in Stats.DmgType.values():
+		self.resistances[type] += amount
+	elif type in Stats.DmgIncreases.values():
+		self.damage_increases[type] += amount
+	elif type in Stats.Defence.values():
+		#dont apply af def to char
+		pass
+	elif type in Stats.SkillStat.values():
+		self.skill_stats[type] += amount
+
+	stats_changed.emit()
+	
+func save_to_json() -> String:
+	var data = {
+		"main_stats": _enum_dict_to_string_keys(main_stats),
+		"char_stats": _enum_dict_to_string_keys(char_stats),
+		"skill_stats": _enum_dict_to_string_keys(skill_stats),
+		"defences": _enum_dict_to_string_keys(defences),
+		"resources": _enum_dict_to_string_keys(resources),
+		"secondary_stats": _enum_dict_to_string_keys(secondary_stats),
+		"resistances": _enum_dict_to_string_keys(resistances),
+		"dmg_increases": _enum_dict_to_string_keys(dmg_increases),
+	}
+	return JSON.stringify(data)
+	
+func load_from_json(json_text:String) -> void:
+	var json = JSON.new()
+	var error = json.parse(json_text)
+	if error != OK:
+		push_error("Failed to parse JSON: %s" % error)
+		return
+
+	var data = json.data
+
+	main_stats = _string_keys_to_enum_dict(data.get("main_stats", {}), Stats.MainStat)
+	char_stats = _string_keys_to_enum_dict(data.get("char_stats", {}), Stats.CharStat)
+	skill_stats = _string_keys_to_enum_dict(data.get("skill_stats", {}), Stats.SkillStat)
+	defences = _string_keys_to_enum_dict(data.get("defences", {}), Stats.Defence)
+	resources = _string_keys_to_enum_dict(data.get("resources", {}), Stats.ResourceStat)
+	secondary_stats = _string_keys_to_enum_dict(data.get("secondary_stats", {}), Stats.SecondaryStat)
+	resistances = _string_keys_to_enum_dict(data.get("resistances", {}), Stats.DmgType)
+	dmg_increases = _string_keys_to_enum_dict(data.get("dmg_increases", {}), Stats.DmgIncreases)
+
+	stats_changed.emit()
+
+func _enum_dict_to_string_keys(dict: Dictionary) -> Dictionary:
+	var result := {}
+	for key in dict.keys():
+		result[str(key)] = dict[key]
+	return result
+
+# Converts a dictionary with string keys back to enum keys using the provided enum type
+func _string_keys_to_enum_dict(dict: Dictionary, enum_type: Dictionary) -> Dictionary:
+	var result := {}
+	for key in dict.keys():
+		var enum_key = enum_type.get(key)
+		if enum_key != null:
+			result[enum_key] = dict[key]
+	return result
+
+func set_stats_from_resource(res:StatResource) -> void:
+	for stat:int in res.main_stats:
+		self.main_stats[stat] = res.main_stats[stat]
+		
+	for stat:int in res.skill_stats:
+		self.skill_stats[stat] = res.skill_stats[stat]
+		
+	for stat:int in res.defences:
+		self.defences[stat] = res.defences[stat]
+		
+	for stat:int in res.resources:
+		self.resources[stat] = res.resources[stat]
+		
+	for stat:int in res.secondary_stats:
+		self.secondary_stats[stat] = res.secondary_stats[stat]
+		
+	for stat:int in res.resistances:
+		self.resistances[stat] = res.resistances[stat]
+		
+	for stat:int in res.dmg_increases:
+		self.dmg_increases[stat] = res.dmg_increases[stat]
+	stats_changed.emit()
+	
+	print(main_stats)

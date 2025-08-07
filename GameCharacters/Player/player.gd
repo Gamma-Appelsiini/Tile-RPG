@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends GameCharacter
 class_name Player
 
 @export var movement_speed:float = 8
