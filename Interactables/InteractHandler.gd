@@ -59,9 +59,8 @@ func _show_right_interactee() -> void:
 	var closest:Interactable = _get_closest_interactee()
 	if current_interactee != closest:
 		if current_interactee != null:
-			current_interactee.hide_indicator()
+			current_interactee.hide_indicator(true)
 
-		#TODO fix indicator hiding in multiple interaction areas
 		current_interactee = closest
 		current_interactee.show_indicator(indicator,label)
 		

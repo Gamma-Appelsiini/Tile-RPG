@@ -40,7 +40,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497079, 0.88758, -0.380507)
 
 [node name="Point2" type="Node3D" parent="Hinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795608, 0.878922, 0.337645)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.502634, 0.878922, 0.337645)
 
 [node name="Interact" type="Node3D" parent="Hinge"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0)

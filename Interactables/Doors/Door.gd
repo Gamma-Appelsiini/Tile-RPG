@@ -23,6 +23,7 @@ func interact() -> void:
 	else:
 		var distance_1:float = player.global_transform.origin.distance_to(side_1.global_transform.origin)
 		var distance_2:float = player.global_transform.origin.distance_to(side_2.global_transform.origin)
+		
 		rotation = ROTATION_AMOUNT
 		if distance_2 < distance_1:
 			rotation *= -1
@@ -39,6 +40,8 @@ func interact() -> void:
 	
 	await tween.finished
 	interaction_enabled = true
+	interact_area.monitoring = false
+	interact_area.monitoring = true
 	
 #Overrided due to doors having 2 interact points
 func show_indicator(ind:Indicator, lab:Label3D) -> void:
@@ -49,13 +52,9 @@ func show_indicator(ind:Indicator, lab:Label3D) -> void:
 	var distance_2:float = player.global_transform.origin.distance_to(side_2.global_transform.origin)
 	rotation = ROTATION_AMOUNT
 	
-	if used: rotation = return_rotation
-	else:
-		closest_interact = side_1
-		if distance_2 < distance_1:
-			closest_interact = side_2
-			rotation *= -1
-		return_rotation = rotation * -1
+	closest_interact = side_1
+	if distance_2 < distance_1:
+		closest_interact = side_2
 	
 	lab.text = self.interact_text
 	lab.global_position = closest_interact.global_position

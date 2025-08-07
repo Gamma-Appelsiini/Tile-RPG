@@ -12,6 +12,7 @@ shader_parameter/emission_amount = 2.5
 shader_parameter/rim_sharpness = 0.65
 
 [node name="Indicator" type="Node3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 top_level = true
 script = ExtResource("1_jqgcn")
 

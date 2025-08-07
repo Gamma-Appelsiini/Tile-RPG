@@ -19,9 +19,10 @@ func _scale_indicator(size:Vector3) -> Tween:
 	tween.tween_property(indicator_mesh,"scale", size, 0.2)
 	return tween
 	
-func hide_indicator() -> void:
-	var tween:Tween = _scale_indicator(Vector3(0,0,0))
-	await tween.finished
+func hide_indicator(instant:bool = false) -> void:
+	if !instant:
+		var tween:Tween = _scale_indicator(Vector3(0,0,0))
+		await tween.finished
 	visible = false
 	
 func show_indicator() -> void:

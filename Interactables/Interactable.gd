@@ -42,12 +42,12 @@ func show_indicator(ind:Indicator, lab:Label3D) -> void:
 	lab.show()
 	ind.show_indicator()
 
-func hide_indicator() -> void:
+func hide_indicator(instant:bool = false) -> void:
 	if indicator == null: return
 	if label == null: return
 	
 	label.hide()
-	indicator.hide_indicator()
+	indicator.hide_indicator(instant)
 	
 	indicator = null
 	label = null
