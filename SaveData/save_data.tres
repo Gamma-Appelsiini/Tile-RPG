@@ -1,0 +1,8 @@
+[gd_resource type="JSON" format=3 uid="uid://begv5dolsfnnt"]
+
+[resource]
+data = {
+"game_characters": {},
+"levels": {},
+"player": {}
+}

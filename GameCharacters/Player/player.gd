@@ -7,6 +7,7 @@ class_name Player
 @export var visual_mesh:MeshInstance3D
 @export var interact_handler:InteractHandler
 
+var came_from_id:String = ""
 var _last_move_dir: Vector3 = Vector3.BACK
 
 func _physics_process(delta: float) -> void:
