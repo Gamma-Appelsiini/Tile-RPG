@@ -1,0 +1,6 @@
+{
+	"player": {},
+	"levels": {},
+	"game_characters": {"test_id": {"stat_handler": {}}},
+	"dead_ids": []
+}

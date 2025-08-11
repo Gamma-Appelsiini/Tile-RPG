@@ -1,0 +1,5 @@
+{
+	"player": {},
+	"levels": {},
+	"game_characters": {"test_id": {"stathandler": {}}},
+}

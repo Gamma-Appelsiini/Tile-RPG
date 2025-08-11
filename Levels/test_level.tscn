@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://do44fnv3jbpyo"]
 
-[ext_resource type="PackedScene" uid="uid://dok2fbe3dlibd" path="res://Tile-RPG/GameCharacters/Player/player.tscn" id="1_7j3ou"]
+[ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 
@@ -14,7 +14,15 @@ data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5,
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_686us"]
 
-[node name="TestLevel" type="Node3D"]
+[node name="TestLevel" type="Node" node_paths=PackedStringArray("game_character_node", "player_spawn_positions")]
+script = ExtResource("1_hnyhx")
+unique_id = "test1"
+game_character_node = NodePath("GameCharNode")
+player_spawn_positions = {
+"menu": NodePath("Spawn1"),
+"spawn1": NodePath("Spawn1")
+}
+metadata/_custom_type_script = "uid://dieqouuwnnyea"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -24,9 +32,6 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7j3ou")
-
-[node name="Player" parent="." instance=ExtResource("1_7j3ou")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64815, 0, 1.86965)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03872, 0)
@@ -46,3 +51,8 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.3850
 
 [node name="WoodDoor" parent="." instance=ExtResource("3_176yf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="GameCharNode" type="Node3D" parent="."]
+
+[node name="Spawn1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47008, 0, -0.940551)

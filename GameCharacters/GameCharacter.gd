@@ -11,8 +11,24 @@ func _ready() -> void:
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
 
 func load_from_json(json:JSON) -> void:
-	#Check if json contains this gamecharacter
-	stat_handler.load_from_json(json.data)
+	var data = json.data
+	var characters:Dictionary = data["game_characters"]
+
+	if characters.has(unique_id):
+		stat_handler.load_from_json(characters[unique_id]["stat_handler"])
 
 func save_to_json(json:JSON) -> void:
-	var string_data:String = stat_handler.save_to_json()
+	var stat_data:String = stat_handler.save_to_json()
+	#TODO add other things characters need saving
+	
+	var data = json.data
+	var characters:Dictionary = data.get("game_characters", {})
+
+	if not characters.has(unique_id):
+		characters[unique_id] = {}
+
+	var stat_data_dict = JSON.parse_string(stat_data)
+
+	characters[unique_id]["stat_handler"] = stat_data_dict
+	data["game_characters"] = characters
+	json.data = data

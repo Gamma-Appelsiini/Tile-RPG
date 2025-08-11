@@ -62,7 +62,12 @@ func _init() -> void:
 		secondary_stats[stat] = 0
 	for stat in Stats.DmgType.values():
 		resistances[stat] = 0
+	for stat in Stats.DmgIncreases.values():
+		dmg_increases[stat] = 0
 	
+	
+
+func json_test():
 	update_stat(Stats.DmgType.FIRE,2)
 	var js:String = save_to_json()
 	print(js)
@@ -145,7 +150,7 @@ func update_stat(type:int, amount:int) -> void:
 	stats_changed.emit()
 	
 func save_to_json() -> String:
-	var data = {
+	var data := {
 		"main_stats": _enum_dict_to_string_keys(main_stats),
 		"char_stats": _enum_dict_to_string_keys(char_stats),
 		"skill_stats": _enum_dict_to_string_keys(skill_stats),
@@ -158,8 +163,8 @@ func save_to_json() -> String:
 	return JSON.stringify(data)
 	
 func load_from_json(json_text:String) -> void:
-	var json = JSON.new()
-	var error = json.parse(json_text)
+	var json := JSON.new()
+	var error := json.parse(json_text)
 	if error != OK:
 		push_error("Failed to parse JSON: %s" % error)
 		return
@@ -215,4 +220,3 @@ func set_stats_from_resource(res:StatResource) -> void:
 		self.dmg_increases[stat] = res.dmg_increases[stat]
 	stats_changed.emit()
 	
-	print(main_stats)
