@@ -33,6 +33,9 @@ func _interact() -> void:
 	
 func _interact_with_interactable() -> void:
 	current_interactee.interact()
+	if current_interactee == null :
+		interactables.clear()
+		return
 	if current_interactee.oneshot:
 		interactables.erase(current_interactee)
 		current_interactee.handle_oneshot()

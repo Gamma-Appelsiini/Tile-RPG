@@ -58,6 +58,7 @@ var dmg_increases:Dictionary[Stats.DmgIncreases,int] = {}
 
 
 func _init() -> void:
+	
 	for stat in Stats.SecondaryStat.values():
 		secondary_stats[stat] = 0
 	for stat in Stats.DmgType.values():
@@ -69,8 +70,8 @@ func _init() -> void:
 
 func json_test():
 	update_stat(Stats.DmgType.FIRE,2)
-	var js:String = save_to_json()
-	print(js)
+	#var js:String = save_to_json()
+	#print(js)
 
 func add_xp(amount:int) -> void:
 	char_stats[Stats.CharStat.CURRENT_XP] += amount
@@ -149,53 +150,43 @@ func update_stat(type:int, amount:int) -> void:
 
 	stats_changed.emit()
 	
-func save_to_json() -> String:
-	var data := {
-		"main_stats": _enum_dict_to_string_keys(main_stats),
-		"char_stats": _enum_dict_to_string_keys(char_stats),
-		"skill_stats": _enum_dict_to_string_keys(skill_stats),
-		"defences": _enum_dict_to_string_keys(defences),
-		"resources": _enum_dict_to_string_keys(resources),
-		"secondary_stats": _enum_dict_to_string_keys(secondary_stats),
-		"resistances": _enum_dict_to_string_keys(resistances),
-		"dmg_increases": _enum_dict_to_string_keys(dmg_increases),
-	}
-	return JSON.stringify(data)
+func save_to_json(save_file:JSON, unique_id:String):
 	
-func load_from_json(json_text:String) -> void:
-	var json := JSON.new()
-	var error := json.parse(json_text)
-	if error != OK:
-		push_error("Failed to parse JSON: %s" % error)
-		return
+	var sh_data := {
+		EnumStrings.stat_type_string[Stats.MainStat]: main_stats,
+		EnumStrings.stat_type_string[Stats.CharStat]: char_stats,
+		EnumStrings.stat_type_string[Stats.SkillStat]: skill_stats,
+		EnumStrings.stat_type_string[Stats.Defence]: defences,
+		EnumStrings.stat_type_string[Stats.ResourceStat]: resources,
+		EnumStrings.stat_type_string[Stats.SecondaryStat]: secondary_stats,
+		EnumStrings.stat_type_string[Stats.DmgType]: resistances,
+		EnumStrings.stat_type_string[Stats.DmgIncreases]: dmg_increases,
+	}
+	#return JSON.stringify(data)
+	
+	var data = save_file.data
+	var characters:Dictionary = data.get("game_characters", {})
 
-	var data = json.data
+	characters[unique_id]["stat_handler"] = sh_data
+	data["game_characters"] = characters
+	save_file.data = data
+	
+func load_from_json(save_file:JSON, unique_id:String) -> void:
+	var data = save_file.data
+	var characters:Dictionary = data.get("game_characters", {})
 
-	main_stats = _string_keys_to_enum_dict(data.get("main_stats", {}), Stats.MainStat)
-	char_stats = _string_keys_to_enum_dict(data.get("char_stats", {}), Stats.CharStat)
-	skill_stats = _string_keys_to_enum_dict(data.get("skill_stats", {}), Stats.SkillStat)
-	defences = _string_keys_to_enum_dict(data.get("defences", {}), Stats.Defence)
-	resources = _string_keys_to_enum_dict(data.get("resources", {}), Stats.ResourceStat)
-	secondary_stats = _string_keys_to_enum_dict(data.get("secondary_stats", {}), Stats.SecondaryStat)
-	resistances = _string_keys_to_enum_dict(data.get("resistances", {}), Stats.DmgType)
-	dmg_increases = _string_keys_to_enum_dict(data.get("dmg_increases", {}), Stats.DmgIncreases)
+	var sh_data = characters[unique_id]["stat_handler"]
+
+	main_stats = sh_data[EnumStrings.stat_type_string[Stats.MainStat]]
+	char_stats = sh_data[EnumStrings.stat_type_string[Stats.CharStat]]
+	skill_stats = sh_data[EnumStrings.stat_type_string[Stats.SkillStat]]
+	defences = sh_data[EnumStrings.stat_type_string[Stats.Defence]]
+	resources = sh_data[EnumStrings.stat_type_string[Stats.ResourceStat]]
+	secondary_stats = sh_data[EnumStrings.stat_type_string[Stats.SecondaryStat]]
+	resistances = sh_data[EnumStrings.stat_type_string[Stats.DmgType]]
+	dmg_increases = sh_data[EnumStrings.stat_type_string[Stats.DmgIncreases]]
 
 	stats_changed.emit()
-
-func _enum_dict_to_string_keys(dict: Dictionary) -> Dictionary:
-	var result := {}
-	for key in dict.keys():
-		result[str(key)] = dict[key]
-	return result
-
-# Converts a dictionary with string keys back to enum keys using the provided enum type
-func _string_keys_to_enum_dict(dict: Dictionary, enum_type: Dictionary) -> Dictionary:
-	var result := {}
-	for key in dict.keys():
-		var enum_key = enum_type.get(key)
-		if enum_key != null:
-			result[enum_key] = dict[key]
-	return result
 
 func set_stats_from_resource(res:StatResource) -> void:
 	for stat:int in res.main_stats:

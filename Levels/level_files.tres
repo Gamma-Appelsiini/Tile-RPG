@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_7j1jw")
 levels = Dictionary[String, String]({
-"test_level_1": "res://Tile-RPG/Levels/test_level.tscn"
+"test_level_1": "res://Tile-RPG/Levels/test_level.tscn",
+"test_level_2": "res://Tile-RPG/Levels/test_level_2.tscn"
 })
 metadata/_custom_type_script = "uid://1i8tbje8x55i"
