@@ -10,36 +10,27 @@ var game_chars:Array[GameCharacter] = []
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)
+	
 	for gchar:GameCharacter in game_character_node.get_children():
 		game_chars.push_back(gchar as GameCharacter)
 
-func save_to_json(json:JSON) -> void:
+func save_to_data(save_data:Dictionary) -> void:
 	#TODO add other things needed to be saved in levels
 	for gchar:GameCharacter in game_chars:
-		gchar.save_to_json(json)
+		gchar.save_to_data(save_data)
 	
-	
-func load_from_json(json:JSON) -> void:
-	if json == null or json.data == null:
-		push_error("Invalid JSON input for Level load.")
+
+func load_from_data(save_data:Dictionary) -> void:
+	var levels:Dictionary = save_data["levels"]
+	if !levels.has(unique_id):
+		print(unique_id, " level not in save data")
 		return
 
-	var data = json.data
-	var levels = data["levels"]
-
-	if levels.has(unique_id):
-		print("Level '%s' found in save data." % unique_id)
-		_load_game_chars(json)
-		
-	else:
-		print("Level '%s' NOT found in save data." % unique_id)
-
-func _load_game_chars(json:JSON) -> void:
-	var data = json.data
-	var dead_ids:Array[String] = data["dead_ids"]
+func _load_game_chars(save_data:Dictionary) -> void:
+	var dead_ids:Array[String] = save_data["dead_ids"]
 	
 	for gchar:GameCharacter in game_chars:
 		if dead_ids.has(gchar.unique_id):
 			game_chars.erase(gchar)
 			gchar.queue_free()
-		else: gchar.load_from_json(json)
+		else: gchar.load_from_data(save_data)

@@ -11,38 +11,21 @@ func _init() -> void:
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)
-	
-func load_from_json(json:JSON) -> void:
-	var data = json.data
-	var characters:Dictionary = data["game_characters"]
+
+func load_from_data(save_data:Dictionary) -> void:
+	var characters:Dictionary = save_data["game_characters"]
 	if !characters.has(unique_id):
 		print(unique_id, " not in save data")
 		return
+		
+	var gpos:Vector3 = save_data["game_characters"][unique_id]["global_position"]
+	if is_inside_tree():
+		self.global_position = gpos
+
+func save_to_data(save_data:Dictionary) -> void:
+	if !save_data["game_characters"].has(unique_id):
+		save_data["game_characters"][unique_id] = {}
 	
-	stat_handler.load_from_json(json,self.unique_id)
-	self.global_position = characters[unique_id]["global_position"]
-
-func check_char(json:JSON) -> void:
-	var data = json.data
-	var characters:Dictionary = data["game_characters"]
-	if characters.has(unique_id): return
-	
-	var new_data:Dictionary = {"stat_handler": {}, "global_position": Vector3.ZERO}
-	characters.set(unique_id, new_data)
-	data["game_characters"] = characters
-	json.data = data
-
-func save_to_json(json:JSON) -> void:
-	check_char(json)
-	stat_handler.save_to_json(json,self.unique_id)
-	#TODO add other things characters need saving
-	
-	var data = json.data
-	var characters:Dictionary = data.get("game_characters", {})
-
-	if not characters.has(unique_id):
-		characters[unique_id] = {}
-
-	characters[unique_id]["global_position"] = self.global_position
-	data["game_characters"] = characters
-	json.data = data
+	#TODO add other things characters need saving	
+	save_data["game_characters"][unique_id]["global_position"] = self.global_position
+	stat_handler.save_to_data(save_data,self.unique_id)

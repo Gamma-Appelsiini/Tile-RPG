@@ -56,7 +56,6 @@ var secondary_stats:Dictionary[Stats.SecondaryStat,int] = {}
 var resistances:Dictionary[Stats.DmgType,int] = {}
 var dmg_increases:Dictionary[Stats.DmgIncreases,int] = {}
 
-
 func _init() -> void:
 	
 	for stat in Stats.SecondaryStat.values():
@@ -65,13 +64,6 @@ func _init() -> void:
 		resistances[stat] = 0
 	for stat in Stats.DmgIncreases.values():
 		dmg_increases[stat] = 0
-	
-	
-
-func json_test():
-	update_stat(Stats.DmgType.FIRE,2)
-	#var js:String = save_to_json()
-	#print(js)
 
 func add_xp(amount:int) -> void:
 	char_stats[Stats.CharStat.CURRENT_XP] += amount
@@ -150,44 +142,33 @@ func update_stat(type:int, amount:int) -> void:
 
 	stats_changed.emit()
 	
-func save_to_json(save_file:JSON, unique_id:String):
-	
+func save_to_data(save_data:Dictionary, unique_id:String) -> void:
 	var sh_data := {
-		EnumStrings.stat_type_string[Stats.MainStat]: main_stats,
-		EnumStrings.stat_type_string[Stats.CharStat]: char_stats,
-		EnumStrings.stat_type_string[Stats.SkillStat]: skill_stats,
-		EnumStrings.stat_type_string[Stats.Defence]: defences,
-		EnumStrings.stat_type_string[Stats.ResourceStat]: resources,
-		EnumStrings.stat_type_string[Stats.SecondaryStat]: secondary_stats,
-		EnumStrings.stat_type_string[Stats.DmgType]: resistances,
-		EnumStrings.stat_type_string[Stats.DmgIncreases]: dmg_increases,
+		EnumStrings.stat_type_string[Stats.MainStat]: main_stats.duplicate(),
+		EnumStrings.stat_type_string[Stats.CharStat]: char_stats.duplicate(),
+		EnumStrings.stat_type_string[Stats.SkillStat]: skill_stats.duplicate(),
+		EnumStrings.stat_type_string[Stats.Defence]: defences.duplicate(),
+		EnumStrings.stat_type_string[Stats.ResourceStat]: resources.duplicate(),
+		EnumStrings.stat_type_string[Stats.SecondaryStat]: secondary_stats.duplicate(),
+		EnumStrings.stat_type_string[Stats.DmgType]: resistances.duplicate(),
+		EnumStrings.stat_type_string[Stats.DmgIncreases]: dmg_increases.duplicate(),
 	}
-	#return JSON.stringify(data)
+	save_data["game_characters"][unique_id]["stat_handler"] = sh_data
+
+func load_from_data(save_data:Dictionary, unique_id:String) -> void:
+	var sh_data:Dictionary = save_data["game_characters"][unique_id]["stat_handler"]
 	
-	var data = save_file.data
-	var characters:Dictionary = data.get("game_characters", {})
-
-	characters[unique_id]["stat_handler"] = sh_data
-	data["game_characters"] = characters
-	save_file.data = data
+	main_stats = sh_data[EnumStrings.stat_type_string[Stats.MainStat]].duplicate()
+	char_stats = sh_data[EnumStrings.stat_type_string[Stats.CharStat]].duplicate()
+	skill_stats = sh_data[EnumStrings.stat_type_string[Stats.SkillStat]].duplicate()
+	defences = sh_data[EnumStrings.stat_type_string[Stats.Defence]].duplicate()
+	resources = sh_data[EnumStrings.stat_type_string[Stats.ResourceStat]].duplicate()
+	secondary_stats = sh_data[EnumStrings.stat_type_string[Stats.SecondaryStat]].duplicate()
+	resistances = sh_data[EnumStrings.stat_type_string[Stats.DmgType]].duplicate()
+	dmg_increases = sh_data[EnumStrings.stat_type_string[Stats.DmgIncreases]].duplicate()
 	
-func load_from_json(save_file:JSON, unique_id:String) -> void:
-	var data = save_file.data
-	var characters:Dictionary = data.get("game_characters", {})
-
-	var sh_data = characters[unique_id]["stat_handler"]
-
-	main_stats = sh_data[EnumStrings.stat_type_string[Stats.MainStat]]
-	char_stats = sh_data[EnumStrings.stat_type_string[Stats.CharStat]]
-	skill_stats = sh_data[EnumStrings.stat_type_string[Stats.SkillStat]]
-	defences = sh_data[EnumStrings.stat_type_string[Stats.Defence]]
-	resources = sh_data[EnumStrings.stat_type_string[Stats.ResourceStat]]
-	secondary_stats = sh_data[EnumStrings.stat_type_string[Stats.SecondaryStat]]
-	resistances = sh_data[EnumStrings.stat_type_string[Stats.DmgType]]
-	dmg_increases = sh_data[EnumStrings.stat_type_string[Stats.DmgIncreases]]
-
 	stats_changed.emit()
-
+	
 func set_stats_from_resource(res:StatResource) -> void:
 	for stat:int in res.main_stats:
 		update_main_stat(stat,res.main_stats[stat])

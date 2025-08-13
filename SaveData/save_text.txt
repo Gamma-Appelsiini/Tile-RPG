@@ -2,7 +2,7 @@
 	"dead_ids": [],
 	"game_characters": {
 		"player": {
-			"global_position": "(2.054044, 0.0, -0.294968)",
+			"global_position": "(1.72124, 0.0, -0.132225)",
 			"stat_handler": {
 				"char_stat": {
 					"100": 0,
@@ -83,7 +83,7 @@
 			}
 		}
 	},
-	"last_level_id": "test2",
+	"last_level_id": "test1",
 	"levels": {
 
 	}

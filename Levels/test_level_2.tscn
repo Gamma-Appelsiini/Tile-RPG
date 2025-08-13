@@ -11,7 +11,7 @@ data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5,
 
 [node name="test_level2" type="Node" node_paths=PackedStringArray("game_character_node", "player_spawn_positions")]
 script = ExtResource("1_vj7em")
-unique_id = "test2"
+unique_id = "test_level_2"
 game_character_node = NodePath("GameChars")
 player_spawn_positions = {
 "spawn1": NodePath("Spawnpos1"),

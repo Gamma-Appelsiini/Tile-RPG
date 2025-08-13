@@ -58,3 +58,14 @@ var stat_type_string := {
 	Stats.DmgType: "dmg_type",
 	Stats.DmgIncreases: "dmg_increases",
 }
+
+var string_stat_enum := {
+	"main_stat": Stats.MainStat,
+	"resource_stat": Stats.ResourceStat,
+	"char_stat": Stats.CharStat,
+	"secondary_stat": Stats.SecondaryStat,
+	"skill_stat": Stats.SkillStat,
+	"defence": Stats.Defence,
+	"dmg_type": Stats.DmgType,
+	"dmg_increases": Stats.DmgIncreases,
+}
