@@ -19,8 +19,8 @@ func load_from_data(save_data:Dictionary) -> void:
 		return
 		
 	var gpos:Vector3 = save_data["game_characters"][unique_id]["global_position"]
-	if is_inside_tree():
-		self.global_position = gpos
+	stat_handler.load_from_data(save_data,unique_id)
+	if is_inside_tree(): self.global_position = gpos
 
 func save_to_data(save_data:Dictionary) -> void:
 	if !save_data["game_characters"].has(unique_id):

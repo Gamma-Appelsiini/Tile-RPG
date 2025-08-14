@@ -22,8 +22,12 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(move_direction * movement_speed, acceleration * delta)
 	move_and_slide()
 	_turn_player(move_direction)
-	
 
+func _input(event: InputEvent) -> void:
+	pass
+	#if event.is_action_pressed("Jump"):
+
+		
 func _turn_player(move_direction:Vector3) -> void:
 	if move_direction.length() > 0.2:
 		_last_move_dir = move_direction

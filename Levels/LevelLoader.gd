@@ -19,8 +19,9 @@ var player:Player = null
 var current_level:Level = null
 
 func _ready() -> void:
-	_load_json_file()
+	_load_bin_file()
 	_load_player()
+	
 	var last_level_id:String = save_data["last_level_id"]
 	var loading:bool = false
 	if last_level_id != "test_level_1": loading = true
@@ -36,7 +37,7 @@ func _load_player() -> void:
 	player = load(PLAYER_PATH).instantiate()
 	player.load_from_data(save_data)
 
-func _load_json_file() -> void:
+func _load_bin_file() -> void:
 	if !FileAccess.file_exists(SAVE_FILE_PATH):
 		print("No save file")
 		return
@@ -44,6 +45,7 @@ func _load_json_file() -> void:
 	var file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 	var data:Dictionary = file.get_var()
 	save_data = data.duplicate()
+	print("Save data: ",save_data)
 
 	file.close()
 
@@ -55,7 +57,6 @@ func save_save_file() -> void:
 	save_player()
 	_save_current_level()
 	
-	print("Saving data: ",save_data)
 	#Creates new file if does not exist
 	var file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_var(save_data.duplicate())
