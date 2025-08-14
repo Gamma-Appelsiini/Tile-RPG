@@ -1,5 +1,14 @@
 extends Node
 
+var main_stat_names := {
+	Stats.MainStat.AGILITY: "Agility",
+	Stats.MainStat.ENDURANCE: "Endurance",
+	Stats.MainStat.LUCK: "Luck",
+	Stats.MainStat.MIGHT: "Might",
+	Stats.MainStat.MYSTIC: "Mystic",
+	Stats.MainStat.SKILL: "Skill",
+	Stats.MainStat.VALOR: "Valor",}
+
 var main_stat_colors := {
 	Stats.MainStat.AGILITY: "#2b722f",
 	Stats.MainStat.ENDURANCE: "#ee5356",
