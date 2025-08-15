@@ -1,0 +1,146 @@
+[gd_scene load_steps=9 format=3 uid="uid://c73cgi56oj84j"]
+
+[ext_resource type="StyleBox" uid="uid://b6uoucwfkwj3j" path="res://Tile-RPG/UI/StatWindow/stat_panel_style.tres" id="1_p3ua1"]
+[ext_resource type="Texture2D" uid="uid://be8erxtlfc13h" path="res://Tile-RPG/Images/Stats/fire.png" id="2_55eqp"]
+[ext_resource type="Script" uid="uid://2dcork07rtcm" path="res://Tile-RPG/UI/StatWindow/resistance_panel.gd" id="2_g3s71"]
+[ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="4_oucjx"]
+[ext_resource type="Texture2D" uid="uid://ql4jiw1fnvi7" path="res://Tile-RPG/Images/Stats/lightning.png" id="5_h256m"]
+[ext_resource type="Texture2D" uid="uid://b4g5r4imur8jo" path="res://Tile-RPG/Images/Stats/magic.png" id="6_ar6o5"]
+[ext_resource type="Texture2D" uid="uid://bkr1kejrrmaoi" path="res://Tile-RPG/Images/Stats/physical.png" id="7_sgwty"]
+[ext_resource type="Texture2D" uid="uid://daink35hnrn4g" path="res://Tile-RPG/Images/Stats/toxic.png" id="8_qeq60"]
+
+[node name="ResistancePanel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_p3ua1")
+script = ExtResource("2_g3s71")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Resistances"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/h_separation = 35
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_55eqp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FireLabel" type="Label" parent="VBoxContainer/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_oucjx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IceLabel" type="Label" parent="VBoxContainer/GridContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_h256m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LightningLabel" type="Label" parent="VBoxContainer/GridContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_ar6o5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MysticalLabel" type="Label" parent="VBoxContainer/GridContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_sgwty")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PhysicalLabel" type="Label" parent="VBoxContainer/GridContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_qeq60")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ToxicLabel" type="Label" parent="VBoxContainer/GridContainer/HBoxContainer6"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "0"

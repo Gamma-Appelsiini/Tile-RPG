@@ -18,6 +18,15 @@ var main_stat_colors := {
 	Stats.MainStat.SKILL: "#f18690",
 	Stats.MainStat.VALOR: "#d1b81b",}
 	
+const MAIN_STAT_PICS := {
+	Stats.MainStat.AGILITY: "res://Tile-RPG/Images/Stats/agility.png",
+	Stats.MainStat.ENDURANCE: "res://Tile-RPG/Images/Stats/endurance.png",
+	Stats.MainStat.LUCK: "res://Tile-RPG/Images/Stats/luck.png",
+	Stats.MainStat.MIGHT: "res://Tile-RPG/Images/Stats/might.png",
+	Stats.MainStat.MYSTIC: "res://Tile-RPG/Images/Stats/mystic.png",
+	Stats.MainStat.SKILL: "res://Tile-RPG/Images/Stats/skill.png",
+	Stats.MainStat.VALOR: "res://Tile-RPG/Images/Stats/valor.png",}
+	
 var def_names := {
 	Stats.Defence.ARMOR: "Armor",
 	Stats.Defence.EVASION: "Evasion",
@@ -36,6 +45,15 @@ var res_colors := {
 	Stats.DmgType.PHYSICAL: "#9ba5aa",
 	Stats.DmgType.TOXIC: "#9637e6",
 	Stats.DmgType.PURE: "#330809",
+}
+
+const RES_PICS := {
+	Stats.DmgType.FIRE: "res://Tile-RPG/Images/Stats/fire.png",
+	Stats.DmgType.FROST: "res://Tile-RPG/Images/Stats/ice.png",
+	Stats.DmgType.LIGHTNING: "res://Tile-RPG/Images/Stats/lightning.png",
+	Stats.DmgType.MYSTICAL: "res://Tile-RPG/Images/Stats/magic.png",
+	Stats.DmgType.PHYSICAL: "res://Tile-RPG/Images/Stats/physical.png",
+	Stats.DmgType.TOXIC: "res://Tile-RPG/Images/Stats/toxic.png",
 }
 
 var res_names := {

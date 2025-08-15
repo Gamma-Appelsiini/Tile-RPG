@@ -2,30 +2,33 @@
 
 [ext_resource type="Script" uid="uid://31066elebtp" path="res://Tile-RPG/UI/StatWindow/main_stat_line.gd" id="1_p161e"]
 
-[node name="MainStatLine" type="Control"]
-layout_mode = 3
+[node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("stat_pic", "stat_label", "number_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
 script = ExtResource("1_p161e")
+stat_pic = NodePath("StatPic")
+stat_label = NodePath("StatLabel")
+number_label = NodePath("NumberLabel")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="StatPicRect" type="TextureRect" parent="HBoxContainer"]
-unique_name_in_owner = true
+[node name="StatPic" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 5
 
-[node name="StatNameLabel" type="Label" parent="HBoxContainer"]
-unique_name_in_owner = true
+[node name="StatLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Agility:"
 
-[node name="AmountLabel" type="Label" parent="HBoxContainer"]
-unique_name_in_owner = true
+[node name="NumberLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "1"
