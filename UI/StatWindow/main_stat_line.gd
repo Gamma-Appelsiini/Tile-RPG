@@ -8,8 +8,7 @@ var line_stat_type:Stats.MainStat = Stats.MainStat.AGILITY
 
 func set_stat(stat_type:Stats.MainStat, amount:int) -> void:
 	line_stat_type = stat_type
-	stat_label.text = EnumStrings.main_stat_names[stat_type] + ": "
-	#var empty_spaces:int =  9 - len(EnumStrings.main_stat_names[stat_type])
+	stat_label.text = EnumStrings.main_stat_names[stat_type] + ":  "
 		
 	stat_label.add_theme_color_override("font_color", Color(EnumStrings.main_stat_colors[stat_type]))
 	stat_label.add_theme_color_override("font_outline_color", Color("#000000"))
@@ -19,6 +18,3 @@ func set_stat(stat_type:Stats.MainStat, amount:int) -> void:
 	
 	var stat_texture:Texture2D = load(EnumStrings.MAIN_STAT_PICS[stat_type])
 	stat_pic.texture = stat_texture
-
-func update_value(amount:int) -> void:
-	number_label.text = str(amount)

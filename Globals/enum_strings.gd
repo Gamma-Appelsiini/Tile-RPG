@@ -37,6 +37,26 @@ var def_names := {
 	Stats.Defence.SPELL_DODGE: "Spell Dodge",
 	Stats.Defence.GLANCE: "Glance"}
 	
+var secondary_names := {
+	Stats.SecondaryStat.STOMACH_CAPACITY: "Stomach Capacity",
+	Stats.SecondaryStat.ACCURACY: "Accuracy",
+	Stats.SecondaryStat.BARTER: "Barter",
+	Stats.SecondaryStat.GREED: "Greed",
+	Stats.SecondaryStat.INITIATIVE: "Initiative",
+	Stats.SecondaryStat.GLOBAL_CRIT_CHANCE: "Global Crit Chance",
+	Stats.SecondaryStat.GLOBAL_CRIT_MULTIPLIER: "Global Crit Multiplier",
+	Stats.SecondaryStat.SPELL_POWER: "Spell Power",
+	Stats.SecondaryStat.SPELL_CRIT_CHANCE: "Spell Crit Chance",
+	Stats.SecondaryStat.LIFE_ON_HIT: "Life On Hit",
+	Stats.SecondaryStat.HEALTH_REGEN: "Health Regen",
+	Stats.SecondaryStat.SPELL_RANGE: "Spell Range",
+	Stats.SecondaryStat.BOW_RANGE: "Bow Range",
+	Stats.SecondaryStat.SPELL_CRIT_MULTIPLIER: "Spell Crit Multiplier",
+	Stats.SecondaryStat.ACCURACY_PERCENT: "Accuracy Percent",
+	Stats.SecondaryStat.THORNS: "Thorns",
+	Stats.SecondaryStat.SPELL_BASE_CRIT: "Spell Base Crit",
+	}
+	
 var res_colors := {
 	Stats.DmgType.FIRE: "#dc3219",
 	Stats.DmgType.FROST: "#87e1ff",

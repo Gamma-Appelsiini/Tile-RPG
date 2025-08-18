@@ -12,17 +12,17 @@ var stats:StatHandler = null
 @onready var resistance_panel: ResistancePanel = $PanelContainer/VBoxContainer/ResistancePanel
 
 func _ready() -> void:
-	#var p:Player = load("res://Tile-RPG/GameCharacters/Player/player.tscn").instantiate()
-	var sh:StatHandler = StatHandler.new()
 	main_stat_panel.fill_main_stats()
-	defence_panel.update_defs(sh)
 
 func set_game_character(gchar:GameCharacter) -> void:
 	stats = gchar.stat_handler
 	stats.stats_changed.connect(_update_values)
 	name_label.text = gchar.display_name
+	picture_container.set_info(gchar)
+	_update_values()
 
 func _update_values() -> void:
+	picture_container.update_values(stats)
 	main_stat_panel.update_stats(stats)
 	defence_panel.update_defs(stats)
 	resistance_panel.update_resistances(stats)
@@ -33,3 +33,6 @@ func _update_xp_bar() -> void:
 	
 	xp_label.text = str(cur_xp) + " / " + str(max_xp)
 	xp_bar.max_value = max_xp
+
+func _on_button_pressed() -> void:
+	pass # Replace with function body.

@@ -8,7 +8,7 @@ class_name ResistancePanel
 @onready var physical_label: Label = %PhysicalLabel
 @onready var toxic_label: Label = %ToxicLabel
 
-func update_resistances(sh:StatHandler):
+func update_resistances(sh:StatHandler) -> void:
 	fire_label.text = str(sh.resistances[Stats.DmgType.FIRE])
 	ice_label.text = str(sh.resistances[Stats.DmgType.FROST])
 	lightning_label.text = str(sh.resistances[Stats.DmgType.LIGHTNING])

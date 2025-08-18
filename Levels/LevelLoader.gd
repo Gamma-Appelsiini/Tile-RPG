@@ -6,6 +6,7 @@ signal load_complete
 const PLAYER_PATH:String = "res://Tile-RPG/GameCharacters/Player/player.tscn"
 const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/save_data.bin"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
+@onready var stat_window: StatWindow = %StatWindow
 
 var save_file:JSON = null
 var save_data:Dictionary = {
@@ -36,6 +37,8 @@ func _input(event: InputEvent) -> void:
 func _load_player() -> void:
 	player = load(PLAYER_PATH).instantiate()
 	player.load_from_data(save_data)
+	await stat_window.ready
+	stat_window.set_game_character(player)
 
 func _load_bin_file() -> void:
 	if !FileAccess.file_exists(SAVE_FILE_PATH):
