@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgycswqthcl8v"]
+
+[ext_resource type="Script" uid="uid://cje3wgmngvedd" path="res://Tile-RPG/UI/StatWindow/stat_window.gd" id="1_kemfi"]
+[ext_resource type="PackedScene" uid="uid://p73hmiwkq3cm" path="res://Tile-RPG/UI/StatWindow/picture_container.tscn" id="2_b5fdx"]
+[ext_resource type="PackedScene" uid="uid://b6ga0ogmtdt61" path="res://Tile-RPG/UI/StatWindow/main_stat_panel.tscn" id="3_8o8bp"]
+[ext_resource type="Texture2D" uid="uid://pmdadci2oh26" path="res://Tile-RPG/Images/UI/progresbarBack.png" id="4_spi4j"]
+[ext_resource type="PackedScene" uid="uid://dgb7aac1p3g2f" path="res://Tile-RPG/UI/StatWindow/defence_panel.tscn" id="4_vubcl"]
+[ext_resource type="Texture2D" uid="uid://clewat78puk85" path="res://Tile-RPG/Images/UI/progresbarFront.png" id="5_abnyx"]
+[ext_resource type="Texture2D" uid="uid://v6qoq871fplm" path="res://Tile-RPG/Images/UI/progresbarMid.png" id="6_le317"]
+[ext_resource type="PackedScene" uid="uid://c73cgi56oj84j" path="res://Tile-RPG/UI/StatWindow/resistance_panel.tscn" id="8_abnyx"]
+[ext_resource type="PackedScene" uid="uid://gr66rucsdhyk" path="res://Tile-RPG/UI/StatWindow/secondary_stats_panel.tscn" id="9_le317"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8o8bp"]
+content_margin_left = 30.0
+content_margin_top = 16.0
+content_margin_right = 30.0
+content_margin_bottom = 16.0
+bg_color = Color(0.100258, 0.0876323, 0.0891133, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.722977, 0.804494, 0.729018, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.329412)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnbaa"]
+bg_color = Color(0.266204, 0.24334, 0.202464, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.329412)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[node name="StatWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.999384, 1.01563)
+script = ExtResource("1_kemfi")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00102, 1.02015)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8o8bp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Default Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="PictureContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_b5fdx")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MainStatPanel" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_8o8bp")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DefencePanel" parent="PanelContainer/VBoxContainer" instance=ExtResource("4_vubcl")]
+layout_mode = 2
+
+[node name="ResistancePanel" parent="PanelContainer/VBoxContainer" instance=ExtResource("8_abnyx")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+
+[node name="XpBarPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xnbaa")
+
+[node name="XpBar" type="TextureProgressBar" parent="PanelContainer/VBoxContainer/XpBarPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_under = ExtResource("4_spi4j")
+texture_over = ExtResource("5_abnyx")
+texture_progress = ExtResource("6_le317")
+
+[node name="XpLabel" type="Label" parent="PanelContainer/VBoxContainer/XpBarPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.729329, 0.778327, 0.865281, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.54902)
+theme_override_colors/font_outline_color = Color(0.0787771, 0.0333942, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 32
+text = "0 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondaryStatsPanel" parent="." instance=ExtResource("9_le317")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+offset_left = 411.608
+offset_top = 19.1683
+offset_right = 411.608
+offset_bottom = 19.1683
+grow_horizontal = 1
+grow_vertical = 1

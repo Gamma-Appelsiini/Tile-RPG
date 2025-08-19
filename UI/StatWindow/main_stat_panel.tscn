@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6ga0ogmtdt61"]
+
+[ext_resource type="Script" uid="uid://d368hjnspsu8w" path="res://Tile-RPG/UI/StatWindow/main_stat_panel.gd" id="1_mkmlm"]
+[ext_resource type="StyleBox" uid="uid://b6uoucwfkwj3j" path="res://Tile-RPG/UI/StatWindow/stat_panel_style.tres" id="1_q6axr"]
+
+[node name="MainStatPanel" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.4
+offset_right = -376.0
+offset_bottom = -424.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_q6axr")
+script = ExtResource("1_mkmlm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Main Stats"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "All Stats"
+alignment = 2
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

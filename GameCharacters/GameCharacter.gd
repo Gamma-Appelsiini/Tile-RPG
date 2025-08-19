@@ -2,6 +2,8 @@ extends CharacterBody3D
 class_name GameCharacter
 
 @export var unique_id:String = ""
+@export var display_name:String = "Default Name"
+@export var picture:Texture2D = null
 @export var stat_resource:StatResource = null
 var stat_handler:StatHandler = null
 

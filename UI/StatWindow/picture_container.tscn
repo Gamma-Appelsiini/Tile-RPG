@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://p73hmiwkq3cm"]
+
+[ext_resource type="StyleBox" uid="uid://b6uoucwfkwj3j" path="res://Tile-RPG/UI/StatWindow/stat_panel_style.tres" id="1_ehtug"]
+[ext_resource type="Script" uid="uid://gc40tv5b62wy" path="res://Tile-RPG/UI/StatWindow/picture_container.gd" id="1_hi05f"]
+[ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_lte2h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehtug"]
+bg_color = Color(0.183155, 0.0650727, 0.0555302, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0337624, 0.119584, 0.0128736, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.223529)
+shadow_size = 3
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jpd3"]
+bg_color = Color(0.244727, 0.399668, 0.180574, 1)
+
+[node name="PictureContainer" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00105, 0.994123)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_ehtug")
+script = ExtResource("1_hi05f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Level: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameCharPicRect" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_lte2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ehtug")
+
+[node name="HpProgBar" type="ProgressBar" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_8jpd3")
+value = 5.0
+show_percentage = false
+
+[node name="HpLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1.58831e-06, 0.641762, 0.305271, 1)
+theme_override_colors/font_shadow_color = Color(0.374139, 0.374139, 0.374139, 1)
+theme_override_colors/font_outline_color = Color(0.0453013, 0.0443237, 0.00976335, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 28
+text = "10 / 10"
+horizontal_alignment = 1
+vertical_alignment = 1

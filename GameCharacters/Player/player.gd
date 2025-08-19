@@ -23,9 +23,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_turn_player(move_direction)
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
-	#if event.is_action_pressed("Jump"):
 
 		
 func _turn_player(move_direction:Vector3) -> void:
