@@ -13,8 +13,8 @@ func _ready() -> void:
 func _set_stats() -> void:
 	for stat:Stats.SecondaryStat in Stats.SecondaryStat.values():
 		var new_label:Label = label.duplicate()
-		print(EnumStrings.secondary_names[stat] + ": 0")
-		new_label.text = EnumStrings.secondary_names[stat] + ": 0"
+		print(EnumStrings.SECONDARY_NAMES[stat] + ": 0")
+		new_label.text = EnumStrings.SECONDARY_NAMES[stat] + ": 0"
 		stat_label_dict[stat] = new_label
 		new_label.visible = true
 		v_box_container.add_child(new_label)

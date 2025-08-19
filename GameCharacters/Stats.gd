@@ -82,5 +82,11 @@ enum DmgIncreases {
 	LIGHTNING,
 	FIRE,
 	FROST,
-	TOXIC
+	TOXIC,
+	AXE,
+	SWORD,
+	STAFF,
+	BOW,
+	MACE,
+	DAGGER
 }

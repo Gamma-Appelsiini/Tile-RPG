@@ -144,28 +144,28 @@ func update_stat(type:int, amount:int) -> void:
 	
 func save_to_data(save_data:Dictionary, unique_id:String) -> void:
 	var sh_data := {
-		EnumStrings.stat_type_string[Stats.MainStat]: main_stats.duplicate(),
-		EnumStrings.stat_type_string[Stats.CharStat]: char_stats.duplicate(),
-		EnumStrings.stat_type_string[Stats.SkillStat]: skill_stats.duplicate(),
-		EnumStrings.stat_type_string[Stats.Defence]: defences.duplicate(),
-		EnumStrings.stat_type_string[Stats.ResourceStat]: resources.duplicate(),
-		EnumStrings.stat_type_string[Stats.SecondaryStat]: secondary_stats.duplicate(),
-		EnumStrings.stat_type_string[Stats.DmgType]: resistances.duplicate(),
-		EnumStrings.stat_type_string[Stats.DmgIncreases]: dmg_increases.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.MainStat]: main_stats.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.CharStat]: char_stats.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.SkillStat]: skill_stats.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.Defence]: defences.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.ResourceStat]: resources.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.SecondaryStat]: secondary_stats.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.DmgType]: resistances.duplicate(),
+		EnumStrings.STAT_TYPE_STRING[Stats.DmgIncreases]: dmg_increases.duplicate(),
 	}
 	save_data["game_characters"][unique_id]["stat_handler"] = sh_data
 
 func load_from_data(save_data:Dictionary, unique_id:String) -> void:
 	var sh_data:Dictionary = save_data["game_characters"][unique_id]["stat_handler"]
 	
-	main_stats = sh_data[EnumStrings.stat_type_string[Stats.MainStat]].duplicate()
-	char_stats = sh_data[EnumStrings.stat_type_string[Stats.CharStat]].duplicate()
-	skill_stats = sh_data[EnumStrings.stat_type_string[Stats.SkillStat]].duplicate()
-	defences = sh_data[EnumStrings.stat_type_string[Stats.Defence]].duplicate()
-	resources = sh_data[EnumStrings.stat_type_string[Stats.ResourceStat]].duplicate()
-	secondary_stats = sh_data[EnumStrings.stat_type_string[Stats.SecondaryStat]].duplicate()
-	resistances = sh_data[EnumStrings.stat_type_string[Stats.DmgType]].duplicate()
-	dmg_increases = sh_data[EnumStrings.stat_type_string[Stats.DmgIncreases]].duplicate()
+	main_stats = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.MainStat]].duplicate()
+	char_stats = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.CharStat]].duplicate()
+	skill_stats = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.SkillStat]].duplicate()
+	defences = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.Defence]].duplicate()
+	resources = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.ResourceStat]].duplicate()
+	secondary_stats = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.SecondaryStat]].duplicate()
+	resistances = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.DmgType]].duplicate()
+	dmg_increases = sh_data[EnumStrings.STAT_TYPE_STRING[Stats.DmgIncreases]].duplicate()
 	
 	stats_changed.emit()
 	
