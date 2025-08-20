@@ -12,7 +12,7 @@ enum ItemRarity {
 }
 
 @export var item_name:String = "Default Name"
-@export var inventory_image:Texture2D = null
+@export var inventory_image:Texture2D = load("res://Tile-RPG/Images/Items/Sword.png")
 @export var item_value:int = 1
 @export var item_rarity:ItemRarity = ItemRarity.POOR
 

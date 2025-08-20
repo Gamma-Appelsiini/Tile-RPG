@@ -1,6 +1,8 @@
 extends Item
 class_name Equipment
 
+signal item_stats_changed
+
 enum EquipmentSlot {
 	MAIN_HAND = 1,
 	OFF_HAND,
@@ -11,15 +13,6 @@ enum EquipmentSlot {
 	CHEST,
 	HANDS,
 	WAIST
-}
-
-enum WeaponTypes {
-	SWORD = 50,
-	STAFF,
-	AXE,
-	DAGGER,
-	MACE,
-	BOW
 }
 
 @export var equipment_slot:EquipmentSlot = EquipmentSlot.MAIN_HAND
@@ -60,6 +53,8 @@ func remove_affix(aff:Affix) -> void:
 	
 	var aff_amount:int = suffixes.size() + prefixes.size()
 	self.item_rarity = RARITY_MAP[aff_amount]
+	
+	item_stats_changed.emit()
 
 func save_to_data() -> void:
 	var equipment_data:Dictionary = {
@@ -168,7 +163,7 @@ func weapon_dmg_prefix() -> void:
 	Stats.DmgIncreases.BOW: "Bowmaster"
 	}
 	
-	var stat_to_increase = NAMES.keys()[randi() % WeaponTypes.values().size()-1]
+	var stat_to_increase = NAMES.keys()[randi() % NAMES.values().size()-1]
 	
 	var amount:int = randi_range(5,item_level + 5)
 	new_prefix.type_increase = stat_to_increase
@@ -190,7 +185,7 @@ func resistance_suffix():
 	var new_suffix:Affix = Affix.new()
 	
 	var amount:int = randi_range(3, item_level + 5)
-	var stat_to_increase = NAMES.keys()[randi() % Stats.DmgType.values().size()-1]
+	var stat_to_increase = NAMES.keys()[randi() % NAMES.values().size()-1]
 	
 	new_suffix.type_increase = stat_to_increase
 	new_suffix.increase_amount = amount

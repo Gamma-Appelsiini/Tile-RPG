@@ -8,9 +8,13 @@ var increase_amount:int = 0
 var affix_generator:Callable
 
 func apply_to_character(game_char:GameCharacter) -> void:
+	#Defence stat increases armor base armor which is applied when equipped
+	if type_increase in Stats.Defence.values(): return
 	game_char.stat_handler.update_stat(type_increase,increase_amount)
 
 func remove_from_character(game_char:GameCharacter) -> void:
+	#Defence stat increases armor base armor which is applied when equipped
+	if type_increase in Stats.Defence.values(): return
 	game_char.stat_handler.update_stat(type_increase,increase_amount * -1)
 
 func get_save_data() -> Dictionary:

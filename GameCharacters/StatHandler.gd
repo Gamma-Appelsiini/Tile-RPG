@@ -135,8 +135,7 @@ func update_stat(type:int, amount:int) -> void:
 	elif type in Stats.DmgIncreases.values():
 		self.damage_increases[type] += amount
 	elif type in Stats.Defence.values():
-		#dont apply af def to char
-		pass
+		self.defences[type] += amount
 	elif type in Stats.SkillStat.values():
 		self.skill_stats[type] += amount
 
