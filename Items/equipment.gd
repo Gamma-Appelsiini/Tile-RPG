@@ -38,10 +38,14 @@ func add_prefix() -> void:
 	prefix_funcs[number].call()
 	prefix_funcs.remove_at(number)
 	
+	item_stats_changed.emit()
+	
 func add_suffix() -> void:
 	var number:int = randi_range(0, len(suffix_funcs)-1)
 	suffix_funcs[number].call()
 	suffix_funcs.remove_at(number)
+	
+	item_stats_changed.emit()
 
 func remove_affix(aff:Affix) -> void:
 	if aff in prefixes:
@@ -99,7 +103,7 @@ func _health_prefix() -> void:
 	
 	prefixes.push_back(new_prefix)
 	
-func dmg_percent_prefix() -> void:
+func _dmg_percent_prefix() -> void:
 	const NAMES := {
 		Stats.DmgIncreases.PHYSICAL: "Brute's",
 		Stats.DmgIncreases.MYSTICAL: "Scholar's",
@@ -119,7 +123,7 @@ func dmg_percent_prefix() -> void:
 	
 	prefixes.push_back(new_prefix)
 	
-func thorns_prefix() -> void:
+func _thorns_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
 	
 	var amount:int = randi_range(1, item_level + 2)
@@ -130,7 +134,7 @@ func thorns_prefix() -> void:
 	
 	prefixes.push_back(new_prefix)
 	
-func spell_crit_prefix() -> void:
+func _spell_crit_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
 	
 	var amount:int = randi_range(5, item_level + 8)
@@ -141,7 +145,7 @@ func spell_crit_prefix() -> void:
 	
 	prefixes.push_back(new_prefix)
 	
-func spell_base_crit_prefix() -> void:
+func _spell_base_crit_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
 	
 	var amount:int = randi_range(1, 5)
@@ -152,7 +156,7 @@ func spell_base_crit_prefix() -> void:
 	
 	prefixes.push_back(new_prefix)
 	
-func weapon_dmg_prefix() -> void:
+func _weapon_dmg_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
 	const NAMES = {
 	Stats.DmgIncreases.SWORD:"Swordmaster",
@@ -173,7 +177,7 @@ func weapon_dmg_prefix() -> void:
 	
 	prefixes.push_back(new_prefix)
 
-func resistance_suffix():
+func _resistance_suffix():
 	const NAMES = {
 		Stats.DmgType.PHYSICAL: "Hardening",
 		Stats.DmgType.MYSTICAL: "Protection",

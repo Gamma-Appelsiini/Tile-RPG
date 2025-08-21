@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://da0xr2nkj8xej"]
+
+[ext_resource type="Texture2D" uid="uid://b2q0lxgghelua" path="res://Tile-RPG/Images/Items/Sword.png" id="1_n8m44"]
+[ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_qpck1"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_qpck1")
+weapon_type = 50
+hand_type = 0
+scale_stat = 5
+damage_type = 400
+weapon_stats = Dictionary[int, int]({
+0: 2,
+1: 4,
+2: 1,
+3: 5,
+4: 100
+})
+equipment_slot = 1
+item_level = 1
+item_name = "Default Name"
+inventory_image = ExtResource("1_n8m44")
+item_value = 5
+item_rarity = 0
+metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

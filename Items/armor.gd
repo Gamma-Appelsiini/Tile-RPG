@@ -15,12 +15,16 @@ var total_defence:int = 0
 
 func _init() -> void:
 	item_stats_changed.connect(apply_total_defence)
+	
+	prefix_funcs = [_base_def_prefix,_percent_def_prefix,_dmg_percent_prefix,_health_prefix,_thorns_prefix,
+	_spell_crit_prefix,_spell_base_crit_prefix,_weapon_dmg_prefix]
+	suffix_funcs = [_mainstat_suffix,_resistance_suffix]
 
-func _reset_defence():
+func _reset_defence() -> void:
 	percent_increase = 0
 	total_defence = 0
 
-func apply_total_defence():
+func apply_total_defence() -> void:
 	_reset_defence()
 	for pref:Affix in prefixes:
 		if pref.type_increase in DefPercentIncrease.values():
