@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Shield" load_steps=3 format=3 uid="uid://bgde80abhoa3d"]
+
+[ext_resource type="Script" uid="uid://cp8nfbbwljfm5" path="res://Tile-RPG/Items/shield.gd" id="1_acnyv"]
+[ext_resource type="Texture2D" uid="uid://3m1t22wcqly1" path="res://Tile-RPG/Images/Items/Shield.png" id="1_dygrl"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_acnyv")
+defence_type = 303
+base_defence = 15
+equipment_slot = 2
+item_level = 1
+item_name = "Buckler"
+inventory_image = ExtResource("1_dygrl")
+item_value = 3
+item_rarity = 0
+metadata/_custom_type_script = "uid://cp8nfbbwljfm5"

@@ -57,7 +57,7 @@ func _min_dmg_prefix() -> void:
 	var amount:int = randi_range(1, item_level)
 	#min dmg cant go over max dmg
 	var reduce_amount:int = (amount + self.weapon_stats[WeaponStat.MIN_DMG]) - self.weapon_stats[WeaponStat.MAX_DMG]
-	if reduce_amount > 0: amount - reduce_amount
+	if reduce_amount > 0: amount -= reduce_amount
 	
 	new_prefix.type_increase = WeaponStat.MIN_DMG
 	new_prefix.increase_amount = amount

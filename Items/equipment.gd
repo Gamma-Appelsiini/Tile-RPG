@@ -33,6 +33,29 @@ const RARITY_MAP:Dictionary[int,Item.ItemRarity] = {0: Item.ItemRarity.POOR,
 	5: Item.ItemRarity.GOD_ROLL,
 	6: Item.ItemRarity.GOD_ROLL,}
 
+func set_rarity(new_rarity:Item.ItemRarity) -> void:
+	if new_rarity == Item.ItemRarity.GOD_ROLL: max_affixes = 3
+	
+	while self.item_rarity != new_rarity:
+		add_affix()
+
+func add_affix() -> void:
+	var pref_amount:int = len(prefixes)
+	var suf_amount:int = len(suffixes)
+	
+	if pref_amount == max_affixes && suf_amount == max_affixes:
+		return
+	
+	if pref_amount > suf_amount: add_suffix()
+	elif suf_amount > pref_amount: add_prefix()
+	else:
+		var which:int = randi_range(1,2)
+		if which == 1: add_prefix()
+		else: add_suffix()
+	
+	var affixes_amount:int = len(prefixes) + len(suffixes)
+	self.item_rarity = RARITY_MAP[affixes_amount]
+
 func add_prefix() -> void:
 	var number:int = randi_range(0, len(prefix_funcs)-1)
 	prefix_funcs[number].call()

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bro3scd6p18hg"]
+
+[ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_5wh8x"]
+[ext_resource type="Texture2D" uid="uid://cfbbl1hdvuu18" path="res://Tile-RPG/Images/Items/Axe.png" id="1_sgeew"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_5wh8x")
+weapon_type = 52
+hand_type = 0
+scale_stat = 3
+damage_type = 400
+weapon_stats = Dictionary[int, int]({
+1500: 2,
+1501: 5,
+1502: 1,
+1503: 4,
+1504: 120
+})
+equipment_slot = 1
+item_level = 1
+item_name = "Hand Axe"
+inventory_image = ExtResource("1_sgeew")
+item_value = 4
+item_rarity = 0
+metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

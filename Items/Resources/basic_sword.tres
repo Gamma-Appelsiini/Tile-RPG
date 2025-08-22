@@ -14,12 +14,12 @@ weapon_stats = Dictionary[int, int]({
 0: 2,
 1: 4,
 2: 1,
-3: 5,
+3: 6,
 4: 100
 })
 equipment_slot = 1
 item_level = 1
-item_name = "Default Name"
+item_name = "Short Sword"
 inventory_image = ExtResource("1_n8m44")
 item_value = 5
 item_rarity = 0
