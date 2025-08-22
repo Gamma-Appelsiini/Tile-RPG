@@ -1,6 +1,6 @@
 extends Node
 
-var main_stat_names := {
+const MAIN_STAT_NAMES := {
 	Stats.MainStat.AGILITY: "Agility",
 	Stats.MainStat.ENDURANCE: "Endurance",
 	Stats.MainStat.LUCK: "Luck",
@@ -9,7 +9,7 @@ var main_stat_names := {
 	Stats.MainStat.SKILL: "Skill",
 	Stats.MainStat.VALOR: "Valor",}
 
-var main_stat_colors := {
+const MAIN_STAT_COLORS := {
 	Stats.MainStat.AGILITY: "#2b722f",
 	Stats.MainStat.ENDURANCE: "#ee5356",
 	Stats.MainStat.LUCK: "#53bb81",
@@ -27,7 +27,7 @@ const MAIN_STAT_PICS := {
 	Stats.MainStat.SKILL: "res://Tile-RPG/Images/Stats/skill.png",
 	Stats.MainStat.VALOR: "res://Tile-RPG/Images/Stats/valor.png",}
 	
-var def_names := {
+const DEF_NAMES := {
 	Stats.Defence.ARMOR: "Armor",
 	Stats.Defence.EVASION: "Evasion",
 	Stats.Defence.WARD: "Ward",
@@ -37,7 +37,7 @@ var def_names := {
 	Stats.Defence.SPELL_DODGE: "Spell Dodge",
 	Stats.Defence.GLANCE: "Glance"}
 	
-var secondary_names := {
+const SECONDARY_NAMES := {
 	Stats.SecondaryStat.STOMACH_CAPACITY: "Stomach Capacity",
 	Stats.SecondaryStat.ACCURACY: "Accuracy",
 	Stats.SecondaryStat.BARTER: "Barter",
@@ -57,7 +57,7 @@ var secondary_names := {
 	Stats.SecondaryStat.SPELL_BASE_CRIT: "Spell Base Crit",
 	}
 	
-var res_colors := {
+const RES_COLORS := {
 	Stats.DmgType.FIRE: "#dc3219",
 	Stats.DmgType.FROST: "#87e1ff",
 	Stats.DmgType.LIGHTNING: "#f0ff6e",
@@ -76,7 +76,7 @@ const RES_PICS := {
 	Stats.DmgType.TOXIC: "res://Tile-RPG/Images/Stats/toxic.png",
 }
 
-var res_names := {
+const RES_NAMES := {
 	Stats.DmgType.FIRE: "Fire",
 	Stats.DmgType.FROST: "Ice",
 	Stats.DmgType.LIGHTNING: "Lightning",
@@ -86,16 +86,22 @@ var res_names := {
 	Stats.DmgType.PURE: "Pure",
 }
 
-var dmg_type_names := {
+const DMG_TYPE_NAMES := {
 	Stats.DmgIncreases.FIRE: "Fire",
 	Stats.DmgIncreases.FROST: "Ice",
 	Stats.DmgIncreases.LIGHTNING: "Lightning",
 	Stats.DmgIncreases.MYSTICAL: "Magic",
 	Stats.DmgIncreases.PHYSICAL: "Physical",
 	Stats.DmgIncreases.TOXIC: "Toxic",
+	Stats.DmgIncreases.AXE: "Axe",
+	Stats.DmgIncreases.SWORD: "Sword",
+	Stats.DmgIncreases.BOW: "Bow",
+	Stats.DmgIncreases.STAFF: "Staff",
+	Stats.DmgIncreases.MACE: "Mace",
+	Stats.DmgIncreases.DAGGER: "Dagger",
 }
 
-var stat_type_string := {
+const STAT_TYPE_STRING := {
 	Stats.MainStat: "main_stat",
 	Stats.ResourceStat: "resource_stat",
 	Stats.CharStat: "char_stat",
@@ -106,7 +112,7 @@ var stat_type_string := {
 	Stats.DmgIncreases: "dmg_increases",
 }
 
-var string_stat_enum := {
+const STRING_STAT_ENUM := {
 	"main_stat": Stats.MainStat,
 	"resource_stat": Stats.ResourceStat,
 	"char_stat": Stats.CharStat,
@@ -116,3 +122,10 @@ var string_stat_enum := {
 	"dmg_type": Stats.DmgType,
 	"dmg_increases": Stats.DmgIncreases,
 }
+
+const RARITY_NAMES := {Item.ItemRarity.POOR : "Poor",
+	Item.ItemRarity.COMMON: "Common",
+	Item.ItemRarity.RARE: "Rare",
+	Item.ItemRarity.EPIC: "Epic",
+	Item.ItemRarity.LEGENDARY: "Legendary",
+	Item.ItemRarity.GOD_ROLL: "God Roll",}
