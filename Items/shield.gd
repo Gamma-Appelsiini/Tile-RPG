@@ -4,6 +4,8 @@ class_name Shield
 #Shields only Block, Spell Block, Dodge, Spell Dodge, Glance
 
 func _init() -> void:
+	item_stats_changed.connect(apply_total_defence)
+	
 	prefix_funcs = [_dmg_percent_prefix,_health_prefix,_thorns_prefix,
 	_spell_crit_prefix,_spell_base_crit_prefix,_shield_base_prefix]
 	suffix_funcs = [_mainstat_suffix,_resistance_suffix]

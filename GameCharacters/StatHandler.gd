@@ -2,7 +2,7 @@ class_name StatHandler
 
 signal stats_changed
 signal leveled_up
-signal health_changed(sh:StatHandler)
+signal resources_changed(sh:StatHandler)
 
 const POINTS_PER_LVL:int = 3
 const XP_INCREASE:float = 1.5
@@ -49,7 +49,7 @@ var resources:Dictionary[Stats.ResourceStat,int] = {
 	Stats.ResourceStat.MAX_HP: 5,
 	Stats.ResourceStat.MAX_AP: 1,
 	Stats.ResourceStat.MAX_SPIRIT: 1,
-	Stats.ResourceStat.MAX_MOVEMENT: 1
+	Stats.ResourceStat.MAX_MOVEMENT: 3
 }
 
 var secondary_stats:Dictionary[Stats.SecondaryStat,int] = {}
@@ -129,7 +129,9 @@ func update_stat(type:int, amount:int) -> void:
 		self.resources[type] += amount
 		if resources[Stats.ResourceStat.CURRENT_HP] > resources[Stats.ResourceStat.MAX_HP]:
 			resources[Stats.ResourceStat.CURRENT_HP] = resources[Stats.ResourceStat.MAX_HP]
-		health_changed.emit(self)
+		elif resources[Stats.ResourceStat.CURRENT_SPIRIT] > resources[Stats.ResourceStat.MAX_SPIRIT]:
+			resources[Stats.ResourceStat.CURRENT_SPIRIT] = resources[Stats.ResourceStat.MAX_SPIRIT]
+		resources_changed.emit(self)
 	elif type in Stats.DmgType.values():
 		self.resistances[type] += amount
 	elif type in Stats.DmgIncreases.values():

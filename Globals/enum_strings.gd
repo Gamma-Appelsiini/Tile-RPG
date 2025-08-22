@@ -122,3 +122,10 @@ const STRING_STAT_ENUM := {
 	"dmg_type": Stats.DmgType,
 	"dmg_increases": Stats.DmgIncreases,
 }
+
+const RARITY_NAMES := {Item.ItemRarity.POOR : "Poor",
+	Item.ItemRarity.COMMON: "Common",
+	Item.ItemRarity.RARE: "Rare",
+	Item.ItemRarity.EPIC: "Epic",
+	Item.ItemRarity.LEGENDARY: "Legendary",
+	Item.ItemRarity.GOD_ROLL: "God Roll",}

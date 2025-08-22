@@ -87,6 +87,7 @@ func _crit_multilier_suffix() -> void:
 	new_prefix.affix_text = "+" + str(amount) + " Base Crit Chance"
 	
 	suffixes.push_back(new_prefix)
+
 #Overwritten to apply weapon affixes
 func add_prefix() -> void:
 	var number:int = randi_range(0, len(prefix_funcs)-1)
