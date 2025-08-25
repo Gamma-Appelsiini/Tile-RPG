@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwm8mixxh22t5"]
+
+[ext_resource type="Script" uid="uid://bjf0h02xhxd3p" path="res://Tile-RPG/UI/Inventory/inventory.gd" id="1_box56"]
+[ext_resource type="StyleBox" uid="uid://dvndtiugiq0s2" path="res://Tile-RPG/UI/panel_style.tres" id="2_25g2e"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_box56")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+theme_override_styles/panel = ExtResource("2_25g2e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="InvSlotGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_constants/v_separation = -1
+columns = 5
