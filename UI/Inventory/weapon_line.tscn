@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://gfbtpvpx47v"]
+
+[ext_resource type="Script" uid="uid://bfujl0of2m7mo" path="res://Tile-RPG/UI/Inventory/weapon_line.gd" id="1_mk68y"]
+
+[node name="WeaponLine" type="HBoxContainer" node_paths=PackedStringArray("label_1", "label_2")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_mk68y")
+label_1 = NodePath("Label1")
+label_2 = NodePath("Label2")
+
+[node name="Label1" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.599476, 0.571591, 0.408294, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 12
+text = "Physical Damage: "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = -1
+theme_override_font_sizes/font_size = 12
+text = "5 - 15"

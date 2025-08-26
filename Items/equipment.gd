@@ -106,12 +106,12 @@ func _mainstat_suffix() -> void:
 	var new_suffix:Affix = Affix.new()
 	
 	var amount:int = randi_range(1, item_level)
-	var stat_to_increase:Stats.MainStat = NAMES.keys()[randi() % Stats.MainStat.values().size()-1]
+	var stat_to_increase:Stats.MainStat = NAMES.keys().pick_random()
 	
 	new_suffix.type_increase = stat_to_increase
 	new_suffix.increase_amount = amount
 	new_suffix.affix_name = NAMES[stat_to_increase]
-	new_suffix.affix_text = "+" + str(amount) + " " + EnumStrings.main_stat_names[stat_to_increase]
+	new_suffix.affix_text = "+" + str(amount) + " " + EnumStrings.MAIN_STAT_NAMES[stat_to_increase]
 	
 	suffixes.push_back(new_suffix)
 
@@ -137,7 +137,7 @@ func _dmg_percent_prefix() -> void:
 	}
 	var new_prefix:Affix = Affix.new()
 	var amount:int = randi_range(1, item_level*2)
-	var stat_to_increase:Stats.DmgIncreases = NAMES.keys()[randi() % Stats.DmgIncreases.values().size()-1]
+	var stat_to_increase:Stats.DmgIncreases = NAMES.keys().pick_random()
 	
 	new_prefix.type_increase = stat_to_increase
 	new_prefix.increase_amount = amount
@@ -190,7 +190,7 @@ func _weapon_dmg_prefix() -> void:
 	Stats.DmgIncreases.BOW: "Bowmaster"
 	}
 	
-	var stat_to_increase = NAMES.keys()[randi() % NAMES.values().size()-1]
+	var stat_to_increase = NAMES.keys().pick_random()
 	
 	var amount:int = randi_range(5,item_level + 5)
 	new_prefix.type_increase = stat_to_increase
@@ -212,7 +212,7 @@ func _resistance_suffix():
 	var new_suffix:Affix = Affix.new()
 	
 	var amount:int = randi_range(3, item_level + 5)
-	var stat_to_increase = NAMES.keys()[randi() % NAMES.values().size()-1]
+	var stat_to_increase = NAMES.keys().pick_random()
 	
 	new_suffix.type_increase = stat_to_increase
 	new_suffix.increase_amount = amount

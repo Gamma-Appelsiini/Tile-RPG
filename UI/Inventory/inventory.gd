@@ -5,9 +5,12 @@ class_name Inventory
 
 const INV_SIZE:int = 20
 const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
+const ITEM_TT_PATH:String = "res://Tile-RPG/UI/Inventory/item_tooltip.tscn"
 
 var items:Array[Item] = []
 var slots:Array[InventorySlot] = []
+var tooltips:Dictionary[Item,ItemTooltip] = {}
+
 var hovered_slot:InventorySlot = null
 var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
@@ -18,6 +21,11 @@ func _ready() -> void:
 	_add_inv_slots()
 	var generator = ItemGenerator.new()
 	add_item_to_inv(generator.get_random_equipment())
+	add_item_to_inv(generator.get_random_equipment())
+	add_item_to_inv(generator.get_random_equipment())
+	add_item_to_inv(generator.get_random_equipment())
+	add_item_to_inv(generator.get_random_equipment())
+	add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.RARE))
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:
@@ -34,13 +42,31 @@ func add_item_to_inv(new_item:Item) -> bool:
 	for i:int in INV_SIZE:
 		if slots[i].item_in_slot == null:
 			slots[i].set_item(new_item)
+			_create_item_tt(new_item)
 			return true
 	
 	return false
+	
+func remove_item_from_inv(remove_item:Item, destroy_item:bool = false) -> void:
+	for i:int in INV_SIZE:
+		if slots[i].item_in_slot == remove_item:
+			tooltips[remove_item].queue_free()
+			tooltips.erase(remove_item)
+			slots[i].remove_item()
+	if destroy_item: remove_item.queue_free()
+
+func _create_item_tt(new_item:Item) -> void:
+	var new_tooltip:ItemTooltip = load(ITEM_TT_PATH).instantiate()
+	new_tooltip.visible = false
+	add_child(new_tooltip)
+	new_tooltip.generate_tooltip(new_item)
+	
+	tooltips[new_item] = new_tooltip
 
 func _slot_clicked() -> void:
 	if hovered_slot.item_in_slot == null: return
 	
+	_hide_tt(hovered_slot)
 	old_slot_pos = hovered_slot.item_image.global_position
 	selected_slot = hovered_slot
 	img_offset = int(selected_slot.item_image.get_size().x / 2)
@@ -73,8 +99,24 @@ func _add_inv_slots() -> void:
 
 func _slot_hovered(slot:InventorySlot) -> void:
 	hovered_slot = slot
+	if !selected_slot: _show_tt(slot)
 	slot.hover_slot()
 	
 func _clear_hover(slot:InventorySlot) -> void:
 	if hovered_slot == slot: hovered_slot = null
+	_hide_tt(slot)
 	slot.unhover_slot()
+
+func _show_tt(slot:InventorySlot) -> void:
+	if slot.item_in_slot == null: return
+	
+	var tooltip:ItemTooltip = tooltips[slot.item_in_slot]
+	tooltip.visible = true
+	var offset_x:float = tooltip.get_tt_size().x
+	var offset_y:float = (tooltip.get_tt_size().y - slot.size.y) / 2
+	tooltips[slot.item_in_slot].global_position = slot.global_position - Vector2(offset_x + 15,offset_y)
+	
+func _hide_tt(slot:InventorySlot) -> void:
+	if slot.item_in_slot == null: return
+	
+	tooltips[slot.item_in_slot].visible = false

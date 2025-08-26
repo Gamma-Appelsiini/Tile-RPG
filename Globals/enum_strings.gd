@@ -78,9 +78,9 @@ const RES_PICS := {
 
 const RES_NAMES := {
 	Stats.DmgType.FIRE: "Fire",
-	Stats.DmgType.FROST: "Ice",
+	Stats.DmgType.FROST: "Frost",
 	Stats.DmgType.LIGHTNING: "Lightning",
-	Stats.DmgType.MYSTICAL: "Magic",
+	Stats.DmgType.MYSTICAL: "Mystical",
 	Stats.DmgType.PHYSICAL: "Physical",
 	Stats.DmgType.TOXIC: "Toxic",
 	Stats.DmgType.PURE: "Pure",
@@ -88,9 +88,9 @@ const RES_NAMES := {
 
 const DMG_TYPE_NAMES := {
 	Stats.DmgIncreases.FIRE: "Fire",
-	Stats.DmgIncreases.FROST: "Ice",
+	Stats.DmgIncreases.FROST: "Frost",
 	Stats.DmgIncreases.LIGHTNING: "Lightning",
-	Stats.DmgIncreases.MYSTICAL: "Magic",
+	Stats.DmgIncreases.MYSTICAL: "Mystical",
 	Stats.DmgIncreases.PHYSICAL: "Physical",
 	Stats.DmgIncreases.TOXIC: "Toxic",
 	Stats.DmgIncreases.AXE: "Axe",
@@ -99,6 +99,13 @@ const DMG_TYPE_NAMES := {
 	Stats.DmgIncreases.STAFF: "Staff",
 	Stats.DmgIncreases.MACE: "Mace",
 	Stats.DmgIncreases.DAGGER: "Dagger",
+	Stats.DmgType.FIRE: "Fire",
+	Stats.DmgType.FROST: "Frost",
+	Stats.DmgType.LIGHTNING: "Lightning",
+	Stats.DmgType.MYSTICAL: "Mystical",
+	Stats.DmgType.PHYSICAL: "Physical",
+	Stats.DmgType.TOXIC: "Toxic",
+	
 }
 
 const STAT_TYPE_STRING := {
@@ -128,4 +135,36 @@ const RARITY_NAMES := {Item.ItemRarity.POOR : "Poor",
 	Item.ItemRarity.RARE: "Rare",
 	Item.ItemRarity.EPIC: "Epic",
 	Item.ItemRarity.LEGENDARY: "Legendary",
-	Item.ItemRarity.GOD_ROLL: "God Roll",}
+	Item.ItemRarity.GOD_ROLL: "God Roll",
+	Item.ItemRarity.FABLED: "Fabled"}
+
+const RARITY_COLORS := {Item.ItemRarity.POOR : "#d2d2d2",
+	Item.ItemRarity.COMMON: "#32c346",
+	Item.ItemRarity.RARE: "#1469e1",
+	Item.ItemRarity.EPIC: "#6405fa",
+	Item.ItemRarity.LEGENDARY: "#e17d00",
+	Item.ItemRarity.GOD_ROLL: "#e00003",
+	Item.ItemRarity.FABLED: "#915a14"}
+
+const SLOT_STRINGS := {
+	Equipment.EquipmentSlot.MAIN_HAND: "Weapon",
+	Equipment.EquipmentSlot.OFF_HAND: "Off Hand",
+	Equipment.EquipmentSlot.FEET: "Boots",
+	Equipment.EquipmentSlot.HEAD: "Helmet",
+	Equipment.EquipmentSlot.NECK: "Amulet",
+	Equipment.EquipmentSlot.FINGER: "Ring",
+	Equipment.EquipmentSlot.CHEST: "Body Armor",
+	Equipment.EquipmentSlot.HANDS: "Gloves",
+	Equipment.EquipmentSlot.WAIST: "Belt"
+}
+
+const DEF_COLORS := {
+	Stats.Defence.ARMOR: "#b5b7ca",
+	Stats.Defence.EVASION: "#64dea6",
+	Stats.Defence.WARD: "#0ccaf8",
+	Stats.Defence.BLOCK: "#866628",
+	Stats.Defence.SPELL_BLOCK: "#1b25af",
+	Stats.Defence.DODGE: "#498a57",
+	Stats.Defence.SPELL_DODGE: "#0d8f64",
+	Stats.Defence.GLANCE: "#b2aa5d"}
+	
