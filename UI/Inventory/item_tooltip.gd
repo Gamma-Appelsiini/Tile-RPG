@@ -49,14 +49,14 @@ func _weapon_handling(new_weapon:Weapon) -> void:
 	var dmg_range:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG]) + " - " + str(new_weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG])
 	var dmg_color:String = EnumStrings.RES_COLORS[new_weapon.damage_type]
 	
-	var range:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.RANGE])
+	var wep_range:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.RANGE])
 	var crit_chance:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT])
 	var crit_multi:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER])
 	
 	_add_weapon_stat_label(dmg_type, dmg_range,Color(dmg_color))
-	_add_weapon_stat_label("Range: ",range)
-	_add_weapon_stat_label("Crit Chance: ",crit_chance)
-	_add_weapon_stat_label("Crit Multiplier: ",crit_multi)
+	_add_weapon_stat_label("Range: ",wep_range)
+	_add_weapon_stat_label("Crit Chance: ",crit_chance + "%")
+	_add_weapon_stat_label("Crit Multiplier: ",crit_multi + "%")
 	
 func _add_weapon_stat_label(text1:String, text2:String,color_override:Color = Color("ffffff")) -> void:
 	var new_line:WeaponLine = load(WL_PATH).instantiate()

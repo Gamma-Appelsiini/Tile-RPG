@@ -68,7 +68,7 @@ horizontal_alignment = 1
 [node name="AffixSeparator" type="HSeparator" parent="TTContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 24
 
 [node name="AffixContainer" type="VBoxContainer" parent="TTContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -87,26 +87,30 @@ horizontal_alignment = 1
 [node name="PriceSeparator" type="HSeparator" parent="TTContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 
 [node name="PriceContainer" type="HBoxContainer" parent="TTContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 6
 alignment = 2
-
-[node name="BuxRect" type="TextureRect" parent="TTContainer/VBoxContainer/PriceContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-texture = ExtResource("3_svmp5")
-expand_mode = 2
-stretch_mode = 4
 
 [node name="PriceLabel" type="Label" parent="TTContainer/VBoxContainer/PriceContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.896251, 0.712011, 0.456124, 1)
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 14
 text = "5"
 horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BuxRect" type="TextureRect" parent="TTContainer/VBoxContainer/PriceContainer"]
+layout_mode = 2
+texture = ExtResource("3_svmp5")
+expand_mode = 2
+stretch_mode = 4

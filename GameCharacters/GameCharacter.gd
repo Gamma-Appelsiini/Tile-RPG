@@ -6,10 +6,14 @@ class_name GameCharacter
 @export var picture:Texture2D = null
 @export var stat_resource:StatResource = null
 var stat_handler:StatHandler = null
+var equipment_handler:EquipmentHandler = null
 
 func _init() -> void:
 	stat_handler = StatHandler.new()
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
+	
+	equipment_handler = EquipmentHandler.new()
+	equipment_handler.equipment_owner = self
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)

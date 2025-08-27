@@ -73,7 +73,7 @@ func _base_crit_suffix() -> void:
 	new_prefix.type_increase = WeaponStat.BASE_CRIT
 	new_prefix.increase_amount = amount
 	new_prefix.affix_name = "Deadly"
-	new_prefix.affix_text = "+" + str(amount) + " Base Crit Chance"
+	new_prefix.affix_text = "+" + str(amount) + "% Base Crit Chance"
 	
 	suffixes.push_back(new_prefix)
 
@@ -84,7 +84,7 @@ func _crit_multilier_suffix() -> void:
 	new_prefix.type_increase = WeaponStat.BASE_MULTIPLIER
 	new_prefix.increase_amount = amount
 	new_prefix.affix_name = "Damaging"
-	new_prefix.affix_text = "+" + str(amount) + " Base Crit Chance"
+	new_prefix.affix_text = "+" + str(amount) + "% Base Crit Multiplier"
 	
 	suffixes.push_back(new_prefix)
 

@@ -2,13 +2,16 @@ extends Control
 class_name Inventory
 
 @onready var inv_slot_grid: GridContainer = %InvSlotGrid
+@onready var equipment_grid: GridContainer = %EquipmentGrid
 
-const INV_SIZE:int = 20
+const INV_SIZE:int = 15
 const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
 const ITEM_TT_PATH:String = "res://Tile-RPG/UI/Inventory/item_tooltip.tscn"
 
+var player:Player = null
 var items:Array[Item] = []
 var slots:Array[InventorySlot] = []
+var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}
 var tooltips:Dictionary[Item,ItemTooltip] = {}
 
 var hovered_slot:InventorySlot = null
@@ -19,28 +22,67 @@ var img_offset:int = 0
 func _ready() -> void:
 	items.resize(INV_SIZE)
 	_add_inv_slots()
-	var generator = ItemGenerator.new()
-	add_item_to_inv(generator.get_random_equipment())
-	add_item_to_inv(generator.get_random_equipment())
-	add_item_to_inv(generator.get_random_equipment())
-	add_item_to_inv(generator.get_random_equipment())
-	add_item_to_inv(generator.get_random_equipment())
-	add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.RARE))
+	_add_equipment_slots()
+
+#TODO saving
+func save_inv_to_data(save_data:Dictionary) -> void:
+	var inv_data:Dictionary = {}
+	
+	for islot:InventorySlot in slots:
+		if islot.array_pos != -1 and islot.item_in_slot != null:
+			inv_data[islot.array_pos] = islot.item_in_slot
+			
+	save_data["inventory"] = inv_data
+
+func load_inv_from_data(save_data:Dictionary) -> void:
+	if !save_data.has("inventory"):return
+	return
+	#TODO loading
+	for key:int in save_data["inventory"].keys():
+		slots[key].set_item(save_data["inventory"][key])
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:
 		selected_slot.item_image.global_position = get_viewport().get_mouse_position() + Vector2(-img_offset,-img_offset)
 
 func _input(event: InputEvent) -> void:
+	if !visible: return
 	if event.is_action_pressed("Left Click"):
 		if hovered_slot == null: return
-		_slot_clicked()
+		_item_clicked()
 	elif event.is_action_released("Left Click"):
-		_slot_released()
+		_item_released()
+	elif event.is_action_released("test2"):
+		var generator = ItemGenerator.new()
+		add_item_to_inv(generator.get_random_equipment())
+		add_item_to_inv(generator.get_random_equipment())
+		add_item_to_inv(generator.get_random_equipment())
+		add_item_to_inv(generator.get_random_equipment())
+		add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.EPIC))
+		add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.RARE))
+
+func _add_equipment_slots() -> void:
+	var equ_slots:Array[Equipment.EquipmentSlot] =[
+		Equipment.EquipmentSlot.NECK, Equipment.EquipmentSlot.HEAD,Equipment.EquipmentSlot.FINGER,
+		Equipment.EquipmentSlot.HANDS, Equipment.EquipmentSlot.CHEST, Equipment.EquipmentSlot.FEET,
+		Equipment.EquipmentSlot.MAIN_HAND, Equipment.EquipmentSlot.WAIST, Equipment.EquipmentSlot.OFF_HAND]
+	
+	for slot:Equipment.EquipmentSlot in equ_slots:
+		var new_inv_slot:InventorySlot = load(INV_SLOT_PATH).instantiate()
+		new_inv_slot.equipment_slot = slot
+		equipment_grid.add_child(new_inv_slot)
+		slots.push_back(new_inv_slot)
+		equipment_slots[slot] = new_inv_slot
+		new_inv_slot.custom_minimum_size = Vector2(140,140)
+		
+		new_inv_slot.equip_item.connect(player.equipment_handler.equip_item)
+		new_inv_slot.unequip_item.connect(player.equipment_handler.unequip_item)
+		new_inv_slot.mouse_exited.connect(_clear_hover.bind(new_inv_slot))
+		new_inv_slot.mouse_entered.connect(_slot_hovered.bind(new_inv_slot))
 
 func add_item_to_inv(new_item:Item) -> bool:
 	for i:int in INV_SIZE:
-		if slots[i].item_in_slot == null:
+		if slots[i].item_in_slot == null and !slots[i].equipment_slot:
 			slots[i].set_item(new_item)
 			_create_item_tt(new_item)
 			return true
@@ -63,7 +105,7 @@ func _create_item_tt(new_item:Item) -> void:
 	
 	tooltips[new_item] = new_tooltip
 
-func _slot_clicked() -> void:
+func _item_clicked() -> void:
 	if hovered_slot.item_in_slot == null: return
 	
 	_hide_tt(hovered_slot)
@@ -74,18 +116,47 @@ func _slot_clicked() -> void:
 	#Enables mouse entered/exited signals to be fired when dragging item
 	selected_slot.item_image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-func _slot_released() -> void:
+func _item_released() -> void:
 	if selected_slot == null: return
 	
 	#Hovering over nothing or own slot
-	if hovered_slot == null or hovered_slot == selected_slot:
+	if hovered_slot == null or hovered_slot == selected_slot or !_possible_to_equip():
 		selected_slot.item_image.global_position = old_slot_pos
 		selected_slot = null
 		return
 	
+	
 	selected_slot.item_image.global_position = old_slot_pos
 	hovered_slot.set_item(selected_slot.item_in_slot,selected_slot)
 	selected_slot = null
+
+#Equipping a two handed weapon requires unequipping off and mainhand
+func _possible_to_equip() -> bool:
+	if !hovered_slot.equipment_slot: return true
+	var item_to_equip:Equipment = selected_slot.item_in_slot
+	
+	if item_to_equip.equipment_slot != hovered_slot.equipment_slot: return false
+	if item_to_equip.equipment_slot != Equipment.EquipmentSlot.MAIN_HAND: return true
+	if item_to_equip is Weapon:
+		if item_to_equip.hand_type == Weapon.HandType.ONE_HANDED: return true
+	
+	#Now we know we are trying to equip a two handed weapon
+	var item_in_mainhand:Equipment = equipment_slots[Equipment.EquipmentSlot.MAIN_HAND].item_in_slot
+	var item_in_offhand:Equipment = equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot
+	var empty_inv_space:int = 0
+	for slot:InventorySlot in slots:
+		if slot.item_in_slot == null and !slot.equipment_slot: empty_inv_space += 1
+
+	#1 empty space required to unequip both hands
+	if item_in_mainhand != null and item_in_offhand != null and empty_inv_space < 1:
+		return false
+	
+	
+	#Add off hand to inv and unequip
+	add_item_to_inv(equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot)
+	equipment_slots[Equipment.EquipmentSlot.OFF_HAND].remove_item()
+	
+	return true
 
 func _add_inv_slots() -> void:
 	for i:int in INV_SIZE:
