@@ -24,22 +24,52 @@ func _ready() -> void:
 	_add_inv_slots()
 	_add_equipment_slots()
 
-#TODO saving
+func _save_equipment(save_data:Dictionary) -> void:
+	var equ_data:Dictionary = {}
+	
+	for slot:Equipment.EquipmentSlot in equipment_slots.keys():
+		var equ_to_save:Equipment = equipment_slots[slot].item_in_slot
+		if equ_to_save != null:
+			equ_data[slot] = equ_to_save.save_to_data()
+			
+	save_data["equipment"] = equ_data
+
+func _load_equ_from_data(save_data:Dictionary) -> void:
+	if !save_data.has("equipment"): return
+	
+	for slot:Equipment.EquipmentSlot in save_data["equipment"].keys():
+		var script: Script = load(save_data["equipment"][slot]["equipment_type"])
+		var loaded_equ:Equipment = script.new()
+		loaded_equ.load_from_data(save_data["equipment"][slot])
+		_create_item_tt(loaded_equ)
+
+		#Don't equip gear again, stats are saved with gear equipped
+		player.equipment_handler.equipped_items[slot] = loaded_equ
+		var skip_equipping:bool = true
+		equipment_slots[slot].set_item(loaded_equ,null,skip_equipping)
+
 func save_inv_to_data(save_data:Dictionary) -> void:
 	var inv_data:Dictionary = {}
 	
 	for islot:InventorySlot in slots:
 		if islot.array_pos != -1 and islot.item_in_slot != null:
-			inv_data[islot.array_pos] = islot.item_in_slot
+			inv_data[islot.array_pos] = islot.item_in_slot.save_to_data()
 			
 	save_data["inventory"] = inv_data
+	_save_equipment(save_data)
 
 func load_inv_from_data(save_data:Dictionary) -> void:
 	if !save_data.has("inventory"):return
-	return
-	#TODO loading
+
 	for key:int in save_data["inventory"].keys():
-		slots[key].set_item(save_data["inventory"][key])
+		var script: Script = load(save_data["inventory"][key]["equipment_type"])
+		var loaded_equ:Equipment = script.new()
+
+		loaded_equ.load_from_data(save_data["inventory"][key])
+		slots[key].set_item(loaded_equ)
+		_create_item_tt(loaded_equ)
+	
+	_load_equ_from_data(save_data)
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:
@@ -54,10 +84,10 @@ func _input(event: InputEvent) -> void:
 		_item_released()
 	elif event.is_action_released("test2"):
 		var generator = ItemGenerator.new()
-		add_item_to_inv(generator.get_random_equipment())
-		add_item_to_inv(generator.get_random_equipment())
-		add_item_to_inv(generator.get_random_equipment())
-		add_item_to_inv(generator.get_random_equipment())
+		add_item_to_inv(generator.get_random_rarity_equipment())
+		add_item_to_inv(generator.get_random_rarity_equipment())
+		add_item_to_inv(generator.get_random_rarity_equipment())
+		add_item_to_inv(generator.get_random_rarity_equipment())
 		add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.EPIC))
 		add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.RARE))
 
@@ -151,7 +181,6 @@ func _possible_to_equip() -> bool:
 	if item_in_mainhand != null and item_in_offhand != null and empty_inv_space < 1:
 		return false
 	
-	
 	#Add off hand to inv and unequip
 	add_item_to_inv(equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot)
 	equipment_slots[Equipment.EquipmentSlot.OFF_HAND].remove_item()
@@ -170,6 +199,7 @@ func _add_inv_slots() -> void:
 
 func _slot_hovered(slot:InventorySlot) -> void:
 	hovered_slot = slot
+
 	if !selected_slot: _show_tt(slot)
 	slot.hover_slot()
 	

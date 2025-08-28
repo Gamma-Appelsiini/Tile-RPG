@@ -25,6 +25,8 @@ var suffixes:Array[Affix] = []
 var prefix_funcs:Array[Callable] = []
 var suffix_funcs:Array[Callable] = []
 
+var aff_funcs:Dictionary[String, Callable] = {"p0": _mainstat_suffix}
+
 const RARITY_MAP:Dictionary[int,Item.ItemRarity] = {0: Item.ItemRarity.POOR,
 	1: Item.ItemRarity.COMMON,
 	2: Item.ItemRarity.RARE,
@@ -32,6 +34,19 @@ const RARITY_MAP:Dictionary[int,Item.ItemRarity] = {0: Item.ItemRarity.POOR,
 	4: Item.ItemRarity.LEGENDARY,
 	5: Item.ItemRarity.GOD_ROLL,
 	6: Item.ItemRarity.GOD_ROLL,}
+
+func _aff_generators_to_dict() -> void:
+	var letter:String = "p"
+	var number:int = 0
+	for function:Callable in prefix_funcs:
+		aff_funcs[letter+str(number)] = function
+		number += 1
+	
+	letter = "s"
+	number = 0
+	for function:Callable in suffix_funcs:
+		aff_funcs[letter+str(number)] = function
+		number += 1
 
 func set_rarity(new_rarity:Item.ItemRarity) -> void:
 	if new_rarity == Item.ItemRarity.GOD_ROLL: max_affixes = 3
@@ -59,6 +74,14 @@ func add_affix() -> void:
 func add_prefix() -> void:
 	var number:int = randi_range(0, len(prefix_funcs)-1)
 	prefix_funcs[number].call()
+	
+	var new_affix:Affix = prefixes.back()
+	new_affix.affix_generator = prefix_funcs[number]
+	
+	for key:String in aff_funcs.keys():
+		if aff_funcs[key] == prefix_funcs[number]:
+			new_affix.generator_key = key
+	
 	prefix_funcs.remove_at(number)
 	
 	item_stats_changed.emit()
@@ -66,6 +89,14 @@ func add_prefix() -> void:
 func add_suffix() -> void:
 	var number:int = randi_range(0, len(suffix_funcs)-1)
 	suffix_funcs[number].call()
+	
+	var new_affix:Affix = suffixes.back()
+	new_affix.affix_generator = suffix_funcs[number]
+	
+	for key:String in aff_funcs.keys():
+		if aff_funcs[key] == suffix_funcs[number]:
+			new_affix.generator_key = key
+	
 	suffix_funcs.remove_at(number)
 	
 	item_stats_changed.emit()
@@ -83,15 +114,58 @@ func remove_affix(aff:Affix) -> void:
 	
 	item_stats_changed.emit()
 
-func save_to_data() -> void:
+func save_to_data() -> Dictionary:
+	var prefix_data = []
+	for pref:Affix in prefixes: prefix_data.push_back(pref.get_save_data())
+	
+	var suffix_data = []
+	for suf:Affix in suffixes: suffix_data.push_back(suf.get_save_data())
+	
 	var equipment_data:Dictionary = {
+		"equipment_type": "res://Tile-RPG/Items/equipment.gd",
 		"equipment_slot": equipment_slot,
 		"item_level": item_level,
-		"prefixes": prefixes,
-		"suffixes": suffixes,
-		"item_rarity": item_rarity
+		"prefixes": prefix_data,
+		"suffixes": suffix_data,
+		"item_rarity": item_rarity,
+		"inventory_image": inventory_image.resource_path,
+		"item_value": item_value,
+		"item_name": item_name,
 	}
 
+	return equipment_data
+
+func _handle_used_aff_generators(loaded_affix:Affix) -> void:
+	var key:String = loaded_affix.generator_key
+	var used_func:Callable = aff_funcs[key]
+	loaded_affix.affix_generator = used_func
+	
+	if key[0] == "p": prefix_funcs.erase(used_func)
+	else: suffix_funcs.erase(used_func)
+
+func _load_affixes(save_data:Dictionary) -> void:
+	for aff_data:Dictionary in save_data["prefixes"]:
+		var new_pref:Affix = Affix.new()
+		new_pref.load_from_data(aff_data)
+		prefixes.push_back(new_pref)
+		_handle_used_aff_generators(new_pref)
+	
+	for aff_data:Dictionary in save_data["suffixes"]:
+		var new_suf:Affix = Affix.new()
+		new_suf.load_from_data(aff_data)
+		suffixes.push_back(new_suf)
+		_handle_used_aff_generators(new_suf)
+
+func load_from_data(save_data:Dictionary) -> void:
+	_load_affixes(save_data)
+
+	self.item_level = save_data["item_level"]
+	self.equipment_slot = save_data["equipment_slot"]
+	self.item_rarity = save_data["item_rarity"]
+	self.inventory_image = load(save_data["inventory_image"])
+	self.item_value = save_data["item_value"]
+	self.item_name = save_data["item_name"]
+	
 #Affixes for all types of equipment
 func _mainstat_suffix() -> void:
 	const NAMES := {

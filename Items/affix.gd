@@ -6,6 +6,7 @@ var affix_text:String = "Default affix text"
 var type_increase:int = -1
 var increase_amount:int = 0
 var affix_generator:Callable
+var generator_key:String = ""
 
 func apply_to_character(game_char:GameCharacter) -> void:
 	#Defence stat increases armor base armor which is applied when equipped
@@ -23,13 +24,14 @@ func get_save_data() -> Dictionary:
 		"affix_text": affix_text,
 		"type_increase": type_increase,
 		"increase_amount": increase_amount,
-		"affix_generator": affix_generator
+		"generator_key": generator_key
 	}
+
 	return data
-	
+
 func load_from_data(data:Dictionary) -> void:
 	affix_name = data["affix_name"]
 	affix_text = data["affix_text"]
 	type_increase = data["type_increase"]
 	increase_amount = data["increase_amount"]
-	affix_generator = data["affix_generator"]
+	generator_key = data["generator_key"]

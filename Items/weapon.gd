@@ -37,8 +37,52 @@ enum WeaponStat {
 }
 
 func _init() -> void:
-	prefix_funcs = [_dmg_percent_prefix, _spell_crit_prefix,_spell_base_crit_prefix,_weapon_dmg_prefix]
+	prefix_funcs = [_dmg_percent_prefix, _spell_crit_prefix,_spell_base_crit_prefix,_weapon_dmg_prefix,
+	_max_dmg_prefix,_min_dmg_prefix]
 	suffix_funcs = [_mainstat_suffix,_resistance_suffix,_base_crit_suffix,_crit_multilier_suffix]
+	
+	_aff_generators_to_dict()
+
+func save_to_data() -> Dictionary:
+	var prefix_data = []
+	for pref:Affix in prefixes: prefix_data.push_back(pref.get_save_data())
+	
+	var suffix_data = []
+	for suf:Affix in suffixes: suffix_data.push_back(suf.get_save_data())
+	
+	var equipment_data:Dictionary = {
+		"equipment_type": "res://Tile-RPG/Items/weapon.gd",
+		"equipment_slot": equipment_slot,
+		"item_level": item_level,
+		"prefixes": prefix_data,
+		"suffixes": suffix_data,
+		"item_rarity": item_rarity,
+		"weapon_type": weapon_type,
+		"hand_type": hand_type,
+		"scale_stat": scale_stat,
+		"damage_type": damage_type,
+		"weapon_stats": weapon_stats,
+		"inventory_image": inventory_image.resource_path,
+		"item_value": item_value,
+		"item_name": item_name,
+	}
+	
+	return equipment_data
+
+func load_from_data(save_data:Dictionary) -> void:
+	_load_affixes(save_data)
+
+	self.item_level = save_data["item_level"]
+	self.equipment_slot = save_data["equipment_slot"]
+	self.item_rarity = save_data["item_rarity"]
+	self.weapon_type = save_data["weapon_type"]
+	self.hand_type = save_data["hand_type"]
+	self.scale_stat = save_data["scale_stat"]
+	self.damage_type = save_data["damage_type"]
+	self.weapon_stats = save_data["weapon_stats"]
+	self.inventory_image = load(save_data["inventory_image"])
+	self.item_value = save_data["item_value"]
+	self.item_name = save_data["item_name"]
 
 func _max_dmg_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
@@ -90,11 +134,18 @@ func _crit_multilier_suffix() -> void:
 
 #Overwritten to apply weapon affixes
 func add_prefix() -> void:
-	var number:int = randi_range(0, len(prefix_funcs)-1)
+	var number:int = randi_range(0, len(suffix_funcs)-1)
 	prefix_funcs[number].call()
-	prefix_funcs.remove_at(number)
 	
 	var new_affix:Affix = prefixes.back()
+	new_affix.affix_generator = suffix_funcs[number]
+	
+	for key:String in aff_funcs.keys():
+		if aff_funcs[key] == suffix_funcs[number]:
+			new_affix.generator_key = key
+	
+	suffix_funcs.remove_at(number)
+
 	if new_affix.type_increase in weapon_stats.keys():
 		self.weapon_stats[new_affix.type_increase] += new_affix.increase_amount
 		
@@ -104,9 +155,16 @@ func add_prefix() -> void:
 func add_suffix() -> void:
 	var number:int = randi_range(0, len(suffix_funcs)-1)
 	suffix_funcs[number].call()
-	suffix_funcs.remove_at(number)
 	
 	var new_affix:Affix = suffixes.back()
+	new_affix.affix_generator = suffix_funcs[number]
+	
+	for key:String in aff_funcs.keys():
+		if aff_funcs[key] == suffix_funcs[number]:
+			new_affix.generator_key = key
+	
+	suffix_funcs.remove_at(number)
+	
 	if new_affix.type_increase in weapon_stats.keys():
 		self.weapon_stats[new_affix.type_increase] += new_affix.increase_amount
 		
