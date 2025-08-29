@@ -133,7 +133,7 @@ func _crit_multilier_suffix() -> void:
 	suffixes.push_back(new_prefix)
 
 #Overwritten to apply weapon affixes
-func add_prefix() -> void:
+func add_prefix() -> Affix:
 	var number:int = randi_range(0, len(suffix_funcs)-1)
 	prefix_funcs[number].call()
 	
@@ -150,9 +150,10 @@ func add_prefix() -> void:
 		self.weapon_stats[new_affix.type_increase] += new_affix.increase_amount
 		
 	item_stats_changed.emit()
+	return new_affix
 
 #Overwritten to apply weapon affixes	
-func add_suffix() -> void:
+func add_suffix() -> Affix:
 	var number:int = randi_range(0, len(suffix_funcs)-1)
 	suffix_funcs[number].call()
 	
@@ -169,6 +170,7 @@ func add_suffix() -> void:
 		self.weapon_stats[new_affix.type_increase] += new_affix.increase_amount
 		
 	item_stats_changed.emit()
+	return new_affix
 
 #Overwritten to remove weapon affixes
 func remove_affix(aff:Affix) -> void:

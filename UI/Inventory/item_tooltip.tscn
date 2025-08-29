@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://b3vr8tssueexw" path="res://Tile-RPG/UI/Inventory/tooltip_panel.tres" id="2_svmp5"]
 [ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="3_svmp5"]
 
-[node name="ItemTooltip" type="Control"]
+[node name="ItemTooltip" type="Control" node_paths=PackedStringArray("v_box_container", "name_label", "ilvl_label", "affix_container", "aff_label_template", "implicit_label", "weapon_stats", "price_label", "price_container", "price_separator", "affix_separator", "tt_container")]
 z_index = 3
 layout_mode = 3
 anchors_preset = 8
@@ -18,6 +18,18 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 mouse_filter = 1
 script = ExtResource("1_qwjvr")
+v_box_container = NodePath("TTContainer/VBoxContainer")
+name_label = NodePath("TTContainer/VBoxContainer/NameLabel")
+ilvl_label = NodePath("TTContainer/VBoxContainer/IlvlLabel")
+affix_container = NodePath("TTContainer/VBoxContainer/AffixContainer")
+aff_label_template = NodePath("TTContainer/VBoxContainer/AffixContainer/AffLabelTemplate")
+implicit_label = NodePath("TTContainer/VBoxContainer/ImplicitLabel")
+weapon_stats = NodePath("TTContainer/VBoxContainer/WeaponStats")
+price_label = NodePath("TTContainer/VBoxContainer/PriceContainer/PriceLabel")
+price_container = NodePath("TTContainer/VBoxContainer/PriceContainer")
+price_separator = NodePath("TTContainer/VBoxContainer/PriceSeparator")
+affix_separator = NodePath("TTContainer/VBoxContainer/AffixSeparator")
+tt_container = NodePath("TTContainer")
 
 [node name="TTContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true

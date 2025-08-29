@@ -1,18 +1,18 @@
 extends Control
 class_name ItemTooltip
 
-@onready var v_box_container: VBoxContainer = %VBoxContainer
-@onready var name_label: Label = %NameLabel
-@onready var ilvl_label: Label = %IlvlLabel
-@onready var affix_container: VBoxContainer = %AffixContainer
-@onready var aff_label_template: Label = %AffLabelTemplate
-@onready var implicit_label: Label = %ImplicitLabel
-@onready var weapon_stats: VBoxContainer = %WeaponStats
-@onready var price_label: Label = %PriceLabel
-@onready var price_container: HBoxContainer = %PriceContainer
-@onready var price_separator: HSeparator = %PriceSeparator
-@onready var affix_separator: HSeparator = %AffixSeparator
-@onready var tt_container: PanelContainer = %TTContainer
+@export var v_box_container: VBoxContainer
+@export var name_label: Label
+@export var ilvl_label: Label
+@export var affix_container: VBoxContainer
+@export var aff_label_template: Label
+@export var implicit_label: Label
+@export var weapon_stats: VBoxContainer
+@export var price_label: Label
+@export var price_container: HBoxContainer
+@export var price_separator: HSeparator
+@export var affix_separator: HSeparator
+@export var tt_container: PanelContainer
 
 const WL_PATH:String = "res://Tile-RPG/UI/Inventory/weapon_line.tscn"
 

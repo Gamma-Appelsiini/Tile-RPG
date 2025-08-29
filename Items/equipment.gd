@@ -54,15 +54,16 @@ func set_rarity(new_rarity:Item.ItemRarity) -> void:
 	while self.item_rarity != new_rarity:
 		add_affix()
 
-func add_affix() -> void:
+func add_affix() -> Affix:
+	var new_aff:Affix = null
 	var pref_amount:int = len(prefixes)
 	var suf_amount:int = len(suffixes)
 	
 	if pref_amount == max_affixes && suf_amount == max_affixes:
-		return
+		return new_aff
 	
-	if pref_amount > suf_amount: add_suffix()
-	elif suf_amount > pref_amount: add_prefix()
+	if pref_amount > suf_amount: new_aff = add_suffix()
+	elif suf_amount > pref_amount: new_aff = add_prefix()
 	else:
 		var which:int = randi_range(1,2)
 		if which == 1: add_prefix()
@@ -70,8 +71,10 @@ func add_affix() -> void:
 	
 	var affixes_amount:int = len(prefixes) + len(suffixes)
 	self.item_rarity = RARITY_MAP[affixes_amount]
+	
+	return new_aff
 
-func add_prefix() -> void:
+func add_prefix() -> Affix:
 	var number:int = randi_range(0, len(prefix_funcs)-1)
 	prefix_funcs[number].call()
 	
@@ -85,8 +88,9 @@ func add_prefix() -> void:
 	prefix_funcs.remove_at(number)
 	
 	item_stats_changed.emit()
+	return new_affix
 	
-func add_suffix() -> void:
+func add_suffix() -> Affix:
 	var number:int = randi_range(0, len(suffix_funcs)-1)
 	suffix_funcs[number].call()
 	
@@ -100,6 +104,7 @@ func add_suffix() -> void:
 	suffix_funcs.remove_at(number)
 	
 	item_stats_changed.emit()
+	return new_affix
 
 func remove_affix(aff:Affix) -> void:
 	if aff in prefixes:

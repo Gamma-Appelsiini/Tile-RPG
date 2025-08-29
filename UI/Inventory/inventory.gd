@@ -11,7 +11,7 @@ const ITEM_TT_PATH:String = "res://Tile-RPG/UI/Inventory/item_tooltip.tscn"
 var player:Player = null
 var items:Array[Item] = []
 var slots:Array[InventorySlot] = []
-var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}
+var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}  
 var tooltips:Dictionary[Item,ItemTooltip] = {}
 
 var hovered_slot:InventorySlot = null
