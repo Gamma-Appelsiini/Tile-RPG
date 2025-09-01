@@ -8,7 +8,7 @@ func _init() -> void:
 	
 	prefix_funcs = [_dmg_percent_prefix,_health_prefix,_thorns_prefix,
 	_spell_crit_prefix,_spell_base_crit_prefix,_shield_base_prefix]
-	suffix_funcs = [_mainstat_suffix,_resistance_suffix]
+	suffix_funcs = [_mainstat_suffix,_resistance_suffix,_spell_block_suffix]
 	
 	_aff_generators_to_dict()
 
@@ -47,3 +47,14 @@ func _shield_base_prefix() -> void:
 	new_prefix.affix_text = "+" + str(amount) + "% Chance to " + EnumStrings.DEF_NAMES[self.defence_type]
 	
 	prefixes.push_back(new_prefix)
+
+func _spell_block_suffix() -> void:
+	var new_prefix:Affix = Affix.new()
+	
+	var amount:int = randi_range(1, 10 + item_level)
+	new_prefix.type_increase = Stats.Defence.SPELL_BLOCK
+	new_prefix.increase_amount = amount
+	new_prefix.affix_name = "Guardian"
+	new_prefix.affix_text = "+" + str(amount) + "% Spell Block Chance"
+	
+	suffixes.push_back(new_prefix)

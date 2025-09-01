@@ -16,7 +16,7 @@ const WEIGHTED_RARITIES:Dictionary[Item.ItemRarity,int] = {Item.ItemRarity.POOR 
 	Item.ItemRarity.LEGENDARY : 100,
 	Item.ItemRarity.GOD_ROLL : 10}
 
-func get_random_equipment(ilvl:int = 1, max_tier:int = 0, item_rarity:Item.ItemRarity = Item.ItemRarity.POOR) -> Equipment:
+static func get_random_equipment(ilvl:int = 1, max_tier:int = 0, item_rarity:Item.ItemRarity = Item.ItemRarity.POOR) -> Equipment:
 	var new_equipment:Equipment = null
 	
 	var possible_equipment:Array[Equipment] = []
@@ -26,11 +26,12 @@ func get_random_equipment(ilvl:int = 1, max_tier:int = 0, item_rarity:Item.ItemR
 			
 	new_equipment = possible_equipment.pick_random().duplicate()
 	new_equipment.item_level = ilvl
+	new_equipment.original_item_level = ilvl
 	new_equipment.set_rarity(item_rarity)
 	
 	return new_equipment
 
-func get_random_rarity_equipment(ilvl:int = 1, max_tier:int = 0) -> Equipment:
+static func get_random_rarity_equipment(ilvl:int = 1, max_tier:int = 0) -> Equipment:
 	var new_equipment:Equipment = null
 	var new_rarity:Item.ItemRarity
 	

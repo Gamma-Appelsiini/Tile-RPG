@@ -19,7 +19,15 @@ const WL_PATH:String = "res://Tile-RPG/UI/Inventory/weapon_line.tscn"
 func get_tt_size() -> Vector2:
 	return tt_container.size
 
+func _reset_tooltip() -> void:
+	for line:WeaponLine in weapon_stats.get_children():
+		line.queue_free()
+	for label:Label in affix_container.get_children():
+		if label != aff_label_template:
+			label.queue_free()
+
 func generate_tooltip(new_item:Item) -> void:
+	_reset_tooltip()
 	name_label.text = new_item.item_name
 	if new_item is Equipment: _equipment_handling(new_item as Equipment)
 	
@@ -37,6 +45,7 @@ func _equipment_handling(new_equipment:Equipment) -> void:
 	ilvl_label.text = "Level " + str(new_equipment.item_level) + " " + rariry_name + " " + type_name
 	
 	if new_equipment.item_rarity == Item.ItemRarity.POOR: affix_separator.visible = false
+	else: affix_separator.visible = true
 	_add_affix_text(new_equipment)
 	
 func _armor_handling(new_armor:Armor) -> void:

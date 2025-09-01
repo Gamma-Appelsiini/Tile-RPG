@@ -19,6 +19,7 @@ enum EquipmentSlot {
 @export var item_level:int = 1
 
 var max_affixes:int = 2
+var original_item_level:int = item_level
 var prefixes:Array[Affix] = []
 var suffixes:Array[Affix] = []
 
@@ -54,6 +55,19 @@ func set_rarity(new_rarity:Item.ItemRarity) -> void:
 	while self.item_rarity != new_rarity:
 		add_affix()
 
+func increase_max_affixes() -> bool:
+	if max_affixes == 3: return false
+	
+	max_affixes += 1
+	return true
+
+func increase_item_level() -> bool:
+	if item_level > original_item_level +1: return false
+	
+	item_level += 1
+	item_stats_changed.emit()
+	return true
+
 func add_affix() -> Affix:
 	var new_aff:Affix = null
 	var pref_amount:int = len(prefixes)
@@ -66,8 +80,8 @@ func add_affix() -> Affix:
 	elif suf_amount > pref_amount: new_aff = add_prefix()
 	else:
 		var which:int = randi_range(1,2)
-		if which == 1: add_prefix()
-		else: add_suffix()
+		if which == 1: new_aff = add_prefix()
+		else: new_aff = add_suffix()
 	
 	var affixes_amount:int = len(prefixes) + len(suffixes)
 	self.item_rarity = RARITY_MAP[affixes_amount]

@@ -82,6 +82,8 @@ func _input(event: InputEvent) -> void:
 		_item_clicked()
 	elif event.is_action_released("Left Click"):
 		_item_released()
+	elif event.is_action_released("Bag"):
+		_reset_selecting()
 	elif event.is_action_released("test2"):
 		var generator = ItemGenerator.new()
 		add_item_to_inv(generator.get_random_rarity_equipment())
@@ -145,16 +147,19 @@ func _item_clicked() -> void:
 	
 	#Enables mouse entered/exited signals to be fired when dragging item
 	selected_slot.item_image.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
+
+func _reset_selecting() -> void:
+	if selected_slot == null: return
+	selected_slot.item_image.global_position = old_slot_pos
+	selected_slot = null
+
 func _item_released() -> void:
 	if selected_slot == null: return
 	
 	#Hovering over nothing or own slot
 	if hovered_slot == null or hovered_slot == selected_slot or !_possible_to_equip():
-		selected_slot.item_image.global_position = old_slot_pos
-		selected_slot = null
+		_reset_selecting()
 		return
-	
 	
 	selected_slot.item_image.global_position = old_slot_pos
 	hovered_slot.set_item(selected_slot.item_in_slot,selected_slot)

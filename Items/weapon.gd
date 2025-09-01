@@ -134,17 +134,17 @@ func _crit_multilier_suffix() -> void:
 
 #Overwritten to apply weapon affixes
 func add_prefix() -> Affix:
-	var number:int = randi_range(0, len(suffix_funcs)-1)
+	var number:int = randi_range(0, len(prefix_funcs)-1)
 	prefix_funcs[number].call()
 	
 	var new_affix:Affix = prefixes.back()
-	new_affix.affix_generator = suffix_funcs[number]
+	new_affix.affix_generator = prefix_funcs[number]
 	
 	for key:String in aff_funcs.keys():
-		if aff_funcs[key] == suffix_funcs[number]:
+		if aff_funcs[key] == prefix_funcs[number]:
 			new_affix.generator_key = key
 	
-	suffix_funcs.remove_at(number)
+	prefix_funcs.remove_at(number)
 
 	if new_affix.type_increase in weapon_stats.keys():
 		self.weapon_stats[new_affix.type_increase] += new_affix.increase_amount

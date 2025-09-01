@@ -1,8 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://du6la0lmqbrtj"]
+[gd_scene load_steps=4 format=3 uid="uid://du6la0lmqbrtj"]
 
 [ext_resource type="Script" uid="uid://bvfjxupsc30vr" path="res://Tile-RPG/UI/Crafting/affix_panel.gd" id="1_p7pj2"]
+[ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="2_pfas3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfas3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpfk5"]
 bg_color = Color(0.18359, 0.18359, 0.18359, 1)
 border_width_left = 1
 border_width_top = 1
@@ -18,23 +19,44 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pfas3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wpfk5")
 script = ExtResource("1_p7pj2")
 affix_text = NodePath("VBoxContainer/AffixText")
 affix_name = NodePath("VBoxContainer/AffixName")
 
+[node name="GlowEffect" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("2_pfas3")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="AffixName" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.955633, 0.378226, 0.248779, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_font_sizes/font_size = 12
 text = "Pyromaniacs"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="AffixText" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
