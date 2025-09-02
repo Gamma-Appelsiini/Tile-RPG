@@ -192,4 +192,3 @@ func set_stats_from_resource(res:StatResource) -> void:
 	for stat:int in res.dmg_increases:
 		self.dmg_increases[stat] = res.dmg_increases[stat]
 	stats_changed.emit()
-	

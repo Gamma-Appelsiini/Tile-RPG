@@ -9,7 +9,6 @@ const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
 const ITEM_TT_PATH:String = "res://Tile-RPG/UI/Inventory/item_tooltip.tscn"
 
 var player:Player = null
-var items:Array[Item] = []
 var slots:Array[InventorySlot] = []
 var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}  
 var tooltips:Dictionary[Item,ItemTooltip] = {}
@@ -20,7 +19,6 @@ var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
 
 func _ready() -> void:
-	items.resize(INV_SIZE)
 	_add_inv_slots()
 	_add_equipment_slots()
 
@@ -42,7 +40,8 @@ func _load_equ_from_data(save_data:Dictionary) -> void:
 		var loaded_equ:Equipment = script.new()
 		loaded_equ.load_from_data(save_data["equipment"][slot])
 		_create_item_tt(loaded_equ)
-
+		loaded_equ.remake_tt.connect(_remake_tt.bind(loaded_equ))
+		
 		#Don't equip gear again, stats are saved with gear equipped
 		player.equipment_handler.equipped_items[slot] = loaded_equ
 		var skip_equipping:bool = true
@@ -66,6 +65,7 @@ func load_inv_from_data(save_data:Dictionary) -> void:
 		var loaded_equ:Equipment = script.new()
 
 		loaded_equ.load_from_data(save_data["inventory"][key])
+		loaded_equ.remake_tt.connect(_remake_tt.bind(loaded_equ))
 		slots[key].set_item(loaded_equ)
 		_create_item_tt(loaded_equ)
 	
@@ -85,13 +85,12 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("Bag"):
 		_reset_selecting()
 	elif event.is_action_released("test2"):
-		var generator = ItemGenerator.new()
-		add_item_to_inv(generator.get_random_rarity_equipment())
-		add_item_to_inv(generator.get_random_rarity_equipment())
-		add_item_to_inv(generator.get_random_rarity_equipment())
-		add_item_to_inv(generator.get_random_rarity_equipment())
-		add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.EPIC))
-		add_item_to_inv(generator.get_random_equipment(5,0,Item.ItemRarity.RARE))
+		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
+		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
+		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
+		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
+		add_item_to_inv(ItemGenerator.get_random_equipment(5,0,Item.ItemRarity.EPIC))
+		add_item_to_inv(ItemGenerator.get_random_equipment(5,0,Item.ItemRarity.RARE))
 
 func _add_equipment_slots() -> void:
 	var equ_slots:Array[Equipment.EquipmentSlot] =[
@@ -112,21 +111,40 @@ func _add_equipment_slots() -> void:
 		new_inv_slot.mouse_exited.connect(_clear_hover.bind(new_inv_slot))
 		new_inv_slot.mouse_entered.connect(_slot_hovered.bind(new_inv_slot))
 
+func connect_slot(new_slot:InventorySlot) -> void:
+	slots.push_back(new_slot)
+	new_slot.mouse_exited.connect(_clear_hover.bind(new_slot))
+	new_slot.mouse_entered.connect(_slot_hovered.bind(new_slot))
+	
+func remove_slot(slot_to_remove:InventorySlot) -> void:
+	slots.erase(slot_to_remove)
+	slot_to_remove.mouse_exited.disconnect(_clear_hover)
+	slot_to_remove.mouse_entered.disconnect(_slot_hovered)
+	
 func add_item_to_inv(new_item:Item) -> bool:
 	for i:int in INV_SIZE:
-		if slots[i].item_in_slot == null and !slots[i].equipment_slot:
-			slots[i].set_item(new_item)
-			_create_item_tt(new_item)
-			return true
-	
+		if slots[i].item_in_slot != null or slots[i].equipment_slot: continue
+		
+		slots[i].set_item(new_item)
+		_create_item_tt(new_item)
+		
+		if not new_item.remake_tt.is_connected(_remake_tt.bind(new_item)):
+			new_item.remake_tt.connect(_remake_tt.bind(new_item))
+			
+		return true
+
 	return false
-	
+
+func _remake_tt(remake_item:Equipment) -> void:
+	tooltips[remake_item].generate_tooltip(remake_item)
+
 func remove_item_from_inv(remove_item:Item, destroy_item:bool = false) -> void:
 	for i:int in INV_SIZE:
-		if slots[i].item_in_slot == remove_item:
-			tooltips[remove_item].queue_free()
-			tooltips.erase(remove_item)
-			slots[i].remove_item()
+		if slots[i].item_in_slot != remove_item: continue
+		tooltips[remove_item].queue_free()
+		tooltips.erase(remove_item)
+		slots[i].remove_item()
+
 	if destroy_item: remove_item.queue_free()
 
 func _create_item_tt(new_item:Item) -> void:
@@ -197,10 +215,7 @@ func _add_inv_slots() -> void:
 		var new_slot:InventorySlot = load(INV_SLOT_PATH).instantiate()
 		new_slot.array_pos = i
 		inv_slot_grid.add_child(new_slot)
-		slots.push_back(new_slot)
-		
-		new_slot.mouse_exited.connect(_clear_hover.bind(new_slot))
-		new_slot.mouse_entered.connect(_slot_hovered.bind(new_slot))
+		connect_slot(new_slot)
 
 func _slot_hovered(slot:InventorySlot) -> void:
 	hovered_slot = slot
@@ -215,9 +230,11 @@ func _clear_hover(slot:InventorySlot) -> void:
 
 func _show_tt(slot:InventorySlot) -> void:
 	if slot.item_in_slot == null: return
+	if slot.array_pos == -2: return
 	
 	var tooltip:ItemTooltip = tooltips[slot.item_in_slot]
 	tooltip.visible = true
+	
 	var offset_x:float = tooltip.get_tt_size().x
 	var offset_y:float = (tooltip.get_tt_size().y - slot.size.y) / 2
 	tooltips[slot.item_in_slot].global_position = slot.global_position - Vector2(offset_x + 15,offset_y)

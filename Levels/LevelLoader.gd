@@ -56,7 +56,6 @@ func _load_bin_file() -> void:
 	var file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 	var data:Dictionary = file.get_var()
 	save_data = data.duplicate()
-	print("Save data: ",save_data)
 
 	file.close()
 

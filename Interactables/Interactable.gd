@@ -14,10 +14,13 @@ var indicator:Indicator = null
 var label:Label3D = null
 
 func _ready() -> void:
+	_on_creation()
+
+func _on_creation() -> void:
 	#Set to scan GameCharacters
 	interact_area.set_collision_mask_value(3,true)
 	if audio_player_3d: audio_player_3d.stream = interact_sound
-	interact_text = "(" + get_input_string("Interact") + ")" + interact_text
+	interact_text = "(" + get_input_string("Interact") + ") " + interact_text
 	#TODO sub to signal when keybinds changed
 	interact_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
 	interact_area.connect("body_exited", Callable(self, "_on_Area3D_body_exited"))

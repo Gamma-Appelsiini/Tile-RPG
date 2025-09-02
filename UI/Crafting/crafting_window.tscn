@@ -34,7 +34,7 @@ border_color = Color(0.860369, 0.860369, 0.860369, 1)
 border_blend = true
 
 [sub_resource type="Curve" id="Curve_m03l5"]
-_data = [Vector2(0, 0.0692559), 0.0, 0.583786, 0, 0, Vector2(0.0494071, 0.124006), 2.43687, 2.43687, 0, 0, Vector2(0.12253, 0.20613), 0.214754, 0.214754, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.0692559), 0.0, 0.583786, 0, 0, Vector2(0.0316206, 0.178755), 2.43687, 2.43687, 0, 0, Vector2(0.0948617, 0.24263), 0.214754, 0.214754, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [node name="CraftingWindow" type="Control"]
@@ -106,12 +106,13 @@ theme_override_font_sizes/font_size = 20
 text = "Affixes"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="RemAffButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="RemAffButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -120,7 +121,7 @@ icon = ExtResource("5_fdih8")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AddAffButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="AddAffButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -129,7 +130,7 @@ icon = ExtResource("6_u54fj")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AddIlvlButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="AddIlvlButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -138,7 +139,7 @@ icon = ExtResource("7_m03l5")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AddMaxAffButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="AddMaxAffButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -148,10 +149,12 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="PanelContainer/VBoxContainer"]
+z_index = 4
 position = Vector2(178, 126)
 emitting = false
 amount = 16
 texture = ExtResource("9_u54fj")
+lifetime = 0.44
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
@@ -166,3 +169,22 @@ angular_velocity_max = 101.33
 scale_amount_min = 0.5
 scale_amount_max = 1.2
 scale_amount_curve = SubResource("Curve_m03l5")
+
+[node name="CloseButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_bottom = 72.0
+grow_horizontal = 0
+mouse_filter = 1
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.29, 0.2349, 0.0145, 0)
+theme_override_colors/font_color = Color(0.997949, 0, 0.093505, 1)
+theme_override_font_sizes/font_size = 26
+text = "X"
+flat = true
+icon_alignment = 1

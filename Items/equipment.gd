@@ -274,7 +274,7 @@ func _spell_base_crit_prefix() -> void:
 	
 func _weapon_dmg_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
-	const NAMES = {
+	const NAMES := {
 	Stats.DmgIncreases.SWORD:"Swordmaster",
 	Stats.DmgIncreases.STAFF: "Staffmaster",
 	Stats.DmgIncreases.AXE: "Axemaster",
@@ -294,7 +294,7 @@ func _weapon_dmg_prefix() -> void:
 	prefixes.push_back(new_prefix)
 
 func _resistance_suffix():
-	const NAMES = {
+	const NAMES := {
 		Stats.DmgType.PHYSICAL: "Hardening",
 		Stats.DmgType.MYSTICAL: "Protection",
 		Stats.DmgType.TOXIC: "Curing",

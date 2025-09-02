@@ -6,12 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
+radius = 0.3
 height = 1.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_42kgy"]
-size = Vector3(0.1, 0.1, 1)
+size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42kgy"]
+radius = 0.3
 height = 1.8
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "visual_mesh", "interact_handler")]
@@ -29,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("CapsuleMesh_51u2s")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885344, 0.487823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885344, 0.165966)
 mesh = SubResource("BoxMesh_42kgy")
 skeleton = NodePath("../..")
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://7l7fu5vglle0"]
+[gd_scene load_steps=6 format=3 uid="uid://7l7fu5vglle0"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_vj7em"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_avkor"]
+[ext_resource type="PackedScene" uid="uid://2b0xh0a27vb8" path="res://Tile-RPG/Interactables/anvil.tscn" id="3_jiagy"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_avkor"]
 size = Vector2(5, 5)
@@ -43,3 +44,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98667)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58203, 9.53674e-07, 1.70203)
 change_to_level_id = "test_level_1"
 came_from_string = "test_level_2"
+
+[node name="Anvil" parent="." instance=ExtResource("3_jiagy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00677, -1.42664e-06, -2.08318)

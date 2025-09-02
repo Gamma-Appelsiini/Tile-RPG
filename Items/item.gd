@@ -1,6 +1,8 @@
 extends Resource
 class_name Item
 
+signal remake_tt
+
 enum ItemRarity {
 	POOR,
 	COMMON,

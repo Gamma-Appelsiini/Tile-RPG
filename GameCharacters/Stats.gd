@@ -78,15 +78,15 @@ enum DmgType {
 
 enum DmgIncreases {
 	PHYSICAL = 450,
-	MYSTICAL,
-	LIGHTNING,
-	FIRE,
-	FROST,
-	TOXIC,
-	AXE,
-	SWORD,
-	STAFF,
-	BOW,
-	MACE,
-	DAGGER
+	MYSTICAL = 451,
+	LIGHTNING = 452,
+	FIRE = 453,
+	FROST = 454,
+	TOXIC = 455,
+	AXE = 456,
+	SWORD = 457,
+	STAFF = 458,
+	BOW = 459,
+	MACE = 460,
+	DAGGER = 461,
 }
