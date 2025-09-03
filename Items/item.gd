@@ -10,7 +10,8 @@ enum ItemRarity {
 	EPIC,
 	LEGENDARY,
 	FABLED,
-	GOD_ROLL
+	GOD_ROLL,
+	RANDOM
 }
 
 @export var item_name:String = "Default Name"

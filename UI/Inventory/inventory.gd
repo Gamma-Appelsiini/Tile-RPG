@@ -85,12 +85,12 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("Bag"):
 		_reset_selecting()
 	elif event.is_action_released("test2"):
-		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
-		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
-		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
-		add_item_to_inv(ItemGenerator.get_random_rarity_equipment())
-		add_item_to_inv(ItemGenerator.get_random_equipment(5,0,Item.ItemRarity.EPIC))
-		add_item_to_inv(ItemGenerator.get_random_equipment(5,0,Item.ItemRarity.RARE))
+		add_item_to_inv(ItemGenerator.get_equipment())
+		add_item_to_inv(ItemGenerator.get_equipment())
+		add_item_to_inv(ItemGenerator.get_equipment())
+		add_item_to_inv(ItemGenerator.get_equipment())
+		add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.RANDOM,5,0,Item.ItemRarity.EPIC))
+		add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.RANDOM,5,0,Item.ItemRarity.RARE))
 
 func _add_equipment_slots() -> void:
 	var equ_slots:Array[Equipment.EquipmentSlot] =[
@@ -187,6 +187,12 @@ func _item_released() -> void:
 func _possible_to_equip() -> bool:
 	if !hovered_slot.equipment_slot: return true
 	var item_to_equip:Equipment = selected_slot.item_in_slot
+	var item_in_mainhand:Weapon = equipment_slots[Equipment.EquipmentSlot.MAIN_HAND].item_in_slot
+	var item_in_offhand:Equipment = equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot
+	
+	#if wieldin 2H and trying to equip shield
+	if item_to_equip.equipment_slot == Equipment.EquipmentSlot.OFF_HAND and item_in_mainhand != null:
+		if item_in_mainhand.hand_type ==  Weapon.HandType.TWO_HANDED: return false
 	
 	if item_to_equip.equipment_slot != hovered_slot.equipment_slot: return false
 	if item_to_equip.equipment_slot != Equipment.EquipmentSlot.MAIN_HAND: return true
@@ -194,8 +200,6 @@ func _possible_to_equip() -> bool:
 		if item_to_equip.hand_type == Weapon.HandType.ONE_HANDED: return true
 	
 	#Now we know we are trying to equip a two handed weapon
-	var item_in_mainhand:Equipment = equipment_slots[Equipment.EquipmentSlot.MAIN_HAND].item_in_slot
-	var item_in_offhand:Equipment = equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot
 	var empty_inv_space:int = 0
 	for slot:InventorySlot in slots:
 		if slot.item_in_slot == null and !slot.equipment_slot: empty_inv_space += 1
@@ -205,8 +209,10 @@ func _possible_to_equip() -> bool:
 		return false
 	
 	#Add off hand to inv and unequip
-	add_item_to_inv(equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot)
-	equipment_slots[Equipment.EquipmentSlot.OFF_HAND].remove_item()
+	var offhand_item:Equipment = equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot
+	if offhand_item != null:
+		add_item_to_inv(offhand_item)
+		equipment_slots[Equipment.EquipmentSlot.OFF_HAND].remove_item()
 	
 	return true
 
@@ -230,16 +236,25 @@ func _clear_hover(slot:InventorySlot) -> void:
 
 func _show_tt(slot:InventorySlot) -> void:
 	if slot.item_in_slot == null: return
-	if slot.array_pos == -2: return
+	if slot.array_pos <= -2: return
 	
 	var tooltip:ItemTooltip = tooltips[slot.item_in_slot]
 	tooltip.visible = true
 	
 	var offset_x:float = tooltip.get_tt_size().x
 	var offset_y:float = (tooltip.get_tt_size().y - slot.size.y) / 2
-	tooltips[slot.item_in_slot].global_position = slot.global_position - Vector2(offset_x + 15,offset_y)
+	
+	#Show TT on slot right side instead of left
+	if slot.array_pos >= INV_SIZE:
+		pass
+	
+	if slot.array_pos >= INV_SIZE:
+		tooltip.global_position = slot.global_position + Vector2(slot.size.x + 15, -offset_y)
+	else:
+		tooltip.global_position = slot.global_position - Vector2(offset_x + 15, offset_y)
 	
 func _hide_tt(slot:InventorySlot) -> void:
 	if slot.item_in_slot == null: return
+	if slot.array_pos <= -2: return
 	
 	tooltips[slot.item_in_slot].visible = false

@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _on_creation() -> void:
 	#Set to scan GameCharacters
-	interact_area.set_collision_mask_value(3,true)
+	interact_area.set_collision_mask_value(4,true)
 	if audio_player_3d: audio_player_3d.stream = interact_sound
 	interact_text = "(" + get_input_string("Interact") + ") " + interact_text
 	#TODO sub to signal when keybinds changed
@@ -27,6 +27,7 @@ func _on_creation() -> void:
 
 func _on_Area3D_body_entered(body: Node) -> void:
 	if body is Player:
+		player = body
 		var entered_player:Player = body as Player
 		entered_player.interact_handler.add_interactable(self)
 

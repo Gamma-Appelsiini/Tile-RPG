@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct761wejgx40c"]
+[gd_scene load_steps=12 format=3 uid="uid://ct761wejgx40c"]
 
 [ext_resource type="Script" uid="uid://cikgpqlo6kbjj" path="res://Tile-RPG/UI/Crafting/crafting_window.gd" id="1_1iunn"]
-[ext_resource type="Texture2D" uid="uid://4gjr7jt3w5ij" path="res://Tile-RPG/Images/UI/Border2.png" id="2_1iunn"]
+[ext_resource type="StyleBox" uid="uid://cpc6pk1jb7575" path="res://Tile-RPG/UI/Crafting/texture_panel_style.tres" id="2_u54fj"]
 [ext_resource type="PackedScene" uid="uid://c8lvxyflk4ru8" path="res://Tile-RPG/UI/Inventory/inventory_slot.tscn" id="3_1iunn"]
 [ext_resource type="FontFile" uid="uid://bvdd0umnhlivu" path="res://Tile-RPG/Fonts/MaryJaneCavazos-L9W.ttf" id="3_nmxv4"]
 [ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="5_fdih8"]
@@ -9,16 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="7_m03l5"]
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="8_5j8om"]
 [ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="9_u54fj"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmxv4"]
-texture = ExtResource("2_1iunn")
-texture_margin_left = 60.0
-texture_margin_top = 60.0
-texture_margin_right = 60.0
-texture_margin_bottom = 60.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgh2l"]
 content_margin_left = 20.0
@@ -65,7 +55,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_nmxv4")
+theme_override_styles/panel = ExtResource("2_u54fj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

@@ -21,6 +21,7 @@ enum WeaponStat {
 	RANGE,
 	BASE_CRIT,
 	BASE_MULTIPLIER,
+	SCALE_AMOUNT,
 }
 
 @export var weapon_type:WeaponType = WeaponType.AXE
@@ -34,6 +35,7 @@ enum WeaponStat {
 	WeaponStat.RANGE: 1,
 	WeaponStat.BASE_CRIT: 5,
 	WeaponStat.BASE_MULTIPLIER: 100,
+	WeaponStat.SCALE_AMOUNT: 100,
 }
 
 func _init() -> void:

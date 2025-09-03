@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=9 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
+[ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_dk6lg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
 size = Vector2(5, 5)
@@ -58,3 +59,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="Spawn1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47008, 0, -0.940551)
+
+[node name="Chest" parent="." instance=ExtResource("4_dk6lg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88467, 0.000412002, 1.96175)
+items_to_generate = Dictionary[int, int]({
+1: 0,
+2: 0,
+4: 3,
+7: 0
+})

@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cpc6pk1jb7575"]
+
+[ext_resource type="Texture2D" uid="uid://4gjr7jt3w5ij" path="res://Tile-RPG/Images/UI/Border2.png" id="1_vw5rk"]
+
+[resource]
+texture = ExtResource("1_vw5rk")
+texture_margin_left = 60.0
+texture_margin_top = 60.0
+texture_margin_right = 60.0
+texture_margin_bottom = 60.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+draw_center = false

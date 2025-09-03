@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0hjepdv625rx"]
+[gd_scene load_steps=6 format=3 uid="uid://d0hjepdv625rx"]
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="2_avm5h"]
 [ext_resource type="PackedScene" uid="uid://cgycswqthcl8v" path="res://Tile-RPG/UI/StatWindow/stat_window.tscn" id="3_0jhli"]
 [ext_resource type="PackedScene" uid="uid://cwm8mixxh22t5" path="res://Tile-RPG/UI/Inventory/inventory.tscn" id="4_muwej"]
+[ext_resource type="PackedScene" uid="uid://di1h35368wxtx" path="res://Tile-RPG/UI/Inventory/loot_window.tscn" id="5_r1gav"]
 
 [node name="MainScene" type="Node3D"]
 
@@ -31,3 +32,9 @@ layout_mode = 1
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="LootWindow" parent="UIHandler" node_paths=PackedStringArray("player_inventory") instance=ExtResource("5_r1gav")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+player_inventory = NodePath("../Inventory")

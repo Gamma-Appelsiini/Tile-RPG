@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciibj20uwiqwu"]
+
+[ext_resource type="Script" uid="uid://bm3xstpfnu02l" path="res://Tile-RPG/Interactables/chest.gd" id="1_vugoh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vugoh"]
+size = Vector3(0.75, 0.5, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pipw1"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pipw1"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Chest" type="Node3D" node_paths=PackedStringArray("interact_area", "indicator_place")]
+script = ExtResource("1_vugoh")
+interact_area = NodePath("Area3D")
+indicator_place = NodePath("IndicatorPlace")
+interact_text = "Open"
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249588, 0)
+shape = SubResource("BoxShape3D_vugoh")
+
+[node name="IndicatorPlace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.606582, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249588, 0)
+mesh = SubResource("BoxMesh_pipw1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.248922, 0)
+shape = SubResource("BoxShape3D_pipw1")

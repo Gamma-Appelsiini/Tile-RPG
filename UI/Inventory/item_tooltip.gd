@@ -42,7 +42,12 @@ func _equipment_handling(new_equipment:Equipment) -> void:
 	
 	var type_name:String = EnumStrings.SLOT_STRINGS[new_equipment.equipment_slot]
 	var rariry_name:String = EnumStrings.RARITY_NAMES[new_equipment.item_rarity]
-	ilvl_label.text = "Level " + str(new_equipment.item_level) + " " + rariry_name + " " + type_name
+	
+	if new_equipment is Weapon:
+		var hand_text:String = "One Handed "
+		if new_equipment.hand_type == Weapon.HandType.TWO_HANDED: hand_text = "Two Handed "
+		ilvl_label.text = "Level " + str(new_equipment.item_level) + " " + rariry_name + " " + hand_text + type_name
+	else: ilvl_label.text = "Level " + str(new_equipment.item_level) + " " + rariry_name + " " + type_name
 	
 	if new_equipment.item_rarity == Item.ItemRarity.POOR: affix_separator.visible = false
 	else: affix_separator.visible = true
@@ -61,11 +66,15 @@ func _weapon_handling(new_weapon:Weapon) -> void:
 	var wep_range:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.RANGE])
 	var crit_chance:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT])
 	var crit_multi:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER])
+	var stat_scale:String = EnumStrings.MAIN_STAT_NAMES[new_weapon.scale_stat]
+	var scale_amount:String = str(float(new_weapon.weapon_stats[Weapon.WeaponStat.SCALE_AMOUNT]) / 100)
+	var stat_color:String = EnumStrings.MAIN_STAT_COLORS[new_weapon.scale_stat]
 	
 	_add_weapon_stat_label(dmg_type, dmg_range,Color(dmg_color))
 	_add_weapon_stat_label("Range: ",wep_range)
 	_add_weapon_stat_label("Crit Chance: ",crit_chance + "%")
 	_add_weapon_stat_label("Crit Multiplier: ",crit_multi + "%")
+	_add_weapon_stat_label("Scaling: ",stat_scale + " " + scale_amount + "x", Color(stat_color))
 	
 func _add_weapon_stat_label(text1:String, text2:String,color_override:Color = Color("ffffff")) -> void:
 	var new_line:WeaponLine = load(WL_PATH).instantiate()

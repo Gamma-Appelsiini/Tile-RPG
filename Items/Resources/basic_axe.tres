@@ -15,7 +15,8 @@ weapon_stats = Dictionary[int, int]({
 1501: 5,
 1502: 1,
 1503: 4,
-1504: 120
+1504: 120,
+1505: 100
 })
 equipment_slot = 1
 item_level = 1
