@@ -15,10 +15,11 @@ data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5,
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_686us"]
 
-[node name="TestLevel" type="Node" node_paths=PackedStringArray("game_character_node", "player_spawn_positions")]
+[node name="TestLevel" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "player_spawn_positions")]
 script = ExtResource("1_hnyhx")
 unique_id = "test_level_1"
-game_character_node = NodePath("GameCharNode")
+game_characters_node = NodePath("GameCharNode")
+interactables_node = NodePath("Interactables")
 player_spawn_positions = {
 "menu": NodePath("Spawn1"),
 "test_level_2": NodePath("Spawn1")
@@ -55,12 +56,14 @@ came_from_string = "test_level_1"
 [node name="WoodDoor" parent="." instance=ExtResource("3_176yf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="GameCharNode" type="Node3D" parent="."]
-
 [node name="Spawn1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47008, 0, -0.940551)
 
-[node name="Chest" parent="." instance=ExtResource("4_dk6lg")]
+[node name="GameCharNode" type="Node" parent="."]
+
+[node name="Interactables" type="Node" parent="."]
+
+[node name="Chest" parent="Interactables" instance=ExtResource("4_dk6lg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88467, 0.000412002, 1.96175)
 items_to_generate = Dictionary[int, int]({
 1: 0,
@@ -68,3 +71,4 @@ items_to_generate = Dictionary[int, int]({
 4: 3,
 7: 0
 })
+unique_id = "TestChest1"

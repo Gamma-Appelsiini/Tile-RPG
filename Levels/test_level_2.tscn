@@ -10,10 +10,11 @@ size = Vector2(5, 5)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jiagy"]
 data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5, -2.5, 0, -2.5, 2.5, 0, -2.5)
 
-[node name="test_level2" type="Node" node_paths=PackedStringArray("game_character_node", "player_spawn_positions")]
+[node name="test_level2" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "player_spawn_positions")]
 script = ExtResource("1_vj7em")
 unique_id = "test_level_2"
-game_character_node = NodePath("GameChars")
+game_characters_node = NodePath("GameChars")
+interactables_node = NodePath("Interactables")
 player_spawn_positions = {
 "spawn1": NodePath("Spawnpos1"),
 "test_level_1": NodePath("Spawnpos1")
@@ -35,8 +36,6 @@ light_color = Color(0.669858, 0.673703, 0.911657, 1)
 light_energy = 6.911
 omni_range = 51.447
 
-[node name="GameChars" type="Node3D" parent="."]
-
 [node name="Spawnpos1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98667)
 
@@ -47,3 +46,7 @@ came_from_string = "test_level_2"
 
 [node name="Anvil" parent="." instance=ExtResource("3_jiagy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00677, -1.42664e-06, -2.08318)
+
+[node name="GameChars" type="Node" parent="."]
+
+[node name="Interactables" type="Node" parent="."]

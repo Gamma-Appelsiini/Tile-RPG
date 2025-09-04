@@ -22,3 +22,10 @@ enum ItemRarity {
 func _init() -> void:
 	resource_local_to_scene = true
 	
+#Override this
+func save_to_data() -> Dictionary:
+	return {}
+
+#Override this
+func load_from_data(save_data:Dictionary) -> void:
+	print(save_data)

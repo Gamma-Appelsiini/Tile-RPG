@@ -1,6 +1,7 @@
 extends Node
 class_name Interactable
 
+@export var unique_id:String = ""
 @export var interact_area:Area3D
 @export var indicator_place:Node3D
 @export var interact_sound: AudioStream = null
@@ -71,3 +72,11 @@ func get_input_string(action_name: String) -> String:
 		return button_name
 
 	return "Unknown"
+
+#Override this
+func save_to_data(save_data:Dictionary) -> void:
+	print(save_data)
+
+#Override this
+func load_from_data(save_data:Dictionary) -> void:
+	print(save_data)

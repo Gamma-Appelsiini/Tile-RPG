@@ -53,7 +53,7 @@ func save_to_data() -> Dictionary:
 	for suf:Affix in suffixes: suffix_data.push_back(suf.get_save_data())
 	
 	var equipment_data:Dictionary = {
-		"equipment_type": "res://Tile-RPG/Items/weapon.gd",
+		"item_type": "res://Tile-RPG/Items/weapon.gd",
 		"equipment_slot": equipment_slot,
 		"item_level": item_level,
 		"prefixes": prefix_data,

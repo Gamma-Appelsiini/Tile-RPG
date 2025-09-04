@@ -36,7 +36,7 @@ func _load_equ_from_data(save_data:Dictionary) -> void:
 	if !save_data.has("equipment"): return
 	
 	for slot:Equipment.EquipmentSlot in save_data["equipment"].keys():
-		var script: Script = load(save_data["equipment"][slot]["equipment_type"])
+		var script: Script = load(save_data["equipment"][slot]["item_type"])
 		var loaded_equ:Equipment = script.new()
 		loaded_equ.load_from_data(save_data["equipment"][slot])
 		_create_item_tt(loaded_equ)
@@ -61,13 +61,13 @@ func load_inv_from_data(save_data:Dictionary) -> void:
 	if !save_data.has("inventory"):return
 
 	for key:int in save_data["inventory"].keys():
-		var script: Script = load(save_data["inventory"][key]["equipment_type"])
-		var loaded_equ:Equipment = script.new()
+		var script: Script = load(save_data["inventory"][key]["item_type"])
+		var loaded_item:Item = script.new()
 
-		loaded_equ.load_from_data(save_data["inventory"][key])
-		loaded_equ.remake_tt.connect(_remake_tt.bind(loaded_equ))
-		slots[key].set_item(loaded_equ)
-		_create_item_tt(loaded_equ)
+		loaded_item.load_from_data(save_data["inventory"][key])
+		loaded_item.remake_tt.connect(_remake_tt.bind(loaded_item))
+		slots[key].set_item(loaded_item)
+		_create_item_tt(loaded_item)
 	
 	_load_equ_from_data(save_data)
 
@@ -204,8 +204,8 @@ func _possible_to_equip() -> bool:
 	for slot:InventorySlot in slots:
 		if slot.item_in_slot == null and !slot.equipment_slot: empty_inv_space += 1
 
-	#1 empty space required to unequip both hands
-	if item_in_mainhand != null and item_in_offhand != null and empty_inv_space < 1:
+	#2 empty space required to unequip both hands
+	if item_in_mainhand != null and item_in_offhand != null and empty_inv_space < 2:
 		return false
 	
 	#Add off hand to inv and unequip
