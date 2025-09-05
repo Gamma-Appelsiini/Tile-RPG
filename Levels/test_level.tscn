@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=10 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_dk6lg"]
+[ext_resource type="PackedScene" uid="uid://dbqx16ken7s0j" path="res://Tile-RPG/Breakables/breakable_crate.tscn" id="5_hnyhx"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
 size = Vector2(5, 5)
@@ -72,3 +73,13 @@ items_to_generate = Dictionary[int, int]({
 7: 0
 })
 unique_id = "TestChest1"
+
+[node name="Breakables" type="Node" parent="."]
+
+[node name="BreakableCrate" parent="Breakables" instance=ExtResource("5_hnyhx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85588, 0, -1.86745)
+
+[node name="Crate" parent="Breakables/BreakableCrate" index="0"]
+transform = Transform3D(0, 0.3, 0, -0.3, 0, 0, 0, 0, 0.3, -3.93212, -0.005, 0)
+
+[editable path="Breakables/BreakableCrate"]

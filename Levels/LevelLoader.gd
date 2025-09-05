@@ -49,6 +49,7 @@ func _load_player() -> void:
 	stat_window.set_game_character(player)
 
 func _load_bin_file() -> void:
+	return
 	if !FileAccess.file_exists(SAVE_FILE_PATH):
 		print("No save file")
 		return
