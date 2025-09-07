@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://5jx43r23nj"]
+
+[ext_resource type="Shader" uid="uid://cob6fqoifkxfi" path="res://Tile-RPG/Shaders/dissolve_shader.gdshader" id="1_8ucqn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8ucqn")
+shader_parameter/baseColor = Color(1, 1, 1, 1)
+shader_parameter/dissolveSlider = 0.0
+shader_parameter/dissolveNoiseScale = 2.0
+shader_parameter/edgeNoiseScale = 0.0
+shader_parameter/edgesThickness = 0.062
+shader_parameter/edgeColor = Color(0.156923, 0.126646, 0.104797, 1)
+shader_parameter/edgeEmissionSlider = 0.29
+shader_parameter/enable_dissolve_animation = false
+shader_parameter/animation_speed = 1.0
+shader_parameter/animation_intensity = 0.2
