@@ -3,6 +3,7 @@ class_name UIHandler
 
 @export var character_window:StatWindow = null
 @onready var inventory: Inventory = %Inventory
+@onready var globe_ui: GlobeUI = %GlobeUI
 
 var input_enabled:bool = true
 

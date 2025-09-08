@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0hjepdv625rx"]
+[gd_scene load_steps=7 format=3 uid="uid://d0hjepdv625rx"]
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="2_avm5h"]
 [ext_resource type="PackedScene" uid="uid://cgycswqthcl8v" path="res://Tile-RPG/UI/StatWindow/stat_window.tscn" id="3_0jhli"]
 [ext_resource type="PackedScene" uid="uid://cwm8mixxh22t5" path="res://Tile-RPG/UI/Inventory/inventory.tscn" id="4_muwej"]
 [ext_resource type="PackedScene" uid="uid://di1h35368wxtx" path="res://Tile-RPG/UI/Inventory/loot_window.tscn" id="5_r1gav"]
+[ext_resource type="PackedScene" uid="uid://dxmgw8d3dcpua" path="res://Tile-RPG/UI/CharacterResources/globe_ui.tscn" id="6_nqssf"]
 
 [node name="MainScene" type="Node3D"]
 
-[node name="LevelLoader" type="Node" parent="."]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("globe_ui")]
 script = ExtResource("1_t2t4i")
+globe_ui = NodePath("../UIHandler/GlobeUI")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
 [node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("character_window")]
@@ -38,3 +40,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 player_inventory = NodePath("../Inventory")
+
+[node name="GlobeUI" parent="UIHandler" instance=ExtResource("6_nqssf")]
+unique_name_in_owner = true
+layout_mode = 1

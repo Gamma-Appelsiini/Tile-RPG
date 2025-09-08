@@ -8,6 +8,7 @@ const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/save_data.bin"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
 @onready var stat_window: StatWindow = %StatWindow
 @onready var inventory: Inventory = %Inventory
+@export var globe_ui:GlobeUI = null
 
 var save_file:JSON = null
 var save_data:Dictionary = {
@@ -47,6 +48,10 @@ func _load_player() -> void:
 	inventory.player = player
 	await stat_window.ready
 	stat_window.set_game_character(player)
+	
+
+func _connect_globes() -> void:
+	globe_ui.set_viewport_path(player.resource_globe.get_viewport_path())
 
 func _load_bin_file() -> void:
 	return
@@ -93,6 +98,7 @@ func _open_new_level(new_level_id:String, loading:bool = false) -> void:
 	
 	self.add_child(current_level)
 	current_level.add_child(player)
+	_connect_globes()
 	
 	if !loading: player.global_position = current_level.player_spawn_positions[player.came_from_id].global_position
 	else: player.global_position = save_data["game_characters"][player.unique_id]["global_position"]

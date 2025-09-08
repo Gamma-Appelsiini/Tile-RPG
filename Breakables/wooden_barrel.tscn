@@ -1691,14 +1691,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e4fmq")
 
-[node name="WoodenBarrel" type="Node3D" node_paths=PackedStringArray("hit_area", "static_body", "original_model", "fragments_node", "pieces_node")]
+[node name="WoodenBarrel" type="Node3D" node_paths=PackedStringArray("hit_area", "static_body", "original_model", "fragments_node")]
 script = ExtResource("1_jjjtq")
 hit_area = NodePath("ScaleNode/Area3D")
 static_body = NodePath("ScaleNode/StaticBody3D")
 break_sound = ExtResource("2_udes3")
 original_model = NodePath("ScaleNode/Barrel")
 fragments_node = NodePath("ScaleNode/Fragments")
-pieces_node = NodePath("")
 
 [node name="ScaleNode" type="Node3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0145127, 0)

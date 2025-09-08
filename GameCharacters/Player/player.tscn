@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=9 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
 [ext_resource type="Script" uid="uid://cur80jd0cr7os" path="res://Tile-RPG/Camera/player_camera.gd" id="2_42kgy"]
 [ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
+[ext_resource type="PackedScene" uid="uid://bdpwih35s30mm" path="res://Tile-RPG/UI/CharacterResources/resource_globe.tscn" id="5_kd85i"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
 radius = 0.3
@@ -45,6 +46,7 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 [node name="PlayerCamera" type="Camera3D" parent="CameraPivot" node_paths=PackedStringArray("pivot")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3.57628e-07, 4, 2.82843)
+cull_mask = 524287
 projection = 1
 current = true
 size = 10.892
@@ -55,3 +57,13 @@ pivot = NodePath("..")
 
 [node name="InteractHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_51u2s")]
 player = NodePath("..")
+
+[node name="ResourceGlobe" parent="." instance=ExtResource("5_kd85i")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" parent="ResourceGlobe/Node3D/SubViewport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 2.9, 0.9)
+cull_mask = 524288
+
+[editable path="ResourceGlobe"]

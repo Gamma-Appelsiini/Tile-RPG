@@ -6,6 +6,7 @@ class_name Player
 @export var player_camera:Camera3D
 @export var visual_mesh:MeshInstance3D
 @export var interact_handler:InteractHandler
+@onready var resource_globe: ResourceGlobe = %ResourceGlobe
 
 var came_from_id:String = "menu"
 var _last_move_dir: Vector3 = Vector3.BACK
