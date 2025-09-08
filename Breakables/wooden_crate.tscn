@@ -2908,16 +2908,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_m6nhs")
 
-[node name="WoodenCrate" type="Node3D" node_paths=PackedStringArray("hit_area", "static_body", "original_model", "fragments_node", "pieces_node")]
+[node name="WoodenCrate" type="Node3D" node_paths=PackedStringArray("hit_area", "static_body", "original_model", "fragments_node")]
 script = ExtResource("1_7vmfa")
-fragment_collision_layer = 16
-fragment_collision_mask = 15
 hit_area = NodePath("Area3D")
 static_body = NodePath("StaticBody3D")
 break_sound = ExtResource("2_a373q")
 original_model = NodePath("Crate")
 fragments_node = NodePath("Fragments")
-pieces_node = NodePath("")
 
 [node name="Crate" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, 0.3, 0, -0.3, 0, 0, 0, 0, 0.3, 0, -0.005, 0)
@@ -2925,6 +2922,7 @@ mesh = SubResource("ArrayMesh_h70o4")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00268555, 0.374512, 0.00170898)

@@ -1,11 +1,7 @@
 extends Node3D
 class_name Breakable
 
-@export_flags_3d_physics var fragment_collision_layer:int = 1
-@export_flags_3d_physics var fragment_collision_mask:int = 1
 @export var explosion_speed:float = 6
-@export var min_frag_lifetime:float = 1.2
-@export var max_frag_lifetime:float = 1.8
 @export var hit_area: Area3D
 @export var static_body:StaticBody3D
 @export var break_sound: AudioStream = null
@@ -18,7 +14,6 @@ var explode_origin:Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	hit_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
-	
 	audio_player_3d = AudioStreamPlayer3D.new()
 	add_child(audio_player_3d)
 	audio_player_3d.stream = break_sound

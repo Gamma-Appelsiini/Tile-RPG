@@ -5,13 +5,13 @@ signal dissolved
 
 @export var lifetime:float = 2
 @export var collision_shape:CollisionShape3D
+@export var dissolve_shader:ShaderMaterial = null
+@export var fragment_mesh:MeshInstance3D = null
 
 const FRAGMENT_DISSOLVE_MATERIAL:ShaderMaterial = preload("res://Tile-RPG/Breakables/fragment_dissolve_material.tres")
 const DISSOLVE_TIME:float = 0.5
 
-@export var dissolve_shader:ShaderMaterial = null
 var elapsed_time:float = 0
-@export var fragment_mesh:MeshInstance3D = null
 
 func _ready() -> void:
 	self.visible = false
