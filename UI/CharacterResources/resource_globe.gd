@@ -1,27 +1,53 @@
 extends Node3D
 class_name ResourceGlobe
 
-@onready var liquid_mesh: MeshInstance3D = %LiquidMesh
-@onready var sub_viewport: SubViewport = %SubViewport
-@onready var camera_pos: Node3D = %CameraPos
-@onready var camera_3d: Camera3D = %Camera3D
+enum LiquidType {HP, SPIRIT}
+
+@export var liquid_mesh: MeshInstance3D = null
+@export var sub_viewport: SubViewport = null
+@export var camera_pos: Node3D = null
+@export var camera_3d: Camera3D = null
+
+@export var liquid_type:LiquidType = LiquidType.HP
 
 const MAX_AMOUNT:float = 1.5
 const MIN_AMOUNT:float = -0.5
+const HP_MATERIAL:ShaderMaterial = preload("res://Tile-RPG/UI/CharacterResources/hp_material.tres")
+const SPIRIT_MATERIAL = preload("res://Tile-RPG/UI/CharacterResources/spirit_material.tres")
 
-var liquid_material:ShaderMaterial = preload("res://Tile-RPG/UI/CharacterResources/hp_material.tres").duplicate()
+var liquid_material:ShaderMaterial = null
 
 func _ready() -> void:
+	if liquid_type == LiquidType.HP:
+		liquid_material = HP_MATERIAL.duplicate()
+	elif liquid_type == LiquidType.SPIRIT:
+		liquid_material = SPIRIT_MATERIAL.duplicate()
+	
 	liquid_mesh.set_surface_override_material(0,liquid_material)
 
 func _process(_delta: float) -> void:
-	camera_3d.global_position = camera_pos.global_position
+	camera_3d.global_transform = camera_pos.global_transform
 
-func set_amount(liquid_amount:float) -> void:
+func resource_changed(sh:StatHandler, stat_type:LiquidType) -> void:
+	var current_amount:int = 0
+	var max_amount:int = 0
+	
+	if stat_type == LiquidType.HP:
+		current_amount = sh.resources[Stats.ResourceStat.CURRENT_HP]
+		max_amount = sh.resources[Stats.ResourceStat.MAX_HP]
+	elif stat_type == LiquidType.SPIRIT:
+		current_amount = sh.resources[Stats.ResourceStat.CURRENT_SPIRIT]
+		max_amount = sh.resources[Stats.ResourceStat.MAX_SPIRIT]
+		
+	_set_amount(float(current_amount) / float(max_amount))
+
+func _set_amount(liquid_amount:float) -> void:
 	liquid_amount = clamp(liquid_amount,0.0,1.0)
 	var amount:float = (MAX_AMOUNT+abs(MIN_AMOUNT)) * liquid_amount
 	
-	liquid_material.set_shader_parameter("liquid_amount", MIN_AMOUNT + amount)
+	var tween_time:float = abs(liquid_material.get_shader_parameter("liquid_amount")/2 - liquid_amount) * 2
+	var tween:Tween = create_tween()
+	tween.tween_property(liquid_material, "shader_parameter/liquid_amount", MIN_AMOUNT + amount, tween_time)
 
 func get_viewport_path() -> SubViewport:
 	return sub_viewport

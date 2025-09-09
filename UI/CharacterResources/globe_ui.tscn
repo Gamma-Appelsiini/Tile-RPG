@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctg8wstkkigj3" path="res://Tile-RPG/UI/CharacterResources/globe_ui.gd" id="1_ra6pi"]
 
-[node name="GlobeUI" type="Control" node_paths=PackedStringArray("viewport_texture_rect")]
+[node name="GlobeUI" type="Control" node_paths=PackedStringArray("hp_viewport_texture_rect", "spirit_viewport_texture_rect")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,21 +13,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_ra6pi")
-viewport_texture_rect = NodePath("PanelContainer/ViewportTextureRect")
+hp_viewport_texture_rect = NodePath("HBoxContainer/ViewportTextureRect")
+spirit_viewport_texture_rect = NodePath("HBoxContainer/ViewportTextureRect2")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(400, 400)
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+offset_top = -300.0
+grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ViewportTextureRect" type="TextureRect" parent="PanelContainer"]
+[node name="ViewportTextureRect" type="TextureRect" parent="HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
+layout_direction = 3
+layout_mode = 2
+expand_mode = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ViewportTextureRect2" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_direction = 3
 layout_mode = 2
 expand_mode = 1

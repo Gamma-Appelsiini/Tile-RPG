@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=4 uid="uid://bdpwih35s30mm"]
+[gd_scene load_steps=14 format=4 uid="uid://bdpwih35s30mm"]
 
-[ext_resource type="Shader" uid="uid://c8ik4vt43p3r6" path="res://Tile-RPG/Shaders/glass_shader.gdshader" id="1_btr02"]
 [ext_resource type="Script" uid="uid://s25j2yw31ma5" path="res://Tile-RPG/UI/CharacterResources/resource_globe.gd" id="1_xkwcr"]
-[ext_resource type="Material" uid="uid://dlflh6w75kgtt" path="res://Tile-RPG/UI/CharacterResources/hp_material.tres" id="3_qckxn"]
+[ext_resource type="Material" uid="uid://c21kp4ucv22al" path="res://Tile-RPG/UI/CharacterResources/globe_glass_material.tres" id="2_hsowg"]
 [ext_resource type="Texture2D" uid="uid://6qo6sawdhc8t" path="res://Tile-RPG/Models/UI/glassball_UI_Rock.png" id="4_hsowg"]
 [ext_resource type="Texture2D" uid="uid://cs4yoja2ora2y" path="res://Tile-RPG/Models/UI/glassball_UI_Rock_Normal.png" id="5_lp1f3"]
 
@@ -39,14 +38,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vav3q")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rsttt"]
-render_priority = 0
-shader = ExtResource("1_btr02")
-shader_parameter/albedo = Color(1, 1, 1, 0)
-shader_parameter/roughness = 0.343
-shader_parameter/normal_strength = 1.0
-shader_parameter/edge_color = Color(0.170208, 0.0609617, 0.155669, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v268u"]
 
@@ -126,30 +117,33 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_5d4iw")
 
-[node name="ResourceGlobe" type="Node3D"]
+[node name="ResourceGlobe" type="Node3D" node_paths=PackedStringArray("liquid_mesh", "sub_viewport", "camera_pos", "camera_3d")]
 script = ExtResource("1_xkwcr")
+liquid_mesh = NodePath("Node3D/LiquidMesh")
+sub_viewport = NodePath("Node3D/SubViewport")
+camera_pos = NodePath("Node3D/CameraPos")
+camera_3d = NodePath("Node3D/SubViewport/Camera3D")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [node name="GlassBall" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-layers = 524289
+layers = 524288
 mesh = SubResource("ArrayMesh_paqye")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_rsttt")
+surface_material_override/0 = ExtResource("2_hsowg")
 
 [node name="LiquidMesh" type="MeshInstance3D" parent="Node3D"]
 unique_name_in_owner = true
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-layers = 524289
+layers = 524288
 mesh = SubResource("ArrayMesh_1503h")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_qckxn")
 
 [node name="StoneCircle" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0, -0.2, 0, 0.2, 0, 0, 0, 0)
-layers = 524289
+layers = 786432
 mesh = SubResource("ArrayMesh_ob6dq")
 skeleton = NodePath("")
 
@@ -161,7 +155,7 @@ gui_disable_input = true
 [node name="Camera3D" type="Camera3D" parent="Node3D/SubViewport"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.899897, 0.899897)
-cull_mask = 524289
+cull_mask = 786432
 projection = 1
 size = 0.6
 

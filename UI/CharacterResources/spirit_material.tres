@@ -1,0 +1,46 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c12e8f42iq6gd"]
+
+[ext_resource type="Shader" uid="uid://dij3y37stud7j" path="res://Tile-RPG/Shaders/hp_shader.gdshader" id="1_h8iwu"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o0hl6"]
+noise_type = 4
+frequency = 0.0111
+fractal_type = 3
+fractal_weighted_strength = 0.46
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h8iwu"]
+invert = true
+seamless = true
+noise = SubResource("FastNoiseLite_o0hl6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s584r"]
+fractal_type = 3
+fractal_lacunarity = 1.0
+fractal_gain = 0.3
+fractal_weighted_strength = 0.15
+fractal_ping_pong_strength = 1.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jd6m1"]
+seamless = true
+noise = SubResource("FastNoiseLite_s584r")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h8iwu")
+shader_parameter/liquid_amount = 1.5
+shader_parameter/wave_strength = 0.585
+shader_parameter/liquid_color = Color(0.792538, 0.712124, 0.519842, 1)
+shader_parameter/noise_tex1 = SubResource("NoiseTexture2D_h8iwu")
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_jd6m1")
+shader_parameter/noise_scale = 1.5
+shader_parameter/noise1_speed = Vector2(0, 0.3)
+shader_parameter/noise2_speed = Vector2(0.1, 0.2)
+shader_parameter/noise1_intensity = 1.104
+shader_parameter/noise1_color = Color(0.461468, 0.405963, 0.184994, 1)
+shader_parameter/noise2_intensity = 0.343
+shader_parameter/noise2_color = Color(0.291839, 0.306704, 0.150276, 1)
+shader_parameter/noise_contrast = 1.647
+shader_parameter/fresnel_strength = 0.966
+shader_parameter/fresnel_power = 0.88
+shader_parameter/fresnel_color = Color(0.596678, 0.499629, 0.307267, 1)
+shader_parameter/fresnel_darken = false

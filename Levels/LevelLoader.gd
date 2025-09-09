@@ -48,10 +48,14 @@ func _load_player() -> void:
 	inventory.player = player
 	await stat_window.ready
 	stat_window.set_game_character(player)
-	
+	_connect_globes()
 
 func _connect_globes() -> void:
-	globe_ui.set_viewport_path(player.resource_globe.get_viewport_path())
+	globe_ui.set_viewport_path(player.hp_globe.get_viewport_path())
+	player.stat_handler.stats_changed.connect(player.hp_globe.resource_changed.bind(player.stat_handler,ResourceGlobe.LiquidType.HP))
+	
+	globe_ui.set_viewport_path(player.spirit_globe.get_viewport_path(), globe_ui.spirit_viewport_texture_rect)
+	player.stat_handler.stats_changed.connect(player.spirit_globe.resource_changed.bind(player.stat_handler,ResourceGlobe.LiquidType.SPIRIT))
 
 func _load_bin_file() -> void:
 	return
@@ -98,7 +102,6 @@ func _open_new_level(new_level_id:String, loading:bool = false) -> void:
 	
 	self.add_child(current_level)
 	current_level.add_child(player)
-	_connect_globes()
 	
 	if !loading: player.global_position = current_level.player_spawn_positions[player.came_from_id].global_position
 	else: player.global_position = save_data["game_characters"][player.unique_id]["global_position"]

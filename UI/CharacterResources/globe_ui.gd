@@ -1,11 +1,8 @@
 extends Control
 class_name GlobeUI
 
-@export var viewport_texture_rect: TextureRect = null
+@export var hp_viewport_texture_rect: TextureRect = null
+@export var spirit_viewport_texture_rect: TextureRect = null
 
-var viewport_texture:ViewportTexture = null
-
-func set_viewport_path(vp:SubViewport) -> void:
-	viewport_texture = ViewportTexture.new()
-	viewport_texture.viewport_path = vp.get_path()
-	viewport_texture_rect.texture = vp.get_texture()
+func set_viewport_path(vp:SubViewport, text_rect:TextureRect = hp_viewport_texture_rect) -> void:
+	text_rect.texture = vp.get_texture()

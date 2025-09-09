@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c21kp4ucv22al"]
+
+[ext_resource type="Shader" uid="uid://c8ik4vt43p3r6" path="res://Tile-RPG/Shaders/glass_shader.gdshader" id="1_studq"]
+[ext_resource type="Texture2D" uid="uid://cs4yoja2ora2y" path="res://Tile-RPG/Models/UI/glassball_UI_Rock_Normal.png" id="2_b6uln"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_studq")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.502
+shader_parameter/roughness_texture = ExtResource("2_b6uln")
+shader_parameter/normal_strength = 0.247001
+shader_parameter/normal_map = ExtResource("2_b6uln")
+shader_parameter/edge_color = Color(0.170208, 0.0609617, 0.155669, 1)
