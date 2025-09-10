@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://mvnmgl1jfbdd"]
+
+[ext_resource type="Shader" uid="uid://ci1nccddk3ck3" path="res://Tile-RPG/Shaders/2d_dissolve.gdshader" id="1_fneji"]
+
+[resource]
+shader = ExtResource("1_fneji")
+shader_parameter/progress = 0.0
+shader_parameter/texture_size = Vector2(500, 250)
+shader_parameter/float_dist = 6.0
+shader_parameter/progress_rand_range = 0.2

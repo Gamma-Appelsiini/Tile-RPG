@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=13 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_dk6lg"]
 [ext_resource type="PackedScene" uid="uid://y7vct1hyfty8" path="res://Tile-RPG/Breakables/wooden_crate.tscn" id="5_hnyhx"]
+[ext_resource type="PackedScene" uid="uid://c7br5jtsjalha" path="res://Tile-RPG/Interactables/dialogue_interactable.tscn" id="5_hp41k"]
+[ext_resource type="Resource" uid="uid://ccmrmya1xe72k" path="res://Tile-RPG/Dialogue/Resources/test_dialogue.tres" id="6_27w33"]
 [ext_resource type="PackedScene" uid="uid://dcgfw3cs3rfuw" path="res://Tile-RPG/Breakables/wooden_barrel.tscn" id="6_l3vii"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
@@ -76,13 +78,25 @@ items_to_generate = Dictionary[int, int]({
 })
 unique_id = "TestChest1"
 
+[node name="DialogueInteractable" parent="Interactables" instance=ExtResource("5_hp41k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.09286)
+dialogue_resource = ExtResource("6_27w33")
+
+[node name="IndicatorPlace" parent="Interactables/DialogueInteractable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.731942, 0)
+
+[node name="CollisionShape3D" parent="Interactables/DialogueInteractable/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0204925, 0.194995, 0.456055)
+
 [node name="Breakables" type="Node" parent="."]
 
-[node name="WoodenCrate" parent="." instance=ExtResource("5_hnyhx")]
+[node name="WoodenCrate" parent="Breakables" instance=ExtResource("5_hnyhx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34943, 0.000373535, 0.0407085)
 
-[node name="WoodenCrate2" parent="." instance=ExtResource("5_hnyhx")]
+[node name="WoodenCrate2" parent="Breakables" instance=ExtResource("5_hnyhx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.363527, 4.76837e-07, 2.54038)
 
-[node name="WoodenBarrel" parent="." instance=ExtResource("6_l3vii")]
+[node name="WoodenBarrel" parent="Breakables" instance=ExtResource("6_l3vii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72587, 0, -0.513271)
+
+[editable path="Interactables/DialogueInteractable"]
