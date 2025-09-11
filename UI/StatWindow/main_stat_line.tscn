@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bmm11j8q31tna"]
 
-[ext_resource type="Script" uid="uid://31066elebtp" path="res://Tile-RPG/UI/StatWindow/main_stat_line.gd" id="1_p161e"]
+[ext_resource type="Script" uid="uid://31066elebtp" path="res://Tile-RPG/UI/Dialogue/main_stat_line.gd" id="1_p161e"]
 
 [node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("stat_pic", "stat_label", "number_label")]
 anchors_preset = 8
