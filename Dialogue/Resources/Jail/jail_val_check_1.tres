@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatCheck" load_steps=2 format=3 uid="uid://ccfyddv8jv85n"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_ewtxh"]
+
+[resource]
+script = ExtResource("1_ewtxh")
+stat_type = 6
+pass_amount = 2
+min_amount = 2
+line_text = "Promise the man that if he gives you the key, you will get them both free."
+fail_text = "The man doesn't trust your character and refuses to part with his key."
+pass_text = "You show your better nature, promising that you will free both of you if he hands over the key. The old man nods and gives you the key willingly."
+pass_func = Callable()
+fail_func = Callable()
+metadata/_custom_type_script = "uid://wyqqibev2l6j"

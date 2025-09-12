@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3 uid="uid://ccmrmya1xe72k"]
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=3 format=3 uid="uid://ccmrmya1xe72k"]
 
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_iqyyv"]
 [ext_resource type="Script" uid="uid://i0vjmqk71o20" path="res://Tile-RPG/Dialogue/dialogue_resource.gd" id="1_u5mh1"]
 
 [resource]
 script = ExtResource("1_u5mh1")
 dialogues = Array[String](["Hello.", "This is a test resource.", "Hope to see you soon here again. I have been alone for quite some time."])
 choices = Array[String]([])
+checks = Array[ExtResource("1_iqyyv")]([])
 repeatable = true
 metadata/_custom_type_script = "uid://i0vjmqk71o20"

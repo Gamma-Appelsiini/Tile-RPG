@@ -29,5 +29,5 @@ func attempt_check(stat_amount:int) -> bool:
 	var percent:float = randf_range(0.0,1.0)
 	var pass_percent:float = _get_pass_percentage(stat_amount)
 	
-	if percent > pass_percent: return false
+	if percent >= pass_percent: return false
 	else: return true

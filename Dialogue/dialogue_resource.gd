@@ -5,10 +5,12 @@ signal last_text
 
 @export_multiline var dialogues:Array[String] = []
 @export_multiline var choices:Array[String] = []
+@export var checks:Array[StatCheck] = []
 @export var next_dialogue:DialogueResource = null
 @export var repeatable:bool = false
 
 var current_spot:int = 0
+var speaker:GameCharacter = null
 
 func get_next_dialogue() -> String:
 	if current_spot >= len(dialogues):

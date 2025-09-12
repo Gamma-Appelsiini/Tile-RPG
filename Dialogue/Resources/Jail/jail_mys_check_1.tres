@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatCheck" load_steps=2 format=3 uid="uid://dtfcyt4jmgnsi"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_b1euh"]
+
+[resource]
+script = ExtResource("1_b1euh")
+stat_type = 4
+pass_amount = 2
+min_amount = 2
+line_text = "Focus on your mystic powers to will the key to your hands."
+fail_text = "The man watches as your face reddens as you try to hold your breath and make the key magically change ownership.	"
+pass_text = "With a deep breath, you focus your mystic powers on the key. The key rises from his waist and floats into your outstretched hand."
+pass_func = Callable()
+fail_func = Callable()
+metadata/_custom_type_script = "uid://wyqqibev2l6j"

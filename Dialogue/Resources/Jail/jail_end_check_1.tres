@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatCheck" load_steps=2 format=3 uid="uid://dgvcduscc0bmw"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_gy1xo"]
+
+[resource]
+script = ExtResource("1_gy1xo")
+stat_type = 1
+pass_amount = 2
+min_amount = 2
+line_text = "Endure the man's gibberish to look for an opening."
+fail_text = "You try listening to the man's tale to look for an opening, but his nonsense is too much for you to endure. After a minute you try to grab the key, but to no avail."
+pass_text = "While the man drones on, you endure his nonsensical prattle and bide your time. Finally, when he gets too absorbed in his tale, you snatch the key and pocket it."
+pass_func = Callable()
+fail_func = Callable()
+metadata/_custom_type_script = "uid://wyqqibev2l6j"

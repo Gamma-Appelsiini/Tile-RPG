@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatCheck" load_steps=2 format=3 uid="uid://bafh81e1ejx6i"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_huxpv"]
+
+[resource]
+script = ExtResource("1_huxpv")
+stat_type = 3
+pass_amount = 2
+min_amount = 2
+line_text = "Grab the man through the bars and force the key for yourself."
+fail_text = "You try to grab the man, but your hold slips as he pushes you back."
+pass_text = "Using your newfound might, you lunge at the old man, grabbing the key from his waist. He stumbles back in shock, but doesn't resist. The key is now yours."
+pass_func = Callable()
+fail_func = Callable()
+metadata/_custom_type_script = "uid://wyqqibev2l6j"

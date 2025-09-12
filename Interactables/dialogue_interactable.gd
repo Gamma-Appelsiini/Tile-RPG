@@ -14,6 +14,9 @@ func _ready() -> void:
 	dialogue_bubble = DBUBBLE_SCENE.instantiate()
 	dialogue_bubble.dialogue_finished.connect(_on_dialogue_finished)
 	add_child(dialogue_bubble)
+	
+	if get_parent() is GameCharacter:
+		dialogue_resource.speaker = get_parent() as GameCharacter
 
 func interact() -> void:
 	interact_area.monitoring = false

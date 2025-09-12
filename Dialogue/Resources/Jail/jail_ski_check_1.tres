@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatCheck" load_steps=2 format=3 uid="uid://nastck6tyjc8"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_4n36b"]
+
+[resource]
+script = ExtResource("1_4n36b")
+stat_type = 5
+pass_amount = 2
+min_amount = 2
+line_text = "Using your skill of snatching keys, adeptly grab the keys from the old man's waist."
+fail_text = "You extend your hand, but your fingers brush too clumsily against the key. The old man jolts and keeps a tighter hold of the key now."
+pass_text = "With steady hands and sharp precision, you ease the keyring free from his belt. The old man continues his rambling, completely unaware as you slide the key back into your cell."
+pass_func = Callable()
+fail_func = Callable()
+metadata/_custom_type_script = "uid://wyqqibev2l6j"
