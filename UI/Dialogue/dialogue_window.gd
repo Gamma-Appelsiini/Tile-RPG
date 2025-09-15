@@ -7,44 +7,81 @@ class_name DialogueWindow
 
 var dialogue_resource:DialogueResource = null
 var player:Player = null
+var speaker:GameCharacter = null
 var last_dialogue_line:bool = false
+var next_dialogue:DialogueResource = null
 
 func _ready() -> void:
-	dialogue_panel.check_attempted.connect(_check_attempted)
+	dialogue_panel.check_attempted.connect(_handle_check)
 	set_process_input(false)
 	dialogue_resource.last_text.connect(_set_last)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interact") or event.is_action_pressed("Jump"):
-		_proceed_dialogue()
+		if dialogue_resource == null: start_dialogue(next_dialogue)
+		else: _proceed_dialogue()
 
 func _set_last() -> void:
 	last_dialogue_line = true
 
 func _proceed_dialogue() -> void:
-	if !last_dialogue_line:
-		var text:String = dialogue_resource.get_next_dialogue()
-		dialogue_panel.set_text(text,dialogue_resource.speaker.display_name)
+	if last_dialogue_line:
+		_handle_last_dialogue()
 		return
-		
-func _set_options() -> void:
-	pass
+
+	var text:String = dialogue_resource.get_next_dialogue()
+	var whos_turn:DialogueResource.SPEAKER = dialogue_resource.get_whos_turn()
+	_set_current_speaker(whos_turn)
+	
+	dialogue_panel.set_text(text)
+
+func _set_current_speaker(whos_turn:DialogueResource.SPEAKER ) -> void:
+	if whos_turn == DialogueResource.SPEAKER.PLAYER:
+		dialogue_panel.set_name_label(player.display_name)
+		character_rect.visible = true
+		npc_rect.visible = false
+	else:
+		dialogue_panel.set_name_label(speaker.display_name)
+		character_rect.visible = false
+		npc_rect.visible = true
+
+func _handle_last_dialogue() -> void:
+	# Are there choices
+	_set_choices()
+	
+	if dialogue_resource.complete_signal: DialogueSignals.dialogue_signal.emit(dialogue_resource.complete_signal)
+	
+	if dialogue_resource.next_dialogue:
+		start_dialogue(dialogue_resource.next_dialogue)
+
+func _set_choices() -> void:
+	var choice_res:DialogueChoicesResource = dialogue_resource.choices_resource
+	if choice_res != null:
+		if choice_res.checks != null:
+			dialogue_panel.set_stat_checks(choice_res.checks)
+		elif choice_res.choices != null:
+			dialogue_panel.set_options()
 
 func _hide_window() -> void:
 	dialogue_resource = null
 	self.visible = false
 
 func start_dialogue(new_dialogue:DialogueResource) -> void:
-	if new_dialogue == null: _hide_window
+	if new_dialogue == null:
+		_hide_window()
+		return
 
+	speaker = new_dialogue.speaker
+	next_dialogue = null
 	dialogue_resource = new_dialogue
 	var speaker_pic:Texture2D = null
 	if dialogue_resource.speaker: speaker_pic = dialogue_resource.speaker.picture
 	set_pics(player.picture, speaker_pic)
 	self.visible = true
 	
-	var text:String = new_dialogue.get_next_dialogue()
-	dialogue_panel.set_text(text)
+	dialogue_panel.dialogue_choices_res = new_dialogue.choices_resource
+	
+	_proceed_dialogue()
 	set_process_input(true)
 
 func set_pics(char_pic:Texture2D, npc_pic:Texture2D) -> void:
@@ -53,12 +90,26 @@ func set_pics(char_pic:Texture2D, npc_pic:Texture2D) -> void:
 	npc_rect.texture = npc_pic
 	npc_rect.visible = true
 
-func _check_attempted(new_check:StatCheck) -> void:
+func _handle_check(new_check:StatCheck) -> void:
 	var passed_check:bool = new_check.attempt_check(player.stat_handler.main_stats[new_check.stat_type])
 	
 	if passed_check:
-		if new_check.pass_func: new_check.pass_func.call()
-		start_dialogue(new_check.pass_dialogue)
+		if new_check.pass_signal:
+			DialogueSignals.dialogue_signal.emit(new_check.pass_signal)
+			
+		if new_check.pass_text:
+			dialogue_panel.set_text(new_check.pass_text)
+			_set_current_speaker(new_check.pass_turn)
+		
+		next_dialogue = (new_check.pass_dialogue)
+		dialogue_resource = null
 	else:
-		if new_check.fail_func: new_check.fail_func.call()
-		start_dialogue(new_check.fail_dialogue)
+		if new_check.fail_signal:
+			DialogueSignals.dialogue_signal.emit(new_check.fail_signal)
+			
+		if new_check.fail_text:
+			dialogue_panel.set_text(new_check.fail_text)
+			_set_current_speaker(new_check.fail_turn)
+		
+		next_dialogue = (new_check.fail_dialogue)
+		dialogue_resource = null

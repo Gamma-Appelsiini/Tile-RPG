@@ -7,6 +7,8 @@
 script = ExtResource("1_u5mh1")
 dialogues = Array[String](["Hello.", "This is a test resource.", "Hope to see you soon here again. I have been alone for quite some time."])
 choices = Array[String]([])
+choices_signals = Array[String]([])
 checks = Array[ExtResource("1_iqyyv")]([])
 repeatable = true
+complete_signal = ""
 metadata/_custom_type_script = "uid://i0vjmqk71o20"

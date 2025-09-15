@@ -4,15 +4,19 @@ class_name StatCheck
 @export var stat_type:Stats.MainStat
 @export var pass_amount:int
 @export var min_amount:int
+var check_turn:DialogueResource.SPEAKER = DialogueResource.SPEAKER.PLAYER
 
 @export_multiline var line_text:String
 @export_multiline var fail_text:String
 @export_multiline var pass_text:String
 
-@export var pass_func:Callable
+@export var pass_signal:String
 @export var pass_dialogue:DialogueResource
-@export var fail_func:Callable
+@export var pass_turn:DialogueResource.SPEAKER
+
+@export var fail_signal:String
 @export var fail_dialogue:DialogueResource
+@export var fail_turn:DialogueResource.SPEAKER
 
 func _get_pass_percentage(stat_amount:int) -> float:
 	var percentage:float = 0.0
