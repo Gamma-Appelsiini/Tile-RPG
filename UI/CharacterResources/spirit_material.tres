@@ -9,9 +9,9 @@ fractal_type = 3
 fractal_weighted_strength = 0.46
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h8iwu"]
-invert = true
-seamless = true
 noise = SubResource("FastNoiseLite_o0hl6")
+seamless = true
+invert = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s584r"]
 fractal_type = 3
@@ -21,8 +21,8 @@ fractal_weighted_strength = 0.15
 fractal_ping_pong_strength = 1.5
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jd6m1"]
-seamless = true
 noise = SubResource("FastNoiseLite_s584r")
+seamless = true
 
 [resource]
 render_priority = 0

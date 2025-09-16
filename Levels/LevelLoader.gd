@@ -6,9 +6,9 @@ signal load_complete
 const PLAYER_PATH:String = "res://Tile-RPG/GameCharacters/Player/player.tscn"
 const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/save_data.bin"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
-@onready var stat_window: StatWindow = %StatWindow
 @onready var inventory: Inventory = %Inventory
 @export var globe_ui:GlobeUI = null
+@onready var ui_handler: UIHandler = %UIHandler
 
 var save_file:JSON = null
 var save_data:Dictionary = {
@@ -45,9 +45,9 @@ func _load_inv() -> void:
 func _load_player() -> void:
 	player = load(PLAYER_PATH).instantiate()
 	player.load_from_data(save_data)
-	inventory.player = player
-	await stat_window.ready
-	stat_window.set_game_character(player)
+
+	#await ui_handler.ready
+	ui_handler.set_player(player)
 	_connect_globes()
 
 func _connect_globes() -> void:

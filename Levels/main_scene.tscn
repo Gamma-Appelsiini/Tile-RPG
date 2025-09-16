@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0hjepdv625rx"]
+[gd_scene load_steps=8 format=3 uid="uid://d0hjepdv625rx"]
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="2_avm5h"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwm8mixxh22t5" path="res://Tile-RPG/UI/Inventory/inventory.tscn" id="4_muwej"]
 [ext_resource type="PackedScene" uid="uid://di1h35368wxtx" path="res://Tile-RPG/UI/Inventory/loot_window.tscn" id="5_r1gav"]
 [ext_resource type="PackedScene" uid="uid://dxmgw8d3dcpua" path="res://Tile-RPG/UI/CharacterResources/globe_ui.tscn" id="6_nqssf"]
+[ext_resource type="PackedScene" uid="uid://cmjamn0h0y14r" path="res://Tile-RPG/UI/Dialogue/dialogue_window.tscn" id="7_efb4g"]
 
 [node name="MainScene" type="Node3D"]
 
@@ -14,7 +15,8 @@ script = ExtResource("1_t2t4i")
 globe_ui = NodePath("../UIHandler/GlobeUI")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
-[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("character_window")]
+[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("character_window", "inventory", "stat_window", "dialogue_window")]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +26,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_avm5h")
 character_window = NodePath("StatWindow")
+inventory = NodePath("Inventory")
+stat_window = NodePath("StatWindow")
+dialogue_window = NodePath("DialogueWindow")
 
 [node name="StatWindow" parent="UIHandler" instance=ExtResource("3_0jhli")]
 unique_name_in_owner = true
@@ -43,4 +48,8 @@ player_inventory = NodePath("../Inventory")
 
 [node name="GlobeUI" parent="UIHandler" instance=ExtResource("6_nqssf")]
 unique_name_in_owner = true
+layout_mode = 1
+
+[node name="DialogueWindow" parent="UIHandler" instance=ExtResource("7_efb4g")]
+visible = false
 layout_mode = 1

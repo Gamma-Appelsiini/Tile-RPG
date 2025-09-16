@@ -5,16 +5,16 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_o0hl6"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_85flr"]
-invert = true
-seamless = true
 noise = SubResource("FastNoiseLite_o0hl6")
+seamless = true
+invert = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7xf3n"]
 noise_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wkawy"]
-seamless = true
 noise = SubResource("FastNoiseLite_7xf3n")
+seamless = true
 
 [resource]
 render_priority = 0

@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba5woaetqefuy"]
+
+[ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
+[ext_resource type="Texture2D" uid="uid://b4g5r4imur8jo" path="res://Tile-RPG/Images/Stats/magic.png" id="2_ms4ik"]
+[ext_resource type="PackedScene" uid="uid://dnw6ibd7fwlqf" path="res://Tile-RPG/Interactables/character_dialogue_interactable.tscn" id="2_sjjpf"]
+[ext_resource type="Resource" uid="uid://deu7j6om1wygy" path="res://Tile-RPG/Dialogue/Resources/Jail/choices_test.tres" id="3_8w85h"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ouqyu"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sjjpf"]
+radius = 0.35
+height = 1.7
+
+[node name="TestNPC" type="CharacterBody3D"]
+script = ExtResource("1_ouqyu")
+display_name = "Testing Character"
+picture = ExtResource("2_ms4ik")
+metadata/_custom_type_script = "uid://ks8scj6i4f0r"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8506718, 0)
+mesh = SubResource("CapsuleMesh_ouqyu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_sjjpf")
+
+[node name="CharacterDialogueInteractable" parent="." instance=ExtResource("2_sjjpf")]
+dialogue_resource = ExtResource("3_8w85h")

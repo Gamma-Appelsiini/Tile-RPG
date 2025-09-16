@@ -12,9 +12,9 @@ var last_dialogue_line:bool = false
 var next_dialogue:DialogueResource = null
 
 func _ready() -> void:
+	GlobalSignals.start_dialogue.connect(start_dialogue)
 	dialogue_panel.check_attempted.connect(_handle_check)
 	set_process_input(false)
-	dialogue_resource.last_text.connect(_set_last)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interact") or event.is_action_pressed("Jump"):
@@ -66,6 +66,9 @@ func _hide_window() -> void:
 	dialogue_resource = null
 	self.visible = false
 
+func _show_window() -> void:
+	self.visible = true
+	
 func start_dialogue(new_dialogue:DialogueResource) -> void:
 	if new_dialogue == null:
 		_hide_window()
@@ -77,7 +80,8 @@ func start_dialogue(new_dialogue:DialogueResource) -> void:
 	var speaker_pic:Texture2D = null
 	if dialogue_resource.speaker: speaker_pic = dialogue_resource.speaker.picture
 	set_pics(player.picture, speaker_pic)
-	self.visible = true
+	dialogue_resource.last_text.connect(_set_last)
+	_show_window()
 	
 	dialogue_panel.dialogue_choices_res = new_dialogue.choices_resource
 	

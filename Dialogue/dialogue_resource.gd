@@ -25,13 +25,13 @@ func get_next_dialogue() -> String:
 		last_text.emit()
 	
 	var next_dialogue_string:String = dialogues[current_spot]
+	
+	if len(dialogue_turns) > 0:
+		var whos_speaking:SPEAKER = dialogue_turns[current_spot]
+		dialogue_turn.emit(whos_speaking)
+		whos_turn = dialogue_turns[current_spot]
+	
 	current_spot += 1
-	
-	var whos_speaking:SPEAKER = dialogue_turns[current_spot]
-	dialogue_turn.emit(whos_speaking)
-	
-	whos_turn = dialogue_turns[current_spot]
-	
 	return next_dialogue_string
 
 func get_whos_turn() -> SPEAKER:
