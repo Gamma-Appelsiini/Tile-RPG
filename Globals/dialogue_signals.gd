@@ -16,3 +16,6 @@ func _signal_received(signal_id:String) -> void:
 
 func _test() -> void:
 	print("Test dialogue signal")
+
+func add_signal_func(key:String, function:Callable) -> void:
+	signal_funcs[key] = function

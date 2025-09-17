@@ -2,20 +2,26 @@
 
 [ext_resource type="Script" uid="uid://dlp7iw0xyldhr" path="res://Tile-RPG/UI/Dialogue/stat_check_option.gd" id="1_djlsr"]
 
-[node name="StatCheckOption" type="HBoxContainer"]
+[node name="StatCheckOption" type="HBoxContainer" node_paths=PackedStringArray("stat_pic", "text_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_djlsr")
+stat_pic = NodePath("StatPic")
+text_label = NodePath("TextLabel")
 
 [node name="StatPic" type="TextureRect" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="TextLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 34
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -13,6 +13,10 @@ var came_from_id:String = "menu"
 var _last_move_dir: Vector3 = Vector3.BACK
 var movement_enabled:bool = true
 
+func _ready() -> void:
+	GlobalSignals.enable_player_movement.connect(_enable_movement)
+	GlobalSignals.disable_player_movement.connect(_disable_movement)
+
 func _physics_process(delta: float) -> void:
 	var move_direction := _handle_movement_input()
 	move_direction.y = 0.0
@@ -22,8 +26,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_turn_player(move_direction)
 
-func _input(_event: InputEvent) -> void:
-	pass
+func _enable_movement() -> void:
+	movement_enabled = true
+	
+func _disable_movement() -> void:
+	movement_enabled = false
 
 func _handle_movement_input() -> Vector3:
 	var direction:Vector3 = Vector3.ZERO

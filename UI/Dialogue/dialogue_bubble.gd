@@ -12,8 +12,8 @@ signal dialogue_finished
 
 const ARROW_GREEN:Texture2D = preload("res://Tile-RPG/Images/UI/arrow_green.png")
 const CROSS:Texture2D = preload("res://Tile-RPG/Images/UI/cross.png")
-const DISSOLVE_TIME:float = 0.7
-const TIME_PER_LETTER:float = 0.04
+const DISSOLVE_TIME:float = 0.3
+const TIME_PER_LETTER:float = 0.02
 
 var dissolve_material:ShaderMaterial = null
 var dialogue_resource:DialogueResource = null
@@ -85,6 +85,7 @@ func _close_dialogue() -> void:
 	set_process(false)
 	dialogue_resource.last_text.disconnect(_change_continue_pic)
 	dialogue_finished.emit()
+	self.queue_free()
 
 func _change_label_text(label:Label,new_text:String, time_override:float = 0):
 	set_process_input(false)

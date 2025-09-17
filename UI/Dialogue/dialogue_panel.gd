@@ -3,6 +3,7 @@ class_name DialoguePanel
 
 signal check_attempted(check:StatCheck)
 signal start_new_dialogue(dr:DialogueResource)
+signal text_ready
 
 @onready var name_label: Label = %NameLabel
 @onready var dialogue_label: Label = %DialogueLabel
@@ -10,7 +11,7 @@ signal start_new_dialogue(dr:DialogueResource)
 #@onready var continue_rect: TextureRect = %ContinueRect
 
 const STAT_CHECK_OPTION = preload("res://Tile-RPG/UI/Dialogue/stat_check_option.tscn")
-const TIME_PER_LETTER:float = 0.04
+const TIME_PER_LETTER:float = 0.025
 
 var dialogue_choices_res:DialogueChoicesResource = null
 var hovered_choice_number:int = -1
@@ -68,7 +69,7 @@ func set_stat_checks(checks:Array[StatCheck]) -> void:
 		var new_choice:StatCheckOption = STAT_CHECK_OPTION.instantiate()
 		
 		new_choice.set_check(check)
-		new_choice._check_option_pressed.connect(_choice_pressed)
+		new_choice.option_pressed.connect(_check_option_pressed)
 		choice_container.add_child(new_choice)
 
 func _check_option_pressed(check:StatCheck) -> void:
@@ -79,7 +80,6 @@ func _check_option_pressed(check:StatCheck) -> void:
 	check_attempted.emit(check)
 	
 func _change_label_text(label:Label,new_text:String, time_override:float = 0):
-	set_process_input(false)
 	#continue_rect.visible = false
 
 	var change_time = new_text.length() * TIME_PER_LETTER
@@ -90,5 +90,5 @@ func _change_label_text(label:Label,new_text:String, time_override:float = 0):
 	tween.tween_property(label,"text",new_text, change_time).set_ease(Tween.EASE_OUT)
 	await tween.finished
 	
-	set_process_input(true)
+	text_ready.emit()
 	#continue_rect.visible = true

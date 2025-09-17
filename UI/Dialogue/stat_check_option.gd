@@ -1,10 +1,10 @@
 extends HBoxContainer
 class_name StatCheckOption
 
-signal option_pressed(stat_check:StatCheck)
+signal option_pressed(pressed_check:StatCheck)
 
-@onready var stat_pic: TextureRect = %StatPic
-@onready var text_label: Label = %TextLabel
+@export var stat_pic: TextureRect = null
+@export var text_label: Label = null
 
 var stat_check:StatCheck = null
 

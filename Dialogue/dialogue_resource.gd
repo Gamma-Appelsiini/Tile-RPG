@@ -19,9 +19,8 @@ var whos_turn:SPEAKER = SPEAKER.PLAYER
 
 func get_next_dialogue() -> String:
 	if current_spot >= len(dialogues):
-		_end_of_dialogue()
 		return ""
-	elif current_spot == len(dialogues) - 1:
+	if current_spot == len(dialogues) - 1:
 		last_text.emit()
 	
 	var next_dialogue_string:String = dialogues[current_spot]
@@ -32,11 +31,11 @@ func get_next_dialogue() -> String:
 		whos_turn = dialogue_turns[current_spot]
 	
 	current_spot += 1
+	
 	return next_dialogue_string
 
 func get_whos_turn() -> SPEAKER:
 	return whos_turn
 
-func _end_of_dialogue() -> void:
-	if repeatable:
-		current_spot = 0
+func end_of_dialogue() -> void:
+	if repeatable: current_spot = 0

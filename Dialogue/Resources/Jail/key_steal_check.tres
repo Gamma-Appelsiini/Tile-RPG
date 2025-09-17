@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DialogueChoicesResource" load_steps=11 format=3 uid="uid://cm36577y1jpm1"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_25kkk"]
+[ext_resource type="Script" uid="uid://i0vjmqk71o20" path="res://Tile-RPG/Dialogue/dialogue_resource.gd" id="2_6ssa1"]
+[ext_resource type="Resource" uid="uid://bgqvdy1lurocr" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_agi_check_1.tres" id="2_cea3y"]
+[ext_resource type="Resource" uid="uid://dgvcduscc0bmw" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_end_check_1.tres" id="3_061qv"]
+[ext_resource type="Script" uid="uid://dtvxyd00wj76e" path="res://Tile-RPG/Dialogue/dialogue_choices_resource.gd" id="3_wrqkv"]
+[ext_resource type="Resource" uid="uid://qv1y0gdah3le" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_luc_check_1.tres" id="4_0drk2"]
+[ext_resource type="Resource" uid="uid://bafh81e1ejx6i" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_might_check_1.tres" id="5_og5xo"]
+[ext_resource type="Resource" uid="uid://dtfcyt4jmgnsi" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_mys_check_1.tres" id="6_x6gjc"]
+[ext_resource type="Resource" uid="uid://nastck6tyjc8" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_ski_check_1.tres" id="7_v6hyu"]
+[ext_resource type="Resource" uid="uid://ccfyddv8jv85n" path="res://Tile-RPG/Dialogue/Resources/Jail/jail_val_check_1.tres" id="8_0easy"]
+
+[resource]
+script = ExtResource("3_wrqkv")
+checks = Array[ExtResource("1_25kkk")]([ExtResource("2_cea3y"), ExtResource("3_061qv"), ExtResource("4_0drk2"), ExtResource("5_og5xo"), ExtResource("6_x6gjc"), ExtResource("7_v6hyu"), ExtResource("8_0easy")])
+metadata/_custom_type_script = "uid://dtvxyd00wj76e"
