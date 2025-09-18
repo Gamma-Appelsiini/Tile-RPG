@@ -18,7 +18,7 @@ var check_turn:DialogueResource.SPEAKER = DialogueResource.SPEAKER.PLAYER
 @export var fail_dialogue:DialogueResource
 @export var fail_turn:DialogueResource.SPEAKER
 
-func _get_pass_percentage(stat_amount:int) -> float:
+func get_pass_percentage(stat_amount:int) -> float:
 	var percentage:float = 0.0
 	
 	if min_amount > stat_amount: return percentage
@@ -27,11 +27,11 @@ func _get_pass_percentage(stat_amount:int) -> float:
 	var t:float = float(stat_amount - min_amount) / float(pass_amount - min_amount)
 	percentage = 0.1 + t * 0.9
 	
-	return percentage
+	return snapped(percentage,0.01)
 
 func attempt_check(stat_amount:int) -> bool:
 	var percent:float = randf_range(0.0,1.0)
-	var pass_percent:float = _get_pass_percentage(stat_amount)
+	var pass_percent:float = get_pass_percentage(stat_amount)
 	
 	if percent >= pass_percent: return false
 	else: return true

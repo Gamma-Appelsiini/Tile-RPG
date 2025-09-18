@@ -28,7 +28,7 @@ func _ready() -> void:
 	continue_rect.visible = false
 	
 	dissolve_material = picture_rect.material
-	dissolve_material.set_shader_parameter("progress", 1.0)
+	dissolve_material.set_shader_parameter("dissolve_value", 0.0)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interact") or event.is_action_pressed("Jump"):
@@ -59,7 +59,7 @@ func show_dialogue(new_dialogue:DialogueResource) -> void:
 	_change_label_text(name_label, name_label.text,DISSOLVE_TIME)
 	
 	var tween:Tween = create_tween()
-	tween.tween_property(dissolve_material, "shader_parameter/progress", 0.0, DISSOLVE_TIME)
+	tween.tween_property(dissolve_material, "shader_parameter/dissolve_value", 1.0, DISSOLVE_TIME)
 	await tween.finished
 	
 	set_next_text()
@@ -78,7 +78,7 @@ func _close_dialogue() -> void:
 	_change_label_text(name_label, "",DISSOLVE_TIME)
 	
 	var tween:Tween = create_tween()
-	tween.tween_property(dissolve_material, "shader_parameter/progress", 1, DISSOLVE_TIME)
+	tween.tween_property(dissolve_material, "shader_parameter/dissolve_value", 0.0, DISSOLVE_TIME)
 	await tween.finished
 	
 	self.visible = false

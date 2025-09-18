@@ -1,8 +1,8 @@
 extends Control
 class_name DialogueWindow
 
-@onready var character_rect: TextureRect = %CharacterRect
-@onready var npc_rect: TextureRect = %NpcRect
+@onready var player_portrait: DialoguePortrait = %DialoguePortrait
+@onready var npc_portrait: DialoguePortrait = %DialoguePortrait2
 @onready var dialogue_panel: DialoguePanel = %DialoguePanel
 
 var dialogue_resource:DialogueResource = null
@@ -27,7 +27,6 @@ func _set_last() -> void:
 
 func _proceed_dialogue() -> void:
 	if last_dialogue_line:
-		last_dialogue_line = false
 		_handle_last_dialogue()
 		return
 
@@ -40,15 +39,14 @@ func _proceed_dialogue() -> void:
 
 func _set_current_speaker(whos_turn:DialogueResource.SPEAKER ) -> void:
 	if whos_turn == DialogueResource.SPEAKER.PLAYER:
-		dialogue_panel.set_name_label(player.display_name)
-		character_rect.visible = true
-		npc_rect.visible = false
+		player_portrait.set_active()
+		npc_portrait.set_passive()
 	else:
-		dialogue_panel.set_name_label(speaker.display_name)
-		character_rect.visible = false
-		npc_rect.visible = true
+		player_portrait.set_passive()
+		npc_portrait.set_active()
 
 func _handle_last_dialogue() -> void:
+	last_dialogue_line = false
 	if dialogue_resource == null:
 		start_dialogue(next_dialogue)
 		return
@@ -64,6 +62,7 @@ func _handle_last_dialogue() -> void:
 func _set_choices() -> bool:
 	var choice_res:DialogueChoicesResource = dialogue_resource.choices_resource
 	if choice_res != null:
+		dialogue_panel.player = player
 		var checks:Array[StatCheck] = choice_res.checks
 		if len(checks) > 0:
 			dialogue_panel.set_stat_checks(checks)
@@ -89,25 +88,23 @@ func start_dialogue(new_dialogue:DialogueResource) -> void:
 		return
 	if dialogue_resource != null: dialogue_resource.last_text.disconnect(_set_last)
 	
+	dialogue_panel.reset_text()
+	last_dialogue_line = false
 	dialogue_resource = new_dialogue
 	next_dialogue = null
 	dialogue_panel.dialogue_choices_res = new_dialogue.choices_resource
 	
 	speaker = new_dialogue.speaker
-	var speaker_pic:Texture2D = null
-	if dialogue_resource.speaker: speaker_pic = dialogue_resource.speaker.picture
-	set_pics(player.picture, speaker_pic)
+	_set_portraits(player, speaker)
 	
 	dialogue_resource.last_text.connect(_set_last)
 	_show_window()
 	_proceed_dialogue()
 	set_process_input(true)
 
-func set_pics(char_pic:Texture2D, npc_pic:Texture2D) -> void:
-	character_rect.texture = char_pic
-	character_rect.visible = false
-	npc_rect.texture = npc_pic
-	npc_rect.visible = true
+func _set_portraits(player_char:Player, npc:GameCharacter = null) -> void:
+	player_portrait.set_character(player_char)
+	if npc: npc_portrait.set_character(npc)
 
 func _handle_check(new_check:StatCheck) -> void:
 	var passed_check:bool = new_check.attempt_check(player.stat_handler.main_stats[new_check.stat_type])

@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://b7q77u7wvwvi3"]
 
 [ext_resource type="Script" uid="uid://cqw3myjsxwd7f" path="res://Tile-RPG/UI/Dialogue/dialogue_bubble.gd" id="1_6tnie"]
-[ext_resource type="Material" uid="uid://mvnmgl1jfbdd" path="res://Tile-RPG/UI/Dialogue/dialogue_bubble_shader_material.tres" id="2_nghgg"]
+[ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="2_nghgg"]
 [ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_rk250"]
-[ext_resource type="Texture2D" uid="uid://mpxnrcgoe4mm" path="res://Tile-RPG/Images/UI/bordertestsmall.png" id="3_nghgg"]
+[ext_resource type="Texture2D" uid="uid://drdw2hhaxs3l5" path="res://Tile-RPG/Images/UI/Border5.png" id="4_nghgg"]
 [ext_resource type="Texture2D" uid="uid://crlg63ublnftt" path="res://Tile-RPG/Images/UI/arrow_green.png" id="5_nghgg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rk250"]
-bg_color = Color(0.935535, 0.935537, 0.935536, 1)
+bg_color = Color(0.0619267, 0.0619267, 0.061926693, 1)
 
 [node name="DialogueBubble" type="Control"]
 use_parent_material = true
@@ -55,6 +55,7 @@ stretch_mode = 5
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+material = ExtResource("2_nghgg")
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -65,7 +66,7 @@ text = "Test Name"
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
-custom_minimum_size = Vector2(500, 200)
+custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rk250")
@@ -74,16 +75,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rk250")
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
 layout_mode = 2
-texture = ExtResource("3_nghgg")
+texture = ExtResource("4_nghgg")
 draw_center = false
-patch_margin_left = 30
-patch_margin_top = 30
-patch_margin_right = 30
-patch_margin_bottom = 30
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ContinueRect" type="TextureRect" parent="VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="ContinueRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
@@ -93,18 +99,23 @@ texture = ExtResource("5_nghgg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DialogueLabel" type="Label" parent="VBoxContainer/PanelContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 180)
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.719076, 0.719076, 0.719076, 1)
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="DialogueLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 28
-horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 3

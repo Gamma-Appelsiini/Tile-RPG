@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cm43sfqma4c3s"]
+
+[ext_resource type="Shader" uid="uid://ci1nccddk3ck3" path="res://Tile-RPG/Shaders/2d_dissolve.gdshader" id="1_76jxm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ncgaf"]
+noise_type = 4
+frequency = 0.0081
+fractal_octaves = 2
+fractal_lacunarity = 3.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8fkyo"]
+noise = SubResource("FastNoiseLite_ncgaf")
+
+[resource]
+shader = ExtResource("1_76jxm")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_8fkyo")
+shader_parameter/dissolve_value = 1.0

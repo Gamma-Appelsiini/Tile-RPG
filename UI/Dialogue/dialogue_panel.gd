@@ -5,22 +5,22 @@ signal check_attempted(check:StatCheck)
 signal start_new_dialogue(dr:DialogueResource)
 signal text_ready
 
-@onready var name_label: Label = %NameLabel
 @onready var dialogue_label: Label = %DialogueLabel
 @onready var choice_container: VBoxContainer = %OptionsContainer
-#@onready var continue_rect: TextureRect = %ContinueRect
+@onready var continue_rect: TextureRect = %ContinueRect
 
 const STAT_CHECK_OPTION = preload("res://Tile-RPG/UI/Dialogue/stat_check_option.tscn")
 const TIME_PER_LETTER:float = 0.025
 
 var dialogue_choices_res:DialogueChoicesResource = null
 var hovered_choice_number:int = -1
+var player:Player = null
+
+func reset_text() -> void:
+	dialogue_label.text = ""
 
 func set_text(next_text:String) -> void:
 	_change_label_text(dialogue_label, next_text)
-
-func set_name_label(name_text:String) -> void:
-	name_label.text = name_text
 
 func set_choices(options:Array[String]) -> void:
 	dialogue_label.text = ""
@@ -45,7 +45,7 @@ func _choice_hovered(choice_number:int) -> void:
 func _choice_pressed(event: InputEvent) -> void:
 	if hovered_choice_number == -1: return
 	
-	_clear_choices()
+	clear_choices()
 	if event.is_action_pressed("Left Click"):
 		#Does signal for choice exist
 		if len(dialogue_choices_res.choices_signals)-1 >= hovered_choice_number:
@@ -57,16 +57,19 @@ func _choice_pressed(event: InputEvent) -> void:
 			var next_dialogue:DialogueResource = dialogue_choices_res.next_dialogues[hovered_choice_number]
 			start_new_dialogue.emit(next_dialogue)
 
-func _clear_choices() -> void:
+func clear_choices() -> void:
 	for child in choice_container.get_children():
 		child.queue_free()
 
 func set_stat_checks(checks:Array[StatCheck]) -> void:
+	_hide_continue()
+	
 	dialogue_label.text = ""
 	dialogue_label.visible = false
 	
 	for check:StatCheck in checks:
 		var new_choice:StatCheckOption = STAT_CHECK_OPTION.instantiate()
+		new_choice.player = player
 		
 		new_choice.set_check(check)
 		new_choice.option_pressed.connect(_check_option_pressed)
@@ -79,9 +82,21 @@ func _check_option_pressed(check:StatCheck) -> void:
 	
 	check_attempted.emit(check)
 	
-func _change_label_text(label:Label,new_text:String, time_override:float = 0):
-	#continue_rect.visible = false
+func _hide_continue() -> void:
+	var tween:Tween = create_tween().set_ease(Tween.EASE_IN).set_parallel(true)
+	tween.tween_property(continue_rect, "custom_minimum_size:x", 0, 0.1)
+	tween.tween_property(continue_rect, "modulate:a", 0, 0.1)
 
+func _show_continue() -> void:
+	continue_rect.custom_minimum_size.x = 0
+	continue_rect.visible = true
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(continue_rect, "custom_minimum_size:x", 50, 0.1)
+	tween.tween_property(continue_rect, "modulate:a", 1, 0.1)
+
+func _change_label_text(label:Label,new_text:String, time_override:float = 0):
+	_hide_continue()
+	
 	var change_time = new_text.length() * TIME_PER_LETTER
 	if time_override != 0: change_time = time_override
 	
@@ -91,4 +106,4 @@ func _change_label_text(label:Label,new_text:String, time_override:float = 0):
 	await tween.finished
 	
 	text_ready.emit()
-	#continue_rect.visible = true
+	_show_continue()

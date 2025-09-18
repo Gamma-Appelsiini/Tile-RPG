@@ -1,27 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://c265xfdgssv01"]
+[gd_scene load_steps=3 format=3 uid="uid://c265xfdgssv01"]
 
 [ext_resource type="Script" uid="uid://dlp7iw0xyldhr" path="res://Tile-RPG/UI/Dialogue/stat_check_option.gd" id="1_djlsr"]
 
-[node name="StatCheckOption" type="HBoxContainer" node_paths=PackedStringArray("stat_pic", "text_label")]
+[sub_resource type="Gradient" id="Gradient_djlsr"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.9170381, 0, 0.27258426, 1, 0.9699432, 0.7861627, 0.21688262, 1, 0.2017276, 0.7704156, 0, 1)
+metadata/_snap_enabled = true
+
+[node name="StatCheckOption" type="HBoxContainer" node_paths=PackedStringArray("stat_pic", "text_label", "percentage_label")]
+custom_minimum_size = Vector2(200, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
 script = ExtResource("1_djlsr")
 stat_pic = NodePath("StatPic")
 text_label = NodePath("TextLabel")
+color_ramp = SubResource("Gradient_djlsr")
+percentage_label = NodePath("PercentageLabel")
 
 [node name="StatPic" type="TextureRect" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 35)
 layout_mode = 2
+size_flags_vertical = 0
 expand_mode = 1
 stretch_mode = 5
 
 [node name="TextLabel" type="Label" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 34
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92389965, 0.92389965, 0.92389965, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9843137)
+theme_override_constants/line_spacing = -6
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "asdasd"
+autowrap_mode = 3
+
+[node name="PercentageLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.2548324, 0.7756587, 3.85046e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 28
+text = "100%"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
-[ext_resource type="Texture2D" uid="uid://b4g5r4imur8jo" path="res://Tile-RPG/Images/Stats/magic.png" id="2_ms4ik"]
+[ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_ms4ik"]
 [ext_resource type="PackedScene" uid="uid://dnw6ibd7fwlqf" path="res://Tile-RPG/Interactables/character_dialogue_interactable.tscn" id="2_sjjpf"]
 [ext_resource type="Resource" uid="uid://deu7j6om1wygy" path="res://Tile-RPG/Dialogue/Resources/Jail/choices_test.tres" id="3_8w85h"]
 

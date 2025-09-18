@@ -4,7 +4,4 @@
 
 [resource]
 shader = ExtResource("1_fneji")
-shader_parameter/progress = 0.0
-shader_parameter/texture_size = Vector2(500, 250)
-shader_parameter/float_dist = 6.0
-shader_parameter/progress_rand_range = 0.2
+shader_parameter/dissolve_value = 0.0

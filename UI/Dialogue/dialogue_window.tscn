@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmjamn0h0y14r"]
 
 [ext_resource type="Script" uid="uid://b48t0oxnnu31r" path="res://Tile-RPG/UI/Dialogue/dialogue_window.gd" id="1_6vitp"]
-[ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_mo1iq"]
+[ext_resource type="PackedScene" uid="uid://6xedavukxk8d" path="res://Tile-RPG/UI/Dialogue/dialogue_portrait.tscn" id="2_mo1iq"]
 [ext_resource type="PackedScene" uid="uid://ca2xbwhnef5ap" path="res://Tile-RPG/UI/Dialogue/dialogue_panel.tscn" id="2_n5fkp"]
 
 [node name="DialogueWindow" type="Control"]
@@ -25,22 +25,16 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 12
 
-[node name="CharacterRect" type="TextureRect" parent="HBoxContainer"]
+[node name="DialoguePortrait" parent="HBoxContainer" instance=ExtResource("2_mo1iq")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
-texture = ExtResource("2_mo1iq")
-expand_mode = 1
-stretch_mode = 5
+size_flags_vertical = 4
 
 [node name="DialoguePanel" parent="HBoxContainer" instance=ExtResource("2_n5fkp")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="NpcRect" type="TextureRect" parent="HBoxContainer"]
+[node name="DialoguePortrait2" parent="HBoxContainer" instance=ExtResource("2_mo1iq")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
-texture = ExtResource("2_mo1iq")
-expand_mode = 1
-stretch_mode = 5
+size_flags_vertical = 4
