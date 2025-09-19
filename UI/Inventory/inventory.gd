@@ -18,10 +18,15 @@ var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
 
-func _ready() -> void:
+#func _ready() -> void:
+	#_add_inv_slots()
+	#_add_equipment_slots()
+
+func set_player(new_player:Player) -> void:
+	player = new_player
 	_add_inv_slots()
 	_add_equipment_slots()
-
+	
 func _save_equipment(save_data:Dictionary) -> void:
 	var equ_data:Dictionary = {}
 	

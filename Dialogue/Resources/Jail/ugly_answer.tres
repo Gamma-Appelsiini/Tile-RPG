@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3 uid="uid://uwqsny3f1dfn"]
+
+[ext_resource type="Script" uid="uid://i0vjmqk71o20" path="res://Tile-RPG/Dialogue/dialogue_resource.gd" id="1_63jqd"]
+
+[resource]
+script = ExtResource("1_63jqd")
+dialogues = Array[String](["I think you look ugly.", "Oh... I didn't even realise..."])
+dialogue_turns = Array[int]([0, 1])
+repeatable = true
+metadata/_custom_type_script = "uid://i0vjmqk71o20"

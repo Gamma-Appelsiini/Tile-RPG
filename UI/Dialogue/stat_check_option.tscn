@@ -37,6 +37,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.92389965, 0.92389965, 0.92389965, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9843137)
 theme_override_constants/line_spacing = -6

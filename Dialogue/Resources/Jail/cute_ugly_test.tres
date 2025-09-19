@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=3 format=3 uid="uid://cidlo31hofkdj"]
+
+[ext_resource type="Resource" uid="uid://dpp4yvmo6tn78" path="res://Tile-RPG/Dialogue/Resources/Jail/choice_test2.tres" id="1_goq5h"]
+[ext_resource type="Script" uid="uid://i0vjmqk71o20" path="res://Tile-RPG/Dialogue/dialogue_resource.gd" id="1_keh1b"]
+
+[resource]
+script = ExtResource("1_keh1b")
+dialogues = Array[String](["Hello sir.", "Do you think I look cute?"])
+dialogue_turns = Array[int]([1, 1])
+choices_resource = ExtResource("1_goq5h")
+repeatable = true
+metadata/_custom_type_script = "uid://i0vjmqk71o20"

@@ -11,10 +11,14 @@ signal text_ready
 
 const STAT_CHECK_OPTION = preload("res://Tile-RPG/UI/Dialogue/stat_check_option.tscn")
 const TIME_PER_LETTER:float = 0.025
+const PLAYER_TEXT_COLOR:Color = Color(0.909, 0.773, 0.507, 1.0)
+const DEFAULT_TEXT_COLOR:Color = Color(1.0, 1.0, 1.0, 1.0)
+const HOVER_COLOR:Color = Color(0.183, 0.6, 0.604, 1.0)
 
 var dialogue_choices_res:DialogueChoicesResource = null
 var hovered_choice_number:int = -1
 var player:Player = null
+var choice_labels:Array[Label] = []
 
 func reset_text() -> void:
 	dialogue_label.text = ""
@@ -22,40 +26,71 @@ func reset_text() -> void:
 func set_text(next_text:String) -> void:
 	_change_label_text(dialogue_label, next_text)
 
-func set_choices(options:Array[String]) -> void:
+func set_text_color(is_player_text:bool = false) -> void:
+	if is_player_text:
+		dialogue_label.add_theme_color_override("font_color", PLAYER_TEXT_COLOR)
+		return
+		
+	dialogue_label.add_theme_color_override("font_color", DEFAULT_TEXT_COLOR)
+
+func set_choices(choices:Array[String]) -> void:
+	clear_choices()
+	_hide_continue()
+	choice_labels = []
 	dialogue_label.text = ""
 	dialogue_label.visible = false
+	
 	var place:int = 0
 	
-	for choice:String in options:
-		var new_choice:Label = dialogue_label.duplicate()
+	for choice:String in choices:
+		var new_container:HBoxContainer = HBoxContainer.new()
+		new_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		new_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		new_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+		new_container.mouse_exited.connect(_choice_exited.bind(place))
+		new_container.mouse_entered.connect(_choice_hovered.bind(place))
+		new_container.gui_input.connect(_choice_pressed)
+		new_container.visible = true
 		
+		var new_choice:Label = dialogue_label.duplicate()
+		new_choice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		new_choice.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+		new_choice.visible = true
 		new_choice.text = choice
-		new_choice.mouse_exited.connect(_choice_exited.bind(place))
-		new_choice.mouse_entered.connect(_choice_hovered.bind(place))
-		new_choice.gui_input.connect(_choice_pressed)
-		choice_container.add_child(new_choice)
+		choice_labels.push_back(new_choice)
+		
+		new_container.add_child(new_choice)
+		choice_container.add_child(new_container)
+		place += 1
 
 func _choice_exited(choice_number:int) -> void:
-	if hovered_choice_number == choice_number: hovered_choice_number = -1
+	if hovered_choice_number == choice_number:
+		hovered_choice_number = -1
+		choice_labels[choice_number].add_theme_color_override("font_color", PLAYER_TEXT_COLOR)
 
 func _choice_hovered(choice_number:int) -> void:
 	hovered_choice_number = choice_number
+	choice_labels[choice_number].add_theme_color_override("font_color", HOVER_COLOR)
 
 func _choice_pressed(event: InputEvent) -> void:
+	if !event.is_action_pressed("Left Click"): return
 	if hovered_choice_number == -1: return
+	var choice_number:int = hovered_choice_number
 	
+	dialogue_label.visible = true
 	clear_choices()
-	if event.is_action_pressed("Left Click"):
-		#Does signal for choice exist
-		if len(dialogue_choices_res.choices_signals)-1 >= hovered_choice_number:
-			var signal_id:String = dialogue_choices_res.choices_signals[hovered_choice_number]
-			DialogueSignals.dialogue_signal.emit(signal_id)
+	
+	#Does signal for choice exist
+	var signal_amount:int = len(dialogue_choices_res.choices_signals)
+	if signal_amount -1 >= choice_number:
+		var signal_id:String = dialogue_choices_res.choices_signals[choice_number]
+		DialogueSignals.dialogue_signal.emit(signal_id)
 
-		#Does next dialogue for choice exist
-		if len(dialogue_choices_res.next_dialogues)-1 >= hovered_choice_number:
-			var next_dialogue:DialogueResource = dialogue_choices_res.next_dialogues[hovered_choice_number]
-			start_new_dialogue.emit(next_dialogue)
+	#Does next dialogue for choice exist
+	var next_dialogue_amount:int = len(dialogue_choices_res.next_dialogues)
+	if next_dialogue_amount -1  >= choice_number:
+		var next_dialogue:DialogueResource = dialogue_choices_res.next_dialogues[choice_number]
+		start_new_dialogue.emit(next_dialogue)
 
 func clear_choices() -> void:
 	for child in choice_container.get_children():

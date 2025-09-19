@@ -12,10 +12,15 @@ var last_dialogue_line:bool = false
 var next_dialogue:DialogueResource = null
 
 func _ready() -> void:
+	DialogueSignals.add_signal_func("quit_dialogue", _hide_window)
 	GlobalSignals.start_dialogue.connect(start_dialogue)
+	dialogue_panel.start_new_dialogue.connect(start_dialogue)
 	dialogue_panel.check_attempted.connect(_handle_check)
 	dialogue_panel.text_ready.connect(set_process_input.bind(true))
 	set_process_input(false)
+
+func set_player(new_player:Player) -> void:
+	player = new_player
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interact") or event.is_action_pressed("Jump"):
@@ -39,9 +44,11 @@ func _proceed_dialogue() -> void:
 
 func _set_current_speaker(whos_turn:DialogueResource.SPEAKER ) -> void:
 	if whos_turn == DialogueResource.SPEAKER.PLAYER:
+		dialogue_panel.set_text_color(true)
 		player_portrait.set_active()
 		npc_portrait.set_passive()
 	else:
+		dialogue_panel.set_text_color()
 		player_portrait.set_passive()
 		npc_portrait.set_active()
 
@@ -62,19 +69,23 @@ func _handle_last_dialogue() -> void:
 func _set_choices() -> bool:
 	var choice_res:DialogueChoicesResource = dialogue_resource.choices_resource
 	if choice_res != null:
+		set_process_input(false)
+		_set_current_speaker(DialogueResource.SPEAKER.PLAYER)
 		dialogue_panel.player = player
 		var checks:Array[StatCheck] = choice_res.checks
 		if len(checks) > 0:
 			dialogue_panel.set_stat_checks(checks)
 		elif choice_res.choices != null:
-			dialogue_panel.set_options()
+			dialogue_panel.set_choices(choice_res.choices)
 		return true
 		
 	return false
 
 func _hide_window() -> void:
 	set_process_input(false)
-	if dialogue_resource != null: dialogue_resource.last_text.disconnect(_set_last)
+	if dialogue_resource != null:
+		#dialogue_resource.end_of_dialogue()
+		dialogue_resource.last_text.disconnect(_set_last)
 	dialogue_resource = null
 	self.visible = false
 	GlobalSignals.dialogue_finished.emit()

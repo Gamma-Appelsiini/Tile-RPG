@@ -10,14 +10,11 @@ class_name InteractHandler
 
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
-var input_enabled:bool = true
 
 func _process(_delta: float) -> void:
-	if len(interactables) > 1: _show_right_interactee()
+	_show_right_interactee()
 
 func _input(event: InputEvent) -> void:
-	if !input_enabled: return
-	
 	if event.is_action_pressed("Interact"):
 		_interact()
 
@@ -47,10 +44,16 @@ func add_interactable(inter:Interactable) -> void:
 	inter.player = self.player
 	_show_right_interactee()
 	
+	if len(interactables) > 1: set_process(true)
+	else: set_process(false)
+	
 func remove_interactable(inter:Interactable) -> void:
 	if interactables.has(inter):
 		interactables.erase(inter)
 		_show_right_interactee()
+		
+	if len(interactables) > 1: set_process(true)
+	else: set_process(false)
 	
 func _show_right_interactee() -> void:
 	if interactables.is_empty():

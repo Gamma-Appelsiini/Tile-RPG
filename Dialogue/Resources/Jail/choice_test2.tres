@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DialogueChoicesResource" load_steps=6 format=3 uid="uid://dpp4yvmo6tn78"]
+
+[ext_resource type="Script" uid="uid://wyqqibev2l6j" path="res://Tile-RPG/Dialogue/stat_check.gd" id="1_rfqn5"]
+[ext_resource type="Script" uid="uid://i0vjmqk71o20" path="res://Tile-RPG/Dialogue/dialogue_resource.gd" id="2_3125s"]
+[ext_resource type="Resource" uid="uid://uwqsny3f1dfn" path="res://Tile-RPG/Dialogue/Resources/Jail/ugly_answer.tres" id="3_3125s"]
+[ext_resource type="Resource" uid="uid://vwf36jnjk5b8" path="res://Tile-RPG/Dialogue/Resources/Jail/cute_answer.tres" id="3_eqpxx"]
+[ext_resource type="Script" uid="uid://dtvxyd00wj76e" path="res://Tile-RPG/Dialogue/dialogue_choices_resource.gd" id="3_nj5e8"]
+
+[resource]
+script = ExtResource("3_nj5e8")
+choices = Array[String](["You look cute. You look cute. You look cute.", "You look ugly.", "Quit."])
+choices_signals = Array[String](["test", "test", "quit_dialogue"])
+next_dialogues = Array[ExtResource("2_3125s")]([ExtResource("3_eqpxx"), ExtResource("3_3125s")])
+metadata/_custom_type_script = "uid://dtvxyd00wj76e"
