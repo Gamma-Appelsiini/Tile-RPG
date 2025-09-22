@@ -17,6 +17,45 @@ func _ready() -> void:
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
 
+func move_to_point(point: Vector3) -> void:
+	movement_enabled = false
+	await _move_to_point_internal(point)
+	movement_enabled = true
+
+func _move_to_point_internal(point: Vector3) -> void:
+	var tolerance: float = 0.1
+	while global_position.distance_to(point) > tolerance:
+		var dir: Vector3 = (point - global_position).normalized()
+		dir.y = 0.0
+		velocity = dir * movement_speed
+		move_and_slide()
+		_turn_player(dir)
+		await get_tree().physics_frame
+	velocity = Vector3.ZERO
+
+func rotate_towards_point(point: Vector3) -> void:
+	movement_enabled = false
+	await _rotate_to_point_internal(point)
+	movement_enabled = true
+
+func _rotate_to_point_internal(point: Vector3) -> void:
+	var tolerance: float = 0.01
+	while true:
+		var dir: Vector3 = (point - global_position).normalized()
+		dir.y = 0.0
+		if dir.length() < 0.001:
+			break
+		
+		var target_angle: float = Vector3.BACK.signed_angle_to(dir, Vector3.UP)
+		var current_angle: float = visual_mesh.global_rotation.y
+		var new_angle: float = lerp_angle(current_angle, target_angle, 0.2)
+		visual_mesh.global_rotation.y = new_angle
+		
+		if absf(current_angle - target_angle) < tolerance:
+			break
+		
+		await get_tree().physics_frame
+
 func _physics_process(delta: float) -> void:
 	var move_direction := _handle_movement_input()
 	move_direction.y = 0.0

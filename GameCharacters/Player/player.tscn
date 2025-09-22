@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=11 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
 [ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_8amvv"]
 [ext_resource type="Script" uid="uid://cur80jd0cr7os" path="res://Tile-RPG/Camera/player_camera.gd" id="2_42kgy"]
 [ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
+[ext_resource type="Material" uid="uid://4uxg3v0dshat" path="res://Tile-RPG/Levels/path_visual_material.tres" id="4_gqri5"]
 [ext_resource type="PackedScene" uid="uid://bdpwih35s30mm" path="res://Tile-RPG/UI/CharacterResources/resource_globe.tscn" id="5_kd85i"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
@@ -33,6 +34,7 @@ stat_resource = ExtResource("2_3oamb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = ExtResource("4_gqri5")
 mesh = SubResource("CapsuleMesh_51u2s")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]

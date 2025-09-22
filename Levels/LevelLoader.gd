@@ -101,6 +101,7 @@ func _open_new_level(new_level_id:String, loading:bool = false) -> void:
 	var new_level_path:String = LEVEL_FILES.levels[new_level_id]
 	current_level = load(new_level_path).instantiate()
 	current_level.load_from_data(save_data)
+	current_level.tile_manager.set_player(player)
 	
 	self.add_child(current_level)
 	current_level.add_child(player)
