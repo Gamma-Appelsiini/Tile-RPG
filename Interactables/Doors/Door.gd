@@ -7,7 +7,7 @@ class_name Door
 
 const OPEN_TIME:float = 0.55
 const ROTATION_AMOUNT:float = -1.5708
-var rotation:float = 0
+var door_rotation:float = 0
 var return_rotation:float = 0
 var locked:bool = false
 var interaction_enabled:bool = true
@@ -19,15 +19,15 @@ func interact() -> void:
 	if locked: return
 	interaction_enabled = false
 	
-	if used: rotation = return_rotation
+	if used: door_rotation = return_rotation
 	else:
 		var distance_1:float = player.global_transform.origin.distance_to(side_1.global_transform.origin)
 		var distance_2:float = player.global_transform.origin.distance_to(side_2.global_transform.origin)
 		
-		rotation = ROTATION_AMOUNT
+		door_rotation = ROTATION_AMOUNT
 		if distance_2 < distance_1:
 			rotation *= -1
-		return_rotation = rotation * -1
+		return_rotation = door_rotation * -1
 	
 	used = !used
 	hide_indicator()
@@ -35,7 +35,7 @@ func interact() -> void:
 	if used: interact_text = "Close"
 	
 	var tween:Tween = create_tween()
-	tween.tween_property(pivot,"rotation",pivot.rotation +Vector3(0, rotation, 0), OPEN_TIME).set_ease(Tween.EASE_OUT)
+	tween.tween_property(pivot,"rotation",pivot.rotation +Vector3(0, door_rotation, 0), OPEN_TIME).set_ease(Tween.EASE_OUT)
 	audio_player_3d.play()
 	
 	await tween.finished
@@ -50,7 +50,7 @@ func show_indicator(ind:Indicator, lab:Label3D) -> void:
 	
 	var distance_1:float = player.global_transform.origin.distance_to(side_1.global_transform.origin)
 	var distance_2:float = player.global_transform.origin.distance_to(side_2.global_transform.origin)
-	rotation = ROTATION_AMOUNT
+	door_rotation = ROTATION_AMOUNT
 	
 	closest_interact = side_1
 	if distance_2 < distance_1:

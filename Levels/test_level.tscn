@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=18 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
+[ext_resource type="Material" uid="uid://4uxg3v0dshat" path="res://Tile-RPG/Levels/path_visual_material.tres" id="2_7gm5c"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_dk6lg"]
@@ -22,6 +23,9 @@ data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5,
 [sub_resource type="BoxMesh" id="BoxMesh_7j3ou"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_686us"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
 
 [node name="TestLevel" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "tile_manager", "player_spawn_positions")]
 script = ExtResource("1_hnyhx")
@@ -56,6 +60,7 @@ mesh = SubResource("BoxMesh_7j3ou")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.89966, 0, -0.0629866)
+material_override = ExtResource("2_7gm5c")
 mesh = SubResource("CylinderMesh_686us")
 
 [node name="TestInteract" parent="." instance=ExtResource("2_686us")]
@@ -107,109 +112,109 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72587, 0, -0.513271)
 [node name="TestNPC" parent="." instance=ExtResource("9_y07y2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3592803, 0, -5.089472)
 
-[node name="TileManager" type="Node" parent="."]
+[node name="TileManager" type="Node" parent="." node_paths=PackedStringArray("target_indicator")]
 script = ExtResource("10_v1d17")
+target_indicator = NodePath("../MeshInstance3D2")
 metadata/_custom_type_script = "uid://chv46rdn2gkni"
 
-[node name="@Node@44539" type="Node" parent="TileManager"]
+[node name="@Node@46132" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-2, 7.450581e-09, -2)
+global_position = Vector3(-2, 0, -2)
 
-[node name="@Node@44540" type="Node" parent="TileManager"]
+[node name="@Node@46133" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-2, 7.450581e-09, -1)
+global_position = Vector3(-2, 0, -1)
 
-[node name="@Node@44541" type="Node" parent="TileManager"]
+[node name="@Node@46134" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-2, 7.450581e-09, 0)
+global_position = Vector3(-2, 0, 0)
 
-[node name="@Node@44542" type="Node" parent="TileManager"]
+[node name="@Node@46135" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-2, 7.450581e-09, 1)
+global_position = Vector3(-2, 0, 1)
 
-[node name="@Node@44543" type="Node" parent="TileManager"]
+[node name="@Node@46136" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-2, 7.450581e-09, 2)
+global_position = Vector3(-2, 0, 2)
 
-[node name="@Node@44544" type="Node" parent="TileManager"]
+[node name="@Node@46137" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-1, 7.450581e-09, -2)
+global_position = Vector3(-1, 0, -2)
 
-[node name="@Node@44545" type="Node" parent="TileManager"]
+[node name="@Node@46138" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-1, 7.450581e-09, -1)
+global_position = Vector3(-1, 0, -1)
 
-[node name="@Node@44546" type="Node" parent="TileManager"]
+[node name="@Node@46139" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-1, 7.450581e-09, 0)
+global_position = Vector3(-1, 0, 0)
 
-[node name="@Node@44547" type="Node" parent="TileManager"]
+[node name="@Node@46140" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-1, 7.450581e-09, 1)
+global_position = Vector3(-1, 0, 1)
 
-[node name="@Node@44548" type="Node" parent="TileManager"]
+[node name="@Node@46141" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(-1, 7.450581e-09, 2)
+global_position = Vector3(-1, 0, 2)
 
-[node name="@Node@44549" type="Node" parent="TileManager"]
+[node name="@Node@46142" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(0, 7.450581e-09, -2)
+global_position = Vector3(0, 0, -2)
 
-[node name="@Node@44550" type="Node" parent="TileManager"]
+[node name="@Node@46143" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(0, 7.450581e-09, -1)
+global_position = Vector3(0, 0, -1)
 
-[node name="@Node@44551" type="Node" parent="TileManager"]
+[node name="@Node@46144" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(0, 7.450581e-09, 0)
 
-[node name="@Node@44552" type="Node" parent="TileManager"]
+[node name="@Node@46145" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(0, 7.450581e-09, 1)
+global_position = Vector3(0, 0, 1)
 
-[node name="@Node@44553" type="Node" parent="TileManager"]
+[node name="@Node@46146" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(0, 7.450581e-09, 2)
+global_position = Vector3(0, 0, 2)
 
-[node name="@Node@44554" type="Node" parent="TileManager"]
+[node name="@Node@46147" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(1, 7.450581e-09, -2)
+global_position = Vector3(1, 0, -2)
 
-[node name="@Node@44555" type="Node" parent="TileManager"]
+[node name="@Node@46148" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(1, 7.450581e-09, -1)
+global_position = Vector3(1, 0, -1)
 
-[node name="@Node@44556" type="Node" parent="TileManager"]
+[node name="@Node@46149" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(1, 7.450581e-09, 0)
+global_position = Vector3(1, 0, 0)
 
-[node name="@Node@44557" type="Node" parent="TileManager"]
+[node name="@Node@46150" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(1, 7.450581e-09, 1)
+global_position = Vector3(1, 0, 1)
 
-[node name="@Node@44558" type="Node" parent="TileManager"]
+[node name="@Node@46151" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(1, 7.450581e-09, 2)
+global_position = Vector3(1, 0, 2)
 
-[node name="@Node@44559" type="Node" parent="TileManager"]
+[node name="@Node@46152" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(2, 7.450581e-09, -2)
+global_position = Vector3(2, 0, -2)
 
-[node name="@Node@44560" type="Node" parent="TileManager"]
+[node name="@Node@46153" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(2, 7.450581e-09, -1)
+global_position = Vector3(2, 0, -1)
 
-[node name="@Node@44561" type="Node" parent="TileManager"]
+[node name="@Node@46154" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(2, 7.450581e-09, 0)
+global_position = Vector3(2, 0, 0)
 
-[node name="@Node@44562" type="Node" parent="TileManager"]
+[node name="@Node@46155" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(2, 7.450581e-09, 1)
+global_position = Vector3(2, 0, 1)
 
-[node name="@Node@44563" type="Node" parent="TileManager"]
+[node name="@Node@46156" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
-global_position = Vector3(2, 7.450581e-09, 2)
+global_position = Vector3(2, 0, 2)
 
 [node name="Start" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.0874663, -2)

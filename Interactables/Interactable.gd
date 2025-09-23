@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name Interactable
 
 @export var unique_id:String = ""
@@ -8,6 +8,7 @@ class_name Interactable
 @export var interact_text: String = "Interact"
 @export var oneshot:bool = false
 @export var audio_player_3d: AudioStreamPlayer3D
+@export var face_interactable:bool = false
 
 var used:bool = false
 var player:Player = null

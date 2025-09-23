@@ -45,11 +45,11 @@ var resources:Dictionary[Stats.ResourceStat,int] = {
 	Stats.ResourceStat.CURRENT_HP: 5,
 	Stats.ResourceStat.CURRENT_AP: 1,
 	Stats.ResourceStat.CURRENT_SPIRIT: 1,
-	Stats.ResourceStat.CURRENT_MOVEMENT: 1,
+	Stats.ResourceStat.CURRENT_MOVEMENT: 7,
 	Stats.ResourceStat.MAX_HP: 5,
 	Stats.ResourceStat.MAX_AP: 1,
 	Stats.ResourceStat.MAX_SPIRIT: 1,
-	Stats.ResourceStat.MAX_MOVEMENT: 3
+	Stats.ResourceStat.MAX_MOVEMENT: 7
 }
 
 var secondary_stats:Dictionary[Stats.SecondaryStat,int] = {}

@@ -111,7 +111,6 @@ rotation_parent = NodePath("RotationParent")
 [node name="Arrow" type="MeshInstance3D" parent="RotationParent"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-visible = false
 material_override = ExtResource("2_p1pfk")
 transparency = 0.18
 mesh = SubResource("ArrayMesh_c6s5x")
@@ -120,7 +119,6 @@ skeleton = NodePath("")
 [node name="Corner" type="MeshInstance3D" parent="RotationParent"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-visible = false
 material_override = ExtResource("2_p1pfk")
 mesh = SubResource("ArrayMesh_p1pfk")
 skeleton = NodePath("")
@@ -128,7 +126,6 @@ skeleton = NodePath("")
 [node name="Straigth" type="MeshInstance3D" parent="RotationParent"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-visible = false
 material_override = ExtResource("2_p1pfk")
 mesh = SubResource("ArrayMesh_sgcur")
 skeleton = NodePath("")

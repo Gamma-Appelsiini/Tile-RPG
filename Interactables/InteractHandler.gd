@@ -26,6 +26,10 @@ func _interact() -> void:
 		
 	audio_stream_player_3d.stream = interaction_sound
 	audio_stream_player_3d.play()
+	
+	if current_interactee.face_interactable:
+		player.rotate_towards_point(current_interactee.indicator_place.global_position)
+		await player.rotation_complete
 	_interact_with_interactable()
 	
 func _interact_with_interactable() -> void:

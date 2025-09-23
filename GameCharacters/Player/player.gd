@@ -4,10 +4,11 @@ class_name Player
 @export var movement_speed:float = 8
 @export var acceleration:float = 20
 @export var player_camera:Camera3D
-@export var visual_mesh:MeshInstance3D
 @export var interact_handler:InteractHandler
 @export var hp_globe: ResourceGlobe = null
 @export var spirit_globe: ResourceGlobe = null
+
+var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var came_from_id:String = "menu"
 var _last_move_dir: Vector3 = Vector3.BACK
@@ -17,46 +18,9 @@ func _ready() -> void:
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
 
-func move_to_point(point: Vector3) -> void:
-	movement_enabled = false
-	await _move_to_point_internal(point)
-	movement_enabled = true
-
-func _move_to_point_internal(point: Vector3) -> void:
-	var tolerance: float = 0.1
-	while global_position.distance_to(point) > tolerance:
-		var dir: Vector3 = (point - global_position).normalized()
-		dir.y = 0.0
-		velocity = dir * movement_speed
-		move_and_slide()
-		_turn_player(dir)
-		await get_tree().physics_frame
-	velocity = Vector3.ZERO
-
-func rotate_towards_point(point: Vector3) -> void:
-	movement_enabled = false
-	await _rotate_to_point_internal(point)
-	movement_enabled = true
-
-func _rotate_to_point_internal(point: Vector3) -> void:
-	var tolerance: float = 0.01
-	while true:
-		var dir: Vector3 = (point - global_position).normalized()
-		dir.y = 0.0
-		if dir.length() < 0.001:
-			break
-		
-		var target_angle: float = Vector3.BACK.signed_angle_to(dir, Vector3.UP)
-		var current_angle: float = visual_mesh.global_rotation.y
-		var new_angle: float = lerp_angle(current_angle, target_angle, 0.2)
-		visual_mesh.global_rotation.y = new_angle
-		
-		if absf(current_angle - target_angle) < tolerance:
-			break
-		
-		await get_tree().physics_frame
-
 func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y -= GRAVITY * delta
 	var move_direction := _handle_movement_input()
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
@@ -89,3 +53,23 @@ func _turn_player(move_direction:Vector3) -> void:
 		
 	var target_angle: float = Vector3.BACK.signed_angle_to(_last_move_dir, Vector3.UP)
 	visual_mesh.global_rotation.y = target_angle
+
+#Overrided
+func rotate_towards_point(point: Vector3) -> void:
+	set_physics_process(false)
+	
+	const ROTATION_TIME: float = 0.4
+	var dir: Vector3 = (point - global_position).normalized()
+	var target_yaw: float = atan2(dir.x, dir.z)
+	var current_yaw: float = visual_mesh.rotation.y
+	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
+	var final_yaw: float = current_yaw + delta
+	
+	_last_move_dir = dir
+
+	var tween := create_tween()
+	tween.tween_property(visual_mesh, "rotation:y", final_yaw, ROTATION_TIME).set_trans(TRANS_TYPE).set_ease(EASE_TYPE)
+
+	await tween.finished
+	rotation_complete.emit()
+	set_physics_process(true)

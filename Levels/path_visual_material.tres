@@ -5,11 +5,11 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_jd6ca")
-shader_parameter/level = 0.44800002128
+shader_parameter/level = 1.0
 shader_parameter/emission_intensity = 0.55600002641
 shader_parameter/fresnel_color = Color(0.86205274, 0, 0.18668833, 1)
-shader_parameter/fresnel_intensity = 2.32400011039
-shader_parameter/fresnel_power = 1.3210000152474999
+shader_parameter/fresnel_intensity = 4.78400022724
+shader_parameter/fresnel_power = 1.214000010165
 shader_parameter/rim_color = Color(0.87, 0.50750005, 0, 1)
 shader_parameter/rim_size = 0.4990000237025
 shader_parameter/rim_intensity = 0.734000034865
