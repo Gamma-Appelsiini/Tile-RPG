@@ -6,7 +6,6 @@ class_name InteractHandler
 @export var label:Label3D
 @export var no_interaction_sound:AudioStream
 @export var interaction_sound:AudioStream
-@onready var audio_stream_player_3d: AudioStreamPlayer3D = %AudioStreamPlayer3D
 
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
@@ -20,12 +19,10 @@ func _input(event: InputEvent) -> void:
 
 func _interact() -> void:
 	if current_interactee == null:
-		audio_stream_player_3d.stream = no_interaction_sound
-		audio_stream_player_3d.play()
+		GlobalSignals.play_audio.emit(no_interaction_sound, AudioManager.AUDIO_TYPE.UI)
 		return
 		
-	audio_stream_player_3d.stream = interaction_sound
-	audio_stream_player_3d.play()
+	GlobalSignals.play_audio.emit(interaction_sound, AudioManager.AUDIO_TYPE.UI)
 	
 	if current_interactee.face_interactable:
 		player.rotate_towards_point(current_interactee.indicator_place.global_position)

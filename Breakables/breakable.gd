@@ -12,14 +12,10 @@ signal broken
 @export var pieces_node:Node3D = null
 @export var block_tiles:bool = false
 
-var audio_player_3d: AudioStreamPlayer3D = null
 var explode_origin:Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	hit_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
-	audio_player_3d = AudioStreamPlayer3D.new()
-	add_child(audio_player_3d)
-	audio_player_3d.stream = break_sound
 
 #TODO change to be destroyed by hitting with weapon
 func _on_Area3D_body_entered(body: Node) -> void:
@@ -35,13 +31,9 @@ func _explode() -> void:
 	
 	var last_frag:Fragment = fragments_node.get_children().back()
 	last_frag.dissolved.connect(queue_free)
-	_play_sound()
+	GlobalSignals.play_audio.emit(break_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, explode_origin)
 	
 	for frag:Fragment in fragments_node.get_children():
 		var fragment_speed:float = randf_range(explosion_speed-1,explosion_speed+1)
 		var vel:Vector3 = (frag.global_transform.origin - explode_origin) * fragment_speed
 		frag.explode(vel)
-	
-func _play_sound() -> void:
-	audio_player_3d.global_position = explode_origin
-	audio_player_3d.play()
