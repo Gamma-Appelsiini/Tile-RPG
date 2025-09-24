@@ -55,10 +55,7 @@ func _turn_player(move_direction:Vector3) -> void:
 	visual_mesh.global_rotation.y = target_angle
 
 #Overrided
-func rotate_towards_point(point: Vector3) -> void:
-	set_physics_process(false)
-	
-	const ROTATION_TIME: float = 0.4
+func _rotate(point: Vector3) -> Tween:
 	var dir: Vector3 = (point - global_position).normalized()
 	var target_yaw: float = atan2(dir.x, dir.z)
 	var current_yaw: float = visual_mesh.rotation.y
@@ -67,9 +64,10 @@ func rotate_towards_point(point: Vector3) -> void:
 	
 	_last_move_dir = dir
 
+	const FULL_ROTATION_TIME: float = 0.8
+	var angle_diff: float = abs(delta)
+	var rotation_time:float = FULL_ROTATION_TIME * (angle_diff / TAU)
+	
 	var tween := create_tween()
-	tween.tween_property(visual_mesh, "rotation:y", final_yaw, ROTATION_TIME).set_trans(TRANS_TYPE).set_ease(EASE_TYPE)
-
-	await tween.finished
-	rotation_complete.emit()
-	set_physics_process(true)
+	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(TRANS_TYPE).set_ease(EASE_TYPE)
+	return tween

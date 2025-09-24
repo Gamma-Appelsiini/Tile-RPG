@@ -6,7 +6,7 @@ const OFFSETS:Array[Vector3] = [Vector3(0,0,-1),Vector3(0,0,1),Vector3(-1,0,0),V
 const GROUND_INDICATOR_SCENE:PackedScene = preload("uid://od3hhc5xdir8")
 
 var tiles:Dictionary[Vector3,Tile] = {}
-var char_tiles:Dictionary[Player,Tile] = {}
+var char_tiles:Dictionary[GameCharacter,Tile] = {}
 var path_visuals:Array[PathVisual] = []
 
 var player:Player = null
@@ -26,36 +26,29 @@ func _ready() -> void:
 		
 	for tile:Tile in tiles.values():
 		_add_neighbors(tile)
-	
-	await get_tree().create_timer(0.4).timeout
-	set_on_closest_tile(player)
-	enable_shooting()
 
 func _create_indicator() -> void:
 	ground_indicator = GROUND_INDICATOR_SCENE.instantiate()
 	ground_indicator.visible = false
 	get_parent().add_child.call_deferred(ground_indicator)
 
-func _move_player() -> void:
-	if hovered_tile == null: return
-	
-	var path:Array[Tile] = _get_shortest_path(char_tiles[player], hovered_tile)
+func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile) -> void:
+	var path:Array[Tile] = _get_shortest_path(char_tiles[game_character], end_tile)
 	path.pop_front()
 	
 	for tile:Tile in path:
-		var player_move_amount:int = player.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT]
-		if 0 >= player_move_amount: break
+		var char_move_amount:int = game_character.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT]
+		if 0 >= char_move_amount: break
 		
 		var start:bool = false
 		var end:bool = false
 		if tile == path.back(): end = true
 		if tile == path.front(): start = true
 		
-		player.rotate_towards_point(tile.global_position)
-		player.move_to_point(tile.global_position,start, end)
+		game_character.move_to_point(tile.global_position,start, end)
 		
-		player.stat_handler.update_stat(Stats.ResourceStat.CURRENT_MOVEMENT, -1)
-		await player.move_complete
+		game_character.stat_handler.update_stat(Stats.ResourceStat.CURRENT_MOVEMENT, -1)
+		await game_character.move_complete
 
 func _add_neighbors(tile:Tile) -> void:
 	for offset:Vector3 in OFFSETS:
@@ -64,8 +57,9 @@ func _add_neighbors(tile:Tile) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
-		if hovered_tile != null:_move_player()
-		disable_shooting()
+		if hovered_tile != null:
+			_move_character_to_tile(player, hovered_tile)
+			disable_shooting()
 
 func enable_shooting() -> void:
 	set_process_input(true)
@@ -73,24 +67,28 @@ func enable_shooting() -> void:
 	_choose_tile()
 	
 func disable_shooting() -> void:
+	shooting = false
 	_hide_path()
 	set_process_input(false)
-	shooting = false
 	_set_hovered_tile(null)
 
 func _set_hovered_tile(new_tile:Tile) -> void:
-	if hovered_tile == new_tile: return
+	if hovered_tile == new_tile:
+		return
 	if new_tile == null:
 		ground_indicator.visible = false
+		_hide_path()
 		hovered_tile = null
 		return
 	
 	hovered_tile = new_tile
 	ground_indicator.visible = true
 	ground_indicator.global_position = new_tile.global_position
+	if hovered_tile.blocked or hovered_tile.occupant != null: ground_indicator.set_indicator_color(false)
+	else: ground_indicator.set_indicator_color(true)
 	
 	var player_move_amount:int = player.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT]
-	var path:Array[Tile] = _get_shortest_path(char_tiles[player], hovered_tile)
+	var path:Array[Tile] = _get_shortest_path(char_tiles[player as GameCharacter], hovered_tile)
 	path = path.slice(0,player_move_amount + 1)
 	_visualize_path(path)
 
@@ -98,12 +96,8 @@ func _choose_tile() -> void:
 	if !shooting: return
 	
 	var mouse_point:Vector3 = _get_mouse_point()
-	if mouse_point != Vector3.INF:
-		var closest_tile:Tile = _get_closest_tile(mouse_point)
-		_set_hovered_tile(closest_tile)
-
-	else:
-		_hide_path()
+	var closest_tile:Tile = get_closest_tile(mouse_point)
+	_set_hovered_tile(closest_tile)
 	
 	await get_tree().create_timer(0.1).timeout
 	_choose_tile()
@@ -113,7 +107,7 @@ func _get_mouse_point() -> Vector3:
 	
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var from: Vector3 = player_camera.project_ray_origin(mouse_pos)
-	var to: Vector3 = from + player_camera.project_ray_normal(mouse_pos) * 1000.0
+	var to: Vector3 = from + player_camera.project_ray_normal(mouse_pos) * 2000.0
 	
 	var space_state := player.get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(from, to)
@@ -126,14 +120,16 @@ func _get_mouse_point() -> Vector3:
 	
 	return point
 
-func _get_closest_tile(pos:Vector3) -> Tile:
+func get_closest_tile(pos:Vector3) -> Tile:
 	var closest_tile:Tile = null
+	if pos == Vector3.INF: return closest_tile
+	
 	var rounded_x:int = int(round(pos.x))
 	var rounded_z:int = int(round(pos.z))
-	var rounded_pos:Vector3 = Vector3(float(rounded_x),pos.y,float(rounded_z))
+	var rounded_y:int = int((pos.y))
+	var rounded_pos:Vector3 = Vector3((rounded_x),rounded_y,(rounded_z))
 	
-	if tiles.has(rounded_pos):
-		return tiles[rounded_pos]
+	if tiles.has(rounded_pos): closest_tile = tiles[rounded_pos]
 	return closest_tile
 	
 func set_player(new_player:Player) -> void:
@@ -227,9 +223,9 @@ func _visualize_path(path:Array[Tile]) -> void:
 		
 func _get_corner_rotation(prev_tile:Tile, tile:Tile, next_tile:Tile) -> float:
 	var rotation_amount:float = 0
-	var p = Vector2(prev_tile.global_position.x, prev_tile.global_position.z)
-	var c = Vector2(tile.global_position.x, tile.global_position.z)
-	var n = Vector2(next_tile.global_position.x, next_tile.global_position.z)
+	var p := Vector2(prev_tile.global_position.x, prev_tile.global_position.z)
+	var c := Vector2(tile.global_position.x, tile.global_position.z)
+	var n := Vector2(next_tile.global_position.x, next_tile.global_position.z)
 	var dir1:Vector2 = (c-p)
 	var dir2:Vector2 = (n-c)
 	
@@ -250,7 +246,7 @@ func _get_corner_rotation(prev_tile:Tile, tile:Tile, next_tile:Tile) -> float:
 
 	return deg_to_rad(rotation_amount)
 
-func set_on_closest_tile(game_char:Player) -> void:
+func set_on_closest_tile(game_char:GameCharacter) -> void:
 	var distance:float = -1
 	var closest_tile:Tile = null
 	

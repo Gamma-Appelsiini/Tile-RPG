@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bn7fuscw35f5x"]
+
+[ext_resource type="Shader" uid="uid://bi2urx8c06pma" path="res://Tile-RPG/Shaders/ground_indicator.gdshader" id="1_a0we7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_a0we7")
+shader_parameter/base_color = Color(0.9965821, 0.34659013, 0.32164374, 1)
+shader_parameter/bob_speed = 2.000000095
+shader_parameter/bob_amount = 0.010000000475
+shader_parameter/fresnel_color = Color(0.34726867, 0.05643662, 0.01508023, 1)
+shader_parameter/fresnel_intensity = 1.3910000660725

@@ -9,6 +9,7 @@ class_name Interactable
 @export var oneshot:bool = false
 @export var audio_player_3d: AudioStreamPlayer3D
 @export var face_interactable:bool = false
+@export var block_tiles:bool = false
 
 var used:bool = false
 var player:Player = null

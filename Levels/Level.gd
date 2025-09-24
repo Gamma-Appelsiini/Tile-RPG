@@ -4,6 +4,7 @@ class_name Level
 @export var unique_id:String = ""
 @export var game_characters_node:Node = null
 @export var interactables_node:Node = null
+@export var breakables_node:Node = null
 @export var tile_manager:TileManager = null
 
 @export var player_spawn_positions:Dictionary[String,Node3D] = {}
@@ -16,6 +17,8 @@ func _ready() -> void:
 	
 	for gchar:GameCharacter in game_characters_node.get_children():
 		game_chars.push_back(gchar as GameCharacter)
+		
+	_handle_tile_blockers()
 
 func save_to_data(save_data:Dictionary) -> void:
 	#TODO add other things needed to be saved in levels
@@ -53,3 +56,16 @@ func _load_game_chars(save_data:Dictionary) -> void:
 			game_chars.erase(gchar)
 			gchar.queue_free()
 		else: gchar.load_from_data(save_data)
+
+func _handle_tile_blockers() -> void:
+	for interactable:Interactable in interactables_node.get_children():
+		if interactable.block_tiles:
+			var occupied_tile:Tile = tile_manager.get_closest_tile(interactable.global_position)
+			occupied_tile.add_blocker(interactable)
+		
+	for breakable:Breakable in breakables_node.get_children():
+		if breakable.block_tiles:
+			var occupied_tile:Tile = tile_manager.get_closest_tile(breakable.global_position)
+			if occupied_tile == null: continue
+			occupied_tile.add_blocker(breakable)
+			breakable.broken.connect(occupied_tile.remove_blocker.bind(breakable))

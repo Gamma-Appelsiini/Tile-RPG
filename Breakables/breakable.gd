@@ -1,6 +1,8 @@
 extends Node3D
 class_name Breakable
 
+signal broken
+
 @export var explosion_speed:float = 6
 @export var hit_area: Area3D
 @export var static_body:StaticBody3D
@@ -8,6 +10,7 @@ class_name Breakable
 @export var original_model:MeshInstance3D = null
 @export var fragments_node:Node3D = null
 @export var pieces_node:Node3D = null
+@export var block_tiles:bool = false
 
 var audio_player_3d: AudioStreamPlayer3D = null
 var explode_origin:Vector3 = Vector3.ZERO
@@ -25,6 +28,7 @@ func _on_Area3D_body_entered(body: Node) -> void:
 		_explode()
 
 func _explode() -> void:
+	broken.emit()
 	hit_area.set_deferred("monitoring", false)
 	original_model.visible = false
 	static_body.queue_free()

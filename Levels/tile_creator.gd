@@ -38,8 +38,11 @@ func _add_tiles() -> void:
 			var result:Vector3 = _shoot_ray(from)
 			if !result: pass
 			if result != from:
-				result = Vector3(round(result.x),round(result.y),round(result.z))
-				_add_tile(result)
+				var rounded_x:int = int(result.x)
+				var rounded_z:int = int(result.z)
+				var rounded_y:int = int(result.y)
+				var rounded_pos:Vector3 = Vector3(rounded_x,rounded_y,rounded_z)
+				_add_tile(rounded_pos)
 			z += 1
 		x += 1
 

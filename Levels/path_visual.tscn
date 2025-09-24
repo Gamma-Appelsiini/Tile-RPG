@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=4 uid="uid://b0o02dka0wxp2"]
 
 [ext_resource type="Script" uid="uid://ct6q8ns1p6cea" path="res://Tile-RPG/Levels/path_visual.gd" id="1_ighsl"]
-[ext_resource type="Material" uid="uid://4uxg3v0dshat" path="res://Tile-RPG/Levels/path_visual_material.tres" id="2_p1pfk"]
+[ext_resource type="Material" uid="uid://bn7fuscw35f5x" path="res://Tile-RPG/Levels/path_visual_material2.tres" id="2_p1pfk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omxxa"]
 
@@ -111,6 +111,7 @@ rotation_parent = NodePath("RotationParent")
 [node name="Arrow" type="MeshInstance3D" parent="RotationParent"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
 material_override = ExtResource("2_p1pfk")
 transparency = 0.18
 mesh = SubResource("ArrayMesh_c6s5x")
@@ -119,6 +120,7 @@ skeleton = NodePath("")
 [node name="Corner" type="MeshInstance3D" parent="RotationParent"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
 material_override = ExtResource("2_p1pfk")
 mesh = SubResource("ArrayMesh_p1pfk")
 skeleton = NodePath("")
@@ -126,6 +128,7 @@ skeleton = NodePath("")
 [node name="Straigth" type="MeshInstance3D" parent="RotationParent"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
 material_override = ExtResource("2_p1pfk")
 mesh = SubResource("ArrayMesh_sgcur")
 skeleton = NodePath("")

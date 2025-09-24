@@ -1698,6 +1698,7 @@ static_body = NodePath("ScaleNode/StaticBody3D")
 break_sound = ExtResource("2_udes3")
 original_model = NodePath("ScaleNode/Barrel")
 fragments_node = NodePath("ScaleNode/Fragments")
+block_tiles = true
 
 [node name="ScaleNode" type="Node3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0145127, 0)
@@ -1711,6 +1712,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03296, 0)
 shape = SubResource("CylinderShape3D_7wi28")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ScaleNode"]
+collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScaleNode/StaticBody3D"]

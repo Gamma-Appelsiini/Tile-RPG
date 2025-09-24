@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://7l7fu5vglle0"]
+[gd_scene load_steps=7 format=3 uid="uid://7l7fu5vglle0"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_vj7em"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_avkor"]
 [ext_resource type="PackedScene" uid="uid://2b0xh0a27vb8" path="res://Tile-RPG/Interactables/anvil.tscn" id="3_jiagy"]
+[ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="4_hhi1q"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_avkor"]
 size = Vector2(5, 5)
@@ -10,11 +11,12 @@ size = Vector2(5, 5)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jiagy"]
 data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5, -2.5, 0, -2.5, 2.5, 0, -2.5)
 
-[node name="test_level2" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "player_spawn_positions")]
+[node name="test_level2" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "tile_manager", "player_spawn_positions")]
 script = ExtResource("1_vj7em")
 unique_id = "test_level_2"
 game_characters_node = NodePath("GameChars")
 interactables_node = NodePath("Interactables")
+tile_manager = NodePath("TileManager")
 player_spawn_positions = {
 "spawn1": NodePath("Spawnpos1"),
 "test_level_1": NodePath("Spawnpos1")
@@ -51,3 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00677, -1.42664e-06, -2.08
 [node name="GameChars" type="Node" parent="."]
 
 [node name="Interactables" type="Node" parent="."]
+
+[node name="TileManager" type="Node" parent="."]
+script = ExtResource("4_hhi1q")
+metadata/_custom_type_script = "uid://chv46rdn2gkni"

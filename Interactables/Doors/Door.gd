@@ -18,6 +18,7 @@ func interact() -> void:
 	_handle_locked()
 	if locked: return
 	interaction_enabled = false
+	interact_area.monitoring = false
 	
 	if used: door_rotation = return_rotation
 	else:
@@ -26,7 +27,7 @@ func interact() -> void:
 		
 		door_rotation = ROTATION_AMOUNT
 		if distance_2 < distance_1:
-			rotation *= -1
+			door_rotation *= -1
 		return_rotation = door_rotation * -1
 	
 	used = !used
@@ -40,7 +41,6 @@ func interact() -> void:
 	
 	await tween.finished
 	interaction_enabled = true
-	interact_area.monitoring = false
 	interact_area.monitoring = true
 	
 #Overrided due to doors having 2 interact points
@@ -50,7 +50,6 @@ func show_indicator(ind:Indicator, lab:Label3D) -> void:
 	
 	var distance_1:float = player.global_transform.origin.distance_to(side_1.global_transform.origin)
 	var distance_2:float = player.global_transform.origin.distance_to(side_2.global_transform.origin)
-	door_rotation = ROTATION_AMOUNT
 	
 	closest_interact = side_1
 	if distance_2 < distance_1:
@@ -61,7 +60,6 @@ func show_indicator(ind:Indicator, lab:Label3D) -> void:
 	ind.global_position = closest_interact.global_position + Vector3(0,0.1,0)
 	lab.show()
 	ind.show_indicator()
-
 	
 #TODO add locked/key functionality
 func _handle_locked() -> void:
