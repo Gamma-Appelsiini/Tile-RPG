@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=19 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="Material" uid="uid://4uxg3v0dshat" path="res://Tile-RPG/Levels/path_visual_material.tres" id="2_7gm5c"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="10_v1d17"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="11_1m872"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="11_hwmq8"]
+[ext_resource type="PackedScene" uid="uid://b0q06sun50bsc" path="res://Tile-RPG/Levels/LevelObjects/roach.tscn" id="14_e3s5j"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
 size = Vector2(5, 5)
@@ -228,5 +229,8 @@ tile_manager = NodePath("../TileManager")
 start_node = NodePath("../Start")
 end_node = NodePath("../End")
 metadata/_custom_type_script = "uid://bp36ikilmc15g"
+
+[node name="Roach" parent="." instance=ExtResource("14_e3s5j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
 [editable path="Interactables/DialogueInteractable"]
