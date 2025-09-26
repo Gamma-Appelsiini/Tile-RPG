@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dixo86dkwapgy"]
+
+[ext_resource type="Shader" uid="uid://b5tdoppdhawoh" path="res://Tile-RPG/Shaders/outline_shader.gdshader" id="1_eqm80"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_eqm80")
+shader_parameter/outline_color = Color(0.11302375, 0.6847217, 5.7756904e-07, 1)
+shader_parameter/outline_width = 3.0000001425
+shader_parameter/fade_start = 10.0
+shader_parameter/fade_end = 30.0

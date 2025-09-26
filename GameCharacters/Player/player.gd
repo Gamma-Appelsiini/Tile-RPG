@@ -18,6 +18,12 @@ func _ready() -> void:
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Highlight"):
+		GlobalSignals.show_outline.emit()
+	elif event.is_action_released("Highlight"):
+		GlobalSignals.hide_outline.emit()
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta

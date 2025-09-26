@@ -1,13 +1,16 @@
-[gd_scene load_steps=238 format=4 uid="uid://y7vct1hyfty8"]
+[gd_scene load_steps=240 format=4 uid="uid://y7vct1hyfty8"]
 
 [ext_resource type="Script" uid="uid://bbqjjguiy4xwh" path="res://Tile-RPG/Breakables/breakable.gd" id="1_7vmfa"]
 [ext_resource type="Texture2D" uid="uid://ymwm8kgb6kjm" path="res://Tile-RPG/Models/Breakables/crate_pieces_Crate.png" id="1_j5ren"]
 [ext_resource type="AudioStream" uid="uid://dg5ljqvsx0gbw" path="res://Tile-RPG/Sounds/interact.wav" id="2_a373q"]
+[ext_resource type="Material" uid="uid://l0c1ypupcv43" path="res://Tile-RPG/Handlers/object_outline.tres" id="3_nsj7e"]
 [ext_resource type="Script" uid="uid://dx6urqvsbtxd7" path="res://Tile-RPG/Breakables/fragment.gd" id="4_a12ou"]
 [ext_resource type="Shader" uid="uid://cob6fqoifkxfi" path="res://Tile-RPG/Shaders/dissolve_shader.gdshader" id="5_08j1d"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/outline_handler.gd" id="6_08j1d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njgu6"]
 resource_name = "Wood"
+next_pass = ExtResource("3_nsj7e")
 cull_mode = 2
 albedo_texture = ExtResource("1_j5ren")
 roughness = 0.634483
@@ -3947,3 +3950,8 @@ shape = SubResource("ConvexPolygonShape3D_a1a4n")
 material_override = SubResource("ShaderMaterial_jlhan")
 mesh = SubResource("ArrayMesh_pigwo")
 skeleton = NodePath("")
+
+[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+script = ExtResource("6_08j1d")
+mesh_to_outline = NodePath("../Crate")
+metadata/_custom_type_script = "uid://g6rood38j5ok"

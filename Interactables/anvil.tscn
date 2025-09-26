@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://2b0xh0a27vb8"]
+[gd_scene load_steps=10 format=4 uid="uid://2b0xh0a27vb8"]
 
 [ext_resource type="Script" uid="uid://bjf15g0ncnvb1" path="res://Tile-RPG/Interactables/anvil.gd" id="1_og7ni"]
 [ext_resource type="Texture2D" uid="uid://chyow8elnov82" path="res://Tile-RPG/Models/Interactables/anvil_Anvil.png" id="2_2kqpt"]
 [ext_resource type="PackedScene" uid="uid://ct761wejgx40c" path="res://Tile-RPG/UI/Crafting/crafting_window.tscn" id="3_2kqpt"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/outline_handler.gd" id="4_md1ui"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0t8r"]
 resource_name = "Metal"
@@ -84,3 +85,8 @@ shape = SubResource("BoxShape3D_og7ni")
 [node name="CraftingWindow" parent="." instance=ExtResource("3_2kqpt")]
 unique_name_in_owner = true
 visible = false
+
+[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+script = ExtResource("4_md1ui")
+mesh_to_outline = NodePath("../AnvilMesh")
+metadata/_custom_type_script = "uid://g6rood38j5ok"

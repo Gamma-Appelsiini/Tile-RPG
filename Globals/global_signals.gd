@@ -9,4 +9,7 @@ signal enable_player_movement
 signal disable_player_movement
 signal play_audio(new_stream:AudioStream, pos:Vector3)
 
+signal show_outline
+signal hide_outline
+
 signal change_all_stats_visibility
