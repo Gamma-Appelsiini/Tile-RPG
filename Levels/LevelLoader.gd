@@ -103,6 +103,9 @@ func _open_new_level(new_level_id:String, loading:bool = false) -> void:
 	current_level.load_from_data(save_data)
 	current_level.tile_manager.set_player(player)
 	
+	for gc:GameCharacter in current_level.game_characters_node.get_children():
+		if gc.follow_hander != null: gc.follow_hander.set_tile_manager(current_level.tile_manager)
+	
 	self.add_child(current_level)
 	current_level.add_child(player)
 	

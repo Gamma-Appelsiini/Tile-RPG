@@ -4,6 +4,7 @@ class_name Tile
 
 var tile_manager:TileManager = null
 var neighbor_tiles:Array[Tile] = []
+var diagonal_tiles:Array[Tile] = []
 var occupant:GameCharacter = null
 var blockers:Array[Node3D] = []
 

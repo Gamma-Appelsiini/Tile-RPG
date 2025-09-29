@@ -1,31 +1,52 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba5woaetqefuy"]
+[gd_scene load_steps=8 format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
 [ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_ms4ik"]
-[ext_resource type="PackedScene" uid="uid://dnw6ibd7fwlqf" path="res://Tile-RPG/Interactables/character_dialogue_interactable.tscn" id="2_sjjpf"]
-[ext_resource type="Resource" uid="uid://cidlo31hofkdj" path="res://Tile-RPG/Dialogue/Resources/Jail/cute_ugly_test.tres" id="4_ms4ik"]
+[ext_resource type="Script" uid="uid://dq5x88665dpbq" path="res://Tile-RPG/GameCharacters/follow_handler.gd" id="5_yvq5j"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ouqyu"]
 radius = 0.35
 height = 1.7
 
+[sub_resource type="BoxMesh" id="BoxMesh_8w85h"]
+size = Vector3(0.1, 0.1, 0.5)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sjjpf"]
 radius = 0.35
 height = 1.7
 
-[node name="TestNPC" type="CharacterBody3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8w85h"]
+radius = 1.0
+
+[node name="TestNPC" type="CharacterBody3D" node_paths=PackedStringArray("visual_mesh", "follow_hander")]
 script = ExtResource("1_ouqyu")
 display_name = "Testing Character"
 picture = ExtResource("2_ms4ik")
+visual_mesh = NodePath("MeshInstance3D")
+follow_hander = NodePath("FollowHandler")
 metadata/_custom_type_script = "uid://ks8scj6i4f0r"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8506718, 0)
 mesh = SubResource("CapsuleMesh_ouqyu")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7998745, 0.2499609)
+mesh = SubResource("BoxMesh_8w85h")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_sjjpf")
 
-[node name="CharacterDialogueInteractable" parent="." instance=ExtResource("2_sjjpf")]
-dialogue_resource = ExtResource("4_ms4ik")
+[node name="FollowHandler" type="Node" parent="." node_paths=PackedStringArray("area")]
+script = ExtResource("5_yvq5j")
+area = NodePath("../Area3D")
+metadata/_custom_type_script = "uid://dq5x88665dpbq"
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_8w85h")

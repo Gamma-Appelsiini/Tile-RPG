@@ -9,9 +9,11 @@ signal rotation_complete
 @export var picture:Texture2D = null
 @export var stat_resource:StatResource = null
 @export var visual_mesh:MeshInstance3D
+@export var follow_hander:FollowHandler = null
 
 const EASE_TYPE: Tween.EaseType = Tween.EASE_IN_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_SINE
+var move_tween:Tween = null
 
 var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
@@ -44,20 +46,26 @@ func save_to_data(save_data:Dictionary) -> void:
 	save_data["game_characters"][unique_id]["global_position"] = self.global_position
 	stat_handler.save_to_data(save_data,self.unique_id)
 
+func stop_moving() -> void:
+	if move_tween != null: move_tween.stop()
+
 func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void:
+	if self.global_position.distance_to(point) <= 0.1:
+		move_complete.emit()
+		return
 	set_physics_process(false)
 	_rotate(point)
 	
 	var distance:float = self.global_position.distance_to(point)
 	var move_time:float = 0.6 * distance
-	var tween := create_tween()
-	if start: tween.set_ease(Tween.EASE_OUT)
-	elif end: tween.set_ease(Tween.EASE_IN)
-	elif start and end: tween.set_ease(Tween.EASE_IN_OUT)
+	move_tween = create_tween()
+	if start: move_tween.set_ease(Tween.EASE_OUT)
+	elif end: move_tween.set_ease(Tween.EASE_IN)
+	elif start and end: move_tween.set_ease(Tween.EASE_IN_OUT)
 	
-	tween.tween_property(self, "global_position", point, move_time)
+	move_tween.tween_property(self, "global_position", point, move_time)
 	
-	await tween.finished
+	await move_tween.finished
 	move_complete.emit()
 	set_physics_process(true)
 

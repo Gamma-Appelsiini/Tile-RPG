@@ -26,6 +26,7 @@ func _ready() -> void:
 		
 	for tile:Tile in tiles.values():
 		_add_neighbors(tile)
+		_add_diagonals(tile)
 
 func _create_indicator() -> void:
 	ground_indicator = GROUND_INDICATOR_SCENE.instantiate()
@@ -33,7 +34,7 @@ func _create_indicator() -> void:
 	get_parent().add_child.call_deferred(ground_indicator)
 
 func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile) -> void:
-	var path:Array[Tile] = _get_shortest_path(char_tiles[game_character], end_tile)
+	var path:Array[Tile] = get_shortest_path(char_tiles[game_character], end_tile)
 	path.pop_front()
 	
 	for tile:Tile in path:
@@ -54,6 +55,29 @@ func _add_neighbors(tile:Tile) -> void:
 	for offset:Vector3 in OFFSETS:
 		var neighbor:Tile = tiles.get(tile.global_position + offset)
 		if neighbor != null: tile.neighbor_tiles.push_back(neighbor)
+
+func _add_diagonals(tile:Tile) -> void:
+	var topl:Tile = tiles.get(tile.global_position + (OFFSETS[1] + OFFSETS[2]))
+	var topr:Tile = tiles.get(tile.global_position + (OFFSETS[1] - OFFSETS[3]))
+	var botl:Tile = tiles.get(tile.global_position + (OFFSETS[0] + OFFSETS[2]))
+	var botr:Tile = tiles.get(tile.global_position + (OFFSETS[0] - OFFSETS[3]))
+	
+	var left:Tile = tiles.get(tile.global_position + OFFSETS[0])
+	var right:Tile = tiles.get(tile.global_position + OFFSETS[1])
+	var top:Tile = tiles.get(tile.global_position + OFFSETS[2])
+	var bot:Tile = tiles.get(tile.global_position + OFFSETS[3])
+	
+	if topl != null and left != null and right != null:
+		tile.diagonal_tiles.push_back(topl)
+		
+	if topr != null and top != null and left != null:
+		tile.diagonal_tiles.push_back(topr)
+		
+	if botl != null and left != null and bot != null:
+		tile.diagonal_tiles.push_back(botl)
+		
+	if botr != null and bot != null and right != null:
+		tile.diagonal_tiles.push_back(botr)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -88,7 +112,7 @@ func _set_hovered_tile(new_tile:Tile) -> void:
 	else: ground_indicator.set_indicator_color(true)
 	
 	var player_move_amount:int = player.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT]
-	var path:Array[Tile] = _get_shortest_path(char_tiles[player as GameCharacter], hovered_tile)
+	var path:Array[Tile] = get_shortest_path(char_tiles[player as GameCharacter], hovered_tile)
 	path = path.slice(0,player_move_amount + 1)
 	_visualize_path(path)
 
@@ -140,7 +164,7 @@ func _reset_tiles() -> void:
 	for tile:Tile in tiles.values():
 		tile.reset_tile()
 
-func _get_shortest_path(start:Tile, end:Tile)->Array[Tile]:
+func get_shortest_path(start:Tile, end:Tile, out_of_combat:bool = false)->Array[Tile]:
 	var path:Array[Tile] = []
 	_reset_tiles()
 	
@@ -155,7 +179,10 @@ func _get_shortest_path(start:Tile, end:Tile)->Array[Tile]:
 		if current == end:
 			break
 		
-		for neighbor:Tile in current.neighbor_tiles:
+		var neighbors:Array[Tile] = current.neighbor_tiles
+		if out_of_combat: neighbors.append_array(current.diagonal_tiles)
+		
+		for neighbor:Tile in neighbors:
 			if neighbor.blocked or neighbor.occupant != null: continue
 			if !neighbor.visited:
 				neighbor.visited = true
@@ -246,7 +273,7 @@ func _get_corner_rotation(prev_tile:Tile, tile:Tile, next_tile:Tile) -> float:
 
 	return deg_to_rad(rotation_amount)
 
-func set_on_closest_tile(game_char:GameCharacter) -> void:
+func set_on_closest_tile(game_char:GameCharacter, out_of_combat:bool = false) -> void:
 	var distance:float = -1
 	var closest_tile:Tile = null
 	
@@ -269,4 +296,4 @@ func set_on_closest_tile(game_char:GameCharacter) -> void:
 
 	game_char.rotate_towards_point(closest_tile.global_position)
 	game_char.move_to_point(closest_tile.global_position,true,true)
-	char_tiles[game_char] = closest_tile
+	if !out_of_combat: char_tiles[game_char] = closest_tile
