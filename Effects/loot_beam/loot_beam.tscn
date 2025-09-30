@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmgb3ivkgrbqb"]
+
+[ext_resource type="Script" uid="uid://csu44veh5dh1o" path="res://Tile-RPG/Effects/loot_beam/loot_beam.gd" id="1_he7j1"]
+[ext_resource type="Material" uid="uid://d3hkbqtmyt8vh" path="res://Tile-RPG/Effects/loot_beam/poor_material.tres" id="2_tkhf4"]
+[ext_resource type="Texture2D" uid="uid://cwfrpx7wl2hfd" path="res://Tile-RPG/Images/Shaders/T_VFX_Flare_251.jpg" id="3_tkhf4"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_73dit"]
+size = Vector2(0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m83cw"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("3_tkhf4")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_roa3g"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8018105, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wt17w"]
+curve = SubResource("Curve_roa3g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qo4ek"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 0.39999998
+initial_velocity_max = 0.79999995
+gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_wt17w")
+color = Color(1.587139, 1.5253057, 0.53294206, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vvhlp"]
+
+[node name="LootBeam" type="Node3D" node_paths=PackedStringArray("beam_mesh", "scale_node", "particles")]
+script = ExtResource("1_he7j1")
+beam_mesh = NodePath("ScaleNode/BeamMesh")
+scale_node = NodePath("ScaleNode")
+particles = NodePath("ScaleNode/GPUParticles3D")
+
+[node name="ScaleNode" type="Node3D" parent="."]
+
+[node name="BeamMesh" type="MeshInstance3D" parent="ScaleNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30532837, 0)
+material_override = ExtResource("2_tkhf4")
+mesh = SubResource("QuadMesh_73dit")
+skeleton = NodePath("../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="ScaleNode"]
+material_override = SubResource("StandardMaterial3D_m83cw")
+emitting = false
+amount = 3
+lifetime = 2.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_qo4ek")
+draw_pass_1 = SubResource("QuadMesh_vvhlp")

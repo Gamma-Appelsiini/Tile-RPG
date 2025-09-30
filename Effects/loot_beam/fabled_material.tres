@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ob340kvi4h5i"]
+
+[ext_resource type="Shader" uid="uid://m86r0cc6xaen" path="res://Tile-RPG/Shaders/loot_beam.tres" id="1_hboce"]
+[ext_resource type="Texture2D" uid="uid://uiclh1x82i26" path="res://Tile-RPG/Images/Shaders/T_Aura8.png" id="2_4sr24"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_hboce")
+shader_parameter/main_color = Color(1.2408576, 1.0805603, 0.54574853, 1)
+shader_parameter/blink_speed = 2.0
+shader_parameter/Transparency_texture = ExtResource("2_4sr24")

@@ -1,0 +1,166 @@
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://m86r0cc6xaen"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_olwqe"]
+parameter_name = "blink_speed"
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_olwqe"]
+default_input_values = [0, 0.5]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_chm0p"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_olwqe"]
+parameter_name = "Transparency_texture"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_chm0p"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_0xohm"]
+output_port_for_preview = 0
+parameter_name = "main_color"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_olwqe"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_chm0p"]
+function = 1
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_0xohm"]
+default_input_values = [1, -1.0, 2, 1.0, 3, 0.3, 4, 1.0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_v1u4f"]
+default_input_values = [0, 0.0, 1, 4.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_sayle"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_chm0p"]
+billboard_type = 2
+keep_scale = true
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+
+uniform vec4 main_color : source_color;
+uniform float blink_speed;
+uniform sampler2D Transparency_texture : source_color;
+uniform sampler2D depth_tex_frg_11 : hint_depth_texture;
+
+
+
+void vertex() {
+	mat4 n_out2p0;
+// GetBillboardMatrix:2
+	{
+		mat4 __mvm = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
+		__mvm = __mvm * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, 1.0, 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		n_out2p0 = __mvm;
+	}
+
+
+// Output:0
+	MODELVIEW_MATRIX = n_out2p0;
+
+
+}
+
+void fragment() {
+// ColorParameter:4
+	vec4 n_out4p0 = main_color;
+
+
+// Input:5
+	float n_out5p0 = TIME;
+
+
+// FloatParameter:10
+	float n_out10p0 = blink_speed;
+
+
+// FloatOp:8
+	float n_out8p0 = n_out5p0 * n_out10p0;
+
+
+// FloatFunc:6
+	float n_out6p0 = cos(n_out8p0);
+
+
+	float n_out7p0;
+// Remap:7
+	float n_in7p1 = -1.00000;
+	float n_in7p2 = 1.00000;
+	float n_in7p3 = 0.30000;
+	float n_in7p4 = 1.00000;
+	{
+		float __input_range = n_in7p2 - n_in7p1;
+		float __output_range = n_in7p4 - n_in7p3;
+		n_out7p0 = n_in7p3 + __output_range * ((n_out6p0 - n_in7p1) / __input_range);
+	}
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Transparency_texture, UV);
+	float n_out3p1 = n_out3p0.r;
+
+
+// FloatOp:9
+	float n_out9p0 = n_out7p0 * n_out3p1;
+
+
+	float n_out11p0;
+// ProximityFade:11
+	float n_in11p0 = 0.50000;
+	{
+		float __depth_tex = texture(depth_tex_frg_11, SCREEN_UV).r;
+		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
+		__depth_world_pos.xyz /= __depth_world_pos.w;
+		n_out11p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_in11p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+	}
+
+
+// FloatOp:12
+	float n_out12p0 = n_out9p0 * n_out11p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out4p0.xyz);
+	ALPHA = n_out12p0;
+
+
+}
+"
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/vertex/0/position = Vector2(1160, 140)
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_chm0p")
+nodes/vertex/2/position = Vector2(420, 500)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_olwqe")
+nodes/fragment/2/position = Vector2(-1700, 0)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_chm0p")
+nodes/fragment/3/position = Vector2(-1240, 20)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorParameter_0xohm")
+nodes/fragment/4/position = Vector2(-260, -100)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_olwqe")
+nodes/fragment/5/position = Vector2(-2100, 880)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_chm0p")
+nodes/fragment/6/position = Vector2(-940, 1020)
+nodes/fragment/7/node = SubResource("VisualShaderNodeRemap_0xohm")
+nodes/fragment/7/position = Vector2(-640, 1000)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_v1u4f")
+nodes/fragment/8/position = Vector2(-1640, 1140)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_sayle")
+nodes/fragment/9/position = Vector2(-240, 700)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatParameter_olwqe")
+nodes/fragment/10/position = Vector2(-2280, 1320)
+nodes/fragment/11/node = SubResource("VisualShaderNodeProximityFade_olwqe")
+nodes/fragment/11/position = Vector2(-100, 1140)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFloatOp_chm0p")
+nodes/fragment/12/position = Vector2(80, 720)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 0, 0, 6, 0, 7, 0, 5, 0, 8, 0, 8, 0, 6, 0, 7, 0, 9, 0, 3, 1, 9, 1, 10, 0, 8, 1, 11, 0, 12, 1, 9, 0, 12, 0, 12, 0, 0, 1)
