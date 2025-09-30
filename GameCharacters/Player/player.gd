@@ -2,7 +2,7 @@ extends GameCharacter
 class_name Player
 
 @export var movement_speed:float = 8
-@export var acceleration:float = 20
+@export var acceleration:float = 14
 @export var player_camera:Camera3D
 @export var interact_handler:InteractHandler
 @export var hp_globe: ResourceGlobe = null

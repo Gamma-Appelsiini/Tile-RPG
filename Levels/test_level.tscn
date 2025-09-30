@@ -16,10 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://b0q06sun50bsc" path="res://Tile-RPG/Levels/LevelObjects/roach.tscn" id="14_e3s5j"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
-size = Vector2(5, 5)
+size = Vector2(15, 15)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7j3ou"]
-data = PackedVector3Array(2.5, 0, 2.5, -2.5, 0, 2.5, 2.5, 0, -2.5, -2.5, 0, 2.5, -2.5, 0, -2.5, 2.5, 0, -2.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e3s5j"]
+data = PackedVector3Array(7.5, 0, 7.5, -7.5, 0, 7.5, 7.5, 0, -7.5, -7.5, 0, 7.5, -7.5, 0, -7.5, 7.5, 0, -7.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7j3ou"]
 
@@ -48,7 +48,7 @@ mesh = SubResource("PlaneMesh_a52sh")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_7j3ou")
+shape = SubResource("ConcavePolygonShape3D_e3s5j")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03872, 0)
@@ -118,110 +118,910 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72587, 0, -0.513271)
 script = ExtResource("10_v1d17")
 metadata/_custom_type_script = "uid://chv46rdn2gkni"
 
-[node name="@Node@54901" type="Node" parent="TileManager"]
+[node name="@Node@45669" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -7)
+
+[node name="@Node@45670" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -6)
+
+[node name="@Node@45671" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -5)
+
+[node name="@Node@45672" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -4)
+
+[node name="@Node@45673" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -3)
+
+[node name="@Node@45674" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -2)
+
+[node name="@Node@45675" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, -1)
+
+[node name="@Node@45676" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 0)
+
+[node name="@Node@45677" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 1)
+
+[node name="@Node@45678" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 2)
+
+[node name="@Node@45679" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 3)
+
+[node name="@Node@45680" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 4)
+
+[node name="@Node@45681" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 5)
+
+[node name="@Node@45682" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 6)
+
+[node name="@Node@45683" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-7, 0, 7)
+
+[node name="@Node@45684" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -7)
+
+[node name="@Node@45685" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -6)
+
+[node name="@Node@45686" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -5)
+
+[node name="@Node@45687" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -4)
+
+[node name="@Node@45688" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -3)
+
+[node name="@Node@45689" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -2)
+
+[node name="@Node@45690" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, -1)
+
+[node name="@Node@45691" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 0)
+
+[node name="@Node@45692" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 1)
+
+[node name="@Node@45693" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 2)
+
+[node name="@Node@45694" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 3)
+
+[node name="@Node@45695" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 4)
+
+[node name="@Node@45696" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 5)
+
+[node name="@Node@45697" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 6)
+
+[node name="@Node@45698" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-6, 0, 7)
+
+[node name="@Node@45699" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -7)
+
+[node name="@Node@45700" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -6)
+
+[node name="@Node@45701" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -5)
+
+[node name="@Node@45702" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -4)
+
+[node name="@Node@45703" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -3)
+
+[node name="@Node@45704" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -2)
+
+[node name="@Node@45705" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, -1)
+
+[node name="@Node@45706" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 0)
+
+[node name="@Node@45707" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 1)
+
+[node name="@Node@45708" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 2)
+
+[node name="@Node@45709" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 3)
+
+[node name="@Node@45710" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 4)
+
+[node name="@Node@45711" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 5)
+
+[node name="@Node@45712" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 6)
+
+[node name="@Node@45713" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-5, 0, 7)
+
+[node name="@Node@45714" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -7)
+
+[node name="@Node@45715" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -6)
+
+[node name="@Node@45716" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -5)
+
+[node name="@Node@45717" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -4)
+
+[node name="@Node@45718" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -3)
+
+[node name="@Node@45719" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -2)
+
+[node name="@Node@45720" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, -1)
+
+[node name="@Node@45721" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 0)
+
+[node name="@Node@45722" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 1)
+
+[node name="@Node@45723" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 2)
+
+[node name="@Node@45724" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 3)
+
+[node name="@Node@45725" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 4)
+
+[node name="@Node@45726" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 5)
+
+[node name="@Node@45727" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 6)
+
+[node name="@Node@45728" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-4, 0, 7)
+
+[node name="@Node@45729" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -7)
+
+[node name="@Node@45730" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -6)
+
+[node name="@Node@45731" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -5)
+
+[node name="@Node@45732" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -4)
+
+[node name="@Node@45733" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -3)
+
+[node name="@Node@45734" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -2)
+
+[node name="@Node@45735" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, -1)
+
+[node name="@Node@45736" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 0)
+
+[node name="@Node@45737" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 1)
+
+[node name="@Node@45738" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 2)
+
+[node name="@Node@45739" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 3)
+
+[node name="@Node@45740" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 4)
+
+[node name="@Node@45741" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 5)
+
+[node name="@Node@45742" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 6)
+
+[node name="@Node@45743" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-3, 0, 7)
+
+[node name="@Node@45744" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, -7)
+
+[node name="@Node@45745" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, -6)
+
+[node name="@Node@45746" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, -5)
+
+[node name="@Node@45747" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, -4)
+
+[node name="@Node@45748" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, -3)
+
+[node name="@Node@45749" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-2, 0, -2)
 
-[node name="@Node@54902" type="Node" parent="TileManager"]
+[node name="@Node@45750" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-2, 0, -1)
 
-[node name="@Node@54903" type="Node" parent="TileManager"]
+[node name="@Node@45751" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-2, 0, 0)
 
-[node name="@Node@54904" type="Node" parent="TileManager"]
+[node name="@Node@45752" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-2, 0, 1)
 
-[node name="@Node@54905" type="Node" parent="TileManager"]
+[node name="@Node@45753" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-2, 0, 2)
 
-[node name="@Node@54906" type="Node" parent="TileManager"]
+[node name="@Node@45754" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, 3)
+
+[node name="@Node@45755" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, 4)
+
+[node name="@Node@45756" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, 5)
+
+[node name="@Node@45757" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, 6)
+
+[node name="@Node@45758" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-2, 0, 7)
+
+[node name="@Node@45759" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, -7)
+
+[node name="@Node@45760" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, -6)
+
+[node name="@Node@45761" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, -5)
+
+[node name="@Node@45762" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, -4)
+
+[node name="@Node@45763" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, -3)
+
+[node name="@Node@45764" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-1, 0, -2)
 
-[node name="@Node@54907" type="Node" parent="TileManager"]
+[node name="@Node@45765" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-1, 0, -1)
 
-[node name="@Node@54908" type="Node" parent="TileManager"]
+[node name="@Node@45766" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-1, 0, 0)
 
-[node name="@Node@54909" type="Node" parent="TileManager"]
+[node name="@Node@45767" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-1, 0, 1)
 
-[node name="@Node@54910" type="Node" parent="TileManager"]
+[node name="@Node@45768" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(-1, 0, 2)
 
-[node name="@Node@54911" type="Node" parent="TileManager"]
+[node name="@Node@45769" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, 3)
+
+[node name="@Node@45770" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, 4)
+
+[node name="@Node@45771" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, 5)
+
+[node name="@Node@45772" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, 6)
+
+[node name="@Node@45773" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(-1, 0, 7)
+
+[node name="@Node@45774" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, -7)
+
+[node name="@Node@45775" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, -6)
+
+[node name="@Node@45776" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, -5)
+
+[node name="@Node@45777" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, -4)
+
+[node name="@Node@45778" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, -3)
+
+[node name="@Node@45779" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(0, 0, -2)
 
-[node name="@Node@54912" type="Node" parent="TileManager"]
+[node name="@Node@45780" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(0, 0, -1)
 
-[node name="@Node@54913" type="Node" parent="TileManager"]
+[node name="@Node@45781" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 
-[node name="@Node@54914" type="Node" parent="TileManager"]
+[node name="@Node@45782" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(0, 0, 1)
 
-[node name="@Node@54915" type="Node" parent="TileManager"]
+[node name="@Node@45783" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(0, 0, 2)
 
-[node name="@Node@54916" type="Node" parent="TileManager"]
+[node name="@Node@45784" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, 3)
+
+[node name="@Node@45785" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, 4)
+
+[node name="@Node@45786" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, 5)
+
+[node name="@Node@45787" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, 6)
+
+[node name="@Node@45788" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(0, 0, 7)
+
+[node name="@Node@45789" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, -7)
+
+[node name="@Node@45790" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, -6)
+
+[node name="@Node@45791" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, -5)
+
+[node name="@Node@45792" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, -4)
+
+[node name="@Node@45793" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, -3)
+
+[node name="@Node@45794" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(1, 0, -2)
 
-[node name="@Node@54917" type="Node" parent="TileManager"]
+[node name="@Node@45795" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(1, 0, -1)
 
-[node name="@Node@54918" type="Node" parent="TileManager"]
+[node name="@Node@45796" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(1, 0, 0)
 
-[node name="@Node@54919" type="Node" parent="TileManager"]
+[node name="@Node@45797" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(1, 0, 1)
 
-[node name="@Node@54920" type="Node" parent="TileManager"]
+[node name="@Node@45798" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(1, 0, 2)
 
-[node name="@Node@54921" type="Node" parent="TileManager"]
+[node name="@Node@45799" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, 3)
+
+[node name="@Node@45800" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, 4)
+
+[node name="@Node@45801" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, 5)
+
+[node name="@Node@45802" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, 6)
+
+[node name="@Node@45803" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(1, 0, 7)
+
+[node name="@Node@45804" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, -7)
+
+[node name="@Node@45805" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, -6)
+
+[node name="@Node@45806" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, -5)
+
+[node name="@Node@45807" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, -4)
+
+[node name="@Node@45808" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, -3)
+
+[node name="@Node@45809" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(2, 0, -2)
 
-[node name="@Node@54922" type="Node" parent="TileManager"]
+[node name="@Node@45810" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(2, 0, -1)
 
-[node name="@Node@54923" type="Node" parent="TileManager"]
+[node name="@Node@45811" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(2, 0, 0)
 
-[node name="@Node@54924" type="Node" parent="TileManager"]
+[node name="@Node@45812" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(2, 0, 1)
 
-[node name="@Node@54925" type="Node" parent="TileManager"]
+[node name="@Node@45813" type="Node" parent="TileManager"]
 script = ExtResource("11_hwmq8")
 global_position = Vector3(2, 0, 2)
 
+[node name="@Node@45814" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, 3)
+
+[node name="@Node@45815" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, 4)
+
+[node name="@Node@45816" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, 5)
+
+[node name="@Node@45817" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, 6)
+
+[node name="@Node@45818" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(2, 0, 7)
+
+[node name="@Node@45819" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -7)
+
+[node name="@Node@45820" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -6)
+
+[node name="@Node@45821" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -5)
+
+[node name="@Node@45822" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -4)
+
+[node name="@Node@45823" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -3)
+
+[node name="@Node@45824" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -2)
+
+[node name="@Node@45825" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, -1)
+
+[node name="@Node@45826" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 0)
+
+[node name="@Node@45827" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 1)
+
+[node name="@Node@45828" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 2)
+
+[node name="@Node@45829" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 3)
+
+[node name="@Node@45830" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 4)
+
+[node name="@Node@45831" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 5)
+
+[node name="@Node@45832" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 6)
+
+[node name="@Node@45833" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(3, 0, 7)
+
+[node name="@Node@45834" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -7)
+
+[node name="@Node@45835" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -6)
+
+[node name="@Node@45836" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -5)
+
+[node name="@Node@45837" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -4)
+
+[node name="@Node@45838" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -3)
+
+[node name="@Node@45839" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -2)
+
+[node name="@Node@45840" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, -1)
+
+[node name="@Node@45841" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 0)
+
+[node name="@Node@45842" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 1)
+
+[node name="@Node@45843" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 2)
+
+[node name="@Node@45844" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 3)
+
+[node name="@Node@45845" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 4)
+
+[node name="@Node@45846" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 5)
+
+[node name="@Node@45847" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 6)
+
+[node name="@Node@45848" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(4, 0, 7)
+
+[node name="@Node@45849" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -7)
+
+[node name="@Node@45850" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -6)
+
+[node name="@Node@45851" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -5)
+
+[node name="@Node@45852" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -4)
+
+[node name="@Node@45853" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -3)
+
+[node name="@Node@45854" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -2)
+
+[node name="@Node@45855" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, -1)
+
+[node name="@Node@45856" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 0)
+
+[node name="@Node@45857" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 1)
+
+[node name="@Node@45858" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 2)
+
+[node name="@Node@45859" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 3)
+
+[node name="@Node@45860" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 4)
+
+[node name="@Node@45861" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 5)
+
+[node name="@Node@45862" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 6)
+
+[node name="@Node@45863" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(5, 0, 7)
+
+[node name="@Node@45864" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -7)
+
+[node name="@Node@45865" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -6)
+
+[node name="@Node@45866" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -5)
+
+[node name="@Node@45867" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -4)
+
+[node name="@Node@45868" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -3)
+
+[node name="@Node@45869" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -2)
+
+[node name="@Node@45870" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, -1)
+
+[node name="@Node@45871" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 0)
+
+[node name="@Node@45872" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 1)
+
+[node name="@Node@45873" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 2)
+
+[node name="@Node@45874" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 3)
+
+[node name="@Node@45875" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 4)
+
+[node name="@Node@45876" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 5)
+
+[node name="@Node@45877" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 6)
+
+[node name="@Node@45878" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(6, 0, 7)
+
+[node name="@Node@45879" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -7)
+
+[node name="@Node@45880" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -6)
+
+[node name="@Node@45881" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -5)
+
+[node name="@Node@45882" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -4)
+
+[node name="@Node@45883" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -3)
+
+[node name="@Node@45884" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -2)
+
+[node name="@Node@45885" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, -1)
+
+[node name="@Node@45886" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 0)
+
+[node name="@Node@45887" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 1)
+
+[node name="@Node@45888" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 2)
+
+[node name="@Node@45889" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 3)
+
+[node name="@Node@45890" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 4)
+
+[node name="@Node@45891" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 5)
+
+[node name="@Node@45892" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 6)
+
+[node name="@Node@45893" type="Node" parent="TileManager"]
+script = ExtResource("11_hwmq8")
+global_position = Vector3(7, 0, 7)
+
 [node name="Start" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.0874663, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.0874663, -7)
 
 [node name="End" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.0874663, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.0874663, 7)
 
 [node name="TileCreator" type="Node" parent="." node_paths=PackedStringArray("tile_manager", "start_node", "end_node")]
 script = ExtResource("11_1m872")
