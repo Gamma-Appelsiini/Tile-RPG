@@ -7,6 +7,7 @@ class_name LootContainer
 @export var container_name:String = "Chest"
 @export var container_image:Texture2D = null
 @export var animation_player:AnimationPlayer = null
+@export var loot_beam:LootBeam = null
 
 const OPEN_ANIM_NAME:String = "Open"
 const CLOSE_ANIM_NAME:String = "Close"
@@ -18,8 +19,10 @@ var generated:bool = false
 func interact() -> void:
 	interact_area.monitoring = false
 	_generate_loot()
+	set_highest_rarity()
 	GlobalSignals.close_container.connect(_close_container)
 	
+	loot_beam.show_beam()
 	if animation_player:
 		animation_player.play(OPEN_ANIM_NAME)
 		await animation_player.animation_finished
@@ -29,6 +32,7 @@ func _close_container(lootC:LootContainer) -> void:
 	if lootC != self: return
 	GlobalSignals.close_container.disconnect(_close_container)
 	
+	loot_beam.hide_beam()
 	if animation_player:
 		animation_player.play(CLOSE_ANIM_NAME)
 		await animation_player.animation_finished
@@ -45,8 +49,21 @@ func _generate_loot() -> void:
 		var loot_type:ItemGenerator.LOOT_TYPE = items_to_generate[rarity]
 		items.push_back(ItemGenerator.get_equipment(loot_type,chest_lvl,max_tier,rarity))
 
+func set_highest_rarity() -> void:
+	if len(items) == 0:
+		loot_beam.hide_beam()
+		return
+	var highest_rarity:Item.ItemRarity = items[0].item_rarity
+	
+	for item:Item in items:
+		if item.item_rarity > highest_rarity: highest_rarity = item.item_rarity
+	
+	loot_beam.set_rarity(highest_rarity)
+	loot_beam.show_beam()
+
 func add_item(item:Item) -> bool:
 	if len(items) >= CONTAINER_SIZE: return false
+	if items.has(item): return false
 	items.push_back(item)
 	return true
 

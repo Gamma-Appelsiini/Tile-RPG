@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciibj20uwiqwu"]
+[gd_scene load_steps=8 format=3 uid="uid://ciibj20uwiqwu"]
 
 [ext_resource type="Script" uid="uid://bm3xstpfnu02l" path="res://Tile-RPG/Interactables/chest.gd" id="1_vugoh"]
 [ext_resource type="Texture2D" uid="uid://cnjp47v04w6lp" path="res://Tile-RPG/Images/Icons/Chest.png" id="2_lcgj3"]
 [ext_resource type="PackedScene" uid="uid://b7atv28wtwkd3" path="res://Tile-RPG/Models/Interactables/new_chest.glb" id="2_pipw1"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/outline_handler.gd" id="4_15uek"]
+[ext_resource type="PackedScene" uid="uid://cmgb3ivkgrbqb" path="res://Tile-RPG/Effects/loot_beam/loot_beam.tscn" id="5_evfjl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vugoh"]
 size = Vector3(0.499878, 0.346558, 0.462891)
@@ -11,10 +12,11 @@ size = Vector3(0.499878, 0.346558, 0.462891)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pipw1"]
 size = Vector3(0.5, 0.423828, 0.351318)
 
-[node name="Chest" type="Node3D" node_paths=PackedStringArray("animation_player", "interact_area", "indicator_place")]
+[node name="Chest" type="Node3D" node_paths=PackedStringArray("animation_player", "loot_beam", "interact_area", "indicator_place")]
 script = ExtResource("1_vugoh")
 container_image = ExtResource("2_lcgj3")
 animation_player = NodePath("new_chest/AnimationPlayer")
+loot_beam = NodePath("LootBeam")
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("IndicatorPlace")
 interact_text = "Open"
@@ -42,10 +44,10 @@ shape = SubResource("BoxShape3D_pipw1")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="Skeleton3D" parent="new_chest/Armature" index="0"]
-bones/0/rotation = Quaternion(0.733722, -1.61995e-07, -1.74935e-07, 0.67945)
+bones/0/rotation = Quaternion(0.7337221, -1.6199483e-07, -1.7493456e-07, 0.67944974)
 
 [node name="Bot" parent="new_chest/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 4.8601123e-12, 4.7108983e-12, 3.3821834e-12, 1, 1.2591481e-06, -4.0998316e-12, 7.4505806e-08, 1.0000001, -3.6948222e-13, 5.9604645e-07, 2.3841858e-07)
+transform = Transform3D(1, 4.121148e-12, 4.1637804e-12, 4.1495696e-12, 1.0000001, 6.631017e-07, -3.5313974e-12, 6.7055225e-07, 1.0000002, 2.842171e-14, 5.9604645e-08, -2.9802322e-07)
 
 [node name="Lid" parent="new_chest/Armature/Skeleton3D" index="1"]
 transform = Transform3D(1, 4.8316906e-12, -6.5227823e-12, 6.366463e-12, 1.0000001, -1.1026859e-06, 4.703793e-12, -8.791685e-07, 0.9999998, 5.684342e-14, 5.9604645e-08, -8.940697e-07)
@@ -54,5 +56,8 @@ transform = Transform3D(1, 4.8316906e-12, -6.5227823e-12, 6.366463e-12, 1.000000
 script = ExtResource("4_15uek")
 mesh_to_outline = NodePath("../new_chest/Armature/Skeleton3D/Lid/Lid")
 metadata/_custom_type_script = "uid://g6rood38j5ok"
+
+[node name="LootBeam" parent="." instance=ExtResource("5_evfjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10354106, 0)
 
 [editable path="new_chest"]

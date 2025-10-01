@@ -9,8 +9,8 @@ enum ItemRarity {
 	RARE,
 	EPIC,
 	LEGENDARY,
-	FABLED,
 	GOD_ROLL,
+	FABLED,
 	RANDOM
 }
 

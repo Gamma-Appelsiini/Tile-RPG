@@ -37,10 +37,13 @@ func _add_slots() -> void:
 		inv_slots.push_back(new_slot)
 
 func _item_added_to_inv(new_item:Item) -> void:
-	if loot_container.items.has(new_item): loot_container.remove_item(new_item)
+	if loot_container.items.has(new_item):
+		loot_container.remove_item(new_item)
+		loot_container.set_highest_rarity()
 
 func _item_added_to_container(new_item:Item) -> void:
 	loot_container.add_item(new_item)
+	loot_container.set_highest_rarity()
 
 func add_container(container:LootContainer) -> void:
 	loot_container = container

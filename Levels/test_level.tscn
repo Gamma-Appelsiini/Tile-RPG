@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=19 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="Material" uid="uid://4uxg3v0dshat" path="res://Tile-RPG/Levels/path_visual_material.tres" id="2_7gm5c"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="11_1m872"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="11_hwmq8"]
 [ext_resource type="PackedScene" uid="uid://b0q06sun50bsc" path="res://Tile-RPG/Levels/LevelObjects/roach.tscn" id="14_e3s5j"]
-[ext_resource type="PackedScene" uid="uid://cmgb3ivkgrbqb" path="res://Tile-RPG/Effects/loot_beam/loot_beam.tscn" id="15_ymqdu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
 size = Vector2(15, 15)
@@ -1033,8 +1032,5 @@ metadata/_custom_type_script = "uid://bp36ikilmc15g"
 
 [node name="Roach" parent="." instance=ExtResource("14_e3s5j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
-
-[node name="LootBeam" parent="." instance=ExtResource("15_ymqdu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41585964, 0.94369555, 2.7036314)
 
 [editable path="Interactables/DialogueInteractable"]
