@@ -18,10 +18,6 @@ var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
 
-#func _ready() -> void:
-	#_add_inv_slots()
-	#_add_equipment_slots()
-
 func set_player(new_player:Player) -> void:
 	player = new_player
 	_add_inv_slots()
@@ -127,10 +123,13 @@ func remove_slot(slot_to_remove:InventorySlot) -> void:
 	slot_to_remove.mouse_entered.disconnect(_slot_hovered)
 	
 func add_item_to_inv(new_item:Item) -> bool:
-	for i:int in INV_SIZE:
-		if slots[i].item_in_slot != null or slots[i].equipment_slot: continue
-		
-		slots[i].set_item(new_item)
+	if new_item == null:
+		print("ERROR TRYING TO ADD NULL ITEM TO INV")
+		return false
+
+	for slot:InventorySlot in slots:
+		if slot.item_in_slot != null or slot.equipment_slot or slot.array_pos >= INV_SIZE: continue
+		slot.set_item(new_item)
 		_create_item_tt(new_item)
 		
 		if not new_item.remake_tt.is_connected(_remake_tt.bind(new_item)):

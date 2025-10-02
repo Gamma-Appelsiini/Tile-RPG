@@ -38,6 +38,7 @@ func set_volume(audio_type:AUDIO_TYPE, amount:float) -> void:
 	volumes[audio_type] = amount
 
 func play_audio(new_stream:AudioStream, audio_type:AUDIO_TYPE, pos:Vector3 = Vector3.INF) -> void:
+	if new_stream == null: return
 	if pos != Vector3.INF:
 		_play_3d_audio(new_stream,audio_type,pos)
 		return

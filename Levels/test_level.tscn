@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=17 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
-[ext_resource type="Material" uid="uid://4uxg3v0dshat" path="res://Tile-RPG/Levels/path_visual_material.tres" id="2_7gm5c"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_dk6lg"]
@@ -18,15 +17,10 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_a52sh"]
 size = Vector2(15, 15)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e3s5j"]
-data = PackedVector3Array(7.5, 0, 7.5, -7.5, 0, 7.5, 7.5, 0, -7.5, -7.5, 0, 7.5, -7.5, 0, -7.5, 7.5, 0, -7.5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ymqdu"]
+size = Vector3(15, 0.5, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7j3ou"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_686us"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.2
 
 [node name="TestLevel" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "tile_manager", "player_spawn_positions")]
 script = ExtResource("1_hnyhx")
@@ -48,7 +42,8 @@ mesh = SubResource("PlaneMesh_a52sh")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_e3s5j")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_ymqdu")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03872, 0)
@@ -59,11 +54,6 @@ omni_range = 27.243
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.0776)
 mesh = SubResource("BoxMesh_7j3ou")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.89966, 0, -0.0629866)
-material_override = ExtResource("2_7gm5c")
-mesh = SubResource("CylinderMesh_686us")
 
 [node name="TestInteract" parent="." instance=ExtResource("2_686us")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.38504, -9.53674e-07, 1.4866)

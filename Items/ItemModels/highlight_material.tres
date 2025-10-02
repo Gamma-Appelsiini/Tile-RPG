@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c5lpnu7c74uau"]
+
+[ext_resource type="Shader" uid="uid://badynhwxq2uhv" path="res://Tile-RPG/Shaders/highlight_shader.gdshader" id="1_rfhuo"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rfhuo")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 1.200000057
+shader_parameter/shine_width = 0.1200000057
+shader_parameter/cycle_interval = 3.0000001425
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 1.0
+shader_parameter/y_direction = 1.0
+shader_parameter/z_direction = 1.0

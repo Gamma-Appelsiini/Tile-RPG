@@ -1,9 +1,12 @@
 extends Node3D
 class_name LootBeam
 
+signal beam_hidden
+
 @export var beam_mesh:MeshInstance3D = null
 @export var scale_node:Node3D = null
 @export var particles:GPUParticles3D = null
+@export var trails:GPUParticles3D = null
 
 const START_SCALE:Vector3 = Vector3(0.01,0.01,0.01)
 var end_scale:Vector3 = Vector3.ZERO
@@ -47,6 +50,7 @@ func _ready() -> void:
 	self.visible = false
 	scale_node.scale = START_SCALE
 	particles.emitting = false
+	trails.emitting = false
 
 func set_rarity(new_rarity:Item.ItemRarity) -> void:
 	beam_mesh.material_override = MATERIALS[new_rarity]
@@ -54,6 +58,7 @@ func set_rarity(new_rarity:Item.ItemRarity) -> void:
 	particles.amount = PARTICLE_AMOUNTS[new_rarity]
 	var material:ParticleProcessMaterial = particles.process_material
 	material.color = PARTICLE_COLORS[new_rarity]
+	_handle_trails(new_rarity)
 	
 	if visible:
 		var tween:Tween = create_tween()
@@ -73,3 +78,15 @@ func hide_beam() -> void:
 	tween.tween_property(scale_node, "scale", START_SCALE, 0.4).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	self.visible = false
+	beam_hidden.emit()
+
+func _handle_trails(new_rarity:Item.ItemRarity) -> void:
+	if Item.ItemRarity.RARE > new_rarity:
+		trails.emitting = false
+		return
+	
+	trails.amount = new_rarity - 1
+	var material:ParticleProcessMaterial = trails.process_material
+	material.color = PARTICLE_COLORS[new_rarity]
+	
+	trails.emitting = true

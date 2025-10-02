@@ -37,7 +37,6 @@ func interact() -> void:
 	
 	var tween:Tween = create_tween()
 	tween.tween_property(pivot,"rotation",pivot.rotation +Vector3(0, door_rotation, 0), OPEN_TIME).set_ease(Tween.EASE_OUT)
-	audio_player_3d.play()
 	
 	await tween.finished
 	interaction_enabled = true

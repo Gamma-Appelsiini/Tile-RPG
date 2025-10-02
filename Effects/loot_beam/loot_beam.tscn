@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmgb3ivkgrbqb"]
+[gd_scene load_steps=20 format=3 uid="uid://cmgb3ivkgrbqb"]
 
 [ext_resource type="Script" uid="uid://csu44veh5dh1o" path="res://Tile-RPG/Effects/loot_beam/loot_beam.gd" id="1_he7j1"]
 [ext_resource type="Material" uid="uid://d3hkbqtmyt8vh" path="res://Tile-RPG/Effects/loot_beam/poor_material.tres" id="2_tkhf4"]
 [ext_resource type="Texture2D" uid="uid://cwfrpx7wl2hfd" path="res://Tile-RPG/Images/Shaders/T_VFX_Flare_251.jpg" id="3_tkhf4"]
+[ext_resource type="Texture2D" uid="uid://dl1if4cb3s0rk" path="res://Tile-RPG/Images/Shaders/trail.png" id="4_m83cw"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_73dit"]
 size = Vector2(0.9, 1)
@@ -42,21 +43,83 @@ color = Color(1.587139, 1.5253057, 0.53294206, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_vvhlp"]
 
-[node name="LootBeam" type="Node3D" node_paths=PackedStringArray("beam_mesh", "scale_node", "particles")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_roa3g"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("4_m83cw")
+use_particle_trails = true
+
+[sub_resource type="Curve" id="Curve_wt17w"]
+_data = [Vector2(0, 0), 0.0, 0.0142212175, 0, 0, Vector2(0.23409091, 0.96820647), 0.9375432, 0.9375432, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qo4ek"]
+texture_mode = 1
+curve = SubResource("Curve_wt17w")
+
+[sub_resource type="Curve" id="Curve_vvhlp"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_3duhh"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5kkyl"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6hprr"]
+curve_x = SubResource("Curve_vvhlp")
+curve_y = SubResource("Curve_3duhh")
+curve_z = SubResource("Curve_5kkyl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x0grx"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.2
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.39999998
+orbit_velocity_min = 0.60000014
+orbit_velocity_max = 1.3000002
+orbit_velocity_curve = SubResource("CurveXYZTexture_6hprr")
+gravity = Vector3(0, 0, 0)
+color = Color(1.4858685, 1.3733742, 0.70160013, 1)
+alpha_curve = SubResource("CurveTexture_qo4ek")
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_3ojj7"]
+shape = 0
+size = 0.08
+section_segments = 4
+
+[node name="LootBeam" type="Node3D" node_paths=PackedStringArray("beam_mesh", "scale_node", "particles", "trails")]
 script = ExtResource("1_he7j1")
 beam_mesh = NodePath("ScaleNode/BeamMesh")
 scale_node = NodePath("ScaleNode")
-particles = NodePath("ScaleNode/GPUParticles3D")
+particles = NodePath("ScaleNode/Particles")
+trails = NodePath("ScaleNode/Trails")
 
 [node name="ScaleNode" type="Node3D" parent="."]
 
 [node name="BeamMesh" type="MeshInstance3D" parent="ScaleNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30532837, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24577057, 0)
 material_override = ExtResource("2_tkhf4")
 mesh = SubResource("QuadMesh_73dit")
 skeleton = NodePath("../..")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="ScaleNode"]
+[node name="Particles" type="GPUParticles3D" parent="ScaleNode"]
 material_override = SubResource("StandardMaterial3D_m83cw")
 emitting = false
 amount = 3
@@ -64,3 +127,14 @@ lifetime = 2.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_qo4ek")
 draw_pass_1 = SubResource("QuadMesh_vvhlp")
+
+[node name="Trails" type="GPUParticles3D" parent="ScaleNode"]
+material_override = SubResource("StandardMaterial3D_roa3g")
+amount = 2
+lifetime = 2.0
+preprocess = 0.1
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_x0grx")
+draw_pass_1 = SubResource("RibbonTrailMesh_3ojj7")

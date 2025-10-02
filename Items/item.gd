@@ -18,6 +18,7 @@ enum ItemRarity {
 @export var inventory_image:Texture2D = load("res://Tile-RPG/Images/Items/Sword.png")
 @export var item_value:int = 1
 @export var item_rarity:ItemRarity = ItemRarity.POOR
+@export var item_model_path:String = ""
 
 func _init() -> void:
 	resource_local_to_scene = true

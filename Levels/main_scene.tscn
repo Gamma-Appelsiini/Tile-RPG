@@ -18,7 +18,7 @@ globe_ui = NodePath("../UIHandler/GlobeUI")
 ui_handler = NodePath("../UIHandler")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
-[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window")]
+[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window") groups=["UI"]]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -46,7 +46,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="Inventory" parent="UIHandler" groups=["Inventory"] instance=ExtResource("4_muwej")]
+[node name="Inventory" parent="UIHandler" instance=ExtResource("4_muwej")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

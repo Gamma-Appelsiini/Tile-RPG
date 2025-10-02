@@ -7,7 +7,6 @@ class_name Interactable
 @export var interact_sound: AudioStream = null
 @export var interact_text: String = "Interact"
 @export var oneshot:bool = false
-@export var audio_player_3d: AudioStreamPlayer3D
 @export var face_interactable:bool = false
 @export var block_tiles:bool = false
 
@@ -22,7 +21,6 @@ func _ready() -> void:
 func _on_creation() -> void:
 	#Set to scan GameCharacters
 	interact_area.set_collision_mask_value(4,true)
-	if audio_player_3d: audio_player_3d.stream = interact_sound
 	interact_text = "(" + get_input_string("Interact") + ") " + interact_text
 	#TODO sub to signal when keybinds changed
 	interact_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
