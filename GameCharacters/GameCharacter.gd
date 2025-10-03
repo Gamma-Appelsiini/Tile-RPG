@@ -3,6 +3,7 @@ class_name GameCharacter
 
 signal move_complete
 signal rotation_complete
+signal died
 
 @export var unique_id:String = ""
 @export var display_name:String = "Default Name"

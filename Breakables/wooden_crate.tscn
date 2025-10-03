@@ -5,7 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://dg5ljqvsx0gbw" path="res://Tile-RPG/Sounds/interact.wav" id="2_a373q"]
 [ext_resource type="Script" uid="uid://dx6urqvsbtxd7" path="res://Tile-RPG/Breakables/fragment.gd" id="4_a12ou"]
 [ext_resource type="Shader" uid="uid://cob6fqoifkxfi" path="res://Tile-RPG/Shaders/dissolve_shader.gdshader" id="5_08j1d"]
-[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/outline_handler.gd" id="6_08j1d"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="6_08j1d"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njgu6"]
 resource_name = "Wood"

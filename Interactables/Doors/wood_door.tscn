@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dhbk2lg2t2ydq" path="res://Tile-RPG/Interactables/Doors/Door.gd" id="1_a60df"]
 [ext_resource type="ArrayMesh" uid="uid://u8fwn3bcjjwh" path="res://Tile-RPG/Interactables/Doors/wood_door.res" id="2_we8qq"]
-[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/outline_handler.gd" id="3_we8qq"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="3_we8qq"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_juyni"]
 size = Vector3(1, 2, 0.102539)

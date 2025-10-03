@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cinmwl8lufsce"]
+
+[ext_resource type="Shader" uid="uid://c5n807eo1ir3m" path="res://Tile-RPG/Shaders/ball_shader.gdshader" id="1_p3ypr"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_p3ypr")
+shader_parameter/baseColor = Color(0.22190198, 0.22190201, 0.2219019, 1)
+shader_parameter/gradientBasis = Vector3(3, 3, 3)
+shader_parameter/gradientBasisDistort = Vector3(1, 0, 0)
+shader_parameter/gradientBasisSpeed = 0.5
+shader_parameter/refractionSplit = 1.0
+shader_parameter/refractionSplitPower = 0.00999999977648
+shader_parameter/refractionAffect = 0.4

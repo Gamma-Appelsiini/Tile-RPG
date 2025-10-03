@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bm3xstpfnu02l" path="res://Tile-RPG/Interactables/chest.gd" id="1_vugoh"]
 [ext_resource type="Texture2D" uid="uid://cnjp47v04w6lp" path="res://Tile-RPG/Images/Icons/Chest.png" id="2_lcgj3"]
 [ext_resource type="PackedScene" uid="uid://b7atv28wtwkd3" path="res://Tile-RPG/Models/Interactables/new_chest.glb" id="2_pipw1"]
-[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/outline_handler.gd" id="4_15uek"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="4_15uek"]
 [ext_resource type="PackedScene" uid="uid://cmgb3ivkgrbqb" path="res://Tile-RPG/Effects/loot_beam/loot_beam.tscn" id="5_evfjl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vugoh"]

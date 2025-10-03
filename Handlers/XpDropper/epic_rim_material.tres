@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://13rok4y1hvvo"]
+
+[ext_resource type="Shader" uid="uid://bb8rb8x4hb8dv" path="res://Tile-RPG/Shaders/xp_orb_shader.gdshader" id="1_rxbxw"]
+
+[sub_resource type="Gradient" id="Gradient_wcoly"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.29761904, 0.68095237, 0.99761903)
+colors = PackedColorArray(0.7490196, 0.003921569, 0.99215686, 1, 0.71920115, 0.5969512, 0, 1, 0.99999994, 0.19467342, 0.30385357, 1, 0.7490513, 0.0030241513, 0.99319583, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5kfjl"]
+gradient = SubResource("Gradient_wcoly")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rxbxw")
+shader_parameter/fresnel_power = 2.72500012617762
+shader_parameter/emission_power = 5.4040002534301195
+shader_parameter/white_lerp = 0.0
+shader_parameter/scroll_speed = 2.0
+shader_parameter/colors_texture = SubResource("GradientTexture1D_5kfjl")
