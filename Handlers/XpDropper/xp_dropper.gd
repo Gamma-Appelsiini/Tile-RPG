@@ -5,7 +5,7 @@ class_name XpDropper
 @export var dropping_character:GameCharacter = null
 
 const ORB_SCENE:PackedScene = preload("res://Tile-RPG/Handlers/XpDropper/xp_orb.tscn")
-const EXPLOSION_SPEED:float = 12
+const EXPLOSION_SPEED:float = 6
 
 var globes_amounts:Dictionary[int,int] = {}
 
@@ -19,15 +19,16 @@ func _drop_xp() -> void:
 
 func _create_globes() -> void:
 	for xp_orb in globes_amounts:
-		var i = globes_amounts[xp_orb]
+		var i:int = globes_amounts[xp_orb]
 		while i > 0:
 			_create_globe(xp_orb)
 			i -= 1
 
 func _create_globe(type:int) -> void:
 	var new_orb:XpOrb = ORB_SCENE.instantiate()
-	add_child(new_orb)
-	var player:Player = null
+	dropping_character.add_child(new_orb)
+	
+	var player:Player = GlobalSignals.player
 	new_orb.set_params(type,player)
 	_spawn_offset(new_orb)
 	apply_force(new_orb)
@@ -38,21 +39,21 @@ func _set_dropper() -> void:
 		dropping_character = get_parent() as GameCharacter
 
 func _divide()-> void:
-	globes_amounts[50] = xp_amount / 50
+	globes_amounts[50] = int(xp_amount / 50.0)
 	var remaining:int = xp_amount % 50
 	
-	globes_amounts[25] = remaining / 25
+	globes_amounts[25] = int(remaining / 25.0)
 	remaining = remaining % 25
 	
-	globes_amounts[10] = remaining / 10
+	globes_amounts[10] = int(remaining / 10.0)
 	remaining = remaining % 10
 	
 	globes_amounts[1] = remaining
 
-
 func _spawn_offset(orb:XpOrb)-> void:
+	orb.global_position += Vector3(0,1,0)
 	orb.global_position += Vector3(randf_range(-0.2,0.2),randf_range(0.05,0.2),randf_range(-0.2,0.2))
 
 func apply_force(orb:XpOrb)-> void:
-	var vel:Vector3 = (orb.global_transform.origin - self.global_transform.origin) * EXPLOSION_SPEED
+	var vel:Vector3 = (orb.global_transform.origin - dropping_character.global_transform.origin) * EXPLOSION_SPEED
 	orb.linear_velocity = vel

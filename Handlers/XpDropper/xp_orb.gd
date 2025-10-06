@@ -29,13 +29,13 @@ const ORB_RIMS:Dictionary[int, ShaderMaterial] = {
 	1: COMMON_RIM_MATERIAL}
 
 const ORB_SIZES:Dictionary[int,float] ={
-	50: 2,
-	25: 1.5,
-	10: 1,
-	1: 0.5}
+	50: 3,
+	25: 2,
+	10: 1.5,
+	1: 1}
 
-var moving:bool = false
-var target:Node3D = null
+var xp_amount:int = 0
+var target:GameCharacter = null
 var timer:Timer = null
 
 var _bezier_t: float = 0.0
@@ -45,6 +45,7 @@ var _bezier_control: Vector3 = Vector3(0,0,0)
 var _bezier_end: Vector3 = Vector3(0,0,0)
 
 func _ready() -> void:
+	set_process(false)
 	top_level = true
 	timer = Timer.new()
 	add_child(timer)
@@ -53,8 +54,12 @@ func _ready() -> void:
 	timer.timeout.connect(_move_to_target)
 	timer.start()
 
-func set_params(orb_size:int, target_node:Node3D):	
-	target = target_node
+func _process(delta: float) -> void:
+	_move_with_curve(delta)
+
+func set_params(orb_size:int, target_char:GameCharacter):
+	xp_amount = orb_size
+	target = target_char
 	collision_shape.scale = Vector3(ORB_SIZES[orb_size],ORB_SIZES[orb_size],ORB_SIZES[orb_size])
 	ball_mesh.scale = Vector3(ORB_SIZES[orb_size],ORB_SIZES[orb_size],ORB_SIZES[orb_size])
 
@@ -63,19 +68,20 @@ func set_params(orb_size:int, target_node:Node3D):
 
 func disappear():
 	GlobalSignals.play_audio.emit(xp_pick_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
+	target.stat_handler.add_xp(xp_amount)
 	_tween_orb()
 
 func _move_to_target(target_node:Node3D = target)-> void:
+	set_process(true)
 	collision_shape.disabled = true
 	self.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 	freeze_mode = FREEZE_MODE_STATIC
 	freeze = true
 	target = target_node
-	moving = true
 	
 	_bezier_t = 0.0
 	_bezier_start = global_position
-	_bezier_end = target.global_position
+	_bezier_end = target.global_position + Vector3(0,1.5,0)
 
 	var random_offset:Vector3 = Vector3(randf() - 0.5, randf() * 0.5, randf() - 0.5).normalized() * 2.0
 	_bezier_control = (_bezier_start + _bezier_end) * 0.5 + random_offset
@@ -87,7 +93,7 @@ func _move_with_curve(delta: float) -> void:
 	global_position = _quadratic_bezier(_bezier_start, _bezier_control, _bezier_end, t)
 
 	if t >= 1.0:
-		moving = false
+		set_process(false)
 		disappear()
 
 func _quadratic_bezier(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:

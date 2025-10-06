@@ -5,7 +5,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_v81e4")
-shader_parameter/baseColor = Color(0.47918248, 0.47918284, 0.47918278, 1)
+shader_parameter/baseColor = Color(0.20999773, 0.5254341, 0.93792754, 1)
 shader_parameter/gradientBasis = Vector3(3, 3, 3)
 shader_parameter/gradientBasisDistort = Vector3(0, 0, 0)
 shader_parameter/gradientBasisSpeed = 1.0

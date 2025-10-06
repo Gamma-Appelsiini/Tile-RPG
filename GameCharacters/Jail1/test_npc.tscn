@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ba5woaetqefuy"]
+[gd_scene load_steps=9 format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
 [ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_ms4ik"]
+[ext_resource type="Script" uid="uid://cfaw7c8b3dbes" path="res://Tile-RPG/Handlers/XpDropper/xp_dropper.gd" id="4_ms4ik"]
 [ext_resource type="Script" uid="uid://dq5x88665dpbq" path="res://Tile-RPG/GameCharacters/follow_handler.gd" id="5_yvq5j"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ouqyu"]
@@ -50,3 +51,8 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_8w85h")
+
+[node name="XpDropper" type="Node3D" parent="."]
+script = ExtResource("4_ms4ik")
+xp_amount = 4
+metadata/_custom_type_script = "uid://cfaw7c8b3dbes"

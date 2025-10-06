@@ -1,5 +1,7 @@
 extends Node
 
+var player:Player = null
+
 signal change_level(new_level:Level)
 signal show_container(new_container:LootContainer)
 signal close_container(new_container:LootContainer)

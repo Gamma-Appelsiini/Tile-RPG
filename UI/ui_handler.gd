@@ -13,6 +13,7 @@ func _input(event: InputEvent) -> void:
 		inventory.visible = !inventory.visible
 
 func set_player(player:Player) -> void:
+	GlobalSignals.player = player
 	inventory.set_player(player)
 	dialogue_window.set_player(player)
 	stat_window.set_game_character(player)

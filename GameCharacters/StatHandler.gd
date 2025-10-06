@@ -78,6 +78,9 @@ func level_up() -> void:
 	leveled_up.emit()
 	stats_changed.emit()
 	
+	if char_stats[Stats.CharStat.CURRENT_XP] >= char_stats[Stats.CharStat.MAX_XP]:
+		level_up()
+	
 func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 	main_stats[main_stat] += amount
 	#Might = armor, physical dmg, crit dmg

@@ -44,12 +44,10 @@ func _load_inv() -> void:
 	inventory.load_inv_from_data(save_data)
 
 func _load_player() -> void:
-	print("load player")
 	player = load(PLAYER_PATH).instantiate()
 	player.load_from_data(save_data)
 	
 	ui_handler.set_player(player)
-	print("set player")
 	_connect_globes()
 
 func _connect_globes() -> void:

@@ -5,7 +5,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_p3ypr")
-shader_parameter/baseColor = Color(0.22190198, 0.22190201, 0.2219019, 1)
+shader_parameter/baseColor = Color(0.16077025, 0.75815254, 0.23046495, 1)
 shader_parameter/gradientBasis = Vector3(3, 3, 3)
 shader_parameter/gradientBasisDistort = Vector3(1, 0, 0)
 shader_parameter/gradientBasisSpeed = 0.5
