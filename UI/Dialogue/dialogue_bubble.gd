@@ -45,7 +45,7 @@ func _change_continue_pic() -> void:
 	continue_rect.texture = CROSS
 
 func _process(_delta: float) -> void:
-	var screen_position = game_camera.unproject_position(position_node.global_transform.origin)
+	var screen_position:Vector2 = game_camera.unproject_position(position_node.global_transform.origin)
 	self.global_position = screen_position
 
 func show_dialogue(new_dialogue:DialogueResource) -> void:

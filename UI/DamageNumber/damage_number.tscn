@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dac2s2r20qif4"]
+
+[ext_resource type="Script" uid="uid://d3nciah8aj1oh" path="res://Tile-RPG/UI/DamageNumber/damage_number.gd" id="1_qab1v"]
+[ext_resource type="FontFile" uid="uid://d0yoohyaar2bi" path="res://Tile-RPG/Fonts/GoogleFonts/CinzelDecorative-Bold.ttf" id="2_dqu6n"]
+[ext_resource type="Shader" uid="uid://kn40q3r6vb31" path="res://Tile-RPG/Shaders/damage_number_shader.gdshader" id="3_ohw5c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fljb1"]
+shader = ExtResource("3_ohw5c")
+shader_parameter/Line_Smoothness = 0.10000000149012
+shader_parameter/Line_Width = 0.1250000059375
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = -22.1429967767925
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.4
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
+[node name="DamageNumber" type="Control" node_paths=PackedStringArray("number_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 69.0
+offset_right = 37.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qab1v")
+number_label = NodePath("NumberLabel")
+
+[node name="NumberLabel" type="Label" parent="."]
+unique_name_in_owner = true
+clip_children = 2
+texture_filter = 2
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.99, 0, 0.34649992, 1)
+theme_override_colors/font_outline_color = Color(0.016887499, 0.008905992, 3.008172e-09, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_dqu6n")
+theme_override_font_sizes/font_size = 48
+text = "125"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="NumberLabel"]
+material = SubResource("ShaderMaterial_fljb1")
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
