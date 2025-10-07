@@ -10,6 +10,8 @@ signal dialogue_finished
 signal enable_player_movement
 signal disable_player_movement
 signal play_audio(new_stream:AudioStream, pos:Vector3)
+signal show_damage_number(amount:int, target_node:Node3D, crit:bool)
+signal show_miss_text(miss_text:String, target_node:Node3D)
 
 signal show_outline
 signal hide_outline
