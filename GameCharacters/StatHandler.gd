@@ -3,9 +3,12 @@ class_name StatHandler
 signal stats_changed
 signal leveled_up
 signal resources_changed(sh:StatHandler)
+signal owner_died
 
 const POINTS_PER_LVL:int = 3
 const XP_INCREASE:float = 1.5
+
+var attacks_dodged_in_a_row:int = 0
 
 var main_stats:Dictionary[Stats.MainStat,int] = {
 	Stats.MainStat.AGILITY: 1,
@@ -85,12 +88,12 @@ func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 	main_stats[main_stat] += amount
 	#Might = armor, physical dmg, crit dmg
 	if main_stat == Stats.MainStat.MIGHT:
-		defences[Stats.Defence.ARMOR] += 3 * amount
+		defences[Stats.Defence.ARMOR] += 2 * amount
 		dmg_increases[Stats.DmgIncreases.PHYSICAL] += 2 * amount
 		secondary_stats[Stats.SecondaryStat.GLOBAL_CRIT_MULTIPLIER] += 2 * amount
 	#Agility = evasion, toxic dmg, initiative
 	elif main_stat == Stats.MainStat.AGILITY:
-		defences[Stats.Defence.EVASION] += 3 * amount
+		defences[Stats.Defence.EVASION] += 2 * amount
 		dmg_increases[Stats.DmgIncreases.TOXIC] += 2 * amount
 		secondary_stats[Stats.SecondaryStat.INITIATIVE] += 1 * amount
 	#Endurace = hp, vigor
@@ -100,7 +103,7 @@ func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 		skill_stats[Stats.SkillStat.VIGOR] += 1 * amount
 	#Mystic = ward, mystical dmg, spell crit multi
 	elif main_stat == Stats.MainStat.MYSTIC:
-		defences[Stats.Defence.WARD] += 2 * amount
+		defences[Stats.Defence.WARD] += 1 * amount
 		dmg_increases[Stats.DmgIncreases.MYSTICAL] += 2 * amount
 		secondary_stats[Stats.SecondaryStat.SPELL_CRIT_MULTIPLIER] += 2 * amount
 	#Skill = focus, frost dmg, accuracy
@@ -120,6 +123,18 @@ func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 		resources[Stats.ResourceStat.MAX_SPIRIT] += 1 * amount
 		resources[Stats.ResourceStat.CURRENT_SPIRIT] += 1 * amount
 
+func _update_current_hp(amount:int) -> void:
+	resources[Stats.ResourceStat.CURRENT_HP] += amount
+	
+	if resources[Stats.ResourceStat.CURRENT_HP] > resources[Stats.ResourceStat.MAX_HP]:
+		resources[Stats.ResourceStat.CURRENT_HP] = resources[Stats.ResourceStat.MAX_HP]
+		
+	resources_changed.emit(self)
+	stats_changed.emit()
+	
+	if resources[Stats.ResourceStat.CURRENT_HP] <= 0:
+		owner_died.emit()
+
 func update_stat(type:int, amount:int) -> void:
 	
 	if type in Stats.MainStat.values():
@@ -129,10 +144,12 @@ func update_stat(type:int, amount:int) -> void:
 	elif type in Stats.CharStat.values():
 		self.char_stats[type] += amount
 	elif type in Stats.ResourceStat.values():
+		if type == resources[Stats.ResourceStat.CURRENT_HP]:
+			_update_current_hp(amount)
+			return
+			
 		self.resources[type] += amount
-		if resources[Stats.ResourceStat.CURRENT_HP] > resources[Stats.ResourceStat.MAX_HP]:
-			resources[Stats.ResourceStat.CURRENT_HP] = resources[Stats.ResourceStat.MAX_HP]
-		elif resources[Stats.ResourceStat.CURRENT_SPIRIT] > resources[Stats.ResourceStat.MAX_SPIRIT]:
+		if resources[Stats.ResourceStat.CURRENT_SPIRIT] > resources[Stats.ResourceStat.MAX_SPIRIT]:
 			resources[Stats.ResourceStat.CURRENT_SPIRIT] = resources[Stats.ResourceStat.MAX_SPIRIT]
 		resources_changed.emit(self)
 	elif type in Stats.DmgType.values():
