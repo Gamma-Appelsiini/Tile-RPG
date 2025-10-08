@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs08mf1jnw3vi"]
+
+[ext_resource type="Script" uid="uid://bf0eri1wkopni" path="res://Tile-RPG/Combat/Abilities/basic_attack.gd" id="1_cgb73"]
+
+[node name="BasicAttack" type="Node3D"]
+script = ExtResource("1_cgb73")

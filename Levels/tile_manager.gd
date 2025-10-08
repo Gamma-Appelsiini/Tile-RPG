@@ -164,6 +164,12 @@ func _reset_tiles() -> void:
 	for tile:Tile in tiles.values():
 		tile.reset_tile()
 
+#TODO edge cases
+func get_distance_to_tile(start:Tile, end:Tile, allow_diagonal:bool = false) -> int:
+	var path:Array[Tile] = get_shortest_path(start,end,allow_diagonal)
+	
+	return len(path) - 1
+
 func get_shortest_path(start:Tile, end:Tile, out_of_combat:bool = false)->Array[Tile]:
 	var path:Array[Tile] = []
 	_reset_tiles()
