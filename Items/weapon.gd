@@ -2,12 +2,12 @@ extends Equipment
 class_name Weapon
 
 enum WeaponType {
-	SWORD = 50,
-	STAFF,
-	AXE,
-	DAGGER,
-	MACE,
-	BOW
+	AXE = 56,
+	SWORD = 57,
+	STAFF = 58,
+	BOW = 59,
+	MACE = 60,
+	DAGGER = 61,
 }
 
 enum HandType {
@@ -35,7 +35,7 @@ enum WeaponStat {
 	WeaponStat.RANGE: 1,
 	WeaponStat.BASE_CRIT: 5,
 	WeaponStat.BASE_MULTIPLIER: 100,
-	WeaponStat.SCALE_AMOUNT: 100,
+	WeaponStat.SCALE_AMOUNT: 10,
 }
 
 func _init() -> void:

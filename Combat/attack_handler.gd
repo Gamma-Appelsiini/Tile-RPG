@@ -4,6 +4,7 @@ const ARMOR_CURVE:Curve = null
 const EVASION_CURVE:Curve = preload("uid://cwsdo8omrwkr7")
 const MAX_BLOCK_CHANCE:int = 75
 const MAX_EVADE_CHANCE:int = 75
+const MAX_RES_PERCENT:int = 75
 const MIN_HIT_CHANCE:int = 5
 
 static var attack:Attack = null
@@ -17,10 +18,21 @@ static func use_attack_on_char(new_receiver:GameCharacter, new_attack:Attack) ->
 	
 	if !_does_attack_hit(): return
 	
+	_apply_damage_increases()
 	attack.damages = _apply_resistances(attack.damages.duplicate())
 	_apply_armor()
 	_receive_damage()
 	_handle_thorns()
+
+static func _apply_damage_increases() -> void:
+	for dmg_type:Stats.DmgType in attack.damages.keys():
+		if dmg_type == Stats.DmgType.PURE: continue
+		
+		#Dmg increases keys are +50 compared to dmg types
+		if attack.attacker.stat_handler.dmg_increases.has(dmg_type + 50):
+			var damage_multiplier:float = 1.0 + (attack.attacker.stat_handler.dmg_increases[dmg_type + 50] / 100.0)
+			print("Has increase: ", damage_multiplier)
+			attack.damages[dmg_type] = int(attack.damages[dmg_type] * damage_multiplier )
 
 static func _receive_damage() -> void:
 	#TODO receiver hit animation
@@ -73,11 +85,11 @@ static func _does_attack_hit() -> bool:
 	return true
 
 static func _get_evasion_chance() -> int:
-	var receiver_accuracy_percent:int = receiver.stat_handler.secondary_stats[Stats.SecondaryStat.ACCURACY_PERCENT]
-	if receiver_accuracy_percent <= 0: receiver_accuracy_percent = 1
-	var receiver_accuracy_multiplier:float = 1.0 + ( float(receiver_accuracy_percent) / 100)
-	var receiver_accuracy:int = int(receiver.stat_handler.secondary_stats[Stats.SecondaryStat.ACCURACY] * receiver_accuracy_multiplier)
-	if receiver_accuracy <= 0: receiver_accuracy = 1
+	var attacker_accuracy_percent:int = attack.attacker.stat_handler.secondary_stats[Stats.SecondaryStat.ACCURACY_PERCENT]
+	if attacker_accuracy_percent <= 0: attacker_accuracy_percent = 1
+	var attacker_accuracy_multiplier:float = 1.0 + ( float(attacker_accuracy_percent) / 100)
+	var attacker_accuracy:int = int(attack.attacker.stat_handler.secondary_stats[Stats.SecondaryStat.ACCURACY] * attacker_accuracy_multiplier)
+	if attacker_accuracy <= 0: attacker_accuracy = 1
 
 	var receiver_evasion:int = receiver.stat_handler.defences[Stats.Defence.EVASION]
 	if receiver_evasion <= 0: receiver_evasion = 1
@@ -87,9 +99,12 @@ static func _get_evasion_chance() -> int:
 	#Overskill evasion
 	if attacker_skill > receiver_skill * 4: receiver_evasion /= 2
 	
+	var evasion_penetration:float = 1.0 - (attack.defence_penetrations[Stats.Defence.EVASION] / 100.0)
+	receiver_evasion = int(receiver_evasion * evasion_penetration )
+	
 	var evade_entropy_multiplier:float = 1.0 + (0.25 * receiver.stat_handler.attacks_dodged_in_a_row)
 	var end:float = receiver_evasion
-	var point:float = (receiver_accuracy * evade_entropy_multiplier / end)
+	var point:float = (attacker_accuracy * evade_entropy_multiplier / end)
 	if point > 1.0: point = 1.0
 	var evasion_chance:float = EVASION_CURVE.sample(point)
 	
@@ -105,10 +120,16 @@ static func _get_evasion_chance() -> int:
 
 static func _is_attack_blocked() -> bool:
 	var block_chance:int = receiver.stat_handler.defences[Stats.Defence.BLOCK]
+	var block_reduction:int = attack.defence_penetrations[Stats.Defence.BLOCK]
 	if attack.tags.has(Attack.ATTACK_TAG.SPELL):
 		block_chance = receiver.stat_handler.defences[Stats.Defence.SPELL_BLOCK]
+		block_reduction = attack.defence_penetrations[Stats.Defence.SPELL_BLOCK]
 		
 	if block_chance > MAX_BLOCK_CHANCE: block_chance = MAX_BLOCK_CHANCE
+	
+	var block_penetration:float = 1.0 - (block_reduction / 100.0)
+	block_chance = int(block_chance * block_penetration )
+	
 	if block_chance >= randi_range(1,100): return true
 	return false
 
@@ -118,7 +139,13 @@ static func _apply_resistances(damages:Dictionary[Stats.DmgType,int]) -> Diction
 		if dmg_type == Stats.DmgType.PURE: continue
 		
 		var res_amount:int = receiver.stat_handler.resistances[dmg_type]
-		if res_amount > 75: res_amount = 75
+		if res_amount > MAX_RES_PERCENT: res_amount = MAX_RES_PERCENT
+		
+		if res_amount > 0:
+			#res pens enums are +100 values
+			var res_penetration:float = 1.0 - (attack.attacker.stat_handler.resistance_penetrations[dmg_type + 100] / 100.0)
+			res_amount = int(res_amount * res_penetration )
+		
 		if res_amount == 0: continue
 		
 		var dmg_multiplier:float = res_amount / 100.0
@@ -148,6 +175,9 @@ static func _apply_armor() -> void:
 	
 	#Overpower armor
 	if attacker_might > receiver_might * 4: receiver_armor /= 2
+	
+	var armor_penetration:float = 1.0 - (attack.defence_penetrations[Stats.Defence.ARMOR] / 100.0)
+	receiver_armor = int(receiver_armor * armor_penetration )
 	
 	var point:float = receiver_armor / float((final_damage + pure_damage + receiver_armor) * 2)
 	if point > 1.0: point = 1.0

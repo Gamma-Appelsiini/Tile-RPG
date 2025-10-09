@@ -58,6 +58,7 @@ var resources:Dictionary[Stats.ResourceStat,int] = {
 var secondary_stats:Dictionary[Stats.SecondaryStat,int] = {}
 var resistances:Dictionary[Stats.DmgType,int] = {}
 var dmg_increases:Dictionary[Stats.DmgIncreases,int] = {}
+var resistance_penetrations:Dictionary[Stats.DmgType,int] = {}
 
 func _init() -> void:
 	
@@ -67,6 +68,8 @@ func _init() -> void:
 		resistances[stat] = 0
 	for stat in Stats.DmgIncreases.values():
 		dmg_increases[stat] = 0
+	for stat in Stats.ResPenetrations.values():
+		resistance_penetrations[stat] = 0
 
 func add_xp(amount:int) -> void:
 	char_stats[Stats.CharStat.CURRENT_XP] += amount
@@ -160,6 +163,8 @@ func update_stat(type:int, amount:int) -> void:
 		self.defences[type] += amount
 	elif type in Stats.SkillStat.values():
 		self.skill_stats[type] += amount
+	elif type in Stats.ResPenetrations.values():
+		self.ResPenetrations[type] += amount
 
 	stats_changed.emit()
 	

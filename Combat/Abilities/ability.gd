@@ -37,10 +37,19 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 func use_ability_on_target_tile(target:Tile) -> void:
 	print(target.name)
 	pass
-
-#TODO
-func _set_weapon_damage(attack:Attack) -> Attack:
-	return attack
+	
+func is_target_valid(target:Node) -> bool:
+	if target is GameCharacter:
+		if self.target_type != TARGET_TYPE.GAME_CHARACTER: return false
+		if !usable_on_characters.has(CHARACTER_TYPE.SELF) and target == ability_owner: return false
+		#TODO add check to see if target is ally
+		if !usable_on_characters.has(CHARACTER_TYPE.ALLY) and target == ability_owner: return false
+		#TODO add check to see if target is enemy
+		if !usable_on_characters.has(CHARACTER_TYPE.ENEMY) and target == ability_owner: return false
+	elif target is Tile:
+		if self.target_type != TARGET_TYPE.TILE: return false
+	
+	return true
 
 func _is_in_range() -> bool:
 	var tile_manager:TileManager = null
@@ -59,3 +68,49 @@ func _is_in_range() -> bool:
 		return false
 	
 	return true
+
+func _get_weapon_dmg_to_attack(attack:Attack) -> void:
+	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
+	_set_ability_weapon_range(weapon)
+	
+	if weapon == null:
+		_unarmed_attack(attack)
+		return
+	_weapon_attack(attack, weapon)
+
+func _unarmed_attack(attack:Attack) -> void:
+	attack.damages[Stats.DmgType.PHYSICAL] = randi_range(1,ability_owner.stat_handler.main_stats[Stats.MainStat.MIGHT])
+	attack.tags.push_back(Attack.ATTACK_TAG.MELEE)
+	attack.tags.push_back(Attack.ATTACK_TAG.HIT)
+	attack.tags.push_back(Attack.ATTACK_TAG.SINGLE_TARGET)
+	attack.base_crit_chance = 4 + int(ability_owner.stat_handler.main_stats[Stats.MainStat.AGILITY] * 0.3)
+	attack.calculate_crit()
+
+func _set_ability_weapon_range(weapon:Weapon) -> void:
+	if weapon == null:
+		self.ability_range = 1
+		return
+	
+	self.ability_range = weapon.weapon_stats[Weapon.WeaponStat.RANGE]
+	if weapon.weapon_type == Weapon.WeaponType.BOW:
+		self.ability_range += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
+
+func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
+	if weapon.weapon_type == Weapon.WeaponType.BOW:
+		attack.tags.push_back(Attack.ATTACK_TAG.RANGED)
+		self.animation_type = ANIMATION_TYPE.RANGED
+	else: attack.tags.push_back(Attack.ATTACK_TAG.MELEE)
+	attack.tags.push_back(Attack.ATTACK_TAG.HIT)
+	attack.tags.push_back(Attack.ATTACK_TAG.WEAPON)
+	attack.tags.push_back(Attack.ATTACK_TAG.SINGLE_TARGET)
+	
+	var base_damage:int = randi_range(weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG], weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG])
+	var scale_stat_amount:int = ability_owner.stat_handler.main_stats[weapon.scale_stat]
+	var multiplier:float = 1.0 + (weapon.weapon_stats[Weapon.WeaponStat.SCALE_AMOUNT] / 100.0 * scale_stat_amount)
+	var final_damage:int = int(base_damage * multiplier)
+	
+	attack.damages[weapon.damage_type] = final_damage
+	attack.main_damage_type = weapon.damage_type
+	attack.base_crit_chance = weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT]
+	attack.base_crit_multiplier = weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER]
+	attack.calculate_crit()

@@ -7,21 +7,16 @@
 resource_local_to_scene = true
 script = ExtResource("1_qpck1")
 weapon_type = 50
-hand_type = 0
 scale_stat = 5
-damage_type = 400
 weapon_stats = Dictionary[int, int]({
 1500: 2,
 1501: 4,
 1502: 1,
 1503: 6,
-1504: 100,
-1505: 100
+1504: 180,
+1505: 20
 })
-equipment_slot = 1
-item_level = 1
 item_name = "Short Sword"
 inventory_image = ExtResource("1_n8m44")
 item_value = 5
-item_rarity = 0
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

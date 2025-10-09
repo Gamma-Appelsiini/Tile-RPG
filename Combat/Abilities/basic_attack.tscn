@@ -4,3 +4,6 @@
 
 [node name="BasicAttack" type="Node3D"]
 script = ExtResource("1_cgb73")
+usable_on_characters = Array[int]([1])
+ability_name = "Basic Attack"
+ap_cost = 2

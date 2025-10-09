@@ -9,19 +9,15 @@ script = ExtResource("1_ovpss")
 weapon_type = 51
 hand_type = 1
 scale_stat = 4
-damage_type = 400
 weapon_stats = Dictionary[int, int]({
 1500: 1,
 1501: 6,
 1502: 2,
 1503: 3,
-1504: 50,
-1505: 100
+1504: 150,
+1505: 10
 })
-equipment_slot = 1
-item_level = 1
 item_name = "Wooden Staff"
 inventory_image = ExtResource("1_uge0p")
 item_value = 8
-item_rarity = 0
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

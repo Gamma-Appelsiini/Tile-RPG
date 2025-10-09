@@ -8,19 +8,15 @@ script = ExtResource("1_fj1ff")
 weapon_type = 54
 hand_type = 1
 scale_stat = 6
-damage_type = 400
 weapon_stats = Dictionary[int, int]({
 1500: 3,
 1501: 6,
 1502: 2,
 1503: 4,
-1504: 100,
-1505: 100
+1504: 200,
+1505: 20
 })
-equipment_slot = 1
-item_level = 1
 item_name = "Iron Mace"
 inventory_image = ExtResource("1_pmldo")
 item_value = 6
-item_rarity = 0
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

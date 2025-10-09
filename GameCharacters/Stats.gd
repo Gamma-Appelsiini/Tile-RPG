@@ -90,3 +90,12 @@ enum DmgIncreases {
 	MACE = 460,
 	DAGGER = 461,
 }
+
+enum ResPenetrations {
+	PHYSICAL = 500,
+	MYSTICAL,
+	LIGHTNING,
+	FIRE,
+	FROST,
+	TOXIC,
+}
