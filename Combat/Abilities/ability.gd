@@ -2,6 +2,10 @@ extends Node
 class_name Ability
 
 signal ability_finished
+signal insufficient_ap
+signal insufficient_spirit
+signal ability_on_cooldown
+signal cooldown_changed
 
 enum TARGET_TYPE {TILE, GAME_CHARACTER, NONE}
 enum ABILITY_TAG {SINGLE_TARGET, AOE}
@@ -38,16 +42,35 @@ func use_ability_on_target_tile(target:Tile) -> void:
 	print(target.name)
 	pass
 	
-func is_target_valid(target:Node) -> bool:
+func _is_target_valid(target:Node) -> bool:
 	if target is GameCharacter:
 		if self.target_type != TARGET_TYPE.GAME_CHARACTER: return false
 		if !usable_on_characters.has(CHARACTER_TYPE.SELF) and target == ability_owner: return false
 		#TODO add check to see if target is ally
-		if !usable_on_characters.has(CHARACTER_TYPE.ALLY) and target == ability_owner: return false
+		#if !usable_on_characters.has(CHARACTER_TYPE.ALLY) and target == ability_owner: return false
 		#TODO add check to see if target is enemy
-		if !usable_on_characters.has(CHARACTER_TYPE.ENEMY) and target == ability_owner: return false
+		#if !usable_on_characters.has(CHARACTER_TYPE.ENEMY) and target == ability_owner: return false
 	elif target is Tile:
 		if self.target_type != TARGET_TYPE.TILE: return false
+	
+	return true
+
+func _use_resources() -> void:
+	ability_owner.stat_handler.update_stat(Stats.ResourceStat.CURRENT_AP, -ap_cost)
+	ability_owner.stat_handler.update_stat(Stats.ResourceStat.CURRENT_SPIRIT, -spirit_cost)
+	current_cooldown = ability_cooldown
+	cooldown_changed.emit()
+
+func _is_enough_resources() -> bool:
+	if current_cooldown > 0:
+		ability_on_cooldown.emit()
+		return false
+	elif ap_cost > ability_owner.stat_handler.resources[Stats.ResourceStat.CURRENT_AP]:
+		insufficient_ap.emit()
+		return false
+	elif spirit_cost > ability_owner.stat_handler.resources[Stats.ResourceStat.CURRENT_SPIRIT]:
+		insufficient_spirit.emit()
+		return false
 	
 	return true
 
