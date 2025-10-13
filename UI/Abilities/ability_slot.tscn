@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://camo5qmy5xx2a"]
+[gd_scene load_steps=5 format=3 uid="uid://camo5qmy5xx2a"]
 
 [ext_resource type="Script" uid="uid://ctv8dai26hq8c" path="res://Tile-RPG/UI/Abilities/ability_slot.gd" id="1_4dhx1"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="2_n6ghh"]
-[ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="4_008pa"]
 [ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="5_ue6e8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncqfq"]
@@ -48,7 +47,6 @@ stretch_mode = 5
 [node name="AbilityIconRect" type="TextureRect" parent="."]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("4_008pa")
 expand_mode = 1
 stretch_mode = 5
 
@@ -68,6 +66,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="CooldownLabel" type="Label" parent="."]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5958281, 0.5958281, 0.5958281, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -77,6 +76,6 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 48
-text = "5"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -20,6 +20,14 @@ func _ready() -> void:
 	GlobalSignals.show_outline.connect(_show_outline)
 	GlobalSignals.hide_outline.connect(_hide_outline)
 	
+func _show_specific_outline(target:Node3D) -> void:
+	if get_parent() == target:
+		_show_outline()
+		
+func _hide_specific_outline(target:Node3D) -> void:
+	if get_parent() == target:
+		_hide_outline()
+	
 func _show_outline() -> void:
 	var outline_material:ShaderMaterial = OUTLINES[outline_type]
 	

@@ -20,6 +20,7 @@ func set_ability(new_ability:Ability) -> void:
 	new_ability.cooldown_changed.connect(_set_cooldown)
 	ability_icon_rect.texture = new_ability.ability_icon
 	ability_icon_rect.visible = true
+	ability_in_slot = new_ability
 
 func _set_cooldown() -> void:
 	cooldown_label.text = str(ability_in_slot.current_cooldown)

@@ -5,6 +5,8 @@ class_name UIHandler
 @export var globe_ui: GlobeUI = null
 @export var stat_window: StatWindow = null
 @export var dialogue_window: DialogueWindow = null
+@export var ability_bar: AbilityBar = null
+@export var ability_targeter: AbilityTargeter = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 
@@ -20,6 +22,7 @@ func _input(event: InputEvent) -> void:
 
 func set_player(player:Player) -> void:
 	GlobalSignals.player = player
+	ability_bar.set_player(player)
 	inventory.set_player(player)
 	dialogue_window.set_player(player)
 	stat_window.set_game_character(player)
