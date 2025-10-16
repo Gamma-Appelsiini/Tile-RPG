@@ -17,6 +17,8 @@ var hovered_tile:Tile = null
 var ground_indicator:GroundIndicator = null
 
 func _ready() -> void:
+	GlobalSignals.combat_start.connect(_on_combat_start)
+	
 	_create_new_path_visuals(8)
 	_create_indicator()
 	
@@ -27,6 +29,14 @@ func _ready() -> void:
 	for tile:Tile in tiles.values():
 		_add_neighbors(tile)
 		_add_diagonals(tile)
+
+func _on_combat_start() -> void:
+	var current_level:Level = GlobalSignals.current_level
+	set_on_closest_tile(player,false)
+	
+	#TODO change to only put combat chars
+	for gchar:GameCharacter in current_level.game_chars:
+		set_on_closest_tile(gchar,false)
 
 func _create_indicator() -> void:
 	ground_indicator = GROUND_INDICATOR_SCENE.instantiate()

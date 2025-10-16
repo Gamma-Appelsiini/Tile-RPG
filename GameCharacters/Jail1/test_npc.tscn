@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba5woaetqefuy"]
+[gd_scene load_steps=10 format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
 [ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_ms4ik"]
 [ext_resource type="Script" uid="uid://cfaw7c8b3dbes" path="res://Tile-RPG/Handlers/XpDropper/xp_dropper.gd" id="4_ms4ik"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="5_pf120"]
 [ext_resource type="Script" uid="uid://dq5x88665dpbq" path="res://Tile-RPG/GameCharacters/follow_handler.gd" id="5_yvq5j"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ouqyu"]
@@ -20,6 +21,8 @@ height = 1.7
 radius = 1.0
 
 [node name="TestNPC" type="CharacterBody3D" node_paths=PackedStringArray("visual_mesh", "follow_hander")]
+collision_layer = 8
+collision_mask = 15
 script = ExtResource("1_ouqyu")
 display_name = "Testing Character"
 picture = ExtResource("2_ms4ik")
@@ -56,3 +59,9 @@ shape = SubResource("CylinderShape3D_8w85h")
 script = ExtResource("4_ms4ik")
 xp_amount = 4
 metadata/_custom_type_script = "uid://cfaw7c8b3dbes"
+
+[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+script = ExtResource("5_pf120")
+mesh_to_outline = NodePath("../MeshInstance3D")
+outline_type = 0
+metadata/_custom_type_script = "uid://g6rood38j5ok"

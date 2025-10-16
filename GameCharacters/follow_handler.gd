@@ -5,6 +5,7 @@ class_name FollowHandler
 
 var tile_manager:TileManager = null
 var target:GameCharacter = null
+var target_on_hold:GameCharacter = null
 var target_tile:Tile = null
 var path:Array[Tile] = []
 var follower:GameCharacter = null
@@ -16,6 +17,16 @@ var pathing:bool = false
 func _ready() -> void:
 	if get_parent() is GameCharacter: follower = get_parent() as GameCharacter
 	area.body_entered.connect(_area_entered)
+	GlobalSignals.combat_start.connect(_on_combat_start)
+	GlobalSignals.combat_end.connect(_on_combat_end)
+	
+func _on_combat_start() -> void:
+	target_on_hold = target
+	stop_follow()
+	
+func _on_combat_end() -> void:
+	target = target_on_hold
+	start_follow()
 	
 func _area_entered(body:Node3D) -> void:
 	if body is Player:
@@ -31,7 +42,6 @@ func set_tile_manager(new_tilem:TileManager) -> void:
 	
 func start_follow() -> void:
 	if target == null:
-		print("NO TARGET FOR FOLLOWING")
 		return
 	pathing = false
 	following = false

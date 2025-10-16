@@ -53,6 +53,7 @@ func _is_target_valid(target:Node) -> bool:
 	elif target is Tile:
 		if self.target_type != TARGET_TYPE.TILE: return false
 	
+	print("Target is valis")
 	return true
 
 func _use_resources() -> void:
@@ -72,10 +73,11 @@ func _is_enough_resources() -> bool:
 		insufficient_spirit.emit()
 		return false
 	
+	print("Enough resources")
 	return true
 
 func _is_in_range() -> bool:
-	var tile_manager:TileManager = null
+	var tile_manager:TileManager = GlobalSignals.current_level.tile_manager
 	var ability_user_tile:Tile = tile_manager.char_tiles[ability_owner]
 	var distance:int = -1
 	
@@ -90,6 +92,7 @@ func _is_in_range() -> bool:
 		print("Ability not in range")
 		return false
 	
+	print("Target in range")
 	return true
 
 func _get_weapon_dmg_to_attack(attack:Attack) -> void:

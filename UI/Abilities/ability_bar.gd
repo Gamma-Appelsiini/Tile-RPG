@@ -16,18 +16,15 @@ func _input(event: InputEvent) -> void:
 
 func set_player(new_player:Player) -> void:
 	player = new_player
+	var new_ability:Ability = BASIC_ATTACK.instantiate()
+	new_ability.ability_owner = player
+	slots[0].set_ability(new_ability)
 
 func _ready() -> void:
 	set_process_input(true)
 	for abi_slot:AbilitySlot in ability_slot_container.get_children():
 		slots.push_back(abi_slot)
 		abi_slot.ability_hovered.connect(_set_hovered_slot)
-		
-	test()
-	
-func test() -> void:
-	var new_ability:Ability = BASIC_ATTACK.instantiate()
-	slots[0].set_ability(new_ability)
 
 func _set_hovered_slot(new_slot:AbilitySlot) -> void:
 	hovered_slot = new_slot
@@ -44,6 +41,7 @@ func _slot_pressed() -> void:
 		print("selected_ability == null")
 		return
 	
+	GlobalSignals.combat_start.emit()
 	ability_targeter.set_ability_to_target(selected_ability)
 
 func hide_bar() -> void:

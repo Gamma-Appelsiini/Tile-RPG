@@ -20,3 +20,6 @@ signal hide_outline
 signal hide_outline_on_target(target:Node3D)
 
 signal change_all_stats_visibility
+
+signal combat_start
+signal combat_end

@@ -19,6 +19,8 @@ const OUTLINES:Dictionary[OUTLINE_TYPE, ShaderMaterial] = {
 func _ready() -> void:
 	GlobalSignals.show_outline.connect(_show_outline)
 	GlobalSignals.hide_outline.connect(_hide_outline)
+	GlobalSignals.show_outline_on_target.connect(_show_specific_outline)
+	GlobalSignals.hide_outline_on_target.connect(_hide_specific_outline)
 	
 func _show_specific_outline(target:Node3D) -> void:
 	if get_parent() == target:

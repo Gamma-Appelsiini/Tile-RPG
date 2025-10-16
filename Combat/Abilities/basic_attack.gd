@@ -9,6 +9,7 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	if !_is_in_range(): return
 	if !_is_enough_resources(): return
 	
+	print("Using basic attack on target")
 	_use_resources()
 	#TODO animate attacker
 	ability_owner.rotate_towards_point(target.global_position)

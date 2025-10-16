@@ -1,6 +1,6 @@
 class_name AttackHandler
 
-const ARMOR_CURVE:Curve = null
+const ARMOR_CURVE:Curve = preload("uid://bra32dhoui53i")
 const EVASION_CURVE:Curve = preload("uid://cwsdo8omrwkr7")
 const MAX_BLOCK_CHANCE:int = 75
 const MAX_EVADE_CHANCE:int = 75
@@ -71,6 +71,7 @@ static func _does_attack_hit() -> bool:
 		GlobalSignals.show_miss_text.emit("MISS", receiver)
 		#TODO receiver evade animation
 		return false
+	receiver.stat_handler.attacks_dodged_in_a_row = 0
 	
 	#Block calc
 	var blocked:bool = _is_attack_blocked()
@@ -81,7 +82,6 @@ static func _does_attack_hit() -> bool:
 		#TODO receiver block animation
 		return false
 	
-	receiver.stat_handler.attacks_dodged_in_a_row = 0
 	return true
 
 static func _get_evasion_chance() -> int:
@@ -103,10 +103,11 @@ static func _get_evasion_chance() -> int:
 	receiver_evasion = int(receiver_evasion * evasion_penetration )
 	
 	var evade_entropy_multiplier:float = 1.0 + (0.25 * receiver.stat_handler.attacks_dodged_in_a_row)
-	var end:float = receiver_evasion
-	var point:float = (attacker_accuracy * evade_entropy_multiplier / end)
+	var divider:float = receiver_evasion + (attacker_accuracy * evade_entropy_multiplier)
+	var point:float = (receiver_evasion * 0.3) / divider
 	if point > 1.0: point = 1.0
 	var evasion_chance:float = EVASION_CURVE.sample(point)
+	print("evasion chance: ", evasion_chance)
 	
 	var dodge_chance:int = receiver.stat_handler.defences[Stats.Defence.DODGE]
 	if attack.tags.has(Attack.ATTACK_TAG.SPELL): dodge_chance = receiver.stat_handler.defences[Stats.Defence.SPELL_DODGE]
@@ -156,7 +157,6 @@ static func _apply_resistances(damages:Dictionary[Stats.DmgType,int]) -> Diction
 	
 	return damages
 
-#TODO
 static func _apply_armor() -> void:
 	var pure_damage:int = 0
 	for type:Stats.DmgType in attack.damages.keys():
