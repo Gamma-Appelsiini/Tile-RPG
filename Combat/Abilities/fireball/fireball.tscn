@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://def83grj4ohmj"]
+
+[ext_resource type="Script" uid="uid://byc1r1xqku5vs" path="res://Tile-RPG/Combat/Abilities/fireball/fireball.gd" id="1_towhf"]
+[ext_resource type="Texture2D" uid="uid://be8erxtlfc13h" path="res://Tile-RPG/Images/Stats/fire.png" id="2_rgogx"]
+
+[node name="Fireball" type="Node3D"]
+script = ExtResource("1_towhf")
+animation_type = 1
+target_type = 0
+ability_tags = Array[int]([1, 4, 5])
+ability_icon = ExtResource("2_rgogx")
+ability_name = "Fireball"
+ap_cost = 0
+ability_range = 5
+ability_aoe = 3

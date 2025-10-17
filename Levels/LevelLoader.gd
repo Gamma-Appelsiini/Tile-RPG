@@ -9,6 +9,7 @@ const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
 @export var inventory: Inventory = null
 @export var globe_ui:GlobeUI = null
 @export var ui_handler: UIHandler = null
+@export var ability_targeter:AbilityTargeter = null
 
 var save_file:JSON = null
 var save_data:Dictionary = {
@@ -101,6 +102,7 @@ func _open_new_level(new_level_id:String, loading:bool = false) -> void:
 	current_level.load_from_data(save_data)
 	current_level.tile_manager.set_player(player)
 	GlobalSignals.current_level = current_level
+	ability_targeter.tile_manager = current_level.tile_manager
 	
 	for gc:GameCharacter in current_level.game_characters_node.get_children():
 		if gc.follow_hander != null: gc.follow_hander.set_tile_manager(current_level.tile_manager)

@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=4 uid="uid://mn3gwrbcqycm"]
+
+[ext_resource type="Material" uid="uid://bugjrnc03koey" path="res://Tile-RPG/Combat/Abilities/aoe_material.tres" id="1_66hqh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx70n"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b7o7y"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIAAwAFAAEABAACAAYAAwAHAAUABwAEAAYABwAGAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD//wAA//8AAP////8AAAAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f7w2x"]
+resource_name = "aoe_box_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("///+//9//3/+//9//3///////v//f/9//v//f/9///////7//3//f/7//3//f//////+//9//3/+//9//3///w=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_dx70n"),
+"primitive": 3,
+"uv_scale": Vector4(2, 2.0000005, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP///78AAP//AAD/vwAA//////+/AAAAAAAA/78AAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AID/f/7//3/+//9/////f/7//3/+//9//v//f////3/+//9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b7o7y")
+
+[node name="AoeIndicator" type="Node3D"]
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_66hqh")
+mesh = SubResource("ArrayMesh_f7w2x")
+skeleton = NodePath("")

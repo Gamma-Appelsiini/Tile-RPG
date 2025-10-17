@@ -1,6 +1,6 @@
 class_name Attack
 
-enum ATTACK_TAG {MELEE, RANGED, SPELL, AOE, SINGLE_TARGET, HIT, DOT, UNEVADEABLE, NO_RETALIATION, WEAPON}
+#enum ATTACK_TAG {MELEE, RANGED, SPELL, AOE, SINGLE_TARGET, HIT, DOT, UNEVADEABLE, NO_RETALIATION, WEAPON}
 
 var attacker:GameCharacter = null
 var damages:Dictionary[Stats.DmgType,int] = {}
@@ -11,18 +11,21 @@ var defence_penetrations:Dictionary[Stats.Defence,int] = {
 	Stats.Defence.SPELL_BLOCK: 0
 }
 var main_damage_type:Stats.DmgType = Stats.DmgType.PHYSICAL
-var tags: Array[ATTACK_TAG] = []
+var ability_tags:Array[Ability.ABILITY_TAG] = []
 var crit:bool = false
 
 var base_crit_chance: int = 5
 var base_crit_multiplier:int = 100
+
+func set_tags(new_tags:Array[Ability.ABILITY_TAG]) -> void:
+	ability_tags = new_tags
 
 func calculate_crit() -> void:
 	var crit_chance:int = base_crit_chance
 	var final_crit_multiplier:float = base_crit_multiplier
 	
 	final_crit_multiplier += attacker.stat_handler.secondary_stats[Stats.SecondaryStat.GLOBAL_CRIT_MULTIPLIER]
-	if tags.has(ATTACK_TAG.SPELL):
+	if ability_tags.has(Ability.ABILITY_TAG.SPELL):
 		crit_chance += attacker.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_BASE_CRIT]
 		final_crit_multiplier += attacker.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_CRIT_MULTIPLIER]
 	
@@ -32,7 +35,7 @@ func calculate_crit() -> void:
 		crit = true
 
 func calculate_weapon_damage_increase() -> void:
-	if !tags.has(ATTACK_TAG.WEAPON): return
+	if !ability_tags.has(Ability.ABILITY_TAG.WEAPON): return
 	var weapon:Weapon = attacker.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
 	if weapon == null: return
 	

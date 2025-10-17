@@ -13,11 +13,12 @@
 
 [node name="MainScene" type="Node3D"]
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "ui_handler")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "ui_handler", "ability_targeter")]
 script = ExtResource("1_t2t4i")
 inventory = NodePath("../UIHandler/Inventory")
 globe_ui = NodePath("../UIHandler/GlobeUI")
 ui_handler = NodePath("../UIHandler")
+ability_targeter = NodePath("../AbilityTargeter")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
 [node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "ability_targeter") groups=["UI"]]

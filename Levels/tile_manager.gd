@@ -38,6 +38,22 @@ func _on_combat_start() -> void:
 	for gchar:GameCharacter in current_level.game_chars:
 		set_on_closest_tile(gchar,false)
 
+func get_tiles_in_aoe(start_tile:Tile, aoe:int) -> Array[Tile]:
+	var tiles_in_aoe:Array[Tile] = []
+	_reset_tiles()
+	tiles_in_aoe.push_back(start_tile)
+	
+	#TODO fix
+	for tile:Tile in tiles_in_aoe:
+		if aoe <= 1: break
+		if !tile.visited:
+			for new_tile:Tile in tile.neighbor_tiles:
+				if !tiles_in_aoe.has(new_tile): tiles_in_aoe.push_back(new_tile)
+			tile.visited = true
+		aoe -= 1
+		
+	return tiles_in_aoe
+
 func _create_indicator() -> void:
 	ground_indicator = GROUND_INDICATOR_SCENE.instantiate()
 	ground_indicator.visible = false

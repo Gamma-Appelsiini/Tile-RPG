@@ -1,6 +1,8 @@
 extends Node
 class_name AbilityTargeter
 
+const AOE_INDICATOR:PackedScene = preload("uid://mn3gwrbcqycm")
+
 var player:Player = null
 var player_camera:Camera3D = null
 var tile_manager:TileManager = null
@@ -8,6 +10,7 @@ var tile_manager:TileManager = null
 var selected_ability:Ability = null
 var hovered_character:GameCharacter = null
 var hovered_tile:Tile = null
+var aoe_indicators:Array[Node3D] = []
 
 func _ready() -> void:
 	set_process(false)
@@ -37,6 +40,7 @@ func cancel_ability_targeting() -> void:
 	print("cancel abi targeting")
 	set_process_input(false)
 	set_process(false)
+	_hide_aoe()
 	GlobalSignals.hide_outline_on_target.emit(hovered_character)
 	hovered_tile = null
 	hovered_character = null
@@ -59,9 +63,25 @@ func _get_ability_target() -> void:
 func _set_new_target_tile(new_target:Tile) -> void:
 	if hovered_tile == new_target: return
 
-	#TODO hide hovered tile
+	_hide_aoe()
 	hovered_tile = new_target
-	#TODO show new tile + aoe
+	_show_aoe()
+
+func _hide_aoe() -> void:
+	for aoe_ind:Node3D in aoe_indicators:
+		aoe_ind.visible = false
+
+func _show_aoe() -> void:
+	var tiles_in_aoe:Array[Tile] = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
+	while len(tiles_in_aoe) > len(aoe_indicators):
+		var new_indicator:Node3D = AOE_INDICATOR.instantiate()
+		new_indicator.visible = false
+		add_child(new_indicator)
+		aoe_indicators.push_back(new_indicator)
+
+	for i:int in len(tiles_in_aoe):
+		aoe_indicators[i].visible = true
+		aoe_indicators[i].global_position = tiles_in_aoe[i].global_position
 
 func _set_new_target_character(new_target:GameCharacter) -> void:
 	if hovered_character == new_target: return

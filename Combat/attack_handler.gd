@@ -41,20 +41,20 @@ static func _receive_damage() -> void:
 	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, final_damage)
 
 static func _handle_thorns() -> void:
-	if attack.tags.has(Attack.ATTACK_TAG.NO_RETALIATION): return
+	if attack.ability_tags.has(Ability.ABILITY_TAG.NO_RETALIATION): return
 	var thorns_amount:int = receiver.stat_handler.secondary_stats[Stats.SecondaryStat.THORNS]
 	if thorns_amount <= 0: return
 	
 	var thorns_attack:Attack = Attack.new()
 	thorns_attack.attacker = receiver
-	thorns_attack.tags.push_back(Attack.ATTACK_TAG.UNEVADEABLE)
-	thorns_attack.tags.push_back(Attack.ATTACK_TAG.NO_RETALIATION)
+	thorns_attack.ability_tags.push_back(Ability.ABILITY_TAG.UNEVADEABLE)
+	thorns_attack.ability_tags.push_back(Ability.ABILITY_TAG.NO_RETALIATION)
 	thorns_attack.damages[Stats.DmgType.PURE] = thorns_amount
 	
 	AttackHandler.use_attack_on_char(attack.attacker, thorns_attack)
 
 static func _does_attack_hit() -> bool:
-	if attack.tags.has(Attack.ATTACK_TAG.UNEVADEABLE): return true
+	if attack.ability_tags.has(Ability.ABILITY_TAG.UNEVADEABLE): return true
 	var hit_chance:int = 99
 	
 	var receiver_luck:int = receiver.stat_handler.main_stats[Stats.MainStat.LUCK]
@@ -110,7 +110,7 @@ static func _get_evasion_chance() -> int:
 	print("evasion chance: ", evasion_chance)
 	
 	var dodge_chance:int = receiver.stat_handler.defences[Stats.Defence.DODGE]
-	if attack.tags.has(Attack.ATTACK_TAG.SPELL): dodge_chance = receiver.stat_handler.defences[Stats.Defence.SPELL_DODGE]
+	if attack.ability_tags.has(Ability.ABILITY_TAG.SPELL): dodge_chance = receiver.stat_handler.defences[Stats.Defence.SPELL_DODGE]
 	dodge_chance = dodge_chance - int(dodge_chance * (1.0 - evade_entropy_multiplier))
 	if dodge_chance < 0: dodge_chance = 0
 	
@@ -122,7 +122,7 @@ static func _get_evasion_chance() -> int:
 static func _is_attack_blocked() -> bool:
 	var block_chance:int = receiver.stat_handler.defences[Stats.Defence.BLOCK]
 	var block_reduction:int = attack.defence_penetrations[Stats.Defence.BLOCK]
-	if attack.tags.has(Attack.ATTACK_TAG.SPELL):
+	if attack.ability_tags.has(Ability.ABILITY_TAG.SPELL):
 		block_chance = receiver.stat_handler.defences[Stats.Defence.SPELL_BLOCK]
 		block_reduction = attack.defence_penetrations[Stats.Defence.SPELL_BLOCK]
 		
@@ -165,7 +165,7 @@ static func _apply_armor() -> void:
 			continue
 		final_damage += attack.damages[type]
 		
-	if !attack.tags.has(Attack.ATTACK_TAG.HIT):
+	if !attack.ability_tags.has(Ability.ABILITY_TAG.HIT):
 		final_damage += pure_damage
 		return
 

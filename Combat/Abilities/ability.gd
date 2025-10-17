@@ -8,19 +8,21 @@ signal ability_on_cooldown
 signal cooldown_changed
 
 enum TARGET_TYPE {TILE, GAME_CHARACTER, NONE}
-enum ABILITY_TAG {SINGLE_TARGET, AOE}
+enum ABILITY_TAG {SINGLE_TARGET, AOE, MELEE, RANGED, SPELL, HIT, DOT, UNEVADEABLE, NO_RETALIATION, WEAPON}
 enum CHARACTER_TYPE {ALLY, ENEMY, SELF}
 enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 
 @export var animation_type:ANIMATION_TYPE = ANIMATION_TYPE.MELEE
 @export var target_type:TARGET_TYPE = TARGET_TYPE.GAME_CHARACTER
 @export var usable_on_characters:Array[CHARACTER_TYPE] = []
+@export var ability_tags:Array[ABILITY_TAG] = []
 @export var ability_icon: Texture = null
 @export var ability_name:String = "Default Ability Name"
 @export var ability_cooldown: int = 0
 @export var ap_cost: int = 1
 @export var spirit_cost: int = 0
 @export var ability_range: int = 1
+@export var ability_aoe: int = 1
 
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0
@@ -81,6 +83,10 @@ func _is_in_range() -> bool:
 	var ability_user_tile:Tile = tile_manager.char_tiles[ability_owner]
 	var distance:int = -1
 	
+	var range_increase:int = 0
+	if ability_tags.has(ABILITY_TAG.SPELL): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_RANGE]
+	if ability_tags.has(ABILITY_TAG.RANGED): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
+	
 	if target_type == TARGET_TYPE.NONE: return true
 	elif target_type == TARGET_TYPE.TILE:
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile)
@@ -88,7 +94,7 @@ func _is_in_range() -> bool:
 		var ability_target_tile:Tile = tile_manager.char_tiles[target_char]
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile)
 	
-	if distance == -1 or distance > ability_range:
+	if distance == -1 or distance > ability_range + range_increase:
 		print("Ability not in range")
 		return false
 	
@@ -106,9 +112,9 @@ func _get_weapon_dmg_to_attack(attack:Attack) -> void:
 
 func _unarmed_attack(attack:Attack) -> void:
 	attack.damages[Stats.DmgType.PHYSICAL] = randi_range(1,ability_owner.stat_handler.main_stats[Stats.MainStat.MIGHT])
-	attack.tags.push_back(Attack.ATTACK_TAG.MELEE)
-	attack.tags.push_back(Attack.ATTACK_TAG.HIT)
-	attack.tags.push_back(Attack.ATTACK_TAG.SINGLE_TARGET)
+	attack.ability_tags.push_back(ABILITY_TAG.MELEE)
+	attack.ability_tags.push_back(ABILITY_TAG.HIT)
+	attack.ability_tags.push_back(ABILITY_TAG.SINGLE_TARGET)
 	attack.base_crit_chance = 4 + int(ability_owner.stat_handler.main_stats[Stats.MainStat.AGILITY] * 0.3)
 	attack.calculate_crit()
 
@@ -123,12 +129,12 @@ func _set_ability_weapon_range(weapon:Weapon) -> void:
 
 func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
 	if weapon.weapon_type == Weapon.WeaponType.BOW:
-		attack.tags.push_back(Attack.ATTACK_TAG.RANGED)
+		attack.tags.push_back(ABILITY_TAG.RANGED)
 		self.animation_type = ANIMATION_TYPE.RANGED
-	else: attack.tags.push_back(Attack.ATTACK_TAG.MELEE)
-	attack.tags.push_back(Attack.ATTACK_TAG.HIT)
-	attack.tags.push_back(Attack.ATTACK_TAG.WEAPON)
-	attack.tags.push_back(Attack.ATTACK_TAG.SINGLE_TARGET)
+	else: attack.tags.push_back(ABILITY_TAG.MELEE)
+	attack.tags.push_back(ABILITY_TAG.HIT)
+	attack.tags.push_back(ABILITY_TAG.WEAPON)
+	attack.tags.push_back(ABILITY_TAG.SINGLE_TARGET)
 	
 	var base_damage:int = randi_range(weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG], weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG])
 	var scale_stat_amount:int = ability_owner.stat_handler.main_stats[weapon.scale_stat]

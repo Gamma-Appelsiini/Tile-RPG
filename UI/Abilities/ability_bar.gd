@@ -9,6 +9,7 @@ var hovered_slot:AbilitySlot = null
 var player:Player = null
 var selected_ability:Ability = null
 const BASIC_ATTACK = preload("uid://bs08mf1jnw3vi")
+const FIREBALL = preload("uid://def83grj4ohmj")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -16,9 +17,15 @@ func _input(event: InputEvent) -> void:
 
 func set_player(new_player:Player) -> void:
 	player = new_player
+	
+	#Test
 	var new_ability:Ability = BASIC_ATTACK.instantiate()
 	new_ability.ability_owner = player
 	slots[0].set_ability(new_ability)
+	
+	var new_ability2:Ability = FIREBALL.instantiate()
+	new_ability2.ability_owner = player
+	slots[1].set_ability(new_ability2)
 
 func _ready() -> void:
 	set_process_input(true)
@@ -41,7 +48,8 @@ func _slot_pressed() -> void:
 		print("selected_ability == null")
 		return
 	
-	GlobalSignals.combat_start.emit()
+	print("clicked; ", selected_ability.ability_name)
+	#GlobalSignals.combat_start.emit()
 	ability_targeter.set_ability_to_target(selected_ability)
 
 func hide_bar() -> void:

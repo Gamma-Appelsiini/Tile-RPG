@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bugjrnc03koey"]
+
+[ext_resource type="Shader" uid="uid://clm2mrfb4fti5" path="res://Tile-RPG/Shaders/gradient_dissolve.gdshader" id="1_g41vq"]
+
+[sub_resource type="Gradient" id="Gradient_g41vq"]
+offsets = PackedFloat32Array(0, 0.9955556, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fqstj"]
+gradient = SubResource("Gradient_g41vq")
+fill_from = Vector2(1, 0.48433048)
+fill_to = Vector2(1, 1)
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_g41vq")
+shader_parameter/ColorParameter = Color(1.2940211, 0.6839375, 0, 1)
+shader_parameter/moveAmount = Vector2(0, 0)
+shader_parameter/maskTexture = SubResource("GradientTexture2D_fqstj")
