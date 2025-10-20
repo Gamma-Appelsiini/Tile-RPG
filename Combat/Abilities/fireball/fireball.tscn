@@ -10,6 +10,7 @@ target_type = 0
 ability_tags = Array[int]([1, 4, 5])
 ability_icon = ExtResource("2_rgogx")
 ability_name = "Fireball"
+ability_cooldown = 1
 ap_cost = 0
 ability_range = 5
 ability_aoe = 3

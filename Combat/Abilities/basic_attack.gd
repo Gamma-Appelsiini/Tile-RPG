@@ -3,11 +3,7 @@ class_name BasicAttack
 
 func use_ability_on_target_character(target:GameCharacter) -> void:
 	var new_attack:Attack = _create_attack()
-	self.target_char = target
-	
-	if !_is_target_valid(target): return
-	if !_is_in_range(): return
-	if !_is_enough_resources(): return
+	if !_can_use_ability(target): return
 	
 	print("Using basic attack on target")
 	_use_resources()

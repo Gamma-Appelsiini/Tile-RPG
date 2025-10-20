@@ -3,6 +3,7 @@ class_name AbilityBar
 
 @export var ability_slot_container: HBoxContainer = null
 @export var ability_targeter:AbilityTargeter = null
+@export var panel_container: PanelContainer = null
 
 var slots:Array[AbilitySlot] = []
 var hovered_slot:AbilitySlot = null
@@ -28,10 +29,13 @@ func set_player(new_player:Player) -> void:
 	slots[1].set_ability(new_ability2)
 
 func _ready() -> void:
-	set_process_input(true)
+	set_process_input(false)
+	
 	for abi_slot:AbilitySlot in ability_slot_container.get_children():
 		slots.push_back(abi_slot)
 		abi_slot.ability_hovered.connect(_set_hovered_slot)
+		abi_slot.mouse_entered.connect(_on_container_mouse_entered)
+		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
 
 func _set_hovered_slot(new_slot:AbilitySlot) -> void:
 	hovered_slot = new_slot
@@ -47,15 +51,23 @@ func _slot_pressed() -> void:
 	if selected_ability == null:
 		print("selected_ability == null")
 		return
+	if !selected_ability._is_enough_resources():
+		print("selected_ability not enought resources")
+		return
 	
 	print("clicked; ", selected_ability.ability_name)
-	#GlobalSignals.combat_start.emit()
 	ability_targeter.set_ability_to_target(selected_ability)
 
 func hide_bar() -> void:
-	set_process_input(false)
+	#TODO animate
 	self.visible = false
 	
 func show_bar() -> void:
-	set_process_input(true)
+	#TODO animate
 	self.visible = true
+
+func _on_container_mouse_entered() -> void:
+	set_process_input(true)
+
+func _on_container_mouse_exited() -> void:
+	set_process_input(false)

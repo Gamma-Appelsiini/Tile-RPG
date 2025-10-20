@@ -42,16 +42,21 @@ func get_tiles_in_aoe(start_tile:Tile, aoe:int) -> Array[Tile]:
 	var tiles_in_aoe:Array[Tile] = []
 	_reset_tiles()
 	tiles_in_aoe.push_back(start_tile)
-	
-	#TODO fix
-	for tile:Tile in tiles_in_aoe:
-		if aoe <= 1: break
-		if !tile.visited:
-			for new_tile:Tile in tile.neighbor_tiles:
-				if !tiles_in_aoe.has(new_tile): tiles_in_aoe.push_back(new_tile)
-			tile.visited = true
-		aoe -= 1
-		
+	aoe -= 1
+
+	var current_frontier: Array[Tile] = [start_tile]
+	for i in range(aoe):
+		var next_frontier: Array[Tile] = []
+		for tile:Tile in current_frontier:
+			for neighbor:Tile in tile.neighbor_tiles:
+				if !neighbor.visited:
+					neighbor.visited = true
+					next_frontier.append(neighbor)
+					tiles_in_aoe.append(neighbor)
+		if next_frontier.is_empty():
+			break
+		current_frontier = next_frontier
+
 	return tiles_in_aoe
 
 func _create_indicator() -> void:
