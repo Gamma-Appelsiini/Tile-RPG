@@ -6,6 +6,7 @@ class_name UIHandler
 @export var stat_window: StatWindow = null
 @export var dialogue_window: DialogueWindow = null
 @export var ability_bar: AbilityBar = null
+@export var abilities_container: AbilitiesContainer = null
 @export var ability_targeter: AbilityTargeter = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
@@ -26,6 +27,20 @@ func set_player(player:Player) -> void:
 	inventory.set_player(player)
 	dialogue_window.set_player(player)
 	stat_window.set_game_character(player)
+
+func load_from_data(save_data:Dictionary) -> void:
+	await inventory.ready
+	inventory.load_inv_from_data(save_data)
+	
+	abilities_container.load_from_data(save_data)
+	
+	var ability_bar_array:Array[String] = save_data["ability_bar"]
+	ability_bar.load_from_array(ability_bar_array)
+
+func save_to_data(save_data:Dictionary) -> void:
+	inventory.save_inv_to_data(save_data)
+	abilities_container.save_to_data(save_data)
+	save_data["ability_bar"] = ability_bar.save_to_data()
 
 func show_damage_number(amount:int, target_node:Node3D, crit:bool = false) -> void:
 	var new_number:DamageNumber = DAMAGE_NUMBER_SCENE.instantiate()

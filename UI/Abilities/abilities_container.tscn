@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp3lhfafyqjva"]
+
+[ext_resource type="Script" uid="uid://dl8o1rxduyfyg" path="res://Tile-RPG/UI/Abilities/abilities_container.gd" id="1_2uebh"]
+[ext_resource type="StyleBox" uid="uid://dvndtiugiq0s2" path="res://Tile-RPG/UI/panel_style.tres" id="1_g3gg1"]
+
+[node name="AbilitiesContainer" type="Control" node_paths=PackedStringArray("grid_container", "ability_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2uebh")
+grid_container = NodePath("PanelContainer/VBoxContainer/GridContainer")
+ability_bar = NodePath("")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_g3gg1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Abilities"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 48
+columns = 6

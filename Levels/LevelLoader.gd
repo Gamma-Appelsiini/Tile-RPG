@@ -16,6 +16,8 @@ var save_data:Dictionary = {
 	"last_level_id": "test_level_1",
 	"levels": {},
 	"inventory": {},
+	"ability_bar": [],
+	"abilities_container": [],
 	"game_characters": {},
 	"dead_ids": [],
 }
@@ -27,7 +29,6 @@ func _ready() -> void:
 	await ui_handler.ready
 	_load_bin_file()
 	_load_player()
-	_load_inv()
 	
 	var last_level_id:String = save_data["last_level_id"]
 	var loading:bool = false
@@ -40,15 +41,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
 		save_save_file()
 
-func _load_inv() -> void:
-	await inventory.ready
-	inventory.load_inv_from_data(save_data)
-
 func _load_player() -> void:
 	player = load(PLAYER_PATH).instantiate()
 	player.load_from_data(save_data)
 	
 	ui_handler.set_player(player)
+	ui_handler.load_from_data(save_data)
 	_connect_globes()
 
 func _connect_globes() -> void:
@@ -77,7 +75,7 @@ func _save_current_level():
 func save_save_file() -> void:
 	save_player()
 	_save_current_level()
-	inventory.save_inv_to_data(save_data)
+	ui_handler.save_to_data(save_data)
 	
 	#Creates new file if does not exist
 	var file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)

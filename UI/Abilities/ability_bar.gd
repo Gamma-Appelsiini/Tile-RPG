@@ -71,3 +71,26 @@ func _on_container_mouse_entered() -> void:
 
 func _on_container_mouse_exited() -> void:
 	set_process_input(false)
+
+func save_to_data() -> Array:
+	var save_array:Array[String] = []
+	
+	for slot:AbilitySlot in slots:
+		var abi_to_save:Ability = slot.ability_in_slot
+		if abi_to_save == null: save_array.push_back("")
+		else:
+			var scene_path:String = abi_to_save.scene_file_path
+			save_array.push_back(scene_path)
+		
+	return save_array
+
+func load_from_array(save_array:Array[String]) -> void:
+	if save_array == []: return
+	
+	var place:int = 0
+	for path:String in save_array:
+		if path != "":
+			var new_ability:Ability = load(path).instantiate()
+			new_ability.ability_owner = player
+			slots[place].set_ability(new_ability)
+		place += 1
