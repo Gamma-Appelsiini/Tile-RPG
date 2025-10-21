@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0hjepdv625rx"]
+[gd_scene load_steps=12 format=3 uid="uid://d0hjepdv625rx"]
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="2_avm5h"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dxmgw8d3dcpua" path="res://Tile-RPG/UI/CharacterResources/globe_ui.tscn" id="6_nqssf"]
 [ext_resource type="PackedScene" uid="uid://cmjamn0h0y14r" path="res://Tile-RPG/UI/Dialogue/dialogue_window.tscn" id="7_efb4g"]
 [ext_resource type="Script" uid="uid://dg2l3uhho1dlk" path="res://Tile-RPG/Sounds/audio_manager.gd" id="8_pu26t"]
+[ext_resource type="PackedScene" uid="uid://cp3lhfafyqjva" path="res://Tile-RPG/UI/Abilities/abilities_container.tscn" id="9_a4mdm"]
 [ext_resource type="Script" uid="uid://duq8yqsolme5u" path="res://Tile-RPG/Combat/Abilities/ability_targeter.gd" id="10_8wimm"]
 
 [node name="MainScene" type="Node3D"]
@@ -21,7 +22,7 @@ ui_handler = NodePath("../UIHandler")
 ability_targeter = NodePath("../AbilityTargeter")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
-[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "ability_targeter") groups=["UI"]]
+[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter") groups=["UI"]]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -36,6 +37,7 @@ globe_ui = NodePath("GlobeUI")
 stat_window = NodePath("StatWindow")
 dialogue_window = NodePath("DialogueWindow")
 ability_bar = NodePath("AbilityBar")
+abilities_container = NodePath("AbilitiesContainer")
 ability_targeter = NodePath("../AbilityTargeter")
 
 [node name="GlobeUI" parent="UIHandler" instance=ExtResource("6_nqssf")]
@@ -44,6 +46,7 @@ layout_mode = 1
 
 [node name="AbilityBar" parent="UIHandler" node_paths=PackedStringArray("ability_targeter") instance=ExtResource("4_ivirr")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 ability_targeter = NodePath("../../AbilityTargeter")
 
@@ -66,6 +69,11 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 player_inventory = NodePath("../Inventory")
+
+[node name="AbilitiesContainer" parent="UIHandler" node_paths=PackedStringArray("ability_bar") instance=ExtResource("9_a4mdm")]
+visible = false
+layout_mode = 1
+ability_bar = NodePath("../AbilityBar")
 
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("8_pu26t")

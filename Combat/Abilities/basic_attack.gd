@@ -21,3 +21,20 @@ func _create_attack() -> Attack:
 	new_attack.calculate_crit()
 	
 	return new_attack
+
+#Overrided
+func get_range() -> int:
+	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
+	_set_ability_weapon_range(weapon)
+	
+	return ability_range
+
+#Overrided
+func get_dmg() -> Dictionary[Stats.DmgType,int]:
+	var new_attack:Attack = Attack.new()
+	new_attack.attacker = ability_owner
+	
+	_get_weapon_dmg_to_attack(new_attack)
+	new_attack.calculate_weapon_damage_increase()
+	
+	return new_attack.damages

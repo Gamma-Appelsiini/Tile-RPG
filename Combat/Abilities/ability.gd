@@ -31,8 +31,8 @@ var target_char:GameCharacter = null
 var target_tile:Tile = null
 
 #Override
-func _set_description() -> void:
-	pass
+func get_description() -> String:
+	return ability_description
 
 #Override
 func use_ability_on_target_character(target:GameCharacter) -> void:
@@ -43,6 +43,26 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 func use_ability_on_target_tile(target:Tile) -> void:
 	print(target.name)
 	pass
+
+#Override
+func get_dmg() -> Dictionary[Stats.DmgType,int]:
+	return {}
+
+#Override
+func get_range() -> int:
+	return ability_range
+	
+#Override
+func get_aoe() -> int:
+	return ability_aoe
+
+#Override
+func get_sp_cost() -> int:
+	return spirit_cost
+	
+#Override
+func get_cd() -> int:
+	return ability_cooldown
 	
 func _is_target_valid(target:Node) -> bool:
 	if target is GameCharacter:

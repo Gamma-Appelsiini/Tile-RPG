@@ -1,7 +1,5 @@
 class_name Attack
 
-#enum ATTACK_TAG {MELEE, RANGED, SPELL, AOE, SINGLE_TARGET, HIT, DOT, UNEVADEABLE, NO_RETALIATION, WEAPON}
-
 var attacker:GameCharacter = null
 var damages:Dictionary[Stats.DmgType,int] = {}
 var defence_penetrations:Dictionary[Stats.Defence,int] = {

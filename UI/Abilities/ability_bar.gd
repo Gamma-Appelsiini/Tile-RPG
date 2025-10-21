@@ -18,15 +18,6 @@ func _input(event: InputEvent) -> void:
 
 func set_player(new_player:Player) -> void:
 	player = new_player
-	
-	#Test
-	var new_ability:Ability = BASIC_ATTACK.instantiate()
-	new_ability.ability_owner = player
-	slots[0].set_ability(new_ability)
-	
-	var new_ability2:Ability = FIREBALL.instantiate()
-	new_ability2.ability_owner = player
-	slots[1].set_ability(new_ability2)
 
 func _ready() -> void:
 	set_process_input(false)
@@ -63,6 +54,7 @@ func hide_bar() -> void:
 	self.visible = false
 	
 func show_bar() -> void:
+	if visible: return
 	#TODO animate
 	self.visible = true
 

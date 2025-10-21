@@ -20,6 +20,9 @@ func _input(event: InputEvent) -> void:
 		stat_window.visible = !stat_window.visible
 	elif event.is_action_pressed("Bag"):
 		inventory.visible = !inventory.visible
+	elif event.is_action_pressed("Abilities"):
+		if !abilities_container.visible: abilities_container.show_container()
+		else: abilities_container.hide_container()
 
 func set_player(player:Player) -> void:
 	GlobalSignals.player = player
