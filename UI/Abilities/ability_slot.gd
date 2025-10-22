@@ -29,13 +29,11 @@ func set_ability(new_ability:Ability) -> void:
 func add_tooltip() -> void:
 	if tooltip: tooltip.queue_free()
 	var new_tt:AbilityTooltip = ABILITY_TOOLTIP.instantiate()
+	tooltip = new_tt
 	new_tt.set_ability(ability_in_slot)
 	new_tt.visible = false
 	add_child(new_tt)
-	
-	#TODO half of slot height
-	var offset:Vector2 = Vector2(0,30)
-	new_tt.global_position = self.global_position + offset
+
 
 func _set_cooldown() -> void:
 	cooldown_label.text = str(ability_in_slot.current_cooldown)
@@ -55,12 +53,30 @@ func remove_ability() -> void:
 	ability_icon_rect.visible = false
 
 func _mouse_entered() -> void:
-	tooltip.visible = true
+	_show_tt()
+	
 	select_rect.visible = true
 	GlobalSignals.play_audio.emit(hover_audio, AudioManager.AUDIO_TYPE.UI)
 	ability_hovered.emit(self)
 	
 func _mouse_left() -> void:
-	tooltip.visible = false
+	if tooltip: tooltip.visible = false
+
 	select_rect.visible = false
 	ability_unhovered.emit(self)
+
+func _show_tt():
+	if !tooltip: return
+	tooltip.visible = true
+	
+	var viewport_size:Vector2 = get_viewport_rect().size
+	#var on_left:bool = (global_position.x + size.x * 0.5) < viewport_size.x * 0.5
+	var offset_x:float = tooltip.panel_container.size.x
+	var offset_y:float = (tooltip.panel_container.size.y - self.size.y) / 2
+
+	tooltip.panel_container.global_position = self.global_position - Vector2(offset_x + 15, offset_y)
+	
+	var tt_bottom: float = tooltip.panel_container.global_position.y + tooltip.panel_container.size.y
+	var tt_goes_outside_of_bottom_screen:bool = tt_bottom > viewport_size.y
+	if tt_goes_outside_of_bottom_screen:
+		tooltip.panel_container.global_position = self.global_position + Vector2(-(tooltip.panel_container.size.y / 2), -tooltip.panel_container.size.y)

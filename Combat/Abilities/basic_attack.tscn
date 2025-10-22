@@ -8,3 +8,6 @@ script = ExtResource("1_cgb73")
 usable_on_characters = Array[int]([1])
 ability_icon = ExtResource("2_3hlnx")
 ability_name = "Basic Attack"
+ap_cost = 2
+damage_desc = "100% of Weapon Damage"
+ability_desc = "Attack with your equipped weapon."

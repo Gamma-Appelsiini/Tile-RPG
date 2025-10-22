@@ -13,6 +13,7 @@ var hovered_bar_slot:AbilitySlot = null
 var clicked_slot:AbilitySlot = null
 var original_pos:Vector2 = Vector2.ZERO
 const BASIC_ATTACK = preload("uid://bs08mf1jnw3vi")
+const FIREBALL = preload("uid://def83grj4ohmj")
 
 func _ready() -> void:
 	set_process_input(false)
@@ -27,10 +28,16 @@ func _ready() -> void:
 	for slot:AbilitySlot in ability_bar.slots:
 		slot.ability_hovered.connect(set_hovered)
 		slot.ability_unhovered.connect(set_hovered)
-		
+
+
+func set_player(new_player:Player) -> void:
 	var new_ability:Ability = BASIC_ATTACK.instantiate()
+	new_ability.ability_owner = new_player
 	add_new_ability(new_ability)
 	
+	var new_ability2:Ability = FIREBALL.instantiate()
+	new_ability2.ability_owner = new_player
+	add_new_ability(new_ability2)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):

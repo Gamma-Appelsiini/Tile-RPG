@@ -22,7 +22,10 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var ap_cost: int = 1
 @export var spirit_cost: int = 0
 @export var ability_range: int = 1
-@export var ability_aoe: int = 1
+@export var ability_aoe: int = 0
+@export var damage_desc: String = "Damage Description"
+@export_multiline var ability_desc: String = "Ability Description"
+@export_multiline var scaling_desc: String = ""
 
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0
@@ -47,6 +50,10 @@ func use_ability_on_target_tile(target:Tile) -> void:
 #Override
 func get_dmg() -> Dictionary[Stats.DmgType,int]:
 	return {}
+
+#Override
+func get_ap_cost() -> int:
+	return ap_cost
 
 #Override
 func get_range() -> int:

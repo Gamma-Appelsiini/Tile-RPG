@@ -23,21 +23,37 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="AbilityTooltip" type="Control"]
+[node name="AbilityTooltip" type="Control" node_paths=PackedStringArray("panel_container", "name_label", "description_label", "cooldown_label", "range_label", "aoe_label", "sp_label", "damages_container", "aoe_texture_rect", "sp_texture_rect", "range_texture_rect", "cost_container", "dmg_desc_label")]
+z_index = 2
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 322.0
+offset_bottom = 185.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_o3f25")
+panel_container = NodePath("PanelContainer")
+name_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer7/NameLabel")
+description_label = NodePath("PanelContainer/VBoxContainer/DescriptionLabel")
+cooldown_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/CooldownLabel")
+range_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/RangeLabel")
+aoe_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3/AoeLabel")
+sp_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4/SpLabel")
+damages_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/DamagesContainer")
+aoe_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3/AoeTextureRect")
+sp_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4/SpTextureRect")
+range_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/RangeTextureRect")
+cost_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer7/CostContainer")
+dmg_desc_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/DmgDescriptionLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ersg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
@@ -49,9 +65,8 @@ layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer7"]
-unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 22
 text = "Default Name"
 
 [node name="CostContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer7"]
@@ -79,36 +94,64 @@ texture = ExtResource("3_igjpu")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+texture = ExtResource("3_igjpu")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="DescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(0.7024227, 0.6379762, 0.50641954, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7176471)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Description"
+autowrap_mode = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 texture = ExtResource("3_kb0k5")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="DmgDescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7176471)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "This is a damage description"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="DamagesContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -119,7 +162,8 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="CdTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+self_modulate = Color(0.008477317, 0.30457103, 0.43204436, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("4_qnk44")
@@ -127,9 +171,8 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="CooldownLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
@@ -143,7 +186,8 @@ text = "0"
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="RangeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("5_kb0k5")
@@ -151,9 +195,8 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
@@ -167,7 +210,8 @@ text = "0"
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+[node name="AoeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("6_jwe0q")
@@ -175,9 +219,8 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="AoeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
-unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
@@ -191,7 +234,8 @@ text = "0"
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
+[node name="SpTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
+self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("7_6vllo")
@@ -199,9 +243,8 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="SpLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
-unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3

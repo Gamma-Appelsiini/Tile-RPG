@@ -30,6 +30,7 @@ func set_player(player:Player) -> void:
 	inventory.set_player(player)
 	dialogue_window.set_player(player)
 	stat_window.set_game_character(player)
+	abilities_container.set_player(player)
 
 func load_from_data(save_data:Dictionary) -> void:
 	await inventory.ready

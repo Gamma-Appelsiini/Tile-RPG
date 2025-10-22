@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dl8o1rxduyfyg" path="res://Tile-RPG/UI/Abilities/abilities_container.gd" id="1_2uebh"]
 [ext_resource type="StyleBox" uid="uid://dvndtiugiq0s2" path="res://Tile-RPG/UI/panel_style.tres" id="1_g3gg1"]
 
-[node name="AbilitiesContainer" type="Control" node_paths=PackedStringArray("grid_container", "ability_bar")]
+[node name="AbilitiesContainer" type="Control" node_paths=PackedStringArray("grid_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_2uebh")
 grid_container = NodePath("PanelContainer/VBoxContainer/GridContainer")
-ability_bar = NodePath("")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
