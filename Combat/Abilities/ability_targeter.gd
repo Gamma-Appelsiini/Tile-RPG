@@ -11,6 +11,7 @@ var selected_ability:Ability = null
 var hovered_character:GameCharacter = null
 var hovered_tile:Tile = null
 var aoe_indicators:Array[Node3D] = []
+var input_ok:bool = false
 
 func _ready() -> void:
 	set_process(false)
@@ -18,7 +19,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
+		if !input_ok: return
 		_use_ability()
+	#TODO any other action cancels
 	elif event.is_action_pressed("Right Click"):
 		cancel_ability_targeting()
 

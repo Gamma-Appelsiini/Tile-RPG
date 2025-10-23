@@ -14,8 +14,8 @@ ability_cooldown = 1
 ap_cost = 3
 ability_range = 5
 ability_aoe = 3
-damage_desc = "5 + Lvl * 2 + Mystic / 2"
-ability_desc = "Shoot an exploding fireball to target tile."
-scaling_desc = "Chance to ignite tile: 2 * Luck.
-Range: 2 + Agility / 5.
-Aoe: 2 + Might / 5"
+damage_desc = "5 + [color=#ff914d]Lvl[/color] * 2 + [color=#8f39ee]Mystic[/color] / 2"
+ability_desc = "Shoot an exploding fireball at target tile."
+scaling_desc = "Tile ignite %: 2 * [color=#53bb81]Luck[/color].
+Range: 2 + [color=#2b722f]Agility[/color] / 5.
+Aoe: 2 + [color=#bd5136]Might[/color] / 5"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwwbtybjbkw7p"]
+[gd_scene load_steps=10 format=3 uid="uid://dwwbtybjbkw7p"]
 
 [ext_resource type="Script" uid="uid://bs1tmvoxke3ud" path="res://Tile-RPG/UI/Abilities/ability_tooltip.gd" id="1_o3f25"]
 [ext_resource type="Texture2D" uid="uid://h21gl570sx8f" path="res://Tile-RPG/Images/UI/ApBall.png" id="3_igjpu"]
+[ext_resource type="Texture2D" uid="uid://cyhup2i8p3an7" path="res://Tile-RPG/Images/UI/Scale.png" id="3_jwe0q"]
 [ext_resource type="Texture2D" uid="uid://djhr5n3yki3di" path="res://Tile-RPG/Images/UI/Damage.png" id="3_kb0k5"]
 [ext_resource type="Texture2D" uid="uid://8d5u8dvdifd1" path="res://Tile-RPG/Images/UI/Clock.png" id="4_qnk44"]
 [ext_resource type="Texture2D" uid="uid://d1jo3g26bjkum" path="res://Tile-RPG/Images/UI/Range.png" id="5_kb0k5"]
@@ -13,55 +14,64 @@ content_margin_left = 12.0
 content_margin_top = 8.0
 content_margin_right = 12.0
 content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.88235295)
+bg_color = Color(0.1, 0.1, 0.1, 0.92156863)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+border_blend = true
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="AbilityTooltip" type="Control" node_paths=PackedStringArray("panel_container", "name_label", "description_label", "cooldown_label", "range_label", "aoe_label", "sp_label", "damages_container", "aoe_texture_rect", "sp_texture_rect", "range_texture_rect", "cost_container", "dmg_desc_label")]
+[node name="AbilityTooltip" type="VBoxContainer" node_paths=PackedStringArray("panel_container", "name_label", "description_label", "cooldown_label", "range_label", "aoe_label", "sp_label", "aoe_texture_rect", "sp_texture_rect", "range_texture_rect", "cost_container", "scaling_container", "scaling_label", "damage_container", "dmg_description_label")]
 z_index = 2
-layout_mode = 3
-anchors_preset = 0
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 322.0
-offset_bottom = 185.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -112.0
+offset_right = 167.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_o3f25")
 panel_container = NodePath("PanelContainer")
 name_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer7/NameLabel")
 description_label = NodePath("PanelContainer/VBoxContainer/DescriptionLabel")
-cooldown_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/CooldownLabel")
-range_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/RangeLabel")
-aoe_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3/AoeLabel")
-sp_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4/SpLabel")
-damages_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/DamagesContainer")
-aoe_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3/AoeTextureRect")
-sp_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4/SpTextureRect")
-range_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/RangeTextureRect")
+cooldown_label = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer/CooldownLabel")
+range_label = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer2/RangeLabel")
+aoe_label = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer3/AoeLabel")
+sp_label = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer4/SpLabel")
+aoe_texture_rect = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer3/AoeTextureRect")
+sp_texture_rect = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer4/SpTextureRect")
+range_texture_rect = NodePath("PanelContainer/VBoxContainer/IconContainer/HBoxContainer2/RangeTextureRect")
 cost_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer7/CostContainer")
-dmg_desc_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/DmgDescriptionLabel")
+scaling_container = NodePath("PanelContainer/VBoxContainer/ScalingContainer")
+scaling_label = NodePath("PanelContainer/VBoxContainer/ScalingContainer/ScalingLabel")
+damage_container = NodePath("PanelContainer/VBoxContainer/DamageContainer")
+dmg_description_label = NodePath("PanelContainer/VBoxContainer/DamageContainer/DmgDescriptionLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ersg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_constants/separation = 6
 
 [node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 15
 
 [node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer7"]
@@ -71,7 +81,9 @@ text = "Default Name"
 
 [node name="CostContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer7"]
 layout_mode = 2
+size_flags_horizontal = 10
 theme_override_constants/separation = -2
+alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer"]
 custom_minimum_size = Vector2(35, 0)
@@ -103,6 +115,7 @@ stretch_mode = 5
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="DescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer"]
@@ -114,55 +127,89 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7176471)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "Description"
 autowrap_mode = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="ScalingContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
+size_flags_vertical = 4
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(35, 0)
+[node name="ScalingTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/ScalingContainer"]
+self_modulate = Color(0.60929835, 0.4473, 0.71, 1)
+custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("3_jwe0q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ScalingLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScalingContainer"]
+custom_minimum_size = Vector2(250, 35)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.783241, 0.83403987, 0.851964, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8980392)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "This is a scaling description."
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="DamageContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="DmgTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/DamageContainer"]
+self_modulate = Color(0.8235294, 0.27058825, 0.26666668, 1)
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 texture = ExtResource("3_kb0k5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DmgDescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(250, 0)
+[node name="DmgDescriptionLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/DamageContainer"]
+custom_minimum_size = Vector2(250, 35)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7176471)
+theme_override_colors/default_color = Color(0.78431374, 0.8352941, 0.8509804, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8980392)
+theme_override_constants/shadow_outline_size = 0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 18
-text = "This is a damage description"
-horizontal_alignment = 1
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "This is a dmg description"
+fit_content = true
+scroll_active = false
 vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="DamagesContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="IconContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="CdTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="CdTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer"]
 self_modulate = Color(0.008477317, 0.30457103, 0.43204436, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -170,7 +217,7 @@ texture = ExtResource("4_qnk44")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CooldownLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="CooldownLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
@@ -182,11 +229,12 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="RangeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="RangeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer2"]
 self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -194,7 +242,7 @@ texture = ExtResource("5_kb0k5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
@@ -206,11 +254,12 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="AoeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+[node name="AoeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer3"]
 self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -218,7 +267,7 @@ texture = ExtResource("6_jwe0q")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AoeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+[node name="AoeLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
@@ -230,11 +279,12 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="SpTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
+[node name="SpTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer4"]
 self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -242,7 +292,7 @@ texture = ExtResource("7_6vllo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SpLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
+[node name="SpLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer4"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)

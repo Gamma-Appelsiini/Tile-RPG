@@ -11,3 +11,4 @@ ability_name = "Basic Attack"
 ap_cost = 2
 damage_desc = "100% of Weapon Damage"
 ability_desc = "Attack with your equipped weapon."
+scaling_desc = ""

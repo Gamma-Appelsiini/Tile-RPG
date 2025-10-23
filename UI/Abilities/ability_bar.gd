@@ -9,6 +9,7 @@ var slots:Array[AbilitySlot] = []
 var hovered_slot:AbilitySlot = null
 var player:Player = null
 var selected_ability:Ability = null
+
 const BASIC_ATTACK = preload("uid://bs08mf1jnw3vi")
 const FIREBALL = preload("uid://def83grj4ohmj")
 
@@ -59,9 +60,11 @@ func show_bar() -> void:
 	self.visible = true
 
 func _on_container_mouse_entered() -> void:
+	ability_targeter.input_ok = false
 	set_process_input(true)
 
 func _on_container_mouse_exited() -> void:
+	ability_targeter.input_ok = true
 	set_process_input(false)
 
 func save_to_data() -> Array:

@@ -6,6 +6,7 @@ class_name AbilitiesContainer
 
 const SLOTS:int = 6 * 5
 const ABILITY_SLOT := preload("uid://camo5qmy5xx2a")
+const ABILITY_TOOLTIP := preload("uid://dwwbtybjbkw7p")
 
 var owned_abilities:Array[Ability] = []
 var hovered_slot:AbilitySlot = null
@@ -15,20 +16,30 @@ var original_pos:Vector2 = Vector2.ZERO
 const BASIC_ATTACK = preload("uid://bs08mf1jnw3vi")
 const FIREBALL = preload("uid://def83grj4ohmj")
 
+var tooltip:AbilityTooltip = null
+
 func _ready() -> void:
 	set_process_input(false)
 	set_process(false)
+	_create_tooltip()
 	
 	for i in SLOTS:
 		var new_slot:AbilitySlot = ABILITY_SLOT.instantiate()
 		grid_container.add_child(new_slot)
 		new_slot.ability_hovered.connect(set_hovered)
 		new_slot.ability_unhovered.connect(set_hovered)
+		new_slot.tooltip = self.tooltip
 		
 	for slot:AbilitySlot in ability_bar.slots:
 		slot.ability_hovered.connect(set_hovered)
 		slot.ability_unhovered.connect(set_hovered)
+		slot.tooltip = self.tooltip
 
+func _create_tooltip() -> void:
+	var new_tt:AbilityTooltip = ABILITY_TOOLTIP.instantiate()
+	tooltip = new_tt
+	new_tt.visible = false
+	add_child(new_tt)
 
 func set_player(new_player:Player) -> void:
 	var new_ability:Ability = BASIC_ATTACK.instantiate()

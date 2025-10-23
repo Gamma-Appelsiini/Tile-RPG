@@ -23,9 +23,11 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var spirit_cost: int = 0
 @export var ability_range: int = 1
 @export var ability_aoe: int = 0
-@export var damage_desc: String = "Damage Description"
+@export_multiline var damage_desc: String = "Damage Description"
 @export_multiline var ability_desc: String = "Ability Description"
-@export_multiline var scaling_desc: String = ""
+@export_multiline var scaling_desc: String = "[color=#2b722f]Agility[/color],[color=#ee5356]Endurance[/color],
+[color=#53bb81]Luck[/color],[color=#bd5136]Might[/color],[color=#8f39ee]Mystic[/color],[color=#f18690]Skill[/color],
+[color=#d1b81b]Valor[/color],[color=#ff914d]Lvl[/color]"
 
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0

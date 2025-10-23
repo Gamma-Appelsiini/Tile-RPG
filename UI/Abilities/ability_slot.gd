@@ -24,7 +24,6 @@ func set_ability(new_ability:Ability) -> void:
 	ability_icon_rect.texture = new_ability.ability_icon
 	ability_icon_rect.visible = true
 	ability_in_slot = new_ability
-	add_tooltip()
 
 func add_tooltip() -> void:
 	if tooltip: tooltip.queue_free()
@@ -66,7 +65,9 @@ func _mouse_left() -> void:
 	ability_unhovered.emit(self)
 
 func _show_tt():
-	if !tooltip: return
+	if !tooltip or !ability_in_slot: return
+	
+	tooltip.set_ability(ability_in_slot)
 	tooltip.visible = true
 	
 	var viewport_size:Vector2 = get_viewport_rect().size
@@ -74,9 +75,9 @@ func _show_tt():
 	var offset_x:float = tooltip.panel_container.size.x
 	var offset_y:float = (tooltip.panel_container.size.y - self.size.y) / 2
 
-	tooltip.panel_container.global_position = self.global_position - Vector2(offset_x + 15, offset_y)
+	tooltip.global_position = self.global_position - Vector2(offset_x + 15, offset_y)
 	
 	var tt_bottom: float = tooltip.panel_container.global_position.y + tooltip.panel_container.size.y
 	var tt_goes_outside_of_bottom_screen:bool = tt_bottom > viewport_size.y
 	if tt_goes_outside_of_bottom_screen:
-		tooltip.panel_container.global_position = self.global_position + Vector2(-(tooltip.panel_container.size.y / 2), -tooltip.panel_container.size.y)
+		tooltip.global_position = self.global_position + Vector2(-(tooltip.panel_container.size.y / 2), -tooltip.panel_container.size.y)
