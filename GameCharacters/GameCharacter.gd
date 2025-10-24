@@ -3,10 +3,11 @@ class_name GameCharacter
 
 signal move_complete
 signal rotation_complete
-signal died
+signal died(char:GameCharacter)
 signal dodged
 signal blocked
 signal got_hit
+signal end_turn
 
 @export var unique_id:String = ""
 @export var display_name:String = "Default Name"
@@ -25,9 +26,15 @@ var equipment_handler:EquipmentHandler = null
 func _init() -> void:
 	stat_handler = StatHandler.new()
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
+	stat_handler.owner_died.connect(_die)
 	
 	equipment_handler = EquipmentHandler.new()
 	equipment_handler.equipment_owner = self
+
+func _die() -> void:
+	#TODO
+	print("Character ", self.display_name, " died.")
+	died.emit(self)
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)
