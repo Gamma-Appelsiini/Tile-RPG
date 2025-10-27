@@ -22,6 +22,7 @@ var move_tween:Tween = null
 
 var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
+@export var ai_handler:AIHandler = null
 
 func _init() -> void:
 	stat_handler = StatHandler.new()

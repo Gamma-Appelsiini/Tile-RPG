@@ -2,7 +2,9 @@ extends Node
 class_name CombatManager
 
 signal round_changed(number:int)
+signal camera_move_finished
 
+@export var combat_ui:CombatUI = null
 @export var combat_start_music:AudioStream = null
 @export var combat_end_music:AudioStream = null
 @export var player_turn_sound:AudioStream = null
@@ -17,10 +19,13 @@ var player:Player = null
 
 var round_count:int = 0
 var char_to_act:GameCharacter = null
+var spectate_camera_pivot:Node3D = null
+var spectate_camera:Camera3D = null
 
 func _start_combat(new_enemies:Array[GameCharacter]) -> void:
 	_reset()
 	GlobalSignals.play_audio.emit(combat_start_music, AudioManager.AUDIO_TYPE.UI)
+	combat_ui.show_text("Combat Start")
 	
 	player = GlobalSignals.player
 	#TODO Add player team
@@ -31,13 +36,45 @@ func _start_combat(new_enemies:Array[GameCharacter]) -> void:
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died)
 	
-	_next_round()
+	_set_combat_camera()
 	
+	await get_tree().create_timer(1).timeout
+	_next_round()
+
+func _set_combat_camera() -> void:
+	if spectate_camera_pivot: spectate_camera_pivot.queue_free()
+	if spectate_camera: spectate_camera.queue_free()
+	
+	spectate_camera_pivot = player.player_camera.get_parent().duplicate()
+	spectate_camera = player.player_camera.duplicate()
+	spectate_camera.set_script(CombatCamera)
+	spectate_camera.set_process_input(false)
+	spectate_camera.set_physics_process(false)
+	spectate_camera_pivot.add_child(spectate_camera)
+	add_child(spectate_camera_pivot)
+	
+	spectate_camera.make_current()
+
+func _return_to_player_camera() -> void:
+	spectate_camera.set_process_input(false)
+	spectate_camera.set_physics_process(false)
+	_move_camera_to_char(player)
+	await camera_move_finished
+	player.player_camera.pivot.global_basis = spectate_camera_pivot.global_basis
+	player.player_camera.size = spectate_camera.size
+	
+	player.player_camera.make_current()
+
 func _next_round() -> void:
 	round_count += 1
 	round_order = chars_in_combat.duplicate()
 	GlobalSignals.play_audio.emit(round_change_sound, AudioManager.AUDIO_TYPE.UI)
 	round_changed.emit(round_count)
+	
+	combat_ui.add_characters(round_order)
+	await combat_ui.portraits_added
+	combat_ui.show_text("Round " + str(round_count))
+	
 	_next_turn()
 
 func _next_turn() -> void:
@@ -47,16 +84,50 @@ func _next_turn() -> void:
 	
 	round_order.sort_custom(_compare_initiative)
 	char_to_act = round_order[0]
-	char_to_act.end_turn.connect(_next_turn)
+	round_order.erase(char_to_act)
+	
+	combat_ui.update_portraits(round_order)
+	combat_ui.set_turn_haver(char_to_act)
+	combat_ui.show_text(char_to_act.display_name + ("'s turn"))
+	_handle_camera(char_to_act)
 	
 	if char_to_act is Player:
 		#TODO
 		GlobalSignals.play_audio.emit(player_turn_sound, AudioManager.AUDIO_TYPE.UI)
-		pass
+		_player_turn()
 	else:
 		#TODO
 		GlobalSignals.play_audio.emit(turn_change_sound, AudioManager.AUDIO_TYPE.UI)
-		pass
+		char_to_act.ai_handler.take_turn()
+		
+	await char_to_act.end_turn
+	_next_turn()
+
+func _player_turn() -> void:
+	#TODO show UI
+	print("player had their turn")
+	player.end_turn.emit()
+	#await player.end_turn
+
+func _handle_camera(current_actor:GameCharacter) -> void:
+	spectate_camera_pivot.reparent(current_actor)
+	set_process_input(false)
+	_move_camera_to_char(current_actor)
+	await camera_move_finished
+	
+	if current_actor is Player:
+		spectate_camera.set_process_input(true)
+		spectate_camera.set_physics_process(true)
+
+
+func _move_camera_to_char(current_actor:GameCharacter) -> void:
+	var distance:float = current_actor.global_position.distance_to(spectate_camera_pivot.global_position)
+	var time_to_point:float = distance * 0.1 + 0.2
+	
+	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(spectate_camera_pivot, "global_position", current_actor.global_position, time_to_point)
+	await tween.finished
+	camera_move_finished.emit()
 
 func _char_died(dead_char:GameCharacter) -> void:
 	if dead_char in player_team: player_team.erase(dead_char)

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqq3ue4ejaios"]
+
+[ext_resource type="Script" uid="uid://dj70b8q4x7jd4" path="res://Tile-RPG/UI/Combat/combat_ui.gd" id="1_oalw4"]
+[ext_resource type="PackedScene" uid="uid://cerdi7wt14odo" path="res://Tile-RPG/UI/Combat/turn_portrait.tscn" id="2_1ychr"]
+[ext_resource type="FontFile" uid="uid://d0yoohyaar2bi" path="res://Tile-RPG/Fonts/GoogleFonts/CinzelDecorative-Bold.ttf" id="3_jsdr5"]
+
+[node name="CombatUI" type="Control" node_paths=PackedStringArray("turn_container", "info_label", "turn_haver_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_oalw4")
+turn_container = NodePath("TurnContainer")
+info_label = NodePath("InfoLabel")
+turn_haver_container = NodePath("TurnHaverContainer")
+
+[node name="TurnContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.15
+
+[node name="TurnPortrait" parent="TurnContainer" instance=ExtResource("2_1ychr")]
+layout_mode = 2
+
+[node name="TurnPortrait2" parent="TurnContainer" instance=ExtResource("2_1ychr")]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="."]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -301.0
+offset_right = 301.0
+offset_bottom = 98.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9881112, 0.5278308, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7607843)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_jsdr5")
+theme_override_font_sizes/font_size = 72
+text = "COMBAT START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnHaverContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.225
+
+[node name="VBoxContainer" parent="TurnHaverContainer" instance=ExtResource("2_1ychr")]
+layout_mode = 2
