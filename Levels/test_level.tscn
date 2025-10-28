@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://do44fnv3jbpyo"]
+[gd_scene load_steps=18 format=3 uid="uid://do44fnv3jbpyo"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_hnyhx"]
 [ext_resource type="PackedScene" uid="uid://wdj2pbvpp1yp" path="res://Tile-RPG/Interactables/test_interact.tscn" id="2_686us"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_176yf"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_dk6lg"]
+[ext_resource type="Texture2D" uid="uid://cdv3r02ojo6fe" path="res://Tile-RPG/Images/Portraits/rogue_portrait.png" id="5_e3s5j"]
 [ext_resource type="PackedScene" uid="uid://y7vct1hyfty8" path="res://Tile-RPG/Breakables/wooden_crate.tscn" id="5_hnyhx"]
 [ext_resource type="PackedScene" uid="uid://c7br5jtsjalha" path="res://Tile-RPG/Interactables/dialogue_interactable.tscn" id="5_hp41k"]
 [ext_resource type="Resource" uid="uid://ccmrmya1xe72k" path="res://Tile-RPG/Dialogue/Resources/test_dialogue.tres" id="6_27w33"]
@@ -70,6 +71,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47008, 0, -0.940551)
 
 [node name="TestNPC" parent="GameCharNode" instance=ExtResource("9_y07y2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8723062, 0, -2.1303988)
+picture = ExtResource("5_e3s5j")
+
+[node name="CombatStarter" parent="GameCharNode/TestNPC" index="6" node_paths=PackedStringArray("combatants")]
+combatants = [NodePath(".."), NodePath("../../TestNPC2")]
+
+[node name="TestNPC2" parent="GameCharNode" instance=ExtResource("9_y07y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.084261, 0, -5.8355293)
 
 [node name="Interactables" type="Node" parent="."]
 
@@ -1023,4 +1031,5 @@ metadata/_custom_type_script = "uid://bp36ikilmc15g"
 [node name="Roach" parent="." instance=ExtResource("14_e3s5j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
+[editable path="GameCharNode/TestNPC"]
 [editable path="Interactables/DialogueInteractable"]

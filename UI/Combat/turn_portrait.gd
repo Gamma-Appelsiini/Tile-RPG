@@ -21,6 +21,7 @@ func _set_hp() -> void:
 	hp_label.text = hp_text
 	
 	var percentage:float = cur_hp / float(max_hp)
+	percentage = abs(1 - percentage)
 	var shader_material:ShaderMaterial = hp_rect.material
 	shader_material.set_shader_parameter("percentage", percentage)
 

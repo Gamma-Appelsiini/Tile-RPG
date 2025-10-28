@@ -22,8 +22,12 @@ var char_to_act:GameCharacter = null
 var spectate_camera_pivot:Node3D = null
 var spectate_camera:Camera3D = null
 
-func _start_combat(new_enemies:Array[GameCharacter]) -> void:
+func _ready() -> void:
+	GlobalSignals.combat_manager = self
+
+func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	_reset()
+	GlobalSignals.combat_start.emit()
 	GlobalSignals.play_audio.emit(combat_start_music, AudioManager.AUDIO_TYPE.UI)
 	combat_ui.show_text("Combat Start")
 	
@@ -35,6 +39,7 @@ func _start_combat(new_enemies:Array[GameCharacter]) -> void:
 	chars_in_combat = player_team + enemy_team
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died)
+		GlobalSignals.current_level.tile_manager.set_on_closest_tile(game_char)
 	
 	_set_combat_camera()
 	
@@ -67,13 +72,14 @@ func _return_to_player_camera() -> void:
 
 func _next_round() -> void:
 	round_count += 1
+	combat_ui.show_text("Round " + str(round_count))
 	round_order = chars_in_combat.duplicate()
 	GlobalSignals.play_audio.emit(round_change_sound, AudioManager.AUDIO_TYPE.UI)
 	round_changed.emit(round_count)
 	
+	round_order.sort_custom(_compare_initiative)
 	combat_ui.add_characters(round_order)
 	await combat_ui.portraits_added
-	combat_ui.show_text("Round " + str(round_count))
 	
 	_next_turn()
 
@@ -105,6 +111,7 @@ func _next_turn() -> void:
 
 func _player_turn() -> void:
 	#TODO show UI
+	await get_tree().create_timer(3).timeout
 	print("player had their turn")
 	player.end_turn.emit()
 	#await player.end_turn
@@ -118,6 +125,9 @@ func _handle_camera(current_actor:GameCharacter) -> void:
 	if current_actor is Player:
 		spectate_camera.set_process_input(true)
 		spectate_camera.set_physics_process(true)
+	else:
+		spectate_camera.set_process_input(false)
+		spectate_camera.set_physics_process(false)
 
 
 func _move_camera_to_char(current_actor:GameCharacter) -> void:
@@ -151,7 +161,7 @@ func _compare_initiative(a:GameCharacter, b:GameCharacter):
 
 func _end_combat() -> void:
 	GlobalSignals.play_audio.emit(combat_end_music, AudioManager.AUDIO_TYPE.UI)
-	pass
+	GlobalSignals.combat_end.emit()
 
 func _reset() -> void:
 	chars_in_combat = []

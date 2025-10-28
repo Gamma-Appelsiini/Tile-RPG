@@ -8,6 +8,7 @@ class_name UIHandler
 @export var ability_bar: AbilityBar = null
 @export var abilities_container: AbilitiesContainer = null
 @export var ability_targeter: AbilityTargeter = null
+@export var combat_ui: CombatUI = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 

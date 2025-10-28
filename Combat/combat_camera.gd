@@ -8,6 +8,7 @@ var parent_node:Node3D = null
 
 func _ready() -> void:
 	parent_node = get_parent_node_3d()
+	pivot = parent_node
 
 func _physics_process(delta: float) -> void:
 	var move_direction := _handle_movement_input()

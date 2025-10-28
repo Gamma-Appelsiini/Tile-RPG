@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0hjepdv625rx"]
+[gd_scene load_steps=15 format=3 uid="uid://d0hjepdv625rx"]
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="2_avm5h"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://dg2l3uhho1dlk" path="res://Tile-RPG/Sounds/audio_manager.gd" id="8_pu26t"]
 [ext_resource type="PackedScene" uid="uid://cp3lhfafyqjva" path="res://Tile-RPG/UI/Abilities/abilities_container.tscn" id="9_a4mdm"]
 [ext_resource type="Script" uid="uid://duq8yqsolme5u" path="res://Tile-RPG/Combat/Abilities/ability_targeter.gd" id="10_8wimm"]
+[ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/Combat/combat_ui.tscn" id="10_60sei"]
+[ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
+[ext_resource type="AudioStream" uid="uid://cbxtrq1o2v6jn" path="res://Tile-RPG/Sounds/Music/CombatStart.wav" id="14_274ut"]
 
 [node name="MainScene" type="Node3D"]
 
@@ -22,7 +25,7 @@ ui_handler = NodePath("../UIHandler")
 ability_targeter = NodePath("../AbilityTargeter")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
-[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter") groups=["UI"]]
+[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter", "combat_ui") groups=["UI"]]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -39,6 +42,7 @@ dialogue_window = NodePath("DialogueWindow")
 ability_bar = NodePath("AbilityBar")
 abilities_container = NodePath("AbilitiesContainer")
 ability_targeter = NodePath("../AbilityTargeter")
+combat_ui = NodePath("CombatUI")
 
 [node name="GlobeUI" parent="UIHandler" instance=ExtResource("6_nqssf")]
 unique_name_in_owner = true
@@ -75,6 +79,10 @@ visible = false
 layout_mode = 1
 ability_bar = NodePath("../AbilityBar")
 
+[node name="CombatUI" parent="UIHandler" instance=ExtResource("10_60sei")]
+visible = false
+layout_mode = 1
+
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("8_pu26t")
 metadata/_custom_type_script = "uid://dg2l3uhho1dlk"
@@ -83,3 +91,9 @@ metadata/_custom_type_script = "uid://dg2l3uhho1dlk"
 unique_name_in_owner = true
 script = ExtResource("10_8wimm")
 metadata/_custom_type_script = "uid://duq8yqsolme5u"
+
+[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("combat_ui")]
+script = ExtResource("13_t6tkx")
+combat_ui = NodePath("../UIHandler/CombatUI")
+combat_start_music = ExtResource("14_274ut")
+metadata/_custom_type_script = "uid://dwdy8svwx3gnc"

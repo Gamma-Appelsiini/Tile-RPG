@@ -15,6 +15,8 @@ var _last_move_dir: Vector3 = Vector3.BACK
 var movement_enabled:bool = true
 
 func _ready() -> void:
+	GlobalSignals.combat_start.connect(_disable_movement)
+	GlobalSignals.combat_end.connect(_enable_movement)
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
 
