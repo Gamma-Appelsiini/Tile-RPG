@@ -9,139 +9,134 @@ signal portraits_added
 @export var turn_haver_container: VBoxContainer = null
 
 const TURN_PORTRAIT := preload("uid://cerdi7wt14odo")
+const PORTRAIT_MOVE_TIME:float = 0.7
+const PORTRAIT_X_RATIO:float = 0.75
+const MARGIN_SIZE:Vector2 = Vector2(3,0)
 
+var combat_manager:CombatManager = null
 var turn_haver_portrait:TurnPortrait = null
 
 func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("Left Click"):
-		turn_haver_portrait = turn_haver_container.get_children()[0]
-		_animate_turn_haver_away()
+		#turn_haver_portrait = turn_haver_container.get_children()[0]
+		_squeeze_portrait_away(turn_container.get_children()[0])
 
 func _ready() -> void:
 	GlobalSignals.combat_start.connect(_on_combat_start)
 	GlobalSignals.combat_end.connect(_on_combat_end)
 
 func _on_combat_start() -> void:
+	combat_manager = GlobalSignals.combat_manager
 	self.visible = true
 
 func _on_combat_end() -> void:
 	self.visible = false
 	for tp:TurnPortrait in turn_container: tp.queue_free()
 
+func _get_border_type(gchar:GameCharacter) -> TurnPortrait.BORDER_TYPE:
+	var border_type:TurnPortrait.BORDER_TYPE = TurnPortrait.BORDER_TYPE.ENEMY
+	if gchar is Player: border_type = TurnPortrait.BORDER_TYPE.PLAYER
+	elif combat_manager.player_team.has(gchar): border_type = TurnPortrait.BORDER_TYPE.FRIENDLY
+	
+	return border_type
+
 func add_characters(combatants:Array[GameCharacter]) -> void:
 	for gchar:GameCharacter in combatants:
 		var new_portrait:TurnPortrait = TURN_PORTRAIT.instantiate()
-		new_portrait.set_character(gchar)
-		#new_portrait.modulate.a = 0
+		var border_type:TurnPortrait.BORDER_TYPE = _get_border_type(gchar)
+		new_portrait.set_character(gchar, border_type)
 		turn_container.add_child(new_portrait)
-		_animate_portrait_to_pos(new_portrait)
-		await get_tree().create_timer(0.2).timeout
+		
+		new_portrait.modulate.a = 0
+		_animate_portrait_in_out(new_portrait,false, false)
+		await get_tree().create_timer(PORTRAIT_MOVE_TIME).timeout
+		new_portrait.modulate.a = 1
 	
 	portraits_added.emit()
 
 func update_portraits(combatants:Array[GameCharacter]) -> void:
 	var portraits_to_remove:Array[TurnPortrait] = []
-	var portraits_to_keep:Array[TurnPortrait] = []
 	
 	for tp:TurnPortrait in turn_container.get_children():
 		if !combatants.has(tp.gchar):
 			portraits_to_remove.push_back(tp)
-		else: portraits_to_keep.push_back(tp)
 			
-	#Animate portraits smoothly to their new places inside turn_container and remove not needed portraits smoothly animating them away
-	#Combatants is the order in the portraits should be. TurnPortrait has variable gchar that has which GameCharacter is in the portrait.
+	for tp:TurnPortrait in portraits_to_remove:
+		_squeeze_portrait_away(tp)
 	
-	# Animate removals (fade + slide out)
-	for tp in portraits_to_remove:
-		var tween := create_tween()
-		tween.tween_property(tp, "modulate:a", 0.0, 0.3)
-		tween.tween_property(tp, "position:x", tp.position.x + 50, 0.3)
-		tween.finished.connect(func():
-			if is_instance_valid(tp):
-				tp.queue_free()
-		)
-	
-	# Ensure container order matches combatants array
-	var new_order:Array[TurnPortrait] = []
-	for gchar in combatants:
-		var portrait := portraits_to_keep.filter(func(p): return p.gchar == gchar)
-		if portrait.size() > 0:
-			new_order.push_back(portrait[0])
-	
-	# Reorder nodes according to combatants order
-	for i in range(new_order.size()):
-		turn_container.move_child(new_order[i], i)
-	
-	# Animate smooth movement of portraits to new positions
-	# We wait one frame to ensure layout updates before tweening
-	await get_tree().process_frame
-	for tp in new_order:
-		var tween := create_tween()
-		var target_pos := tp.position  # new layout position
-		tp.position = tp.position.lerp(target_pos, 0.0) # keep current pos
-		tween.tween_property(tp, "position", target_pos, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	await get_tree().create_timer(PORTRAIT_MOVE_TIME / 1.5).timeout
+	portraits_added.emit()
 
+func _squeeze_portrait_away(tp:TurnPortrait) -> void:
+	_animate_portrait_in_out(tp,true)
+	tp.modulate.a = 0
+	if tp.nine_patch_rect: tp.nine_patch_rect.free()
+	tp.custom_minimum_size.y = tp.get_parent_control().size.y
+	tp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(tp,"custom_minimum_size:y", 0, PORTRAIT_MOVE_TIME / 2)
+	await tween.finished
+	tp.queue_free()
 
-func set_turn_haver(gchar:GameCharacter) -> void:
-	_animate_turn_haver_away(gchar)
+func _calculate_x_offset(tp:TurnPortrait) -> Vector2:
+	var portraits_amount:int = turn_container.get_child_count()
+	if portraits_amount == 1: return Vector2(tp.size.y * PORTRAIT_X_RATIO / 2, 0) + MARGIN_SIZE
+	var x_offset:Vector2 = Vector2(portraits_amount * tp.size.y * PORTRAIT_X_RATIO,0) - Vector2(tp.size.y * PORTRAIT_X_RATIO / 2, 0) + MARGIN_SIZE
+	return x_offset
 
-func _animate_turn_haver_in(gchar:GameCharacter) -> void:
+func _animate_portrait_in_out(tp:TurnPortrait, out:bool, turn_haver:bool = false) -> void:
+	if tp == null: return
+	
+	var animation_portrait:TurnPortrait = tp.duplicate()
+	animation_portrait.modulate.a = 1
+	add_child(animation_portrait)
+	
+	animation_portrait.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	animation_portrait.size.y = tp.get_parent().size.y
+	animation_portrait.position = _calculate_x_offset(animation_portrait)
+	if turn_haver: animation_portrait.position = Vector2(-tp.get_parent().size.x /2,0) + MARGIN_SIZE
+	
+	var offset:Vector2 = Vector2(0,get_viewport_rect().size.y * 0.2)
+	var modulation:int = 0
+	if !out:
+		modulation = 1
+		animation_portrait.modulate.a = 0
+		animation_portrait.position = animation_portrait.position + -offset
+	
+	GlobalSignals.play_audio.emit(portrait_slide_sound, AudioManager.AUDIO_TYPE.UI)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(animation_portrait,"modulate:a", modulation, PORTRAIT_MOVE_TIME / 2)
+	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME)
+	
+	await tween.finished
+	animation_portrait.queue_free()
+
+func set_turn_haver(new_turn_haver:GameCharacter) -> void:
+	if turn_haver_portrait != null:
+		turn_haver_portrait.modulate.a = 0
+		_animate_portrait_in_out(turn_haver_portrait, true, true)
+		await get_tree().create_timer(PORTRAIT_MOVE_TIME).timeout
+		turn_haver_portrait.queue_free()
+		turn_haver_portrait = null
+		
+	if new_turn_haver == null: return
+	for tp:TurnPortrait in turn_container.get_children():
+		if tp.gchar == new_turn_haver:
+			_squeeze_portrait_away(tp)
+			break
+	
 	var new_portrait:TurnPortrait = TURN_PORTRAIT.instantiate()
-	new_portrait.set_character(gchar)
+	var border_type:TurnPortrait.BORDER_TYPE = _get_border_type(new_turn_haver)
+	new_portrait.set_character(new_turn_haver, border_type)
 	new_portrait.set_active()
 	turn_haver_portrait = new_portrait
 	turn_haver_container.add_child(new_portrait)
-	_animate_portrait_to_pos(new_portrait)
-
-func _animate_turn_haver_away(replacer_char:GameCharacter = null) -> void:
-	if !turn_haver_portrait:
-		if replacer_char: _animate_turn_haver_in(replacer_char)
-		return
-	
-	var animation_portrait:TurnPortrait = turn_haver_portrait.duplicate()
-	add_child(animation_portrait)
-	animation_portrait.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	animation_portrait.size.y = turn_haver_portrait.get_parent().size.y
-	animation_portrait.position = Vector2(-turn_haver_portrait.get_parent().size.x /2,0)
-	
-	turn_haver_portrait.queue_free()
-	
-	var viewport_size:Vector2 = get_viewport_rect().size
-	var offset:Vector2 = Vector2(0,viewport_size.y * 0.4)
-	
-	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true)
-	tween.tween_property(animation_portrait,"modulate:a", 0, 0.9)
-	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, 1)
-	
-	await tween.finished
-	animation_portrait.queue_free()
-	turn_haver_portrait = null
-	
-	if replacer_char: _animate_turn_haver_in(replacer_char)
-
-func _animate_portrait_to_pos(portrait:TurnPortrait) -> void:
-	portrait.modulate.a = 0
-	var animation_portrait:TurnPortrait = portrait.duplicate()
-	animation_portrait.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	self.add_child(animation_portrait)
-	#animation_portrait.custom_minimum_size = portrait.size
-	animation_portrait.size.y = portrait.get_parent().size.y
-	
-	
-	var viewport_size:Vector2 = get_viewport_rect().size
-	var offset:Vector2 = Vector2(0,viewport_size.y * 0.4)
-	animation_portrait.global_position = animation_portrait.global_position + offset
-	
-	
-	GlobalSignals.play_audio.emit(portrait_slide_sound, AudioManager.AUDIO_TYPE.UI)
-	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true)
-	tween.tween_property(animation_portrait,"modulate:a", 1, .4)
-	tween.tween_property(animation_portrait,"global_position", portrait.global_position, .8)
-	
-	await tween.finished
-	portrait.modulate.a = 1
-	animation_portrait.queue_free()
+	new_portrait.modulate.a = 0
+	_animate_portrait_in_out(new_portrait, false, true)
+	await get_tree().create_timer(PORTRAIT_MOVE_TIME).timeout
+	new_portrait.modulate.a = 1
 
 func show_text(new_text:String, color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
 	var new_label:Label = info_label.duplicate()

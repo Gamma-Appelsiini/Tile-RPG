@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://b6uoucwfkwj3j" path="res://Tile-RPG/UI/StatWindow/stat_panel_style.tres" id="1_ehtug"]
 [ext_resource type="Script" uid="uid://gc40tv5b62wy" path="res://Tile-RPG/UI/StatWindow/picture_container.gd" id="1_hi05f"]
-[ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="2_lte2h"]
+[ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_ehtug"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehtug"]
 bg_color = Color(0.183155, 0.0650727, 0.0555302, 1)
@@ -51,7 +51,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_lte2h")
+texture = ExtResource("3_ehtug")
 expand_mode = 1
 stretch_mode = 5
 

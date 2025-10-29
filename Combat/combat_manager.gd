@@ -71,6 +71,7 @@ func _return_to_player_camera() -> void:
 	player.player_camera.make_current()
 
 func _next_round() -> void:
+	combat_ui.set_turn_haver(null)
 	round_count += 1
 	combat_ui.show_text("Round " + str(round_count))
 	round_order = chars_in_combat.duplicate()
@@ -145,6 +146,8 @@ func _char_died(dead_char:GameCharacter) -> void:
 	chars_in_combat.erase(dead_char)
 	round_order.erase(dead_char)
 	dead_char.died.disconnect(_char_died)
+	combat_ui.update_portraits(round_order)
+	await combat_ui.portraits_added
 	
 	if len(enemy_team) == 0:
 		_end_combat()

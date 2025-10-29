@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
 [ext_resource type="Script" uid="uid://cur80jd0cr7os" path="res://Tile-RPG/Camera/player_camera.gd" id="2_42kgy"]
-[ext_resource type="Texture2D" uid="uid://3h3xuhntkl48" path="res://Tile-RPG/Images/Portraits/peasant_portrait.png" id="2_gqri5"]
+[ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="2_gqri5"]
 [ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
 [ext_resource type="PackedScene" uid="uid://bdpwih35s30mm" path="res://Tile-RPG/UI/CharacterResources/resource_globe.tscn" id="5_kd85i"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="7_gqri5"]

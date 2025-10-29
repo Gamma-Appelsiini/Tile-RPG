@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://6xedavukxk8d"]
 
 [ext_resource type="Script" uid="uid://c0p70k8koyggt" path="res://Tile-RPG/UI/Dialogue/dialogue_portrait.gd" id="1_3ygy6"]
-[ext_resource type="Texture2D" uid="uid://cg6egsvu5pckp" path="res://Tile-RPG/Images/default_portrait.png" id="1_gb4x2"]
 [ext_resource type="Texture2D" uid="uid://d4eiicta8350h" path="res://Tile-RPG/Images/UI/Border3.png" id="2_w16rv"]
+[ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_w16rv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ugm8h"]
 texture = ExtResource("2_w16rv")
@@ -36,7 +36,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_ugm8h")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 329)
 layout_mode = 2
-texture = ExtResource("1_gb4x2")
+texture = ExtResource("3_w16rv")
 expand_mode = 1
 stretch_mode = 5
 

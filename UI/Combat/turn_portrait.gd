@@ -1,18 +1,27 @@
 extends VBoxContainer
 class_name TurnPortrait
 
+enum BORDER_TYPE {ENEMY, FRIENDLY, PLAYER}
+
 @export var portrait_rect: TextureRect = null
 @export var hp_label: Label = null
 @export var shadow_rect: ColorRect = null
 @export var hp_rect: ColorRect = null
+@export var nine_patch_rect: NinePatchRect = null
+
+const BORDER_COLORS:Dictionary[BORDER_TYPE, Color] = {BORDER_TYPE.ENEMY: Color(0.809, 0.0, 0.215, 1.0), BORDER_TYPE.FRIENDLY: Color(0.0, 0.61, 0.431, 1.0),BORDER_TYPE.PLAYER: Color(0.974, 0.851, 0.771, 1.0)}
 
 var gchar:GameCharacter = null
 
-func set_character(new_character:GameCharacter) -> void:
+func set_character(new_character:GameCharacter, char_type:BORDER_TYPE = BORDER_TYPE.ENEMY) -> void:
 	portrait_rect.texture = new_character.picture
 	gchar = new_character
+	_set_border_color(char_type)
 	_set_hp()
 	gchar.stat_handler.stats_changed.connect(_set_hp)
+	
+func _set_border_color(type:BORDER_TYPE = BORDER_TYPE.ENEMY) -> void:
+	nine_patch_rect.modulate = BORDER_COLORS[type]
 	
 func _set_hp() -> void:
 	var cur_hp:int = gchar.stat_handler.resources[Stats.ResourceStat.CURRENT_HP]
