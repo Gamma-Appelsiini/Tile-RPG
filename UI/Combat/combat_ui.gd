@@ -11,18 +11,11 @@ signal portraits_added
 const TURN_PORTRAIT := preload("uid://cerdi7wt14odo")
 const PORTRAIT_MOVE_TIME:float = 0.7
 const PORTRAIT_X_RATIO:float = 0.75
-const MARGIN_SIZE:Vector2 = Vector2(3,0)
 
 var combat_manager:CombatManager = null
 var turn_haver_portrait:TurnPortrait = null
 
-func _input(event: InputEvent) -> void:
-	
-	if event.is_action_pressed("Left Click"):
-		#turn_haver_portrait = turn_haver_container.get_children()[0]
-		_squeeze_portrait_away(turn_container.get_children()[0])
-
-func _ready() -> void:
+func _ready() -> void:  
 	GlobalSignals.combat_start.connect(_on_combat_start)
 	GlobalSignals.combat_end.connect(_on_combat_end)
 
@@ -33,6 +26,13 @@ func _on_combat_start() -> void:
 func _on_combat_end() -> void:
 	self.visible = false
 	for tp:TurnPortrait in turn_container: tp.queue_free()
+
+func _get_portrait_size() -> Vector2:
+	var p_height:float = get_viewport_rect().size.y * 0.1
+	var p_width:float = p_height * PORTRAIT_X_RATIO
+	var p_size:Vector2 = Vector2(p_width, p_height)
+	
+	return p_size
 
 func _get_border_type(gchar:GameCharacter) -> TurnPortrait.BORDER_TYPE:
 	var border_type:TurnPortrait.BORDER_TYPE = TurnPortrait.BORDER_TYPE.ENEMY
@@ -72,7 +72,7 @@ func _squeeze_portrait_away(tp:TurnPortrait) -> void:
 	_animate_portrait_in_out(tp,true)
 	tp.modulate.a = 0
 	if tp.nine_patch_rect: tp.nine_patch_rect.free()
-	tp.custom_minimum_size.y = tp.get_parent_control().size.y
+	tp.custom_minimum_size.y = _get_portrait_size().y
 	tp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
@@ -80,10 +80,12 @@ func _squeeze_portrait_away(tp:TurnPortrait) -> void:
 	await tween.finished
 	tp.queue_free()
 
-func _calculate_x_offset(tp:TurnPortrait) -> Vector2:
-	var portraits_amount:int = turn_container.get_child_count()
-	if portraits_amount == 1: return Vector2(tp.size.y * PORTRAIT_X_RATIO / 2, 0) + MARGIN_SIZE
-	var x_offset:Vector2 = Vector2(portraits_amount * tp.size.y * PORTRAIT_X_RATIO,0) - Vector2(tp.size.y * PORTRAIT_X_RATIO / 2, 0) + MARGIN_SIZE
+func _calculate_x_offset(tp:TurnPortrait, out:bool = false) -> Vector2:
+	var portraits_place:int = turn_container.get_children().find(tp) + 1
+	if !out: portraits_place = turn_container.get_child_count()
+	
+	if portraits_place == 1: return Vector2(0, 0)
+	var x_offset:Vector2 = Vector2(portraits_place * (_get_portrait_size().x),0) - Vector2(_get_portrait_size().x, 0)
 	return x_offset
 
 func _animate_portrait_in_out(tp:TurnPortrait, out:bool, turn_haver:bool = false) -> void:
@@ -94,21 +96,24 @@ func _animate_portrait_in_out(tp:TurnPortrait, out:bool, turn_haver:bool = false
 	add_child(animation_portrait)
 	
 	animation_portrait.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	animation_portrait.size.y = tp.get_parent().size.y
-	animation_portrait.position = _calculate_x_offset(animation_portrait)
-	if turn_haver: animation_portrait.position = Vector2(-tp.get_parent().size.x /2,0) + MARGIN_SIZE
+	animation_portrait.size = _get_portrait_size()
+	animation_portrait.position = _calculate_x_offset(tp, out) + Vector2(get_viewport_rect().size.x * 0.5, 0)
+
+	if turn_haver:
+		animation_portrait.size = Vector2(get_viewport_rect().size.x * (0.5 - 0.435), get_viewport_rect().size.y * 0.15)
+		animation_portrait.position = Vector2(get_viewport_rect().size.x * 0.435, 0)
 	
-	var offset:Vector2 = Vector2(0,get_viewport_rect().size.y * 0.2)
+	var offset:Vector2 = Vector2(0, get_viewport_rect().size.y * 0.2)
 	var modulation:int = 0
 	if !out:
 		modulation = 1
 		animation_portrait.modulate.a = 0
-		animation_portrait.position = animation_portrait.position + -offset
+		animation_portrait.position = animation_portrait.position - offset
 	
 	GlobalSignals.play_audio.emit(portrait_slide_sound, AudioManager.AUDIO_TYPE.UI)
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
 	tween.tween_property(animation_portrait,"modulate:a", modulation, PORTRAIT_MOVE_TIME / 2)
-	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME)
+	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME + 0.01)
 	
 	await tween.finished
 	animation_portrait.queue_free()

@@ -23,7 +23,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.15
+anchor_bottom = 0.1
 theme_override_constants/separation = 0
 
 [node name="InfoLabel" type="Label" parent="."]
@@ -50,6 +50,6 @@ vertical_alignment = 1
 [node name="TurnHaverContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.4
+anchor_left = 0.435
 anchor_right = 0.5
-anchor_bottom = 0.225
+anchor_bottom = 0.15

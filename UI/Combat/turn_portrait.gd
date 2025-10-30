@@ -9,7 +9,10 @@ enum BORDER_TYPE {ENEMY, FRIENDLY, PLAYER}
 @export var hp_rect: ColorRect = null
 @export var nine_patch_rect: NinePatchRect = null
 
-const BORDER_COLORS:Dictionary[BORDER_TYPE, Color] = {BORDER_TYPE.ENEMY: Color(0.809, 0.0, 0.215, 1.0), BORDER_TYPE.FRIENDLY: Color(0.0, 0.61, 0.431, 1.0),BORDER_TYPE.PLAYER: Color(0.974, 0.851, 0.771, 1.0)}
+const BORDER_COLORS:Dictionary[BORDER_TYPE, Color] ={
+	BORDER_TYPE.ENEMY: Color(0.809, 0.0, 0.215, 1.0),
+	BORDER_TYPE.FRIENDLY: Color(0.0, 0.61, 0.431, 1.0),
+	BORDER_TYPE.PLAYER: Color(0.974, 0.851, 0.771, 1.0)}
 
 var gchar:GameCharacter = null
 
