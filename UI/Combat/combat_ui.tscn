@@ -26,8 +26,14 @@ anchor_right = 1.0
 anchor_bottom = 0.1
 theme_override_constants/separation = 0
 
+[node name="TurnHaverContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.435
+anchor_right = 0.5
+anchor_bottom = 0.15
+
 [node name="InfoLabel" type="Label" parent="."]
-visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 5
@@ -42,14 +48,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7607843)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = ExtResource("3_jsdr5")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 64
 text = "COMBAT START"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TurnHaverContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.435
-anchor_right = 0.5
-anchor_bottom = 0.15

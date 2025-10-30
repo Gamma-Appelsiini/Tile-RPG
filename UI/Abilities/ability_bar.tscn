@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs8aa2kl2ldyl"]
+[gd_scene load_steps=6 format=3 uid="uid://cs8aa2kl2ldyl"]
 
 [ext_resource type="PackedScene" uid="uid://camo5qmy5xx2a" path="res://Tile-RPG/UI/Abilities/ability_slot.tscn" id="1_fh5s2"]
 [ext_resource type="Script" uid="uid://dff24d0l3t5og" path="res://Tile-RPG/UI/Abilities/ability_bar.gd" id="1_on83k"]
+[ext_resource type="Script" uid="uid://g4mhn3qshbnk" path="res://Tile-RPG/UI/Abilities/ap_container.gd" id="3_jq4jv"]
+[ext_resource type="PackedScene" uid="uid://bf7u41el4bmki" path="res://Tile-RPG/UI/Combat/ap_ball.tscn" id="4_8slfc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh5s2"]
 content_margin_left = 1.0
@@ -83,4 +85,31 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="AbilitySlot11" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+layout_mode = 2
+
+[node name="ApContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.85
+anchor_right = 0.6
+anchor_bottom = 0.885
+script = ExtResource("3_jq4jv")
+
+[node name="ApBall" parent="ApContainer" instance=ExtResource("4_8slfc")]
+layout_mode = 2
+
+[node name="ApBall2" parent="ApContainer" instance=ExtResource("4_8slfc")]
+layout_mode = 2
+
+[node name="ApBall3" parent="ApContainer" instance=ExtResource("4_8slfc")]
+layout_mode = 2
+
+[node name="ApBall4" parent="ApContainer" instance=ExtResource("4_8slfc")]
+layout_mode = 2
+
+[node name="ApBall5" parent="ApContainer" instance=ExtResource("4_8slfc")]
+layout_mode = 2
+
+[node name="ApBall6" parent="ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2

@@ -26,6 +26,7 @@ func _on_combat_start() -> void:
 func _on_combat_end() -> void:
 	self.visible = false
 	for tp:TurnPortrait in turn_container: tp.queue_free()
+	for tp:TurnPortrait in turn_haver_container.get_children(): tp.queue_free()
 
 func _get_portrait_size() -> Vector2:
 	var p_height:float = get_viewport_rect().size.y * 0.1
@@ -152,7 +153,7 @@ func show_text(new_text:String, color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void
 	new_label.modulate.a = 0
 	
 	var viewport_size:Vector2 = get_viewport_rect().size
-	var offset:Vector2 = Vector2(0,viewport_size.y * 0.4)
+	var offset:Vector2 = Vector2(0,viewport_size.y * 0.3)
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true)
 	tween.tween_property(new_label,"modulate:a", 1, 1)
