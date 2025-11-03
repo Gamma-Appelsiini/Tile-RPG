@@ -21,12 +21,14 @@ var round_count:int = 0
 var char_to_act:GameCharacter = null
 var spectate_camera_pivot:Node3D = null
 var spectate_camera:Camera3D = null
+var tile_manager:TileManager = null
 
 func _ready() -> void:
 	GlobalSignals.combat_manager = self
 
 func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	_reset()
+	tile_manager = GlobalSignals.current_level.tile_manager
 	GlobalSignals.combat_start.emit()
 	GlobalSignals.play_audio.emit(combat_start_music, AudioManager.AUDIO_TYPE.UI)
 	combat_ui.show_text("Combat Start")
@@ -39,7 +41,7 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	chars_in_combat = player_team + enemy_team
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died)
-		GlobalSignals.current_level.tile_manager.set_on_closest_tile(game_char)
+		tile_manager.set_on_closest_tile(game_char)
 	
 	_set_combat_camera()
 	
@@ -97,6 +99,7 @@ func _next_turn() -> void:
 	combat_ui.set_turn_haver(char_to_act)
 	combat_ui.show_text(char_to_act.display_name + ("'s turn"))
 	_handle_camera(char_to_act)
+	char_to_act.start_turn.emit()
 	
 	if char_to_act is Player:
 		#TODO
@@ -111,11 +114,11 @@ func _next_turn() -> void:
 	_next_turn()
 
 func _player_turn() -> void:
-	#TODO show UI
-	await get_tree().create_timer(3).timeout
-	print("player had their turn")
-	player.end_turn.emit()
-	#await player.end_turn
+	print("player's  turn")
+	tile_manager.enable_shooting()
+	
+	await player.end_turn
+	tile_manager.disable_shooting()
 
 func _handle_camera(current_actor:GameCharacter) -> void:
 	spectate_camera_pivot.reparent(current_actor)

@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 offset_bottom = 3684.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("1_vpwc7")
 ap_rect = NodePath("FullRect")
@@ -25,6 +25,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="FullRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_vpwc7")

@@ -20,6 +20,8 @@ enum ResourceStat {
 	CURRENT_AP,
 	MAX_MOVEMENT,
 	CURRENT_MOVEMENT,
+	MOVEMENT_PER_TURN,
+	AP_PER_TURN,
 }
 
 enum CharStat {

@@ -10,7 +10,7 @@ var char_tiles:Dictionary[GameCharacter,Tile] = {}
 var path_visuals:Array[PathVisual] = []
 
 var player:Player = null
-var player_camera = null
+var player_camera:Camera3D = null
 var shooting:bool = false
 var hovered_tile:Tile = null
 
@@ -159,10 +159,11 @@ func _choose_tile() -> void:
 
 func _get_mouse_point() -> Vector3:
 	var point:Vector3 = Vector3.INF
+	var current_camera:Camera3D = get_viewport().get_camera_3d()
 	
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var from: Vector3 = player_camera.project_ray_origin(mouse_pos)
-	var to: Vector3 = from + player_camera.project_ray_normal(mouse_pos) * 2000.0
+	var from: Vector3 = current_camera.project_ray_origin(mouse_pos)
+	var to: Vector3 = from + current_camera.project_ray_normal(mouse_pos) * 2000.0
 	
 	var space_state := player.get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(from, to)

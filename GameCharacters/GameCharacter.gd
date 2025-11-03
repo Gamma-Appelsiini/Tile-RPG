@@ -7,6 +7,7 @@ signal died(char:GameCharacter)
 signal dodged
 signal blocked
 signal got_hit
+signal start_turn
 signal end_turn
 
 @export var unique_id:String = ""
@@ -16,8 +17,6 @@ signal end_turn
 @export var visual_mesh:MeshInstance3D
 @export var follow_hander:FollowHandler = null
 
-const EASE_TYPE: Tween.EaseType = Tween.EASE_IN_OUT
-const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_SINE
 var move_tween:Tween = null
 
 var stat_handler:StatHandler = null
@@ -28,8 +27,11 @@ func _init() -> void:
 	stat_handler = StatHandler.new()
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
 	stat_handler.owner_died.connect(_die)
+	start_turn.connect(stat_handler.on_turn_start)
+	
 	
 	equipment_handler = EquipmentHandler.new()
+	add_child(equipment_handler)
 	equipment_handler.equipment_owner = self
 
 func _die() -> void:
@@ -102,5 +104,5 @@ func _rotate(point: Vector3) -> Tween:
 	var rotation_time:float = FULL_ROTATION_TIME * (angle_diff / TAU)
 	
 	var tween := create_tween()
-	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(TRANS_TYPE).set_ease(EASE_TYPE)
+	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween

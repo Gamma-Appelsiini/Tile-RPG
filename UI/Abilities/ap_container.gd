@@ -2,23 +2,22 @@ extends HBoxContainer
 class_name ApContainer
 
 var ap_balls:Array[ApBall] = []
+var stat_handler:StatHandler = null
 
 func _ready() -> void:
-	ap_balls = get_children() as Array[ApBall]
+	for ball:ApBall in get_children() :
+		ap_balls.push_back(ball)
+	
+func set_player(player:Player) -> void:
+	stat_handler = player.stat_handler
+	stat_handler.stats_changed.connect(_set_ap)
 
-func use_ap(amount:int) -> void:
-	var spot:int = len(ap_balls) -1
-	while ap_balls[spot].empty:
-		spot -= 1
-	
-	while amount > 0:
-		ap_balls[spot].hide_ap()
-		amount -= 1
-		spot -= 1
-	
-func add_ap(amount:int) -> void:
+func _set_ap() -> void:
 	for ball:ApBall in ap_balls:
-		if amount == 0: break
-		if ball.empty:
-			ball.show_ap()
-			amount -= 1
+		ball.hide_ap()
+		
+	var ap_amount:int = stat_handler.resources[Stats.ResourceStat.CURRENT_AP]
+	for ball:ApBall in ap_balls:
+		if ap_amount == 0: break
+		ball.show_ap()
+		ap_amount -= 1

@@ -190,6 +190,8 @@ func _item_released() -> void:
 #Equipping a two handed weapon requires unequipping off and mainhand
 func _possible_to_equip() -> bool:
 	if !hovered_slot.equipment_slot: return true
+	if !player.equipment_handler.can_equip(): return false
+	
 	var item_to_equip:Equipment = selected_slot.item_in_slot
 	var item_in_mainhand:Weapon = equipment_slots[Equipment.EquipmentSlot.MAIN_HAND].item_in_slot
 	var item_in_offhand:Equipment = equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot
