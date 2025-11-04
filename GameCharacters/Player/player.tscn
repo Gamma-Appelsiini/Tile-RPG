@@ -30,6 +30,7 @@ interact_handler = NodePath("InteractHandler")
 hp_globe = NodePath("GlobesNode/HpGlobe")
 spirit_globe = NodePath("GlobesNode/SpiritGlobe")
 unique_id = "player"
+display_name = "Player"
 picture = ExtResource("2_gqri5")
 stat_resource = ExtResource("2_3oamb")
 visual_mesh = NodePath("MeshInstance3D")

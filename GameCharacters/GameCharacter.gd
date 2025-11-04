@@ -9,6 +9,7 @@ signal blocked
 signal got_hit
 signal start_turn
 signal end_turn
+signal moved_to_tile(tile:Tile)
 
 @export var unique_id:String = ""
 @export var display_name:String = "Default Name"
@@ -64,9 +65,6 @@ func stop_moving() -> void:
 	if move_tween != null: move_tween.stop()
 
 func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void:
-	if self.global_position.distance_to(point) <= 0.1:
-		move_complete.emit()
-		return
 	set_physics_process(false)
 	_rotate(point)
 	
@@ -97,11 +95,11 @@ func _rotate(point: Vector3) -> Tween:
 	var target_yaw: float = atan2(dir.x, dir.z)
 	var current_yaw: float = visual_mesh.rotation.y
 	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
-	var final_yaw: float = current_yaw + delta
+	var final_yaw: float = lerp_angle(current_yaw, target_yaw, 1.0)
 
 	const FULL_ROTATION_TIME: float = 0.8
 	var angle_diff: float = abs(delta)
-	var rotation_time:float = FULL_ROTATION_TIME * (angle_diff / TAU)
+	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.25, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
 	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

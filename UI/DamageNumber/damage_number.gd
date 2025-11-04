@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func spawn_text_at_node(new_text:String, target_pos:Node3D) -> void:
 	self.position_node = target_pos
-	game_camera = GlobalSignals.player.player_camera
+	game_camera = get_viewport().get_camera_3d()
 	number_label.text = new_text
 	
 	number_label.add_theme_color_override("font_outline_color", Color(0.913, 0.298, 0.0, 1.0))
@@ -27,7 +27,7 @@ func spawn_text_at_node(new_text:String, target_pos:Node3D) -> void:
 
 func spawn_at_node(number:int, target_pos:Node3D, crit:bool = false) -> void:
 	self.position_node = target_pos
-	game_camera = GlobalSignals.player.player_camera
+	game_camera = get_viewport().get_camera_3d()
 	number_label.text = str(number)
 	
 	offset = Vector3(randf_range(-0.2,0.2),randf_range(1.45,1.85),randf_range(-0.2,0.2))

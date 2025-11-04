@@ -36,6 +36,9 @@ func _ready() -> void:
 	GlobalSignals.combat_start.connect(func(): info_container.visible = true)
 	GlobalSignals.combat_end.connect(func(): info_container.visible = false)
 	
+	info_container.mouse_entered.connect(_on_container_mouse_entered)
+	info_container.mouse_exited.connect(_on_container_mouse_exited)
+	
 	for abi_slot:AbilitySlot in ability_slot_container.get_children():
 		slots.push_back(abi_slot)
 		abi_slot.ability_hovered.connect(_set_hovered_slot)
@@ -86,10 +89,14 @@ func show_bar() -> void:
 
 func _on_container_mouse_entered() -> void:
 	ability_targeter.input_ok = false
+	
+	#Dont try to move when mouse in bar
+	GlobalSignals.current_level.tile_manager.shooting_ok = false
 	set_process_input(true)
 
 func _on_container_mouse_exited() -> void:
 	ability_targeter.input_ok = true
+	GlobalSignals.current_level.tile_manager.shooting_ok = true
 	set_process_input(false)
 
 func save_to_data() -> Array:

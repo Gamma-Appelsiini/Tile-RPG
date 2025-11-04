@@ -29,6 +29,8 @@ func _ready() -> void:
 func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	_reset()
 	tile_manager = GlobalSignals.current_level.tile_manager
+	tile_manager.reset()
+	
 	GlobalSignals.combat_start.emit()
 	GlobalSignals.play_audio.emit(combat_start_music, AudioManager.AUDIO_TYPE.UI)
 	combat_ui.show_text("Combat Start")
@@ -39,8 +41,9 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	
 	enemy_team = new_enemies
 	chars_in_combat = player_team + enemy_team
+	print(len(chars_in_combat))
 	for game_char:GameCharacter in chars_in_combat:
-		game_char.died.connect(_char_died)
+		game_char.died.connect(_char_died, true)
 		tile_manager.set_on_closest_tile(game_char)
 	
 	_set_combat_camera()
