@@ -27,7 +27,7 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
-[node name="AbilityBar" type="Control" node_paths=PackedStringArray("ability_slot_container", "panel_container", "ap_container", "color_rect", "button_container", "info_container", "movement_label")]
+[node name="AbilityBar" type="Control" node_paths=PackedStringArray("ability_slot_container", "panel_container", "ap_container", "color_rect", "button_container", "info_container", "movement_label", "input_area", "end_turn_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,118 +36,125 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_on83k")
-ability_slot_container = NodePath("PanelContainer/AbilitySlotContainer")
-panel_container = NodePath("PanelContainer")
-ap_container = NodePath("InfoContainer/ApContainer")
-color_rect = NodePath("PanelContainer/ColorRect")
-button_container = NodePath("InfoContainer/ButtonContainer")
-info_container = NodePath("InfoContainer")
-movement_label = NodePath("InfoContainer/MovementContainer/CenterContainer/MovementLabel")
+ability_slot_container = NodePath("InputArea/PanelContainer/AbilitySlotContainer")
+panel_container = NodePath("InputArea/PanelContainer")
+ap_container = NodePath("InputArea/InfoContainer/ApContainer")
+color_rect = NodePath("InputArea/PanelContainer/ColorRect")
+button_container = NodePath("InputArea/InfoContainer/ButtonContainer")
+info_container = NodePath("InputArea/InfoContainer")
+movement_label = NodePath("InputArea/InfoContainer/MovementContainer/CenterContainer/MovementLabel")
+input_area = NodePath("InputArea")
+end_turn_button = NodePath("InputArea/InfoContainer/ButtonContainer/EndTurnButton")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="InputArea" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.2
+anchor_top = 0.85
+anchor_right = 0.8
+anchor_bottom = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="InputArea"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.89
-anchor_right = 0.8
-anchor_bottom = 0.99
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_fh5s2")
 
-[node name="AbilitySlotContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="AbilitySlotContainer" type="HBoxContainer" parent="InputArea/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="AbilitySlot" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot2" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot2" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot3" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot3" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot4" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot4" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot5" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot5" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot6" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot6" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot7" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot7" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot8" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot8" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot9" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot9" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot10" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot10" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot11" parent="PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+[node name="AbilitySlot11" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="InputArea/PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.44705883)
 
-[node name="InfoContainer" type="HBoxContainer" parent="."]
+[node name="InfoContainer" type="HBoxContainer" parent="InputArea"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.85
-anchor_right = 0.8
-anchor_bottom = 0.885
+anchor_right = 1.0
+anchor_bottom = 0.225
 theme_override_constants/separation = 40
 
-[node name="VSeparator2" type="VSeparator" parent="InfoContainer"]
+[node name="VSeparator2" type="VSeparator" parent="InputArea/InfoContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="ApContainer" type="HBoxContainer" parent="InfoContainer"]
+[node name="ApContainer" type="HBoxContainer" parent="InputArea/InfoContainer"]
 layout_mode = 2
 script = ExtResource("3_jq4jv")
 
-[node name="ApBall" parent="InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
+[node name="ApBall" parent="InputArea/InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2
 
-[node name="ApBall2" parent="InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
+[node name="ApBall2" parent="InputArea/InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2
 
-[node name="ApBall3" parent="InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
+[node name="ApBall3" parent="InputArea/InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2
 
-[node name="ApBall4" parent="InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
+[node name="ApBall4" parent="InputArea/InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2
 
-[node name="ApBall5" parent="InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
+[node name="ApBall5" parent="InputArea/InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2
 
-[node name="ApBall6" parent="InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
+[node name="ApBall6" parent="InputArea/InfoContainer/ApContainer" instance=ExtResource("4_8slfc")]
 layout_mode = 2
 
-[node name="MovementContainer" type="HBoxContainer" parent="InfoContainer"]
+[node name="MovementContainer" type="HBoxContainer" parent="InputArea/InfoContainer"]
 layout_mode = 2
 
-[node name="MovementRect" type="TextureRect" parent="InfoContainer/MovementContainer"]
+[node name="MovementRect" type="TextureRect" parent="InputArea/InfoContainer/MovementContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("5_8slfc")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CenterContainer" type="CenterContainer" parent="InfoContainer/MovementContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="InputArea/InfoContainer/MovementContainer"]
 layout_mode = 2
 
-[node name="MovementLabel" type="Label" parent="InfoContainer/MovementContainer/CenterContainer"]
+[node name="MovementLabel" type="Label" parent="InputArea/InfoContainer/MovementContainer/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -155,28 +162,27 @@ text = "0"
 horizontal_alignment = 3
 vertical_alignment = 3
 
-[node name="ButtonContainer" type="MarginContainer" parent="InfoContainer"]
-visible = false
+[node name="ButtonContainer" type="MarginContainer" parent="InputArea/InfoContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="EndRect" type="TextureRect" parent="InfoContainer/ButtonContainer"]
+[node name="EndRect" type="TextureRect" parent="InputArea/InfoContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("6_entml")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="EndTurnButton" type="Button" parent="InfoContainer/ButtonContainer"]
+[node name="EndTurnButton" type="Button" parent="InputArea/InfoContainer/ButtonContainer"]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 icon_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="InfoContainer"]
+[node name="VSeparator" type="VSeparator" parent="InputArea/InfoContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[connection signal="pressed" from="InfoContainer/ButtonContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="InputArea/InfoContainer/ButtonContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]

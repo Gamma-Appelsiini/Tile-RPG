@@ -74,7 +74,7 @@ func _rotate(point: Vector3) -> Tween:
 
 	const FULL_ROTATION_TIME: float = 0.8
 	var angle_diff: float = abs(delta)
-	var rotation_time: float = clampf(FULL_ROTATION_TIME * (angle_diff / PI), 0.25, FULL_ROTATION_TIME)
+	var rotation_time: float = clampf(FULL_ROTATION_TIME * (angle_diff / PI), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
 	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

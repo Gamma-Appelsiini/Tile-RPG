@@ -37,6 +37,7 @@ func _init() -> void:
 
 func _die() -> void:
 	#TODO
+	print("ASODIFJNSDIFJSDIFHSODIFHSDFIHSODIFH")
 	print("Character ", self.display_name, " died.")
 	died.emit(self)
 
@@ -79,7 +80,8 @@ func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void
 	
 	await move_tween.finished
 	move_complete.emit()
-	set_physics_process(true)
+	
+	if end: set_physics_process(true)
 
 func rotate_towards_point(point: Vector3) -> void:
 	set_physics_process(false)
@@ -99,7 +101,7 @@ func _rotate(point: Vector3) -> Tween:
 
 	const FULL_ROTATION_TIME: float = 0.8
 	var angle_diff: float = abs(delta)
-	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.25, FULL_ROTATION_TIME)
+	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
 	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

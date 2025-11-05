@@ -25,7 +25,7 @@ func _on_combat_start() -> void:
 
 func _on_combat_end() -> void:
 	self.visible = false
-	for tp:TurnPortrait in turn_container: tp.queue_free()
+	for tp:TurnPortrait in turn_container.get_children(): tp.queue_free()
 	for tp:TurnPortrait in turn_haver_container.get_children(): tp.queue_free()
 
 func _get_portrait_size() -> Vector2:

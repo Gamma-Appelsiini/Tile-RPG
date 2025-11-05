@@ -9,9 +9,12 @@ class_name AbilityBar
 @export var button_container: MarginContainer = null
 @export var info_container: HBoxContainer = null
 @export var movement_label: Label = null
+@export var input_area: Control = null
+@export var end_turn_button: Button = null
 
 @export var end_turn_button_sound:AudioStream = null
 
+var controls:Array[bool] = []
 var slots:Array[AbilitySlot] = []
 var hovered_slot:AbilitySlot = null
 var player:Player = null
@@ -30,20 +33,27 @@ func set_player(new_player:Player) -> void:
 
 func _ready() -> void:
 	set_process_input(false)
+	_connect_signals()
+	_add_slots()
+
+func _add_slots() -> void:
+	for abi_slot:AbilitySlot in ability_slot_container.get_children():
+		slots.push_back(abi_slot)
+		abi_slot.ability_hovered.connect(_set_hovered_slot)
+		abi_slot.mouse_entered.connect(_on_container_mouse_entered)
+		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
+
+func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(show_bar)
 	GlobalSignals.combat_end.connect(hide_bar)
 	
 	GlobalSignals.combat_start.connect(func(): info_container.visible = true)
 	GlobalSignals.combat_end.connect(func(): info_container.visible = false)
 	
-	info_container.mouse_entered.connect(_on_container_mouse_entered)
-	info_container.mouse_exited.connect(_on_container_mouse_exited)
-	
-	for abi_slot:AbilitySlot in ability_slot_container.get_children():
-		slots.push_back(abi_slot)
-		abi_slot.ability_hovered.connect(_set_hovered_slot)
-		abi_slot.mouse_entered.connect(_on_container_mouse_entered)
-		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
+	input_area.mouse_entered.connect(_on_container_mouse_entered)
+	input_area.mouse_exited.connect(_on_container_mouse_exited)
+	end_turn_button.mouse_entered.connect(_on_container_mouse_entered)
+	end_turn_button.mouse_exited.connect(_on_container_mouse_exited)
 
 func _set_movement() -> void:
 	movement_label.text = str(player.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT])
@@ -88,6 +98,7 @@ func show_bar() -> void:
 	self.visible = true
 
 func _on_container_mouse_entered() -> void:
+	controls.push_back(true)
 	ability_targeter.input_ok = false
 	
 	#Dont try to move when mouse in bar
@@ -95,6 +106,9 @@ func _on_container_mouse_entered() -> void:
 	set_process_input(true)
 
 func _on_container_mouse_exited() -> void:
+	controls.pop_back()
+	if len(controls) != 0: return
+	
 	ability_targeter.input_ok = true
 	GlobalSignals.current_level.tile_manager.shooting_ok = true
 	set_process_input(false)

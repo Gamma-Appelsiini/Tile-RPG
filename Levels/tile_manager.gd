@@ -181,7 +181,9 @@ func _choose_tile() -> void:
 		var mouse_point:Vector3 = _get_mouse_point()
 		var closest_tile:Tile = get_closest_tile(mouse_point)
 		_set_hovered_tile(closest_tile)
-	else: _hide_path()
+	else:
+		ground_indicator.visible = false
+		_hide_path()
 		
 	await get_tree().create_timer(0.1).timeout
 	_choose_tile()
@@ -390,8 +392,6 @@ func set_on_closest_tile(game_char:GameCharacter, out_of_combat:bool = false) ->
 		print("ERROR: NO TILE FOUND FOR ", char)
 		return
 
-	#game_char.rotate_towards_point(closest_tile.global_position)
 	game_char.move_to_point(closest_tile.global_position,true,true)
-	#game_char.move_to_point_with_move_and_slide(closest_tile.global_position)
 	await game_char.move_complete
 	if !out_of_combat: _set_char_on_tile(game_char, closest_tile)

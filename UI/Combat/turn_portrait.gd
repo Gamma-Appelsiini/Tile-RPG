@@ -16,6 +16,9 @@ const BORDER_COLORS:Dictionary[BORDER_TYPE, Color] ={
 
 var gchar:GameCharacter = null
 
+func _ready() -> void:
+	hp_rect.material = hp_rect.material.duplicate()
+
 func set_character(new_character:GameCharacter, char_type:BORDER_TYPE = BORDER_TYPE.ENEMY) -> void:
 	portrait_rect.texture = new_character.picture
 	gchar = new_character

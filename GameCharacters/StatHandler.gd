@@ -138,6 +138,7 @@ func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 		resources[Stats.ResourceStat.CURRENT_SPIRIT] += 1 * amount
 
 func _update_current_hp(amount:int) -> void:
+	print("Update current hp")
 	resources[Stats.ResourceStat.CURRENT_HP] += amount
 	
 	if resources[Stats.ResourceStat.CURRENT_HP] > resources[Stats.ResourceStat.MAX_HP]:
@@ -147,10 +148,11 @@ func _update_current_hp(amount:int) -> void:
 	stats_changed.emit()
 	
 	if resources[Stats.ResourceStat.CURRENT_HP] <= 0:
+		print("OWNER DIED EMIT")
 		owner_died.emit()
 
 func _update_resource_stat(type:int, amount:int) -> void:
-	if type == resources[Stats.ResourceStat.CURRENT_HP]:
+	if type == Stats.ResourceStat.CURRENT_HP:
 			_update_current_hp(amount)
 			return
 			
