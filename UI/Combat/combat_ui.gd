@@ -2,6 +2,7 @@ extends Control
 class_name CombatUI
 
 signal portraits_added
+signal portraits_reordered
 
 @export var portrait_slide_sound:AudioStream = null
 @export var turn_container: HBoxContainer = null
@@ -9,7 +10,7 @@ signal portraits_added
 @export var turn_haver_container: VBoxContainer = null
 
 const TURN_PORTRAIT := preload("uid://cerdi7wt14odo")
-const PORTRAIT_MOVE_TIME:float = 0.7
+const PORTRAIT_MOVE_TIME:float = 0.3
 const PORTRAIT_X_RATIO:float = 0.75
 
 var combat_manager:CombatManager = null
@@ -66,8 +67,48 @@ func update_portraits(combatants:Array[GameCharacter]) -> void:
 	for tp:TurnPortrait in portraits_to_remove:
 		_squeeze_portrait_away(tp)
 	
-	await get_tree().create_timer(PORTRAIT_MOVE_TIME / 1.5).timeout
+	await get_tree().create_timer(PORTRAIT_MOVE_TIME).timeout
+	_reorder_portraits(combatants)
+	await portraits_reordered
 	portraits_added.emit()
+	
+func _reorder_portraits(combatants:Array[GameCharacter]) -> void:
+	var place:int = 0
+	for tp:TurnPortrait in turn_container.get_children():
+		if combatants[place] != tp.gchar:
+			_animate_portrait_to_place(combatants[place], place)
+		
+		place += 1
+	
+	await get_tree().create_timer(PORTRAIT_MOVE_TIME).timeout
+	portraits_reordered.emit()
+
+func _animate_portrait_to_place(gchar:GameCharacter, end_place:int) -> void:
+	var from_portrait:TurnPortrait = null
+	for tp:TurnPortrait in turn_container.get_children():
+		if tp.gchar == gchar:
+			from_portrait = tp
+			break
+	
+	var end_portrait:TurnPortrait = turn_container.get_children()[end_place]
+	var from_place:int = turn_container.get_children().find(from_portrait)
+	var spot_amount:int = (end_place - from_place)
+	var offset:Vector2 = Vector2(_get_portrait_size().x * spot_amount, 0)
+	
+	var animation_portrait:TurnPortrait = from_portrait.duplicate()
+	add_child(animation_portrait)
+	animation_portrait.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	animation_portrait.size = _get_portrait_size()
+	animation_portrait.position = _calculate_x_offset(from_portrait, true) + Vector2(get_viewport_rect().size.x * 0.5, 0)
+	
+	from_portrait.modulate.a = 0
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME * 9)
+	
+	await tween.finished
+	end_portrait.set_character(gchar)
+	from_portrait.modulate.a = 1
+	animation_portrait.queue_free()
 
 func _squeeze_portrait_away(tp:TurnPortrait) -> void:
 	_animate_portrait_in_out(tp,true)
@@ -77,7 +118,7 @@ func _squeeze_portrait_away(tp:TurnPortrait) -> void:
 	tp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
-	tween.tween_property(tp,"custom_minimum_size:y", 0, PORTRAIT_MOVE_TIME / 2)
+	tween.tween_property(tp,"custom_minimum_size:y", 0, PORTRAIT_MOVE_TIME - 0.05)
 	await tween.finished
 	tp.queue_free()
 
@@ -104,7 +145,7 @@ func _animate_portrait_in_out(tp:TurnPortrait, out:bool, turn_haver:bool = false
 		animation_portrait.size = Vector2(get_viewport_rect().size.x * (0.5 - 0.435), get_viewport_rect().size.y * 0.15)
 		animation_portrait.position = Vector2(get_viewport_rect().size.x * 0.435, 0)
 	
-	var offset:Vector2 = Vector2(0, get_viewport_rect().size.y * 0.2)
+	var offset:Vector2 = Vector2(0, get_viewport_rect().size.y * 0.1)
 	var modulation:int = 0
 	if !out:
 		modulation = 1
@@ -113,7 +154,7 @@ func _animate_portrait_in_out(tp:TurnPortrait, out:bool, turn_haver:bool = false
 	
 	GlobalSignals.play_audio.emit(portrait_slide_sound, AudioManager.AUDIO_TYPE.UI)
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
-	tween.tween_property(animation_portrait,"modulate:a", modulation, PORTRAIT_MOVE_TIME / 2)
+	tween.tween_property(animation_portrait,"modulate:a", modulation, PORTRAIT_MOVE_TIME)
 	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME + 0.01)
 	
 	await tween.finished
@@ -153,7 +194,7 @@ func show_text(new_text:String, color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void
 	new_label.modulate.a = 0
 	
 	var viewport_size:Vector2 = get_viewport_rect().size
-	var offset:Vector2 = Vector2(0,viewport_size.y * 0.3)
+	var offset:Vector2 = Vector2(0,viewport_size.y * 0.2)
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true)
 	tween.tween_property(new_label,"modulate:a", 1, 1)

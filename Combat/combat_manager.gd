@@ -3,6 +3,7 @@ class_name CombatManager
 
 signal round_changed(number:int)
 signal camera_move_finished
+signal returned_to_player_camera
 
 @export var combat_ui:CombatUI = null
 @export var combat_start_music:AudioStream = null
@@ -74,6 +75,7 @@ func _return_to_player_camera() -> void:
 	player.player_camera.size = spectate_camera.size
 	
 	player.player_camera.make_current()
+	returned_to_player_camera.emit()
 
 func _next_round() -> void:
 	combat_ui.set_turn_haver(null)
@@ -101,7 +103,9 @@ func _next_turn() -> void:
 	combat_ui.update_portraits(round_order)
 	combat_ui.set_turn_haver(char_to_act)
 	combat_ui.show_text(char_to_act.display_name + ("'s turn"))
+	
 	_handle_camera(char_to_act)
+	await camera_move_finished
 	char_to_act.start_turn.emit()
 	
 	if char_to_act is Player:
@@ -117,7 +121,6 @@ func _next_turn() -> void:
 	_next_turn()
 
 func _player_turn() -> void:
-	print("player's  turn")
 	tile_manager.enable_shooting()
 	
 	await player.end_turn
@@ -139,7 +142,7 @@ func _handle_camera(current_actor:GameCharacter) -> void:
 
 func _move_camera_to_char(current_actor:GameCharacter) -> void:
 	var distance:float = current_actor.global_position.distance_to(spectate_camera_pivot.global_position)
-	var time_to_point:float = distance * 0.1 + 0.2
+	var time_to_point:float = distance * 0.2 + 0.2
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(spectate_camera_pivot, "global_position", current_actor.global_position, time_to_point)
@@ -169,7 +172,11 @@ func _compare_initiative(a:GameCharacter, b:GameCharacter):
 	return a.stat_handler.secondary_stats[Stats.SecondaryStat.INITIATIVE] > b.stat_handler.secondary_stats[Stats.SecondaryStat.INITIATIVE]
 
 func _end_combat() -> void:
+	tile_manager.disable_shooting()
 	GlobalSignals.play_audio.emit(combat_end_music, AudioManager.AUDIO_TYPE.UI)
+	
+	_return_to_player_camera()
+	await returned_to_player_camera
 	GlobalSignals.combat_end.emit()
 
 func _reset() -> void:

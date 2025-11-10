@@ -20,7 +20,9 @@ func _ready() -> void:
 	hp_rect.material = hp_rect.material.duplicate()
 
 func set_character(new_character:GameCharacter, char_type:BORDER_TYPE = BORDER_TYPE.ENEMY) -> void:
-	portrait_rect.texture = new_character.picture
+	if new_character == null: return
+	
+	#portrait_rect.texture = new_character.picture
 	gchar = new_character
 	_set_border_color(char_type)
 	_set_hp()

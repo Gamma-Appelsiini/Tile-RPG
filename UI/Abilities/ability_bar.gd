@@ -19,6 +19,7 @@ var slots:Array[AbilitySlot] = []
 var hovered_slot:AbilitySlot = null
 var player:Player = null
 var selected_ability:Ability = null
+var in_combat:bool = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -44,6 +45,8 @@ func _add_slots() -> void:
 		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
 
 func _connect_signals() -> void:
+	GlobalSignals.combat_start.connect(func(): in_combat = true)
+	GlobalSignals.combat_end.connect(func(): in_combat = false)
 	GlobalSignals.combat_start.connect(show_bar)
 	GlobalSignals.combat_end.connect(hide_bar)
 	
@@ -63,6 +66,7 @@ func _on_turn_start() -> void:
 	button_container.show()
 	
 func _on_turn_end() -> void:
+	button_container.hide()
 	color_rect.show()
 
 func _set_hovered_slot(new_slot:AbilitySlot) -> void:
@@ -91,11 +95,13 @@ func _slot_pressed() -> void:
 func hide_bar() -> void:
 	#TODO animate
 	self.visible = false
+	info_container.hide()
 	
 func show_bar() -> void:
 	if visible: return
 	#TODO animate
 	self.visible = true
+	if in_combat: info_container.show()
 
 func _on_container_mouse_entered() -> void:
 	controls.push_back(true)
