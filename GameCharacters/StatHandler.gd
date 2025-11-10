@@ -50,9 +50,11 @@ var resources:Dictionary[Stats.ResourceStat,int] = {
 	Stats.ResourceStat.CURRENT_SPIRIT: 1,
 	Stats.ResourceStat.CURRENT_MOVEMENT: 7,
 	Stats.ResourceStat.MAX_HP: 5,
-	Stats.ResourceStat.MAX_AP: 1,
+	Stats.ResourceStat.MAX_AP: 6,
 	Stats.ResourceStat.MAX_SPIRIT: 1,
-	Stats.ResourceStat.MAX_MOVEMENT: 7
+	Stats.ResourceStat.MAX_MOVEMENT: 7,
+	Stats.ResourceStat.MOVEMENT_PER_TURN: 4,
+	Stats.ResourceStat.AP_PER_TURN: 4,
 }
 
 var secondary_stats:Dictionary[Stats.SecondaryStat,int] = {}
@@ -61,6 +63,7 @@ var dmg_increases:Dictionary[Stats.DmgIncreases,int] = {}
 var resistance_penetrations:Dictionary[Stats.DmgType,int] = {}
 
 func _init() -> void:
+	GlobalSignals.combat_start.connect(_on_combat_start)
 	
 	for stat in Stats.SecondaryStat.values():
 		secondary_stats[stat] = 0
@@ -70,6 +73,14 @@ func _init() -> void:
 		dmg_increases[stat] = 0
 	for stat in Stats.ResPenetrations.values():
 		resistance_penetrations[stat] = 0
+
+func _on_combat_start() -> void:
+	resources[Stats.ResourceStat.CURRENT_AP] = 0
+	resources[Stats.ResourceStat.CURRENT_MOVEMENT] = 0
+	
+func on_turn_start() -> void:
+	update_stat(Stats.ResourceStat.CURRENT_MOVEMENT, resources[Stats.ResourceStat.MOVEMENT_PER_TURN])
+	update_stat(Stats.ResourceStat.CURRENT_AP, resources[Stats.ResourceStat.AP_PER_TURN])
 
 func add_xp(amount:int) -> void:
 	char_stats[Stats.CharStat.CURRENT_XP] += amount
@@ -127,6 +138,7 @@ func update_main_stat(main_stat:Stats.MainStat, amount:int) -> void:
 		resources[Stats.ResourceStat.CURRENT_SPIRIT] += 1 * amount
 
 func _update_current_hp(amount:int) -> void:
+	print("Update current hp")
 	resources[Stats.ResourceStat.CURRENT_HP] += amount
 	
 	if resources[Stats.ResourceStat.CURRENT_HP] > resources[Stats.ResourceStat.MAX_HP]:
@@ -136,7 +148,25 @@ func _update_current_hp(amount:int) -> void:
 	stats_changed.emit()
 	
 	if resources[Stats.ResourceStat.CURRENT_HP] <= 0:
+		print("OWNER DIED EMIT")
 		owner_died.emit()
+
+func _update_resource_stat(type:int, amount:int) -> void:
+	if type == Stats.ResourceStat.CURRENT_HP:
+			_update_current_hp(amount)
+			return
+			
+	self.resources[type] += amount
+	if resources[Stats.ResourceStat.CURRENT_SPIRIT] > resources[Stats.ResourceStat.MAX_SPIRIT]:
+		resources[Stats.ResourceStat.CURRENT_SPIRIT] = resources[Stats.ResourceStat.MAX_SPIRIT]
+	
+	if resources[Stats.ResourceStat.CURRENT_AP] > resources[Stats.ResourceStat.MAX_AP]:
+		resources[Stats.ResourceStat.CURRENT_AP] = resources[Stats.ResourceStat.MAX_AP]
+		
+	if resources[Stats.ResourceStat.CURRENT_MOVEMENT] > resources[Stats.ResourceStat.MAX_MOVEMENT]:
+		resources[Stats.ResourceStat.CURRENT_MOVEMENT] = resources[Stats.ResourceStat.MAX_MOVEMENT]
+		
+	resources_changed.emit(self)
 
 func update_stat(type:int, amount:int) -> void:
 	
@@ -147,14 +177,7 @@ func update_stat(type:int, amount:int) -> void:
 	elif type in Stats.CharStat.values():
 		self.char_stats[type] += amount
 	elif type in Stats.ResourceStat.values():
-		if type == resources[Stats.ResourceStat.CURRENT_HP]:
-			_update_current_hp(amount)
-			return
-			
-		self.resources[type] += amount
-		if resources[Stats.ResourceStat.CURRENT_SPIRIT] > resources[Stats.ResourceStat.MAX_SPIRIT]:
-			resources[Stats.ResourceStat.CURRENT_SPIRIT] = resources[Stats.ResourceStat.MAX_SPIRIT]
-		resources_changed.emit(self)
+		_update_resource_stat(type, amount)
 	elif type in Stats.DmgType.values():
 		self.resistances[type] += amount
 	elif type in Stats.DmgIncreases.values():

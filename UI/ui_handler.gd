@@ -8,12 +8,17 @@ class_name UIHandler
 @export var ability_bar: AbilityBar = null
 @export var abilities_container: AbilitiesContainer = null
 @export var ability_targeter: AbilityTargeter = null
+@export var combat_ui: CombatUI = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
+
+var in_combat:bool = false
 
 func _ready() -> void:
 	GlobalSignals.show_damage_number.connect(show_damage_number)
 	GlobalSignals.show_miss_text.connect(show_miss_text)
+	GlobalSignals.combat_start.connect(func(): in_combat = true)
+	GlobalSignals.combat_end.connect(func(): in_combat = false)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Character"):
@@ -21,6 +26,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("Bag"):
 		inventory.visible = !inventory.visible
 	elif event.is_action_pressed("Abilities"):
+		if in_combat: return
 		if !abilities_container.visible: abilities_container.show_container()
 		else: abilities_container.hide_container()
 

@@ -37,8 +37,9 @@ static func _apply_damage_increases() -> void:
 static func _receive_damage() -> void:
 	#TODO receiver hit animation
 	receiver.got_hit.emit()
+	print("Final damage: ", final_damage)
 	GlobalSignals.show_damage_number.emit(final_damage, receiver, attack.crit)
-	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, final_damage)
+	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, -final_damage)
 
 static func _handle_thorns() -> void:
 	if attack.ability_tags.has(Ability.ABILITY_TAG.NO_RETALIATION): return
@@ -184,7 +185,7 @@ static func _apply_armor() -> void:
 	var reduction:float = ARMOR_CURVE.sample(point)
 	print("Armor: ", receiver_armor, " Damage: ", final_damage + pure_damage, " Reduction: ", reduction)
 	
-	var reduced_damage:int = int(final_damage * reduction)
+	var reduced_damage:int = int(final_damage * (1 - reduction))
 	if final_damage > 0 and reduced_damage <= 0: reduced_damage = 1
 	
 	final_damage = reduced_damage + pure_damage

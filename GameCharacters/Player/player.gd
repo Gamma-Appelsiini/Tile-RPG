@@ -15,6 +15,8 @@ var _last_move_dir: Vector3 = Vector3.BACK
 var movement_enabled:bool = true
 
 func _ready() -> void:
+	GlobalSignals.combat_start.connect(_disable_movement)
+	GlobalSignals.combat_end.connect(_enable_movement)
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
 
@@ -27,6 +29,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
+		
 	var move_direction := _handle_movement_input()
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
@@ -65,15 +68,16 @@ func _rotate(point: Vector3) -> Tween:
 	var dir: Vector3 = (point - global_position).normalized()
 	var target_yaw: float = atan2(dir.x, dir.z)
 	var current_yaw: float = visual_mesh.rotation.y
-	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
+
+	var delta: float = wrapf(target_yaw - current_yaw, -PI, PI)
 	var final_yaw: float = current_yaw + delta
-	
-	_last_move_dir = dir
 
 	const FULL_ROTATION_TIME: float = 0.8
 	var angle_diff: float = abs(delta)
-	var rotation_time:float = FULL_ROTATION_TIME * (angle_diff / TAU)
+	var rotation_time: float = clampf(FULL_ROTATION_TIME * (angle_diff / PI), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
-	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(TRANS_TYPE).set_ease(EASE_TYPE)
+	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_last_move_dir = dir
+	
 	return tween

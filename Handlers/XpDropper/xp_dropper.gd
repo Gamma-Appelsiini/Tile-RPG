@@ -13,7 +13,8 @@ func _ready() -> void:
 	_set_dropper()
 	dropping_character.died.connect(_drop_xp)
 
-func _drop_xp() -> void:
+func _drop_xp(dropper:GameCharacter) -> void:
+	dropping_character = dropper
 	_divide()
 	_create_globes()
 

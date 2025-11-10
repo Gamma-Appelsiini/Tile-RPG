@@ -1,7 +1,7 @@
+extends Node
 class_name EquipmentHandler
 
 var equipment_owner:GameCharacter = null
-
 var equipped_items:Dictionary[Equipment.EquipmentSlot, Equipment] = {
 	Equipment.EquipmentSlot.MAIN_HAND: null,
 	Equipment.EquipmentSlot.OFF_HAND: null,
@@ -13,6 +13,27 @@ var equipped_items:Dictionary[Equipment.EquipmentSlot, Equipment] = {
 	Equipment.EquipmentSlot.HANDS: null,
 	Equipment.EquipmentSlot.WAIST: null
 }
+
+var in_combat:bool = false
+var owner_turn:bool = false
+
+func _ready() -> void:
+	GlobalSignals.combat_start.connect(func(): in_combat = true)
+	GlobalSignals.combat_end.connect(func(): in_combat = false)
+	
+	if equipment_owner:
+		equipment_owner.start_turn.connect(func(): owner_turn = true)
+		equipment_owner.end_turn.connect(func(): owner_turn = false)
+
+func can_equip() -> bool:
+	if !in_combat: return true
+	if !owner_turn: return false
+	
+	var current_ap:int = equipment_owner.stat_handler.resources[Stats.ResourceStat.CURRENT_AP]
+	if current_ap <= 0: return false
+	
+	equipment_owner.stat_handler.update_stat(Stats.ResourceStat.CURRENT_AP, -1)
+	return true
 
 func equip_item(new_item:Equipment) -> void:
 	unequip_item(new_item.equipment_slot)

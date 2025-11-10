@@ -71,6 +71,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47008, 0, -0.940551)
 [node name="TestNPC" parent="GameCharNode" instance=ExtResource("9_y07y2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8723062, 0, -2.1303988)
 
+[node name="CombatStarter" parent="GameCharNode/TestNPC" index="6" node_paths=PackedStringArray("combatants")]
+combatants = [NodePath(".."), NodePath("../../TestNPC2")]
+
+[node name="TestNPC2" parent="GameCharNode" instance=ExtResource("9_y07y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.084261, 0, -5.8355293)
+
 [node name="Interactables" type="Node" parent="."]
 
 [node name="Chest" parent="Interactables" instance=ExtResource("4_dk6lg")]
@@ -1023,4 +1029,5 @@ metadata/_custom_type_script = "uid://bp36ikilmc15g"
 [node name="Roach" parent="." instance=ExtResource("14_e3s5j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
+[editable path="GameCharNode/TestNPC"]
 [editable path="Interactables/DialogueInteractable"]

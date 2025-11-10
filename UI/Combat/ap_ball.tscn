@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf7u41el4bmki"]
+
+[ext_resource type="Texture2D" uid="uid://t7qgcqdccvcr" path="res://Tile-RPG/Images/UI/ApBallEmpty.png" id="1_u6cc4"]
+[ext_resource type="Script" uid="uid://derlsc450qrb3" path="res://Tile-RPG/UI/Combat/ap_ball.gd" id="1_vpwc7"]
+[ext_resource type="Texture2D" uid="uid://h21gl570sx8f" path="res://Tile-RPG/Images/UI/ApBall.png" id="2_vpwc7"]
+
+[node name="ApBall" type="PanelContainer" node_paths=PackedStringArray("ap_rect")]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 3684.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+script = ExtResource("1_vpwc7")
+ap_rect = NodePath("FullRect")
+
+[node name="EmptyRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_u6cc4")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FullRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_vpwc7")
+expand_mode = 3
+stretch_mode = 5

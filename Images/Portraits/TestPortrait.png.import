@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg6egsvu5pckp"
-path="res://.godot/imported/default_portrait.png-beae12a10f007261a7bafc157c5e4857.ctex"
+uid="uid://cvw3ohynhqnkj"
+path="res://.godot/imported/TestPortrait.png-55ad9b4d0361e94d70727c5f96064c00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Images/default_portrait.png"
-dest_files=["res://.godot/imported/default_portrait.png-beae12a10f007261a7bafc157c5e4857.ctex"]
+source_file="res://Tile-RPG/Images/Portraits/TestPortrait.png"
+dest_files=["res://.godot/imported/TestPortrait.png-55ad9b4d0361e94d70727c5f96064c00.ctex"]
 
 [params]
 

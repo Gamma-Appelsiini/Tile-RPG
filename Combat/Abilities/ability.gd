@@ -133,7 +133,6 @@ func _is_in_range() -> bool:
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile)
 	
 	if distance == -1 or distance > ability_range + range_increase:
-		print("Ability not in range")
 		return false
 	
 	return true
@@ -166,12 +165,12 @@ func _set_ability_weapon_range(weapon:Weapon) -> void:
 
 func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
 	if weapon.weapon_type == Weapon.WeaponType.BOW:
-		attack.tags.push_back(ABILITY_TAG.RANGED)
+		attack.ability_tags.push_back(ABILITY_TAG.RANGED)
 		self.animation_type = ANIMATION_TYPE.RANGED
-	else: attack.tags.push_back(ABILITY_TAG.MELEE)
-	attack.tags.push_back(ABILITY_TAG.HIT)
-	attack.tags.push_back(ABILITY_TAG.WEAPON)
-	attack.tags.push_back(ABILITY_TAG.SINGLE_TARGET)
+	else: attack.ability_tags.push_back(ABILITY_TAG.MELEE)
+	attack.ability_tags.push_back(ABILITY_TAG.HIT)
+	attack.ability_tags.push_back(ABILITY_TAG.WEAPON)
+	attack.ability_tags.push_back(ABILITY_TAG.SINGLE_TARGET)
 	
 	var base_damage:int = randi_range(weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG], weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG])
 	var scale_stat_amount:int = ability_owner.stat_handler.main_stats[weapon.scale_stat]

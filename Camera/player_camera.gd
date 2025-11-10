@@ -2,7 +2,6 @@ extends Camera3D
 class_name PlayerCamera
 
 @export var pivot:Node3D
-var input_enabled:bool = true
 
 var rotating:bool = false
 var zoom_enabled:bool = true
@@ -10,8 +9,11 @@ const ZOOM_DEFAULT:float = 11
 const RESET_TIME:float = 0.75
 var old_zoom:float = 0
 
+func _ready() -> void:
+	GlobalSignals.combat_start.connect(_on_combat_start)
+	GlobalSignals.combat_end.connect(_on_combat_end)
+
 func _input(event: InputEvent) -> void:
-	if !input_enabled: return
 	if event.is_action_pressed("Rotate_Cam_L"):
 		_rotate_cam(-90)
 	elif event.is_action_pressed("Rotate_Cam_R"):
@@ -20,6 +22,12 @@ func _input(event: InputEvent) -> void:
 		_zoom_cam(-1)
 	elif event.is_action_pressed("roll_down"):
 		_zoom_cam(1)
+
+func _on_combat_start() -> void:
+	set_process_input(false)
+
+func _on_combat_end() -> void:
+	set_process_input(true)
 
 func _rotate_cam(amount:float) -> void:
 	if rotating: return
@@ -35,8 +43,8 @@ func _rotate_cam(amount:float) -> void:
 
 func _zoom_cam(dir:float) -> void:
 	if !zoom_enabled: return
-	const MAX_ZOOM_IN:float = 4.5
-	const MAX_ZOOM_OUT:float = 20
+	const MAX_ZOOM_IN:float = 4.0
+	const MAX_ZOOM_OUT:float = 10
 	
 	var move_amount: float = 0.5
 	self.size = clamp(self.size + move_amount * dir, MAX_ZOOM_IN, MAX_ZOOM_OUT)

@@ -31,6 +31,9 @@ func _process(_delta: float) -> void:
 func set_ability_to_target(new_ability:Ability) -> void:
 	print("set abi to target")
 	if new_ability == null: return
+	
+	GlobalSignals.current_level.tile_manager.targeting_ability = true
+	
 	if player == null:
 		player = GlobalSignals.player
 		player_camera = player.player_camera
@@ -48,6 +51,8 @@ func cancel_ability_targeting() -> void:
 	hovered_tile = null
 	hovered_character = null
 	selected_ability = null
+	await get_tree().create_timer(.1).timeout
+	GlobalSignals.current_level.tile_manager.targeting_ability = false
 
 func _set_collision_mask(query:PhysicsRayQueryParameters3D) -> void:
 	if selected_ability.target_type == Ability.TARGET_TYPE.TILE:
@@ -95,8 +100,10 @@ func _set_new_target_character(new_target:GameCharacter) -> void:
 
 func _shoot_ray() -> Dictionary:
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var from: Vector3 = player_camera.project_ray_origin(mouse_pos)
-	var to: Vector3 = from + player_camera.project_ray_normal(mouse_pos) * 2000.0
+	var current_camera:Camera3D = get_viewport().get_camera_3d()
+	
+	var from: Vector3 = current_camera.project_ray_origin(mouse_pos)
+	var to: Vector3 = from + current_camera.project_ray_normal(mouse_pos) * 2000.0
 	
 	var space_state := player.get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(from, to)

@@ -3,10 +3,13 @@ class_name GameCharacter
 
 signal move_complete
 signal rotation_complete
-signal died
+signal died(char:GameCharacter)
 signal dodged
 signal blocked
 signal got_hit
+signal start_turn
+signal end_turn
+signal moved_to_tile(tile:Tile)
 
 @export var unique_id:String = ""
 @export var display_name:String = "Default Name"
@@ -15,19 +18,28 @@ signal got_hit
 @export var visual_mesh:MeshInstance3D
 @export var follow_hander:FollowHandler = null
 
-const EASE_TYPE: Tween.EaseType = Tween.EASE_IN_OUT
-const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_SINE
 var move_tween:Tween = null
 
 var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
+@export var ai_handler:AIHandler = null
 
 func _init() -> void:
 	stat_handler = StatHandler.new()
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
+	stat_handler.owner_died.connect(_die)
+	start_turn.connect(stat_handler.on_turn_start)
+	
 	
 	equipment_handler = EquipmentHandler.new()
+	add_child(equipment_handler)
 	equipment_handler.equipment_owner = self
+
+func _die() -> void:
+	#TODO
+	print("ASODIFJNSDIFJSDIFHSODIFHSDFIHSODIFH")
+	print("Character ", self.display_name, " died.")
+	died.emit(self)
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)
@@ -54,9 +66,6 @@ func stop_moving() -> void:
 	if move_tween != null: move_tween.stop()
 
 func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void:
-	if self.global_position.distance_to(point) <= 0.1:
-		move_complete.emit()
-		return
 	set_physics_process(false)
 	_rotate(point)
 	
@@ -71,7 +80,8 @@ func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void
 	
 	await move_tween.finished
 	move_complete.emit()
-	set_physics_process(true)
+	
+	if end: set_physics_process(true)
 
 func rotate_towards_point(point: Vector3) -> void:
 	set_physics_process(false)
@@ -87,12 +97,12 @@ func _rotate(point: Vector3) -> Tween:
 	var target_yaw: float = atan2(dir.x, dir.z)
 	var current_yaw: float = visual_mesh.rotation.y
 	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
-	var final_yaw: float = current_yaw + delta
+	var final_yaw: float = lerp_angle(current_yaw, target_yaw, 1.0)
 
 	const FULL_ROTATION_TIME: float = 0.8
 	var angle_diff: float = abs(delta)
-	var rotation_time:float = FULL_ROTATION_TIME * (angle_diff / TAU)
+	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
-	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(TRANS_TYPE).set_ease(EASE_TYPE)
+	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween

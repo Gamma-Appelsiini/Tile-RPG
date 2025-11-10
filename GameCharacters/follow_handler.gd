@@ -16,7 +16,7 @@ var pathing:bool = false
 
 func _ready() -> void:
 	if get_parent() is GameCharacter: follower = get_parent() as GameCharacter
-	area.body_entered.connect(_area_entered)
+	#area.body_entered.connect(_area_entered)
 	GlobalSignals.combat_start.connect(_on_combat_start)
 	GlobalSignals.combat_end.connect(_on_combat_end)
 	
