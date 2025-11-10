@@ -1,0 +1,145 @@
+[gd_scene load_steps=13 format=3 uid="uid://binrcrkcfdfcs"]
+
+[ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_0k4s7"]
+[ext_resource type="Texture2D" uid="uid://chr3glcjd8i5s" path="res://Tile-RPG/Images/Shaders/Line.png" id="2_giahk"]
+[ext_resource type="Texture2D" uid="uid://buusbcoljry7d" path="res://Tile-RPG/Images/Shaders/SmoothBall.png" id="2_lj0ok"]
+
+[sub_resource type="Animation" id="Animation_0k4s7"]
+resource_name = "play_effect"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Beams:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Balls:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_giahk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Beams:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lj0ok"]
+_data = {
+&"RESET": SubResource("Animation_giahk"),
+&"play_effect": SubResource("Animation_0k4s7")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54wb1"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.5289129, 1.208377, 0.61309594, 0.7019608)
+albedo_texture = ExtResource("2_giahk")
+billboard_mode = 2
+billboard_keep_scale = true
+proximity_fade_enabled = true
+proximity_fade_distance = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_giahk"]
+material = SubResource("StandardMaterial3D_54wb1")
+size = Vector2(0.25, 1)
+
+[sub_resource type="Curve" id="Curve_moy61"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.124000005, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.73600006, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj0ok"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.5289994, 1.3077328, 0.9283805, 1)
+albedo_texture = ExtResource("2_lj0ok")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_54wb1"]
+material = SubResource("StandardMaterial3D_lj0ok")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_lj0ok"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.762, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="LevelUp" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_0k4s7")
+start_on_spawn = true
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lj0ok")
+}
+
+[node name="Beams" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+amount = 30
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.64
+mesh = SubResource("QuadMesh_giahk")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.1
+emission_ring_radius = 0.45
+emission_ring_inner_radius = 0.35
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 12, 0)
+angle_max = 345.6
+scale_amount_curve = SubResource("Curve_moy61")
+
+[node name="Balls" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.096467435, 0)
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 0.42
+randomness = 0.7
+mesh = SubResource("QuadMesh_54wb1")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.4
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 9, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 2.0
+angle_max = 345.6
+scale_amount_min = 0.25
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_lj0ok")
