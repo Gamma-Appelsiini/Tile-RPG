@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm1wjhbewqrs2"
-path.s3tc="res://.godot/imported/T_vfx_hit122.jpg-bdfe20f50c7d18bb688df6bdc6a71990.s3tc.ctex"
+uid="uid://cvougw8fp3thy"
+path.s3tc="res://.godot/imported/book_book.png-c26406bea306314ff3d1c93864a3bcf1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "d0f827d416643661342dbb0ad94743f5"
+}
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Shaders/T_vfx_hit122.jpg"
-dest_files=["res://.godot/imported/T_vfx_hit122.jpg-bdfe20f50c7d18bb688df6bdc6a71990.s3tc.ctex"]
+source_file="res://Tile-RPG/Models/props/book_book.png"
+dest_files=["res://.godot/imported/book_book.png-c26406bea306314ff3d1c93864a3bcf1.s3tc.ctex"]
 
 [params]
 

@@ -1,12 +1,139 @@
-[gd_scene load_steps=13 format=3 uid="uid://binrcrkcfdfcs"]
+[gd_scene load_steps=21 format=3 uid="uid://binrcrkcfdfcs"]
 
 [ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_0k4s7"]
 [ext_resource type="Texture2D" uid="uid://chr3glcjd8i5s" path="res://Tile-RPG/Images/Shaders/Line.png" id="2_giahk"]
 [ext_resource type="Texture2D" uid="uid://buusbcoljry7d" path="res://Tile-RPG/Images/Shaders/SmoothBall.png" id="2_lj0ok"]
+[ext_resource type="AudioStream" uid="uid://pd66kbx6abqv" path="res://Tile-RPG/Sounds/Effects/level_up.mp3" id="2_moy61"]
+[ext_resource type="Shader" uid="uid://bnj6ab6gqjr4m" path="res://Tile-RPG/Shaders/gradient_dissolve2.gdshader" id="4_54wb1"]
+
+[sub_resource type="Animation" id="Animation_giahk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Beams:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder:mesh:bottom_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cylinder:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cylinder:position:z")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cylinder:mesh:top_radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cylinder:mesh:height")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(3.2944162, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.9906307, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.8498186, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_0k4s7"]
 resource_name = "play_effect"
-length = 0.5
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,7 +150,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Balls:emitting")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.03333333),
@@ -31,20 +158,129 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-
-[sub_resource type="Animation" id="Animation_giahk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Beams:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder:mesh:bottom_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0.1, -0.25, 0, 0.25, 0, 1, -0.07333334, -0.15, 0, 0, 0.3, -0.07333334, -0.15, 0, 0),
+"times": PackedFloat32Array(0, 0.23333335, 1.0333333)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cylinder:mesh:top_radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.1, -0.25, 0, 0.25, 0, 0, -0.07333334, 0.016666668, 0, 0),
+"times": PackedFloat32Array(0, 0.7)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cylinder:mesh:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.1, -0.25, 0, 0.25, 0, 0.1, -0.07333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.53333336)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cylinder:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.07333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.53333336)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cylinder:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.05, -0.07333334, -0.008333334, 0, 0),
+"times": PackedFloat32Array(0, 0.53333336)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cylinder:position:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.07333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.53333336)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:r")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(3.2944162, 0, 0, 0.013333334, 0, 3.2944162, -0.013333334, 0, 0, 0, 3.2944162, -0.058333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.31333333, 0.8)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:g")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(1.9906307, 0, 0, 0.013333334, 0, 1.9906307, -0.013333334, 0, 0, 0, 1.9906307, -0.058333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.31333333, 0.8)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:b")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0.8498186, 0, 0, 0.013333334, 0, 0.8498186, -0.013333334, 0, 0, 0, 0.8498186, -0.058333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.31333333, 0.8)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Cylinder:material_override:shader_parameter/ColorParameter:a")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.013333334, 0.16666667, 1, -0.013333334, 0, 0, 0, 0, -0.058333334, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.31333333, 0.8)
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [{
+"args": [],
+"method": &"_play_effect_sound"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lj0ok"]
@@ -92,9 +328,47 @@ size = Vector2(0.1, 0.1)
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.762, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_54wb1"]
+noise_type = 3
+frequency = 0.0175
+fractal_type = 2
+fractal_octaves = 8
+fractal_weighted_strength = 0.09
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_moy61"]
+noise = SubResource("FastNoiseLite_54wb1")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_moy61"]
+offsets = PackedFloat32Array(0, 0.96666664, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r420q"]
+gradient = SubResource("Gradient_moy61")
+fill_from = Vector2(1, 0.102564104)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brpl7"]
+render_priority = 0
+shader = ExtResource("4_54wb1")
+shader_parameter/speed = Vector2(0.1, 0.05)
+shader_parameter/aura_texture = SubResource("NoiseTexture2D_moy61")
+shader_parameter/maskTexture = SubResource("GradientTexture2D_r420q")
+shader_parameter/ProxFade = 0.2
+shader_parameter/ColorParameter = Color(3.2944162, 1.9906307, 0.8498186, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ss65a"]
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.1
+radial_segments = 32
+cap_top = false
+cap_bottom = false
+
 [node name="LevelUp" type="Node3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_0k4s7")
 start_on_spawn = true
+effect_sound = ExtResource("2_moy61")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -143,3 +417,9 @@ angle_max = 345.6
 scale_amount_min = 0.25
 scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_lj0ok")
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_brpl7")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_ss65a")

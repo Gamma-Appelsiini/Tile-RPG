@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c1rfwrhakph42" path="res://Tile-RPG/Images/Items/Mace.png" id="1_pmldo"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_fj1ff")
 weapon_type = 54
 hand_type = 1

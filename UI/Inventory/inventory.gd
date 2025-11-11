@@ -7,6 +7,8 @@ class_name Inventory
 const INV_SIZE:int = 15
 const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
 const ITEM_TT_PATH:String = "res://Tile-RPG/UI/Inventory/item_tooltip.tscn"
+const INV_DROP:AudioStream = preload("uid://c0naiqt18dbxq")
+const INV_PICK:AudioStream = preload("uid://t4n17ysxkboc")
 
 var player:Player = null
 var slots:Array[InventorySlot] = []
@@ -162,6 +164,7 @@ func _create_item_tt(new_item:Item) -> void:
 func _item_clicked() -> void:
 	if hovered_slot.item_in_slot == null: return
 	
+	GlobalSignals.play_audio.emit(INV_PICK, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 	_hide_tt(hovered_slot)
 	old_slot_pos = hovered_slot.item_image.global_position
 	selected_slot = hovered_slot
@@ -183,6 +186,7 @@ func _item_released() -> void:
 		_reset_selecting()
 		return
 	
+	GlobalSignals.play_audio.emit(INV_DROP, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 	selected_slot.item_image.global_position = old_slot_pos
 	hovered_slot.set_item(selected_slot.item_in_slot,selected_slot)
 	selected_slot = null

@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://bbqjjguiy4xwh" path="res://Tile-RPG/Breakables/breakable.gd" id="1_jjjtq"]
 [ext_resource type="Texture2D" uid="uid://8dms8t0mdbu1" path="res://Tile-RPG/Models/Breakables/barrel_broken_Barrel.png" id="2_7wi28"]
 [ext_resource type="Texture2D" uid="uid://cde83wakco43d" path="res://Tile-RPG/Models/Breakables/barrel_Barrel.png" id="2_gfe3q"]
-[ext_resource type="AudioStream" uid="uid://dmt22fc53w2ha" path="res://Tile-RPG/Sounds/no_interact.wav" id="2_udes3"]
+[ext_resource type="AudioStream" uid="uid://c3i1vywdenoyj" path="res://Tile-RPG/Sounds/Effects/woodbox_break.mp3" id="2_udes3"]
 [ext_resource type="Script" uid="uid://dx6urqvsbtxd7" path="res://Tile-RPG/Breakables/fragment.gd" id="2_yn1xq"]
 [ext_resource type="Shader" uid="uid://cob6fqoifkxfi" path="res://Tile-RPG/Shaders/dissolve_shader.gdshader" id="3_udes3"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="7_udes3"]
-
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7wi28"]
 height = 2.12744

@@ -60,7 +60,7 @@ shape = SubResource("CylinderShape3D_8w85h")
 
 [node name="XpDropper" type="Node3D" parent="."]
 script = ExtResource("4_ms4ik")
-xp_amount = 4
+xp_amount = 100
 metadata/_custom_type_script = "uid://cfaw7c8b3dbes"
 
 [node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
