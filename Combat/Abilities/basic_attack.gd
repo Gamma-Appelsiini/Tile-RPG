@@ -10,6 +10,7 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	#TODO animate attacker
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
+	_spawn_hit_effect(target)
 	AttackHandler.use_attack_on_char(target, new_attack)
 
 func _create_attack() -> Attack:

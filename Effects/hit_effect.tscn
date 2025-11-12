@@ -1,0 +1,62 @@
+[gd_scene load_steps=14 format=3 uid="uid://bh8ym5yvmklps"]
+
+[ext_resource type="Script" uid="uid://dfopx7c0fiupk" path="res://Tile-RPG/Effects/hit_effect.gd" id="1_nwr1t"]
+[ext_resource type="AudioStream" uid="uid://dfou684kfibmc" path="res://Tile-RPG/Sounds/Effects/small_rock.mp3" id="2_fyibu"]
+[ext_resource type="Shader" uid="uid://ccv60de7nqcn" path="res://Tile-RPG/Shaders/simple_shader.tres" id="2_nwr1t"]
+[ext_resource type="Texture2D" uid="uid://cwfrpx7wl2hfd" path="res://Tile-RPG/Images/Shaders/T_VFX_Flare_251.jpg" id="3_nwr1t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u75fo"]
+render_priority = 0
+shader = ExtResource("2_nwr1t")
+shader_parameter/hit_texture = ExtResource("3_nwr1t")
+
+[sub_resource type="Curve" id="Curve_fyibu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.049999997, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.014402151), -1.7270519, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s035r"]
+curve = SubResource("Curve_fyibu")
+
+[sub_resource type="Gradient" id="Gradient_oh2la"]
+colors = PackedColorArray(1.7728652, 1.0866064, 0.1331594, 1, 0.9262406, 0.46891055, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8fchc"]
+gradient = SubResource("Gradient_oh2la")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_n53u5"]
+_data = [Vector2(0, 1), 0.0, 0.32073787, 0, 0, Vector2(1, 0), -1.4669727, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nqclb"]
+curve = SubResource("Curve_n53u5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fyibu"]
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 0.79999995
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_nqclb")
+color_ramp = SubResource("GradientTexture1D_8fchc")
+alpha_curve = SubResource("CurveTexture_s035r")
+
+[sub_resource type="QuadMesh" id="QuadMesh_oh2la"]
+
+[node name="HitEffect" type="Node3D"]
+script = ExtResource("1_nwr1t")
+start_on_spawn = true
+effect_sound = ExtResource("2_fyibu")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.056806922, 0, 0)
+material_override = SubResource("ShaderMaterial_u75fo")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+randomness = 0.37
+process_material = SubResource("ParticleProcessMaterial_fyibu")
+draw_pass_1 = SubResource("QuadMesh_oh2la")

@@ -37,7 +37,6 @@ func _init() -> void:
 
 func _die() -> void:
 	#TODO
-	print("ASODIFJNSDIFJSDIFHSODIFHSDFIHSODIFH")
 	print("Character ", self.display_name, " died.")
 	died.emit(self)
 
@@ -99,7 +98,7 @@ func _rotate(point: Vector3) -> Tween:
 	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
 	var final_yaw: float = lerp_angle(current_yaw, target_yaw, 1.0)
 
-	const FULL_ROTATION_TIME: float = 0.8
+	const FULL_ROTATION_TIME: float = 0.4
 	var angle_diff: float = abs(delta)
 	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.1, FULL_ROTATION_TIME)
 	

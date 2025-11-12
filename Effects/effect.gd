@@ -15,6 +15,9 @@ const PLAY_STRING:String = "play_effect"
 var asp:AudioStreamPlayer3D = null
 
 func _ready() -> void:
+	_handle_start()
+
+func _handle_start() -> void:
 	effect_done.connect(queue_free)
 	if looping:
 		asp = AudioStreamPlayer3D.new()
@@ -22,9 +25,7 @@ func _ready() -> void:
 		add_child(asp)
 	
 	if start_on_spawn: play_effect()
-	
-	await get_tree().create_timer(5).timeout
-	end_effect()
+
 
 func play_effect() -> void:
 	if starting_animation:

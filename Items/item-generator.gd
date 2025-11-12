@@ -63,7 +63,11 @@ static func _choose_equipment_type(loot_type:LOOT_TYPE, ilvl:int, max_tier:int, 
 		for tier:int in loot_dict.keys():
 			if max_tier >= tier: possible_equipment.push_back(loot_dict[tier])
 	
-	new_equipment = possible_equipment.pick_random().duplicate()
+	new_equipment = possible_equipment.pick_random()
+	new_equipment.resource_local_to_scene = true
+	#Deep duplication to create true duplicate dicts etc.
+	new_equipment = new_equipment.duplicate(true)
+	
 	new_equipment.item_level = ilvl
 	new_equipment.original_item_level = ilvl
 	new_equipment.set_rarity(item_rarity)

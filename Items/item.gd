@@ -20,9 +20,7 @@ enum ItemRarity {
 @export var item_rarity:ItemRarity = ItemRarity.POOR
 @export var item_model_path:String = ""
 
-func _init() -> void:
-	resource_local_to_scene = true
-	
+
 #Override this
 func save_to_data() -> Dictionary:
 	return {}

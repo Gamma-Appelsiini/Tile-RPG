@@ -29,6 +29,8 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 [color=#53bb81]Luck[/color],[color=#bd5136]Might[/color],[color=#8f39ee]Mystic[/color],[color=#f18690]Skill[/color],
 [color=#d1b81b]Valor[/color],[color=#ff914d]Lvl[/color]"
 
+const HIT_EFFECT := preload("uid://bh8ym5yvmklps")
+
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0
 var ability_description:String = "Default Ability Description"
@@ -182,3 +184,16 @@ func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
 	attack.base_crit_chance = weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT]
 	attack.base_crit_multiplier = weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER]
 	attack.calculate_crit()
+
+func _get_hit_position(target:GameCharacter) -> Vector3:
+	var pos:Vector3 = target.global_position + Vector3(0,1.5,0)
+	
+	pos = pos.move_toward(ability_owner.global_position, 0.35)
+	
+	return pos
+
+func _spawn_hit_effect(target:GameCharacter) -> void:
+	var pos:Vector3 = _get_hit_position(target)
+	var new_hit:HitEffect = HIT_EFFECT.instantiate()
+	GlobalSignals.current_level.add_child(new_hit)
+	new_hit.global_position = pos

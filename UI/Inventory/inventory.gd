@@ -161,6 +161,7 @@ func _create_item_tt(new_item:Item) -> void:
 	
 	tooltips[new_item] = new_tooltip
 
+
 func _item_clicked() -> void:
 	if hovered_slot.item_in_slot == null: return
 	
