@@ -22,6 +22,7 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var ap_cost: int = 1
 @export var spirit_cost: int = 0
 @export var ability_range: int = 1
+@export var allow_diagonal: bool = false
 @export var ability_aoe: int = 0
 @export_multiline var damage_desc: String = "Damage Description"
 @export_multiline var ability_desc: String = "Ability Description"
@@ -129,10 +130,10 @@ func _is_in_range() -> bool:
 	
 	if target_type == TARGET_TYPE.NONE: return true
 	elif target_type == TARGET_TYPE.TILE:
-		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile)
+		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile, allow_diagonal)
 	else:
 		var ability_target_tile:Tile = tile_manager.char_tiles[target_char]
-		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile)
+		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile, allow_diagonal)
 	
 	if distance == -1 or distance > ability_range + range_increase:
 		return false
