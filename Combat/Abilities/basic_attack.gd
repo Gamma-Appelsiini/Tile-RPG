@@ -5,13 +5,15 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	var new_attack:Attack = _create_attack()
 	if !_can_use_ability(target): return
 	
-	print("Using basic attack on target")
 	_use_resources()
 	#TODO animate attacker
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
 	_spawn_hit_effect(target)
 	AttackHandler.use_attack_on_char(target, new_attack)
+	
+	await get_tree().create_timer(0.3).timeout
+	ability_finished.emit()
 
 func _create_attack() -> Attack:
 	var new_attack:Attack = Attack.new()

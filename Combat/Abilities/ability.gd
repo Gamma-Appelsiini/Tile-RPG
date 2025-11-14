@@ -24,6 +24,7 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var ability_range: int = 1
 @export var allow_diagonal: bool = false
 @export var ability_aoe: int = 0
+@export var ability_power: int = 0
 @export_multiline var damage_desc: String = "Damage Description"
 @export_multiline var ability_desc: String = "Ability Description"
 @export_multiline var scaling_desc: String = "[color=#2b722f]Agility[/color],[color=#ee5356]Endurance[/color],
@@ -119,9 +120,10 @@ func _can_use_ability(target:Node) -> bool:
 	
 	return true
 
-func _is_in_range() -> bool:
+func _is_in_range(override_tile:Tile = null) -> bool:
 	var tile_manager:TileManager = GlobalSignals.current_level.tile_manager
 	var ability_user_tile:Tile = tile_manager.char_tiles[ability_owner]
+	if override_tile: ability_user_tile = override_tile
 	var distance:int = -1
 	
 	var range_increase:int = 0
