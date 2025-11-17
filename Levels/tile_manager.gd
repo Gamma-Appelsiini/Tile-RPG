@@ -81,17 +81,20 @@ func _set_char_on_tile(game_char:GameCharacter, new_tile:Tile)-> void:
 	char_tiles[game_char] = new_tile
 	game_char.moved_to_tile.emit(new_tile)
 
-func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile) -> void:
-	var path:Array[Tile] = get_shortest_path(char_tiles[game_character], end_tile)
+func move_character_to_character(move_char:GameCharacter, target_char:GameCharacter) -> void:
+	var path:Array[Tile] = get_shortest_path(char_tiles[move_char], char_tiles[target_char], false, true)
 	path.pop_front()
-	
-	if path == [] or game_character.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT] == 0:
+	_use_movement_to_traverse_tile_path(move_char, path)
+
+func _use_movement_to_traverse_tile_path(move_char:GameCharacter, path:Array[Tile]) -> void:
+	if path == [] or move_char.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT] == 0:
+		print("return 1")
 		await get_tree().create_timer(0.1).timeout
 		character_moved.emit()
 		return
 	
 	for tile:Tile in path:
-		var char_move_amount:int = game_character.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT]
+		var char_move_amount:int = move_char.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT]
 		if 0 >= char_move_amount: break
 		
 		var start:bool = false
@@ -99,13 +102,21 @@ func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile) -> void
 		if tile == path.back(): end = true
 		if tile == path.front(): start = true
 		
-		game_character.move_to_point(tile.global_position,start, end)
-		game_character.stat_handler.update_stat(Stats.ResourceStat.CURRENT_MOVEMENT, -1)
-		await game_character.move_complete
+		move_char.move_to_point(tile.global_position,start, end)
+		move_char.stat_handler.update_stat(Stats.ResourceStat.CURRENT_MOVEMENT, -1)
+		await move_char.move_complete
 		
-		_set_char_on_tile(game_character, tile)
+		_set_char_on_tile(move_char, tile)
 	
+	print("Char moved to tile")
 	character_moved.emit()
+
+func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile, end_tile_can_be_blocked:bool = false) -> void:
+	print("move char to tile")
+	var path:Array[Tile] = get_shortest_path(char_tiles[game_character], end_tile, false, end_tile_can_be_blocked)
+	path.pop_front()
+	
+	_use_movement_to_traverse_tile_path(game_character, path)
 
 func _add_neighbors(tile:Tile) -> void:
 	for offset:Vector3 in OFFSETS:

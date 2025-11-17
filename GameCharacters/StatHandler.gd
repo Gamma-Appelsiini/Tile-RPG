@@ -185,10 +185,34 @@ func update_stat(type:int, amount:int) -> void:
 	elif type in Stats.SkillStat.values():
 		self.skill_stats[type] += amount
 	elif type in Stats.ResPenetrations.values():
-		self.ResPenetrations[type] += amount
+		self.resistance_penetrations[type] += amount
 
 	stats_changed.emit()
+
+func get_stat_amount(type:int) -> int:
+	var amount = 0
 	
+	if type in Stats.MainStat.values():
+		amount = main_stats[type]
+	elif type in Stats.SecondaryStat.values():
+		amount = secondary_stats[type]
+	elif type in Stats.CharStat.values():
+		amount = char_stats[type]
+	elif type in Stats.ResourceStat.values():
+		amount = resources[type]
+	elif type in Stats.DmgType.values():
+		amount = resistances[type]
+	elif type in Stats.DmgIncreases.values():
+		amount = dmg_increases[type]
+	elif type in Stats.Defence.values():
+		amount = defences[type]
+	elif type in Stats.SkillStat.values():
+		amount = skill_stats[type]
+	elif type in Stats.ResPenetrations.values():
+		amount = resistance_penetrations[type]
+	
+	return amount
+
 func save_to_data(save_data:Dictionary, unique_id:String) -> void:
 	var sh_data := {
 		EnumStrings.STAT_TYPE_STRING[Stats.MainStat]: main_stats.duplicate(),

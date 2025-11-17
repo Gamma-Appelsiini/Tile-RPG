@@ -31,21 +31,71 @@ func take_turn() -> void:
 	_set_teams()
 	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
 	
+	if _is_damaged_friendlies():
+		var healed:bool = await _heal_lowest_health_ally()
+		print("healed: ", healed)
+	
+	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
+	
 	var attacked:bool = await _try_to_attack()
 	if !attacked:
+		print("Not in range to attack, moving")
 		_move_to_character(target_char)
 		await GlobalSignals.combat_manager.tile_manager.character_moved
 		end_turn.emit()
 	else: end_turn.emit()
-	print("attacked: ", attacked)
 
 
 func _try_to_attack() -> bool:
-	print("1")
 	if await _attack_lowest_health_enemy(): return true
 	if await _attack_closest_enemy(): return true
 	
 	return false
+
+func _is_damaged_friendlies() -> bool:
+	var all_friendlies:Array[GameCharacter] = friendlies.duplicate()
+	all_friendlies.push_back(combatant)
+	all_friendlies = all_friendlies.filter(func(gc:GameCharacter): return gc.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP) < gc.stat_handler.get_stat_amount(Stats.ResourceStat.MAX_HP))
+	
+	print("damaged friendlies: ", all_friendlies)
+	if all_friendlies.is_empty(): return false
+	else: return true
+
+func _heal_lowest_health_ally() -> bool:
+	var healing_abilities:Array[Ability] = _filter_non_usable_abilities(support_abilities)
+	healing_abilities = healing_abilities.filter(func(abi:Ability): return abi.ability_tags.has(Ability.ABILITY_TAG.HEAL))
+	
+	var heal_targets:Array[GameCharacter] = friendlies.duplicate()
+	heal_targets.push_back(combatant)
+	heal_targets.sort_custom(compare_health)
+	
+	var possible_abilities:Array[Ability] = []
+	for new_target:GameCharacter in heal_targets:
+		possible_abilities = healing_abilities.duplicate()
+		target_char = heal_targets[0]
+		target_tile = tile_manager.char_tiles[target_char]
+		if target_char.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP) == target_char.stat_handler.get_stat_amount(Stats.ResourceStat.MAX_HP):
+			print("can't heal targets that have lost hp")
+			return false
+	
+		if target_char == combatant:
+			possible_abilities.filter(func(abi:Ability): return abi.usable_on_characters.has(Ability.CHARACTER_TYPE.SELF))
+			if possible_abilities.is_empty(): continue
+			else:
+				break
+	
+		for abi:Ability in healing_abilities:
+			chosen_ability = abi
+			if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: possible_abilities.erase(abi)
+			chosen_ability = null
+			
+		if !possible_abilities.is_empty(): break
+	
+	if possible_abilities.is_empty(): return false
+	_use_the_best_ability(possible_abilities)
+	await chosen_ability.ability_finished
+	
+	return true
 
 func _get_any_usable_abilities() -> Array[Ability]:
 	var all_abilities:Array[Ability] = offensive_abilities + support_abilities + movement_abilities
@@ -98,18 +148,11 @@ func _attack_closest_enemy() -> bool:
 		if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: usable_offensive_abilities.erase(abi)
 		chosen_ability = null
 		
-	if usable_offensive_abilities.is_empty(): return false
+	if usable_offensive_abilities.is_empty():
+		print("No usable offe abilities")
+		return false
 		
-	usable_offensive_abilities.sort_custom(compare_ability_power)
-	if combat_intelligence == INTELLIGENCE.DUMB: chosen_ability = usable_offensive_abilities.pick_random()
-	else: chosen_ability = usable_offensive_abilities[0]
-	
-	var tiles:Array[Tile] = _get_tiles_where_ability_in_range(tiles_to_move_to)
-	_move_to_tile(_get_tile_closest_to_char(tiles))
-	await GlobalSignals.combat_manager.tile_manager.character_moved
-	
-	if chosen_ability.target_type == Ability.TARGET_TYPE.TILE: chosen_ability.use_ability_on_target_tile(target_tile)
-	else: chosen_ability.use_ability_on_target_character(target_char)
+	_use_the_best_ability(usable_offensive_abilities)
 	await chosen_ability.ability_finished
 	
 	return true
@@ -129,9 +172,15 @@ func _attack_lowest_health_enemy() -> bool:
 		print("No usable offe abilities")
 		return false
 		
-	usable_offensive_abilities.sort_custom(compare_ability_power)
-	if combat_intelligence == INTELLIGENCE.DUMB: chosen_ability = usable_offensive_abilities.pick_random()
-	else: chosen_ability = usable_offensive_abilities[0]
+	_use_the_best_ability(usable_offensive_abilities)
+	await chosen_ability.ability_finished
+	
+	return true
+
+func _use_the_best_ability(usable_abilities:Array[Ability]) -> void:
+	usable_abilities.sort_custom(compare_ability_power)
+	if combat_intelligence == INTELLIGENCE.DUMB: chosen_ability = usable_abilities.pick_random()
+	else: chosen_ability = usable_abilities[0]
 	
 	var tiles:Array[Tile] = _get_tiles_where_ability_in_range(tiles_to_move_to)
 	_move_to_tile(tiles.pick_random())
@@ -139,9 +188,6 @@ func _attack_lowest_health_enemy() -> bool:
 	
 	if chosen_ability.target_type == Ability.TARGET_TYPE.TILE: chosen_ability.use_ability_on_target_tile(target_tile)
 	else: chosen_ability.use_ability_on_target_character(target_char)
-	await chosen_ability.ability_finished
-	
-	return true
 
 func _filter_non_usable_abilities(abilities:Array[Ability]) -> Array[Ability]:
 	var usable_abilities:Array[Ability] = abilities.duplicate().filter(func(abi:Ability): return abi.current_cooldown == 0)
@@ -158,26 +204,24 @@ func _choose_ability() -> void:
 	_dumb_choosing()
 
 func _move_randomly() -> void:
-	tile_manager._move_character_to_tile(combatant, tile_manager.tiles.values().pick_random())
+	tile_manager._move_character_to_tile(combatant, tile_manager.tiles.values().pick_random(), true)
 	await GlobalSignals.combat_manager.tile_manager.character_moved
 	
 func _move_to_character(gchar:GameCharacter) -> void:
-	tile_manager._move_character_to_tile(combatant, tile_manager.char_tiles[gchar])
-	await GlobalSignals.combat_manager.tile_manager.character_moved
+	tile_manager.move_character_to_character(combatant, gchar)
 	
 func _move_to_tile(tile:Tile) -> void:
 	tile_manager._move_character_to_tile(combatant, tile)
 
 func _set_teams() -> void:
 	if GlobalSignals.combat_manager.enemy_team.has(combatant):
-		friendlies = GlobalSignals.combat_manager.enemy_team
-		enemies = GlobalSignals.combat_manager.player_team
+		friendlies = GlobalSignals.combat_manager.enemy_team.duplicate()
+		enemies = GlobalSignals.combat_manager.player_team.duplicate()
 		
 	else:
-		friendlies = GlobalSignals.combat_manager.player_team
-		enemies = GlobalSignals.combat_manager.enemy_team
+		friendlies = GlobalSignals.combat_manager.player_team.duplicate()
+		enemies = GlobalSignals.combat_manager.enemy_team.duplicate()
 		
-	enemies.sort_custom(compare_distance)
 	friendlies.erase(combatant)
 
 func _get_tiles_where_ability_in_range(reachable_tiles:Array[Tile]) -> Array[Tile]:
@@ -207,9 +251,12 @@ func _get_possible_tiles_to_move_to() -> Array[Tile]:
 func _get_reachable_tiles(possible_tiles:Array[Tile]) -> Array[Tile]:
 	var reachable_tiles:Array[Tile] = []
 	var combatant_tile:Tile = tile_manager.char_tiles[combatant]
+	var move_amount:int = combatant.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_MOVEMENT)
 	
 	for tile:Tile in possible_tiles:
-		if tile_manager.get_shortest_path(combatant_tile,tile) == []: continue
+		var path:Array[Tile] = tile_manager.get_shortest_path(combatant_tile,tile)
+		if path == []: continue
+		elif len(path) > move_amount: continue
 		reachable_tiles.push_back(tile)
 	
 	return reachable_tiles

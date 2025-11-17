@@ -41,7 +41,7 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	player_team.push_back(player)
 	
 	enemy_team = new_enemies
-	chars_in_combat = player_team + enemy_team
+	chars_in_combat = player_team.duplicate() + enemy_team.duplicate()
 	print(len(chars_in_combat))
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died, true)
@@ -150,6 +150,7 @@ func _move_camera_to_char(current_actor:GameCharacter) -> void:
 	camera_move_finished.emit()
 
 func _char_died(dead_char:GameCharacter) -> void:
+	print("Char died: ", dead_char)
 	if dead_char in player_team: player_team.erase(dead_char)
 	elif dead_char in enemy_team: enemy_team.erase(dead_char)
 	chars_in_combat.erase(dead_char)

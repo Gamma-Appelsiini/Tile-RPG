@@ -8,7 +8,7 @@ signal ability_on_cooldown
 signal cooldown_changed
 
 enum TARGET_TYPE {TILE, GAME_CHARACTER, NONE}
-enum ABILITY_TAG {SINGLE_TARGET, AOE, MELEE, RANGED, SPELL, HIT, DOT, UNEVADEABLE, NO_RETALIATION, WEAPON}
+enum ABILITY_TAG {SINGLE_TARGET, AOE, MELEE, RANGED, SPELL, HIT, DOT, UNEVADEABLE, NO_RETALIATION, WEAPON, HEAL}
 enum CHARACTER_TYPE {ALLY, ENEMY, SELF}
 enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 
@@ -134,6 +134,7 @@ func _is_in_range(override_tile:Tile = null) -> bool:
 	elif target_type == TARGET_TYPE.TILE:
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile, allow_diagonal)
 	else:
+		if target_char == ability_owner: return true
 		var ability_target_tile:Tile = tile_manager.char_tiles[target_char]
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile, allow_diagonal)
 	

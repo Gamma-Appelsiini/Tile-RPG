@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ba5woaetqefuy"]
+[gd_scene load_steps=14 format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="2_ilq20"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cjxr6uush4nq0" path="res://Tile-RPG/Combat/combat_starter.tscn" id="6_pf120"]
 [ext_resource type="Script" uid="uid://3i4005pgv256" path="res://Tile-RPG/Combat/ai_handler.gd" id="7_ilq20"]
 [ext_resource type="PackedScene" uid="uid://bs08mf1jnw3vi" path="res://Tile-RPG/Combat/Abilities/basic_attack.tscn" id="8_nl7kr"]
+[ext_resource type="PackedScene" uid="uid://cxigqlih8j8nv" path="res://Tile-RPG/Combat/Abilities/cure_wounds/cure_wounds.tscn" id="9_oevf2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ouqyu"]
 radius = 0.35
@@ -72,10 +73,13 @@ metadata/_custom_type_script = "uid://g6rood38j5ok"
 
 [node name="CombatStarter" parent="." instance=ExtResource("6_pf120")]
 
-[node name="AIHandler" type="Node" parent="." node_paths=PackedStringArray("combatant", "offensive_abilities")]
+[node name="AIHandler" type="Node" parent="." node_paths=PackedStringArray("combatant", "offensive_abilities", "support_abilities")]
 script = ExtResource("7_ilq20")
 combatant = NodePath("..")
 offensive_abilities = [NodePath("BasicAttack")]
+support_abilities = [NodePath("CureWounds")]
 metadata/_custom_type_script = "uid://3i4005pgv256"
 
 [node name="BasicAttack" parent="AIHandler" instance=ExtResource("8_nl7kr")]
+
+[node name="CureWounds" parent="AIHandler" instance=ExtResource("9_oevf2")]

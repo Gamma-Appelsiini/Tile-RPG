@@ -12,7 +12,7 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	_spawn_hit_effect(target)
 	AttackHandler.use_attack_on_char(target, new_attack)
 	
-	await get_tree().create_timer(0.3).timeout
+	#await get_tree().create_timer(0.3).timeout
 	ability_finished.emit()
 
 func _create_attack() -> Attack:
