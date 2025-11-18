@@ -4,9 +4,11 @@ class_name AIHandler
 signal end_turn
 
 enum INTELLIGENCE {DUMB, AVERAGE, SMART}
+enum COMBAT_TYPE {RANGED, MELEE, SUPPORT}
 
 @export var combatant:GameCharacter = null
 @export var combat_intelligence:INTELLIGENCE = INTELLIGENCE.AVERAGE
+@export var combat_type:COMBAT_TYPE = COMBAT_TYPE.MELEE
 @export var offensive_abilities:Array[Ability] = []
 @export var support_abilities:Array[Ability] = []
 @export var movement_abilities:Array[Ability] = []
@@ -45,6 +47,36 @@ func take_turn() -> void:
 		end_turn.emit()
 	else: end_turn.emit()
 
+func _run_away_from_enemies() -> bool:
+	var furthest_tile:Tile = _get_furthest_tile_from_enemies()
+	if furthest_tile == null: return false
+	
+	_move_to_tile(furthest_tile)
+	await GlobalSignals.combat_manager.tile_manager.character_moved
+	
+	return true
+
+func _get_furthest_tile_from_enemies() -> Tile:
+	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
+	if tiles_to_move_to.is_empty(): return null
+	
+	var enemy_tiles:Array[Tile] = []
+	for enemy:GameCharacter in enemies:
+		enemy_tiles.push_back(tile_manager.char_tiles[enemy])
+
+	var furthest_tile:Tile = tiles_to_move_to[0]
+	var max_total_distance:int = -1
+	
+	for tile:Tile in tiles_to_move_to:
+		var total_distance:int = 0
+		for enemy_tile:Tile in enemy_tiles:
+			total_distance += tile_manager.get_distance_to_tile(tile, enemy_tile)
+		
+		if total_distance > max_total_distance:
+			max_total_distance = total_distance
+			furthest_tile = tile
+	
+	return furthest_tile
 
 func _try_to_attack() -> bool:
 	if await _attack_lowest_health_enemy(): return true

@@ -5,7 +5,7 @@
 [resource]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.88341594, 0.9880635, 1.1450349, 0.11073645)
+albedo_color = Color(0.88341594, 0.9880635, 1.1450349, 0.093219265)
 albedo_texture = ExtResource("1_f2tsl")
 disable_receive_shadows = true
 billboard_mode = 3
