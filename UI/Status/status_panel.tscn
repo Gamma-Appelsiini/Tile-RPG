@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckjtakb74tlm2"]
+[gd_scene load_steps=5 format=3 uid="uid://ckjtakb74tlm2"]
 
 [ext_resource type="Script" uid="uid://dm60sw82ox0lh" path="res://Tile-RPG/UI/Status/status_panel.gd" id="1_luyw7"]
 [ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_rlhqa"]
 [ext_resource type="Texture2D" uid="uid://dc73lpptw3vso" path="res://Tile-RPG/Images/Borders/SimpleBorder3.png" id="3_io5lf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlhqa"]
 
 [node name="StatusPanel" type="Control"]
 layout_mode = 3
@@ -33,6 +35,8 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.46666667)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+self_modulate = Color(1.92523e-07, 0.7276906, 0.17200261, 1)
+material = SubResource("ShaderMaterial_rlhqa")
 layout_mode = 2
 texture = ExtResource("3_io5lf")
 patch_margin_left = 6

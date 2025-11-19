@@ -102,7 +102,7 @@ func _animate_portrait_to_place(gchar:GameCharacter, end_place:int) -> void:
 	animation_portrait.position = _calculate_x_offset(from_portrait, true) + Vector2(get_viewport_rect().size.x * 0.5, 0)
 	
 	from_portrait.modulate.a = 0
-	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME * 9)
 	
 	await tween.finished
@@ -117,7 +117,7 @@ func _squeeze_portrait_away(tp:TurnPortrait) -> void:
 	tp.custom_minimum_size.y = _get_portrait_size().y
 	tp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	
-	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(tp,"custom_minimum_size:y", 0, PORTRAIT_MOVE_TIME - 0.05)
 	await tween.finished
 	tp.queue_free()
@@ -153,7 +153,9 @@ func _animate_portrait_in_out(tp:TurnPortrait, out:bool, turn_haver:bool = false
 		animation_portrait.position = animation_portrait.position - offset
 	
 	GlobalSignals.play_audio.emit(portrait_slide_sound, AudioManager.AUDIO_TYPE.UI)
-	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true).set_trans(Tween.TRANS_ELASTIC)
+	if out: tween.set_trans(Tween.TRANS_CIRC)
+	
 	tween.tween_property(animation_portrait,"modulate:a", modulation, PORTRAIT_MOVE_TIME)
 	tween.tween_property(animation_portrait,"position", animation_portrait.position + offset, PORTRAIT_MOVE_TIME + 0.01)
 	
@@ -196,7 +198,7 @@ func show_text(new_text:String, color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void
 	var viewport_size:Vector2 = get_viewport_rect().size
 	var offset:Vector2 = Vector2(0,viewport_size.y * 0.2)
 	
-	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(new_label,"modulate:a", 1, 1)
 	tween.tween_property(new_label,"global_position", new_label.global_position + offset, 1)
 	

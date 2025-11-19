@@ -15,6 +15,7 @@ enum STATUS_TYPE {BUFF, DEBUFF}
 
 var current_duration:int = 0
 var affected_gchar:GameCharacter = null
+var status_creator:GameCharacter = null
 var affixes:Array[Affix] = []
 
 func connect_status(new_char:GameCharacter) -> void:

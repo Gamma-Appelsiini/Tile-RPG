@@ -1,0 +1,329 @@
+[gd_scene load_steps=22 format=3 uid="uid://cg47mkl168mib"]
+
+[ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_25x40"]
+[ext_resource type="Texture2D" uid="uid://i6f03jnmgiuh" path="res://Tile-RPG/Images/Textures/blood_base.png" id="2_trjk8"]
+[ext_resource type="Texture2D" uid="uid://djj2is87q4b33" path="res://Tile-RPG/Images/Textures/blood_normal.png" id="3_bcm4a"]
+[ext_resource type="Texture2D" uid="uid://c0ew3yl2t67w6" path="res://Tile-RPG/Images/Textures/T_Decal_Blood651aas.png" id="4_bcm4a"]
+[ext_resource type="Texture2D" uid="uid://e1d6u0qxrq4c" path="res://Tile-RPG/Images/Textures/T_Decal_Blood651aas_N.png" id="5_tquvc"]
+[ext_resource type="Script" uid="uid://bie0wnij5d3f5" path="res://Tile-RPG/Effects/decal_effect.gd" id="6_tquvc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tquvc"]
+transparency = 2
+alpha_scissor_threshold = 0.15
+alpha_antialiasing_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("2_trjk8")
+roughness = 0.24
+normal_enabled = true
+normal_scale = 0.62
+normal_texture = ExtResource("3_bcm4a")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_m7rbu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.24545453, 0.95407605), -0.37008265, -0.37008265, 0, 0, Vector2(0.99318177, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vvjct"]
+curve = SubResource("Curve_m7rbu")
+
+[sub_resource type="Gradient" id="Gradient_33bjg"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0.08955224, 0.35074627)
+colors = PackedColorArray(0.5228232, 0, 0.09937961, 1, 0.96109587, 0, 0.045013793, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_emgqt"]
+gradient = SubResource("Gradient_33bjg")
+
+[sub_resource type="Curve" id="Curve_2uxow"]
+_data = [Vector2(0, 0), 0.0, 3.354859, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vbxfu"]
+curve = SubResource("Curve_2uxow")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wa2u1"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.3
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 10.0
+initial_velocity_min = -0.5
+initial_velocity_max = 3.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 0.39997762
+scale_min = 0.39999998
+scale_curve = SubResource("CurveTexture_vbxfu")
+color_ramp = SubResource("GradientTexture1D_emgqt")
+alpha_curve = SubResource("CurveTexture_vvjct")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3l6oi"]
+size = Vector2(0.6, 0.6)
+
+[sub_resource type="Animation" id="Animation_15ehu"]
+resource_name = "play_effect"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BloodDecal")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_decal"
+}]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BloodDecal:albedo_mix")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.06666667, 0, 0, 0, 1, -0.03333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BloodDecal:modulate:r")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BloodDecal:modulate:g")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BloodDecal:modulate:b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BloodDecal:modulate:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.06666667, 0, 0, 0, 1, -0.03333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_p6lnw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BloodDecal:albedo_mix")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BloodDecal:modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BloodDecal:modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BloodDecal:modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BloodDecal:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_tquvc"]
+resource_name = "blood_disappear"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BloodDecal:albedo_mix")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.06666667, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BloodDecal:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BloodDecal:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BloodDecal:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BloodDecal:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.06666667, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtf2s"]
+_data = {
+&"RESET": SubResource("Animation_p6lnw"),
+&"blood_disappear": SubResource("Animation_tquvc"),
+&"play_effect": SubResource("Animation_15ehu")
+}
+
+[sub_resource type="Gradient" id="Gradient_m7rbu"]
+offsets = PackedFloat32Array(0.47333333)
+colors = PackedColorArray(0, 0.48452926, 0.3491902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_33bjg"]
+gradient = SubResource("Gradient_m7rbu")
+
+[node name="BloodEffect" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_25x40")
+start_on_spawn = true
+animation_player = NodePath("AnimationPlayer")
+ending_animation = "blood_disappear"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+layers = 4
+material_override = SubResource("StandardMaterial3D_tquvc")
+emitting = false
+amount = 6
+lifetime = 1.3
+one_shot = true
+explosiveness = 0.6
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_wa2u1")
+draw_pass_1 = SubResource("QuadMesh_3l6oi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wtf2s")
+}
+
+[node name="BloodDecal" type="Decal" parent="."]
+size = Vector3(0.5, 0.1, 0.5)
+texture_albedo = ExtResource("4_bcm4a")
+texture_normal = ExtResource("5_tquvc")
+texture_orm = SubResource("GradientTexture1D_33bjg")
+modulate = Color(1, 1, 1, 0)
+albedo_mix = 0.0
+cull_mask = 1048571
+script = ExtResource("6_tquvc")

@@ -19,6 +19,8 @@ func set_tags(new_tags:Array[Ability.ABILITY_TAG]) -> void:
 	ability_tags = new_tags
 
 func calculate_crit() -> void:
+	if ability_tags.has(Ability.ABILITY_TAG.CANT_CRIT): return
+	
 	var crit_chance:int = base_crit_chance
 	var final_crit_multiplier:float = base_crit_multiplier
 	
