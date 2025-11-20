@@ -11,7 +11,7 @@ var bleed_per_movement:int = 0
 func _connet_to_char_signals() -> void:
 	affected_gchar.moved_to_tile.connect(_bleed)
 
-func _bleed() -> void:
+func _bleed(_tile:Tile) -> void:
 	var bleed_attack:Attack = Attack.new()
 	bleed_attack.attacker = status_creator
 	bleed_attack.set_tags([Ability.ABILITY_TAG.CANT_CRIT, Ability.ABILITY_TAG.DOT, Ability.ABILITY_TAG.UNEVADEABLE, Ability.ABILITY_TAG.NO_RETALIATION ])
@@ -22,6 +22,7 @@ func _bleed() -> void:
 
 	var blood_effect:Effect = BLOOD_EFFECT.instantiate()
 	GlobalSignals.current_level.add_child(blood_effect)
+	blood_effect.global_position = affected_gchar.global_position + Vector3(randf_range(-0.2,0.2), randf_range(1.5,1.9), randf_range(-0.2,0.2))
 
 func set_bleed_stats(dmg:int, duration:int) -> void:
 	bleed_per_movement = dmg

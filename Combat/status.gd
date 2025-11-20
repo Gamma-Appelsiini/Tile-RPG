@@ -1,3 +1,4 @@
+extends Node
 class_name Status
 
 signal remove_status
@@ -27,7 +28,7 @@ func connect_status(new_char:GameCharacter) -> void:
 	
 	_connet_to_char_signals()
 	
-func _on_round_change() -> void:
+func _on_round_change(_round_count:int) -> void:
 	current_duration -= 1
 	duration_changed.emit()
 	if current_duration <= 0: remove_status.emit()

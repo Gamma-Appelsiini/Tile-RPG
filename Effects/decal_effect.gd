@@ -16,5 +16,5 @@ func _spawn_decal() -> void:
 	
 	if result:
 		collision_pos = result.position
-		self.global_position = collision_pos
+		self.global_position = collision_pos + Vector3(randf_range(-0.2, 0.2),0,randf_range(-0.2, 0.2))
 	else: self.visible = false

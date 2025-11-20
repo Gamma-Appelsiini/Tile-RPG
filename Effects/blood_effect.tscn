@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cg47mkl168mib"]
+[gd_scene load_steps=23 format=3 uid="uid://cg47mkl168mib"]
 
 [ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_25x40"]
+[ext_resource type="AudioStream" uid="uid://dfou684kfibmc" path="res://Tile-RPG/Sounds/Effects/small_rock.mp3" id="2_m7rbu"]
 [ext_resource type="Texture2D" uid="uid://i6f03jnmgiuh" path="res://Tile-RPG/Images/Textures/blood_base.png" id="2_trjk8"]
 [ext_resource type="Texture2D" uid="uid://djj2is87q4b33" path="res://Tile-RPG/Images/Textures/blood_normal.png" id="3_bcm4a"]
 [ext_resource type="Texture2D" uid="uid://c0ew3yl2t67w6" path="res://Tile-RPG/Images/Textures/T_Decal_Blood651aas.png" id="4_bcm4a"]
@@ -66,91 +67,6 @@ alpha_curve = SubResource("CurveTexture_vvjct")
 
 [sub_resource type="QuadMesh" id="QuadMesh_3l6oi"]
 size = Vector2(0.6, 0.6)
-
-[sub_resource type="Animation" id="Animation_15ehu"]
-resource_name = "play_effect"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles3D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.8333334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BloodDecal")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_spawn_decal"
-}]
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BloodDecal:albedo_mix")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.06666667, 0, 0, 0, 1, -0.03333334, -0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BloodDecal:modulate:r")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("BloodDecal:modulate:g")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("BloodDecal:modulate:b")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6)
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("BloodDecal:modulate:a")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.06666667, 0, 0, 0, 1, -0.03333334, -0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6)
-}
 
 [sub_resource type="Animation" id="Animation_p6lnw"]
 length = 0.001
@@ -281,6 +197,105 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.4)
 }
 
+[sub_resource type="Animation" id="Animation_15ehu"]
+resource_name = "play_effect"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BloodDecal")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_decal"
+}]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BloodDecal:albedo_mix")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.06666667, 0, 0, 0, 1, -0.03333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BloodDecal:modulate:r")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BloodDecal:modulate:g")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BloodDecal:modulate:b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.06666667, 0, 0, 0, 1, -0.03333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BloodDecal:modulate:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.06666667, 0, 0, 0, 1, -0.03333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_effect_sound"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wtf2s"]
 _data = {
 &"RESET": SubResource("Animation_p6lnw"),
@@ -298,6 +313,7 @@ gradient = SubResource("Gradient_m7rbu")
 [node name="BloodEffect" type="Node3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_25x40")
 start_on_spawn = true
+effect_sound = ExtResource("2_m7rbu")
 animation_player = NodePath("AnimationPlayer")
 ending_animation = "blood_disappear"
 
