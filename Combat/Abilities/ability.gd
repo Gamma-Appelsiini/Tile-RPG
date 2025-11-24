@@ -63,7 +63,10 @@ func get_ap_cost() -> int:
 
 #Override
 func get_range() -> int:
-	return ability_range
+	var range_increase:int = 0
+	if ability_tags.has(ABILITY_TAG.SPELL): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_RANGE]
+	if ability_tags.has(ABILITY_TAG.RANGED): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
+	return ability_range + range_increase
 	
 #Override
 func get_aoe() -> int:
@@ -126,10 +129,6 @@ func _is_in_range(override_tile:Tile = null) -> bool:
 	if override_tile: ability_user_tile = override_tile
 	var distance:int = -1
 	
-	var range_increase:int = 0
-	if ability_tags.has(ABILITY_TAG.SPELL): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_RANGE]
-	if ability_tags.has(ABILITY_TAG.RANGED): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
-	
 	if target_type == TARGET_TYPE.NONE: return true
 	elif target_type == TARGET_TYPE.TILE:
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile, allow_diagonal)
@@ -138,7 +137,7 @@ func _is_in_range(override_tile:Tile = null) -> bool:
 		var ability_target_tile:Tile = tile_manager.char_tiles[target_char]
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile, allow_diagonal)
 	
-	if distance == -1 or distance > ability_range + range_increase:
+	if distance == -1 or distance > get_range():
 		return false
 	
 	return true

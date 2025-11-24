@@ -47,6 +47,41 @@ func take_turn() -> void:
 		end_turn.emit()
 	else: end_turn.emit()
 
+func _buff_friendly() -> bool:
+	var buffing_abilities:Array[Ability] = _filter_non_usable_abilities(support_abilities)
+	buffing_abilities = buffing_abilities.filter(func(abi:Ability): return abi.ability_tags.has(Ability.ABILITY_TAG.BUFF))
+	
+	var buff_targets:Array[GameCharacter] = friendlies.duplicate()
+	buff_targets.push_back(combatant)
+	
+	#TODO npc power
+	#buff_targets.sort_custom(compare_health)
+	
+	var possible_abilities:Array[Ability] = []
+	for new_target:GameCharacter in buff_targets:
+		possible_abilities = buffing_abilities.duplicate()
+		target_char = new_target
+		target_tile = tile_manager.char_tiles[target_char]
+	
+		if target_char == combatant:
+			possible_abilities.filter(func(abi:Ability): return abi.usable_on_characters.has(Ability.CHARACTER_TYPE.SELF))
+			if possible_abilities.is_empty(): continue
+			else:
+				break
+	
+		for abi:Ability in buffing_abilities:
+			chosen_ability = abi
+			if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: possible_abilities.erase(abi)
+			chosen_ability = null
+			
+		if !possible_abilities.is_empty(): break
+	
+	if possible_abilities.is_empty(): return false
+	_use_the_best_ability(possible_abilities)
+	await chosen_ability.ability_finished
+	
+	return true
+
 func _run_away_from_enemies() -> bool:
 	var furthest_tile:Tile = _get_furthest_tile_from_enemies()
 	if furthest_tile == null: return false
@@ -104,7 +139,7 @@ func _heal_lowest_health_ally() -> bool:
 	var possible_abilities:Array[Ability] = []
 	for new_target:GameCharacter in heal_targets:
 		possible_abilities = healing_abilities.duplicate()
-		target_char = heal_targets[0]
+		target_char = new_target
 		target_tile = tile_manager.char_tiles[target_char]
 		if target_char.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP) == target_char.stat_handler.get_stat_amount(Stats.ResourceStat.MAX_HP):
 			print("can't heal targets that have lost hp")
@@ -215,8 +250,9 @@ func _use_the_best_ability(usable_abilities:Array[Ability]) -> void:
 	else: chosen_ability = usable_abilities[0]
 	
 	var tiles:Array[Tile] = _get_tiles_where_ability_in_range(tiles_to_move_to)
-	_move_to_tile(tiles.pick_random())
-	await GlobalSignals.combat_manager.tile_manager.character_moved
+	if target_char != combatant:
+		_move_to_tile(tiles.pick_random())
+		await GlobalSignals.combat_manager.tile_manager.character_moved
 	
 	if chosen_ability.target_type == Ability.TARGET_TYPE.TILE: chosen_ability.use_ability_on_target_tile(target_tile)
 	else: chosen_ability.use_ability_on_target_character(target_char)

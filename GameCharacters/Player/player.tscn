@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=12 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bdpwih35s30mm" path="res://Tile-RPG/UI/CharacterResources/resource_globe.tscn" id="5_kd85i"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="7_gqri5"]
 [ext_resource type="Script" uid="uid://dx5v73ugqm3sk" path="res://Tile-RPG/Effects/effect_handler.gd" id="8_x0jno"]
-[ext_resource type="Script" uid="uid://cyxkkp42rics7" path="res://Tile-RPG/Handlers/status_handler.gd" id="9_udvo0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
 radius = 0.3
@@ -92,7 +91,3 @@ metadata/_custom_type_script = "uid://g6rood38j5ok"
 [node name="EffectHandler" type="Node" parent="."]
 script = ExtResource("8_x0jno")
 metadata/_custom_type_script = "uid://dx5v73ugqm3sk"
-
-[node name="StatusHandler" type="Node" parent="."]
-script = ExtResource("9_udvo0")
-metadata/_custom_type_script = "uid://cyxkkp42rics7"

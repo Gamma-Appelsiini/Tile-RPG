@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs08mf1jnw3vi"]
 
 [ext_resource type="Script" uid="uid://bf0eri1wkopni" path="res://Tile-RPG/Combat/Abilities/basic_attack.gd" id="1_cgb73"]
-[ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="2_3hlnx"]
+[ext_resource type="Texture2D" uid="uid://b3h5tbu7sr1yy" path="res://Tile-RPG/Images/Abilities/BasicAttack.png" id="2_3hlnx"]
 
 [node name="BasicAttack" type="Node3D"]
 script = ExtResource("1_cgb73")

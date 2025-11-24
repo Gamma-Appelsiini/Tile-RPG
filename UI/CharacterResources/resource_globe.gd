@@ -46,7 +46,7 @@ func _set_amount(liquid_amount:float) -> void:
 	var amount:float = (MAX_AMOUNT+abs(MIN_AMOUNT)) * liquid_amount
 	
 	var tween_time:float = abs(liquid_material.get_shader_parameter("liquid_amount")/2 - liquid_amount) * 2
-	var tween:Tween = create_tween()
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(liquid_material, "shader_parameter/liquid_amount", MIN_AMOUNT + amount, tween_time)
 
 func get_viewport_path() -> SubViewport:

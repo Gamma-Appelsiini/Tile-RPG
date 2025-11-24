@@ -23,6 +23,7 @@ var move_tween:Tween = null
 var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
 @export var ai_handler:AIHandler = null
+var status_handler:StatusHandler = null
 
 func _init() -> void:
 	stat_handler = StatHandler.new()
@@ -34,6 +35,9 @@ func _init() -> void:
 	equipment_handler = EquipmentHandler.new()
 	add_child(equipment_handler)
 	equipment_handler.equipment_owner = self
+	
+	status_handler = StatusHandler.new()
+	add_child(status_handler)
 
 func _die() -> void:
 	#TODO

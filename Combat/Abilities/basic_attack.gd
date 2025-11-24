@@ -30,7 +30,11 @@ func get_range() -> int:
 	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
 	_set_ability_weapon_range(weapon)
 	
-	return ability_range
+	var range_increase:int = 0
+	if weapon:
+		if weapon.weapon_type == Weapon.WeaponType.BOW: range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
+	
+	return ability_range + range_increase
 
 #Overrided
 func get_dmg() -> Dictionary[Stats.DmgType,int]:

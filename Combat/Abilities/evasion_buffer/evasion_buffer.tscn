@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://wct51sa62ho1"]
+
+[ext_resource type="Script" uid="uid://cjjr1xr0iq31n" path="res://Tile-RPG/Combat/Abilities/evasion_buffer/evasion_buffer.gd" id="1_hty33"]
+[ext_resource type="Texture2D" uid="uid://dea3jo74a31p8" path="res://Tile-RPG/Images/Stats/evasion.png" id="2_8vdj3"]
+
+[node name="EvasionBuffer" type="Node3D"]
+script = ExtResource("1_hty33")
+animation_type = 1
+usable_on_characters = Array[int]([0, 2])
+ability_tags = Array[int]([0, 4, 11])
+ability_icon = ExtResource("2_8vdj3")
+ability_name = "Graceful Wind"
+ability_cooldown = 2
+ability_range = 2
+allow_diagonal = true
+damage_desc = "5 + [color=#2b722f]Agility[/color] * 3 + Lvl * 2"
+ability_desc = "Buff target ally with evasion."
+scaling_desc = "Range: 2 +[color=#8f39ee]Mystic[/color] / 5."

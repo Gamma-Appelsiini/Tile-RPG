@@ -1,0 +1,203 @@
+[gd_scene load_steps=17 format=3 uid="uid://b8xk37t3i1ps4"]
+
+[ext_resource type="Script" uid="uid://h0qphrekiodp" path="res://Tile-RPG/Effects/generic_buff.gd" id="1_vn8fu"]
+[ext_resource type="Texture2D" uid="uid://buusbcoljry7d" path="res://Tile-RPG/Images/Shaders/SmoothBall.png" id="2_qi832"]
+[ext_resource type="Shader" uid="uid://bnj6ab6gqjr4m" path="res://Tile-RPG/Shaders/gradient_dissolve2.gdshader" id="3_qi832"]
+
+[sub_resource type="Animation" id="Animation_qi832"]
+resource_name = "play_effect"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AuraMesh:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.78999996)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AuraMesh:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.2660947, -0.25, 0, 0.25, 0, 2, -0.25, -0.37768245, 0, 0),
+"times": PackedFloat32Array(0, 0.78999996)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AuraMesh:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.78999996)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Balls:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animate_aura_color"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cgjes"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AuraMesh:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AuraMesh:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AuraMesh:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m2u11"]
+_data = {
+&"RESET": SubResource("Animation_cgjes"),
+&"play_effect": SubResource("Animation_qi832")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgjes"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.5289994, 1.3077328, 0.9283805, 1)
+albedo_texture = ExtResource("2_qi832")
+billboard_mode = 2
+billboard_keep_scale = true
+proximity_fade_enabled = true
+proximity_fade_distance = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_m2u11"]
+material = SubResource("StandardMaterial3D_cgjes")
+size = Vector2(0.05, 0.15)
+
+[sub_resource type="Curve" id="Curve_7jkcb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.762, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qi832"]
+noise_type = 3
+frequency = 0.0071
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cgjes"]
+noise = SubResource("FastNoiseLite_qi832")
+seamless = true
+invert = true
+
+[sub_resource type="Gradient" id="Gradient_cgjes"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.35, 0.52619046, 0.6642857)
+colors = PackedColorArray(0, 0, 0, 1, 0.7609995, 0.760999, 0.76099896, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m2u11"]
+gradient = SubResource("Gradient_cgjes")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jkcb"]
+render_priority = 0
+shader = ExtResource("3_qi832")
+shader_parameter/speed = Vector2(0.2, 0.1)
+shader_parameter/aura_texture = SubResource("NoiseTexture2D_cgjes")
+shader_parameter/maskTexture = SubResource("GradientTexture2D_m2u11")
+shader_parameter/ProxFade = 0.2
+shader_parameter/ColorParameter = Color(0, 0.84, 0.26599994, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ueghx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7jkcb"]
+radius = 0.2
+height = 1.8
+
+[node name="GenericBuff" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_vn8fu")
+start_on_spawn = true
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m2u11")
+}
+
+[node name="Balls" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.096467435, 0)
+emitting = false
+amount = 15
+one_shot = true
+explosiveness = 0.42
+randomness = 0.7
+mesh = SubResource("QuadMesh_m2u11")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.4
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 9, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 2.0
+angle_max = 345.6
+scale_amount_min = 0.25
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_7jkcb")
+
+[node name="AuraMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("ShaderMaterial_7jkcb")
+mesh = SubResource("SphereMesh_ueghx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9050368, 0)
+mesh = SubResource("CapsuleMesh_7jkcb")
