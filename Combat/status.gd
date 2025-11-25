@@ -12,6 +12,7 @@ enum STATUS_TYPE {BUFF, DEBUFF}
 @export var remove_after_combat:bool = true
 @export var max_duration:int = 0
 @export var picture:Texture2D = null
+@export var status_color:Color = Color(1.0, 1.0, 1.0, 1.0)
 @export_multiline var description:String = "Default description"
 
 var current_duration:int = 0

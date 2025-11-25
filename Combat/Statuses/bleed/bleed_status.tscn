@@ -9,4 +9,5 @@ status_name = "Bleed"
 status_type = 1
 unique = true
 picture = ExtResource("2_i3thh")
+status_color = Color(0.6812531, 2.7434528e-06, 4.813075e-07, 1)
 description = "Target takes pure damage after every movement"

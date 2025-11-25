@@ -19,6 +19,7 @@ func _ready() -> void:
 	GlobalSignals.show_miss_text.connect(show_miss_text)
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
 	GlobalSignals.combat_end.connect(func(): in_combat = false)
+	GlobalSignals.show_floating_text.connect(show_text_at_pos)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Character"):
@@ -61,3 +62,8 @@ func show_miss_text(miss_text:String, target_node:Node3D) -> void:
 	var new_number:DamageNumber = DAMAGE_NUMBER_SCENE.instantiate()
 	add_child(new_number)
 	new_number.spawn_text_at_node(miss_text, target_node)
+	
+func show_text_at_pos(miss_text:String, target_node:Node3D, font_color:Color) -> void:
+	var new_number:DamageNumber = DAMAGE_NUMBER_SCENE.instantiate()
+	add_child(new_number)
+	new_number.spawn_text_at_node(miss_text, target_node, font_color)

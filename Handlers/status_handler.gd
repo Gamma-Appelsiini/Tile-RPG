@@ -1,21 +1,42 @@
 extends Node
 class_name StatusHandler
 
+const GENERIC_BUFF_EFFECT := preload("uid://b8xk37t3i1ps4")
+const GENERIC_DEBUFF_EFFECT := preload("uid://duwkcoksgw1mw")
+
 var buffs:Array[Status] = []
 var debuffs:Array[Status] = []
 var gchar:GameCharacter = null
 const BLEED_STATUS = preload("uid://cfxrle4miamtb")
+const EVASION_STATUS = preload("uid://ctryr6cqir6ne")
 
 func _ready() -> void:
 	if get_parent() is GameCharacter: gchar = get_parent()
 	await get_tree().create_timer(1).timeout
-	var bl:BleedStatus = BLEED_STATUS.instantiate()
-	bl.set_bleed_stats(1,2)
+	var bl:EvasionBuff = EVASION_STATUS.instantiate()
+	bl.set_evasion_stats(1,2)
 	add_status(bl)
+
+func has_status(name_to_check:String) -> bool:
+	var all_statuses:Array[Status] = buffs.duplicate() + debuffs.duplicate()
+	for status:Status in all_statuses:
+		if status.status_name == name_to_check: return true
 	
+	return false
+
 func add_status(new_status:Status) -> void:
 	var array_to_apply:Array[Status] = buffs
-	if new_status.status_type == Status.STATUS_TYPE.DEBUFF: array_to_apply = debuffs
+	var status_effect:GenericBuff
+	
+	if new_status.status_type == Status.STATUS_TYPE.DEBUFF:
+		array_to_apply = debuffs
+		status_effect = GENERIC_DEBUFF_EFFECT.instantiate()
+	else:
+		status_effect = GENERIC_BUFF_EFFECT.instantiate()
+	
+	status_effect.set_color(new_status.status_color)
+	gchar.add_child(status_effect)
+	
 	if new_status.unique: _remove_same_status(array_to_apply, new_status)
 	
 	new_status.remove_status.connect(_remove_status.bind(new_status))
@@ -25,8 +46,7 @@ func add_status(new_status:Status) -> void:
 		gchar.stat_handler.update_stat(affix.increase_amount, affix.type_increase)
 
 	array_to_apply.push_back(new_status)
-	print("added status ", new_status.status_name, " to ", gchar.display_name)
-
+	GlobalSignals.show_floating_text.emit(new_status.status_name, gchar, new_status.status_color)
 
 func _remove_same_status(status_array:Array[Status], new_status:Status) -> void:
 	var remove_array := status_array.duplicate().filter(func(status:Status): return status.status_name == new_status.status_name)

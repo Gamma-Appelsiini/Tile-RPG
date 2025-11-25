@@ -84,11 +84,11 @@ func _set_char_on_tile(game_char:GameCharacter, new_tile:Tile)-> void:
 func move_character_to_character(move_char:GameCharacter, target_char:GameCharacter) -> void:
 	var path:Array[Tile] = get_shortest_path(char_tiles[move_char], char_tiles[target_char], false, true)
 	path.pop_front()
+	path.pop_back()
 	_use_movement_to_traverse_tile_path(move_char, path)
 
 func _use_movement_to_traverse_tile_path(move_char:GameCharacter, path:Array[Tile]) -> void:
 	if path == [] or move_char.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT] == 0:
-		print("return 1")
 		await get_tree().create_timer(0.1).timeout
 		character_moved.emit()
 		return
@@ -108,11 +108,9 @@ func _use_movement_to_traverse_tile_path(move_char:GameCharacter, path:Array[Til
 		
 		_set_char_on_tile(move_char, tile)
 	
-	print("Char moved to tile")
 	character_moved.emit()
 
 func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile, end_tile_can_be_blocked:bool = false) -> void:
-	print("move char to tile")
 	var path:Array[Tile] = get_shortest_path(char_tiles[game_character], end_tile, false, end_tile_can_be_blocked)
 	path.pop_front()
 	

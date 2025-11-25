@@ -13,13 +13,13 @@ func _ready() -> void:
 	set_process(false)
 	number_label.scale = Vector2(0,0)
 
-func spawn_text_at_node(new_text:String, target_pos:Node3D) -> void:
+func spawn_text_at_node(new_text:String, target_pos:Node3D, font_color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
 	self.position_node = target_pos
 	game_camera = get_viewport().get_camera_3d()
 	number_label.text = new_text
 	
-	number_label.add_theme_color_override("font_outline_color", Color(0.913, 0.298, 0.0, 1.0))
-	number_label.add_theme_color_override("font_color", Color(0.0, 0.643, 0.9, 1.0))
+	number_label.add_theme_color_override("font_outline_color", Color(0.065, 0.006, 0.0, 1.0))
+	number_label.add_theme_color_override("font_color", font_color)
 	
 	offset = Vector3(randf_range(-0.2,0.2),randf_range(1.45,1.85),randf_range(-0.2,0.2))
 	set_process(true)
@@ -45,14 +45,14 @@ func _process(_delta: float) -> void:
 	self.global_position = screen_position
 
 func _animate_label() -> void:
-	var tween2:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	var tween2:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween2.tween_property(number_label,"position", number_label.position + Vector2(0,-150), DURATION)
 	
-	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(number_label,"scale",Vector2(1.5,1.5), 0.2)
 	await tween.finished
 	
-	tween = create_tween().set_ease(Tween.EASE_IN_OUT)
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(number_label,"scale",Vector2(1,1), 0.1)
 	await tween2.finished
 	

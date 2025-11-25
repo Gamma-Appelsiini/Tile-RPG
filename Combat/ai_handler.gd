@@ -35,17 +35,37 @@ func take_turn() -> void:
 	
 	if _is_damaged_friendlies():
 		var healed:bool = await _heal_lowest_health_ally()
-		print("healed: ", healed)
 	
 	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
 	
 	var attacked:bool = await _try_to_attack()
 	if !attacked:
-		print("Not in range to attack, moving")
 		_move_to_character(target_char)
 		await GlobalSignals.combat_manager.tile_manager.character_moved
-		end_turn.emit()
-	else: end_turn.emit()
+	
+	await _handle_turn_end_movement()
+	
+	end_turn.emit()
+
+func _handle_turn_end_movement() -> void:
+	if combatant.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_MOVEMENT) == 0: return
+	
+	if combat_intelligence == INTELLIGENCE.SMART:
+		if combatant.status_handler.has_status("Bleed"): return
+	
+	if combat_type == COMBAT_TYPE.RANGED:
+		await _run_away_from_enemies()
+	elif combat_type == COMBAT_TYPE.MELEE:
+		enemies.sort_custom(compare_distance)
+		var closest_enemy:GameCharacter = enemies[0]
+		await _move_to_character(closest_enemy)
+	elif combat_type == COMBAT_TYPE.SUPPORT:
+		if friendlies.is_empty():
+			await _move_randomly()
+			return
+		friendlies.sort_custom(compare_distance)
+		var closest_ally:GameCharacter = friendlies[0]
+		await _move_to_character(closest_ally)
 
 func _buff_friendly() -> bool:
 	var buffing_abilities:Array[Ability] = _filter_non_usable_abilities(support_abilities)
@@ -277,9 +297,11 @@ func _move_randomly() -> void:
 	
 func _move_to_character(gchar:GameCharacter) -> void:
 	tile_manager.move_character_to_character(combatant, gchar)
+	await tile_manager.character_moved
 	
 func _move_to_tile(tile:Tile) -> void:
 	tile_manager._move_character_to_tile(combatant, tile)
+	await tile_manager.character_moved
 
 func _set_teams() -> void:
 	if GlobalSignals.combat_manager.enemy_team.has(combatant):

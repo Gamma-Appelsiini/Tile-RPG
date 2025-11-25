@@ -42,12 +42,13 @@ func play_effect() -> void:
 func end_effect() -> void:
 	animation_player.stop()
 	
-	if ending_animation == starting_animation:
+	if ending_animation == starting_animation and starting_animation != "":
 		animation_player.play_backwards(starting_animation)
 	elif ending_animation:
 		animation_player.play(ending_animation)
 	
-	await get_tree().create_timer(animation_player.current_animation_length).timeout
+	if animation_player.is_playing():
+		await get_tree().create_timer(animation_player.current_animation_length).timeout
 		
 	effect_done.emit()
 	queue_free()

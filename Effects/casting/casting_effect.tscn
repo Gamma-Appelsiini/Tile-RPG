@@ -618,7 +618,7 @@ size = Vector2(0.1, 0.1)
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.762, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ek0s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwxqo"]
 transparency = 1
 blend_mode = 1
 shading_mode = 0
@@ -633,7 +633,7 @@ proximity_fade_enabled = true
 proximity_fade_distance = 0.1
 
 [sub_resource type="QuadMesh" id="QuadMesh_ftomg"]
-material = SubResource("StandardMaterial3D_6ek0s")
+material = SubResource("StandardMaterial3D_qwxqo")
 size = Vector2(4, 4)
 
 [node name="CastingEffect" type="Node3D" node_paths=PackedStringArray("animation_player")]
