@@ -12,6 +12,7 @@ signal end_turn
 signal moved_to_tile(tile:Tile)
 
 @export var unique_id:String = ""
+@export var character_power:int = 0
 @export var display_name:String = "Default Name"
 @export var picture:Texture2D = null
 @export var stat_resource:StatResource = null

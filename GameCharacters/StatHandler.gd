@@ -7,6 +7,7 @@ signal owner_died
 
 const POINTS_PER_LVL:int = 3
 const XP_INCREASE:float = 1.5
+const LOW_HEALTH_TRESHOLD:float = 0.35
 
 var attacks_dodged_in_a_row:int = 0
 
@@ -262,3 +263,12 @@ func set_stats_from_resource(res:StatResource) -> void:
 	for stat:int in res.dmg_increases:
 		self.dmg_increases[stat] = res.dmg_increases[stat]
 	stats_changed.emit()
+
+func is_on_low_health() -> bool:
+	var health_percentage:float = get_stat_amount(Stats.ResourceStat.CURRENT_HP) / float(get_stat_amount(Stats.ResourceStat.MAX_HP))
+	if health_percentage <= LOW_HEALTH_TRESHOLD: return true
+	return false
+
+func is_not_on_full_health() -> bool:
+	if get_stat_amount(Stats.ResourceStat.CURRENT_HP) <= get_stat_amount(Stats.ResourceStat.MAX_HP): return true
+	return false
