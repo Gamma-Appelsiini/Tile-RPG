@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b72rjc52ql4wf"]
+
+[ext_resource type="Shader" uid="uid://6orvm2x3hydh" path="res://Tile-RPG/Shaders/take_damage_shader.gdshader" id="1_gau7g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cc8cj"]
+noise_type = 3
+frequency = 0.0068
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7icpq"]
+noise = SubResource("FastNoiseLite_cc8cj")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gau7g")
+shader_parameter/hurt_color = Color(0.5411765, 0, 0.03529412, 1)
+shader_parameter/active_strength = 0.0
+shader_parameter/erosion_amount = 0.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_7icpq")
+shader_parameter/wobble_intensity = 0.0
+shader_parameter/wobble_speed = 4.00000019
+shader_parameter/fresnel_power = 0.5
+shader_parameter/emission_strength = 4.750000178125

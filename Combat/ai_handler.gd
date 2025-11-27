@@ -31,28 +31,37 @@ func _ready() -> void:
 func take_turn() -> void:
 	tile_manager = GlobalSignals.current_level.tile_manager
 	_set_teams()
-	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
+	_set_reachable_tiles()
 	
-	if _is_target_too_far(enemies, offensive_abilities): await _use_movement_ability()
-	
-	if _is_damaged_friendlies():
-		var healed:bool = await _heal_lowest_health_ally()
-	
-	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
-	
-	var attacked:bool = await _try_to_attack()
-	if !attacked:
-		_move_to_character(target_char)
-		await GlobalSignals.combat_manager.tile_manager.character_moved
+	if combat_type == COMBAT_TYPE.MELEE or combat_type == COMBAT_TYPE.RANGED: await _take_attacker_turn()
+	elif combat_type == COMBAT_TYPE.SUPPORT: await _take_support_turn()
 	
 	await _handle_turn_end_movement()
-	
 	end_turn.emit()
 
-func _take_dumb_turn() -> void:
-	var actions:Array[Callable] = [_try_to_attack, _buff_friendly, _use_defensive_ability, _heal_lowest_health_ally]
-	
-	await _handle_turn_end_movement()
+func _set_reachable_tiles() -> void:
+	var current_tile:Tile = tile_manager.char_tiles[combatant]
+	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
+	tiles_to_move_to.push_back(current_tile)
+
+func _take_attacker_turn() -> void:
+	if _is_target_too_far(enemies, offensive_abilities): await _use_movement_ability()
+	if combatant.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_AP) >= 4:
+		await _buff_self()
+	await _try_to_attack()
+	await _try_to_attack()
+	if _is_damaged_friendlies(): await _heal_lowest_health_ally()
+	await _use_defensive_ability()
+
+func _buff_self() -> bool:
+	return await _use_ability_with_tag(Ability.ABILITY_TAG.BUFF, [combatant], support_abilities)
+
+func _take_support_turn() -> void:
+	if _is_target_too_far(friendlies, support_abilities): await _use_movement_ability()
+	if _is_damaged_friendlies(): await _heal_lowest_health_ally()
+	await _buff_friendly()
+	await _try_to_attack()
+	await _use_defensive_ability()
 
 func _use_movement_ability() -> bool:
 	var targets:Array[GameCharacter] = [combatant]
@@ -78,6 +87,7 @@ func _use_defensive_ability() -> bool:
 	return await _use_ability_with_tag(Ability.ABILITY_TAG.DEFENSIVE, targets, support_abilities)
 
 func _use_ability_with_tag(tag:Ability.ABILITY_TAG, targets:Array[GameCharacter], abilities:Array[Ability]) -> bool:
+	_set_reachable_tiles()
 	var usable_abilities:Array[Ability] = _filter_non_usable_abilities(abilities)
 	usable_abilities = usable_abilities.filter(func(abi:Ability): return abi.ability_tags.has(tag))
 	if usable_abilities.is_empty(): return false
@@ -111,6 +121,7 @@ func _use_ability_with_tag(tag:Ability.ABILITY_TAG, targets:Array[GameCharacter]
 	return true
 
 func _handle_turn_end_movement() -> void:
+	_set_reachable_tiles()
 	if combatant.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_MOVEMENT) == 0: return
 	
 	if combat_intelligence == INTELLIGENCE.SMART:
@@ -248,6 +259,7 @@ func _get_tile_closest_to_char(tiles:Array[Tile]) -> Tile:
 	return closest_tile
 
 func _attack_closest_enemy() -> bool:
+	_set_reachable_tiles()
 	enemies.sort_custom(compare_distance)
 	target_char = enemies[0]
 	target_tile = tile_manager.char_tiles[target_char]
@@ -266,6 +278,7 @@ func _attack_closest_enemy() -> bool:
 	return true
 
 func _attack_lowest_health_enemy() -> bool:
+	_set_reachable_tiles()
 	enemies.sort_custom(compare_health)
 	target_char = enemies[0]
 	target_tile = tile_manager.char_tiles[target_char]
@@ -288,10 +301,12 @@ func _use_the_best_ability(usable_abilities:Array[Ability]) -> void:
 	if combat_intelligence == INTELLIGENCE.DUMB: chosen_ability = usable_abilities.pick_random()
 	else: chosen_ability = usable_abilities[0]
 	
+	var current_tile:Tile = tile_manager.char_tiles[combatant]
 	var tiles:Array[Tile] = _get_tiles_where_ability_in_range(tiles_to_move_to)
 	if target_char != combatant:
-		_move_to_tile(tiles.pick_random())
-		await GlobalSignals.combat_manager.tile_manager.character_moved
+		if !tiles.has(current_tile):
+			_move_to_tile(tiles.pick_random())
+			await GlobalSignals.combat_manager.tile_manager.character_moved
 	
 	if chosen_ability.target_type == Ability.TARGET_TYPE.TILE: chosen_ability.use_ability_on_target_tile(target_tile)
 	else: chosen_ability.use_ability_on_target_character(target_char)
@@ -336,7 +351,7 @@ func _set_teams() -> void:
 	friendlies.erase(combatant)
 
 func _get_tiles_where_ability_in_range(reachable_tiles:Array[Tile]) -> Array[Tile]:
-	tiles_to_move_to = _get_reachable_tiles(_get_possible_tiles_to_move_to())
+	_set_reachable_tiles()
 	var in_range_tiles:Array[Tile] = []
 	
 	chosen_ability.target_tile = target_tile

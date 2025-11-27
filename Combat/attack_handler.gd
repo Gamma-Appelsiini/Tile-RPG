@@ -1,5 +1,10 @@
 class_name AttackHandler
 
+const TAKE_DAMAGE_MATERIAL := preload("uid://b72rjc52ql4wf")
+const START_DMG_COLOR:Color = Color("8a0009")
+const END_DMG_COLOR:Color = Color("ffffff")
+const END_WOBBLE:float = 0.08
+
 const ARMOR_CURVE:Curve = preload("uid://bra32dhoui53i")
 const EVASION_CURVE:Curve = preload("uid://cwsdo8omrwkr7")
 const MAX_BLOCK_CHANCE:int = 75
@@ -24,6 +29,25 @@ static func use_attack_on_char(new_receiver:GameCharacter, new_attack:Attack) ->
 	_receive_damage()
 	_handle_thorns()
 
+static func _animate_take_damage_effect(target:GameCharacter) -> void:
+	if target.visual_mesh.material_overlay != null: return
+	const EFFECT_TIME:float = 0.2
+	
+	var new_dmg_material:ShaderMaterial = TAKE_DAMAGE_MATERIAL.duplicate()
+	target.visual_mesh.material_overlay = new_dmg_material
+	var tween:Tween = target.create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
+	tween.tween_property(new_dmg_material, "shader_parameter/active_strength", 1.0, EFFECT_TIME / 2)
+	tween.tween_property(new_dmg_material, "shader_parameter/hurt_color", END_DMG_COLOR, EFFECT_TIME / 2)
+	tween.tween_property(new_dmg_material, "shader_parameter/wobble_intensity", END_WOBBLE, EFFECT_TIME / 2)
+	
+	await tween.finished
+	tween = target.create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
+	tween.tween_property(new_dmg_material, "shader_parameter/hurt_color", START_DMG_COLOR, EFFECT_TIME / 2)
+	tween.tween_property(new_dmg_material, "shader_parameter/wobble_intensity", 0, EFFECT_TIME / 2)
+	
+	await tween.finished
+	target.visual_mesh.material_overlay = null
+
 static func _apply_damage_increases() -> void:
 	for dmg_type:Stats.DmgType in attack.damages.keys():
 		if dmg_type == Stats.DmgType.PURE: continue
@@ -36,6 +60,7 @@ static func _apply_damage_increases() -> void:
 
 static func _receive_damage() -> void:
 	#TODO receiver hit animation
+	_animate_take_damage_effect(receiver)
 	receiver.got_hit.emit()
 	print("Final damage: ", final_damage)
 	GlobalSignals.show_damage_number.emit(final_damage, receiver, attack.crit)
