@@ -1,0 +1,456 @@
+[gd_scene load_steps=31 format=3 uid="uid://2u1utrq13bbp"]
+
+[ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_48u7r"]
+[ext_resource type="Shader" uid="uid://dob5k5l0r56ed" path="res://Tile-RPG/Shaders/ground_magic_shader.gdshader" id="2_lll1l"]
+[ext_resource type="Texture2D" uid="uid://dhtx27mww2a4w" path="res://Tile-RPG/Images/Shaders/sumcircle.png" id="3_wqnpa"]
+[ext_resource type="Texture2D" uid="uid://dl1if4cb3s0rk" path="res://Tile-RPG/Images/Shaders/trail.png" id="4_lll1l"]
+[ext_resource type="Texture2D" uid="uid://crc76ag1t1tkn" path="res://Tile-RPG/Images/Shaders/Ball2.png" id="5_wqnpa"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_foplb"]
+frequency = 0.0089
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_37i5g"]
+noise = SubResource("FastNoiseLite_foplb")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7bqv7"]
+render_priority = 0
+shader = ExtResource("2_lll1l")
+shader_parameter/main_texture = ExtResource("3_wqnpa")
+shader_parameter/energy_noise = SubResource("NoiseTexture2D_37i5g")
+shader_parameter/distortion_texture = SubResource("NoiseTexture2D_37i5g")
+shader_parameter/emission_color = Color(1.052, 0.697, 1.486, 1)
+shader_parameter/transparency = 1.0
+shader_parameter/rotation_speed = 0.5
+shader_parameter/noise_scroll_speed = Vector2(0.2, 0.1)
+shader_parameter/distortion_scroll_speed = Vector2(0.04, 0.04)
+shader_parameter/distortion_strength = 0.0060000005
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_intensity = 0.400000019
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h6p2a"]
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="Animation" id="Animation_lll1l"]
+resource_name = "start"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaneMesh:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.16666667, 0.16666667, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.56666666)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaneMesh:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.16666667, 0.16666667, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.56666666)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaneMesh:scale:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.16666667, 0.16666667, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.56666666)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trails:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Balls:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wqnpa"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaneMesh:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaneMesh:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaneMesh:scale:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:r")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.052, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:g")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.697, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.486, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PlaneMesh:material_override:shader_parameter/distortion_strength")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.0060000005, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_elwkf"]
+resource_name = "end"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Balls:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trails:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaneMesh:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.083333336, -0.16666667, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlaneMesh:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.083333336, -0.16666667, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlaneMesh:scale:z")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.083333336, -0.16666667, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_foplb"]
+resource_name = "play_effect"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1.052, -0.25, 0, 0.25, 0, 0.94693416, -0.16666667, 0, 0.16666667, 0, 1.052, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0.697, -0.25, 0, 0.25, 0, 0.725589, -0.16666667, 0, 0.16666667, 0, 0.697, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1.486, -0.25, 0, 0.25, 0, 2.201223, -0.16666667, 0, 0.16666667, 0, 1.486, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlaneMesh:material_override:shader_parameter/emission_color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.16666667, 0, 0.16666667, 0, 1, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlaneMesh:material_override:shader_parameter/distortion_strength")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0),
+"points": PackedFloat32Array(0.0060000005, 0, 0, 0.33333334, 0, 0.011000001, -0.16666667, 0, 0.16666667, 0, 0.0060000005, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_foplb"]
+_data = {
+&"RESET": SubResource("Animation_wqnpa"),
+&"end": SubResource("Animation_elwkf"),
+&"play_effect": SubResource("Animation_foplb"),
+&"start": SubResource("Animation_lll1l")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elwkf"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.97139007, 0, 1.0040126, 1)
+albedo_texture = ExtResource("4_lll1l")
+billboard_mode = 2
+billboard_keep_scale = true
+proximity_fade_enabled = true
+proximity_fade_distance = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_foplb"]
+material = SubResource("StandardMaterial3D_elwkf")
+size = Vector2(0.03, 0.2)
+
+[sub_resource type="Curve" id="Curve_8hn51"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.762, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37i5g"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("5_wqnpa")
+use_particle_trails = true
+
+[sub_resource type="Curve" id="Curve_7bqv7"]
+_data = [Vector2(0, 0), 0.0, 0.0142212175, 0, 0, Vector2(0.23409091, 0.96820647), 0.9375432, 0.9375432, 0, 0, Vector2(0.99318177, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qo4ek"]
+texture_mode = 1
+curve = SubResource("Curve_7bqv7")
+
+[sub_resource type="Gradient" id="Gradient_h6p2a"]
+offsets = PackedFloat32Array(0, 0.5771144, 1)
+colors = PackedColorArray(3.308989e-07, 0.2329767, 0.010292954, 0, 1, 1, 1, 1, 0.19076231, 0.19076234, 0.19076231, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36qik"]
+gradient = SubResource("Gradient_h6p2a")
+
+[sub_resource type="Curve" id="Curve_3jo6j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.37727273, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.24048907), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tpojl"]
+curve = SubResource("Curve_3jo6j")
+
+[sub_resource type="Curve" id="Curve_ue3jd"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_w2a8o"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mf6gt"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6hprr"]
+curve_x = SubResource("Curve_ue3jd")
+curve_y = SubResource("Curve_w2a8o")
+curve_z = SubResource("Curve_mf6gt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n2j37"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.2
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.39999998
+orbit_velocity_min = 0.90000015
+orbit_velocity_max = 1.3000002
+orbit_velocity_curve = SubResource("CurveXYZTexture_6hprr")
+gravity = Vector3(0, 0, 0)
+color = Color(1.0522157, 0.69726396, 1.4860457, 1)
+color_ramp = SubResource("GradientTexture1D_36qik")
+alpha_curve = SubResource("CurveTexture_qo4ek")
+emission_curve = SubResource("CurveTexture_tpojl")
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_24qoq"]
+shape = 0
+size = 0.03
+section_length = 0.3
+section_segments = 8
+
+[node name="GroundCastingEffect" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_48u7r")
+start_on_spawn = true
+looping = true
+animation_player = NodePath("AnimationPlayer")
+starting_animation = "start"
+ending_animation = "end"
+
+[node name="PlaneMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.025, 0)
+material_override = SubResource("ShaderMaterial_7bqv7")
+mesh = SubResource("PlaneMesh_h6p2a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_foplb")
+}
+
+[node name="Balls" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+amount = 12
+randomness = 0.7
+mesh = SubResource("QuadMesh_foplb")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.4
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 9, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 2.0
+angle_max = 345.6
+scale_amount_min = 0.25
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_8hn51")
+
+[node name="Trails" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_37i5g")
+amount = 3
+lifetime = 3.0
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 0.9
+process_material = SubResource("ParticleProcessMaterial_n2j37")
+draw_pass_1 = SubResource("RibbonTrailMesh_24qoq")

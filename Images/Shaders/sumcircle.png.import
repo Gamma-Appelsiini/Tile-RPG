@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6n2gwyif3khy"
-path.s3tc="res://.godot/imported/star.png-68b2ab51b03e3f78f90464578ffe0736.s3tc.ctex"
+uid="uid://dhtx27mww2a4w"
+path.s3tc="res://.godot/imported/sumcircle.png-1d07ce80d89a394b55a3d254acd4621a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Shaders/star.png"
-dest_files=["res://.godot/imported/star.png-68b2ab51b03e3f78f90464578ffe0736.s3tc.ctex"]
+source_file="res://Tile-RPG/Images/Shaders/sumcircle.png"
+dest_files=["res://.godot/imported/sumcircle.png-1d07ce80d89a394b55a3d254acd4621a.s3tc.ctex"]
 
 [params]
 
