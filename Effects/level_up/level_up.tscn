@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_0k4s7"]
 [ext_resource type="Texture2D" uid="uid://chr3glcjd8i5s" path="res://Tile-RPG/Images/Shaders/Line.png" id="2_giahk"]
 [ext_resource type="Texture2D" uid="uid://buusbcoljry7d" path="res://Tile-RPG/Images/Shaders/SmoothBall.png" id="2_lj0ok"]
-[ext_resource type="AudioStream" uid="uid://pd66kbx6abqv" path="res://Tile-RPG/Sounds/Effects/level_up.mp3" id="2_moy61"]
+[ext_resource type="AudioStream" uid="uid://c3v62yr27jobp" path="res://Tile-RPG/Sounds/Effects/lvl3.mp3" id="2_moy61"]
 [ext_resource type="Shader" uid="uid://bnj6ab6gqjr4m" path="res://Tile-RPG/Shaders/gradient_dissolve2.gdshader" id="4_54wb1"]
 
 [sub_resource type="Animation" id="Animation_giahk"]

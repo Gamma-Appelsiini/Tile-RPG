@@ -104,6 +104,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="InputArea/PanelContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.44705883)
@@ -115,10 +116,6 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.225
 theme_override_constants/separation = 40
-
-[node name="VSeparator2" type="VSeparator" parent="InputArea/InfoContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
 
 [node name="ApContainer" type="HBoxContainer" parent="InputArea/InfoContainer"]
 layout_mode = 2
@@ -182,9 +179,5 @@ unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 icon_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="InputArea/InfoContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
 
 [connection signal="pressed" from="InputArea/InfoContainer/ButtonContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]

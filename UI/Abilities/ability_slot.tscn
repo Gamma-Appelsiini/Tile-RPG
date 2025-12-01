@@ -6,30 +6,23 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncqfq"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
 [node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("ability_icon_rect", "cooldown_rect", "cooldown_label", "select_rect")]
-custom_minimum_size = Vector2(100, 100)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -31.5
-offset_right = 30.0
-offset_bottom = 31.5
+custom_minimum_size = Vector2(50, 50)
+offset_right = 100.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
-size_flags_vertical = 6
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ncqfq")
 script = ExtResource("1_4dhx1")
 ability_icon_rect = NodePath("AbilityIconRect")
@@ -41,14 +34,14 @@ select_rect = NodePath("SelectRect")
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_n6ghh")
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
 [node name="AbilityIconRect" type="TextureRect" parent="."]
-z_index = 2
+z_index = 1
 layout_mode = 2
 mouse_filter = 2
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
 [node name="CooldownRect" type="ColorRect" parent="."]
@@ -56,15 +49,6 @@ visible = false
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.78039217)
-
-[node name="SelectRect" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(0.9999997, 0.7437305, 0.39284056, 1)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("5_ue6e8")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="CooldownLabel" type="Label" parent="."]
 visible = false
@@ -80,3 +64,13 @@ theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SelectRect" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(0.9999997, 0.7437305, 0.39284056, 1)
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_ue6e8")
+expand_mode = 3
+stretch_mode = 5

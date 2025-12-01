@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp3lhfafyqjva"]
+[gd_scene load_steps=6 format=3 uid="uid://cp3lhfafyqjva"]
 
 [ext_resource type="Script" uid="uid://dl8o1rxduyfyg" path="res://Tile-RPG/UI/Abilities/abilities_container.gd" id="1_2uebh"]
-[ext_resource type="StyleBox" uid="uid://dvndtiugiq0s2" path="res://Tile-RPG/UI/panel_style.tres" id="1_g3gg1"]
+[ext_resource type="Texture2D" uid="uid://dytvgrd87wiqx" path="res://Tile-RPG/Images/UI/CornerUI3.png" id="2_3s6q1"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_2uebh"]
+[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="4_254ls"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2uebh"]
+texture = ExtResource("2_3s6q1")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 25.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+draw_center = false
 
 [node name="AbilitiesContainer" type="Control" node_paths=PackedStringArray("grid_container")]
 layout_mode = 3
@@ -23,19 +35,37 @@ anchor_right = 0.8
 anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_g3gg1")
+theme_override_styles/panel = SubResource("StyleBoxTexture_2uebh")
+
+[node name="ColorRect" type="TextureRect" parent="PanelContainer"]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_2uebh")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(1, 0.87216663, 0.41000003, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_254ls")
+theme_override_font_sizes/font_size = 42
 text = "Abilities"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/v_separation = 48
 columns = 6
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 14

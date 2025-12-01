@@ -19,7 +19,6 @@ func set_color(new_color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
 	shader_material.set_shader_parameter("ColorParameter", start_color)
 
 func animate_aura_color() -> void:
-	print("animateauracolor")
 	var shader_material:ShaderMaterial = aura_mesh.material_override
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
