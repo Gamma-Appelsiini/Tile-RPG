@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://di1h35368wxtx"]
+[gd_scene load_steps=7 format=3 uid="uid://di1h35368wxtx"]
 
 [ext_resource type="Script" uid="uid://bjen5hn1ggnlm" path="res://Tile-RPG/UI/Inventory/loot_window.gd" id="1_fpxqn"]
 [ext_resource type="Texture2D" uid="uid://cnjp47v04w6lp" path="res://Tile-RPG/Images/Icons/Chest.png" id="2_140vs"]
+[ext_resource type="Texture2D" uid="uid://wa5n4r0ycjdf" path="res://Tile-RPG/Images/Textures/Wooden Planks (43).png" id="2_ms2vd"]
 [ext_resource type="Texture2D" uid="uid://4gjr7jt3w5ij" path="res://Tile-RPG/Images/UI/Border2.png" id="3_140vs"]
+[ext_resource type="PackedScene" uid="uid://cojb0yey4conu" path="res://Tile-RPG/UI/x_button.tscn" id="5_4uw6a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rqfk4"]
 texture = ExtResource("3_140vs")
@@ -14,7 +16,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 draw_center = false
 
-[node name="LootWindow" type="Control"]
+[node name="LootWindow" type="Control" node_paths=PackedStringArray("x_button", "wood_bg", "panel_container")]
 layout_mode = 3
 anchor_left = 0.1
 anchor_top = 0.35
@@ -24,76 +26,70 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fpxqn")
+x_button = NodePath("x_button")
+wood_bg = NodePath("WoodBG")
+panel_container = NodePath("PanelContainer")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.13
-anchor_right = 1.0
-anchor_bottom = 0.99
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.101961, 0.0862745, 0.0901961, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-
-[node name="ContainerImage" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="WoodBG" type="TextureRect" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(0.84032553, 0.84032553, 0.8403255, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 1125.0
+offset_bottom = 617.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ms2vd")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 576.0
+offset_bottom = 324.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_rqfk4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ContainerImage" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color(0.8661112, 0.86611134, 0.86611134, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 texture = ExtResource("2_140vs")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ContainerName" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="ContainerName" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.81960785, 0.62352943, 0.34509805, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 22
 text = "Chest"
 vertical_alignment = 2
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-mouse_filter = 1
-theme_override_colors/font_color = Color(0.997949, 0, 0.093505, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0.29, 0.2349, 0.0145, 0)
-theme_override_font_sizes/font_size = 22
-text = "X"
-flat = true
-icon_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxTexture_rqfk4")
-
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_constants/v_separation = -35
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 16
 columns = 5
+
+[node name="x_button" parent="." instance=ExtResource("5_4uw6a")]
+layout_mode = 1
+offset_left = 234.0
+offset_top = -144.0
+offset_right = 234.0
+offset_bottom = -144.0

@@ -5,18 +5,23 @@ class_name LootWindow
 @onready var grid_container: GridContainer = %GridContainer
 @onready var container_image: TextureRect = %ContainerImage
 @export var player_inventory:Inventory = null
-@onready var close_button: Button = %CloseButton
+@export var x_button: XButton = null
+@export var wood_bg: TextureRect = null
+@export var panel_container: PanelContainer = null
 
 const LOOT_SIZE:int = 10
 const INV_SLOT_SCENE:PackedScene = preload("res://Tile-RPG/UI/Inventory/inventory_slot.tscn")
+const BORDER_TEXTURES:Dictionary[LootContainer.ContainerStyle, Texture2D] = {LootContainer.ContainerStyle.WOOD: preload("uid://dfxc2i7p6w3ay")}
 
+var style_dict:Dictionary[LootContainer.ContainerStyle, TextureRect] = {}
 var inv_slots:Array[InventorySlot] = []
 var loot_container:LootContainer = null
 
 func _ready() -> void:
 	_add_slots()
 	GlobalSignals.show_container.connect(add_container)
-	close_button.pressed.connect(_close_window)
+	x_button.x_pressed.connect(_close_window)
+	style_dict[LootContainer.ContainerStyle.WOOD] = wood_bg
 
 func _connect_slots() -> void:
 	for slot:InventorySlot in inv_slots:
@@ -56,6 +61,9 @@ func add_container(container:LootContainer) -> void:
 	_connect_slots()
 	self.visible = true
 	player_inventory.visible = true
+	
+	_set_panel_borders(container.container_style)
+	_show_style_bg(container.container_style)
 
 func _add_item(item:Item) -> void:
 	for slot:InventorySlot in inv_slots:
@@ -79,3 +87,12 @@ func _close_window() -> void:
 	player_inventory.visible = false
 	_clear_container()
 	GlobalSignals.close_container.emit(loot_container)
+
+func _show_style_bg(style:LootContainer.ContainerStyle) -> void:
+	for key:LootContainer.ContainerStyle in style_dict.keys():
+		if key == style: style_dict[key].show()
+		else: style_dict[key].hide()
+
+func _set_panel_borders(style:LootContainer.ContainerStyle):
+	var stylebox: StyleBoxTexture = panel_container.get_theme_stylebox("panel")
+	stylebox.texture = BORDER_TEXTURES[style]

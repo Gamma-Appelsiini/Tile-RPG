@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cojb0yey4conu"]
+
+[ext_resource type="Texture2D" uid="uid://d2yxkc2ig42kk" path="res://Tile-RPG/Images/UI/Inv/close_button3.png" id="1_dc0ia"]
+[ext_resource type="Script" uid="uid://bh2ah0hmka1c4" path="res://Tile-RPG/UI/x_button.gd" id="1_fq503"]
+[ext_resource type="Texture2D" uid="uid://c7ipdq5cqnbxb" path="res://Tile-RPG/Images/UI/Border1.png" id="2_fq503"]
+[ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="4_v6f1b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6f1b"]
+bg_color = Color(0, 0, 0, 0.68235296)
+
+[node name="x_button" type="Control" node_paths=PackedStringArray("button", "select_glow")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fq503")
+button = NodePath("PanelContainer/Button")
+select_glow = NodePath("SelectGlow")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6f1b")
+
+[node name="Button" type="Button" parent="PanelContainer"]
+layout_mode = 2
+icon = ExtResource("1_dc0ia")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Border" type="TextureRect" parent="."]
+self_modulate = Color(0.5958281, 0.5958282, 0.595828, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("2_fq503")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SelectGlow" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("4_v6f1b")
+expand_mode = 3
+stretch_mode = 5

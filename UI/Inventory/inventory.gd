@@ -3,12 +3,24 @@ class_name Inventory
 
 @onready var inv_slot_grid: GridContainer = %InvSlotGrid
 @onready var equipment_grid: GridContainer = %EquipmentGrid
+@onready var x_button: XButton = $x_button
 
 const INV_SIZE:int = 15
 const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
 const ITEM_TT_PATH:String = "res://Tile-RPG/UI/Inventory/item_tooltip.tscn"
 const INV_DROP:AudioStream = preload("uid://c0naiqt18dbxq")
 const INV_PICK:AudioStream = preload("uid://t4n17ysxkboc")
+const BG_DICT:Dictionary[Equipment.EquipmentSlot, Texture2D] = {
+	Equipment.EquipmentSlot.NECK: preload("uid://cs7enw4chf7o0"),
+	Equipment.EquipmentSlot.CHEST: preload("uid://csuvdo1xfmrlo"),
+	Equipment.EquipmentSlot.WAIST: preload("uid://545xjkc3bbhb"),
+	Equipment.EquipmentSlot.FEET: preload("uid://disvj6dguw7rx"),
+	Equipment.EquipmentSlot.HANDS: preload("uid://bjhhk8qdavghl"),
+	Equipment.EquipmentSlot.HEAD: preload("uid://ccukvnuyioqtf"),
+	Equipment.EquipmentSlot.MAIN_HAND: preload("uid://hfbqojp8uoo8"),
+	Equipment.EquipmentSlot.OFF_HAND: preload("uid://bke5ek62sccvo"),
+	Equipment.EquipmentSlot.FINGER: preload("uid://cbw5exe7le1dn")}
+const EQU_CORNER:Texture2D = preload("uid://buhoav5pguorp")
 
 var player:Player = null
 var slots:Array[InventorySlot] = []
@@ -19,6 +31,9 @@ var hovered_slot:InventorySlot = null
 var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
+
+func _ready() -> void:
+	x_button.x_pressed.connect(func(): self.visible = false)
 
 func set_player(new_player:Player) -> void:
 	player = new_player
@@ -95,6 +110,9 @@ func _input(event: InputEvent) -> void:
 		add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.RANDOM,5,0,Item.ItemRarity.EPIC))
 		add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.RANDOM,5,0,Item.ItemRarity.RARE))
 
+func _restore_equ_slot_bg(slot:InventorySlot) -> void:
+	slot.bg_image.texture = BG_DICT[slot.equipment_slot]
+
 func _add_equipment_slots() -> void:
 	var equ_slots:Array[Equipment.EquipmentSlot] =[
 		Equipment.EquipmentSlot.NECK, Equipment.EquipmentSlot.HEAD,Equipment.EquipmentSlot.FINGER,
@@ -103,6 +121,12 @@ func _add_equipment_slots() -> void:
 	
 	for slot:Equipment.EquipmentSlot in equ_slots:
 		var new_inv_slot:InventorySlot = load(INV_SLOT_PATH).instantiate()
+		var equ_bg_texture:Texture2D = BG_DICT[slot]
+		new_inv_slot.put_back_equ_bg.connect(_restore_equ_slot_bg.bind(new_inv_slot))
+		
+		new_inv_slot.bg_image.texture = equ_bg_texture
+		new_inv_slot.corner_image.texture = EQU_CORNER
+		
 		new_inv_slot.equipment_slot = slot
 		equipment_grid.add_child(new_inv_slot)
 		slots.push_back(new_inv_slot)
@@ -170,12 +194,14 @@ func _item_clicked() -> void:
 	old_slot_pos = hovered_slot.item_image.global_position
 	selected_slot = hovered_slot
 	img_offset = int(selected_slot.item_image.get_size().x / 2)
+	selected_slot.item_image.z_index = 1
 	
 	#Enables mouse entered/exited signals to be fired when dragging item
 	selected_slot.item_image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _reset_selecting() -> void:
 	if selected_slot == null: return
+	selected_slot.item_image.z_index = 0
 	selected_slot.item_image.global_position = old_slot_pos
 	selected_slot = null
 

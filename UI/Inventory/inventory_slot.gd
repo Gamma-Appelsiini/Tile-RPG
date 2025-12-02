@@ -5,9 +5,14 @@ signal equip_item(item:Equipment)
 signal unequip_item(item:Equipment)
 signal item_placed(item:Equipment)
 signal item_removed
+signal put_back_equ_bg
 
-@onready var item_image: TextureRect = %ItemImage
-@onready var hover_image: TextureRect = %HoverImage
+const EMPTY_SLOT:Texture2D = preload("uid://ca2rmcr4qwoye")
+
+@export var item_image: TextureRect = null
+@export var hover_image: TextureRect = null
+@export var bg_image: TextureRect = null
+@export var corner_image: TextureRect = null
 
 var array_pos:int = -1
 var item_in_slot:Item = null
@@ -22,6 +27,7 @@ func set_item(new_item:Item, old_slot:InventorySlot = null, skip_equipping:bool 
 	if item_in_slot != null: remove_item()
 	
 	if equipment_slot and !skip_equipping:
+		bg_image.texture = EMPTY_SLOT
 		equip_item.emit(new_item)
 
 	item_image.texture = new_item.inventory_image
@@ -30,6 +36,7 @@ func set_item(new_item:Item, old_slot:InventorySlot = null, skip_equipping:bool 
 
 func remove_item() -> void:
 	if equipment_slot:
+		put_back_equ_bg.emit()
 		unequip_item.emit(item_in_slot.equipment_slot)
 
 	#Remake TT after crafting

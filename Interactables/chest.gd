@@ -1,8 +1,11 @@
 extends Interactable
 class_name LootContainer
 
+enum ContainerStyle {WOOD}
+
 @export var chest_lvl:int = -1
 @export var max_tier:int = -1
+@export var container_style:ContainerStyle = ContainerStyle.WOOD
 @export var items_to_generate:Dictionary[Item.ItemRarity, ItemGenerator.LOOT_TYPE]
 @export var container_name:String = "Chest"
 @export var container_image:Texture2D = null
