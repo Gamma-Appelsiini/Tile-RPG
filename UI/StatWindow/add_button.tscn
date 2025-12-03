@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcbb1hnpi8h6l"]
+
+[ext_resource type="Script" uid="uid://bh2ah0hmka1c4" path="res://Tile-RPG/UI/x_button.gd" id="1_152kk"]
+[ext_resource type="Texture2D" uid="uid://d2y04m3wxhnx8" path="res://Tile-RPG/Images/UI/Inv/add_point.png" id="2_r6f62"]
+[ext_resource type="Texture2D" uid="uid://c7ipdq5cqnbxb" path="res://Tile-RPG/Images/UI/Border1.png" id="3_3skmy"]
+[ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="4_cler2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c75y1"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="AddButton" type="PanelContainer" node_paths=PackedStringArray("button", "select_glow")]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -4.0
+offset_right = 540.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_152kk")
+button = NodePath("PanelContainer/Button")
+select_glow = NodePath("SelectGlow")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c75y1")
+
+[node name="Button" type="Button" parent="PanelContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("2_r6f62")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Border" type="TextureRect" parent="."]
+self_modulate = Color(0.97, 0.7682401, 0.21340004, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("3_3skmy")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SelectGlow" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_cler2")
+expand_mode = 3
+stretch_mode = 5

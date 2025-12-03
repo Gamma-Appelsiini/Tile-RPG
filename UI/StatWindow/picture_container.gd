@@ -1,10 +1,10 @@
-extends PanelContainer
+extends Control
 class_name PictureContainer
 
-@onready var level_label: Label = %LevelLabel
-@onready var game_char_pic_rect: TextureRect = %GameCharPicRect
-@onready var hp_prog_bar: ProgressBar = %HpProgBar
-@onready var hp_label: Label = %HpLabel
+@export var level_label: Label = null
+@export var game_char_pic_rect: TextureRect = null
+@export var hp_prog_bar: ProgressBar = null
+@export var hp_label: Label = null
 
 func set_info(gchar:GameCharacter) -> void:
 	if gchar.picture: game_char_pic_rect.texture = gchar.picture

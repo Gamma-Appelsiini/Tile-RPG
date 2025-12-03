@@ -1,8 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://p73hmiwkq3cm"]
+[gd_scene load_steps=11 format=3 uid="uid://p73hmiwkq3cm"]
 
-[ext_resource type="StyleBox" uid="uid://b6uoucwfkwj3j" path="res://Tile-RPG/UI/StatWindow/stat_panel_style.tres" id="1_ehtug"]
+[ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="1_8jpd3"]
 [ext_resource type="Script" uid="uid://gc40tv5b62wy" path="res://Tile-RPG/UI/StatWindow/picture_container.gd" id="1_hi05f"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="2_lte2h"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_ehtug"]
+[ext_resource type="Texture2D" uid="uid://d4eiicta8350h" path="res://Tile-RPG/Images/UI/Border3.png" id="4_32cm2"]
+[ext_resource type="FontFile" uid="uid://d0yoohyaar2bi" path="res://Tile-RPG/Fonts/GoogleFonts/CinzelDecorative-Bold.ttf" id="5_lte2h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_32cm2"]
+texture = ExtResource("2_lte2h")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwu2l"]
+texture = ExtResource("4_32cm2")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehtug"]
 bg_color = Color(0.183155, 0.0650727, 0.0555302, 1)
@@ -21,55 +44,80 @@ shadow_offset = Vector2(2, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jpd3"]
 bg_color = Color(0.244727, 0.399668, 0.180574, 1)
+shadow_color = Color(0, 0, 0, 0.5921569)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
 
-[node name="PictureContainer" type="PanelContainer"]
-anchors_preset = -1
-anchor_right = 0.2
-anchor_bottom = 0.4
+[node name="Control" type="PanelContainer" node_paths=PackedStringArray("level_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.00105, 0.994123)
+script = ExtResource("1_hi05f")
+level_label = NodePath("PictureContainer/VBoxContainer/LevelLabel")
+game_char_pic_rect = NodePath("PictureContainer/VBoxContainer/PanelContainer2/GameCharPicRect")
+hp_prog_bar = NodePath("PictureContainer/VBoxContainer/PanelContainer/HpProgBar")
+hp_label = NodePath("PictureContainer/VBoxContainer/PanelContainer/HpLabel")
+
+[node name="BgRect" type="TextureRect" parent="."]
+self_modulate = Color(0.5, 0.46883333, 0.445, 1)
+layout_mode = 2
+texture = ExtResource("1_8jpd3")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PictureContainer" type="PanelContainer" parent="."]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_ehtug")
-script = ExtResource("1_hi05f")
+theme_override_styles/panel = SubResource("StyleBoxTexture_32cm2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="PictureContainer"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 
-[node name="LevelLabel" type="Label" parent="VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="PictureContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Level: 0"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "Lvl 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameCharPicRect" type="TextureRect" parent="VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="PictureContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_kwu2l")
+
+[node name="GameCharPicRect" type="TextureRect" parent="PictureContainer/VBoxContainer/PanelContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_ehtug")
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PictureContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ehtug")
 
-[node name="HpProgBar" type="ProgressBar" parent="VBoxContainer/PanelContainer"]
+[node name="HpProgBar" type="ProgressBar" parent="PictureContainer/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 texture_filter = 1
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_8jpd3")
 value = 5.0
 show_percentage = false
 
-[node name="HpLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+[node name="HpLabel" type="Label" parent="PictureContainer/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1.58831e-06, 0.641762, 0.305271, 1)
@@ -79,7 +127,8 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("5_lte2h")
+theme_override_font_sizes/font_size = 20
 text = "10 / 10"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,10 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgb7aac1p3g2f"]
+[gd_scene load_steps=11 format=3 uid="uid://dgb7aac1p3g2f"]
 
-[ext_resource type="StyleBox" uid="uid://b6uoucwfkwj3j" path="res://Tile-RPG/UI/StatWindow/stat_panel_style.tres" id="1_6drc1"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_jbbnr"]
 [ext_resource type="Script" uid="uid://cunvmt4u3a1pn" path="res://Tile-RPG/UI/StatWindow/defence_panel.gd" id="2_o8uvw"]
 [ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_x5n7a"]
+[ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="3_14nlr"]
 [ext_resource type="Texture2D" uid="uid://dea3jo74a31p8" path="res://Tile-RPG/Images/Stats/evasion.png" id="3_cj4a0"]
+[ext_resource type="FontFile" uid="uid://ci51be7lgo08e" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-VariableFont_wght.ttf" id="4_14nlr"]
 [ext_resource type="Texture2D" uid="uid://biemtwue0bext" path="res://Tile-RPG/Images/Stats/ward.png" id="4_o8uvw"]
+[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="6_2oen1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2oen1"]
+texture = ExtResource("1_jbbnr")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2oen1"]
+content_margin_left = 15.0
+content_margin_top = 2.0
+content_margin_right = 15.0
+content_margin_bottom = 2.0
 
 [node name="DefencePanel" type="PanelContainer"]
 anchors_preset = 15
@@ -14,115 +33,139 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
-theme_override_styles/panel = ExtResource("1_6drc1")
+theme_override_styles/panel = SubResource("StyleBoxTexture_2oen1")
 script = ExtResource("2_o8uvw")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="BgRect" type="TextureRect" parent="."]
+self_modulate = Color(0.5, 0.46883333, 0.445, 1)
+layout_mode = 2
+texture = ExtResource("3_14nlr")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2oen1")
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 28
-theme_override_constants/v_separation = -2
+theme_override_constants/v_separation = -12
 columns = 3
 
-[node name="Label" type="Label" parent="GridContainer"]
+[node name="Label" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.61, 0.579805, 0.5429, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_14nlr")
 theme_override_font_sizes/font_size = 26
 text = "Armor"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="GridContainer"]
+[node name="Label2" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.5803922, 0.5411765, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_14nlr")
 theme_override_font_sizes/font_size = 26
 text = "Evasion"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="GridContainer"]
+[node name="Label3" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.5803922, 0.5411765, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_14nlr")
 theme_override_font_sizes/font_size = 26
 text = "Ward"
 horizontal_alignment = 1
 
-[node name="Control" type="PanelContainer" parent="GridContainer"]
+[node name="Control" type="PanelContainer" parent="PanelContainer/GridContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer/Control"]
-self_modulate = Color(1, 1, 1, 0.352941)
-custom_minimum_size = Vector2(80, 80)
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/Control"]
+self_modulate = Color(0.82, 0.871, 1, 0.23529412)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_x5n7a")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ArmorAmount" type="Label" parent="GridContainer/Control"]
+[node name="ArmorAmount" type="Label" parent="PanelContainer/GridContainer/Control"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.953041, 0.95304, 0.953041, 1)
+theme_override_colors/font_color = Color(0.7411765, 0.68235296, 0.5019608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("6_2oen1")
+theme_override_font_sizes/font_size = 42
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control2" type="PanelContainer" parent="GridContainer"]
+[node name="Control2" type="PanelContainer" parent="PanelContainer/GridContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="GridContainer/Control2"]
-self_modulate = Color(1, 1, 1, 0.352941)
-custom_minimum_size = Vector2(80, 80)
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/GridContainer/Control2"]
+self_modulate = Color(0.82, 1, 0.85899997, 0.23529412)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_cj4a0")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="EvasionAmount" type="Label" parent="GridContainer/Control2"]
+[node name="EvasionAmount" type="Label" parent="PanelContainer/GridContainer/Control2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.953041, 0.95304, 0.953041, 1)
+theme_override_colors/font_color = Color(0.7411765, 0.68235296, 0.5019608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("6_2oen1")
+theme_override_font_sizes/font_size = 42
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control3" type="PanelContainer" parent="GridContainer"]
+[node name="Control3" type="PanelContainer" parent="PanelContainer/GridContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="GridContainer/Control3"]
-self_modulate = Color(1, 1, 1, 0.352941)
-custom_minimum_size = Vector2(80, 80)
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/Control3"]
+self_modulate = Color(0.853, 0.82, 1, 0.23529412)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_o8uvw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WardAmount" type="Label" parent="GridContainer/Control3"]
+[node name="WardAmount" type="Label" parent="PanelContainer/GridContainer/Control3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.953041, 0.95304, 0.953041, 1)
+theme_override_colors/font_color = Color(0.7411765, 0.68235296, 0.5019608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("6_2oen1")
+theme_override_font_sizes/font_size = 42
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1

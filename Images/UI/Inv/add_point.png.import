@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4y21aa1jefu"
-path="res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.ctex"
+uid="uid://d2y04m3wxhnx8"
+path="res://.godot/imported/add_point.png-14dfb57a20d58bea7a5117860f1c50a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Stats/armor.png"
-dest_files=["res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.ctex"]
+source_file="res://Tile-RPG/Images/UI/Inv/add_point.png"
+dest_files=["res://.godot/imported/add_point.png-14dfb57a20d58bea7a5117860f1c50a9.ctex"]
 
 [params]
 

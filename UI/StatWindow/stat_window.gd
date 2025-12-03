@@ -10,9 +10,11 @@ var stats:StatHandler = null
 @onready var xp_label: Label = %XpLabel
 @onready var xp_bar_panel: PanelContainer = %XpBarPanel
 @onready var resistance_panel: ResistancePanel = $PanelContainer/VBoxContainer/ResistancePanel
+@onready var x_button: XButton = $x_button
 
 func _ready() -> void:
 	main_stat_panel.fill_main_stats()
+	x_button.x_pressed.connect(func(): self.hide())
 
 func set_game_character(gchar:GameCharacter) -> void:
 	stats = gchar.stat_handler

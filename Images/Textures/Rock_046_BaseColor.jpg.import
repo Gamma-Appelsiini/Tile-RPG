@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4y21aa1jefu"
-path="res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.ctex"
+uid="uid://dynfpu1cjo0hv"
+path="res://.godot/imported/Rock_046_BaseColor.jpg-803e44aa247756fa9bb348ed7f4573f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Stats/armor.png"
-dest_files=["res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.ctex"]
+source_file="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg"
+dest_files=["res://.godot/imported/Rock_046_BaseColor.jpg-803e44aa247756fa9bb348ed7f4573f6.ctex"]
 
 [params]
 
