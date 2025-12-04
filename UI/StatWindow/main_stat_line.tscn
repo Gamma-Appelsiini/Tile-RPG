@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://31066elebtp" path="res://Tile-RPG/UI/Dialogue/main_stat_line.gd" id="1_p161e"]
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="2_kmi15"]
-[ext_resource type="FontFile" uid="uid://cayy3p0s75w25" path="res://Tile-RPG/Fonts/GoogleFonts/Metamorphous-Regular.ttf" id="3_5ri86"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="3_5ri86"]
 
 [node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("stat_pic", "stat_label", "number_label")]
 anchors_preset = 4
@@ -29,26 +29,13 @@ stretch_mode = 5
 [node name="StatLabel" type="Label" parent="."]
 layout_mode = 2
 theme = ExtResource("2_kmi15")
-theme_override_colors/font_color = Color(0.96, 0.95615995, 0.8832, 1)
-theme_override_fonts/font = ExtResource("3_5ri86")
 theme_override_font_sizes/font_size = 18
 text = "Agility:"
 
 [node name="NumberLabel" type="Label" parent="."]
 layout_mode = 2
-theme = ExtResource("2_kmi15")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.619764, 0.456677, 0.362728, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 3
-theme_override_constants/shadow_outline_size = 2
+theme = ExtResource("3_5ri86")
 theme_override_font_sizes/font_size = 28
 text = "1"
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[node name="Control" type="HSeparator" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2

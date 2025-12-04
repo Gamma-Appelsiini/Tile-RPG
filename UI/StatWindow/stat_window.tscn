@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cgycswqthcl8v"]
+[gd_scene load_steps=17 format=3 uid="uid://cgycswqthcl8v"]
 
 [ext_resource type="Script" uid="uid://cje3wgmngvedd" path="res://Tile-RPG/UI/StatWindow/stat_window.gd" id="1_kemfi"]
 [ext_resource type="PackedScene" uid="uid://p73hmiwkq3cm" path="res://Tile-RPG/UI/StatWindow/picture_container.tscn" id="2_b5fdx"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dgb7aac1p3g2f" path="res://Tile-RPG/UI/StatWindow/defence_panel.tscn" id="4_vubcl"]
 [ext_resource type="Texture2D" uid="uid://clewat78puk85" path="res://Tile-RPG/Images/UI/progresbarFront.png" id="5_abnyx"]
 [ext_resource type="Texture2D" uid="uid://v6qoq871fplm" path="res://Tile-RPG/Images/UI/progresbarMid.png" id="6_le317"]
+[ext_resource type="PackedScene" uid="uid://di7mctw4yr74d" path="res://Tile-RPG/UI/StatWindow/skill_panel.tscn" id="7_ap1mc"]
 [ext_resource type="PackedScene" uid="uid://c73cgi56oj84j" path="res://Tile-RPG/UI/StatWindow/resistance_panel.tscn" id="8_abnyx"]
 [ext_resource type="PackedScene" uid="uid://gr66rucsdhyk" path="res://Tile-RPG/UI/StatWindow/secondary_stats_panel.tscn" id="9_le317"]
 [ext_resource type="PackedScene" uid="uid://cojb0yey4conu" path="res://Tile-RPG/UI/x_button.tscn" id="13_r27gf"]
@@ -42,7 +43,7 @@ shadow_color = Color(0, 0, 0, 0.329412)
 shadow_size = 3
 shadow_offset = Vector2(3, 3)
 
-[node name="StatWindow" type="Control"]
+[node name="StatWindow" type="Control" node_paths=PackedStringArray("skill_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,6 +52,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_kemfi")
+skill_panel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/SkillPanel")
 
 [node name="BgRect" type="TextureRect" parent="."]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
@@ -97,8 +99,15 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MainStatPanel" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_8o8bp")]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MainStatPanel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_8o8bp")]
 unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SkillPanel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_ap1mc")]
 layout_mode = 2
 
 [node name="DefencePanel" parent="PanelContainer/VBoxContainer" instance=ExtResource("4_vubcl")]

@@ -1,13 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgb7aac1p3g2f"]
+[gd_scene load_steps=16 format=3 uid="uid://dgb7aac1p3g2f"]
 
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_jbbnr"]
 [ext_resource type="Script" uid="uid://cunvmt4u3a1pn" path="res://Tile-RPG/UI/StatWindow/defence_panel.gd" id="2_o8uvw"]
 [ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_x5n7a"]
 [ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="3_14nlr"]
 [ext_resource type="Texture2D" uid="uid://dea3jo74a31p8" path="res://Tile-RPG/Images/Stats/evasion.png" id="3_cj4a0"]
-[ext_resource type="FontFile" uid="uid://ci51be7lgo08e" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-VariableFont_wght.ttf" id="4_14nlr"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_2oen1"]
 [ext_resource type="Texture2D" uid="uid://biemtwue0bext" path="res://Tile-RPG/Images/Stats/ward.png" id="4_o8uvw"]
-[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="6_2oen1"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="6_2oen1"]
+[ext_resource type="Texture2D" uid="uid://dlkosry7vjvod" path="res://Tile-RPG/Images/Stats/glance.png" id="9_4p66e"]
+[ext_resource type="Texture2D" uid="uid://bsn3fj8ynvjn1" path="res://Tile-RPG/Images/Stats/block.png" id="10_813h0"]
+[ext_resource type="Texture2D" uid="uid://xw72mkrqag2v" path="res://Tile-RPG/Images/Stats/spell_block.png" id="11_evh5k"]
+[ext_resource type="Texture2D" uid="uid://dimr3nic414au" path="res://Tile-RPG/Images/Stats/dodge.png" id="12_ilwok"]
+[ext_resource type="Texture2D" uid="uid://bu3w4pnhi3r7o" path="res://Tile-RPG/Images/Stats/spell_dodge.png" id="13_bx37x"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2oen1"]
 texture = ExtResource("1_jbbnr")
@@ -25,7 +30,7 @@ content_margin_top = 2.0
 content_margin_right = 15.0
 content_margin_bottom = 2.0
 
-[node name="DefencePanel" type="PanelContainer"]
+[node name="DefencePanel" type="PanelContainer" node_paths=PackedStringArray("armor_amount", "evasion_amount", "ward_amount", "glance_amount", "block_amount", "sblock_amount", "dodge_amount", "sdodge_amount")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,6 +40,14 @@ size_flags_horizontal = 6
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_2oen1")
 script = ExtResource("2_o8uvw")
+armor_amount = NodePath("PanelContainer/GridContainer/HBoxContainer/ArmorAmount")
+evasion_amount = NodePath("PanelContainer/GridContainer/HBoxContainer2/EvasionAmount")
+ward_amount = NodePath("PanelContainer/GridContainer/HBoxContainer3/WardAmount")
+glance_amount = NodePath("PanelContainer/GridContainer/HBoxContainer4/GlanceAmount")
+block_amount = NodePath("PanelContainer/GridContainer/HBoxContainer5/BlockAmount")
+sblock_amount = NodePath("PanelContainer/GridContainer/HBoxContainer6/SBlockAmount")
+dodge_amount = NodePath("PanelContainer/GridContainer/HBoxContainer7/DodgeAmount")
+sdodge_amount = NodePath("PanelContainer/GridContainer/HBoxContainer8/SDodgeAmount")
 
 [node name="BgRect" type="TextureRect" parent="."]
 self_modulate = Color(0.5, 0.46883333, 0.445, 1)
@@ -52,120 +65,237 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2oen1")
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 28
-theme_override_constants/v_separation = -12
-columns = 3
+theme_override_constants/v_separation = -2
+columns = 4
 
 [node name="Label" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61, 0.579805, 0.5429, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("4_14nlr")
-theme_override_font_sizes/font_size = 26
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
 text = "Armor"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6117647, 0.5803922, 0.5411765, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("4_14nlr")
-theme_override_font_sizes/font_size = 26
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
 text = "Evasion"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6117647, 0.5803922, 0.5411765, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("4_14nlr")
-theme_override_font_sizes/font_size = 26
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
 text = "Ward"
 horizontal_alignment = 1
 
-[node name="Control" type="PanelContainer" parent="PanelContainer/GridContainer"]
-self_modulate = Color(1, 1, 1, 0)
+[node name="Label4" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
+text = "Glance"
+horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/Control"]
-self_modulate = Color(0.82, 0.871, 1, 0.23529412)
-custom_minimum_size = Vector2(60, 60)
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer"]
+self_modulate = Color(0.70980394, 0.7176471, 0.7921569, 1)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_x5n7a")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ArmorAmount" type="Label" parent="PanelContainer/GridContainer/Control"]
+[node name="ArmorAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7411765, 0.68235296, 0.5019608, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("6_2oen1")
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("6_2oen1")
+theme_override_font_sizes/font_size = 32
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control2" type="PanelContainer" parent="PanelContainer/GridContainer"]
-self_modulate = Color(1, 1, 1, 0)
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/GridContainer"]
 layout_mode = 2
+theme_override_constants/separation = -6
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/GridContainer/Control2"]
-self_modulate = Color(0.82, 1, 0.85899997, 0.23529412)
-custom_minimum_size = Vector2(60, 60)
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer2"]
+self_modulate = Color(0.39215687, 0.87058824, 0.6509804, 1)
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_cj4a0")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="EvasionAmount" type="Label" parent="PanelContainer/GridContainer/Control2"]
+[node name="EvasionAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer2"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7411765, 0.68235296, 0.5019608, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("6_2oen1")
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("6_2oen1")
+theme_override_font_sizes/font_size = 32
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control3" type="PanelContainer" parent="PanelContainer/GridContainer"]
-self_modulate = Color(1, 1, 1, 0)
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/GridContainer"]
 layout_mode = 2
+theme_override_constants/separation = -6
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/Control3"]
-self_modulate = Color(0.853, 0.82, 1, 0.23529412)
-custom_minimum_size = Vector2(60, 60)
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer3"]
+self_modulate = Color(0.047058824, 0.7921569, 0.972549, 1)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_o8uvw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WardAmount" type="Label" parent="PanelContainer/GridContainer/Control3"]
+[node name="WardAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer3"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.7411765, 0.68235296, 0.5019608, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("6_2oen1")
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("6_2oen1")
+theme_override_font_sizes/font_size = 32
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer4"]
+self_modulate = Color(0.69803923, 0.6666667, 0.3647059, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_4p66e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GlanceAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("6_2oen1")
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
+text = "Block"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
+text = "Spell Block"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
+text = "Dodge"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("4_2oen1")
+theme_override_font_sizes/font_size = 16
+text = "Spell Dodge"
+horizontal_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer5"]
+self_modulate = Color(0.5254902, 0.4, 0.15686275, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("10_813h0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BlockAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("6_2oen1")
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer6"]
+self_modulate = Color(0.105882354, 0.14509805, 0.6862745, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_evh5k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SBlockAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("6_2oen1")
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer7"]
+self_modulate = Color(0.28627452, 0.5411765, 0.34117648, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("12_ilwok")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DodgeAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("6_2oen1")
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer8"]
+self_modulate = Color(0.050980393, 0.56078434, 0.39215687, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("13_bx37x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SDodgeAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("6_2oen1")
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1

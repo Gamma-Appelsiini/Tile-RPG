@@ -1,12 +1,14 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://ccdo4mxej4pk4"]
 
-[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="1_ws7hb"]
+[ext_resource type="FontFile" uid="uid://cayy3p0s75w25" path="res://Tile-RPG/Fonts/GoogleFonts/Metamorphous-Regular.ttf" id="1_ws7hb"]
 
 [resource]
-Label/colors/font_color = Color(0.83420247, 0.7678326, 0.60185176, 1)
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_color = Color(0.91804093, 0.91265655, 0.89375186, 1)
+Label/colors/font_outline_color = Color(0.2864622, 0.25334355, 0.023877377, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.50980395)
-Label/constants/shadow_offset_x = 2
-Label/constants/shadow_offset_y = 2
+Label/constants/outline_size = 2
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 42
 Label/fonts/font = ExtResource("1_ws7hb")

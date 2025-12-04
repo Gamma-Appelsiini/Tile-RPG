@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://2dcork07rtcm" path="res://Tile-RPG/UI/StatWindow/resistance_panel.gd" id="2_g3s71"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="3_h256m"]
 [ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="3_sgwty"]
-[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_h256m"]
 [ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="4_oucjx"]
 [ext_resource type="Texture2D" uid="uid://ql4jiw1fnvi7" path="res://Tile-RPG/Images/Stats/lightning.png" id="5_h256m"]
 [ext_resource type="Texture2D" uid="uid://b4g5r4imur8jo" path="res://Tile-RPG/Images/Stats/magic.png" id="6_ar6o5"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="6_sgwty"]
 [ext_resource type="Texture2D" uid="uid://bkr1kejrrmaoi" path="res://Tile-RPG/Images/Stats/physical.png" id="7_sgwty"]
 [ext_resource type="Texture2D" uid="uid://daink35hnrn4g" path="res://Tile-RPG/Images/Stats/toxic.png" id="8_qeq60"]
 
@@ -85,7 +85,7 @@ stretch_mode = 5
 [node name="FireLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_h256m")
+theme = ExtResource("6_sgwty")
 text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -106,7 +106,7 @@ stretch_mode = 5
 [node name="IceLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_h256m")
+theme = ExtResource("6_sgwty")
 text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -127,7 +127,7 @@ stretch_mode = 5
 [node name="LightningLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_h256m")
+theme = ExtResource("6_sgwty")
 text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -148,7 +148,7 @@ stretch_mode = 5
 [node name="MysticalLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_h256m")
+theme = ExtResource("6_sgwty")
 text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -169,7 +169,7 @@ stretch_mode = 5
 [node name="PhysicalLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_h256m")
+theme = ExtResource("6_sgwty")
 text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -190,10 +190,8 @@ stretch_mode = 5
 [node name="ToxicLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer6"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_h256m")
+theme = ExtResource("6_sgwty")
 text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
-visible_characters = 2
-visible_ratio = 2.0

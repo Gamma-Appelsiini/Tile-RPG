@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://da54lm3jymm33"]
+
+[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="1_y21m2"]
+
+[resource]
+Label/colors/font_color = Color(0.8352941, 0.76862746, 0.6, 1)
+Label/colors/font_outline_color = Color(0.61960787, 0.45490196, 0.36078432, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 3
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 2
+Label/font_sizes/font_size = 28
+Label/fonts/font = ExtResource("1_y21m2")

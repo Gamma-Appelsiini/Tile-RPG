@@ -11,6 +11,7 @@ var stats:StatHandler = null
 @onready var xp_bar_panel: PanelContainer = %XpBarPanel
 @onready var resistance_panel: ResistancePanel = $PanelContainer/VBoxContainer/ResistancePanel
 @onready var x_button: XButton = $x_button
+@export var skill_panel: SkillPanel = null
 
 func _ready() -> void:
 	main_stat_panel.fill_main_stats()
@@ -21,6 +22,7 @@ func set_game_character(gchar:GameCharacter) -> void:
 	stats.stats_changed.connect(_update_values)
 	name_label.text = gchar.display_name
 	picture_container.set_info(gchar)
+	skill_panel.set_stat_handler(gchar.stat_handler)
 	_update_values()
 
 func _update_values() -> void:
