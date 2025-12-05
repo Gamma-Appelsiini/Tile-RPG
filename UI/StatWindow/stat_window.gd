@@ -2,7 +2,6 @@ extends Control
 class_name StatWindow
 
 var stats:StatHandler = null
-@onready var name_label: Label = %NameLabel
 @onready var picture_container: PictureContainer = %PictureContainer
 @onready var main_stat_panel: MainStatPanel = %MainStatPanel
 @onready var defence_panel: DefencePanel = $PanelContainer/VBoxContainer/DefencePanel
@@ -20,7 +19,7 @@ func _ready() -> void:
 func set_game_character(gchar:GameCharacter) -> void:
 	stats = gchar.stat_handler
 	stats.stats_changed.connect(_update_values)
-	name_label.text = gchar.display_name
+	#name_label.text = gchar.display_name
 	picture_container.set_info(gchar)
 	skill_panel.set_stat_handler(gchar.stat_handler)
 	_update_values()

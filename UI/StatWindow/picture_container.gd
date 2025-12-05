@@ -1,6 +1,7 @@
 extends Control
 class_name PictureContainer
 
+@export var name_label: Label = null
 @export var level_label: Label = null
 @export var game_char_pic_rect: TextureRect = null
 @export var hp_prog_bar: ProgressBar = null
@@ -8,10 +9,11 @@ class_name PictureContainer
 
 func set_info(gchar:GameCharacter) -> void:
 	if gchar.picture: game_char_pic_rect.texture = gchar.picture
+	name_label.text = gchar.display_name
 	update_values(gchar.stat_handler)
 
 func update_values(sh:StatHandler) -> void:
-	level_label.text = "Level: " + str(sh.char_stats[Stats.CharStat.CURRENT_LEVEL])
+	level_label.text = "Lvl.  " + str(sh.char_stats[Stats.CharStat.CURRENT_LEVEL])
 	
 	hp_prog_bar.max_value = sh.resources[Stats.ResourceStat.MAX_HP]
 	hp_prog_bar.value = sh.resources[Stats.ResourceStat.CURRENT_HP]

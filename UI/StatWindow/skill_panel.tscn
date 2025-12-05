@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://di7mctw4yr74d"]
+[gd_scene load_steps=13 format=3 uid="uid://di7mctw4yr74d"]
 
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_3qeme"]
-[ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="2_12pfs"]
 [ext_resource type="Script" uid="uid://7rplsahgutl5" path="res://Tile-RPG/UI/StatWindow/skill_panel.gd" id="2_ivc55"]
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="3_gsdhw"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_gsdhw"]
 [ext_resource type="Texture2D" uid="uid://0m4aj3rb81yt" path="res://Tile-RPG/Images/Stats/focus.png" id="4_ivc55"]
+[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="4_qhbmb"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_b4u1d"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="6_gsdhw"]
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="6_ivc55"]
 [ext_resource type="Texture2D" uid="uid://b6rwi4usnvpms" path="res://Tile-RPG/Images/Stats/insight.png" id="6_u53cc"]
@@ -19,12 +22,6 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 draw_center = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erftf"]
-content_margin_left = 15.0
-content_margin_top = 2.0
-content_margin_right = 15.0
-content_margin_bottom = 2.0
-
 [node name="SkillPanel" type="PanelContainer" node_paths=PackedStringArray("focus_amount", "insight_amount", "vigor_amount")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,64 +32,81 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 theme_override_styles/panel = SubResource("StyleBoxTexture_egfmp")
 script = ExtResource("2_ivc55")
-focus_amount = NodePath("PanelContainer/GridContainer/HBoxContainer/FocusAmount")
-insight_amount = NodePath("PanelContainer/GridContainer/HBoxContainer2/InsightAmount")
-vigor_amount = NodePath("PanelContainer/GridContainer/HBoxContainer3/VigorAmount")
+focus_amount = NodePath("PanelContainer/VBoxContainer/GridContainer/HBoxContainer/FocusAmount")
+insight_amount = NodePath("PanelContainer/VBoxContainer/GridContainer/HBoxContainer2/InsightAmount")
+vigor_amount = NodePath("PanelContainer/VBoxContainer/GridContainer/HBoxContainer3/VigorAmount")
 
-[node name="BgRect" type="TextureRect" parent="."]
-self_modulate = Color(0.5, 0.46883333, 0.445, 1)
+[node name="BgRect2" type="TextureRect" parent="."]
+self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
 layout_mode = 2
-texture = ExtResource("2_12pfs")
+texture = ExtResource("3_gsdhw")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_erftf")
+theme_override_styles/panel = ExtResource("4_qhbmb")
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("5_b4u1d")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_gsdhw")
+theme_override_font_sizes/font_size = 26
+text = "Skills"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/h_separation = 10
+theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = -10
 columns = 3
 
-[node name="Label" type="Label" parent="PanelContainer/GridContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme = ExtResource("6_ivc55")
 theme_override_font_sizes/font_size = 16
 text = "Focus"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/GridContainer"]
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme = ExtResource("6_ivc55")
 theme_override_font_sizes/font_size = 16
 text = "Insight"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="PanelContainer/GridContainer"]
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme = ExtResource("6_ivc55")
 theme_override_font_sizes/font_size = 16
 text = "Vigor"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
 self_modulate = Color(0.50330573, 0.5770903, 0.99999934, 1)
-custom_minimum_size = Vector2(60, 6)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_ivc55")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="FocusAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer"]
+[node name="FocusAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_gsdhw")
 theme_override_font_sizes/font_size = 32
@@ -100,20 +114,20 @@ text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
 self_modulate = Color(0.3670069, 0.9999997, 0.751761, 1)
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("6_u53cc")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="InsightAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer2"]
+[node name="InsightAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("6_gsdhw")
 theme_override_font_sizes/font_size = 32
@@ -121,20 +135,20 @@ text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/GridContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer/HBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
 self_modulate = Color(0.99999756, 0.5134415, 0.54996383, 1)
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("7_qhbmb")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VigorAmount" type="Label" parent="PanelContainer/GridContainer/HBoxContainer3"]
+[node name="VigorAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("6_gsdhw")

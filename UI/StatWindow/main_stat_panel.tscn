@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6ga0ogmtdt61"]
+[gd_scene load_steps=8 format=3 uid="uid://b6ga0ogmtdt61"]
 
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_i4mvd"]
 [ext_resource type="Script" uid="uid://d368hjnspsu8w" path="res://Tile-RPG/UI/StatWindow/main_stat_panel.gd" id="1_mkmlm"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="3_i4mvd"]
-[ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="3_u83ea"]
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="3_u83ea"]
+[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="4_ljmis"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_g7pht"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u83ea"]
 texture = ExtResource("1_i4mvd")
@@ -14,12 +16,6 @@ texture_margin_bottom = 9.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_al0rm"]
-content_margin_left = 15.0
-content_margin_top = 2.0
-content_margin_right = 15.0
-content_margin_bottom = 2.0
 
 [node name="MainStatPanel" type="PanelContainer"]
 anchors_preset = -1
@@ -34,17 +30,24 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_u83ea")
 script = ExtResource("1_mkmlm")
 
-[node name="BgRect" type="TextureRect" parent="."]
-self_modulate = Color(0.5, 0.46883333, 0.445, 1)
+[node name="BgRect2" type="TextureRect" parent="."]
+self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
 layout_mode = 2
 texture = ExtResource("3_u83ea")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_al0rm")
+theme_override_styles/panel = ExtResource("4_ljmis")
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("5_g7pht")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 unique_name_in_owner = true

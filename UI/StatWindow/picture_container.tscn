@@ -1,19 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://p73hmiwkq3cm"]
+[gd_scene load_steps=15 format=3 uid="uid://p73hmiwkq3cm"]
 
 [ext_resource type="Script" uid="uid://gc40tv5b62wy" path="res://Tile-RPG/UI/StatWindow/picture_container.gd" id="1_hi05f"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_kwu2l"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_lte2h"]
+[ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="3_32cm2"]
+[ext_resource type="FontFile" uid="uid://cd2shkn54kchq" path="res://Tile-RPG/Fonts/GoogleFonts/GrenzeGotisch-VariableFont_wght.ttf" id="3_bbh2h"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_ehtug"]
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_8jpd3"]
-[ext_resource type="Texture2D" uid="uid://d4eiicta8350h" path="res://Tile-RPG/Images/UI/Border3.png" id="4_32cm2"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_kwu2l"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="7_3ydml"]
+[ext_resource type="FontFile" uid="uid://cayy3p0s75w25" path="res://Tile-RPG/Fonts/GoogleFonts/Metamorphous-Regular.ttf" id="8_rc1ih"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lte2h"]
+texture = ExtResource("2_lte2h")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+draw_center = false
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwu2l"]
-texture = ExtResource("4_32cm2")
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("3_32cm2")
 texture_margin_left = 10.0
 texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehtug"]
 bg_color = Color(0.183155, 0.0650727, 0.0555302, 1)
@@ -36,34 +51,67 @@ shadow_color = Color(0, 0, 0, 0.5921569)
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
-[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("level_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
 offset_right = 1920.0
 offset_bottom = 1080.0
-theme_override_constants/separation = 10
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 script = ExtResource("1_hi05f")
-level_label = NodePath("LevelLabel")
-game_char_pic_rect = NodePath("PanelContainer2/GameCharPicRect")
+name_label = NodePath("HBoxContainer/NameLabel")
+level_label = NodePath("HBoxContainer/LevelLabel")
+game_char_pic_rect = NodePath("PanelContainer2/PanelContainer/GameCharPicRect")
 hp_prog_bar = NodePath("PanelContainer/HpProgBar")
 hp_label = NodePath("PanelContainer/HpLabel")
 
-[node name="LevelLabel" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kwu2l")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_bbh2h")
+theme_override_font_sizes/font_size = 26
+text = "Default Name"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 18
-text = "Lvl 0"
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("7_3ydml")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.42584735, 0.27900606, 0.08400323, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("8_rc1ih")
+theme_override_font_sizes/font_size = 16
+text = "Level  0"
+horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_lte2h")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_kwu2l")
 
-[node name="GameCharPicRect" type="TextureRect" parent="PanelContainer2"]
+[node name="GameCharPicRect" type="TextureRect" parent="PanelContainer2/PanelContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -71,6 +119,18 @@ size_flags_vertical = 3
 texture = ExtResource("3_ehtug")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer2/PanelContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("5_kwu2l")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

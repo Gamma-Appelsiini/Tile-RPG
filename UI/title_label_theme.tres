@@ -6,7 +6,7 @@
 Label/colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
-Label/constants/shadow_offset_x = 3
-Label/constants/shadow_offset_y = 3
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
 Label/font_sizes/font_size = 42
 Label/fonts/font = ExtResource("1_m6dfq")

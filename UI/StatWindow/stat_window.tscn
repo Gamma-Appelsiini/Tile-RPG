@@ -48,6 +48,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -57,10 +59,10 @@ skill_panel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer
 [node name="BgRect" type="TextureRect" parent="."]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
 layout_mode = 0
-offset_left = 88.0
+offset_left = 100.0
 offset_top = 69.0
-offset_right = 776.0
-offset_bottom = 1033.0
+offset_right = 752.0
+offset_bottom = 1018.0
 texture = ExtResource("2_uo5gd")
 expand_mode = 1
 stretch_mode = 1
@@ -74,18 +76,18 @@ anchor_right = 0.4
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.00102, 1.02015)
+scale = Vector2(0.981, 1)
 theme_override_styles/panel = SubResource("StyleBoxTexture_ji44i")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 6
 
 [node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_uo5gd")
-text = "Default Name"
+text = "Character"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -121,6 +123,7 @@ size_flags_vertical = 0
 
 [node name="XpBarPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xnbaa")
@@ -128,6 +131,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xnbaa")
 [node name="XpBar" type="TextureProgressBar" parent="PanelContainer/VBoxContainer/XpBarPanel"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 texture_under = ExtResource("4_spi4j")
 texture_over = ExtResource("5_abnyx")
 texture_progress = ExtResource("6_le317")
@@ -160,7 +164,7 @@ grow_vertical = 1
 
 [node name="x_button" parent="." instance=ExtResource("13_r27gf")]
 layout_mode = 1
-offset_left = -242.0
+offset_left = -267.0
 offset_top = -458.0
-offset_right = -242.0
+offset_right = -267.0
 offset_bottom = -458.0
