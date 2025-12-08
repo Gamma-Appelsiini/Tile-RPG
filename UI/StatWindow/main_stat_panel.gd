@@ -46,7 +46,3 @@ func update_stats(sh:StatHandler) -> void:
 	
 	for stat:Stats.MainStat in stat_label_dict.keys():
 		stat_label_dict[stat].text = str(sh.main_stats[stat])
-
-
-func _on_button_pressed() -> void:
-	GlobalSignals.change_all_stats_visibility.emit()

@@ -8,8 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_ehtug"]
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_8jpd3"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_kwu2l"]
-[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="7_3ydml"]
-[ext_resource type="FontFile" uid="uid://cayy3p0s75w25" path="res://Tile-RPG/Fonts/GoogleFonts/Metamorphous-Regular.ttf" id="8_rc1ih"]
+[ext_resource type="Texture2D" uid="uid://djrvrh67ejqvc" path="res://Tile-RPG/Images/UI/Borders/gold_bar.png" id="6_1652o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1652o"]
+content_margin_bottom = 6.0
+texture = ExtResource("6_1652o")
+texture_margin_left = 45.0
+texture_margin_right = 45.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lte2h"]
 texture = ExtResource("2_lte2h")
@@ -56,23 +61,25 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 0
+theme_override_constants/separation = 8
 script = ExtResource("1_hi05f")
-name_label = NodePath("HBoxContainer/NameLabel")
-level_label = NodePath("HBoxContainer/LevelLabel")
+name_label = NodePath("PanelContainer3/HBoxContainer/NameLabel")
+level_label = NodePath("PanelContainer3/HBoxContainer/LvlLabel")
 game_char_pic_rect = NodePath("PanelContainer2/PanelContainer/GameCharPicRect")
 hp_prog_bar = NodePath("PanelContainer/HpProgBar")
 hp_label = NodePath("PanelContainer/HpLabel")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="PanelContainer3" type="PanelContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_1652o")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer3"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="HBoxContainer"]
+[node name="NameLabel" type="Label" parent="PanelContainer3/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_kwu2l")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -80,26 +87,18 @@ theme_override_fonts/font = ExtResource("3_bbh2h")
 theme_override_font_sizes/font_size = 26
 text = "Default Name"
 horizontal_alignment = 1
-
-[node name="LevelLabel" type="Label" parent="HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme = ExtResource("7_3ydml")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.42584735, 0.27900606, 0.08400323, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("8_rc1ih")
-theme_override_font_sizes/font_size = 16
-text = "Level  0"
-horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(15, 0)
+[node name="LvlLabel" type="Label" parent="PanelContainer3/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_kwu2l")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_bbh2h")
+theme_override_font_sizes/font_size = 26
+text = "Lvl 1"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 2

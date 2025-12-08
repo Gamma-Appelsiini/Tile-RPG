@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://dywf40dscgmoc"]
+
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="1_3ye36"]
+[ext_resource type="Texture2D" uid="uid://cnepxnk6kx81n" path="res://Tile-RPG/Images/UI/Borders/level_bar.png" id="1_msoq7"]
+[ext_resource type="Script" uid="uid://3vo8xjopmyky" path="res://Tile-RPG/UI/StatWindow/xp_panel.gd" id="2_hm6gm"]
+[ext_resource type="FontFile" uid="uid://ci51be7lgo08e" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-VariableFont_wght.ttf" id="4_ftqei"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ye36"]
+texture = ExtResource("1_3ye36")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hm6gm"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ye36"]
+bg_color = Color(0.8898403, 0.8674041, 0.71264464, 1)
+
+[node name="XpPanel" type="PanelContainer" node_paths=PackedStringArray("progress_bar", "texture_rect")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.15387
+offset_top = -23.5
+offset_right = 257.15387
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_3ye36")
+script = ExtResource("2_hm6gm")
+progress_bar = NodePath("PanelContainer/ProgressBar")
+texture_rect = NodePath("PanelContainer/TextureRect")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hm6gm")
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_3ye36")
+value = 50.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "145 / 2000"
+texture = ExtResource("1_msoq7")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8901961, 0.8666667, 0.7137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("4_ftqei")
+theme_override_font_sizes/font_size = 14
+text = "Xp            "
+horizontal_alignment = 2
+vertical_alignment = 1
