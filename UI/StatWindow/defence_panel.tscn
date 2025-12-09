@@ -72,7 +72,6 @@ theme_override_constants/separation = 6
 [node name="Label" type="Label" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_evh5k")
-theme_override_font_sizes/font_size = 26
 text = "Defences"
 horizontal_alignment = 1
 
@@ -187,7 +186,7 @@ layout_mode = 2
 theme_override_constants/separation = -6
 
 [node name="TextureRect3" type="TextureRect" parent="PanelContainer2/VBoxContainer/GridContainer/HBoxContainer4"]
-self_modulate = Color(0.69803923, 0.6666667, 0.3647059, 1)
+self_modulate = Color(0.81435007, 0.33474272, 0.42473993, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -243,7 +242,7 @@ layout_mode = 2
 theme_override_constants/separation = -6
 
 [node name="TextureRect3" type="TextureRect" parent="PanelContainer2/VBoxContainer/GridContainer2/HBoxContainer5"]
-self_modulate = Color(0.5254902, 0.4, 0.15686275, 1)
+self_modulate = Color(0.9084846, 0.7355112, 0.42127055, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -264,7 +263,7 @@ layout_mode = 2
 theme_override_constants/separation = -6
 
 [node name="TextureRect3" type="TextureRect" parent="PanelContainer2/VBoxContainer/GridContainer2/HBoxContainer6"]
-self_modulate = Color(0.105882354, 0.14509805, 0.6862745, 1)
+self_modulate = Color(0.8781734, 0.28130004, 0.97, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -285,7 +284,7 @@ layout_mode = 2
 theme_override_constants/separation = -6
 
 [node name="TextureRect3" type="TextureRect" parent="PanelContainer2/VBoxContainer/GridContainer2/HBoxContainer7"]
-self_modulate = Color(0.28627452, 0.5411765, 0.34117648, 1)
+self_modulate = Color(0.21862733, 0.8728055, 0.4074712, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -306,7 +305,7 @@ layout_mode = 2
 theme_override_constants/separation = -6
 
 [node name="TextureRect3" type="TextureRect" parent="PanelContainer2/VBoxContainer/GridContainer2/HBoxContainer8"]
-self_modulate = Color(0.050980393, 0.56078434, 0.39215687, 1)
+self_modulate = Color(0.93, 0.43710002, 0.7410551, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3

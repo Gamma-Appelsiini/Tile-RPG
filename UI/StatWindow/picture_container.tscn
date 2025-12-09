@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://p73hmiwkq3cm"]
+[gd_scene load_steps=16 format=3 uid="uid://p73hmiwkq3cm"]
 
 [ext_resource type="Script" uid="uid://gc40tv5b62wy" path="res://Tile-RPG/UI/StatWindow/picture_container.gd" id="1_hi05f"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_kwu2l"]
@@ -6,9 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="3_32cm2"]
 [ext_resource type="FontFile" uid="uid://cd2shkn54kchq" path="res://Tile-RPG/Fonts/GoogleFonts/GrenzeGotisch-VariableFont_wght.ttf" id="3_bbh2h"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_ehtug"]
-[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_8jpd3"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_kwu2l"]
 [ext_resource type="Texture2D" uid="uid://djrvrh67ejqvc" path="res://Tile-RPG/Images/UI/Borders/gold_bar.png" id="6_1652o"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="9_bbh2h"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="10_bbh2h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1652o"]
 content_margin_bottom = 6.0
@@ -35,33 +36,22 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehtug"]
-bg_color = Color(0.183155, 0.0650727, 0.0555302, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.0337624, 0.119584, 0.0128736, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-shadow_color = Color(0, 0, 0, 0.223529)
-shadow_size = 3
-shadow_offset = Vector2(2, 3)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4rbcs"]
+texture = ExtResource("9_bbh2h")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jpd3"]
-bg_color = Color(0.244727, 0.399668, 0.180574, 1)
-shadow_color = Color(0, 0, 0, 0.5921569)
-shadow_size = 2
-shadow_offset = Vector2(2, 2)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rc1ih"]
+bg_color = Color(0.3846482, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 8
+size_flags_vertical = 2
+theme_override_constants/separation = 16
 script = ExtResource("1_hi05f")
 name_label = NodePath("PanelContainer3/HBoxContainer/NameLabel")
 level_label = NodePath("PanelContainer3/HBoxContainer/LvlLabel")
@@ -103,18 +93,21 @@ vertical_alignment = 1
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
+size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxTexture_lte2h")
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer2"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_kwu2l")
 
 [node name="GameCharPicRect" type="TextureRect" parent="PanelContainer2/PanelContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("3_ehtug")
 expand_mode = 3
 stretch_mode = 5
@@ -133,23 +126,25 @@ patch_margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ehtug")
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_4rbcs")
 
 [node name="HpProgBar" type="ProgressBar" parent="PanelContainer"]
 unique_name_in_owner = true
 texture_filter = 1
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(250, 20)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 1
-theme_override_styles/fill = SubResource("StyleBoxFlat_8jpd3")
-value = 5.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rc1ih")
+value = 55.0
+rounded = true
 show_percentage = false
 
 [node name="HpLabel" type="Label" parent="PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_8jpd3")
-theme_override_colors/font_color = Color(1.58831e-06, 0.641762, 0.305271, 1)
+theme = ExtResource("10_bbh2h")
 theme_override_font_sizes/font_size = 20
 text = "10 / 10"
 horizontal_alignment = 1

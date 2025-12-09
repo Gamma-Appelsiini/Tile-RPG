@@ -61,7 +61,6 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_gsdhw")
-theme_override_font_sizes/font_size = 26
 text = "Skills"
 horizontal_alignment = 1
 

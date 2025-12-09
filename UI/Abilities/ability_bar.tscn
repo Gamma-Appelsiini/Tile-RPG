@@ -1,31 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs8aa2kl2ldyl"]
+[gd_scene load_steps=11 format=3 uid="uid://cs8aa2kl2ldyl"]
 
 [ext_resource type="PackedScene" uid="uid://camo5qmy5xx2a" path="res://Tile-RPG/UI/Abilities/ability_slot.tscn" id="1_fh5s2"]
 [ext_resource type="Script" uid="uid://dff24d0l3t5og" path="res://Tile-RPG/UI/Abilities/ability_bar.gd" id="1_on83k"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_smgsx"]
 [ext_resource type="Script" uid="uid://g4mhn3qshbnk" path="res://Tile-RPG/UI/Abilities/ap_container.gd" id="3_jq4jv"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_qbedm"]
 [ext_resource type="PackedScene" uid="uid://bf7u41el4bmki" path="res://Tile-RPG/UI/Combat/ap_ball.tscn" id="4_8slfc"]
 [ext_resource type="Texture2D" uid="uid://6b6oqfw0qqw2" path="res://Tile-RPG/Images/UI/Shoe.png" id="5_8slfc"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_b3exp"]
 [ext_resource type="Texture2D" uid="uid://65wfreko2dtk" path="res://Tile-RPG/Images/UI/EndTurn2.png" id="6_entml"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh5s2"]
-content_margin_left = 1.0
-content_margin_top = 1.0
-content_margin_right = 1.0
-content_margin_bottom = 1.0
-bg_color = Color(0.1247, 0.11893407, 0.097255744, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.5297439, 0.50742036, 0.60994595, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qbedm"]
+texture = ExtResource("2_smgsx")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
 
 [node name="AbilityBar" type="Control" node_paths=PackedStringArray("ability_slot_container", "panel_container", "ap_container", "color_rect", "button_container", "info_container", "movement_label", "input_area", "end_turn_button")]
 layout_mode = 3
@@ -60,15 +50,25 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.25
 anchor_right = 1.0
-anchor_bottom = 0.95
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_fh5s2")
+theme_override_styles/panel = SubResource("StyleBoxTexture_qbedm")
+
+[node name="BgRect" type="TextureRect" parent="InputArea/PanelContainer"]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_qbedm")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="AbilitySlotContainer" type="HBoxContainer" parent="InputArea/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
+
+[node name="AbilitySlot12" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+layout_mode = 2
 
 [node name="AbilitySlot" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
@@ -103,11 +103,22 @@ layout_mode = 2
 [node name="AbilitySlot11" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
+[node name="AbilitySlot13" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
+layout_mode = 2
+
 [node name="ColorRect" type="ColorRect" parent="InputArea/PanelContainer"]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.44705883)
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="InputArea/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("5_b3exp")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
 [node name="InfoContainer" type="HBoxContainer" parent="InputArea"]
 visible = false

@@ -3,6 +3,7 @@ class_name AbilitiesContainer
 
 @export var grid_container: GridContainer = null
 @export var ability_bar:AbilityBar = null
+@export var x_button: XButton = null
 
 const SLOTS:int = 6 * 5
 const ABILITY_SLOT := preload("uid://camo5qmy5xx2a")
@@ -21,6 +22,8 @@ var tooltip:AbilityTooltip = null
 func _ready() -> void:
 	set_process_input(false)
 	set_process(false)
+	x_button.x_pressed.connect(hide_container)
+	
 	_create_tooltip()
 	
 	for i in SLOTS:
@@ -61,6 +64,7 @@ func _slot_pressed() -> void:
 	if hovered_slot.ability_in_slot == null: return
 	
 	clicked_slot = hovered_slot
+	clicked_slot.ability_icon_rect.z_index = 1
 	original_pos = hovered_slot.ability_icon_rect.global_position
 	set_process(true)
 	
@@ -71,6 +75,7 @@ func _slot_released() -> void:
 	if hovered_bar_slot != null:
 		hovered_bar_slot.set_ability(clicked_slot.ability_in_slot)
 	
+	clicked_slot.ability_icon_rect.z_index = 0
 	clicked_slot.ability_icon_rect.global_position = original_pos
 	clicked_slot = null
 

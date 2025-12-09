@@ -162,9 +162,9 @@ const DEF_COLORS := {
 	Stats.Defence.ARMOR: "#b5b7ca",
 	Stats.Defence.EVASION: "#64dea6",
 	Stats.Defence.WARD: "#0ccaf8",
-	Stats.Defence.BLOCK: "#866628",
-	Stats.Defence.SPELL_BLOCK: "#1b25af",
-	Stats.Defence.DODGE: "#498a57",
-	Stats.Defence.SPELL_DODGE: "#0d8f64",
-	Stats.Defence.GLANCE: "#b2aa5d"}
+	Stats.Defence.BLOCK: "#e8bc6b",
+	Stats.Defence.SPELL_BLOCK: "#e048f7",
+	Stats.Defence.DODGE: "#38df68",
+	Stats.Defence.SPELL_DODGE: "#ed6fbd",
+	Stats.Defence.GLANCE: "#d0556c"}
 	

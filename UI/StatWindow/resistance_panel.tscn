@@ -61,7 +61,6 @@ theme_override_constants/separation = 0
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_h256m")
-theme_override_font_sizes/font_size = 26
 text = "Resistances"
 horizontal_alignment = 1
 

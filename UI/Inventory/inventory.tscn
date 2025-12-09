@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bjf0h02xhxd3p" path="res://Tile-RPG/UI/Inventory/inventory.gd" id="1_box56"]
 [ext_resource type="Texture2D" uid="uid://c47ivluaw2iuj" path="res://Tile-RPG/Images/UI/Borders/detail_border4.png" id="2_xxh13"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_lcpxx"]
-[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="4_1afs6"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_lcpxx"]
 [ext_resource type="PackedScene" uid="uid://cojb0yey4conu" path="res://Tile-RPG/UI/x_button.tscn" id="5_lcpxx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fb27k"]
@@ -56,12 +56,7 @@ theme_override_constants/separation = 24
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.82, 0.6218334, 0.34440002, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("4_1afs6")
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("4_lcpxx")
 text = "Inventory"
 horizontal_alignment = 1
 
