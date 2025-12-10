@@ -9,6 +9,8 @@ class_name UIHandler
 @export var abilities_container: AbilitiesContainer = null
 @export var ability_targeter: AbilityTargeter = null
 @export var combat_ui: CombatUI = null
+@export var menu_buttons: MenuButtonsPanel = null
+
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 
@@ -20,16 +22,33 @@ func _ready() -> void:
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
 	GlobalSignals.combat_end.connect(func(): in_combat = false)
 	GlobalSignals.show_floating_text.connect(show_text_at_pos)
+	
+	_connect_menu_buttons()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Character"):
-		stat_window.visible = !stat_window.visible
+		_toggle_character()
 	elif event.is_action_pressed("Bag"):
-		inventory.visible = !inventory.visible
+		_toggle_inv()
 	elif event.is_action_pressed("Abilities"):
-		if in_combat: return
-		if !abilities_container.visible: abilities_container.show_container()
-		else: abilities_container.hide_container()
+		_toggle_abilities()
+
+func _toggle_character() -> void:
+	stat_window.visible = !stat_window.visible
+
+func _toggle_inv() -> void:
+	inventory.visible = !inventory.visible
+
+func _toggle_abilities() -> void:
+	if in_combat: return
+	if !abilities_container.visible: abilities_container.show_container()
+	else: abilities_container.hide_container()
+
+func _connect_menu_buttons() -> void:
+	#TODO
+	menu_buttons.open_abi.connect(_toggle_abilities)
+	menu_buttons.open_inv.connect(_toggle_inv)
+	menu_buttons.open_char.connect(_toggle_character)
 
 func set_player(player:Player) -> void:
 	GlobalSignals.player = player

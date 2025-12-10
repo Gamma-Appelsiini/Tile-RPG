@@ -48,8 +48,9 @@ anchor_bottom = 1.0
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.25
-anchor_right = 1.0
+anchor_left = 0.1
+anchor_top = 0.285
+anchor_right = 0.9
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -95,15 +96,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="AbilitySlot9" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot10" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot11" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot13" parent="InputArea/PanelContainer/AbilitySlotContainer" instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="InputArea/PanelContainer"]

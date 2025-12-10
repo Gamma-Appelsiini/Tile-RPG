@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://cc2jlwv1hf0dd"]
+
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="1_072gd"]
+[ext_resource type="Script" uid="uid://kcr7u6klserf" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.gd" id="2_shfjn"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_072gd"]
+[ext_resource type="PackedScene" uid="uid://cs7h36ow7ckj6" path="res://Tile-RPG/UI/ButtonsBar/general_button.tscn" id="4_augf1"]
+[ext_resource type="Texture2D" uid="uid://bapke4p1je7nd" path="res://Tile-RPG/Images/UI/Buttons/backpack.png" id="5_m6mg1"]
+[ext_resource type="Texture2D" uid="uid://cxqof2r0op2o8" path="res://Tile-RPG/Images/UI/Buttons/character.png" id="6_rpejq"]
+[ext_resource type="Texture2D" uid="uid://bmsbhgqlb0t5u" path="res://Tile-RPG/Images/UI/Buttons/party.png" id="7_clvx6"]
+[ext_resource type="Texture2D" uid="uid://cnw7wnk85gin8" path="res://Tile-RPG/Images/UI/Buttons/journal.png" id="7_e6eul"]
+[ext_resource type="Texture2D" uid="uid://cn8a6i7k5i1l6" path="res://Tile-RPG/Images/UI/Buttons/settings.png" id="8_a04dx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fpxea"]
+texture = ExtResource("1_072gd")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+
+[node name="MenuButtons" type="Control" node_paths=PackedStringArray("h_box_container")]
+layout_mode = 3
+anchor_left = 0.75
+anchor_top = 0.96
+anchor_right = 0.885
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_shfjn")
+h_box_container = NodePath("PanelContainer/HBoxContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_fpxea")
+
+[node name="BgRect" type="TextureRect" parent="PanelContainer"]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_072gd")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="GenericButton" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+layout_mode = 2
+
+[node name="GenericButton2" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+layout_mode = 2
+
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton2" index="1"]
+icon = ExtResource("5_m6mg1")
+
+[node name="GenericButton3" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+layout_mode = 2
+
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton3" index="1"]
+icon = ExtResource("6_rpejq")
+
+[node name="GenericButton4" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+layout_mode = 2
+
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton4" index="1"]
+icon = ExtResource("7_e6eul")
+
+[node name="GenericButton5" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+layout_mode = 2
+
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton5" index="1"]
+icon = ExtResource("7_clvx6")
+
+[node name="GenericButton6" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+layout_mode = 2
+
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton6" index="1"]
+icon = ExtResource("8_a04dx")
+
+[editable path="PanelContainer/HBoxContainer/GenericButton2"]
+[editable path="PanelContainer/HBoxContainer/GenericButton3"]
+[editable path="PanelContainer/HBoxContainer/GenericButton4"]
+[editable path="PanelContainer/HBoxContainer/GenericButton5"]
+[editable path="PanelContainer/HBoxContainer/GenericButton6"]
