@@ -4,6 +4,7 @@ signal stats_changed
 signal leveled_up
 signal resources_changed(sh:StatHandler)
 signal owner_died
+signal xp_changed()
 
 const POINTS_PER_LVL:int = 3
 const XP_INCREASE:float = 1.5
@@ -87,6 +88,7 @@ func add_xp(amount:int) -> void:
 	char_stats[Stats.CharStat.CURRENT_XP] += amount
 	if char_stats[Stats.CharStat.CURRENT_XP] >= char_stats[Stats.CharStat.MAX_XP]:
 		level_up()
+	xp_changed.emit(char_stats[Stats.CharStat.CURRENT_XP], char_stats[Stats.CharStat.MAX_XP])
 
 func level_up() -> void:
 	char_stats[Stats.CharStat.CURRENT_XP] = char_stats[Stats.CharStat.CURRENT_XP] - char_stats[Stats.CharStat.MAX_XP]
@@ -94,7 +96,7 @@ func level_up() -> void:
 	char_stats[Stats.CharStat.CURRENT_LEVEL] += 1
 	char_stats[Stats.CharStat.STATS_TO_ALLOCATE] += POINTS_PER_LVL
 	leveled_up.emit()
-	stats_changed.emit()
+	#stats_changed.emit()
 	
 	if char_stats[Stats.CharStat.CURRENT_XP] >= char_stats[Stats.CharStat.MAX_XP]:
 		level_up()

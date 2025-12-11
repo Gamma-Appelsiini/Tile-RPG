@@ -3,45 +3,85 @@ class_name XpPanel
 
 @export var progress_bar: ProgressBar = null
 @export var texture_rect: TextureRect = null
+@export var green_bar: ProgressBar = null
 
-const FULL_BAR_TIME:float = 1.0
+const FULL_BAR_TIME: float = 2.0
 
-var queue:Array[int] = []
-var tween:Tween = null
+# Queue holds dictionaries: { "cur": int, "max": int }
+var queue: Array[Dictionary] = []
+var is_animating: bool = false
 
-func set_stat_handler(sh:StatHandler) -> void:
-	sh.stats_changed.connect(_set_xp.bind(sh))
-	_set_xp(sh)
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Journal"):
+		GlobalSignals.player.stat_handler.add_xp(25)
+
+func set_stat_handler(sh: StatHandler) -> void:
+	var start_max = sh.get_stat_amount(Stats.CharStat.MAX_XP)
+	var start_cur = sh.get_stat_amount(Stats.CharStat.CURRENT_XP)
+	_update_visuals_immediate(start_cur, start_max)
 	
-func _set_xp(sh:StatHandler) -> void:
-	print(1)
-	var cur_xp:int = sh.get_stat_amount(Stats.CharStat.CURRENT_XP)
-	var max_xp:int = sh.get_stat_amount(Stats.CharStat.MAX_XP)
-	
-	if tween != null:
-		queue.push_back(cur_xp)
-		queue.push_back(max_xp)
+	sh.xp_changed.connect(_on_xp_changed_signal)
+
+func _on_xp_changed_signal(cur_xp: int, max_xp: int) -> void:
+	queue.push_back({ "cur": cur_xp, "max": max_xp })
+	_process_queue()
+
+func _process_queue() -> void:
+	if is_animating or queue.is_empty():
 		return
-	
-	_animate_bar(cur_xp, max_xp)
-	
-func _animate_bar(cur_xp:int, max_xp:int):
-	if progress_bar.value == cur_xp and progress_bar.max_value == max_xp:
-		return
-	
-	var tween_time:float = FULL_BAR_TIME * ( float(max_xp) / float(cur_xp))
-	if tween_time == INF: tween_time = .1
 
-	texture_rect.tooltip_text = str(cur_xp) + " / " + str(max_xp)
+	is_animating = true
 	
-	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC).set_parallel(true)
-	tween.tween_property(progress_bar, "max_value", max_xp, tween_time)
-	tween.tween_property(progress_bar, "value", cur_xp, tween_time)
+	var target = queue.pop_front()
+	var target_cur = target["cur"]
+	var target_max = target["max"]
 	
-	await tween.finished
-	tween = null
+	if target_max > progress_bar.max_value:
+		await _sequence_level_up(target_max)
 	
-	if !queue.is_empty():
-		var next_cur:int = queue.pop_front()
-		var next_max:int = queue.pop_front()
-		_animate_bar(next_cur,next_max)
+	await _sequence_gain(target_cur, target_max)
+	
+	is_animating = false
+	_process_queue()
+
+
+func _sequence_level_up(new_max: int) -> void:
+	await _animate_single_bar(green_bar, int(progress_bar.max_value))
+	await _animate_single_bar(progress_bar, int(progress_bar.max_value))
+	
+	progress_bar.max_value = new_max
+	progress_bar.value = 0
+	green_bar.max_value = new_max
+	green_bar.value = 0
+	
+	await get_tree().create_timer(0.05).timeout
+
+func _sequence_gain(target_cur: int, target_max: int) -> void:
+	if texture_rect:
+		texture_rect.tooltip_text = str(target_cur) + " / " + str(target_max)
+
+	await _animate_single_bar(green_bar, target_cur)
+	await _animate_single_bar(progress_bar, target_cur)
+
+func _animate_single_bar(bar: ProgressBar, target_val: int) -> void:
+	if bar.value == target_val:
+		return
+
+	var duration = _get_tween_time(bar.value, target_val, bar.max_value)
+	
+	var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	t.tween_property(bar, "value", target_val, duration)
+	
+	await t.finished
+
+func _update_visuals_immediate(cur: int, max_val: int) -> void:
+	progress_bar.max_value = max_val
+	progress_bar.value = cur
+	green_bar.max_value = max_val
+	green_bar.value = cur
+
+func _get_tween_time(start_val: float, end_val: float, max_val: float) -> float:
+	var diff = abs(end_val - start_val)
+	if max_val == 0: return 0.1
+	var time = FULL_BAR_TIME * (diff / float(max_val))
+	return clamp(time, 0.1, 1.0)

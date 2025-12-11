@@ -43,7 +43,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="CornerRect" type="TextureRect" parent="."]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_pixxd")

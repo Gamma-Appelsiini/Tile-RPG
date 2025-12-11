@@ -17,7 +17,6 @@ func _ready() -> void:
 func set_game_character(gchar:GameCharacter) -> void:
 	stats = gchar.stat_handler
 	stats.stats_changed.connect(_update_values)
-	#name_label.text = gchar.display_name
 	picture_container.set_info(gchar)
 	skill_panel.set_stat_handler(gchar.stat_handler)
 	xp_panel.set_stat_handler(gchar.stat_handler)
@@ -28,6 +27,3 @@ func _update_values() -> void:
 	main_stat_panel.update_stats(stats)
 	defence_panel.update_defs(stats)
 	resistance_panel.update_resistances(stats)
-
-func _on_button_pressed() -> void:
-	pass # Replace with function body.

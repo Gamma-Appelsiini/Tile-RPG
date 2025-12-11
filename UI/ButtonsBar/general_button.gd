@@ -13,3 +13,5 @@ func _ready() -> void:
 	button.pressed.connect(func(): 
 		GlobalSignals.play_audio.emit(button_press_sound, AudioManager.AUDIO_TYPE.UI)
 		button_pressed.emit() )
+
+	

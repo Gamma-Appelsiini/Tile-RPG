@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dywf40dscgmoc"]
+[gd_scene load_steps=9 format=3 uid="uid://dywf40dscgmoc"]
 
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="1_3ye36"]
 [ext_resource type="Texture2D" uid="uid://cnepxnk6kx81n" path="res://Tile-RPG/Images/UI/Borders/level_bar.png" id="1_msoq7"]
@@ -19,10 +19,13 @@ content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftqei"]
+bg_color = Color(0, 1, 0.5999999, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ye36"]
 bg_color = Color(0.8898403, 0.8674041, 0.71264464, 1)
 
-[node name="XpPanel" type="PanelContainer" node_paths=PackedStringArray("progress_bar", "texture_rect")]
+[node name="XpPanel" type="PanelContainer" node_paths=PackedStringArray("progress_bar", "texture_rect", "green_bar")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -40,17 +43,24 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_3ye36")
 script = ExtResource("2_hm6gm")
 progress_bar = NodePath("PanelContainer/ProgressBar")
 texture_rect = NodePath("PanelContainer/TextureRect")
+green_bar = NodePath("PanelContainer/GreenBar")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hm6gm")
+
+[node name="GreenBar" type="ProgressBar" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftqei")
+show_percentage = false
 
 [node name="ProgressBar" type="ProgressBar" parent="PanelContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/fill = SubResource("StyleBoxFlat_3ye36")
-value = 50.0
 show_percentage = false
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
