@@ -95,8 +95,8 @@ func level_up() -> void:
 	char_stats[Stats.CharStat.MAX_XP] = int(char_stats[Stats.CharStat.MAX_XP] * XP_INCREASE)
 	char_stats[Stats.CharStat.CURRENT_LEVEL] += 1
 	char_stats[Stats.CharStat.STATS_TO_ALLOCATE] += POINTS_PER_LVL
-	leveled_up.emit()
-	#stats_changed.emit()
+	#leveled_up.emit()
+	stats_changed.emit()
 	
 	if char_stats[Stats.CharStat.CURRENT_XP] >= char_stats[Stats.CharStat.MAX_XP]:
 		level_up()

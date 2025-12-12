@@ -5,11 +5,12 @@ class_name XpPanel
 @export var texture_rect: TextureRect = null
 @export var green_bar: ProgressBar = null
 
-const FULL_BAR_TIME: float = 2.0
+const FULL_BAR_TIME: float = 1.25
 
 # Queue holds dictionaries: { "cur": int, "max": int }
 var queue: Array[Dictionary] = []
 var is_animating: bool = false
+var stat_handler:StatHandler = null
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Journal"):
@@ -21,6 +22,7 @@ func set_stat_handler(sh: StatHandler) -> void:
 	_update_visuals_immediate(start_cur, start_max)
 	
 	sh.xp_changed.connect(_on_xp_changed_signal)
+	stat_handler = sh
 
 func _on_xp_changed_signal(cur_xp: int, max_xp: int) -> void:
 	queue.push_back({ "cur": cur_xp, "max": max_xp })
@@ -55,6 +57,7 @@ func _sequence_level_up(new_max: int) -> void:
 	green_bar.value = 0
 	
 	await get_tree().create_timer(0.05).timeout
+	stat_handler.leveled_up.emit()
 
 func _sequence_gain(target_cur: int, target_max: int) -> void:
 	if texture_rect:

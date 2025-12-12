@@ -1,31 +1,62 @@
-[gd_scene load_steps=12 format=3 uid="uid://ct761wejgx40c"]
+[gd_scene load_steps=23 format=3 uid="uid://ct761wejgx40c"]
 
 [ext_resource type="Script" uid="uid://cikgpqlo6kbjj" path="res://Tile-RPG/UI/Crafting/crafting_window.gd" id="1_1iunn"]
-[ext_resource type="StyleBox" uid="uid://cpc6pk1jb7575" path="res://Tile-RPG/UI/Crafting/texture_panel_style.tres" id="2_u54fj"]
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="2_bwirk"]
 [ext_resource type="PackedScene" uid="uid://c8lvxyflk4ru8" path="res://Tile-RPG/UI/Inventory/inventory_slot.tscn" id="3_1iunn"]
-[ext_resource type="FontFile" uid="uid://bvdd0umnhlivu" path="res://Tile-RPG/Fonts/MaryJaneCavazos-L9W.ttf" id="3_nmxv4"]
+[ext_resource type="Texture2D" uid="uid://c47ivluaw2iuj" path="res://Tile-RPG/Images/UI/Borders/detail_border4.png" id="3_p2l15"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_ckoyc"]
 [ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="5_fdih8"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_0md6y"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="6_d0je4"]
 [ext_resource type="Texture2D" uid="uid://dk44tml1036ue" path="res://Tile-RPG/Images/UI/Craft2.png" id="6_u54fj"]
+[ext_resource type="Texture2D" uid="uid://cedwte0bxw26f" path="res://Tile-RPG/Images/Textures/TIERNaturalStone-3D_MyraLimestone.webp" id="7_0md6y"]
 [ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="7_m03l5"]
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="8_5j8om"]
-[ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="9_u54fj"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="8_10wou"]
+[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="8_dssmb"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="11_ooejg"]
+[ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="13_dssmb"]
+[ext_resource type="PackedScene" uid="uid://cojb0yey4conu" path="res://Tile-RPG/UI/x_button.tscn" id="17_0md6y"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgh2l"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.860369, 0.860369, 0.860369, 1)
-border_blend = true
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooejg"]
+content_margin_left = 35.0
+content_margin_top = 20.0
+content_margin_right = 35.0
+content_margin_bottom = 35.0
+texture = ExtResource("3_p2l15")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 25.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yxc6d"]
+texture = ExtResource("6_0md6y")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ysrgi"]
+texture = ExtResource("6_d0je4")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [sub_resource type="Curve" id="Curve_m03l5"]
-_data = [Vector2(0, 0.0692559), 0.0, 0.583786, 0, 0, Vector2(0.0316206, 0.178755), 2.43687, 2.43687, 0, 0, Vector2(0.0948617, 0.24263), 0.214754, 0.214754, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 0.2, 0.0, 0.944664]
+_data = [Vector2(0, 0), 0.0, 0.30068958, 0, 0, Vector2(0.1549249, 0), 2.43687, 2.43687, 0, 0, Vector2(0.2852885, 0.02995263), 0.27854544, 0.27854544, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
 point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_ysrgi"]
+offsets = PackedFloat32Array(0, 0.20562771, 1)
+colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000001, 0, 0)
 
 [node name="CraftingWindow" type="Control"]
 layout_mode = 3
@@ -38,24 +69,26 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1iunn")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.101961, 0.0862745, 0.0901961, 1)
+[node name="BgRect" type="TextureRect" parent="."]
+self_modulate = Color(0.322908, 0.322635, 0.3624696, 1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 469.0
+offset_bottom = 856.0
+texture = ExtResource("2_bwirk")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(0.76, 0.6500533, 0.2888, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_u54fj")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ooejg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -63,13 +96,7 @@ theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.815686, 0.721569, 0.482353, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("3_nmxv4")
-theme_override_font_sizes/font_size = 26
+theme = ExtResource("4_ckoyc")
 text = "Crafting"
 horizontal_alignment = 1
 
@@ -83,26 +110,58 @@ size_flags_vertical = 4
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_pgh2l")
+theme_override_styles/panel = SubResource("StyleBoxTexture_yxc6d")
 
-[node name="AffContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+[node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer"]
+self_modulate = Color(0.52, 0.52, 0.52, 1)
+layout_mode = 2
+texture = ExtResource("7_0md6y")
+expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_dssmb")
+
+[node name="AffContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/AffContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer/AffContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_nmxv4")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("4_ckoyc")
 text = "Affixes"
 horizontal_alignment = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("8_10wou")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ysrgi")
+
+[node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2"]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("11_ooejg")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_dssmb")
+
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
 alignment = 1
 
-[node name="RemAffButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
+[node name="RemAffButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -111,7 +170,7 @@ icon = ExtResource("5_fdih8")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AddAffButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
+[node name="AddAffButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -120,7 +179,7 @@ icon = ExtResource("6_u54fj")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AddIlvlButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
+[node name="AddIlvlButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -129,7 +188,7 @@ icon = ExtResource("7_m03l5")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AddMaxAffButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
+[node name="AddMaxAffButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -138,43 +197,48 @@ icon = ExtResource("8_5j8om")
 icon_alignment = 1
 expand_icon = true
 
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("8_10wou")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
 [node name="CPUParticles2D" type="CPUParticles2D" parent="PanelContainer/VBoxContainer"]
 z_index = 4
-position = Vector2(178, 126)
+position = Vector2(204, 118)
+scale = Vector2(0.2, 0.2)
 emitting = false
 amount = 16
-texture = ExtResource("9_u54fj")
-lifetime = 0.44
+texture = ExtResource("13_dssmb")
+lifetime = 0.46
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 fixed_fps = 60
-direction = Vector2(0, 0)
-spread = 126.33
-gravity = Vector2(0, 50)
-initial_velocity_min = 139.23
-initial_velocity_max = 251.86
+emission_shape = 3
+emission_rect_extents = Vector2(300, 300)
+direction = Vector2(0, 1)
+spread = 122.95
+initial_velocity_min = 296.53
+initial_velocity_max = 296.53
 angular_velocity_min = -229.33
 angular_velocity_max = 101.33
+radial_accel_min = -23.22
+radial_accel_max = 38.95
+angle_min = -323.6
+angle_max = 404.5
 scale_amount_min = 0.5
 scale_amount_max = 1.2
 scale_amount_curve = SubResource("Curve_m03l5")
+color_ramp = SubResource("Gradient_ysrgi")
+hue_variation_min = -0.58
+hue_variation_max = 0.55
 
-[node name="CloseButton" type="Button" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(45, 45)
+[node name="x_button" parent="." instance=ExtResource("17_0md6y")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -72.0
-offset_bottom = 72.0
-grow_horizontal = 0
-mouse_filter = 1
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0.29, 0.2349, 0.0145, 0)
-theme_override_colors/font_color = Color(0.997949, 0, 0.093505, 1)
-theme_override_font_sizes/font_size = 26
-text = "X"
-flat = true
-icon_alignment = 1
+offset_left = 173.0
+offset_top = -405.0
+offset_right = 173.0
+offset_bottom = -405.0

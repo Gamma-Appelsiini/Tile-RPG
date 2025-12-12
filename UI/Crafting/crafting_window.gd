@@ -12,8 +12,8 @@ enum CraftAction {REMOVE_RAND_AFF,REMOVE_SPEF_AFF, ADD_AFF, ADD_ILVL, ADD_MAX_AF
 @onready var add_ilvl_button: Button = %AddIlvlButton
 @onready var add_max_aff_button: Button = %AddMaxAffButton
 @onready var cpu_particles_2d: CPUParticles2D = $PanelContainer/VBoxContainer/CPUParticles2D
-@onready var close_button: Button = %CloseButton
 @onready var button_container: HBoxContainer = %ButtonContainer
+@onready var x_button: XButton = $x_button
 
 const AFF_PAN_SCENE:PackedScene = preload("res://Tile-RPG/UI/Crafting/affix_panel.tscn")
 const ITEM_TT_PATH:String = ("res://Tile-RPG/UI/Inventory/item_tooltip.tscn")
@@ -100,7 +100,7 @@ func _connect_buttons() -> void:
 	inventory_slot.mouse_exited.connect(_equ_slot_exited)
 	add_ilvl_button.pressed.connect(_set_action.bind(CraftAction.ADD_ILVL))
 	add_max_aff_button.pressed.connect(_set_action.bind(CraftAction.ADD_MAX_AFF))
-	close_button.pressed.connect(_close_crafting)
+	x_button.x_pressed.connect(_close_crafting)
 	
 	inventory_slot.item_placed.connect(set_equ)
 	inventory_slot.item_removed.connect(clear_equ)

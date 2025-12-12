@@ -17,13 +17,14 @@ func _ready() -> void:
 func set_game_character(gchar:GameCharacter) -> void:
 	stats = gchar.stat_handler
 	stats.stats_changed.connect(_update_values)
+	
 	picture_container.set_info(gchar)
-	skill_panel.set_stat_handler(gchar.stat_handler)
-	xp_panel.set_stat_handler(gchar.stat_handler)
+	skill_panel.set_stat_handler(stats)
+	xp_panel.set_stat_handler(stats)
+	main_stat_panel.set_stat_hanlder(stats)
 	_update_values()
 
 func _update_values() -> void:
 	picture_container.update_values(stats)
-	main_stat_panel.update_stats(stats)
 	defence_panel.update_defs(stats)
 	resistance_panel.update_resistances(stats)
