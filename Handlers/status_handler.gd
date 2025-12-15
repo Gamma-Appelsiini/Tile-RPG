@@ -1,6 +1,8 @@
 extends Node
 class_name StatusHandler
 
+signal status_added(status:Status)
+
 const GENERIC_BUFF_EFFECT := preload("uid://b8xk37t3i1ps4")
 const GENERIC_DEBUFF_EFFECT := preload("uid://duwkcoksgw1mw")
 
@@ -47,6 +49,7 @@ func add_status(new_status:Status) -> void:
 
 	array_to_apply.push_back(new_status)
 	GlobalSignals.show_floating_text.emit(new_status.status_name, gchar, new_status.status_color)
+	status_added.emit(new_status)
 
 func _remove_same_status(status_array:Array[Status], new_status:Status) -> void:
 	var remove_array := status_array.duplicate().filter(func(status:Status): return status.status_name == new_status.status_name)

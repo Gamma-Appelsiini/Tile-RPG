@@ -7,7 +7,7 @@ enum BORDER_TYPE {ENEMY, FRIENDLY, PLAYER}
 @export var hp_label: Label = null
 @export var shadow_rect: ColorRect = null
 @export var hp_rect: ColorRect = null
-@export var nine_patch_rect: NinePatchRect = null
+@export var panel_container: PanelContainer = null
 
 const BORDER_COLORS:Dictionary[BORDER_TYPE, Color] ={
 	BORDER_TYPE.ENEMY: Color(0.809, 0.0, 0.215, 1.0),
@@ -29,7 +29,7 @@ func set_character(new_character:GameCharacter, char_type:BORDER_TYPE = BORDER_T
 	gchar.stat_handler.stats_changed.connect(_set_hp)
 	
 func _set_border_color(type:BORDER_TYPE = BORDER_TYPE.ENEMY) -> void:
-	nine_patch_rect.modulate = BORDER_COLORS[type]
+	panel_container.self_modulate = BORDER_COLORS[type]
 	
 func _set_hp() -> void:
 	var cur_hp:int = gchar.stat_handler.resources[Stats.ResourceStat.CURRENT_HP]

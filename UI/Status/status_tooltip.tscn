@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwhs2cbh0fab4"]
+
+[ext_resource type="Script" uid="uid://ccgpwjwjyumrg" path="res://Tile-RPG/UI/Status/status_tooltip.gd" id="1_cioao"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_0qd58"]
+[ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="3_junf6"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="4_xef4e"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_dr1od"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="6_xyhvi"]
+[ext_resource type="Texture2D" uid="uid://8d5u8dvdifd1" path="res://Tile-RPG/Images/UI/Clock.png" id="7_0qd58"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_d71hv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n45sk"]
+texture = ExtResource("2_0qd58")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.86, 0.81413335, 0.774, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqnv6"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+
+[node name="StatusTooltip" type="Control" node_paths=PackedStringArray("status_name", "status_desc", "duration")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_cioao")
+status_name = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatusName")
+status_desc = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatusDesc")
+duration = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/Duration")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n45sk")
+
+[node name="BgRect" type="TextureRect" parent="PanelContainer"]
+material = ExtResource("3_junf6")
+layout_mode = 2
+texture = ExtResource("4_xef4e")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aqnv6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="StatusName" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_dr1od")
+theme_override_font_sizes/font_size = 22
+text = "Status Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusDesc" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_xyhvi")
+theme_override_font_sizes/font_size = 16
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.85750073, 0.85750073, 0.85750073, 1)
+layout_mode = 2
+texture = ExtResource("7_0qd58")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Duration" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_xyhvi")
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("7_d71hv")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10

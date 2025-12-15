@@ -5,15 +5,15 @@ signal window_closed
 
 enum CraftAction {REMOVE_RAND_AFF,REMOVE_SPEF_AFF, ADD_AFF, ADD_ILVL, ADD_MAX_AFF, NOTHING}
 
-@onready var aff_container: VBoxContainer = %AffContainer
-@onready var rem_aff_button: Button = %RemAffButton
-@onready var add_aff_button: Button = %AddAffButton
-@onready var inventory_slot: InventorySlot = %InventorySlot
-@onready var add_ilvl_button: Button = %AddIlvlButton
-@onready var add_max_aff_button: Button = %AddMaxAffButton
-@onready var cpu_particles_2d: CPUParticles2D = $PanelContainer/VBoxContainer/CPUParticles2D
-@onready var button_container: HBoxContainer = %ButtonContainer
-@onready var x_button: XButton = $x_button
+@export var aff_container: VBoxContainer = null
+@export var rem_aff_button: Button = null
+@export var add_aff_button: Button = null
+@export var inventory_slot: InventorySlot = null
+@export var add_ilvl_button: Button = null
+@export var add_max_aff_button: Button = null
+@export var cpu_particles_2d: CPUParticles2D = null
+@export var button_container: HBoxContainer = null
+@export var x_button: XButton = null
 
 const AFF_PAN_SCENE:PackedScene = preload("res://Tile-RPG/UI/Crafting/affix_panel.tscn")
 const ITEM_TT_PATH:String = ("res://Tile-RPG/UI/Inventory/item_tooltip.tscn")

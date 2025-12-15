@@ -1,15 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://cerdi7wt14odo"]
+[gd_scene load_steps=8 format=3 uid="uid://cerdi7wt14odo"]
 
-[ext_resource type="Texture2D" uid="uid://dc73lpptw3vso" path="res://Tile-RPG/Images/Borders/SimpleBorder3.png" id="1_jkmc4"]
 [ext_resource type="Script" uid="uid://dfgx2m2diydwk" path="res://Tile-RPG/UI/Combat/turn_portrait.gd" id="1_nmebc"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_wdc2w"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_mlu6p"]
 [ext_resource type="Shader" uid="uid://ckbqgufh8hftd" path="res://Tile-RPG/Shaders/color_rect_shader.gdshader" id="4_mlu6p"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_ioyuc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_27xuc"]
+texture = ExtResource("2_wdc2w")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+modulate_color = Color(0.86, 0.81413335, 0.774, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sowdv"]
 shader = ExtResource("4_mlu6p")
 shader_parameter/percentage = 0.0
 
-[node name="TurnPortrait" type="VBoxContainer" node_paths=PackedStringArray("portrait_rect", "hp_label", "shadow_rect", "hp_rect", "nine_patch_rect")]
+[node name="TurnPortrait" type="VBoxContainer" node_paths=PackedStringArray("portrait_rect", "hp_label", "shadow_rect", "hp_rect", "panel_container")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,12 +37,13 @@ portrait_rect = NodePath("PanelContainer/PortraitRect")
 hp_label = NodePath("PanelContainer/MarginContainer/HpLabel")
 shadow_rect = NodePath("PanelContainer/ShadowRect")
 hp_rect = NodePath("PanelContainer/HpRect")
-nine_patch_rect = NodePath("PanelContainer/NinePatchRect")
+panel_container = NodePath("PanelContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_27xuc")
 
 [node name="PortraitRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
@@ -74,13 +84,13 @@ text = "150
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
 layout_mode = 2
-texture = ExtResource("1_jkmc4")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+texture = ExtResource("6_ioyuc")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
 [connection signal="mouse_entered" from="PanelContainer" to="." method="_on_turn_portrait_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer" to="." method="_on_turn_portrait_mouse_exited"]

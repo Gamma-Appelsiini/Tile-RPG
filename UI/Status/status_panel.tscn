@@ -1,45 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckjtakb74tlm2"]
+[gd_scene load_steps=6 format=3 uid="uid://ckjtakb74tlm2"]
 
 [ext_resource type="Script" uid="uid://dm60sw82ox0lh" path="res://Tile-RPG/UI/Status/status_panel.gd" id="1_luyw7"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_io5lf"]
 [ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_rlhqa"]
-[ext_resource type="Texture2D" uid="uid://dc73lpptw3vso" path="res://Tile-RPG/Images/Borders/SimpleBorder3.png" id="3_io5lf"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlhqa"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npn40"]
+bg_color = Color(0.14, 0.14, 0.14, 1)
 
-[node name="StatusPanel" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pijir"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("status_pic")]
 layout_mode = 3
-anchor_left = 0.496
-anchor_top = 0.432
-anchor_right = 0.545
-anchor_bottom = 0.46
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
 script = ExtResource("1_luyw7")
+status_pic = NodePath("PanelContainer/PanelContainer/StatusPic")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_npn40")
 
-[node name="StatusPic" type="TextureRect" parent="PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+self_modulate = Color(0.46240002, 0.68, 0.49503994, 1)
+layout_mode = 2
+texture = ExtResource("2_io5lf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pijir")
+
+[node name="StatusPic" type="TextureRect" parent="PanelContainer/PanelContainer"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 texture = ExtResource("2_rlhqa")
 expand_mode = 3
 stretch_mode = 5
-
-[node name="ShadowRect" type="ColorRect" parent="PanelContainer"]
-layout_mode = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.46666667)
-
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
-self_modulate = Color(1.92523e-07, 0.7276906, 0.17200261, 1)
-material = SubResource("ShaderMaterial_rlhqa")
-layout_mode = 2
-texture = ExtResource("3_io5lf")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6

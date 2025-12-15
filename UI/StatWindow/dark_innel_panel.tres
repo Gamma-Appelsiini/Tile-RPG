@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="1_62dgn"]
 
 [resource]
-content_margin_left = 8.0
+content_margin_left = 6.0
 content_margin_top = 8.0
-content_margin_right = 8.0
+content_margin_right = 6.0
 content_margin_bottom = 8.0
 texture = ExtResource("1_62dgn")
 texture_margin_left = 10.0

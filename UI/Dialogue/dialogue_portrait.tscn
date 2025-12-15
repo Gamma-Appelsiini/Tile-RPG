@@ -1,18 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://6xedavukxk8d"]
+[gd_scene load_steps=9 format=3 uid="uid://6xedavukxk8d"]
 
 [ext_resource type="Script" uid="uid://c0p70k8koyggt" path="res://Tile-RPG/UI/Dialogue/dialogue_portrait.gd" id="1_3ygy6"]
-[ext_resource type="Texture2D" uid="uid://d4eiicta8350h" path="res://Tile-RPG/Images/UI/Border3.png" id="2_w16rv"]
-[ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_w16rv"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_j60w1"]
+[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="3_ugm8h"]
+[ext_resource type="Texture2D" uid="uid://b4s31t8h2tpo1" path="res://Tile-RPG/Images/Portraits/faithful.png" id="4_j60w1"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_ic3b3"]
+[ext_resource type="FontFile" uid="uid://cd2shkn54kchq" path="res://Tile-RPG/Fonts/GoogleFonts/GrenzeGotisch-VariableFont_wght.ttf" id="6_vv68n"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_uxlqj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ugm8h"]
-texture = ExtResource("2_w16rv")
+texture = ExtResource("2_j60w1")
 texture_margin_left = 10.0
 texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 modulate_color = Color(0.86, 0.81413335, 0.774, 1)
 
-[node name="DialoguePortrait" type="VBoxContainer"]
+[node name="DialoguePortrait" type="VBoxContainer" node_paths=PackedStringArray("name_label", "picture_rect", "color_rect")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,6 +29,9 @@ offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3ygy6")
+name_label = NodePath("PanelContainer/PanelContainer/PanelContainer/NameLabel")
+picture_rect = NodePath("PanelContainer/PanelContainer/PictureRect")
+color_rect = NodePath("PanelContainer/PanelContainer/ColorRect")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -32,34 +39,49 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_ugm8h")
 
-[node name="PictureRect" type="TextureRect" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ugm8h")
+
+[node name="PictureRect" type="TextureRect" parent="PanelContainer/PanelContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 329)
 layout_mode = 2
-texture = ExtResource("3_w16rv")
+texture = ExtResource("4_j60w1")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 1
-
-[node name="NameLabel" type="Label" parent="PanelContainer/MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/PanelContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+color = Color(0.07, 0.07, 0.07, 0.3137255)
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7490196)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 22
-text = "Default Name"
-horizontal_alignment = 1
-autowrap_mode = 3
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer"]
-unique_name_in_owner = true
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
-color = Color(0.07, 0.07, 0.07, 0.7882353)
+color = Color(0, 0, 0, 0.22352941)
+
+[node name="NameLabel" type="Label" parent="PanelContainer/PanelContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("5_ic3b3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_vv68n")
+theme_override_font_sizes/font_size = 24
+text = "Jack, Faithful"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("7_uxlqj")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10

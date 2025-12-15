@@ -17,8 +17,8 @@ func _input(event: InputEvent) -> void:
 		GlobalSignals.player.stat_handler.add_xp(25)
 
 func set_stat_handler(sh: StatHandler) -> void:
-	var start_max = sh.get_stat_amount(Stats.CharStat.MAX_XP)
-	var start_cur = sh.get_stat_amount(Stats.CharStat.CURRENT_XP)
+	var start_max:int = sh.get_stat_amount(Stats.CharStat.MAX_XP)
+	var start_cur:int = sh.get_stat_amount(Stats.CharStat.CURRENT_XP)
 	_update_visuals_immediate(start_cur, start_max)
 	
 	sh.xp_changed.connect(_on_xp_changed_signal)
@@ -34,9 +34,9 @@ func _process_queue() -> void:
 
 	is_animating = true
 	
-	var target = queue.pop_front()
-	var target_cur = target["cur"]
-	var target_max = target["max"]
+	var target:Dictionary[String, int] = queue.pop_front()
+	var target_cur:int = target["cur"]
+	var target_max:int = target["max"]
 	
 	if target_max > progress_bar.max_value:
 		await _sequence_level_up(target_max)
@@ -70,12 +70,12 @@ func _animate_single_bar(bar: ProgressBar, target_val: int) -> void:
 	if bar.value == target_val:
 		return
 
-	var duration = _get_tween_time(bar.value, target_val, bar.max_value)
+	var duration:float = _get_tween_time(bar.value, target_val, bar.max_value)
 	
-	var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
-	t.tween_property(bar, "value", target_val, duration)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(bar, "value", target_val, duration)
 	
-	await t.finished
+	await tween.finished
 
 func _update_visuals_immediate(cur: int, max_val: int) -> void:
 	progress_bar.max_value = max_val
@@ -84,7 +84,7 @@ func _update_visuals_immediate(cur: int, max_val: int) -> void:
 	green_bar.value = cur
 
 func _get_tween_time(start_val: float, end_val: float, max_val: float) -> float:
-	var diff = abs(end_val - start_val)
+	var diff:float = abs(end_val - start_val)
 	if max_val == 0: return 0.1
-	var time = FULL_BAR_TIME * (diff / float(max_val))
+	var time:float = FULL_BAR_TIME * (diff / float(max_val))
 	return clamp(time, 0.1, 1.0)

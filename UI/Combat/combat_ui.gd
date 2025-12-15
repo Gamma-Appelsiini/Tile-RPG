@@ -113,7 +113,7 @@ func _animate_portrait_to_place(gchar:GameCharacter, end_place:int) -> void:
 func _squeeze_portrait_away(tp:TurnPortrait) -> void:
 	_animate_portrait_in_out(tp,true)
 	tp.modulate.a = 0
-	if tp.nine_patch_rect: tp.nine_patch_rect.free()
+	#if tp.nine_patch_rect: tp.nine_patch_rect.free()
 	tp.custom_minimum_size.y = _get_portrait_size().y
 	tp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	

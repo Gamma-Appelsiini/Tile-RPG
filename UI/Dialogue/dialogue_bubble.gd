@@ -3,14 +3,12 @@ class_name DialogueBubble
 
 signal dialogue_finished
 
-@onready var dialogue_label: Label = %DialogueLabel
-@onready var picture_rect: TextureRect = %PictureRect
-@onready var name_label: Label = %NameLabel
-@onready var panel_container: PanelContainer = %PanelContainer
-@onready var nine_patch_rect: NinePatchRect = %NinePatchRect
-@onready var continue_rect: TextureRect = %ContinueRect
+@export var dialogue_label: Label = null
+@export var picture_rect: TextureRect = null
+@export var name_label: Label = null
+@export var continue_rect: TextureRect = null
 
-const ARROW_GREEN:Texture2D = preload("res://Tile-RPG/Images/UI/arrow_green.png")
+const CONTINUE_ARROW:Texture2D = preload("uid://cs26xk72bt0wu")
 const CROSS:Texture2D = preload("res://Tile-RPG/Images/UI/cross.png")
 const DISSOLVE_TIME:float = 0.3
 const TIME_PER_LETTER:float = 0.02
@@ -39,7 +37,7 @@ func set_params(dialogue_name,picture:Texture2D, dialogue_pos_node:Node3D, camer
 	position_node = dialogue_pos_node
 	name_label.text = dialogue_name
 	picture_rect.texture = picture
-	continue_rect.texture = ARROW_GREEN
+	continue_rect.texture = CONTINUE_ARROW
 
 func _change_continue_pic() -> void:
 	continue_rect.texture = CROSS
@@ -71,7 +69,7 @@ func set_next_text() -> void:
 		return
 	
 	_change_label_text(dialogue_label, next_text)
-	
+
 func _close_dialogue() -> void:
 	set_process_input(false)
 	_change_label_text(dialogue_label, "",DISSOLVE_TIME)

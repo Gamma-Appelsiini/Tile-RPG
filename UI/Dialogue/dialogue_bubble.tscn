@@ -1,15 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7q77u7wvwvi3"]
+[gd_scene load_steps=13 format=3 uid="uid://b7q77u7wvwvi3"]
 
 [ext_resource type="Script" uid="uid://cqw3myjsxwd7f" path="res://Tile-RPG/UI/Dialogue/dialogue_bubble.gd" id="1_6tnie"]
 [ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="2_nghgg"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_nghgg"]
-[ext_resource type="Texture2D" uid="uid://drdw2hhaxs3l5" path="res://Tile-RPG/Images/UI/Border5.png" id="4_nghgg"]
-[ext_resource type="Texture2D" uid="uid://crlg63ublnftt" path="res://Tile-RPG/Images/UI/arrow_green.png" id="5_nghgg"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_n75w8"]
+[ext_resource type="FontFile" uid="uid://cd2shkn54kchq" path="res://Tile-RPG/Fonts/GoogleFonts/GrenzeGotisch-VariableFont_wght.ttf" id="5_e7nq5"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="6_rexdo"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="7_n75w8"]
+[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="8_vrhd8"]
+[ext_resource type="Texture2D" uid="uid://cs26xk72bt0wu" path="res://Tile-RPG/Images/UI/continue.png" id="9_n75w8"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="10_l53j7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rk250"]
-bg_color = Color(0.0619267, 0.0619267, 0.061926693, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ya6vl"]
+texture = ExtResource("6_rexdo")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.86, 0.81413335, 0.774, 1)
 
-[node name="DialogueBubble" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n75w8"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[node name="DialogueBubble" type="Control" node_paths=PackedStringArray("dialogue_label", "picture_rect", "name_label", "continue_rect")]
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 8
@@ -21,6 +37,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_6tnie")
+dialogue_label = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer/DialogueLabel")
+picture_rect = NodePath("VBoxContainer/HBoxContainer/PictureRect")
+name_label = NodePath("VBoxContainer/HBoxContainer/NameLabel")
+continue_rect = NodePath("VBoxContainer/PanelContainer/PanelContainer/VBoxContainer/ContinueRect")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -39,11 +59,6 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
 [node name="PictureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
@@ -57,9 +72,9 @@ stretch_mode = 5
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
+theme = ExtResource("4_n75w8")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_e7nq5")
 theme_override_font_sizes/font_size = 22
 text = "Test Name"
 
@@ -69,44 +84,48 @@ material = ExtResource("2_nghgg")
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_rk250")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ya6vl")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/PanelContainer"]
-unique_name_in_owner = true
+[node name="BgRect" type="TextureRect" parent="VBoxContainer/PanelContainer"]
 material = ExtResource("2_nghgg")
 layout_mode = 2
-texture = ExtResource("4_nghgg")
-draw_center = false
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 25
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+texture = ExtResource("7_n75w8")
+expand_mode = 1
+stretch_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer"]
+material = ExtResource("2_nghgg")
 layout_mode = 2
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_styles/panel = ExtResource("8_vrhd8")
 
-[node name="ContinueRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="ContinueRect" type="TextureRect" parent="VBoxContainer/PanelContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(35, 35)
+material = ExtResource("2_nghgg")
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("5_nghgg")
+texture = ExtResource("9_n75w8")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/PanelContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="DialogueLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n75w8")
+
+[node name="DialogueLabel" type="Label" parent="VBoxContainer/PanelContainer/PanelContainer/PanelContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
@@ -117,5 +136,14 @@ theme_override_constants/line_spacing = -2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 18
 autowrap_mode = 3
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/PanelContainer/PanelContainer"]
+material = ExtResource("2_nghgg")
+layout_mode = 2
+texture = ExtResource("10_l53j7")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10

@@ -3,29 +3,32 @@ class_name StatusPanel
 
 signal delete_status_panel
 
-@onready var shadow_rect: ColorRect = $PanelContainer/ShadowRect
-@onready var status_pic: TextureRect = $PanelContainer/StatusPic
-@onready var nine_patch_rect: NinePatchRect = $PanelContainer/NinePatchRect
+@export var status_pic: TextureRect = null
+@onready var texture_rect: TextureRect = $TextureRect
+@onready var panel_container: PanelContainer = $PanelContainer
 
 const COLOR_RECT_SHADER := preload("uid://ckbqgufh8hftd")
+const STATUS_TOOLTIP = preload("uid://bwhs2cbh0fab4")
 
 var status:Status = null
 var shader_material:ShaderMaterial = null
-
-func _ready() -> void:
-	shadow_rect.material = COLOR_RECT_SHADER.duplicate()
-	shader_material = shadow_rect.material
+var s_tooltip:StatusTooltip = null
 
 func set_status(new_status:Status) -> void:
 	status = new_status
 	status_pic.texture = new_status.picture
-	status.duration_changed.connect(_set_shadow_rect)
+	#status.duration_changed.connect(_set_shadow_rect)
 	
 	if new_status.status_type == Status.STATUS_TYPE.DEBUFF:
-		nine_patch_rect.self_modulate = "ff0008"
+		texture_rect.self_modulate = "ff0008"
 		
-	tooltip_text = new_status.description
+	panel_container.mouse_entered.connect(func(): s_tooltip._show_tt())
+	panel_container.mouse_exited.connect(func(): s_tooltip.hide())
 
+func _add_tt() -> void:
+	s_tooltip = STATUS_TOOLTIP.instantiate()
+	add_child(s_tooltip)
+	s_tooltip.hide()
 
 func _set_shadow_rect() -> void:
 	var cur_d:int = status.current_duration

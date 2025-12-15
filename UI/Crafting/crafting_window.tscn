@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_0md6y"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="6_d0je4"]
 [ext_resource type="Texture2D" uid="uid://dk44tml1036ue" path="res://Tile-RPG/Images/UI/Craft2.png" id="6_u54fj"]
-[ext_resource type="Texture2D" uid="uid://cedwte0bxw26f" path="res://Tile-RPG/Images/Textures/TIERNaturalStone-3D_MyraLimestone.webp" id="7_0md6y"]
+[ext_resource type="Texture2D" uid="uid://dynfpu1cjo0hv" path="res://Tile-RPG/Images/Textures/Rock_046_BaseColor.jpg" id="7_0md6y"]
 [ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="7_m03l5"]
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="8_5j8om"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="8_10wou"]
@@ -58,7 +58,7 @@ point_count = 4
 offsets = PackedFloat32Array(0, 0.20562771, 1)
 colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000001, 0, 0)
 
-[node name="CraftingWindow" type="Control"]
+[node name="CraftingWindow" type="Control" node_paths=PackedStringArray("aff_container", "rem_aff_button", "add_aff_button", "inventory_slot", "add_ilvl_button", "add_max_aff_button", "cpu_particles_2d", "button_container", "x_button")]
 layout_mode = 3
 anchor_left = 0.15
 anchor_top = 0.1
@@ -68,6 +68,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1iunn")
+aff_container = NodePath("PanelContainer/VBoxContainer/PanelContainer/PanelContainer/AffContainer")
+rem_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/RemAffButton")
+add_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddAffButton")
+inventory_slot = NodePath("PanelContainer/VBoxContainer/InventorySlot")
+add_ilvl_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddIlvlButton")
+add_max_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddMaxAffButton")
+cpu_particles_2d = NodePath("PanelContainer/VBoxContainer/CPUParticles2D")
+button_container = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer")
+x_button = NodePath("x_button")
 
 [node name="BgRect" type="TextureRect" parent="."]
 self_modulate = Color(0.322908, 0.322635, 0.3624696, 1)
@@ -113,7 +122,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_yxc6d")
 
 [node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer"]
-self_modulate = Color(0.52, 0.52, 0.52, 1)
+self_modulate = Color(0.4, 0.39253333, 0.368, 1)
 layout_mode = 2
 texture = ExtResource("7_0md6y")
 expand_mode = 1

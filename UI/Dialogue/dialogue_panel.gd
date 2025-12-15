@@ -5,9 +5,9 @@ signal check_attempted(check:StatCheck)
 signal start_new_dialogue(dr:DialogueResource)
 signal text_ready
 
-@onready var dialogue_label: Label = %DialogueLabel
-@onready var choice_container: VBoxContainer = %OptionsContainer
-@onready var continue_rect: TextureRect = %ContinueRect
+@export var dialogue_label: Label = null
+@export var choice_container: VBoxContainer = null
+@export var continue_rect: TextureRect = null
 
 const STAT_CHECK_OPTION = preload("res://Tile-RPG/UI/Dialogue/stat_check_option.tscn")
 const TIME_PER_LETTER:float = 0.025
