@@ -19,12 +19,15 @@ func _ready() -> void:
 	GlobalSignals.combat_end.connect(_enable_movement)
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
+	asd()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Highlight"):
 		GlobalSignals.show_outline.emit()
+		GlobalSignals.show_info_bar.emit()
 	elif event.is_action_released("Highlight"):
 		GlobalSignals.hide_outline.emit()
+		GlobalSignals.hide_info_bar.emit()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

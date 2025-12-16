@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=13 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bdpwih35s30mm" path="res://Tile-RPG/UI/CharacterResources/resource_globe.tscn" id="5_kd85i"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="7_gqri5"]
 [ext_resource type="Script" uid="uid://dx5v73ugqm3sk" path="res://Tile-RPG/Effects/effect_handler.gd" id="8_x0jno"]
+[ext_resource type="PackedScene" uid="uid://cvi3liudalayl" path="res://Tile-RPG/UI/Status/info_bar.tscn" id="9_udvo0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
 radius = 0.3
@@ -20,7 +21,7 @@ size = Vector3(0.1, 0.1, 0.3)
 radius = 0.3
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "interact_handler", "hp_globe", "spirit_globe", "visual_mesh")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "interact_handler", "hp_globe", "spirit_globe", "visual_mesh", "heigth_node", "infobar")]
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_1iwi1")
@@ -35,6 +36,8 @@ display_name = "Jack, Faithful"
 picture = ExtResource("2_x0jno")
 stat_resource = ExtResource("2_3oamb")
 visual_mesh = NodePath("MeshInstance3D")
+heigth_node = NodePath("HeightNode")
+infobar = NodePath("CharacterInfoBar")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -91,3 +94,9 @@ metadata/_custom_type_script = "uid://g6rood38j5ok"
 [node name="EffectHandler" type="Node" parent="."]
 script = ExtResource("8_x0jno")
 metadata/_custom_type_script = "uid://dx5v73ugqm3sk"
+
+[node name="HeightNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91209, 0)
+
+[node name="CharacterInfoBar" parent="." instance=ExtResource("9_udvo0")]
+visible = false

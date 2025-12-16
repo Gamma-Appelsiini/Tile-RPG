@@ -16,6 +16,8 @@ signal show_damage_number(amount:int, target_node:Node3D, crit:bool)
 signal show_miss_text(miss_text:String, target_node:Node3D)
 signal show_floating_text(text:String, target_node:Node3D, font_color:Color)
 
+signal show_info_bar
+signal hide_info_bar
 signal show_outline
 signal show_outline_on_target(target:Node3D)
 signal hide_outline

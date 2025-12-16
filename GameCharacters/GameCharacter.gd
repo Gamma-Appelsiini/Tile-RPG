@@ -18,6 +18,7 @@ signal moved_to_tile(tile:Tile)
 @export var stat_resource:StatResource = null
 @export var visual_mesh:MeshInstance3D
 @export var follow_hander:FollowHandler = null
+@export var heigth_node:Node3D = null
 
 var move_tween:Tween = null
 
@@ -25,6 +26,14 @@ var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
 @export var ai_handler:AIHandler = null
 var status_handler:StatusHandler = null
+
+
+@export var infobar:CharacterInfoBar = null
+
+func asd() -> void:
+	if infobar == null: return
+	infobar.set_game_character(self)
+
 
 func _init() -> void:
 	stat_handler = StatHandler.new()
@@ -47,7 +56,8 @@ func _die() -> void:
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)
-
+	asd()
+	
 func load_from_data(save_data:Dictionary) -> void:
 	var characters:Dictionary = save_data["game_characters"]
 	if !characters.has(unique_id):

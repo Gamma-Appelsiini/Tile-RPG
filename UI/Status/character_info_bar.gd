@@ -1,21 +1,53 @@
 extends Control
 class_name CharacterInfoBar
 
-@onready var status_container: HBoxContainer = $StatusContainer
+@export var status_container: HBoxContainer = null
+@export var name_label: Label = null
+@export var level_label: Label = null
+@export var hp_bar: ProgressBar = null
 
 const STATUS_PANEL := preload("uid://ckjtakb74tlm2")
 
 var game_char:GameCharacter = null
 
+func _ready() -> void:
+	GlobalSignals.show_info_bar.connect(show_info)
+	GlobalSignals.hide_info_bar.connect(func(): self.hide())
+
 func set_game_character(new_gc:GameCharacter):
 	game_char = new_gc
 	game_char.status_handler.status_added.connect(_add_status)
+	_update_info()
+	game_char.stat_handler.stats_changed.connect(_update_info)
+	
+func _update_info() -> void:
+	var level:String = "Lvl " + str(game_char.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL))
+	level_label.text = level
+	name_label.text = game_char.display_name
+	
+	hp_bar.value = game_char.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP)
+	hp_bar.max_value = game_char.stat_handler.get_stat_amount(Stats.ResourceStat.MAX_HP)
 
 func _add_status(new_status:Status):
-	new_status.remove_status.connect(_remove_status.bind(new_status))
 	var new_spanel:StatusPanel = STATUS_PANEL.instantiate()
+	new_status.remove_status.connect(_remove_status.bind(new_spanel))
 	status_container.add_child(new_spanel)
 	new_spanel.set_status(new_status)
 	
-func _remove_status(status:Status):
-	status_container.remove_child(status)
+func _remove_status(status_panel:StatusPanel):
+	status_container.remove_child(status_panel)
+	status_panel.queue_free()
+
+func _process(_delta: float) -> void:
+	if self.visible == false:
+		set_process(false)
+		return
+	
+	var current_camera:Camera3D =  get_viewport().get_camera_3d()
+	var screen_position:Vector2 = current_camera.unproject_position(game_char.heigth_node.global_transform.origin)
+	var offset:Vector2 = Vector2(-self.size.x / 2, -self.size.y)
+	self.global_position = screen_position + offset
+
+func show_info() -> void:
+	set_process(true)
+	self.visible = true

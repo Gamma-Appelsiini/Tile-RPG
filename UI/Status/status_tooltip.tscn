@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwhs2cbh0fab4"]
+[gd_scene load_steps=12 format=3 uid="uid://bwhs2cbh0fab4"]
 
 [ext_resource type="Script" uid="uid://ccgpwjwjyumrg" path="res://Tile-RPG/UI/Status/status_tooltip.gd" id="1_cioao"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_0qd58"]
@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="6_xyhvi"]
 [ext_resource type="Texture2D" uid="uid://8d5u8dvdifd1" path="res://Tile-RPG/Images/UI/Clock.png" id="7_0qd58"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_d71hv"]
+[ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="9_junf6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n45sk"]
 texture = ExtResource("2_0qd58")
@@ -23,31 +24,38 @@ content_margin_top = 4.0
 content_margin_right = 8.0
 content_margin_bottom = 4.0
 
-[node name="StatusTooltip" type="Control" node_paths=PackedStringArray("status_name", "status_desc", "duration")]
-layout_mode = 3
+[node name="StatusTooltip" type="VBoxContainer" node_paths=PackedStringArray("status_name", "status_desc", "duration")]
+top_level = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -42.5
+offset_right = 68.0
+offset_bottom = 42.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -10
 script = ExtResource("1_cioao")
 status_name = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatusName")
 status_desc = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatusDesc")
 duration = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/Duration")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_n45sk")
 
 [node name="BgRect" type="TextureRect" parent="PanelContainer"]
 material = ExtResource("3_junf6")
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_xef4e")
 expand_mode = 1
 stretch_mode = 1
@@ -60,6 +68,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_aqnv6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="StatusName" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -79,10 +88,13 @@ vertical_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
+alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-self_modulate = Color(0.85750073, 0.85750073, 0.85750073, 1)
+self_modulate = Color(0, 0.50980395, 0.87058824, 1)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("7_0qd58")
 expand_mode = 3
 stretch_mode = 5
@@ -90,6 +102,7 @@ stretch_mode = 5
 [node name="Duration" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_xyhvi")
+theme_override_colors/font_color = Color(0, 0.5116986, 0.8725359, 1)
 theme_override_font_sizes/font_size = 16
 text = "1"
 horizontal_alignment = 1
@@ -102,3 +115,10 @@ patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("9_junf6")
+expand_mode = 1
+stretch_mode = 5
