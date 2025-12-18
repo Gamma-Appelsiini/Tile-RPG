@@ -5,6 +5,7 @@ class_name MainStatPanel
 @onready var grid_container: GridContainer = %GridContainer
 
 const ADD_BUTTON := preload("uid://dcbb1hnpi8h6l")
+const MAIN_STAT_TOOLTIP := preload("uid://j8qvwulhgpwq")
 
 var STAT_LINE_PATH:String = "res://Tile-RPG/UI/StatWindow/main_stat_line.tscn"
 var stat_label_dict:Dictionary[Stats.MainStat, Label] = {}
@@ -20,6 +21,7 @@ func fill_main_stats() -> void:
 		var new_stat_line:StatLine = load(STAT_LINE_PATH).instantiate()
 		new_stat_line.set_stat(stat,1)
 		grid_container.add_child(new_stat_line)
+		_add_stat_tooltip(new_stat_line)
 		
 		var lab:Label = new_stat_line.number_label
 		new_stat_line.remove_child(lab)
@@ -27,6 +29,16 @@ func fill_main_stats() -> void:
 		stat_label_dict[stat] = lab
 		
 		_new_add_button(stat)
+
+func _add_stat_tooltip(stat_line:StatLine) -> void:
+	var new_tt:MainStatTooltip = MAIN_STAT_TOOLTIP.instantiate()
+	new_tt.stat_name.text = EnumStrings.MAIN_STAT_NAMES[stat_line.line_stat_type]
+	new_tt.stat_desc.text = EnumStrings.MAIN_STAT_SCALING[stat_line.line_stat_type]
+	new_tt.stat_flavor.text = EnumStrings.MAIN_STAT_DESCRIPTIONS[stat_line.line_stat_type]
+	stat_line.stat_pic.add_child(new_tt)
+	
+	stat_line.mouse_entered.connect(new_tt.show_tooltip)
+	stat_line.mouse_exited.connect(new_tt.hide)
 
 func _new_add_button(stat:Stats.MainStat) -> void:
 	var new_button:XButton = ADD_BUTTON.instantiate()

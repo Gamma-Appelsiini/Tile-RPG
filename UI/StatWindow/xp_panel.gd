@@ -34,7 +34,7 @@ func _process_queue() -> void:
 
 	is_animating = true
 	
-	var target:Dictionary[String, int] = queue.pop_front()
+	var target:Dictionary = queue.pop_front()
 	var target_cur:int = target["cur"]
 	var target_max:int = target["max"]
 	

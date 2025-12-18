@@ -18,6 +18,24 @@ const MAIN_STAT_COLORS := {
 	Stats.MainStat.SKILL: "#f18690",
 	Stats.MainStat.VALOR: "#d1b81b",}
 	
+const MAIN_STAT_DESCRIPTIONS := {
+	Stats.MainStat.AGILITY: "To be where they are not",
+	Stats.MainStat.ENDURANCE: "The will to carry the burden",
+	Stats.MainStat.LUCK: "Some more fortunate than others",
+	Stats.MainStat.MIGHT: "Overpowering enemies",
+	Stats.MainStat.MYSTIC: "Knowing what remains unseen",
+	Stats.MainStat.SKILL: "The skilled always beat the one who lacks it",
+	Stats.MainStat.VALOR: "Burn bright so others may see",}
+
+const MAIN_STAT_SCALING := {
+	Stats.MainStat.AGILITY: "+2 Evasion, +2% Tocic Dmg, +1 Initiative",
+	Stats.MainStat.ENDURANCE: "+2 Max Hp, +0.5 Vigor",
+	Stats.MainStat.LUCK: "+3 Global Crit Chance, +2% Lightning Dmg, +1 Greed",
+	Stats.MainStat.MIGHT: "+2 Armor, +2% Physical Dmg, +2 Global Crit Multiplier",
+	Stats.MainStat.MYSTIC: "+1 Ward, +2% Mystical Dmg, +2 Spell Crit Multiplier",
+	Stats.MainStat.SKILL: "+2 Accuracy, +2% Frost Dmg, +0.5 Focus",
+	Stats.MainStat.VALOR: "+1 Max Spirit, +2% Fire Dmg, +0.5 Insight",}
+
 const MAIN_STAT_PICS := {
 	Stats.MainStat.AGILITY: "res://Tile-RPG/Images/Stats/agility.png",
 	Stats.MainStat.ENDURANCE: "res://Tile-RPG/Images/Stats/endurance.png",
