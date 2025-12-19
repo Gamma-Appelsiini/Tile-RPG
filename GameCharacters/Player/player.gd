@@ -19,7 +19,10 @@ func _ready() -> void:
 	GlobalSignals.combat_end.connect(_enable_movement)
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
-	asd()
+	_set_infobar()
+	
+	GlobalSignals.combat_start.connect(func(): set_physics_process(false))
+	GlobalSignals.combat_end.connect(func(): set_physics_process(true))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Highlight"):

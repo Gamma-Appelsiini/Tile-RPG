@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dogy8ymo75s0x"]
+
+[ext_resource type="Script" uid="uid://bv0gp24oc3fm2" path="res://Tile-RPG/UI/Globes/globe_panel.gd" id="1_0ors5"]
+[ext_resource type="Texture2D" uid="uid://bbhhxfw47lhqg" path="res://Tile-RPG/Images/UI/Borders/spirit_borders.png" id="1_dss0s"]
+
+[node name="GlobePanel" type="PanelContainer" node_paths=PackedStringArray("borders", "viewport_rect")]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_0ors5")
+borders = NodePath("Borders")
+viewport_rect = NodePath("ViewportRect")
+
+[node name="ViewportRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+
+[node name="Borders" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("1_dss0s")
+expand_mode = 3
+stretch_mode = 5

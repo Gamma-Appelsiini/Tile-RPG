@@ -99,4 +99,3 @@ metadata/_custom_type_script = "uid://dx5v73ugqm3sk"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91209, 0)
 
 [node name="CharacterInfoBar" parent="." instance=ExtResource("9_udvo0")]
-visible = false

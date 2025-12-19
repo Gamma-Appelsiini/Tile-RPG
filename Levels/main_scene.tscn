@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://dg2l3uhho1dlk" path="res://Tile-RPG/Sounds/audio_manager.gd" id="8_pu26t"]
 [ext_resource type="PackedScene" uid="uid://cp3lhfafyqjva" path="res://Tile-RPG/UI/Abilities/abilities_container.tscn" id="9_a4mdm"]
 [ext_resource type="Script" uid="uid://duq8yqsolme5u" path="res://Tile-RPG/Combat/Abilities/ability_targeter.gd" id="10_8wimm"]
-[ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/Combat/combat_ui.tscn" id="10_60sei"]
+[ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.tscn" id="10_60sei"]
 [ext_resource type="PackedScene" uid="uid://cc2jlwv1hf0dd" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.tscn" id="11_t6tkx"]
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
 [ext_resource type="AudioStream" uid="uid://cbxtrq1o2v6jn" path="res://Tile-RPG/Sounds/Music/CombatStart.wav" id="14_274ut"]

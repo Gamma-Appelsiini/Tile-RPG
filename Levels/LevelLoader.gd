@@ -53,7 +53,7 @@ func _connect_globes() -> void:
 	globe_ui.set_viewport_path(player.hp_globe.get_viewport_path())
 	player.stat_handler.stats_changed.connect(player.hp_globe.resource_changed.bind(player.stat_handler,ResourceGlobe.LiquidType.HP))
 	
-	globe_ui.set_viewport_path(player.spirit_globe.get_viewport_path(), globe_ui.spirit_viewport_texture_rect)
+	globe_ui.set_viewport_path(player.spirit_globe.get_viewport_path(), globe_ui.spirit_panel)
 	player.stat_handler.stats_changed.connect(player.spirit_globe.resource_changed.bind(player.stat_handler,ResourceGlobe.LiquidType.SPIRIT))
 
 func _load_bin_file() -> void:

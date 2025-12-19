@@ -5,17 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_smgsx"]
 [ext_resource type="Script" uid="uid://g4mhn3qshbnk" path="res://Tile-RPG/UI/Abilities/ap_container.gd" id="3_jq4jv"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_qbedm"]
-[ext_resource type="PackedScene" uid="uid://bf7u41el4bmki" path="res://Tile-RPG/UI/Combat/ap_ball.tscn" id="4_8slfc"]
+[ext_resource type="PackedScene" uid="uid://bf7u41el4bmki" path="res://Tile-RPG/UI/CharacterResources/Combat/ap_ball.tscn" id="4_8slfc"]
 [ext_resource type="Texture2D" uid="uid://6b6oqfw0qqw2" path="res://Tile-RPG/Images/UI/Shoe.png" id="5_8slfc"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_b3exp"]
 [ext_resource type="Texture2D" uid="uid://65wfreko2dtk" path="res://Tile-RPG/Images/UI/EndTurn2.png" id="6_entml"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qbedm"]
 texture = ExtResource("2_smgsx")
-texture_margin_left = 13.0
-texture_margin_top = 13.0
-texture_margin_right = 13.0
-texture_margin_bottom = 13.0
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [node name="AbilityBar" type="Control" node_paths=PackedStringArray("ability_slot_container", "panel_container", "ap_container", "color_rect", "button_container", "info_container", "movement_label", "input_area", "end_turn_button")]
 layout_mode = 3
@@ -43,6 +43,8 @@ anchor_left = 0.2
 anchor_top = 0.85
 anchor_right = 0.8
 anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 8.0
 
 [node name="PanelContainer" type="PanelContainer" parent="InputArea"]
 unique_name_in_owner = true

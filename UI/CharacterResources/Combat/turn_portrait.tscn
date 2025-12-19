@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cerdi7wt14odo"]
 
-[ext_resource type="Script" uid="uid://dfgx2m2diydwk" path="res://Tile-RPG/UI/Combat/turn_portrait.gd" id="1_nmebc"]
+[ext_resource type="Script" uid="uid://dfgx2m2diydwk" path="res://Tile-RPG/UI/CharacterResources/Combat/turn_portrait.gd" id="1_nmebc"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_wdc2w"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_mlu6p"]
 [ext_resource type="Shader" uid="uid://ckbqgufh8hftd" path="res://Tile-RPG/Shaders/color_rect_shader.gdshader" id="4_mlu6p"]

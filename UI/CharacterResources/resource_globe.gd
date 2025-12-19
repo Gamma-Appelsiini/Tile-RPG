@@ -5,17 +5,17 @@ enum LiquidType {HP, SPIRIT}
 
 @export var liquid_mesh: MeshInstance3D = null
 @export var sub_viewport: SubViewport = null
-@export var camera_pos: Node3D = null
 @export var camera_3d: Camera3D = null
 
 @export var liquid_type:LiquidType = LiquidType.HP
 
 const MAX_AMOUNT:float = 1.5
 const MIN_AMOUNT:float = -0.5
-const HP_MATERIAL:ShaderMaterial = preload("res://Tile-RPG/UI/CharacterResources/hp_material.tres")
-const SPIRIT_MATERIAL = preload("res://Tile-RPG/UI/CharacterResources/spirit_material.tres")
+const HP_MATERIAL:ShaderMaterial = preload("uid://qwh5idv3iyrm")
+const SPIRIT_MATERIAL = preload("uid://cuukqo8bdq4jh")
 
 var liquid_material:ShaderMaterial = null
+@onready var node_3d: Node3D = $Node3D/Node3D
 
 func _ready() -> void:
 	if liquid_type == LiquidType.HP:
@@ -26,7 +26,7 @@ func _ready() -> void:
 	liquid_mesh.set_surface_override_material(0,liquid_material)
 
 func _process(_delta: float) -> void:
-	camera_3d.global_transform = camera_pos.global_transform
+	camera_3d.global_position = node_3d.global_position
 
 func resource_changed(sh:StatHandler, stat_type:LiquidType) -> void:
 	var current_amount:int = 0

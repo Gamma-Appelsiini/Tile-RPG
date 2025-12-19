@@ -42,6 +42,7 @@ axis_stretch_vertical = 2
 bg_color = Color(0.6674271, 0.927775, 0.70944804, 1)
 
 [node name="CharacterInfoBar" type="PanelContainer" node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar")]
+visible = false
 self_modulate = Color(1, 1, 1, 0.43137255)
 anchors_preset = 8
 anchor_left = 0.5

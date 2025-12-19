@@ -19,21 +19,17 @@ signal moved_to_tile(tile:Tile)
 @export var visual_mesh:MeshInstance3D
 @export var follow_hander:FollowHandler = null
 @export var heigth_node:Node3D = null
+@export var infobar:CharacterInfoBar = null
+@export var ai_handler:AIHandler = null
 
 var move_tween:Tween = null
-
 var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
-@export var ai_handler:AIHandler = null
 var status_handler:StatusHandler = null
 
-
-@export var infobar:CharacterInfoBar = null
-
-func asd() -> void:
-	if infobar == null: return
+func _set_infobar() -> void:
+	if !infobar: return
 	infobar.set_game_character(self)
-
 
 func _init() -> void:
 	stat_handler = StatHandler.new()
@@ -56,7 +52,7 @@ func _die() -> void:
 
 func _ready() -> void:
 	if unique_id == "": print("ID NOT SET: ", self)
-	asd()
+	_set_infobar()
 	
 func load_from_data(save_data:Dictionary) -> void:
 	var characters:Dictionary = save_data["game_characters"]
@@ -80,7 +76,6 @@ func stop_moving() -> void:
 	if move_tween != null: move_tween.stop()
 
 func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void:
-	set_physics_process(false)
 	_rotate(point)
 	
 	var distance:float = self.global_position.distance_to(point)
@@ -94,16 +89,11 @@ func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void
 	
 	await move_tween.finished
 	move_complete.emit()
-	
-	if end: set_physics_process(true)
 
 func rotate_towards_point(point: Vector3) -> void:
-	set_physics_process(false)
-
 	var tween:Tween = _rotate(point)
 	await tween.finished
 	
-	set_physics_process(true)
 	rotation_complete.emit()
 
 func _rotate(point: Vector3) -> Tween:

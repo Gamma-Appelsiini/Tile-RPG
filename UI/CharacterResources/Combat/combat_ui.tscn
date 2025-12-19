@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqq3ue4ejaios"]
 
-[ext_resource type="Script" uid="uid://dj70b8q4x7jd4" path="res://Tile-RPG/UI/Combat/combat_ui.gd" id="1_oalw4"]
+[ext_resource type="Script" uid="uid://dj70b8q4x7jd4" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.gd" id="1_oalw4"]
 [ext_resource type="FontFile" uid="uid://d0yoohyaar2bi" path="res://Tile-RPG/Fonts/GoogleFonts/CinzelDecorative-Bold.ttf" id="3_jsdr5"]
 
 [node name="CombatUI" type="Control" node_paths=PackedStringArray("turn_container", "info_label", "turn_haver_container")]

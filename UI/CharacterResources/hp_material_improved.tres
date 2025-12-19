@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://qwh5idv3iyrm"]
+
+[ext_resource type="Shader" uid="uid://dg3r3qgqwp54s" path="res://Tile-RPG/Shaders/improved_globe_shader.gdshader" id="1_66v63"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xkwcr"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qckxn"]
+noise = SubResource("FastNoiseLite_xkwcr")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hsowg"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lp1f3"]
+noise = SubResource("FastNoiseLite_hsowg")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_66v63")
+shader_parameter/liquid_amount = 1.10000002384186
+shader_parameter/deep_color = Color(0.3, 0, 0, 1)
+shader_parameter/surface_color = Color(1, 0, 0, 1)
+shader_parameter/foam_color = Color(2.329646, 0, 0, 1)
+shader_parameter/churn_speed = 0.8
+shader_parameter/wave_amplitude = 0.01
+shader_parameter/noise_tex_primary = SubResource("NoiseTexture2D_qckxn")
+shader_parameter/noise_tex_warp = SubResource("NoiseTexture2D_lp1f3")
+shader_parameter/warp_strength = 0.1850000087875
+shader_parameter/inner_glow_power = 7.4110003282725
+shader_parameter/meniscus_thickness = 0.07100000337250001
