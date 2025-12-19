@@ -4,7 +4,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xkwcr"]
 noise_type = 2
-frequency = 0.0026
+frequency = 0.019
 offset = Vector3(324.32, 0, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qckxn"]
@@ -13,7 +13,10 @@ seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hsowg"]
 noise_type = 3
-frequency = 0.0336
+frequency = 0.0028
+fractal_type = 2
+fractal_octaves = 8
+fractal_lacunarity = 3.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lp1f3"]
 noise = SubResource("FastNoiseLite_hsowg")
@@ -22,14 +25,14 @@ seamless = true
 [resource]
 render_priority = 0
 shader = ExtResource("1_psriq")
-shader_parameter/liquid_amount = 0.66200003470488
-shader_parameter/deep_color = Color(0.06710001, 0.202825, 0.61, 1)
-shader_parameter/surface_color = Color(0.3006526, 0.5847367, 1, 1)
-shader_parameter/foam_color = Color(0, 1.0488964, 2.3298683, 1)
+shader_parameter/liquid_amount = 1.10000002384186
+shader_parameter/deep_color = Color(0.36043027, 0.7647825, 1.2935506, 1)
+shader_parameter/surface_color = Color(0.008099998, 0.008099998, 0.09, 1)
+shader_parameter/foam_color = Color(2.198, 2.198, 2.198, 1)
 shader_parameter/churn_speed = 0.8
 shader_parameter/wave_amplitude = 0.01
 shader_parameter/noise_tex_primary = SubResource("NoiseTexture2D_qckxn")
 shader_parameter/noise_tex_warp = SubResource("NoiseTexture2D_lp1f3")
-shader_parameter/warp_strength = 0.2370000112575
-shader_parameter/inner_glow_power = 7.554000335065
-shader_parameter/meniscus_thickness = 0.0290000013775
+shader_parameter/warp_strength = 0.41200001957
+shader_parameter/inner_glow_power = 7.31600032376
+shader_parameter/meniscus_thickness = 0.0210000009975

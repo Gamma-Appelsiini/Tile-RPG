@@ -19,7 +19,7 @@ borders = NodePath("Borders")
 viewport_rect = NodePath("ViewportRect")
 
 [node name="ViewportRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(260, 260)
+custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

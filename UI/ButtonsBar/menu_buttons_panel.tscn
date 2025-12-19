@@ -12,10 +12,10 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fpxea"]
 texture = ExtResource("1_072gd")
-texture_margin_left = 13.0
-texture_margin_top = 13.0
-texture_margin_right = 13.0
-texture_margin_bottom = 13.0
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
 
 [node name="MenuButtons" type="Control" node_paths=PackedStringArray("h_box_container")]
 layout_mode = 3
@@ -23,6 +23,7 @@ anchor_left = 0.75
 anchor_top = 0.96
 anchor_right = 0.885
 anchor_bottom = 1.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
