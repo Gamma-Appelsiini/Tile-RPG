@@ -1,0 +1,369 @@
+[gd_scene load_steps=11 format=3 uid="uid://bprnqik8q22ev"]
+
+[ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
+[ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
+[ext_resource type="Material" uid="uid://rjrr5scewucu" path="res://Tile-RPG/Materials/TextureMaterials/tile_floor_01.tres" id="3_yniyx"]
+[ext_resource type="PackedScene" uid="uid://cex17x14cxnlr" path="res://Tile-RPG/Models/MapBasics/blank_wall.tscn" id="4_b3657"]
+[ext_resource type="Material" uid="uid://cf0e48ujisxhk" path="res://Tile-RPG/Materials/TextureMaterials/wall_01.tres" id="5_2ekbm"]
+[ext_resource type="PackedScene" uid="uid://dwluacsgis5a3" path="res://Tile-RPG/Levels/Walls/bars.tscn" id="6_l321t"]
+[ext_resource type="PackedScene" uid="uid://7ll3hcxp8abg" path="res://Tile-RPG/Models/Lights/light_stand.tscn" id="7_axm2k"]
+[ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="8_v6jrh"]
+[ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="9_gomib"]
+
+[sub_resource type="Environment" id="Environment_b4y7l"]
+background_mode = 1
+ambient_light_source = 3
+ambient_light_color = Color(0.798, 0.80429995, 0.84, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.15
+reflected_light_source = 1
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.080800556, 0.09207047, 0.10960706, 1)
+
+[node name="Jail_01" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "tile_manager", "player_spawn_positions")]
+script = ExtResource("1_c5me1")
+unique_id = "jail_01"
+game_characters_node = NodePath("GameCharacters")
+interactables_node = NodePath("Interactables")
+breakables_node = NodePath("Breakables")
+tile_manager = NodePath("TileManager")
+player_spawn_positions = {
+"menu": NodePath("spawn_pos_01"),
+"start": NodePath("spawn_pos_01")
+}
+
+[node name="Floors" type="Node3D" parent="."]
+
+[node name="BlankFloor" parent="Floors" instance=ExtResource("2_urkle")]
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor2" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor3" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor4" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor5" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor6" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor7" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor8" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor33" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor34" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor35" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor36" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor37" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor38" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor39" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor40" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor41" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor42" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor43" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor44" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor45" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor46" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor47" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor48" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor9" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor10" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor11" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor12" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor13" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor14" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor15" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor16" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor17" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor18" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor19" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor20" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor21" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor22" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor23" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor24" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor25" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor26" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor27" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor28" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor29" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor30" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor31" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="BlankFloor32" parent="Floors" instance=ExtResource("2_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
+surface_material_override/0 = ExtResource("3_yniyx")
+
+[node name="Walls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="BlankWall" parent="Walls" instance=ExtResource("4_b3657")]
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall2" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall3" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall4" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall5" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall6" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall7" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall8" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall9" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall10" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall11" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall12" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall13" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall14" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall15" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="BlankWall16" parent="Walls" instance=ExtResource("4_b3657")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 6)
+surface_material_override/0 = ExtResource("5_2ekbm")
+
+[node name="Bars" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Bars2" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
+[node name="Bars3" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Bars4" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+
+[node name="Bars5" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5, 0, 2.5)
+
+[node name="Bars6" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5, 0, 1.5)
+
+[node name="Bars7" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5, 0, 0.5)
+
+[node name="Bars8" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5, 0, 2.5)
+
+[node name="Bars9" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5, 0, 1.5)
+
+[node name="Bars10" parent="Walls" instance=ExtResource("6_l321t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5, 0, 0.5)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b4y7l")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="LightStand" parent="Lights" instance=ExtResource("7_axm2k")]
+
+[node name="LightStand2" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="LightStand3" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="LightStand4" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="LightStand5" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="LightStand6" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+
+[node name="LightStand7" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="LightStand8" parent="Lights" instance=ExtResource("7_axm2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
+
+[node name="GameCharacters" type="Node3D" parent="."]
+
+[node name="Interactables" type="Node3D" parent="."]
+
+[node name="BarDoor" parent="Interactables" instance=ExtResource("8_v6jrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
+
+[node name="Breakables" type="Node" parent="."]
+
+[node name="TileManager" type="Node" parent="."]
+script = ExtResource("9_gomib")
+metadata/_custom_type_script = "uid://chv46rdn2gkni"
+
+[node name="spawn_pos_01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)

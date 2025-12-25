@@ -13,7 +13,7 @@ const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
 
 var save_file:JSON = null
 var save_data:Dictionary = {
-	"last_level_id": "test_level_1",
+	"last_level_id": "jail_01",
 	"levels": {},
 	"inventory": {},
 	"ability_bar": [],
@@ -32,7 +32,7 @@ func _ready() -> void:
 	
 	var last_level_id:String = save_data["last_level_id"]
 	var loading:bool = false
-	if last_level_id != "test_level_1": loading = true
+	if last_level_id != "jail_01": loading = true
 	change_levels(last_level_id,loading)
 	
 	GlobalSignals.connect("change_level",change_levels)

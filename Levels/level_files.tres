@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_3ansq")
 levels = Dictionary[String, String]({
+"jail_01": "res://Tile-RPG/Levels/Jail/jail_01.tscn",
 "test_level_1": "res://Tile-RPG/Levels/test_level.tscn",
 "test_level_2": "res://Tile-RPG/Levels/test_level_2.tscn"
 })

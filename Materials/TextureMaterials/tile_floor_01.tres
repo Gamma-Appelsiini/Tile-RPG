@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://rjrr5scewucu"]
+
+[ext_resource type="Texture2D" uid="uid://dtsbrl7q8a45m" path="res://Tile-RPG/Materials/Textures/ground-tile-512x512.png" id="1_7pyi7"]
+[ext_resource type="Texture2D" uid="uid://bseruax65ojh7" path="res://Tile-RPG/Materials/Textures/ground-tile-normal-512x512.png" id="2_4gptl"]
+
+[resource]
+albedo_texture = ExtResource("1_7pyi7")
+roughness = 0.45
+normal_enabled = true
+normal_texture = ExtResource("2_4gptl")

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ta83u001gwow"]
+
+[ext_resource type="Texture2D" uid="uid://ci427ilkqecbh" path="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal.png" id="1_5gw0j"]
+[ext_resource type="Texture2D" uid="uid://cx5tw82mec5lp" path="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png" id="2_7qr4j"]
+
+[resource]
+resource_name = "Metal3"
+cull_mode = 2
+albedo_texture = ExtResource("1_5gw0j")
+metallic = 0.69310343
+roughness = 0.63448274
+normal_enabled = true
+normal_texture = ExtResource("2_7qr4j")
