@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bprnqik8q22ev"]
+[gd_scene load_steps=12 format=3 uid="uid://bprnqik8q22ev"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
 [ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://cf0e48ujisxhk" path="res://Tile-RPG/Materials/TextureMaterials/wall_01.tres" id="5_2ekbm"]
 [ext_resource type="PackedScene" uid="uid://dwluacsgis5a3" path="res://Tile-RPG/Levels/Walls/bars.tscn" id="6_l321t"]
 [ext_resource type="PackedScene" uid="uid://7ll3hcxp8abg" path="res://Tile-RPG/Models/Lights/light_stand.tscn" id="7_axm2k"]
+[ext_resource type="PackedScene" uid="uid://b4l77pee0j6fm" path="res://Tile-RPG/Models/Lights/lantern.tscn" id="8_urkle"]
 [ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="8_v6jrh"]
 [ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="9_gomib"]
 
@@ -333,9 +334,11 @@ environment = SubResource("Environment_b4y7l")
 
 [node name="LightStand2" parent="Lights" instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+visible = false
 
 [node name="LightStand3" parent="Lights" instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+visible = false
 
 [node name="LightStand4" parent="Lights" instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
@@ -345,12 +348,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
 [node name="LightStand6" parent="Lights" instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+visible = false
 
 [node name="LightStand7" parent="Lights" instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+visible = false
 
 [node name="LightStand8" parent="Lights" instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
+
+[node name="Lantern" parent="Lights" instance=ExtResource("8_urkle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 
 [node name="GameCharacters" type="Node3D" parent="."]
 
