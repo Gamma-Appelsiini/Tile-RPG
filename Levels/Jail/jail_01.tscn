@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bprnqik8q22ev"]
+[gd_scene load_steps=16 format=3 uid="uid://bprnqik8q22ev"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
 [ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://b4l77pee0j6fm" path="res://Tile-RPG/Models/Lights/lantern.tscn" id="8_urkle"]
 [ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="8_v6jrh"]
 [ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="9_gomib"]
+[ext_resource type="PackedScene" uid="uid://b8ex6fjd5v7sh" path="res://Tile-RPG/Interactables/TouchInteractables/hay_pile.tscn" id="11_yniyx"]
+[ext_resource type="PackedScene" uid="uid://bscicchmh3q7c" path="res://Tile-RPG/Models/static_props/wooden_table.tscn" id="12_b3657"]
+[ext_resource type="PackedScene" uid="uid://cxkj2ce2h6v51" path="res://Tile-RPG/Models/static_props/wooden_stool.tscn" id="13_2ekbm"]
+[ext_resource type="PackedScene" uid="uid://dd45u14lackui" path="res://Tile-RPG/Models/static_props/jail_bench.tscn" id="14_l321t"]
 
 [sub_resource type="Environment" id="Environment_b4y7l"]
 background_mode = 1
@@ -358,7 +362,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
 
 [node name="Lantern" parent="Lights" instance=ExtResource("8_urkle")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.7951717, 0)
 
 [node name="GameCharacters" type="Node3D" parent="."]
 
@@ -375,3 +379,19 @@ metadata/_custom_type_script = "uid://chv46rdn2gkni"
 
 [node name="spawn_pos_01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="TouchInteractables" type="Node" parent="."]
+
+[node name="HayPile" parent="TouchInteractables" instance=ExtResource("11_yniyx")]
+transform = Transform3D(0.8, 0, 0, 0, 0.32, 0, 0, 0, 0.8, 4, 0, 3.6784508)
+
+[node name="StaticProps" type="Node" parent="."]
+
+[node name="WoodenTable" parent="StaticProps" instance=ExtResource("12_b3657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="WoodenStool" parent="StaticProps" instance=ExtResource("13_2ekbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.647128, 0, 0.54681444)
+
+[node name="JailBench" parent="StaticProps" instance=ExtResource("14_l321t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
