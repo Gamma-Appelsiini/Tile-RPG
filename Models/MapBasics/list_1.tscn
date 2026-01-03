@@ -1,6 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://dq1mcp3b1l5un"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5jc0"]
+[gd_scene load_steps=3 format=4 uid="uid://dq1mcp3b1l5un"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dkjkb"]
 _surfaces = [{
@@ -15,7 +13,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_hmmun"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_nmfid"]
 resource_name = "basic_untextured_blocks_Plane_011"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, 0, 1, 0.5, 0.03),
@@ -23,7 +21,6 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
-"material": SubResource("StandardMaterial3D_y5jc0"),
 "primitive": 3,
 "uv_scale": Vector4(2, 2.0049105, 0, 0),
 "vertex_count": 16,
@@ -33,5 +30,5 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dkjkb")
 
 [node name="List1" type="MeshInstance3D"]
-mesh = SubResource("ArrayMesh_hmmun")
+mesh = SubResource("ArrayMesh_nmfid")
 skeleton = NodePath("")

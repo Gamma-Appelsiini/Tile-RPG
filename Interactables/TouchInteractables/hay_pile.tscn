@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=4 uid="uid://b8ex6fjd5v7sh"]
+[gd_scene load_steps=16 format=4 uid="uid://b8ex6fjd5v7sh"]
 
 [ext_resource type="Material" uid="uid://bo5cawrafhoxd" path="res://Tile-RPG/Materials/TextureMaterials/hay.tres" id="1_e08ay"]
+[ext_resource type="AudioStream" uid="uid://1p6o8gxrjpj7" path="res://Tile-RPG/Sounds/squish.wav" id="2_lagsi"]
 [ext_resource type="Script" uid="uid://dqyc0yljhy4pl" path="res://Tile-RPG/Interactables/TouchInteractables/hay_pile.gd" id="2_yplb5"]
 [ext_resource type="Texture2D" uid="uid://f0n5ii1gaywa" path="res://Tile-RPG/Materials/Textures/hay.png" id="3_j6u3t"]
-[ext_resource type="AudioStream" uid="uid://dnrpbc065obkb" path="res://Tile-RPG/Sounds/Effects/deep_smosh.wav" id="3_lagsi"]
 [ext_resource type="Texture2D" uid="uid://thvh1iv6at8d" path="res://Tile-RPG/Materials/Textures/hay_normal.png" id="4_lagsi"]
 [ext_resource type="Texture2D" uid="uid://wa7hruopk60" path="res://Tile-RPG/Materials/Textures/hay_roughness.png" id="5_xp1tj"]
+[ext_resource type="Texture2D" uid="uid://chr3glcjd8i5s" path="res://Tile-RPG/Images/Shaders/Line.png" id="7_xp1tj"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wi1nn"]
 _surfaces = [{
@@ -58,16 +59,34 @@ material = SubResource("StandardMaterial3D_sihqu")
 size = Vector2(0.04, 0.08)
 orientation = 0
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54wb1"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.5289129, 1.208377, 0.61309594, 0.7019608)
+albedo_texture = ExtResource("7_xp1tj")
+billboard_mode = 2
+billboard_keep_scale = true
+proximity_fade_enabled = true
+proximity_fade_distance = 0.05
 
-[node name="HayPile" type="MeshInstance3D" parent="." node_paths=PackedStringArray("cpu_particles_3d", "area_3d")]
+[sub_resource type="QuadMesh" id="QuadMesh_sihqu"]
+material = SubResource("StandardMaterial3D_54wb1")
+size = Vector2(0.25, 1)
+
+[sub_resource type="Curve" id="Curve_gaqyx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.124000005, 1), 0.0, 0.0, 0, 0, Vector2(0.53800005, 1), 0.0, 0.0, 0, 0, Vector2(0.73600006, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="HayPile" type="Node3D" node_paths=PackedStringArray("cpu_particles_3d", "area_3d")]
+script = ExtResource("2_yplb5")
+hay_rustle_sound = ExtResource("2_lagsi")
+cpu_particles_3d = NodePath("Beams")
+area_3d = NodePath("Area3D")
+
+[node name="HayMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.32, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ecera")
 skeleton = NodePath("")
-script = ExtResource("2_yplb5")
-hay_rustle_sound = ExtResource("3_lagsi")
-cpu_particles_3d = NodePath("../CPUParticles3D")
-area_3d = NodePath("../Area3D")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
@@ -96,3 +115,23 @@ initial_velocity_max = 4.0
 angular_velocity_max = 264.28
 scale_amount_min = 0.6
 scale_amount_max = 2.0
+
+[node name="Beams" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+emitting = false
+amount = 30
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.64
+mesh = SubResource("QuadMesh_sihqu")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.1
+emission_ring_radius = 0.45
+emission_ring_inner_radius = 0.35
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 12, 0)
+angle_max = 345.6
+scale_amount_curve = SubResource("Curve_gaqyx")

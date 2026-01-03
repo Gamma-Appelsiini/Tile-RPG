@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dsl7g38iddh5n"]
+
+[ext_resource type="Texture2D" uid="uid://drrj4bdu03kb" path="res://Tile-RPG/Materials/Textures/gray-smooth-marble-512x512.png" id="1_cjgw8"]
+[ext_resource type="Texture2D" uid="uid://cv6t01glrm7lo" path="res://Tile-RPG/Materials/Textures/gray-smooth-marble-normal-512x512.png" id="2_b13m2"]
+
+[resource]
+albedo_texture = ExtResource("1_cjgw8")
+roughness_texture = ExtResource("1_cjgw8")
+normal_enabled = true
+normal_scale = -0.56
+normal_texture = ExtResource("2_b13m2")
