@@ -9,6 +9,26 @@ class_name InteractHandler
 
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
+var disabled:bool = false
+
+func _ready() -> void:
+	set_process(false)
+	GlobalSignals.combat_start.connect(_disable_interacting)
+	GlobalSignals.combat_end.connect(_enable_interacting)
+
+func _disable_interacting() -> void:
+	disabled = true
+	set_process(false)
+	set_process_input(false)
+	indicator.hide_indicator()
+	
+func _enable_interacting() -> void:
+	disabled = false
+	set_process_input(true)
+	
+	if interactables.is_empty(): return
+	set_process(true)
+	_show_right_interactee()
 
 func _process(_delta: float) -> void:
 	_show_right_interactee()
@@ -45,6 +65,7 @@ func add_interactable(inter:Interactable) -> void:
 	inter.player = self.player
 	_show_right_interactee()
 	
+	if disabled: return
 	if len(interactables) > 1: set_process(true)
 	else: set_process(false)
 	
@@ -52,11 +73,14 @@ func remove_interactable(inter:Interactable) -> void:
 	if interactables.has(inter):
 		interactables.erase(inter)
 		_show_right_interactee()
-		
+	
+	if disabled: return
 	if len(interactables) > 1: set_process(true)
 	else: set_process(false)
 	
 func _show_right_interactee() -> void:
+	if disabled: return
+	
 	if interactables.is_empty():
 		if current_interactee == null: return
 		current_interactee.hide_indicator()

@@ -1,7 +1,9 @@
-extends Node
+extends Node3D
 class_name TileManager
 
 signal character_moved
+
+@export var door_node:Node = null
 
 const PATH_VISUAL_SCENE:PackedScene = preload("uid://b0o02dka0wxp2")
 const OFFSETS:Array[Vector3] = [Vector3(0,0,-1),Vector3(0,0,1),Vector3(-1,0,0),Vector3(1,0,0)]
@@ -10,6 +12,7 @@ const GROUND_INDICATOR_SCENE:PackedScene = preload("uid://od3hhc5xdir8")
 var tiles:Dictionary[Vector3,Tile] = {}
 var char_tiles:Dictionary[GameCharacter,Tile] = {}
 var path_visuals:Array[PathVisual] = []
+var doors:Array[Door] = []
 
 var player:Player = null
 var player_camera:Camera3D = null
@@ -20,9 +23,13 @@ var targeting_ability:bool = false
 
 var ground_indicator:GroundIndicator = null
 
+func _add_doors() -> void:
+	for new_door:Door in door_node.get_children():
+		doors.push_back(new_door)
+		new_door.add_blocked_tiles(self)
+
+
 func _ready() -> void:
-	#GlobalSignals.combat_start.connect(_on_combat_start)
-	
 	_create_new_path_visuals(8)
 	_create_indicator()
 	
@@ -33,15 +40,8 @@ func _ready() -> void:
 	for tile:Tile in tiles.values():
 		_add_neighbors(tile)
 		_add_diagonals(tile)
-
-func _on_combat_start() -> void:
-	var current_level:Level = GlobalSignals.current_level
-	#set_on_closest_tile(player,false)
-	
-	#TODO change to only put combat chars
-	for gchar:GameCharacter in current_level.game_chars:
-		#set_on_closest_tile(gchar,false)
-		pass
+		
+	_add_doors()
 
 func get_tiles_in_aoe(start_tile:Tile, aoe:int) -> Array[Tile]:
 	var tiles_in_aoe:Array[Tile] = []
@@ -119,7 +119,20 @@ func _move_character_to_tile(game_character:GameCharacter,end_tile:Tile, end_til
 func _add_neighbors(tile:Tile) -> void:
 	for offset:Vector3 in OFFSETS:
 		var neighbor:Tile = tiles.get(tile.global_position + offset)
-		if neighbor != null: tile.neighbor_tiles.push_back(neighbor)
+		if neighbor != null:
+			if !_check_if_wall_between_tiles(tile, neighbor):
+				tile.neighbor_tiles.push_back(neighbor)
+		
+func _check_if_wall_between_tiles(tile_from:Tile, tile_to:Tile) -> bool:
+	const vertical_offset:Vector3 = Vector3(0,1,0)
+	var space_state:PhysicsDirectSpaceState3D  = get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(tile_from.global_position + vertical_offset, tile_to.global_position + vertical_offset)
+	
+	# Only collide with layer 2, walls
+	query.collision_mask = 1 << 1
+	
+	var result := space_state.intersect_ray(query)
+	return !result.is_empty()
 
 func _add_diagonals(tile:Tile) -> void:
 	var topl:Tile = tiles.get(tile.global_position + (OFFSETS[1] + OFFSETS[2]))

@@ -97,11 +97,12 @@ size = Vector3(1, 2, 0.085)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xyffr"]
 size = Vector3(1, 1.87256, 1.99121)
 
-[node name="BarDoor" type="Node3D" node_paths=PackedStringArray("side_1", "side_2", "pivot", "interact_area", "indicator_place")]
+[node name="BarDoor" type="Node3D" node_paths=PackedStringArray("side_1", "side_2", "pivot", "collision_shape_3d", "interact_area", "indicator_place")]
 script = ExtResource("1_xyffr")
 side_1 = NodePath("Hinge/Side2")
 side_2 = NodePath("Hinge/Side1")
 pivot = NodePath("Hinge")
+collision_shape_3d = NodePath("Hinge/Door2/StaticBody3D/CollisionShape3D")
 interact_area = NodePath("Hinge/Area3D")
 indicator_place = NodePath("Hinge/Side1")
 interact_text = "Open"
@@ -115,7 +116,7 @@ mesh = SubResource("ArrayMesh_fy17u")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hinge/Door2"]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Door2/StaticBody3D"]

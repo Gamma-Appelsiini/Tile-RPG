@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bprnqik8q22ev"]
+[gd_scene load_steps=30 format=4 uid="uid://bprnqik8q22ev"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
 [ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
@@ -18,7 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://cxkj2ce2h6v51" path="res://Tile-RPG/Models/static_props/wooden_stool.tscn" id="13_2ekbm"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="13_egjwj"]
 [ext_resource type="PackedScene" uid="uid://dd45u14lackui" path="res://Tile-RPG/Models/static_props/jail_bench.tscn" id="14_l321t"]
+[ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="15_fkoil"]
 [ext_resource type="PackedScene" uid="uid://d1rgm1jeak2qy" path="res://Tile-RPG/Models/static_props/wall_chains.tscn" id="19_465oc"]
+[ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="20_0liqt"]
+[ext_resource type="PackedScene" uid="uid://ba5woaetqefuy" path="res://Tile-RPG/GameCharacters/Jail1/test_npc.tscn" id="21_cx1m6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbpx"]
 
@@ -560,9 +563,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.7951717, 0)
 
 [node name="Interactables" type="Node3D" parent="."]
 
-[node name="BarDoor" parent="Interactables" instance=ExtResource("8_v6jrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
-
 [node name="Chest" parent="Interactables" instance=ExtResource("13_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 4)
 items_to_generate = Dictionary[int, int]({
@@ -577,9 +577,201 @@ face_interactable = true
 
 [node name="Breakables" type="Node" parent="."]
 
-[node name="TileManager" type="Node" parent="."]
+[node name="TileManager" type="Node3D" parent="." node_paths=PackedStringArray("door_node")]
 script = ExtResource("9_gomib")
+door_node = NodePath("../Doors")
 metadata/_custom_type_script = "uid://chv46rdn2gkni"
+
+[node name="@Node@90707" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+
+[node name="@Node@90708" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(0, 0, 1)
+
+[node name="@Node@90709" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(0, 0, 2)
+
+[node name="@Node@90710" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(0, 0, 3)
+
+[node name="@Node@90711" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(0, 0, 4)
+
+[node name="@Node@90712" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(0, 0, 5)
+
+[node name="@Node@90713" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(1, 0, 0)
+
+[node name="@Node@90714" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(1, 0, 1)
+
+[node name="@Node@90715" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(1, 0, 2)
+
+[node name="@Node@90716" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(1, 0, 3)
+
+[node name="@Node@90717" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(1, 0, 4)
+
+[node name="@Node@90718" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(1, 0, 5)
+
+[node name="@Node@90719" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(2, 0, 0)
+
+[node name="@Node@90720" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(2, 0, 1)
+
+[node name="@Node@90721" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(2, 0, 2)
+
+[node name="@Node@90722" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(2, 0, 3)
+
+[node name="@Node@90723" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(2, 0, 4)
+
+[node name="@Node@90724" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(2, 0, 5)
+
+[node name="@Node@90725" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(3, 0, 0)
+
+[node name="@Node@90726" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(3, 0, 1)
+
+[node name="@Node@90727" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(3, 0, 2)
+
+[node name="@Node@90728" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(3, 0, 3)
+
+[node name="@Node@90729" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(3, 0, 4)
+
+[node name="@Node@90730" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(3, 0, 5)
+
+[node name="@Node@90731" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(4, 0, 0)
+
+[node name="@Node@90732" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(4, 0, 1)
+
+[node name="@Node@90733" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(4, 0, 2)
+
+[node name="@Node@90734" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(4, 0, 3)
+
+[node name="@Node@90735" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(4, 0, 4)
+
+[node name="@Node@90736" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(4, 0, 5)
+
+[node name="@Node@90737" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(5, 0, 0)
+
+[node name="@Node@90738" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(5, 0, 1)
+
+[node name="@Node@90739" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(5, 0, 2)
+
+[node name="@Node@90740" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(5, 0, 3)
+
+[node name="@Node@90741" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(5, 0, 4)
+
+[node name="@Node@90742" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(5, 0, 5)
+
+[node name="@Node@90743" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(6, 0, 0)
+
+[node name="@Node@90744" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(6, 0, 1)
+
+[node name="@Node@90745" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(6, 0, 2)
+
+[node name="@Node@90746" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(6, 0, 3)
+
+[node name="@Node@90747" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(6, 0, 4)
+
+[node name="@Node@90748" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(6, 0, 5)
+
+[node name="@Node@90749" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(7, 0, 0)
+
+[node name="@Node@90750" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(7, 0, 1)
+
+[node name="@Node@90751" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(7, 0, 2)
+
+[node name="@Node@90752" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(7, 0, 3)
+
+[node name="@Node@90753" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(7, 0, 4)
+
+[node name="@Node@90754" type="Node" parent="TileManager"]
+script = ExtResource("15_fkoil")
+global_position = Vector3(7, 0, 5)
 
 [node name="spawn_pos_01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
@@ -605,6 +797,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
 
 [node name="Chains" parent="StaticProps" instance=ExtResource("19_465oc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.5)
+
+[node name="TileCreator" type="Node" parent="." node_paths=PackedStringArray("start_node", "end_node")]
+script = ExtResource("20_0liqt")
+start_node = NodePath("../Start")
+end_node = NodePath("../End")
+metadata/_custom_type_script = "uid://bp36ikilmc15g"
+
+[node name="GameCharacters2" type="Node" parent="."]
+
+[node name="TestNPC" parent="GameCharacters2" instance=ExtResource("21_cx1m6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+
+[node name="Start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049570918, 0)
+
+[node name="End" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.049570918, 5)
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="BarDoor" parent="Doors" instance=ExtResource("8_v6jrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
 
 [editable path="Walls/Corners/BlankCorner"]
 [editable path="Walls/Corners/BlankCorner2"]
