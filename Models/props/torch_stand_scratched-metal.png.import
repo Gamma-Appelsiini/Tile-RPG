@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccgu6nxv4ohgr"
-path.s3tc="res://.godot/imported/torch_stand_scratched-metal-normal.png-5f6c9b2a35340a8473645c4566f0895d.s3tc.ctex"
+uid="uid://crd2qoypqh4co"
+path.s3tc="res://.godot/imported/torch_stand_scratched-metal.png-5b62425e226ecee2a8455ea689b8950c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "6ebb558fec1b0d7fd8d5016744bc4616"
+}
 
 [deps]
 
-source_file="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png"
-dest_files=["res://.godot/imported/torch_stand_scratched-metal-normal.png-5f6c9b2a35340a8473645c4566f0895d.s3tc.ctex"]
+source_file="res://Tile-RPG/Models/props/torch_stand_scratched-metal.png"
+dest_files=["res://.godot/imported/torch_stand_scratched-metal.png-5b62425e226ecee2a8455ea689b8950c.s3tc.ctex"]
 
 [params]
 
@@ -22,12 +25,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

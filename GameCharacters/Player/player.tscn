@@ -1,27 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene load_steps=11 format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
 [ext_resource type="Script" uid="uid://cur80jd0cr7os" path="res://Tile-RPG/Camera/player_camera.gd" id="2_42kgy"]
 [ext_resource type="Texture2D" uid="uid://b4s31t8h2tpo1" path="res://Tile-RPG/Images/Portraits/faithful.png" id="2_x0jno"]
 [ext_resource type="PackedScene" uid="uid://b2xa3gaq15cp6" path="res://Tile-RPG/Interactables/interact_handler.tscn" id="3_51u2s"]
+[ext_resource type="PackedScene" uid="uid://ccbe2k3nafrns" path="res://Tile-RPG/Models/CharacterModels/jack.tscn" id="4_udvo0"]
 [ext_resource type="PackedScene" uid="uid://bdpwih35s30mm" path="res://Tile-RPG/UI/CharacterResources/resource_globe.tscn" id="5_kd85i"]
-[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="7_gqri5"]
 [ext_resource type="Script" uid="uid://dx5v73ugqm3sk" path="res://Tile-RPG/Effects/effect_handler.gd" id="8_x0jno"]
 [ext_resource type="PackedScene" uid="uid://cvi3liudalayl" path="res://Tile-RPG/UI/Status/info_bar.tscn" id="9_udvo0"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_51u2s"]
-radius = 0.3
-height = 1.8
-
-[sub_resource type="BoxMesh" id="BoxMesh_42kgy"]
-size = Vector3(0.1, 0.1, 0.3)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42kgy"]
 radius = 0.3
-height = 1.8
+height = 1.7412109
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "interact_handler", "hp_globe", "spirit_globe", "visual_mesh", "heigth_node", "infobar")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "interact_handler", "hp_globe", "spirit_globe", "heigth_node", "infobar", "char_model_handler")]
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_1iwi1")
@@ -35,21 +28,14 @@ unique_id = "player"
 display_name = "Jack, Faithful"
 picture = ExtResource("2_x0jno")
 stat_resource = ExtResource("2_3oamb")
-visual_mesh = NodePath("MeshInstance3D")
 heigth_node = NodePath("HeightNode")
 infobar = NodePath("CharacterInfoBar")
+char_model_handler = NodePath("CharacterModel")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("CapsuleMesh_51u2s")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885344, 0.165966)
-mesh = SubResource("BoxMesh_42kgy")
-skeleton = NodePath("../..")
+[node name="CharacterModel" parent="." instance=ExtResource("4_udvo0")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8702148, 0)
 shape = SubResource("CapsuleShape3D_42kgy")
 
 [node name="CameraPivot" type="Node3D" parent="."]
@@ -84,12 +70,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 [node name="SpiritGlobe" parent="GlobesNode" instance=ExtResource("5_kd85i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
 liquid_type = 1
-
-[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
-script = ExtResource("7_gqri5")
-mesh_to_outline = NodePath("../MeshInstance3D")
-outline_type = 1
-metadata/_custom_type_script = "uid://g6rood38j5ok"
 
 [node name="EffectHandler" type="Node" parent="."]
 script = ExtResource("8_x0jno")

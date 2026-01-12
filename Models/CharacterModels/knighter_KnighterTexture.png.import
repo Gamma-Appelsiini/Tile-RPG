@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccgu6nxv4ohgr"
-path.s3tc="res://.godot/imported/torch_stand_scratched-metal-normal.png-5f6c9b2a35340a8473645c4566f0895d.s3tc.ctex"
+uid="uid://b4drf87a3n066"
+path.s3tc="res://.godot/imported/knighter_KnighterTexture.png-d55be00b38cf09d69ab964db63a48889.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "418c0a0ce0320fe599a77388947301da"
+}
 
 [deps]
 
-source_file="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png"
-dest_files=["res://.godot/imported/torch_stand_scratched-metal-normal.png-5f6c9b2a35340a8473645c4566f0895d.s3tc.ctex"]
+source_file="res://Tile-RPG/Models/CharacterModels/knighter_KnighterTexture.png"
+dest_files=["res://.godot/imported/knighter_KnighterTexture.png-d55be00b38cf09d69ab964db63a48889.s3tc.ctex"]
 
 [params]
 
@@ -22,12 +25,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccgu6nxv4ohgr"
-path.s3tc="res://.godot/imported/torch_stand_scratched-metal-normal.png-5f6c9b2a35340a8473645c4566f0895d.s3tc.ctex"
+uid="uid://bbi3ernde8khi"
+path.s3tc="res://.godot/imported/torch_stand_scratched-metal-normal.png-742718c30edfe1ef329b32d36fd782d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "e71c044096758a99cdbd09fd5eef998b"
+}
 
 [deps]
 
-source_file="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png"
-dest_files=["res://.godot/imported/torch_stand_scratched-metal-normal.png-5f6c9b2a35340a8473645c4566f0895d.s3tc.ctex"]
+source_file="res://Tile-RPG/Models/props/torch_stand_scratched-metal-normal.png"
+dest_files=["res://.godot/imported/torch_stand_scratched-metal-normal.png-742718c30edfe1ef329b32d36fd782d9.s3tc.ctex"]
 
 [params]
 
@@ -27,7 +30,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://Tile-RPG/Materials/Textures/torch_stand_scratched-metal-normal.png"
+roughness/src_normal="res://Tile-RPG/Models/props/torch_stand_scratched-metal-normal.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

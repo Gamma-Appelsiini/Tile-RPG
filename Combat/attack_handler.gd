@@ -30,6 +30,7 @@ static func use_attack_on_char(new_receiver:GameCharacter, new_attack:Attack) ->
 	_handle_thorns()
 
 static func _animate_take_damage_effect(target:GameCharacter) -> void:
+	#TODO fix
 	if target.visual_mesh.material_overlay != null: return
 	const EFFECT_TIME:float = 0.2
 	

@@ -33,6 +33,12 @@ func _input(event: InputEvent) -> void:
 		GlobalSignals.hide_info_bar.emit()
 
 func _physics_process(delta: float) -> void:
+	if velocity != Vector3.ZERO and character_state != CharacterState.RUNNING:
+		change_state(CharacterState.RUNNING)
+	elif velocity == Vector3.ZERO and character_state == CharacterState.RUNNING:
+		change_state(CharacterState.OUT_OF_COMBAT)
+		
+	
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 		
@@ -67,13 +73,13 @@ func _turn_player(move_direction:Vector3) -> void:
 		_last_move_dir = move_direction
 		
 	var target_angle: float = Vector3.BACK.signed_angle_to(_last_move_dir, Vector3.UP)
-	visual_mesh.global_rotation.y = target_angle
+	char_model_handler.global_rotation.y = target_angle
 
 #Overrided
 func _rotate(point: Vector3) -> Tween:
 	var dir: Vector3 = (point - global_position).normalized()
 	var target_yaw: float = atan2(dir.x, dir.z)
-	var current_yaw: float = visual_mesh.rotation.y
+	var current_yaw: float = char_model_handler.rotation.y
 
 	var delta: float = wrapf(target_yaw - current_yaw, -PI, PI)
 	var final_yaw: float = current_yaw + delta
@@ -83,7 +89,7 @@ func _rotate(point: Vector3) -> Tween:
 	var rotation_time: float = clampf(FULL_ROTATION_TIME * (angle_diff / PI), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
-	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(char_model_handler, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	_last_move_dir = dir
 	
 	return tween

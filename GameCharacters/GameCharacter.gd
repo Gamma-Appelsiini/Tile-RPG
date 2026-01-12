@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name GameCharacter
 
+enum CharacterState {OUT_OF_COMBAT, IN_COMBAT, FROZEN, STUNNED, DEAD, RUNNING}
+
 signal move_complete
 signal rotation_complete
 signal died(char:GameCharacter)
@@ -16,16 +18,39 @@ signal moved_to_tile(tile:Tile)
 @export var display_name:String = "Default Name"
 @export var picture:Texture2D = null
 @export var stat_resource:StatResource = null
-@export var visual_mesh:MeshInstance3D
 @export var follow_hander:FollowHandler = null
 @export var heigth_node:Node3D = null
 @export var infobar:CharacterInfoBar = null
 @export var ai_handler:AIHandler = null
+@export var char_model_handler:CharacterModelHandler = null
 
 var move_tween:Tween = null
 var stat_handler:StatHandler = null
 var equipment_handler:EquipmentHandler = null
 var status_handler:StatusHandler = null
+var character_state:CharacterState = CharacterState.OUT_OF_COMBAT
+
+func change_state(new_state:CharacterState) -> void:
+	var prev_state:CharacterState = character_state
+	self.character_state = new_state
+	
+	if char_model_handler == null: return
+	
+	if new_state == CharacterState.OUT_OF_COMBAT: _enter_combat_state(prev_state)
+	elif new_state == CharacterState.IN_COMBAT: _enter_combat_state(prev_state)
+	elif new_state == CharacterState.RUNNING: char_model_handler.play_animation(CharacterModelHandler.CharAnimation.RUN, false)
+
+func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
+	if prev_state == CharacterState.IN_COMBAT:
+		char_model_handler.play_backwards(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
+	else:
+		char_model_handler._play_idle_animation()
+	
+func _enter_combat_state(prev_state:CharacterState) -> void:
+	if prev_state == CharacterState.OUT_OF_COMBAT:
+		char_model_handler.play(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
+	else:
+		char_model_handler._play_idle_animation()
 
 func _set_infobar() -> void:
 	if !infobar: return
@@ -99,7 +124,7 @@ func rotate_towards_point(point: Vector3) -> void:
 func _rotate(point: Vector3) -> Tween:
 	var dir: Vector3 = (point - global_position).normalized()
 	var target_yaw: float = atan2(dir.x, dir.z)
-	var current_yaw: float = visual_mesh.rotation.y
+	var current_yaw: float = self.rotation.y
 	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
 	var final_yaw: float = lerp_angle(current_yaw, target_yaw, 1.0)
 
@@ -108,5 +133,5 @@ func _rotate(point: Vector3) -> Tween:
 	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
-	tween.tween_property(visual_mesh, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween
