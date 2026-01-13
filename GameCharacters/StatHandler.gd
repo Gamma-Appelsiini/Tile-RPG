@@ -170,6 +170,8 @@ func _update_resource_stat(type:int, amount:int) -> void:
 	resources_changed.emit(self)
 
 func update_stat(type:int, amount:int) -> void:
+	#TODO remove
+	if type == Stats.MainStat.ENDURANCE: return
 	
 	if type in Stats.MainStat.values():
 		self.update_main_stat(type,amount)

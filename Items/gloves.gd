@@ -49,7 +49,7 @@ func _initiative_suffix() -> void:
 func _life_on_hit_prefix() -> void:
 	var new_prefix:Affix = Affix.new()
 	
-	var amount:int = randi_range(1, int((item_level+1) / 2))
+	var amount:int = randi_range(1, int((item_level+1) / 2.0))
 	new_prefix.type_increase = Stats.SecondaryStat.LIFE_ON_HIT
 	new_prefix.increase_amount = amount
 	new_prefix.affix_name = "Leeching"

@@ -23,6 +23,9 @@ func _ready() -> void:
 	
 	GlobalSignals.combat_start.connect(func(): set_physics_process(false))
 	GlobalSignals.combat_end.connect(func(): set_physics_process(true))
+	
+	GlobalSignals.combat_start.connect(change_state.bind(CharacterState.IN_COMBAT))
+	GlobalSignals.combat_end.connect(change_state.bind(CharacterState.OUT_OF_COMBAT))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Highlight"):

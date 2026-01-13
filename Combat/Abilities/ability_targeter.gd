@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 	_get_ability_target()
 
 func set_ability_to_target(new_ability:Ability) -> void:
-	print("set abi to target")
+	print_debug("set abi to target")
 	if new_ability == null: return
 	
 	GlobalSignals.current_level.tile_manager.targeting_ability = true
@@ -43,7 +43,7 @@ func set_ability_to_target(new_ability:Ability) -> void:
 	set_process_input(true)
 
 func cancel_ability_targeting() -> void:
-	print("cancel abi targeting")
+	print_debug("cancel abi targeting")
 	set_process_input(false)
 	set_process(false)
 	_hide_aoe()

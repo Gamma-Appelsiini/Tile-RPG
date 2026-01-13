@@ -79,14 +79,14 @@ func _slot_pressed() -> void:
 	if color_rect.visible: return
 	
 	if hovered_slot == null:
-		print("hovered_slot == null")
+		print_debug("hovered_slot == null")
 		return
 	selected_ability = hovered_slot.ability_in_slot
 	if selected_ability == null:
-		print("selected_ability == null")
+		print_debug("selected_ability == null")
 		return
 	if !selected_ability._is_enough_resources():
-		print("selected_ability not enought resources")
+		print_debug("selected_ability not enought resources")
 		return
 	
 	print("clicked; ", selected_ability.ability_name)

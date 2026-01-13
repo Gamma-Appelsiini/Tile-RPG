@@ -1,21 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba5woaetqefuy"]
+[gd_scene load_steps=12 format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="2_ilq20"]
+[ext_resource type="PackedScene" uid="uid://ccbe2k3nafrns" path="res://Tile-RPG/Models/CharacterModels/jack.tscn" id="3_sej7w"]
 [ext_resource type="Script" uid="uid://cfaw7c8b3dbes" path="res://Tile-RPG/Handlers/XpDropper/xp_dropper.gd" id="4_ms4ik"]
-[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="5_pf120"]
 [ext_resource type="Script" uid="uid://dq5x88665dpbq" path="res://Tile-RPG/GameCharacters/follow_handler.gd" id="5_yvq5j"]
 [ext_resource type="PackedScene" uid="uid://cjxr6uush4nq0" path="res://Tile-RPG/Combat/combat_starter.tscn" id="6_pf120"]
 [ext_resource type="Script" uid="uid://3i4005pgv256" path="res://Tile-RPG/Combat/ai_handler.gd" id="7_ilq20"]
 [ext_resource type="PackedScene" uid="uid://bs08mf1jnw3vi" path="res://Tile-RPG/Combat/Abilities/basic_attack.tscn" id="8_nl7kr"]
 [ext_resource type="PackedScene" uid="uid://cxigqlih8j8nv" path="res://Tile-RPG/Combat/Abilities/cure_wounds/cure_wounds.tscn" id="9_oevf2"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ouqyu"]
-radius = 0.35
-height = 1.7
-
-[sub_resource type="BoxMesh" id="BoxMesh_8w85h"]
-size = Vector3(0.1, 0.1, 0.5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sjjpf"]
 radius = 0.35
@@ -24,24 +17,18 @@ height = 1.7
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8w85h"]
 radius = 1.0
 
-[node name="TestNPC" type="CharacterBody3D" node_paths=PackedStringArray("visual_mesh", "follow_hander", "ai_handler")]
+[node name="TestNPC" type="CharacterBody3D" node_paths=PackedStringArray("follow_hander", "ai_handler", "char_model_handler")]
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_ouqyu")
 display_name = "Testing Character"
 picture = ExtResource("2_ilq20")
-visual_mesh = NodePath("MeshInstance3D")
 follow_hander = NodePath("FollowHandler")
 ai_handler = NodePath("AIHandler")
+char_model_handler = NodePath("CharacterModel")
 metadata/_custom_type_script = "uid://ks8scj6i4f0r"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8506718, 0)
-mesh = SubResource("CapsuleMesh_ouqyu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7998745, 0.2499609)
-mesh = SubResource("BoxMesh_8w85h")
+[node name="CharacterModel" parent="." instance=ExtResource("3_sej7w")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
@@ -64,12 +51,6 @@ shape = SubResource("CylinderShape3D_8w85h")
 script = ExtResource("4_ms4ik")
 xp_amount = 100
 metadata/_custom_type_script = "uid://cfaw7c8b3dbes"
-
-[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
-script = ExtResource("5_pf120")
-mesh_to_outline = NodePath("../MeshInstance3D")
-outline_type = 0
-metadata/_custom_type_script = "uid://g6rood38j5ok"
 
 [node name="CombatStarter" parent="." instance=ExtResource("6_pf120")]
 

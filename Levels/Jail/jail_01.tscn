@@ -567,7 +567,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.7951717, 0)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 4)
 items_to_generate = Dictionary[int, int]({
 1: 0,
-2: 0,
+2: 4,
 4: 3,
 5: 0,
 7: 0

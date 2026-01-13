@@ -2,7 +2,7 @@ class_name AttackHandler
 
 const TAKE_DAMAGE_MATERIAL := preload("uid://b72rjc52ql4wf")
 const START_DMG_COLOR:Color = Color("8a0009")
-const END_DMG_COLOR:Color = Color("ffffff")
+const END_DMG_COLOR:Color = Color("ffe8e6ff")
 const END_WOBBLE:float = 0.08
 
 const ARMOR_CURVE:Curve = preload("uid://bra32dhoui53i")
@@ -30,24 +30,22 @@ static func use_attack_on_char(new_receiver:GameCharacter, new_attack:Attack) ->
 	_handle_thorns()
 
 static func _animate_take_damage_effect(target:GameCharacter) -> void:
-	#TODO fix
-	if target.visual_mesh.material_overlay != null: return
+	var target_char_mesh:MeshInstance3D = target.char_model_handler.character_mesh
+	if target_char_mesh.material_overlay != null: return
 	const EFFECT_TIME:float = 0.2
 	
 	var new_dmg_material:ShaderMaterial = TAKE_DAMAGE_MATERIAL.duplicate()
-	target.visual_mesh.material_overlay = new_dmg_material
+	target_char_mesh.material_overlay = new_dmg_material
 	var tween:Tween = target.create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	tween.tween_property(new_dmg_material, "shader_parameter/active_strength", 1.0, EFFECT_TIME / 2)
 	tween.tween_property(new_dmg_material, "shader_parameter/hurt_color", END_DMG_COLOR, EFFECT_TIME / 2)
-	tween.tween_property(new_dmg_material, "shader_parameter/wobble_intensity", END_WOBBLE, EFFECT_TIME / 2)
 	
 	await tween.finished
 	tween = target.create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	tween.tween_property(new_dmg_material, "shader_parameter/hurt_color", START_DMG_COLOR, EFFECT_TIME / 2)
-	tween.tween_property(new_dmg_material, "shader_parameter/wobble_intensity", 0, EFFECT_TIME / 2)
 	
 	await tween.finished
-	target.visual_mesh.material_overlay = null
+	target_char_mesh.material_overlay = null
 
 static func _apply_damage_increases() -> void:
 	for dmg_type:Stats.DmgType in attack.damages.keys():
@@ -59,8 +57,23 @@ static func _apply_damage_increases() -> void:
 			print("Has increase: ", damage_multiplier)
 			attack.damages[dmg_type] = int(attack.damages[dmg_type] * damage_multiplier )
 
+static func _choose_take_dmg_animation(attacker:GameCharacter) -> void:
+	var local_pos: Vector3 = receiver.char_model_handler.to_local(attacker.global_position)
+	var dir: Vector3 = local_pos.normalized()
+
+	if abs(dir.x) > abs(dir.z):
+		if dir.x > 0:
+			receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_LEFT)
+		else:
+			receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_RIGHT)
+	else:
+		if dir.z < 0:
+			receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_BACK)
+		else:
+			receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_FRONT)
+
 static func _receive_damage() -> void:
-	#TODO receiver hit animation
+	_choose_take_dmg_animation(attack.attacker)
 	_animate_take_damage_effect(receiver)
 	receiver.got_hit.emit()
 	print("Final damage: ", final_damage)
@@ -96,8 +109,11 @@ static func _does_attack_hit() -> bool:
 		receiver.stat_handler.attacks_dodged_in_a_row += 1
 		receiver.dodged.emit()
 		GlobalSignals.show_miss_text.emit("MISS", receiver)
-		#TODO receiver evade animation
+		
+		receiver.rotate_towards_point(attack.attacker.global_position)
+		receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DODGE)
 		return false
+
 	receiver.stat_handler.attacks_dodged_in_a_row = 0
 	
 	#Block calc
@@ -106,7 +122,9 @@ static func _does_attack_hit() -> bool:
 		GlobalSignals.show_miss_text.emit("BLOCKED", receiver)
 		receiver.dodged.emit()
 		_handle_thorns()
-		#TODO receiver block animation
+		
+		receiver.rotate_towards_point(attack.attacker.global_position)
+		receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.BLOCK)
 		return false
 	
 	return true

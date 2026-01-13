@@ -6,13 +6,16 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	if !_can_use_ability(target): return
 	
 	_use_resources()
-	#TODO animate attacker
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
+	
+	ability_owner.char_model_handler.play_animation(self.use_animation)
+	await ability_owner.get_tree().create_timer(self.hit_delay).timeout
+	
 	_spawn_hit_effect(target)
 	AttackHandler.use_attack_on_char(target, new_attack)
 	
-	#await get_tree().create_timer(0.3).timeout
+	await ability_owner.char_model_handler.animation_player.animation_finished
 	ability_finished.emit()
 
 func _create_attack() -> Attack:

@@ -12,7 +12,9 @@ enum ABILITY_TAG {SINGLE_TARGET, AOE, MELEE, RANGED, SPELL, HIT, DOT, UNEVADEABL
 enum CHARACTER_TYPE {ALLY, ENEMY, SELF}
 enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 
-@export var animation_type:ANIMATION_TYPE = ANIMATION_TYPE.MELEE
+@export var use_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.NULL
+@export var hit_delay:float = 0.2
+
 @export var target_type:TARGET_TYPE = TARGET_TYPE.GAME_CHARACTER
 @export var usable_on_characters:Array[CHARACTER_TYPE] = []
 @export var ability_tags:Array[ABILITY_TAG] = []
@@ -32,6 +34,12 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 [color=#d1b81b]Valor[/color],[color=#ff914d]Lvl[/color]"
 
 const HIT_EFFECT := preload("uid://bh8ym5yvmklps")
+const ATTACK_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
+	CharacterModelHandler.CharAnimation.ATTACK_1H: 0.5,
+	CharacterModelHandler.CharAnimation.ATTACK_2H: 0.3,
+	CharacterModelHandler.CharAnimation.ATTACK_BOW: 0.8,
+	CharacterModelHandler.CharAnimation.ATTACK_PUNCH: 0.5
+}
 
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0
@@ -152,6 +160,9 @@ func _get_weapon_dmg_to_attack(attack:Attack) -> void:
 	_weapon_attack(attack, weapon)
 
 func _unarmed_attack(attack:Attack) -> void:
+	use_animation = CharacterModelHandler.CharAnimation.ATTACK_PUNCH
+	hit_delay = ATTACK_DELAYS[CharacterModelHandler.CharAnimation.ATTACK_PUNCH]
+	
 	attack.damages[Stats.DmgType.PHYSICAL] = randi_range(1,ability_owner.stat_handler.main_stats[Stats.MainStat.MIGHT])
 	attack.ability_tags.push_back(ABILITY_TAG.MELEE)
 	attack.ability_tags.push_back(ABILITY_TAG.HIT)
@@ -169,9 +180,18 @@ func _set_ability_weapon_range(weapon:Weapon) -> void:
 		self.ability_range += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
 
 func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
+	if weapon.hand_type == Weapon.HandType.ONE_HANDED:
+		use_animation = CharacterModelHandler.CharAnimation.ATTACK_1H
+		hit_delay = ATTACK_DELAYS[CharacterModelHandler.CharAnimation.ATTACK_1H]
+	else:
+		use_animation = CharacterModelHandler.CharAnimation.ATTACK_2H
+		hit_delay = ATTACK_DELAYS[CharacterModelHandler.CharAnimation.ATTACK_2H]
+		
 	if weapon.weapon_type == Weapon.WeaponType.BOW:
 		attack.ability_tags.push_back(ABILITY_TAG.RANGED)
-		self.animation_type = ANIMATION_TYPE.RANGED
+		use_animation = CharacterModelHandler.CharAnimation.ATTACK_BOW
+		hit_delay = ATTACK_DELAYS[CharacterModelHandler.CharAnimation.ATTACK_BOW]
+
 	else: attack.ability_tags.push_back(ABILITY_TAG.MELEE)
 	attack.ability_tags.push_back(ABILITY_TAG.HIT)
 	attack.ability_tags.push_back(ABILITY_TAG.WEAPON)

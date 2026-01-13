@@ -14,10 +14,10 @@ const EVASION_STATUS = preload("uid://ctryr6cqir6ne")
 
 func _ready() -> void:
 	if get_parent() is GameCharacter: gchar = get_parent()
-	await get_tree().create_timer(1).timeout
-	var bl:EvasionBuff = EVASION_STATUS.instantiate()
-	bl.set_evasion_stats(1,2)
-	add_status(bl)
+	#await get_tree().create_timer(1).timeout
+	#var bl:EvasionBuff = EVASION_STATUS.instantiate()
+	#bl.set_evasion_stats(1,2)
+	#add_status(bl)
 
 func has_status(name_to_check:String) -> bool:
 	var all_statuses:Array[Status] = buffs.duplicate() + debuffs.duplicate()

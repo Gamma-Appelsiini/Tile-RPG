@@ -39,6 +39,12 @@ func change_state(new_state:CharacterState) -> void:
 	if new_state == CharacterState.OUT_OF_COMBAT: _enter_combat_state(prev_state)
 	elif new_state == CharacterState.IN_COMBAT: _enter_combat_state(prev_state)
 	elif new_state == CharacterState.RUNNING: char_model_handler.play_animation(CharacterModelHandler.CharAnimation.RUN, false)
+	elif new_state == CharacterState.DEAD: _enter_dead_state()
+
+func _enter_dead_state() -> void:
+	GlobalSignals.combat_start.disconnect(change_state.bind(CharacterState.IN_COMBAT))
+	GlobalSignals.combat_end.disconnect(change_state.bind(CharacterState.OUT_OF_COMBAT))
+	char_model_handler.die()
 
 func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.IN_COMBAT:
@@ -48,7 +54,7 @@ func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 	
 func _enter_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.OUT_OF_COMBAT:
-		char_model_handler.play(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
+		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
 	else:
 		char_model_handler._play_idle_animation()
 
@@ -62,7 +68,6 @@ func _init() -> void:
 	stat_handler.owner_died.connect(_die)
 	start_turn.connect(stat_handler.on_turn_start)
 	
-	
 	equipment_handler = EquipmentHandler.new()
 	add_child(equipment_handler)
 	equipment_handler.equipment_owner = self
@@ -72,12 +77,18 @@ func _init() -> void:
 
 func _die() -> void:
 	#TODO
-	print("Character ", self.display_name, " died.")
+	print_debug("Character ", self.display_name, " died.")
+	change_state(CharacterState.DEAD)
 	died.emit(self)
 
+func _connect_state_signals() -> void:
+	GlobalSignals.combat_start.connect(change_state.bind(CharacterState.IN_COMBAT))
+	GlobalSignals.combat_end.connect(change_state.bind(CharacterState.OUT_OF_COMBAT))
+
 func _ready() -> void:
-	if unique_id == "": print("ID NOT SET: ", self)
+	if unique_id == "": print_debug("ID NOT SET: ", self)
 	_set_infobar()
+	_connect_state_signals()
 	
 func load_from_data(save_data:Dictionary) -> void:
 	var characters:Dictionary = save_data["game_characters"]
@@ -124,7 +135,7 @@ func rotate_towards_point(point: Vector3) -> void:
 func _rotate(point: Vector3) -> Tween:
 	var dir: Vector3 = (point - global_position).normalized()
 	var target_yaw: float = atan2(dir.x, dir.z)
-	var current_yaw: float = self.rotation.y
+	var current_yaw: float = char_model_handler.rotation.y
 	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
 	var final_yaw: float = lerp_angle(current_yaw, target_yaw, 1.0)
 
@@ -133,5 +144,5 @@ func _rotate(point: Vector3) -> Tween:
 	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.1, FULL_ROTATION_TIME)
 	
 	var tween := create_tween()
-	tween.tween_property(self, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(char_model_handler, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween

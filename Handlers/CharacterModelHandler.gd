@@ -11,6 +11,7 @@ enum CharAnimation {
 @export var animation_player: AnimationPlayer = null
 @export var game_character:GameCharacter = null
 @export var outline_handler: OutlineHandler = null
+@export var character_texture:CompressedTexture2D = null
 
 const PLAYER_PREFIX:String = "animations/"
 const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
@@ -44,6 +45,23 @@ const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
 	CharAnimation.TAKE_DAMAGE_FROM_RIGHT: "take_damage_from_right",
 }
 const BLEND_TIME:float = 0.1
+const DEATH_ANIMATIONS:Array[CharAnimation] = [CharAnimation.DIE_1,CharAnimation.DIE_2]
+const CHAR_DISSOLVE_MATERIAL := preload("uid://cikrwp1quigsr")
+const DISSOLVE_TIME:float = 1.0
+
+func die() -> void:
+	play_animation(DEATH_ANIMATIONS.pick_random(), false)
+	await animation_player.animation_finished
+	
+	var dissolve_material:ShaderMaterial = CHAR_DISSOLVE_MATERIAL.duplicate()
+	dissolve_material.set_shader_parameter("shader_parameter/baseColorTexture", character_texture)
+	character_mesh.material_override = dissolve_material
+	
+	var tween:Tween = create_tween()
+	tween.tween_property(dissolve_material, "shader_parameter/dissolveSlider", 1, DISSOLVE_TIME)
+	
+	await  tween.finished
+	game_character.queue_free()
 
 func _ready() -> void:
 	if get_parent_node_3d() is GameCharacter: game_character = get_parent_node_3d()
@@ -62,7 +80,6 @@ func play_animation(animation:CharAnimation, return_to_idle:bool = true) -> void
 	
 	await animation_player.animation_finished
 	_play_idle_animation() 
-
 
 func _play_idle_animation() -> void:
 	if game_character.character_state == game_character.CharacterState.OUT_OF_COMBAT:
