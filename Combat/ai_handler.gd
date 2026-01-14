@@ -2,6 +2,7 @@ extends Node
 class_name AIHandler
 
 signal end_turn
+signal end_combat
 
 enum INTELLIGENCE {DUMB, AVERAGE, SMART}
 enum COMBAT_TYPE {RANGED, MELEE, SUPPORT}
@@ -21,6 +22,7 @@ var chosen_ability:Ability = null
 var target_tile:Tile = null
 var target_char:GameCharacter = null
 var tiles_to_move_to:Array[Tile] = []
+var is_combat_over:bool = false
 
 func _ready() -> void:
 	end_turn.connect(_end_turn)
@@ -28,9 +30,16 @@ func _ready() -> void:
 	for ability:Ability in offensive_abilities + support_abilities + movement_abilities:
 		ability.ability_owner = combatant
 
+func _is_combat_over() -> bool:
+	if enemies.is_empty() or is_combat_over:
+		is_combat_over = true
+		return true
+	return false
+
 func take_turn() -> void:
 	tile_manager = GlobalSignals.current_level.tile_manager
 	_set_teams()
+	if _is_combat_over(): return
 	_set_reachable_tiles()
 	
 	if combat_type == COMBAT_TYPE.MELEE or combat_type == COMBAT_TYPE.RANGED: await _take_attacker_turn()
@@ -45,11 +54,15 @@ func _set_reachable_tiles() -> void:
 	tiles_to_move_to.push_back(current_tile)
 
 func _take_attacker_turn() -> void:
+	if _is_combat_over(): return
+	
 	if _is_target_too_far(enemies, offensive_abilities): await _use_movement_ability()
 	if combatant.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_AP) >= 4:
 		await _buff_self()
 	await _try_to_attack()
+	if _is_combat_over(): return
 	await _try_to_attack()
+	if _is_combat_over(): return
 	if _is_damaged_friendlies(): await _heal_lowest_health_ally()
 	await _use_defensive_ability()
 
@@ -57,6 +70,8 @@ func _buff_self() -> bool:
 	return await _use_ability_with_tag(Ability.ABILITY_TAG.BUFF, [combatant], support_abilities)
 
 func _take_support_turn() -> void:
+	if _is_combat_over(): return
+	
 	if _is_target_too_far(friendlies, support_abilities): await _use_movement_ability()
 	if _is_damaged_friendlies(): await _heal_lowest_health_ally()
 	await _buff_friendly()
@@ -121,6 +136,8 @@ func _use_ability_with_tag(tag:Ability.ABILITY_TAG, targets:Array[GameCharacter]
 	return true
 
 func _handle_turn_end_movement() -> void:
+	if _is_combat_over(): return
+	
 	_set_reachable_tiles()
 	if combatant.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_MOVEMENT) == 0: return
 	
@@ -195,6 +212,8 @@ func _get_furthest_tile_from_enemies() -> Tile:
 	return furthest_tile
 
 func _try_to_attack() -> bool:
+	if _is_combat_over(): return false
+	
 	if await _attack_lowest_health_enemy(): return true
 	if await _attack_closest_enemy(): return true
 	

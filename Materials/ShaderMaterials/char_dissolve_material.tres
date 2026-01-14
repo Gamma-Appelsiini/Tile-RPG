@@ -5,7 +5,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_ajpr4")
-shader_parameter/baseColor = Color(1, 1, 1, 1)
+shader_parameter/baseColor = Color(1, 1, 1, 0)
 shader_parameter/dissolveSlider = -1.0
 shader_parameter/dissolveNoiseScale = 5.0
 shader_parameter/edgeNoiseScale = -6.38000008091424

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://ccbe2k3nafrns"]
+[gd_scene load_steps=13 format=4 uid="uid://ccbe2k3nafrns"]
 
 [ext_resource type="Texture2D" uid="uid://cy8nkhg8shiwf" path="res://Tile-RPG/Materials/CharacterTextures/knighter_KnighterTexture.png" id="1_b5dn6"]
 [ext_resource type="Script" uid="uid://dietntj50gava" path="res://Tile-RPG/Handlers/CharacterModelHandler.gd" id="1_sgfln"]
@@ -366,9 +366,6 @@ bind/71/pose = Transform3D(-1, 1.5099582e-07, 5.227504e-16, -3.215633e-14, -2.38
 bind/72/name = &"DEF-breast.R"
 bind/72/bone = -1
 bind/72/pose = Transform3D(-1, 1.5099585e-07, 7.86597e-17, 1.1634967e-13, -1.04308114e-07, 0.9999998, 1.509957e-07, 1.0000001, -1.1877476e-23, -0.10567349, 0.04328686, -1.3027092)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sgfln"]
-graph_offset = Vector2(-412.50806, -52.871044)
 
 [node name="CharacterModel" type="Node3D" node_paths=PackedStringArray("character_mesh", "animation_player", "outline_handler")]
 script = ExtResource("1_sgfln")
@@ -901,10 +898,6 @@ root_node = NodePath("../..")
 libraries = {
 &"animations": ExtResource("2_sgfln")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_sgfln")
-anim_player = NodePath("../GeneralSkeleton/AnimationPlayer")
 
 [node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("4_cadwu")

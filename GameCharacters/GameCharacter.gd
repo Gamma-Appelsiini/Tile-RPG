@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name GameCharacter
 
-enum CharacterState {OUT_OF_COMBAT, IN_COMBAT, FROZEN, STUNNED, DEAD, RUNNING}
+enum CharacterState {OUT_OF_COMBAT, IN_COMBAT, FROZEN, STUNNED, DEAD, RUNNING, INTERACTING}
 
 signal move_complete
 signal rotation_complete
@@ -41,6 +41,14 @@ func change_state(new_state:CharacterState) -> void:
 	elif new_state == CharacterState.RUNNING: char_model_handler.play_animation(CharacterModelHandler.CharAnimation.RUN, false)
 	elif new_state == CharacterState.DEAD: _enter_dead_state()
 
+func _enter_interact_state() -> void:
+	set_physics_process(false)
+	set_process_input(false)
+	
+func _leave_interact_state() -> void:
+	set_physics_process(true)
+	set_process_input(true)
+
 func _enter_dead_state() -> void:
 	GlobalSignals.combat_start.disconnect(change_state.bind(CharacterState.IN_COMBAT))
 	GlobalSignals.combat_end.disconnect(change_state.bind(CharacterState.OUT_OF_COMBAT))
@@ -50,13 +58,13 @@ func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.IN_COMBAT:
 		char_model_handler.play_backwards(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
 	else:
-		char_model_handler._play_idle_animation()
+		char_model_handler.play_idle_animation()
 	
 func _enter_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.OUT_OF_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
 	else:
-		char_model_handler._play_idle_animation()
+		char_model_handler.play_idle_animation()
 
 func _set_infobar() -> void:
 	if !infobar: return
@@ -104,7 +112,7 @@ func save_to_data(save_data:Dictionary) -> void:
 	if !save_data["game_characters"].has(unique_id):
 		save_data["game_characters"][unique_id] = {}
 	
-	#TODO add other things characters need saving	
+	#TODO add other things characters need saving
 	save_data["game_characters"][unique_id]["global_position"] = self.global_position
 	stat_handler.save_to_data(save_data,self.unique_id)
 
@@ -113,6 +121,8 @@ func stop_moving() -> void:
 
 func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void:
 	_rotate(point)
+	
+	char_model_handler.play_animation(CharacterModelHandler.CharAnimation.RUN, false)
 	
 	var distance:float = self.global_position.distance_to(point)
 	var move_time:float = 0.4 * distance
@@ -124,12 +134,12 @@ func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void
 	move_tween.tween_property(self, "global_position", point, move_time)
 	
 	await move_tween.finished
+	if end: char_model_handler.play_idle_animation()
 	move_complete.emit()
 
 func rotate_towards_point(point: Vector3) -> void:
 	var tween:Tween = _rotate(point)
 	await tween.finished
-	
 	rotation_complete.emit()
 
 func _rotate(point: Vector3) -> Tween:

@@ -15,17 +15,25 @@ var _last_move_dir: Vector3 = Vector3.BACK
 var movement_enabled:bool = true
 
 func _ready() -> void:
+	_connect_signals()
+	_set_infobar()
+
+func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(_disable_movement)
 	GlobalSignals.combat_end.connect(_enable_movement)
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
-	_set_infobar()
-	
-	GlobalSignals.combat_start.connect(func(): set_physics_process(false))
-	GlobalSignals.combat_end.connect(func(): set_physics_process(true))
-	
 	GlobalSignals.combat_start.connect(change_state.bind(CharacterState.IN_COMBAT))
 	GlobalSignals.combat_end.connect(change_state.bind(CharacterState.OUT_OF_COMBAT))
+
+#Overrided
+func _enter_dead_state() -> void:
+	GlobalSignals.combat_start.disconnect(change_state.bind(CharacterState.IN_COMBAT))
+	GlobalSignals.combat_end.disconnect(change_state.bind(CharacterState.OUT_OF_COMBAT))
+	GlobalSignals.combat_start.disconnect(_disable_movement)
+	GlobalSignals.combat_end.disconnect(_enable_movement)
+	
+	char_model_handler.die()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Highlight"):
@@ -40,8 +48,7 @@ func _physics_process(delta: float) -> void:
 		change_state(CharacterState.RUNNING)
 	elif velocity == Vector3.ZERO and character_state == CharacterState.RUNNING:
 		change_state(CharacterState.OUT_OF_COMBAT)
-		
-	
+
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 		
@@ -54,9 +61,11 @@ func _physics_process(delta: float) -> void:
 	_turn_player(move_direction)
 
 func _enable_movement() -> void:
+	set_physics_process(true)
 	movement_enabled = true
 	
 func _disable_movement() -> void:
+	set_physics_process(false)
 	movement_enabled = false
 
 func _handle_movement_input() -> Vector3:
@@ -77,22 +86,3 @@ func _turn_player(move_direction:Vector3) -> void:
 		
 	var target_angle: float = Vector3.BACK.signed_angle_to(_last_move_dir, Vector3.UP)
 	char_model_handler.global_rotation.y = target_angle
-
-#Overrided
-func _rotate(point: Vector3) -> Tween:
-	var dir: Vector3 = (point - global_position).normalized()
-	var target_yaw: float = atan2(dir.x, dir.z)
-	var current_yaw: float = char_model_handler.rotation.y
-
-	var delta: float = wrapf(target_yaw - current_yaw, -PI, PI)
-	var final_yaw: float = current_yaw + delta
-
-	const FULL_ROTATION_TIME: float = 0.8
-	var angle_diff: float = abs(delta)
-	var rotation_time: float = clampf(FULL_ROTATION_TIME * (angle_diff / PI), 0.1, FULL_ROTATION_TIME)
-	
-	var tween := create_tween()
-	tween.tween_property(char_model_handler, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	_last_move_dir = dir
-	
-	return tween

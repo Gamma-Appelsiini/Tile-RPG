@@ -37,12 +37,13 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	combat_ui.show_text("Combat Start")
 	
 	player = GlobalSignals.player
+	#player.died.connect(_player_died)
 	#TODO Add player team
 	player_team.push_back(player)
 	
 	enemy_team = new_enemies
 	chars_in_combat = player_team.duplicate() + enemy_team.duplicate()
-	print(len(chars_in_combat))
+
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died, true)
 		tile_manager.set_on_closest_tile(game_char)
@@ -63,6 +64,7 @@ func _set_combat_camera() -> void:
 	spectate_camera.set_physics_process(false)
 	spectate_camera_pivot.add_child(spectate_camera)
 	add_child(spectate_camera_pivot)
+	spectate_camera_pivot.global_position = player.player_camera.get_parent().global_position
 	
 	spectate_camera.make_current()
 
@@ -150,7 +152,7 @@ func _move_camera_to_char(current_actor:GameCharacter) -> void:
 	camera_move_finished.emit()
 
 func _char_died(dead_char:GameCharacter) -> void:
-	print("Char died: ", dead_char)
+	print_debug("Char died: ", dead_char)
 	if dead_char in player_team: player_team.erase(dead_char)
 	elif dead_char in enemy_team: enemy_team.erase(dead_char)
 	chars_in_combat.erase(dead_char)
@@ -165,6 +167,7 @@ func _char_died(dead_char:GameCharacter) -> void:
 		
 	if dead_char == player:
 		#TODO end game
+		_end_combat()
 		return
 		
 	if char_to_act == dead_char: _next_turn()
@@ -173,12 +176,17 @@ func _compare_initiative(a:GameCharacter, b:GameCharacter):
 	return a.stat_handler.secondary_stats[Stats.SecondaryStat.INITIATIVE] > b.stat_handler.secondary_stats[Stats.SecondaryStat.INITIATIVE]
 
 func _end_combat() -> void:
+	_disable_ai_handlers()
 	tile_manager.disable_shooting()
 	GlobalSignals.play_audio.emit(combat_end_music, AudioManager.AUDIO_TYPE.UI)
 	
 	_return_to_player_camera()
 	await returned_to_player_camera
 	GlobalSignals.combat_end.emit()
+	
+func _disable_ai_handlers() -> void:
+	for game_character:GameCharacter in chars_in_combat:
+		if game_character.ai_handler: game_character.ai_handler.is_combat_over = true
 
 func _reset() -> void:
 	chars_in_combat = []

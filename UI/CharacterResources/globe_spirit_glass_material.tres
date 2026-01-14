@@ -6,9 +6,9 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_studq")
-shader_parameter/albedo = Color(1, 1, 1, 0)
-shader_parameter/roughness = 0.21600001026
+shader_parameter/albedo = Color(1.8161298, 1.8161298, 1.8161298, 0)
+shader_parameter/roughness = 0.70000003325
 shader_parameter/roughness_texture = ExtResource("2_4tfev")
-shader_parameter/normal_strength = 0.10000076474999986
+shader_parameter/normal_strength = -0.2999992542500003
 shader_parameter/normal_map = ExtResource("2_4tfev")
-shader_parameter/edge_color = Color(0.16099998, 0.17674997, 0.35, 0.18039216)
+shader_parameter/edge_color = Color(5.0055983e-06, 0.4910434, 0.7017453, 1)

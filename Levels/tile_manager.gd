@@ -101,6 +101,7 @@ func _use_movement_to_traverse_tile_path(move_char:GameCharacter, path:Array[Til
 		var end:bool = false
 		if tile == path.back(): end = true
 		if tile == path.front(): start = true
+		if char_move_amount == 1: end = true
 		
 		move_char.move_to_point(tile.global_position,start, end)
 		move_char.stat_handler.update_stat(Stats.ResourceStat.CURRENT_MOVEMENT, -1)

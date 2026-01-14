@@ -559,6 +559,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
 [node name="Lantern" parent="Lights" instance=ExtResource("8_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.7951717, 0)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.5427742, 5.81936, 2.464391)
+layers = 524289
+light_color = Color(1, 0.955, 0.85, 1)
+light_energy = 0.826
+spot_range = 16.49
+
 [node name="GameCharacters" type="Node3D" parent="."]
 
 [node name="Interactables" type="Node3D" parent="."]

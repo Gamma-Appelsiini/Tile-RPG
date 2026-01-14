@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cqdi0kdmoffy2"]
+
+[ext_resource type="Shader" uid="uid://c8ik4vt43p3r6" path="res://Tile-RPG/Shaders/glass_shader.gdshader" id="1_n3l04"]
+[ext_resource type="Texture2D" uid="uid://dt7cfn0bq6j71" path="res://Tile-RPG/Images/Textures/glass_scratches_normal.png" id="2_l678w"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_n3l04")
+shader_parameter/albedo = Color(0, 0, 0, 0.11764706)
+shader_parameter/roughness = 0.750000035625
+shader_parameter/roughness_texture = ExtResource("2_l678w")
+shader_parameter/normal_strength = 0.3000007742500017
+shader_parameter/normal_map = ExtResource("2_l678w")
+shader_parameter/edge_color = Color(0.85, 0, 0.09916678, 0.09019608)

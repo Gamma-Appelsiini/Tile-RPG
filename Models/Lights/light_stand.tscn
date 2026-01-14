@@ -122,6 +122,7 @@ skeleton = NodePath("")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1417712, 0)
+layers = 524289
 light_color = Color(0.9119475, 0.7271465, 0.5129374, 1)
 
 [node name="FlameMesh" type="MeshInstance3D" parent="."]
