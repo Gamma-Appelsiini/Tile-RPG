@@ -20,6 +20,8 @@ loot_beam = NodePath("LootBeam")
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("IndicatorPlace")
 interact_text = "Open"
+face_interactable = true
+interact_animation = 18
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0

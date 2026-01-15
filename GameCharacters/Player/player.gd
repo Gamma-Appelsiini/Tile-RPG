@@ -19,19 +19,47 @@ func _ready() -> void:
 	_set_infobar()
 
 func _connect_signals() -> void:
-	GlobalSignals.combat_start.connect(_disable_movement)
-	GlobalSignals.combat_end.connect(_enable_movement)
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
+	
 	GlobalSignals.combat_start.connect(change_state.bind(CharacterState.IN_COMBAT))
 	GlobalSignals.combat_end.connect(change_state.bind(CharacterState.OUT_OF_COMBAT))
+
+#Overrided
+func enter_interact_state(interact_animation:CharacterModelHandler.CharAnimation) -> void:
+	_disable_movement()
+	set_process_input(false)
+	
+	char_model_handler.play_animation(interact_animation, false)
+	await char_model_handler.animation_player.animation_finished
+	
+	_enable_movement()
+	set_process_input(true)
+	change_state(CharacterState.OUT_OF_COMBAT)
+
+#Overrided
+func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
+	if prev_state == CharacterState.IN_COMBAT:
+		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON,true, true)
+		await char_model_handler.animation_player.animation_finished
+		_enable_movement()
+	else:
+		char_model_handler.play_idle_animation()
+
+#Overrided
+func _enter_combat_state(prev_state:CharacterState) -> void:
+	_disable_movement()
+	if prev_state != CharacterState.IN_COMBAT:
+		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
+		await char_model_handler.animation_player.animation_finished
+		ready_to_move.emit()
+	else:
+		char_model_handler.play_idle_animation()
 
 #Overrided
 func _enter_dead_state() -> void:
 	GlobalSignals.combat_start.disconnect(change_state.bind(CharacterState.IN_COMBAT))
 	GlobalSignals.combat_end.disconnect(change_state.bind(CharacterState.OUT_OF_COMBAT))
-	GlobalSignals.combat_start.disconnect(_disable_movement)
-	GlobalSignals.combat_end.disconnect(_enable_movement)
 	
 	char_model_handler.die()
 
@@ -42,6 +70,14 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("Highlight"):
 		GlobalSignals.hide_outline.emit()
 		GlobalSignals.hide_info_bar.emit()
+
+func _enable_movement() -> void:
+	set_physics_process(true)
+	movement_enabled = true
+	
+func _disable_movement() -> void:
+	set_physics_process(false)
+	movement_enabled = false
 
 func _physics_process(delta: float) -> void:
 	if velocity != Vector3.ZERO and character_state != CharacterState.RUNNING:
@@ -59,14 +95,6 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(move_direction * movement_speed, acceleration * delta)
 	move_and_slide()
 	_turn_player(move_direction)
-
-func _enable_movement() -> void:
-	set_physics_process(true)
-	movement_enabled = true
-	
-func _disable_movement() -> void:
-	set_physics_process(false)
-	movement_enabled = false
 
 func _handle_movement_input() -> Vector3:
 	var direction:Vector3 = Vector3.ZERO
@@ -86,3 +114,14 @@ func _turn_player(move_direction:Vector3) -> void:
 		
 	var target_angle: float = Vector3.BACK.signed_angle_to(_last_move_dir, Vector3.UP)
 	char_model_handler.global_rotation.y = target_angle
+
+func rotate_towards_point(point: Vector3) -> void:
+	set_process(false)
+	
+	var tween:Tween = _rotate(point)
+	await tween.finished
+	
+	rotation_complete.emit()
+	_last_move_dir = Vector3.BACK.rotated(Vector3.UP, char_model_handler.global_rotation.y)
+	
+	set_process(true)

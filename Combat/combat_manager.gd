@@ -46,12 +46,16 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died, true)
-		tile_manager.set_on_closest_tile(game_char)
+		_move_to_tile_after_draw_weapon_animation(game_char)
 	
 	_set_combat_camera()
 	
 	await get_tree().create_timer(1).timeout
 	_next_round()
+
+func _move_to_tile_after_draw_weapon_animation(game_char:GameCharacter) -> void:
+	await game_char.ready_to_move
+	tile_manager.set_on_closest_tile(game_char)
 
 func _set_combat_camera() -> void:
 	if spectate_camera_pivot: spectate_camera_pivot.queue_free()

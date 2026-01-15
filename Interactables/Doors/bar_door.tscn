@@ -106,6 +106,8 @@ collision_shape_3d = NodePath("Hinge/Door2/StaticBody3D/CollisionShape3D")
 interact_area = NodePath("Hinge/Area3D")
 indicator_place = NodePath("Hinge/Side1")
 interact_text = "Open"
+face_interactable = true
+interact_animation = 18
 
 [node name="Hinge" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44994637, 0, 0)

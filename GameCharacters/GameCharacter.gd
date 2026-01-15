@@ -12,6 +12,7 @@ signal got_hit
 signal start_turn
 signal end_turn
 signal moved_to_tile(tile:Tile)
+signal ready_to_move
 
 @export var unique_id:String = ""
 @export var character_power:int = 0
@@ -36,14 +37,18 @@ func change_state(new_state:CharacterState) -> void:
 	
 	if char_model_handler == null: return
 	
-	if new_state == CharacterState.OUT_OF_COMBAT: _enter_combat_state(prev_state)
+	if new_state == CharacterState.OUT_OF_COMBAT: _enter_out_of_combat_state(prev_state)
 	elif new_state == CharacterState.IN_COMBAT: _enter_combat_state(prev_state)
 	elif new_state == CharacterState.RUNNING: char_model_handler.play_animation(CharacterModelHandler.CharAnimation.RUN, false)
 	elif new_state == CharacterState.DEAD: _enter_dead_state()
 
-func _enter_interact_state() -> void:
-	set_physics_process(false)
+func enter_interact_state(interact_animation:CharacterModelHandler.CharAnimation) -> void:
 	set_process_input(false)
+	
+	char_model_handler.play_animation(interact_animation, false)
+	await char_model_handler.animation_player.animation_finished
+	
+	change_state(CharacterState.OUT_OF_COMBAT)
 	
 func _leave_interact_state() -> void:
 	set_physics_process(true)
@@ -56,13 +61,15 @@ func _enter_dead_state() -> void:
 
 func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.IN_COMBAT:
-		char_model_handler.play_backwards(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
+		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON,true, true)
 	else:
 		char_model_handler.play_idle_animation()
 	
 func _enter_combat_state(prev_state:CharacterState) -> void:
-	if prev_state == CharacterState.OUT_OF_COMBAT:
-		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON)
+	if prev_state != CharacterState.IN_COMBAT:
+		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
+		await char_model_handler.animation_player.animation_finished
+		ready_to_move.emit()
 	else:
 		char_model_handler.play_idle_animation()
 
@@ -101,7 +108,7 @@ func _ready() -> void:
 func load_from_data(save_data:Dictionary) -> void:
 	var characters:Dictionary = save_data["game_characters"]
 	if !characters.has(unique_id):
-		print(unique_id, " not in save data")
+		print_debug(unique_id, " not in save data")
 		return
 		
 	var gpos:Vector3 = save_data["game_characters"][unique_id]["global_position"]
@@ -143,16 +150,15 @@ func rotate_towards_point(point: Vector3) -> void:
 	rotation_complete.emit()
 
 func _rotate(point: Vector3) -> Tween:
-	var dir: Vector3 = (point - global_position).normalized()
-	var target_yaw: float = atan2(dir.x, dir.z)
-	var current_yaw: float = char_model_handler.rotation.y
-	var delta: float = fmod((target_yaw - current_yaw) + PI, TAU) - PI
-	var final_yaw: float = lerp_angle(current_yaw, target_yaw, 1.0)
+	var dir := global_position.direction_to(point)
+	var target_yaw := atan2(dir.x, dir.z)
+	var current_yaw := char_model_handler.global_rotation.y
+	var angle_diff := angle_difference(current_yaw, target_yaw)
+	var final_yaw := current_yaw + angle_diff
 
 	const FULL_ROTATION_TIME: float = 0.4
-	var angle_diff: float = abs(delta)
-	var rotation_time:float = clampf(FULL_ROTATION_TIME * (angle_diff / TAU), 0.1, FULL_ROTATION_TIME)
-	
+	var rotation_time: float = clampf(FULL_ROTATION_TIME * (abs(angle_diff) / PI), 0.1, FULL_ROTATION_TIME)
+
 	var tween := create_tween()
-	tween.tween_property(char_model_handler, "rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(char_model_handler, "global_rotation:y", final_yaw, rotation_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween

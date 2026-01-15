@@ -9,6 +9,12 @@ class_name Interactable
 @export var oneshot:bool = false
 @export var face_interactable:bool = false
 @export var block_tiles:bool = false
+@export var interact_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.NULL
+@export var interact_position:Node3D = null
+
+const INTERACT_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
+	CharacterModelHandler.CharAnimation.INTERACT: 0.3,
+}
 
 var used:bool = false
 var player:Player = null

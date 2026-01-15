@@ -75,14 +75,15 @@ func _ready() -> void:
 	if get_parent_node_3d() is GameCharacter: game_character = get_parent_node_3d()
 	play_idle_animation()
 
-func play_animation(animation:CharAnimation, return_to_idle:bool = true) -> void:
+func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_backwards:bool = false) -> void:
 	if game_character.character_state == game_character.CharacterState.STUNNED or game_character.character_state == game_character.CharacterState.FROZEN: return
 	
 	if !ANIMATION_ENUM_TO_STRING.has(animation):
 		print_debug("No animation ", animation, " in animation dict")
 		return
 	
-	animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[animation], BLEND_TIME)
+	if play_backwards: animation_player.play_backwards(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[animation], BLEND_TIME)
+	else: animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[animation], BLEND_TIME)
 	
 	if !return_to_idle: return
 	
