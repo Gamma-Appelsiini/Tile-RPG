@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dogm0r607we75"
-path="res://.godot/imported/sword.glb-6f2621200367b8cd76acec3ffd51e053.scn"
+uid="uid://hik2xwp4unje"
+path="res://.godot/imported/basic_2h_sword.glb-9897a21bbd2270bce5816f61a82db58f.scn"
 
 [deps]
 
-source_file="res://Tile-RPG/Models/Items/sword.glb"
-dest_files=["res://.godot/imported/sword.glb-6f2621200367b8cd76acec3ffd51e053.scn"]
+source_file="res://Tile-RPG/Models/Items/basic_2h_sword.glb"
+dest_files=["res://.godot/imported/basic_2h_sword.glb-9897a21bbd2270bce5816f61a82db58f.scn"]
 
 [params]
 

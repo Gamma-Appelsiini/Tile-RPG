@@ -13,6 +13,8 @@ signal start_turn
 signal end_turn
 signal moved_to_tile(tile:Tile)
 signal ready_to_move
+signal draw_weapon
+signal hide_weapon
 
 @export var unique_id:String = ""
 @export var character_power:int = 0
@@ -62,12 +64,16 @@ func _enter_dead_state() -> void:
 func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.IN_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON,true, true)
+		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
+		hide_weapon.emit()
 	else:
 		char_model_handler.play_idle_animation()
 	
 func _enter_combat_state(prev_state:CharacterState) -> void:
 	if prev_state != CharacterState.IN_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
+		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
+		draw_weapon.emit()
 		await char_model_handler.animation_player.animation_finished
 		ready_to_move.emit()
 	else:

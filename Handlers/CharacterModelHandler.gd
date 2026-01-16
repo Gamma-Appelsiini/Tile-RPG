@@ -12,6 +12,9 @@ enum CharAnimation {
 @export var game_character:GameCharacter = null
 @export var outline_handler: OutlineHandler = null
 @export var character_texture:CompressedTexture2D = null
+@export var main_hand_node: Node3D = null
+@export var off_hand_node: Node3D = null
+@export var shield_node: Node3D = null
 
 const PLAYER_PREFIX:String = "animations/"
 const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
@@ -48,6 +51,9 @@ const BLEND_TIME:float = 0.1
 const DEATH_ANIMATIONS:Array[CharAnimation] = [CharAnimation.DIE_1,CharAnimation.DIE_2]
 const CHAR_DISSOLVE_MATERIAL := preload("uid://cikrwp1quigsr")
 const DISSOLVE_TIME:float = 1.0
+const DELAYS:Dictionary[CharAnimation,float] = {
+	CharAnimation.DRAW_WEAPON: 0.35,
+	}
 
 func die() -> void:
 	play_animation(DEATH_ANIMATIONS.pick_random(), false)

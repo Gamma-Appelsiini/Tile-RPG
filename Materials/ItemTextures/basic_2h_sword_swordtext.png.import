@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://babyqromsgitk"
-path.s3tc="res://.godot/imported/sword_sword.png-09e955ab3d9b1e2b2263d4997e5faf4d.s3tc.ctex"
+uid="uid://dpwbb4oak1co0"
+path.s3tc="res://.godot/imported/basic_2h_sword_swordtext.png-58e9b98782889315acf9aede665eebb6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "325aa43f510b693eeda2237d4d1f222f"
+"md5": "620c0381cf56df105c17442a0af092ea"
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Models/Items/sword_sword.png"
-dest_files=["res://.godot/imported/sword_sword.png-09e955ab3d9b1e2b2263d4997e5faf4d.s3tc.ctex"]
+source_file="res://Tile-RPG/Materials/ItemTextures/basic_2h_sword_swordtext.png"
+dest_files=["res://.godot/imported/basic_2h_sword_swordtext.png-58e9b98782889315acf9aede665eebb6.s3tc.ctex"]
 
 [params]
 
