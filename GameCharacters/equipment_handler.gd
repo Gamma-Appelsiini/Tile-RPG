@@ -20,6 +20,11 @@ var main_hand_model:ItemModel = null
 var off_hand_model:ItemModel = null
 
 func _ready() -> void:
+	if get_parent() is GameCharacter:
+		equipment_owner = get_parent() as GameCharacter
+		_connect_signals()
+
+func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
 	GlobalSignals.combat_end.connect(func(): in_combat = false)
 	
@@ -30,13 +35,7 @@ func _ready() -> void:
 		equipment_owner.hide_weapon.connect(_hide_equipped_weapon)
 
 func _show_equipped_weapon() -> void:
-	
-	print("ShOW WEAPON MODEL")
-	print("Handler Instance ID: ", get_instance_id())
-	print(main_hand_model)
-
 	if main_hand_model:
-		print("ASDASDASD")
 		main_hand_model.show()
 	if off_hand_model: off_hand_model.show()
 	
@@ -70,7 +69,6 @@ func equip_item(new_item:Equipment) -> void:
 	equipped_items[new_item.equipment_slot] = new_item
 
 func _clear_item_model(equipment_slot:Equipment.EquipmentSlot) -> void:
-	print("Clear item model")
 	if equipment_slot == Equipment.EquipmentSlot.OFF_HAND and off_hand_model:
 		off_hand_model.queue_free()
 		off_hand_model = null
@@ -81,24 +79,22 @@ func _clear_item_model(equipment_slot:Equipment.EquipmentSlot) -> void:
 
 func _set_item_model(new_item:Equipment) -> void:
 	if new_item.item_model_path == "": return
-	
-	print("1")
 	var item_model:ItemModel = load(new_item.item_model_path).instantiate()
 	
 	if new_item.equipment_slot == Equipment.EquipmentSlot.OFF_HAND:
 		off_hand_model = item_model
 		if new_item is Shield: equipment_owner.char_model_handler.shield_node.add_child(item_model)
 		else: equipment_owner.char_model_handler.off_hand_node.add_child(item_model)
+		
+		if !in_combat: off_hand_model.hide()
+		else: off_hand_model.show()
 
 	elif new_item.equipment_slot == Equipment.EquipmentSlot.MAIN_HAND:
 		main_hand_model = item_model
 		equipment_owner.char_model_handler.main_hand_node.add_child(main_hand_model)
-		print("2")
 	
-	print(main_hand_model)
-	print("Handler Instance ID: ", get_instance_id())
-	main_hand_model.show()
-	#if !in_combat: main_hand_model.hide()
+		if !in_combat: main_hand_model.hide()
+		else: main_hand_model.show()
 
 func unequip_item(equipment_slot:Equipment.EquipmentSlot) -> void:
 	var item_to_unequip:Equipment = equipped_items[equipment_slot]

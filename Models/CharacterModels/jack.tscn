@@ -367,13 +367,15 @@ bind/72/name = &"DEF-breast.R"
 bind/72/bone = -1
 bind/72/pose = Transform3D(-1, 1.5099585e-07, 7.86597e-17, 1.1634967e-13, -1.04308114e-07, 0.9999998, 1.509957e-07, 1.0000001, -1.1877476e-23, -0.10567349, 0.04328686, -1.3027092)
 
-[node name="CharacterModel" type="Node3D" node_paths=PackedStringArray("character_mesh", "animation_player", "outline_handler", "main_hand_node")]
+[node name="CharacterModel" type="Node3D" node_paths=PackedStringArray("character_mesh", "animation_player", "outline_handler", "main_hand_node", "off_hand_node", "shield_node")]
 script = ExtResource("1_sgfln")
 character_mesh = NodePath("GeneralSkeleton/CharacterMesh")
 animation_player = NodePath("GeneralSkeleton/AnimationPlayer")
 outline_handler = NodePath("OutlineHandler")
 character_texture = ExtResource("1_b5dn6")
 main_hand_node = NodePath("GeneralSkeleton/WeaponBone/MainHandNode")
+off_hand_node = NodePath("GeneralSkeleton/OffHandBone/OffHandNode")
+shield_node = NodePath("GeneralSkeleton/OffHandBone/ShieldNode")
 
 [node name="GeneralSkeleton" type="Skeleton3D" parent="."]
 unique_name_in_owner = true
@@ -906,7 +908,17 @@ bone_name = "DEF-palm.02.R"
 bone_idx = 62
 
 [node name="MainHandNode" type="Node3D" parent="GeneralSkeleton/WeaponBone"]
-transform = Transform3D(0.9983848, -0.014768655, 0.05486159, 0.014762579, 0.9998909, 0.000515759, -0.05486318, 0.00029483438, 0.9984941, 0.00096940994, -0.004431963, 0.016474366)
+transform = Transform3D(0.10599897, 0.99183166, 0.070956685, -0.85961926, 0.1272698, -0.49483013, -0.49981874, -0.0085441675, 0.86608875, 0.0015194416, 0.0071375966, 0.030127615)
+
+[node name="OffHandBone" type="BoneAttachment3D" parent="GeneralSkeleton"]
+transform = Transform3D(0.21023247, 0.39162725, -0.8957846, -0.94087553, -0.16789643, -0.2942177, -0.2656227, 0.90467614, 0.33317512, 0.45320153, 0.97429806, 0.2530291)
+bone_name = "DEF-palm.02.L"
+bone_idx = 37
+
+[node name="OffHandNode" type="Node3D" parent="GeneralSkeleton/OffHandBone"]
+
+[node name="ShieldNode" type="Node3D" parent="GeneralSkeleton/OffHandBone"]
+transform = Transform3D(-0.110255554, -0.95687413, 0.26876706, -0.8892807, 0.21574105, 0.40328172, -0.44387358, -0.19454542, -0.8747163, 0.009852409, 0.0055259615, -0.007149577)
 
 [node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("4_cadwu")

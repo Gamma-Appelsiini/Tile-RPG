@@ -20,4 +20,5 @@ weapon_stats = Dictionary[int, int]({
 item_name = "Wooden Staff"
 inventory_image = ExtResource("1_uge0p")
 item_value = 8
+item_model_path = "res://Tile-RPG/Items/ItemScenes/staff_model.tscn"
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

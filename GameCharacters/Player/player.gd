@@ -41,6 +41,8 @@ func enter_interact_state(interact_animation:CharacterModelHandler.CharAnimation
 func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 	if prev_state == CharacterState.IN_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON,true, true)
+		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
+		hide_weapon.emit()
 		await char_model_handler.animation_player.animation_finished
 		_enable_movement()
 	else:
@@ -51,6 +53,8 @@ func _enter_combat_state(prev_state:CharacterState) -> void:
 	_disable_movement()
 	if prev_state != CharacterState.IN_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
+		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
+		draw_weapon.emit()
 		await char_model_handler.animation_player.animation_finished
 		ready_to_move.emit()
 	else:

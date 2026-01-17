@@ -576,8 +576,8 @@ items_to_generate = Dictionary[int, int]({
 1: 1,
 2: 4,
 4: 3,
-5: 0,
-7: 0
+5: 2,
+7: 5
 })
 unique_id = "TestChest1"
 

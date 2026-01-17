@@ -26,10 +26,11 @@ signal hide_weapon
 @export var infobar:CharacterInfoBar = null
 @export var ai_handler:AIHandler = null
 @export var char_model_handler:CharacterModelHandler = null
+@export var equipment_handler:EquipmentHandler = null
 
 var move_tween:Tween = null
 var stat_handler:StatHandler = null
-var equipment_handler:EquipmentHandler = null
+
 var status_handler:StatusHandler = null
 var character_state:CharacterState = CharacterState.OUT_OF_COMBAT
 
@@ -68,7 +69,7 @@ func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 		hide_weapon.emit()
 	else:
 		char_model_handler.play_idle_animation()
-	
+
 func _enter_combat_state(prev_state:CharacterState) -> void:
 	if prev_state != CharacterState.IN_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
@@ -88,10 +89,6 @@ func _init() -> void:
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
 	stat_handler.owner_died.connect(_die)
 	start_turn.connect(stat_handler.on_turn_start)
-	
-	equipment_handler = EquipmentHandler.new()
-	add_child(equipment_handler)
-	equipment_handler.equipment_owner = self
 	
 	status_handler = StatusHandler.new()
 	add_child(status_handler)
