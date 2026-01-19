@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Jewellery" load_steps=3 format=3 uid="uid://djlh8lkpwruo"]
+
+[ext_resource type="Texture2D" uid="uid://b7oruf0enhfp0" path="res://Tile-RPG/Images/Items/Amulet.png" id="1_fjsfs"]
+[ext_resource type="Script" uid="uid://ctrcuuypkaxu4" path="res://Tile-RPG/Items/jewellery.gd" id="1_xw61u"]
+
+[resource]
+script = ExtResource("1_xw61u")
+base_skill = 251
+equipment_slot = 5
+item_name = "Silver Necklace"
+inventory_image = ExtResource("1_fjsfs")
+item_value = 30
+item_model_path = "res://Tile-RPG/Items/ItemScenes/amulet_model.tscn"
+metadata/_custom_type_script = "uid://ctrcuuypkaxu4"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Gloves" load_steps=3 format=3 uid="uid://c3nqf35wx0ooo"]
+
+[ext_resource type="Script" uid="uid://d06dpwanxbki3" path="res://Tile-RPG/Items/gloves.gd" id="1_q4ma0"]
+[ext_resource type="Texture2D" uid="uid://yy1id5s2nwij" path="res://Tile-RPG/Images/Items/LeatherGloves.png" id="1_yrri0"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_q4ma0")
+defence_type = 301
+base_defence = 5
+equipment_slot = 8
+item_name = "Leather Gloves"
+inventory_image = ExtResource("1_yrri0")
+item_model_path = "res://Tile-RPG/Items/ItemScenes/gloves_evasion_model.tscn"
+metadata/_custom_type_script = "uid://d06dpwanxbki3"

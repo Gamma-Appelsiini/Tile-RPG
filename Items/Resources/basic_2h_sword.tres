@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://ddllco1w0nb10"]
+
+[ext_resource type="Texture2D" uid="uid://5atefkxyvq6y" path="res://Tile-RPG/Images/Items/Sword2h.png" id="1_ixk7k"]
+[ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_yqddr"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_yqddr")
+weapon_type = 57
+hand_type = 1
+scale_stat = 5
+weapon_stats = Dictionary[int, int]({
+1500: 3,
+1501: 7,
+1502: 2,
+1503: 4,
+1504: 120,
+1505: 10
+})
+item_name = "Paladin Sword"
+inventory_image = ExtResource("1_ixk7k")
+item_value = 30
+item_model_path = "res://Tile-RPG/Items/ItemScenes/sword_2H_model.tscn"
+metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

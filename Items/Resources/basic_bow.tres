@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://c4wrcbeitfely"]
+
+[ext_resource type="Texture2D" uid="uid://doe3kwbt1ybhn" path="res://Tile-RPG/Images/Items/Bow.png" id="1_7pqlk"]
+[ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_371hq"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_371hq")
+weapon_type = 59
+hand_type = 1
+scale_stat = 2
+weapon_stats = Dictionary[int, int]({
+1500: 1,
+1501: 4,
+1502: 5,
+1503: 6,
+1504: 135,
+1505: 10
+})
+item_name = "Wooden Bow"
+inventory_image = ExtResource("1_7pqlk")
+item_value = 8
+item_model_path = "res://Tile-RPG/Items/ItemScenes/bow_model.tscn"
+metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

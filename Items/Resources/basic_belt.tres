@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Belt" load_steps=3 format=3 uid="uid://bnbj1eqw6ndnu"]
+
+[ext_resource type="Script" uid="uid://cr6efn875gkuy" path="res://Tile-RPG/Items/belt.gd" id="1_8x3ux"]
+[ext_resource type="Texture2D" uid="uid://ck0d57oab27qd" path="res://Tile-RPG/Images/Items/Belt.png" id="1_cbru6"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_8x3ux")
+equipment_slot = 9
+item_name = "Leather Belt"
+inventory_image = ExtResource("1_cbru6")
+item_value = 3
+item_model_path = "res://Tile-RPG/Items/ItemScenes/belt_model.tscn"
+metadata/_custom_type_script = "uid://cr6efn875gkuy"

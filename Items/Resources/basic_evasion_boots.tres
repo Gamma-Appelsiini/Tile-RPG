@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Boots" load_steps=3 format=3 uid="uid://sdiwk5ssl502"]
+
+[ext_resource type="Texture2D" uid="uid://cn7tbthudfuvs" path="res://Tile-RPG/Images/Items/LeatherBoots.png" id="1_2ntf8"]
+[ext_resource type="Script" uid="uid://bnshrunnw7vqd" path="res://Tile-RPG/Items/boots.gd" id="1_6yl6q"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_6yl6q")
+defence_type = 301
+base_defence = 5
+equipment_slot = 3
+item_name = "Leather Boots"
+inventory_image = ExtResource("1_2ntf8")
+item_value = 6
+item_model_path = "res://Tile-RPG/Items/ItemScenes/boots_evasion_model.tscn"
+metadata/_custom_type_script = "uid://bnshrunnw7vqd"

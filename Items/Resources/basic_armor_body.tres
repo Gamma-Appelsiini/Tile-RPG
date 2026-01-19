@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BodyArmor" load_steps=3 format=3 uid="uid://bh55tw7rcowhx"]
+
+[ext_resource type="Script" uid="uid://dqhxjclyn3ss7" path="res://Tile-RPG/Items/body_armor.gd" id="1_4dxy4"]
+[ext_resource type="Texture2D" uid="uid://bvhgydrw63csk" path="res://Tile-RPG/Images/Items/BodyArmor.png" id="1_5a8uc"]
+
+[resource]
+script = ExtResource("1_4dxy4")
+base_defence = 8
+equipment_slot = 7
+item_name = "Iron Armor"
+inventory_image = ExtResource("1_5a8uc")
+item_value = 12
+item_model_path = "res://Tile-RPG/Items/ItemScenes/armor_body_model.tscn"
+metadata/_custom_type_script = "uid://dqhxjclyn3ss7"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Jewellery" load_steps=3 format=3 uid="uid://c10fj4y3elrq5"]
+
+[ext_resource type="Texture2D" uid="uid://cb0al3lnjwqtk" path="res://Tile-RPG/Images/Items/Ring.png" id="1_ewmut"]
+[ext_resource type="Script" uid="uid://ctrcuuypkaxu4" path="res://Tile-RPG/Items/jewellery.gd" id="1_pnw8h"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_pnw8h")
+equipment_slot = 6
+item_name = "Gold Ring"
+inventory_image = ExtResource("1_ewmut")
+item_value = 25
+item_model_path = "res://Tile-RPG/Items/ItemScenes/ring_model.tscn"
+metadata/_custom_type_script = "uid://ctrcuuypkaxu4"

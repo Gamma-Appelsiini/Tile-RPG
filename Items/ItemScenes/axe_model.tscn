@@ -80,6 +80,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uxo05")
 
 [node name="axe_model" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+collision_layer = 16
+collision_mask = 31
 script = ExtResource("1_riq6w")
 item_mesh = NodePath("Axe")
 

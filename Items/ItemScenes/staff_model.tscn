@@ -79,6 +79,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tfg4r")
 
 [node name="StaffModel" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+collision_layer = 16
+collision_mask = 31
 script = ExtResource("1_gvq3h")
 item_mesh = NodePath("Staff")
 

@@ -144,6 +144,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hloh4")
 
 [node name="shield_model" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+collision_layer = 16
+collision_mask = 31
 script = ExtResource("1_8b3nh")
 item_mesh = NodePath("Shield")
 

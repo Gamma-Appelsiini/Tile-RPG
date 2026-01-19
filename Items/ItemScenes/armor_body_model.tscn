@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://cbbvagtvq7q33"]
 
-[ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_m4cow"]
-[ext_resource type="Texture2D" uid="uid://dwokr0s7shagk" path="res://Tile-RPG/Materials/ItemTextures/basic_armor_armor_texture.png" id="2_up1kl"]
+[ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_nr4ca"]
+[ext_resource type="Texture2D" uid="uid://dwokr0s7shagk" path="res://Tile-RPG/Materials/ItemTextures/basic_armor_armor_texture.png" id="2_od23p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m4cow"]
 size = Vector3(0.5488281, 0.55236816, 0.3095703)
@@ -9,21 +9,21 @@ size = Vector3(0.5488281, 0.55236816, 0.3095703)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3sd5"]
 resource_name = "mesh"
 cull_mode = 2
-albedo_texture = ExtResource("2_up1kl")
+albedo_texture = ExtResource("2_od23p")
 metallic = 0.2766971
 roughness = 0.7420524
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqyro"]
 resource_name = "silver"
 cull_mode = 2
-albedo_texture = ExtResource("2_up1kl")
+albedo_texture = ExtResource("2_od23p")
 metallic = 0.5763151
 roughness = 0.6738825
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4mp6"]
 resource_name = "black"
 cull_mode = 2
-albedo_texture = ExtResource("2_up1kl")
+albedo_texture = ExtResource("2_od23p")
 metallic = 0.46283042
 roughness = 0.5565557
 
@@ -110,7 +110,9 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_72xvs")
 
 [node name="armor_model" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
-script = ExtResource("1_m4cow")
+collision_layer = 16
+collision_mask = 31
+script = ExtResource("1_nr4ca")
 item_mesh = NodePath("Plate")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
