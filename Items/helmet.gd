@@ -49,9 +49,9 @@ func _accuracy_suffix() -> void:
 func _bow_range_suffix() -> void:
 	var new_suffix:Affix = Affix.new()
 	
-	var max:int = 1
-	if item_level > 10: max += 1
-	var amount:int = randi_range(1, max)
+	var max_amount:int = 1
+	if item_level > 10: max_amount += 1
+	var amount:int = randi_range(1, max_amount)
 	new_suffix.type_increase = Stats.SecondaryStat.BOW_RANGE
 	new_suffix.increase_amount = amount
 	new_suffix.affix_name = "Sniping"
@@ -62,9 +62,9 @@ func _bow_range_suffix() -> void:
 func _spell_range_suffix() -> void:
 	var new_suffix:Affix = Affix.new()
 	
-	var max:int = 1
-	if item_level > 10: max += 1
-	var amount:int = randi_range(1, max)
+	var max_amount:int = 1
+	if item_level > 10: max_amount += 1
+	var amount:int = randi_range(1, max_amount)
 	new_suffix.type_increase = Stats.SecondaryStat.SPELL_RANGE
 	new_suffix.increase_amount = amount
 	new_suffix.affix_name = "Reaching"

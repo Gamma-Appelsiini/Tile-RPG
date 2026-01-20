@@ -109,7 +109,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e1lbn")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80rvn"]
-size = Vector3(0.03125, 0.28625488, 0.0126953125)
+size = Vector3(0.041015625, 0.40481567, 0.015625)
 
 [node name="DaggerModel" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
 collision_layer = 16
@@ -118,9 +118,10 @@ script = ExtResource("1_80rvn")
 item_mesh = NodePath("Dagger")
 
 [node name="Dagger" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 mesh = SubResource("ArrayMesh_65mth")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.101623535, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14091492, 0)
 shape = SubResource("BoxShape3D_80rvn")

@@ -64,12 +64,12 @@ script = ExtResource("1_nqwab")
 item_mesh = NodePath("Bow")
 
 [node name="Bow" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.03900002, 0, 0, 0, 0.007000003, 0, 0, 0, 0.0060000033, 0, 0, 0)
+transform = Transform3D(-0.012112507, 0, -0.0057032923, 0, 0.007000003, 0, 0.037071403, 0, -0.0018634629, -0.049746826, 0, 0.019624144)
 lod_bias = 128.0
 mesh = SubResource("ArrayMesh_bx16o")
 skeleton = NodePath("")
 blend_shapes/Draw = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0036577582, -0.122802734)
+transform = Transform3D(-0.2970749, 0, -0.9548541, 0, 1, 0, 0.9548541, 0, -0.2970749, 0.07722616, 0.0036577582, 0.05739154)
 shape = SubResource("BoxShape3D_i0tic")
