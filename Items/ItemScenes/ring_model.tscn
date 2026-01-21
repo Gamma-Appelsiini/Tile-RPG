@@ -75,10 +75,11 @@ shadow_mesh = SubResource("ArrayMesh_62ylv")
 height = 0.03125
 radius = 0.041015625
 
-[node name="RingModel" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+[node name="RingModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_vw1u0")
+collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Ring")
 
 [node name="Ring" type="MeshInstance3D" parent="."]

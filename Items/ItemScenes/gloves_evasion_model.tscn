@@ -49,10 +49,11 @@ shadow_mesh = SubResource("ArrayMesh_xng7c")
 [sub_resource type="BoxShape3D" id="BoxShape3D_hw81f"]
 size = Vector3(0.21972656, 0.051757813, 0.26342773)
 
-[node name="GlovesModel" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+[node name="GlovesModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_o2gn0")
+collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Hand")
 
 [node name="Hand" type="MeshInstance3D" parent="."]

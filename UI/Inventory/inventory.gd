@@ -4,6 +4,7 @@ class_name Inventory
 @onready var inv_slot_grid: GridContainer = %InvSlotGrid
 @onready var equipment_grid: GridContainer = %EquipmentGrid
 @onready var x_button: XButton = $x_button
+@onready var throw_out_area: Control = $ThrowOutArea
 
 const INV_SIZE:int = 15
 const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
@@ -21,8 +22,10 @@ const BG_DICT:Dictionary[Equipment.EquipmentSlot, Texture2D] = {
 	Equipment.EquipmentSlot.OFF_HAND: preload("uid://bke5ek62sccvo"),
 	Equipment.EquipmentSlot.FINGER: preload("uid://cbw5exe7le1dn")}
 const EQU_CORNER:Texture2D = preload("uid://buhoav5pguorp")
+const GROUND_DROP := preload("uid://cuocgxmrrsjwt")
 
 var player:Player = null
+var player_inv_slots:Array[InventorySlot] = []
 var slots:Array[InventorySlot] = []
 var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}  
 var tooltips:Dictionary[Item,ItemTooltip] = {}
@@ -31,9 +34,29 @@ var hovered_slot:InventorySlot = null
 var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
+var drop_item_on_release:bool = false
 
 func _ready() -> void:
 	x_button.x_pressed.connect(func(): self.visible = false)
+	throw_out_area.mouse_entered.connect(func(): drop_item_on_release = true)
+	throw_out_area.mouse_exited.connect(func(): drop_item_on_release = false)
+
+func _drop_item() -> bool:
+	if !drop_item_on_release: return false
+	var selected_item:Item = selected_slot.item_in_slot
+	if selected_item == null: return false
+	
+	#Only drop items from player inv
+	if !player_inv_slots.has(selected_slot) and !equipment_slots.values().has(selected_slot):
+		return false
+	
+	var new_ground_drop:GroundDrop = GROUND_DROP.instantiate()
+	new_ground_drop.set_item(selected_item)
+	GlobalSignals.current_level.add_child(new_ground_drop)
+	new_ground_drop.global_position = player.global_position + Vector3(0,0.5,0)
+	new_ground_drop.shoot_rigidbody()
+	
+	return true
 
 func set_player(new_player:Player) -> void:
 	player = new_player
@@ -208,6 +231,11 @@ func _reset_selecting() -> void:
 func _item_released() -> void:
 	if selected_slot == null: return
 	
+	if _drop_item():
+		selected_slot.remove_item()
+		selected_slot = null
+		return
+	
 	#Hovering over nothing or own slot
 	if hovered_slot == null or hovered_slot == selected_slot or !_possible_to_equip():
 		_reset_selecting()
@@ -259,6 +287,7 @@ func _add_inv_slots() -> void:
 		new_slot.array_pos = i
 		inv_slot_grid.add_child(new_slot)
 		connect_slot(new_slot)
+		player_inv_slots.push_back(new_slot)
 
 func _slot_hovered(slot:InventorySlot) -> void:
 	hovered_slot = slot

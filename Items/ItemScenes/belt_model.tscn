@@ -80,10 +80,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_au6oi")
 
-[node name="BeltModel" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+[node name="BeltModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_i374y")
+collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Belt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

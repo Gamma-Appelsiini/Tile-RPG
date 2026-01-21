@@ -2,7 +2,6 @@ extends Interactable
 class_name GroundDrop
 
 @export var loot_beam:LootBeam = null
-@export var item_model:ItemModel = null
 @export var highlight_material:ShaderMaterial = null
 @export var loot_successful_sound:AudioStream = null
 @export var loot_failed_sound:AudioStream = null
@@ -11,12 +10,17 @@ class_name GroundDrop
 var player_inventory:Inventory = null
 var model_path:String = ""
 var item_drop:Item = null
+var item_model:ItemModel = null
 
 func _ready() -> void:
+	set_process(false)
 	_set_inventory_ref()
 	_on_creation()
 	interact_area.monitoring = false
-	
+
+func _process(_delta: float) -> void:
+	parent_node.global_position = item_model.global_position
+
 func _set_inventory_ref() -> void:
 	var UI := get_tree().get_nodes_in_group("UI")
 	if UI[0] is UIHandler:
@@ -43,17 +47,12 @@ func set_item(new_item:Item) -> void:
 	loot_beam.set_rarity(new_item.item_rarity)
 	
 	if new_item.item_model_path != "":
-		item_model.queue_free()
 		item_model = load(new_item.item_model_path).instantiate()
 		item_model.visible = false
-		
-	var remote := RemoteTransform3D.new()
-	remote.update_rotation = false
-	remote.update_scale = false
-	item_model.add_child(remote)
-	remote.set_remote_node(parent_node.get_path())
+		add_child(item_model)
 
-func _shoot_rigidbody() -> void:
+func shoot_rigidbody() -> void:
+	set_process(true)
 	item_model.item_mesh.material_overlay = highlight_material
 	item_model.appear()
 	

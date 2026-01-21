@@ -3,8 +3,7 @@ class_name ItemModel
 
 signal fire_arrow
 
-#Don't rename default collision shape name
-@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@export var collision_shape_3d: CollisionShape3D = null
 @export var item_mesh:MeshInstance3D
 
 var end_scale:Vector3 = Vector3.ZERO

@@ -7,5 +7,5 @@
 render_priority = 0
 shader = ExtResource("1_2ryvs")
 shader_parameter/main_color = Color(1.0498712, 0.4917399, 1.5720325, 1)
-shader_parameter/blink_speed = 6.0
+shader_parameter/blink_speed = 3.0
 shader_parameter/Transparency_texture = ExtResource("2_i72fq")

@@ -1,26 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuocgxmrrsjwt"]
+[gd_scene load_steps=5 format=3 uid="uid://cuocgxmrrsjwt"]
 
 [ext_resource type="Script" uid="uid://bj5nb64mihlqh" path="res://Tile-RPG/Interactables/ground_drop.gd" id="1_8q27b"]
 [ext_resource type="Material" uid="uid://c5lpnu7c74uau" path="res://Tile-RPG/Materials/ShaderMaterials/highlight_material.tres" id="2_l67ma"]
 [ext_resource type="PackedScene" uid="uid://cmgb3ivkgrbqb" path="res://Tile-RPG/Effects/loot_beam/loot_beam.tscn" id="2_rb758"]
-[ext_resource type="PackedScene" uid="uid://bgobwvrwuxh68" path="res://Tile-RPG/Items/ItemScenes/sword_model.tscn" id="4_oha8q"]
-
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8q27b"]
 height = 0.4
 radius = 0.4
 
-[node name="GroundDrop" type="Node3D" node_paths=PackedStringArray("loot_beam", "item_model", "parent_node", "interact_area", "indicator_place")]
+[node name="GroundDrop" type="Node3D" node_paths=PackedStringArray("loot_beam", "parent_node", "interact_area", "indicator_place")]
 script = ExtResource("1_8q27b")
 loot_beam = NodePath("ParentNode/LootBeam")
-item_model = NodePath("SwordModel")
 highlight_material = ExtResource("2_l67ma")
 parent_node = NodePath("ParentNode")
 interact_area = NodePath("ParentNode/Area3D")
 indicator_place = NodePath("ParentNode/InteractPos")
 interact_text = "Pick Up"
-
-[node name="SwordModel" parent="." instance=ExtResource("4_oha8q")]
+face_interactable = true
 
 [node name="ParentNode" type="Node3D" parent="."]
 

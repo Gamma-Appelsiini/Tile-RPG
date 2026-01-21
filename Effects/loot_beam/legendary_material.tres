@@ -7,5 +7,5 @@
 render_priority = 0
 shader = ExtResource("1_ugwk1")
 shader_parameter/main_color = Color(1.5239617, 0.71660495, 0.086104214, 1)
-shader_parameter/blink_speed = 7.0
+shader_parameter/blink_speed = 3.0
 shader_parameter/Transparency_texture = ExtResource("2_ng6sk")

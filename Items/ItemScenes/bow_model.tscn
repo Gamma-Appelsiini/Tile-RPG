@@ -57,10 +57,11 @@ metadata/extras = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_i0tic"]
 size = Vector3(0.09277344, 1.2503662, 0.25439453)
 
-[node name="BowModel" type="RigidBody3D" node_paths=PackedStringArray("item_mesh")]
+[node name="BowModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_nqwab")
+collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Bow")
 
 [node name="Bow" type="MeshInstance3D" parent="."]
