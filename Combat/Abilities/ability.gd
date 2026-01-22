@@ -38,7 +38,8 @@ const ATTACK_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
 	CharacterModelHandler.CharAnimation.ATTACK_1H: 0.5,
 	CharacterModelHandler.CharAnimation.ATTACK_2H: 0.3,
 	CharacterModelHandler.CharAnimation.ATTACK_BOW: 0.8,
-	CharacterModelHandler.CharAnimation.ATTACK_PUNCH: 0.5
+	CharacterModelHandler.CharAnimation.ATTACK_PUNCH: 0.5,
+	CharacterModelHandler.CharAnimation.CAST_SPELL: 0.4,
 }
 
 var ability_owner:GameCharacter = null
@@ -46,6 +47,10 @@ var current_cooldown:int = 0
 var ability_description:String = "Default Ability Description"
 var target_char:GameCharacter = null
 var target_tile:Tile = null
+
+func _visualize_targetable_tiles() -> void:
+	var tile_manager:TileManager
+	pass
 
 #Override
 func get_description() -> String:

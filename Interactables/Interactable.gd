@@ -14,6 +14,7 @@ class_name Interactable
 
 const INTERACT_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
 	CharacterModelHandler.CharAnimation.INTERACT: 0.3,
+	CharacterModelHandler.CharAnimation.PICKUP: 0.85,
 }
 
 var used:bool = false

@@ -2,6 +2,7 @@ extends Node
 class_name AbilityTargeter
 
 const AOE_INDICATOR:PackedScene = preload("uid://mn3gwrbcqycm")
+const RANGE_INDICATOR := preload("uid://ff1heogqgu75")
 
 var player:Player = null
 var player_camera:Camera3D = null
@@ -12,10 +13,19 @@ var hovered_character:GameCharacter = null
 var hovered_tile:Tile = null
 var aoe_indicators:Array[Node3D] = []
 var input_ok:bool = false
+var range_indicators:Array[RangeIndicator] = []
 
 func _ready() -> void:
 	set_process(false)
 	set_process_input(false)
+	_add_range_tiles(20)
+
+func _add_range_tiles(amount:int) -> void:
+	while len(range_indicators) < amount:
+		var new_indicator:RangeIndicator = RANGE_INDICATOR.instantiate()
+		range_indicators.push_back(new_indicator)
+		new_indicator.hide()
+		add_child(new_indicator)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -28,6 +38,24 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	_get_ability_target()
 
+func _hide_range_indicators() -> void:
+	for ind:RangeIndicator in range_indicators:
+		ind._reset_color()
+		ind.hide()
+
+func _visualize_tiles_in_range() -> void:
+	var player_tile:Tile = tile_manager.char_tiles[player]
+	var tiles_in_aoe:Array[Tile] = tile_manager.get_tiles_in_aoe(player_tile, selected_ability.get_range())
+	tiles_in_aoe.erase(player_tile)
+	_add_range_tiles(len(tiles_in_aoe))
+	
+	for i:int in len(tiles_in_aoe):
+		var indicator:RangeIndicator = range_indicators[i]
+		indicator.global_position = tiles_in_aoe[i].global_position
+		if tiles_in_aoe[i].occupant:
+			indicator.set_enemy_color()
+		indicator.show()
+
 func set_ability_to_target(new_ability:Ability) -> void:
 	print_debug("set abi to target")
 	if new_ability == null: return
@@ -39,11 +67,13 @@ func set_ability_to_target(new_ability:Ability) -> void:
 		player_camera = player.player_camera
 
 	selected_ability = new_ability
+	_visualize_tiles_in_range()
 	set_process(true)
 	set_process_input(true)
 
 func cancel_ability_targeting() -> void:
 	print_debug("cancel abi targeting")
+	_hide_range_indicators()
 	set_process_input(false)
 	set_process(false)
 	_hide_aoe()

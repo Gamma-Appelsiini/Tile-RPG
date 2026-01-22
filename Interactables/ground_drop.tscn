@@ -17,6 +17,7 @@ interact_area = NodePath("ParentNode/Area3D")
 indicator_place = NodePath("ParentNode/InteractPos")
 interact_text = "Pick Up"
 face_interactable = true
+interact_animation = 21
 
 [node name="ParentNode" type="Node3D" parent="."]
 
