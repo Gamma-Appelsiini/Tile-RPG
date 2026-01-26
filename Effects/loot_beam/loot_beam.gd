@@ -7,9 +7,8 @@ signal beam_hidden
 @export var scale_node:Node3D = null
 @export var beams: CPUParticles3D = null
 
-
 const START_SCALE:Vector3 = Vector3(0.01,0.01,0.01)
-var end_scale:Vector3 = Vector3.ZERO
+const END_SCALE:Vector3 = Vector3(1,1,1)
 
 const MATERIALS:Dictionary[Item.ItemRarity,ShaderMaterial] = {
 	Item.ItemRarity.POOR: preload("res://Tile-RPG/Effects/loot_beam/poor_material.tres"),
@@ -21,13 +20,13 @@ const MATERIALS:Dictionary[Item.ItemRarity,ShaderMaterial] = {
 	Item.ItemRarity.FABLED: preload("res://Tile-RPG/Effects/loot_beam/fabled_material.tres"),}
 	
 const PARTICLE_AMOUNTS:Dictionary[Item.ItemRarity,int] = {
-	Item.ItemRarity.POOR: 2,
-	Item.ItemRarity.COMMON: 3,
-	Item.ItemRarity.RARE: 4,
-	Item.ItemRarity.EPIC: 5,
-	Item.ItemRarity.LEGENDARY: 6,
-	Item.ItemRarity.GOD_ROLL: 7,
-	Item.ItemRarity.FABLED: 8,}
+	Item.ItemRarity.POOR: 1,
+	Item.ItemRarity.COMMON: 2,
+	Item.ItemRarity.RARE: 3,
+	Item.ItemRarity.EPIC: 4,
+	Item.ItemRarity.LEGENDARY: 5,
+	Item.ItemRarity.GOD_ROLL: 6,
+	Item.ItemRarity.FABLED: 7,}
 	
 const PARTICLE_COLORS:Dictionary[Item.ItemRarity,Color] = {
 	Item.ItemRarity.POOR: Color("ffffff"),
@@ -46,12 +45,10 @@ func _ready() -> void:
 func set_rarity(new_rarity:Item.ItemRarity) -> void:
 	beam_mesh.material_override = MATERIALS[new_rarity]
 	beams.amount = PARTICLE_AMOUNTS[new_rarity]
-
-	#_handle_trails(new_rarity)
 	
 	if visible:
 		var tween:Tween = create_tween()
-		tween.tween_property(scale_node, "scale", end_scale, 0.2).set_ease(Tween.EASE_OUT)
+		tween.tween_property(scale_node, "scale", END_SCALE, 0.2).set_ease(Tween.EASE_OUT)
 
 func show_beam() -> void:
 	if self.visible: return
@@ -59,7 +56,7 @@ func show_beam() -> void:
 	self.visible = true
 	beams.emitting = true
 	var tween:Tween = create_tween()
-	tween.tween_property(scale_node, "scale", end_scale, 0.6).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(scale_node, "scale", END_SCALE, 0.6).set_ease(Tween.EASE_IN_OUT)
 	
 func hide_beam() -> void:
 	beams.emitting = false
@@ -68,11 +65,3 @@ func hide_beam() -> void:
 	await tween.finished
 	self.visible = false
 	beam_hidden.emit()
-
-func _handle_trails(new_rarity:Item.ItemRarity) -> void:
-	if Item.ItemRarity.RARE > new_rarity:
-		return
-	
-	var material:ParticleProcessMaterial = beams.process_material.duplicate()
-	material.color = PARTICLE_COLORS[new_rarity]
-	beams.process_material = material

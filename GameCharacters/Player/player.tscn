@@ -57,6 +57,7 @@ script = ExtResource("2_42kgy")
 pivot = NodePath("..")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/PlayerCamera"]
+doppler_tracking = 2
 current = true
 
 [node name="InteractHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_51u2s")]

@@ -13,6 +13,7 @@ enum CHARACTER_TYPE {ALLY, ENEMY, SELF}
 enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 
 @export var use_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.NULL
+@export var targeting_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.NULL
 @export var hit_delay:float = 0.2
 
 @export var target_type:TARGET_TYPE = TARGET_TYPE.GAME_CHARACTER

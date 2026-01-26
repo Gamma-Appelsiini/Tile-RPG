@@ -26,7 +26,6 @@ func _ready() -> void:
 	var i:int = 0
 	while 5 > i:
 		var new_ap_3d := AudioStreamPlayer3D.new()
-		add_child(new_ap_3d)
 		position_players.push_back(new_ap_3d)
 		i += 1
 
@@ -56,7 +55,10 @@ func _play_3d_audio(new_stream:AudioStream, audio_type:AUDIO_TYPE, pos:Vector3) 
 	if free_player == null:
 		free_player = AudioStreamPlayer3D.new()
 		position_players.push_back(free_player)
-		
+
+	if free_player.get_parent(): free_player.get_parent().remove_child(free_player)
+	GlobalSignals.current_level.add_child(free_player)
+	
 	free_player.volume_linear = volumes[audio_type]
 	free_player.stream = new_stream
 	free_player.global_position = pos

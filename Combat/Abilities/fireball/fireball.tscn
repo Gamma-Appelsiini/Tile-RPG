@@ -6,6 +6,7 @@
 [node name="Fireball" type="Node3D"]
 script = ExtResource("1_towhf")
 use_animation = 5
+targeting_animation = 6
 target_type = 0
 ability_tags = Array[int]([1, 4, 5])
 ability_icon = ExtResource("2_rgogx")

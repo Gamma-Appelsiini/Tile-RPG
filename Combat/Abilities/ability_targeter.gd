@@ -20,9 +20,9 @@ func _ready() -> void:
 	set_process_input(false)
 	_add_range_tiles(20)
 
-func _start_casting_animation() -> void:
-	if !selected_ability.use_animation == CharacterModelHandler.CharAnimation.CAST_SPELL: return
-	player.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.CASTING,false)
+func _start_targeting_animation() -> void:
+	if selected_ability.targeting_animation == CharacterModelHandler.CharAnimation.NULL: return
+	player.char_model_handler.play_animation(selected_ability.targeting_animation,false)
 
 func _add_range_tiles(amount:int) -> void:
 	while len(range_indicators) < amount:
@@ -71,13 +71,14 @@ func set_ability_to_target(new_ability:Ability) -> void:
 		player_camera = player.player_camera
 
 	selected_ability = new_ability
-	_start_casting_animation()
+	_start_targeting_animation()
 	_visualize_tiles_in_range()
 	set_process(true)
 	set_process_input(true)
 
 func cancel_ability_targeting() -> void:
 	print_debug("cancel abi targeting")
+	player.char_model_handler.play_idle_animation()
 	_hide_range_indicators()
 	set_process_input(false)
 	set_process(false)

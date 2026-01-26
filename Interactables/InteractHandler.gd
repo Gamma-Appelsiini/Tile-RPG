@@ -9,6 +9,7 @@ class_name InteractHandler
 
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
+var interactable:Interactable = null
 var disabled:bool = false
 var interacting:bool = false
 
@@ -45,33 +46,36 @@ func _interact() -> void:
 		return
 	
 	interacting = true
+	#current_interactee can move away while interacting
+	interactable = current_interactee
 
-	if current_interactee.interact_position:
-		player.move_to_point(current_interactee.interact_position.global_position)
+	if interactable.interact_position:
+		player.move_to_point(interactable.interact_position.global_position)
 		await player.move_complete
 	
-	if current_interactee.face_interactable:
-		player.rotate_towards_point(current_interactee.indicator_place.global_position)
+	if interactable.face_interactable:
+		player.rotate_towards_point(interactable.indicator_place.global_position)
 		await player.rotation_complete
 
-	if current_interactee.interact_animation != CharacterModelHandler.CharAnimation.NULL:
-		player.enter_interact_state(current_interactee.interact_animation)
-		if current_interactee.INTERACT_DELAYS.has(current_interactee.interact_animation):
-			await get_tree().create_timer(current_interactee.INTERACT_DELAYS[current_interactee.interact_animation]).timeout
+	if interactable.interact_animation != CharacterModelHandler.CharAnimation.NULL:
+		player.enter_interact_state(interactable.interact_animation)
+		if interactable.INTERACT_DELAYS.has(interactable.interact_animation):
+			await get_tree().create_timer(interactable.INTERACT_DELAYS[interactable.interact_animation]).timeout
 
 	_interact_with_interactable()
+	interactable = null
 	interacting = false
 	
 func _interact_with_interactable() -> void:
 	GlobalSignals.play_audio.emit(interaction_sound, AudioManager.AUDIO_TYPE.UI)
-	current_interactee.interact()
+	interactable.interact()
 	
-	if current_interactee == null :
+	if interactable == null :
 		interactables.clear()
 		return
-	if current_interactee.oneshot:
-		interactables.erase(current_interactee)
-		current_interactee.handle_oneshot()
+	if interactable.oneshot:
+		interactables.erase(interactable)
+		interactable.handle_oneshot()
 		_show_right_interactee()
 		
 
