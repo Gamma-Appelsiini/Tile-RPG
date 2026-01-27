@@ -1,11 +1,11 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bpp5r1ole4lcq"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bpp5r1ole4lcq"]
 
 [ext_resource type="Texture2D" uid="uid://c16q4hensg0jj" path="res://Tile-RPG/Images/Shaders/BeamCross.png" id="1_f2tsl"]
 
 [resource]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.88341594, 0.9880635, 1.1450349, 0.093219265)
+albedo_color = Color(0.88341594, 0.9880635, 1.1450349, 0.11764706)
 albedo_texture = ExtResource("1_f2tsl")
 disable_receive_shadows = true
 billboard_mode = 3

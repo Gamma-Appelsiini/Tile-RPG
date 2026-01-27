@@ -54,6 +54,12 @@ const DISSOLVE_TIME:float = 1.0
 const DELAYS:Dictionary[CharAnimation,float] = {
 	CharAnimation.DRAW_WEAPON: 0.35,
 	}
+const CASTING_EFFECT := preload("uid://bij1r8xadcvhl")
+const GROUND_CASTING_EFFECT := preload("uid://2u1utrq13bbp")
+
+var casting_hand_effect:Effect = null
+var casting_ground_effect:Effect = null
+
 
 func die() -> void:
 	play_animation(DEATH_ANIMATIONS.pick_random(), false)
@@ -72,7 +78,15 @@ func die() -> void:
 	
 	await tween.finished
 	game_character.queue_free()
-	
+
+func start_casting_effects() -> void:
+	casting_hand_effect.play_effect()
+	casting_ground_effect.play_effect()
+
+func stop_casting_effects() -> void:
+	casting_hand_effect.end_effect()
+	casting_ground_effect.end_effect()
+
 #TODO
 func _player_death() -> void:
 	pass
@@ -80,6 +94,12 @@ func _player_death() -> void:
 func _ready() -> void:
 	if get_parent_node_3d() is GameCharacter: game_character = get_parent_node_3d()
 	play_idle_animation()
+	
+	casting_hand_effect = CASTING_EFFECT.instantiate()
+	casting_ground_effect = GROUND_CASTING_EFFECT.instantiate()
+	
+	off_hand_node.add_child(casting_hand_effect)
+	character_mesh.add_child(casting_ground_effect)
 
 func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_backwards:bool = false) -> void:
 	if game_character.character_state == game_character.CharacterState.STUNNED or game_character.character_state == game_character.CharacterState.FROZEN: return

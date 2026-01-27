@@ -4,6 +4,7 @@ class_name Effect
 signal effect_done
 
 @export var start_on_spawn:bool = false
+@export var delete_on_end:bool = true
 @export var looping:bool = false
 @export var start_sound:AudioStream = null
 @export var end_sound:AudioStream = null
@@ -17,10 +18,10 @@ const PLAY_STRING:String = "play_effect"
 var asp:AudioStreamPlayer3D = null
 
 func _ready() -> void:
+	hide()
 	_handle_start()
 
 func _handle_start() -> void:
-	effect_done.connect(queue_free)
 	if looping and effect_sound:
 		asp = AudioStreamPlayer3D.new()
 		asp.stream = effect_sound
@@ -30,6 +31,8 @@ func _handle_start() -> void:
 
 
 func play_effect() -> void:
+	show()
+	
 	if starting_animation != "":
 		GlobalSignals.play_audio.emit(start_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 		animation_player.play(starting_animation)
@@ -40,7 +43,7 @@ func play_effect() -> void:
 	if !looping:
 		await get_tree().create_timer(animation_player.current_animation_length).timeout
 		end_effect()
-	else: asp.play()
+	elif looping and effect_sound: asp.play()
 
 func end_effect() -> void:
 	animation_player.stop()
@@ -55,7 +58,11 @@ func end_effect() -> void:
 	
 	GlobalSignals.play_audio.emit(end_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	effect_done.emit()
-	queue_free()
+	
+	if delete_on_end:
+		queue_free()
+	else:
+		hide()
 
 func _play_effect_sound() -> void:
 	GlobalSignals.play_audio.emit(effect_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)

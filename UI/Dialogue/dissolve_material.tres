@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cm43sfqma4c3s"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cm43sfqma4c3s"]
 
 [ext_resource type="Shader" uid="uid://ci1nccddk3ck3" path="res://Tile-RPG/Shaders/2d_dissolve.gdshader" id="1_76jxm"]
 

@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://qwh5idv3iyrm"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://qwh5idv3iyrm"]
 
 [ext_resource type="Shader" uid="uid://dg3r3qgqwp54s" path="res://Tile-RPG/Shaders/improved_globe_shader.gdshader" id="1_66v63"]
 

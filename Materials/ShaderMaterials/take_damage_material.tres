@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b72rjc52ql4wf"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b72rjc52ql4wf"]
 
 [ext_resource type="Shader" uid="uid://6orvm2x3hydh" path="res://Tile-RPG/Shaders/take_damage_shader.gdshader" id="1_gau7g"]
 

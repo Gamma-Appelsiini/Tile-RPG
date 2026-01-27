@@ -23,6 +23,15 @@ func _ready() -> void:
 func _start_targeting_animation() -> void:
 	if selected_ability.targeting_animation == CharacterModelHandler.CharAnimation.NULL: return
 	player.char_model_handler.play_animation(selected_ability.targeting_animation,false)
+	
+	if selected_ability.targeting_animation == CharacterModelHandler.CharAnimation.CASTING:
+		player.char_model_handler.start_casting_effects()
+		
+func _stop_targeting_animation() -> void:
+	player.char_model_handler.play_idle_animation()
+	
+	if selected_ability.targeting_animation == CharacterModelHandler.CharAnimation.CASTING:
+		player.char_model_handler.stop_casting_effects()
 
 func _add_range_tiles(amount:int) -> void:
 	while len(range_indicators) < amount:
@@ -78,7 +87,8 @@ func set_ability_to_target(new_ability:Ability) -> void:
 
 func cancel_ability_targeting() -> void:
 	print_debug("cancel abi targeting")
-	player.char_model_handler.play_idle_animation()
+	_stop_targeting_animation()
+	
 	_hide_range_indicators()
 	set_process_input(false)
 	set_process(false)

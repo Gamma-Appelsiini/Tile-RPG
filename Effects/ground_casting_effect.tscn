@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://2u1utrq13bbp"]
+[gd_scene format=3 uid="uid://2u1utrq13bbp"]
 
 [ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_48u7r"]
 [ext_resource type="Shader" uid="uid://dob5k5l0r56ed" path="res://Tile-RPG/Shaders/ground_magic_shader.gdshader" id="2_lll1l"]
@@ -407,25 +407,24 @@ size = 0.03
 section_length = 0.3
 section_segments = 8
 
-[node name="GroundCastingEffect" type="Node3D" node_paths=PackedStringArray("animation_player")]
+[node name="GroundCastingEffect" type="Node3D" unique_id=296635157 node_paths=PackedStringArray("animation_player")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0)
 script = ExtResource("1_48u7r")
-start_on_spawn = true
+delete_on_end = false
 looping = true
 animation_player = NodePath("AnimationPlayer")
 starting_animation = "start"
 ending_animation = "end"
 
-[node name="PlaneMesh" type="MeshInstance3D" parent="."]
+[node name="PlaneMesh" type="MeshInstance3D" parent="." unique_id=357415724]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.025, 0)
 material_override = SubResource("ShaderMaterial_7bqv7")
 mesh = SubResource("PlaneMesh_h6p2a")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_foplb")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1504021784]
+libraries/ = SubResource("AnimationLibrary_foplb")
 
-[node name="Balls" type="CPUParticles3D" parent="."]
+[node name="Balls" type="CPUParticles3D" parent="." unique_id=1877751583]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 emitting = false
 amount = 12
@@ -446,7 +445,7 @@ scale_amount_min = 0.25
 scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_8hn51")
 
-[node name="Trails" type="GPUParticles3D" parent="."]
+[node name="Trails" type="GPUParticles3D" parent="." unique_id=1824771745]
 material_override = SubResource("StandardMaterial3D_37i5g")
 emitting = false
 amount = 3

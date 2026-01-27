@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c0y1j817t4323"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c0y1j817t4323"]
 
 [ext_resource type="Shader" uid="uid://bb8rb8x4hb8dv" path="res://Tile-RPG/Shaders/xp_orb_shader.gdshader" id="1_qapc5"]
 
