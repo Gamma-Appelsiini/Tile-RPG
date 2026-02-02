@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://ddllco1w0nb10"]
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://ddllco1w0nb10"]
 
 [ext_resource type="Texture2D" uid="uid://5atefkxyvq6y" path="res://Tile-RPG/Images/Items/Sword2h.png" id="1_ixk7k"]
 [ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_yqddr"]

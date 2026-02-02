@@ -64,6 +64,7 @@ func get_tiles_in_aoe(start_tile:Tile, aoe:int) -> Array[Tile]:
 
 	return tiles_in_aoe
 
+
 func _create_indicator() -> void:
 	ground_indicator = GROUND_INDICATOR_SCENE.instantiate()
 	ground_indicator.visible = false
@@ -165,6 +166,9 @@ func _input(event: InputEvent) -> void:
 			disable_shooting()
 			await character_moved
 			enable_shooting()
+	if event.is_action_pressed("Middle Mouse"):
+		if hovered_tile:
+			print("tile pos: ", hovered_tile.global_position)
 
 func enable_shooting() -> void:
 	set_process_input(true)
@@ -257,10 +261,11 @@ func get_tile_distance(start:Tile, end:Tile, allow_diagonal:bool = false) -> int
 func get_tiles_in_range(start:Tile, range_amount:int, allow_diagonal:bool = false) -> Array[Tile]:
 	var possible_tiles:Array[Tile] = []
 	for tile:Tile in tiles.values():
+		if tile == start: continue
 		if get_tile_distance(start, tile) <= range_amount: possible_tiles.push_back(tile)
 	
 	var tiles_in_range:Array[Tile] = []
-	for tile:Tile in tiles_in_range:
+	for tile:Tile in possible_tiles:
 		if get_shortest_path(start, tile, allow_diagonal, true) != []: tiles_in_range.push_back(tile)
 	
 	return tiles_in_range

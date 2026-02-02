@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ff1heogqgu75"]
+[gd_scene format=3 uid="uid://ff1heogqgu75"]
 
 [ext_resource type="Script" uid="uid://djgt7psi6bjia" path="res://Tile-RPG/Combat/Abilities/range_indicator.gd" id="1_hj14p"]
 [ext_resource type="Material" uid="uid://bnioc7r0i0qjx" path="res://Tile-RPG/Materials/ShaderMaterials/range_indicator_material.tres" id="1_lqjr1"]
@@ -6,11 +6,11 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_hj14p"]
 size = Vector2(0.8, 0.8)
 
-[node name="RangeIndicator" type="Node3D" node_paths=PackedStringArray("tile_mesh")]
+[node name="RangeIndicator" type="Node3D" unique_id=1012213800 node_paths=PackedStringArray("tile_mesh")]
 script = ExtResource("1_hj14p")
 tile_mesh = NodePath("MeshInstance3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1525543409]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08831021, 0)
 material_override = ExtResource("1_lqjr1")
 mesh = SubResource("PlaneMesh_hj14p")

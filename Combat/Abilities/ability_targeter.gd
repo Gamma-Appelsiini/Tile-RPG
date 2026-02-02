@@ -58,14 +58,13 @@ func _hide_range_indicators() -> void:
 
 func _visualize_tiles_in_range() -> void:
 	var player_tile:Tile = tile_manager.char_tiles[player]
-	var tiles_in_aoe:Array[Tile] = tile_manager.get_tiles_in_aoe(player_tile, selected_ability.get_range())
-	tiles_in_aoe.erase(player_tile)
-	_add_range_tiles(len(tiles_in_aoe))
+	var tiles_in_range:Array[Tile] = tile_manager.get_tiles_in_range(player_tile, selected_ability.get_range())
+	_add_range_tiles(len(tiles_in_range))
 	
-	for i:int in len(tiles_in_aoe):
+	for i:int in len(tiles_in_range):
 		var indicator:RangeIndicator = range_indicators[i]
-		indicator.global_position = tiles_in_aoe[i].global_position
-		if tiles_in_aoe[i].occupant:
+		indicator.global_position = tiles_in_range[i].global_position
+		if tiles_in_range[i].occupant:
 			indicator.set_enemy_color()
 		indicator.show()
 

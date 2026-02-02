@@ -92,7 +92,7 @@ func _is_target_too_far(targets:Array[GameCharacter], abilities:Array[Ability]) 
 	target_char = targets[0]
 	target_tile = tile_manager.char_tiles[target_char]
 	
-	if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: return true
+	if _get_tiles_where_ability_in_range() == []: return true
 	
 	return false
 
@@ -124,7 +124,7 @@ func _use_ability_with_tag(tag:Ability.ABILITY_TAG, targets:Array[GameCharacter]
 	
 		for abi:Ability in usable_abilities:
 			chosen_ability = abi
-			if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: possible_abilities.erase(abi)
+			if _get_tiles_where_ability_in_range() == []: possible_abilities.erase(abi)
 			chosen_ability = null
 			
 		if !possible_abilities.is_empty(): break
@@ -286,7 +286,7 @@ func _attack_closest_enemy() -> bool:
 	var usable_offensive_abilities:Array[Ability] = _filter_non_usable_abilities(offensive_abilities)
 	for abi:Ability in usable_offensive_abilities:
 		chosen_ability = abi
-		if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: usable_offensive_abilities.erase(abi)
+		if _get_tiles_where_ability_in_range() == []: usable_offensive_abilities.erase(abi)
 		chosen_ability = null
 		
 	if usable_offensive_abilities.is_empty():
@@ -305,7 +305,7 @@ func _attack_lowest_health_enemy() -> bool:
 	var usable_offensive_abilities:Array[Ability] = _filter_non_usable_abilities(offensive_abilities)
 	for abi:Ability in usable_offensive_abilities:
 		chosen_ability = abi
-		if _get_tiles_where_ability_in_range(tiles_to_move_to) == []: usable_offensive_abilities.erase(abi)
+		if _get_tiles_where_ability_in_range() == []: usable_offensive_abilities.erase(abi)
 		chosen_ability = null
 		
 	if usable_offensive_abilities.is_empty():
@@ -321,7 +321,7 @@ func _use_the_best_ability(usable_abilities:Array[Ability]) -> void:
 	else: chosen_ability = usable_abilities[0]
 	
 	var current_tile:Tile = tile_manager.char_tiles[combatant]
-	var tiles:Array[Tile] = _get_tiles_where_ability_in_range(tiles_to_move_to)
+	var tiles:Array[Tile] = _get_tiles_where_ability_in_range()
 	if target_char != combatant:
 		if !tiles.has(current_tile):
 			_move_to_tile(tiles.pick_random())
@@ -369,18 +369,23 @@ func _set_teams() -> void:
 		
 	friendlies.erase(combatant)
 
-func _get_tiles_where_ability_in_range(reachable_tiles:Array[Tile]) -> Array[Tile]:
+func _get_tiles_where_ability_in_range() -> Array[Tile]:
 	_set_reachable_tiles()
 	var in_range_tiles:Array[Tile] = []
+	asdasd()
 	
 	chosen_ability.target_tile = target_tile
 	chosen_ability.target_char = target_tile.occupant
-	for tile:Tile in reachable_tiles:
+	for tile:Tile in tiles_to_move_to:
 		if chosen_ability._is_in_range(tile): in_range_tiles.push_back(tile)
 	
 	chosen_ability.target_tile = null
 	chosen_ability.target_char = null
 	return in_range_tiles
+
+func asdasd():
+	for tile in tiles_to_move_to:
+		if tile.global_position == Vector3(3.0, 0.0, 4.0): print("YES Vector3(3.0, 0.0, 4.0) is in tiles to move to")
 
 func _get_possible_tiles_to_move_to() -> Array[Tile]:
 	var possibles:Array[Tile] = []
@@ -391,7 +396,7 @@ func _get_possible_tiles_to_move_to() -> Array[Tile]:
 		if tile.blocked: continue
 		if tile_manager.get_tile_distance(combatant_tile, tile) <= movement_left:
 			possibles.push_back(tile)
-	
+
 	return possibles
 
 func _get_reachable_tiles(possible_tiles:Array[Tile]) -> Array[Tile]:
@@ -402,7 +407,9 @@ func _get_reachable_tiles(possible_tiles:Array[Tile]) -> Array[Tile]:
 	for tile:Tile in possible_tiles:
 		var path:Array[Tile] = tile_manager.get_shortest_path(combatant_tile,tile)
 		if path == []: continue
-		elif len(path) > move_amount: continue
+		#Path contains starting tile so move amount + 1
+		elif len(path) > move_amount + 1: 
+			continue
 		reachable_tiles.push_back(tile)
 	
 	return reachable_tiles

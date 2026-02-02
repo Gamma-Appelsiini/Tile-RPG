@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0hjepdv625rx"]
+[gd_scene format=3 uid="uid://d0hjepdv625rx"]
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="2_avm5h"]
@@ -14,11 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.tscn" id="10_60sei"]
 [ext_resource type="PackedScene" uid="uid://cc2jlwv1hf0dd" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.tscn" id="11_t6tkx"]
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
-[ext_resource type="AudioStream" uid="uid://cbxtrq1o2v6jn" path="res://Tile-RPG/Sounds/Music/CombatStart.wav" id="14_274ut"]
+[ext_resource type="AudioStream" uid="uid://dgatv1yix757b" path="res://Tile-RPG/Sounds/Music/combat_start.mp3" id="15_t6tkx"]
 
-[node name="MainScene" type="Node3D"]
+[node name="MainScene" type="Node3D" unique_id=756759122]
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "ui_handler", "ability_targeter")]
+[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("inventory", "globe_ui", "ui_handler", "ability_targeter")]
 script = ExtResource("1_t2t4i")
 inventory = NodePath("../UIHandler/Inventory")
 globe_ui = NodePath("../UIHandler/GlobeUI")
@@ -26,7 +26,7 @@ ui_handler = NodePath("../UIHandler")
 ability_targeter = NodePath("../AbilityTargeter")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
-[node name="UIHandler" type="Control" parent="." node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter", "combat_ui", "menu_buttons") groups=["UI"]]
+[node name="UIHandler" type="Control" parent="." unique_id=2075231115 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter", "combat_ui", "menu_buttons") groups=["UI"]]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -46,58 +46,58 @@ ability_targeter = NodePath("../AbilityTargeter")
 combat_ui = NodePath("CombatUI")
 menu_buttons = NodePath("MenuButtons")
 
-[node name="GlobeUI" parent="UIHandler" instance=ExtResource("6_nqssf")]
+[node name="GlobeUI" parent="UIHandler" unique_id=2098997298 instance=ExtResource("6_nqssf")]
 unique_name_in_owner = true
 layout_mode = 1
 
-[node name="AbilityBar" parent="UIHandler" node_paths=PackedStringArray("ability_targeter") instance=ExtResource("4_ivirr")]
+[node name="AbilityBar" parent="UIHandler" unique_id=1958858202 node_paths=PackedStringArray("ability_targeter") instance=ExtResource("4_ivirr")]
 unique_name_in_owner = true
 layout_mode = 1
 ability_targeter = NodePath("../../AbilityTargeter")
 
-[node name="DialogueWindow" parent="UIHandler" instance=ExtResource("7_efb4g")]
+[node name="DialogueWindow" parent="UIHandler" unique_id=257514179 instance=ExtResource("7_efb4g")]
 visible = false
 layout_mode = 1
 
-[node name="StatWindow" parent="UIHandler" instance=ExtResource("3_0jhli")]
+[node name="StatWindow" parent="UIHandler" unique_id=63015506 instance=ExtResource("3_0jhli")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="Inventory" parent="UIHandler" instance=ExtResource("4_muwej")]
+[node name="Inventory" parent="UIHandler" unique_id=457064333 instance=ExtResource("4_muwej")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="LootWindow" parent="UIHandler" node_paths=PackedStringArray("player_inventory") instance=ExtResource("5_r1gav")]
+[node name="LootWindow" parent="UIHandler" unique_id=1817603244 node_paths=PackedStringArray("player_inventory") instance=ExtResource("5_r1gav")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 player_inventory = NodePath("../Inventory")
 
-[node name="AbilitiesContainer" parent="UIHandler" node_paths=PackedStringArray("ability_bar") instance=ExtResource("9_a4mdm")]
+[node name="AbilitiesContainer" parent="UIHandler" unique_id=2097854834 node_paths=PackedStringArray("ability_bar") instance=ExtResource("9_a4mdm")]
 visible = false
 layout_mode = 1
 ability_bar = NodePath("../AbilityBar")
 
-[node name="CombatUI" parent="UIHandler" instance=ExtResource("10_60sei")]
+[node name="CombatUI" parent="UIHandler" unique_id=1728485190 instance=ExtResource("10_60sei")]
 visible = false
 layout_mode = 1
 
-[node name="MenuButtons" parent="UIHandler" instance=ExtResource("11_t6tkx")]
+[node name="MenuButtons" parent="UIHandler" unique_id=849139490 instance=ExtResource("11_t6tkx")]
 layout_mode = 1
 
-[node name="AudioManager" type="Node3D" parent="."]
+[node name="AudioManager" type="Node3D" parent="." unique_id=2050587167]
 script = ExtResource("8_pu26t")
 metadata/_custom_type_script = "uid://dg2l3uhho1dlk"
 
-[node name="AbilityTargeter" type="Node" parent="."]
+[node name="AbilityTargeter" type="Node" parent="." unique_id=529246435]
 unique_name_in_owner = true
 script = ExtResource("10_8wimm")
 metadata/_custom_type_script = "uid://duq8yqsolme5u"
 
-[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("combat_ui")]
+[node name="CombatManager" type="Node" parent="." unique_id=412127291 node_paths=PackedStringArray("combat_ui")]
 script = ExtResource("13_t6tkx")
 combat_ui = NodePath("../UIHandler/CombatUI")
-combat_start_music = ExtResource("14_274ut")
+combat_start_music = ExtResource("15_t6tkx")
 metadata/_custom_type_script = "uid://dwdy8svwx3gnc"

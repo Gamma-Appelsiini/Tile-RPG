@@ -150,7 +150,7 @@ func _is_in_range(override_tile:Tile = null) -> bool:
 		if target_char == ability_owner: return true
 		var ability_target_tile:Tile = tile_manager.char_tiles[target_char]
 		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile, allow_diagonal)
-	
+
 	if distance == -1 or distance > get_range():
 		return false
 	

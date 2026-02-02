@@ -18,17 +18,18 @@ const PLAY_STRING:String = "play_effect"
 var asp:AudioStreamPlayer3D = null
 
 func _ready() -> void:
-	hide()
 	_handle_start()
 
 func _handle_start() -> void:
+	hide()
+	
 	if looping and effect_sound:
 		asp = AudioStreamPlayer3D.new()
 		asp.stream = effect_sound
 		add_child(asp)
 	
 	if start_on_spawn: play_effect()
-
+	
 
 func play_effect() -> void:
 	show()
