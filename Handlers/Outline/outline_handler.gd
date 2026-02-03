@@ -16,12 +16,33 @@ const OUTLINES:Dictionary[OUTLINE_TYPE, ShaderMaterial] = {
 	OUTLINE_TYPE.NEUTRAL: NEUTRAL_OUTLINE,
 	OUTLINE_TYPE.OBJECT: OBJECT_OUTLINE,}
 
+const CHARACTER_TYPES:Array[OUTLINE_TYPE] = [OUTLINE_TYPE.ENEMY, OUTLINE_TYPE.FRIENDLY]
+const CHARACTER_CIRCLE := preload("uid://m1q7emmmfpad")
+const CIRCLE_MATERIALS:Dictionary[OUTLINE_TYPE, ShaderMaterial] = {
+	OUTLINE_TYPE.ENEMY: preload("uid://b0umj4yqby8an"),
+	OUTLINE_TYPE.FRIENDLY: preload("uid://d3jjo2h4hbf03"),
+	}
+
+var character_circle:MeshInstance3D = null
+
 func _ready() -> void:
 	GlobalSignals.show_outline.connect(_show_outline)
 	GlobalSignals.hide_outline.connect(_hide_outline)
 	GlobalSignals.show_outline_on_target.connect(_show_specific_outline)
 	GlobalSignals.hide_outline_on_target.connect(_hide_specific_outline)
+	_add_char_circle()
+
+func _add_char_circle() -> void:
+	if !CHARACTER_TYPES.has(outline_type): return
 	
+	character_circle = CHARACTER_CIRCLE.instantiate()
+	mesh_to_outline.add_child(character_circle)
+	character_circle.hide()
+	character_circle.material_override = CIRCLE_MATERIALS[outline_type]
+	
+	GlobalSignals.combat_start.connect(func(): character_circle.show())
+	GlobalSignals.combat_end.connect(func(): character_circle.hide())
+
 func _show_specific_outline(target:Node3D) -> void:
 	if get_parent() == target:
 		_show_outline()

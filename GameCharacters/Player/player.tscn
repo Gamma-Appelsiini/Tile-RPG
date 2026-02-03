@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dok2fbe3dlibd"]
+[gd_scene format=3 uid="uid://dok2fbe3dlibd"]
 
 [ext_resource type="Script" uid="uid://cjciru25l281t" path="res://Tile-RPG/GameCharacters/Player/player.gd" id="1_1iwi1"]
 [ext_resource type="Resource" uid="uid://b2olp676jv13w" path="res://Tile-RPG/GameCharacters/test_resourece.tres" id="2_3oamb"]
@@ -15,7 +15,7 @@
 radius = 0.3
 height = 1.7412109
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "interact_handler", "hp_globe", "spirit_globe", "heigth_node", "infobar", "char_model_handler", "equipment_handler")]
+[node name="Player" type="CharacterBody3D" unique_id=1267163367 node_paths=PackedStringArray("player_camera", "interact_handler", "hp_globe", "spirit_globe", "heigth_node", "infobar", "char_model_handler", "equipment_handler")]
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_1iwi1")
@@ -34,16 +34,16 @@ infobar = NodePath("CharacterInfoBar")
 char_model_handler = NodePath("CharacterModel")
 equipment_handler = NodePath("EquipmentHandler")
 
-[node name="CharacterModel" parent="." instance=ExtResource("4_udvo0")]
+[node name="CharacterModel" parent="." unique_id=1275603827 instance=ExtResource("4_udvo0")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1079198810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8702148, 0)
 shape = SubResource("CapsuleShape3D_42kgy")
 
-[node name="CameraPivot" type="Node3D" parent="."]
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1027254121]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.15003, 0)
 
-[node name="PlayerCamera" type="Camera3D" parent="CameraPivot" node_paths=PackedStringArray("pivot")]
+[node name="PlayerCamera" type="Camera3D" parent="CameraPivot" unique_id=28469967 node_paths=PackedStringArray("pivot")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3.57628e-07, 4, 2.82843)
 cull_mask = 262143
@@ -56,33 +56,33 @@ far = 50.0
 script = ExtResource("2_42kgy")
 pivot = NodePath("..")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/PlayerCamera"]
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/PlayerCamera" unique_id=820805951]
 doppler_tracking = 2
 current = true
 
-[node name="InteractHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_51u2s")]
+[node name="InteractHandler" parent="." unique_id=140095896 node_paths=PackedStringArray("player") instance=ExtResource("3_51u2s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30016, 0)
 player = NodePath("..")
 
-[node name="GlobesNode" type="Node3D" parent="."]
+[node name="GlobesNode" type="Node3D" parent="." unique_id=1753559343]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.15003, 0)
 
-[node name="HpGlobe" parent="GlobesNode" instance=ExtResource("5_kd85i")]
+[node name="HpGlobe" parent="GlobesNode" unique_id=835374489 instance=ExtResource("5_kd85i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 
-[node name="SpiritGlobe" parent="GlobesNode" instance=ExtResource("5_kd85i")]
+[node name="SpiritGlobe" parent="GlobesNode" unique_id=545790941 instance=ExtResource("5_kd85i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
 liquid_type = 1
 
-[node name="EffectHandler" type="Node" parent="."]
+[node name="EffectHandler" type="Node" parent="." unique_id=666009574]
 script = ExtResource("8_x0jno")
 metadata/_custom_type_script = "uid://dx5v73ugqm3sk"
 
-[node name="HeightNode" type="Node3D" parent="."]
+[node name="HeightNode" type="Node3D" parent="." unique_id=1861802294]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91209, 0)
 
-[node name="CharacterInfoBar" parent="." instance=ExtResource("9_udvo0")]
+[node name="CharacterInfoBar" parent="." unique_id=2127654214 instance=ExtResource("9_udvo0")]
 
-[node name="EquipmentHandler" type="Node" parent="."]
+[node name="EquipmentHandler" type="Node" parent="." unique_id=1897239607]
 script = ExtResource("10_5ci2u")
 metadata/_custom_type_script = "uid://c4xywaxpmfcw0"

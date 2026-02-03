@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://mn3gwrbcqycm"]
+[gd_scene format=4 uid="uid://mn3gwrbcqycm"]
 
 [ext_resource type="Material" uid="uid://c3x48f3htyqei" path="res://Tile-RPG/Combat/Abilities/aoe_material2.tres" id="1_66hqh"]
 
@@ -34,9 +34,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b7o7y")
 
-[node name="AoeIndicator" type="Node3D"]
+[node name="AoeIndicator" type="Node3D" unique_id=1204574438]
 
-[node name="Cube2" type="MeshInstance3D" parent="."]
+[node name="Cube2" type="MeshInstance3D" parent="." unique_id=1271492782]
 material_override = ExtResource("1_66hqh")
 mesh = SubResource("ArrayMesh_f7w2x")
 skeleton = NodePath("")

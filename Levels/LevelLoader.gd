@@ -123,4 +123,5 @@ func change_levels(new_level_id:String, loading:bool = false) -> void:
 
 func save_player() -> void:
 	player.save_to_data(save_data)
+	
 	#TODO add player specific saving (inventory, quests)

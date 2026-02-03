@@ -59,12 +59,12 @@ ability_targeter = NodePath("../../AbilityTargeter")
 visible = false
 layout_mode = 1
 
-[node name="StatWindow" parent="UIHandler" unique_id=63015506 instance=ExtResource("3_0jhli")]
+[node name="Inventory" parent="UIHandler" unique_id=457064333 instance=ExtResource("4_muwej")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="Inventory" parent="UIHandler" unique_id=457064333 instance=ExtResource("4_muwej")]
+[node name="StatWindow" parent="UIHandler" unique_id=63015506 instance=ExtResource("3_0jhli")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

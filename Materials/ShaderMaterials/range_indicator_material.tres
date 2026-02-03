@@ -1,12 +1,24 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnioc7r0i0qjx"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bnioc7r0i0qjx"]
 
-[ext_resource type="Shader" uid="uid://bi2urx8c06pma" path="res://Tile-RPG/Shaders/ground_indicator.gdshader" id="1_jbmms"]
+[ext_resource type="Shader" uid="uid://p3uf3l43vc0q" path="res://Tile-RPG/Shaders/new_tile_shader.gdshader" id="1_jbmms"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6xm5j"]
+noise_type = 3
+frequency = 0.02
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nqsxc"]
+noise = SubResource("FastNoiseLite_6xm5j")
+seamless = true
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_jbmms")
-shader_parameter/base_color = Color(0, 0.9, 0.5850001, 0.28627452)
-shader_parameter/bob_speed = 6.198000294405
-shader_parameter/bob_amount = 0.010000000475
-shader_parameter/fresnel_color = Color(1, 1, 1, 1)
-shader_parameter/fresnel_intensity = 0.3450000163875
+shader_parameter/base_color = Color(0.16145645, 0.16145645, 1.2450722, 1)
+shader_parameter/edge_color = Color(7.315874e-06, 0.35916948, 0.9555066, 1)
+shader_parameter/pulse_speed = 5.0000002375
+shader_parameter/pulse_intensity = 0.146000006935
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_nqsxc")
+shader_parameter/noise_scale = 0.37400001450512
+shader_parameter/edge_thickness = 0.050000002375
+shader_parameter/edge_softness = 0.030000001425

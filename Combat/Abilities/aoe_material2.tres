@@ -8,7 +8,7 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_clbbf"]
 gradient = SubResource("Gradient_7m7pj")
-fill_from = Vector2(1, 0.18233618)
+fill_from = Vector2(1, 0.5925926)
 fill_to = Vector2(1, 1)
 
 [resource]
@@ -17,4 +17,4 @@ shader = ExtResource("1_mqpva")
 shader_parameter/speed = Vector2(0, 0)
 shader_parameter/maskTexture = SubResource("GradientTexture2D_clbbf")
 shader_parameter/ProxFade = 0.15
-shader_parameter/ColorParameter = Color(1.4369954, 0.6356076, 0, 1)
+shader_parameter/ColorParameter = Color(1.4369954, 0.6356076, 0, 0.3529412)

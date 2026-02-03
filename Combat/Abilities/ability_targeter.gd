@@ -14,6 +14,7 @@ var hovered_tile:Tile = null
 var aoe_indicators:Array[Node3D] = []
 var input_ok:bool = false
 var range_indicators:Array[RangeIndicator] = []
+var range_mesh:MeshInstance3D = null
 
 func _ready() -> void:
 	set_process(false)

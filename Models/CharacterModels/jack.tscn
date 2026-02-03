@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ccbe2k3nafrns"]
+[gd_scene format=4 uid="uid://ccbe2k3nafrns"]
 
 [ext_resource type="Texture2D" uid="uid://cy8nkhg8shiwf" path="res://Tile-RPG/Materials/CharacterTextures/knighter_KnighterTexture.png" id="1_b5dn6"]
 [ext_resource type="Script" uid="uid://dietntj50gava" path="res://Tile-RPG/Handlers/CharacterModelHandler.gd" id="1_sgfln"]
@@ -367,7 +367,7 @@ bind/72/name = &"DEF-breast.R"
 bind/72/bone = -1
 bind/72/pose = Transform3D(-1, 1.5099585e-07, 7.86597e-17, 1.1634967e-13, -1.04308114e-07, 0.9999998, 1.509957e-07, 1.0000001, -1.1877476e-23, -0.10567349, 0.04328686, -1.3027092)
 
-[node name="CharacterModel" type="Node3D" node_paths=PackedStringArray("character_mesh", "animation_player", "outline_handler", "main_hand_node", "off_hand_node", "shield_node")]
+[node name="CharacterModel" type="Node3D" unique_id=1185490212 node_paths=PackedStringArray("character_mesh", "animation_player", "outline_handler", "main_hand_node", "off_hand_node", "shield_node")]
 script = ExtResource("1_sgfln")
 character_mesh = NodePath("GeneralSkeleton/CharacterMesh")
 animation_player = NodePath("GeneralSkeleton/AnimationPlayer")
@@ -377,7 +377,7 @@ main_hand_node = NodePath("GeneralSkeleton/WeaponBone/MainHandNode")
 off_hand_node = NodePath("GeneralSkeleton/OffHandBone/OffHandNode")
 shield_node = NodePath("GeneralSkeleton/OffHandBone/ShieldNode")
 
-[node name="GeneralSkeleton" type="Skeleton3D" parent="."]
+[node name="GeneralSkeleton" type="Skeleton3D" parent="." unique_id=812285002]
 unique_name_in_owner = true
 motion_scale = 0.95725113
 bones/0/name = "Hips"
@@ -892,35 +892,33 @@ bones/72/position = Vector3(-0.1466242, 1.228521, 0.03011614)
 bones/72/rotation = Quaternion(0.16962896, 0.6152443, 0.7580365, -0.13446593)
 bones/72/scale = Vector3(1, 1.0000002, 0.99999994)
 
-[node name="CharacterMesh" type="MeshInstance3D" parent="GeneralSkeleton"]
+[node name="CharacterMesh" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=883519258]
 mesh = SubResource("ArrayMesh_cadwu")
 skin = SubResource("Skin_frn0l")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GeneralSkeleton"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GeneralSkeleton" unique_id=1604505897]
 root_node = NodePath("../..")
-libraries = {
-&"animations": ExtResource("2_sgfln")
-}
+libraries/animations = ExtResource("2_sgfln")
 
-[node name="WeaponBone" type="BoneAttachment3D" parent="GeneralSkeleton"]
+[node name="WeaponBone" type="BoneAttachment3D" parent="GeneralSkeleton" unique_id=1986545366]
 transform = Transform3D(0.03265062, 0.0058590174, 0.99944997, 0.8958844, -0.44348627, -0.026668102, 0.4430863, 0.896262, -0.019729704, -0.04945422, 0.9544849, 0.50226545)
 bone_name = "DEF-palm.02.R"
 bone_idx = 62
 
-[node name="MainHandNode" type="Node3D" parent="GeneralSkeleton/WeaponBone"]
+[node name="MainHandNode" type="Node3D" parent="GeneralSkeleton/WeaponBone" unique_id=1360159162]
 transform = Transform3D(0.10599897, 0.99183166, 0.070956685, -0.85961926, 0.1272698, -0.49483013, -0.49981874, -0.0085441675, 0.86608875, 0.0015194416, 0.0071375966, 0.030127615)
 
-[node name="OffHandBone" type="BoneAttachment3D" parent="GeneralSkeleton"]
+[node name="OffHandBone" type="BoneAttachment3D" parent="GeneralSkeleton" unique_id=961995907]
 transform = Transform3D(0.03554529, -0.42299142, -0.90543616, -0.9313089, -0.34264848, 0.12351349, -0.36249113, 0.83885056, -0.4061154, 0.077282496, 0.94666415, 0.21667561)
 bone_name = "DEF-palm.02.L"
 bone_idx = 37
 
-[node name="OffHandNode" type="Node3D" parent="GeneralSkeleton/OffHandBone"]
+[node name="OffHandNode" type="Node3D" parent="GeneralSkeleton/OffHandBone" unique_id=810362345]
 
-[node name="ShieldNode" type="Node3D" parent="GeneralSkeleton/OffHandBone"]
+[node name="ShieldNode" type="Node3D" parent="GeneralSkeleton/OffHandBone" unique_id=462792344]
 transform = Transform3D(-0.110255554, -0.95687413, 0.26876706, -0.8892807, 0.21574105, 0.40328172, -0.44387358, -0.19454542, -0.8747163, 0.009852409, 0.0055259615, -0.007149577)
 
-[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+[node name="OutlineHandler" type="Node" parent="." unique_id=938893564 node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("4_cadwu")
 mesh_to_outline = NodePath("../GeneralSkeleton/CharacterMesh")
 outline_type = 1
