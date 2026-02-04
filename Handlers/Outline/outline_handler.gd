@@ -24,13 +24,29 @@ const CIRCLE_MATERIALS:Dictionary[OUTLINE_TYPE, ShaderMaterial] = {
 	}
 
 var character_circle:MeshInstance3D = null
+var outline_parent:GameCharacter = null
+var show_amount:int = 0
 
 func _ready() -> void:
-	GlobalSignals.show_outline.connect(_show_outline)
-	GlobalSignals.hide_outline.connect(_hide_outline)
-	GlobalSignals.show_outline_on_target.connect(_show_specific_outline)
-	GlobalSignals.hide_outline_on_target.connect(_hide_specific_outline)
+	_connect_outline_signals()
 	_add_char_circle()
+
+func _modify_show_amount(amount:int) -> void:
+	show_amount += amount
+	
+	if show_amount > 0:
+		_show_outline()
+	else:
+		_hide_outline()
+
+func _connect_outline_signals() -> void:
+	GlobalSignals.show_outline.connect(_modify_show_amount.bind(1))
+	GlobalSignals.hide_outline.connect(_modify_show_amount.bind(-1))
+	
+	if get_parent().get_parent() is GameCharacter:
+		outline_parent = get_parent().get_parent() as GameCharacter
+		outline_parent.character_mouse_over.connect(_modify_show_amount.bind(1) )
+		outline_parent.character_mouse_left.connect(_modify_show_amount.bind(-1) )
 
 func _add_char_circle() -> void:
 	if !CHARACTER_TYPES.has(outline_type): return
@@ -43,24 +59,9 @@ func _add_char_circle() -> void:
 	GlobalSignals.combat_start.connect(func(): character_circle.show())
 	GlobalSignals.combat_end.connect(func(): character_circle.hide())
 
-func _show_specific_outline(target:Node3D) -> void:
-	if get_parent() == target:
-		_show_outline()
-		
-func _hide_specific_outline(target:Node3D) -> void:
-	if get_parent() == target:
-		_hide_outline()
-	
 func _show_outline() -> void:
 	var outline_material:ShaderMaterial = OUTLINES[outline_type]
-	
-	var surface_count:int = mesh_to_outline.mesh.get_surface_count()
-	for i in surface_count:
-		var mat := mesh_to_outline.mesh.surface_get_material(i)
-		if mat != null: mat.next_pass = outline_material
+	mesh_to_outline.material_overlay = outline_material
 
 func _hide_outline() -> void:
-	var surface_count:int = mesh_to_outline.mesh.get_surface_count()
-	for i in surface_count:
-		var mat := mesh_to_outline.mesh.surface_get_material(i)
-		if mat != null: mat.next_pass = null
+	mesh_to_outline.material_overlay = null

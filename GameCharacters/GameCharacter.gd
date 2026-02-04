@@ -15,6 +15,8 @@ signal moved_to_tile(tile:Tile)
 signal ready_to_move
 signal draw_weapon
 signal hide_weapon
+signal character_mouse_over
+signal character_mouse_left
 
 @export var unique_id:String = ""
 @export var character_power:int = 0
@@ -33,6 +35,16 @@ var stat_handler:StatHandler = null
 
 var status_handler:StatusHandler = null
 var character_state:CharacterState = CharacterState.OUT_OF_COMBAT
+
+#TODO mouseover fails from behind transparent walls
+func _connect_mouse_over_outlining() -> void:
+	self.mouse_entered.connect(func():
+		character_mouse_over.emit()
+	)
+	
+	self.mouse_exited.connect(func():
+		character_mouse_left.emit()
+	)
 
 func change_state(new_state:CharacterState) -> void:
 	var prev_state:CharacterState = character_state
@@ -85,13 +97,24 @@ func _set_infobar() -> void:
 	infobar.set_game_character(self)
 
 func _init() -> void:
+	_add_handlers()
+	_connect_mouse_over_outlining()
+	_connect_state_signals()
+
+func _add_handlers() -> void:
+	#Stats
 	stat_handler = StatHandler.new()
 	if stat_resource: stat_handler.set_stats_from_resource(stat_resource)
 	stat_handler.owner_died.connect(_die)
 	start_turn.connect(stat_handler.on_turn_start)
 	
+	#Status
 	status_handler = StatusHandler.new()
 	add_child(status_handler)
+	
+	#Equipment
+	if !equipment_handler:
+		equipment_handler = EquipmentHandler.new()
 
 func _die() -> void:
 	#TODO
@@ -106,7 +129,6 @@ func _connect_state_signals() -> void:
 func _ready() -> void:
 	if unique_id == "": print_debug("ID NOT SET: ", self)
 	_set_infobar()
-	_connect_state_signals()
 	
 func load_from_data(save_data:Dictionary) -> void:
 	var characters:Dictionary = save_data["game_characters"]

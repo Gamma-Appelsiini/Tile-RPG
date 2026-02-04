@@ -9,16 +9,29 @@ class_name CharacterInfoBar
 const STATUS_PANEL := preload("uid://ckjtakb74tlm2")
 
 var game_char:GameCharacter = null
+var show_amount:int = 0
 
 func _ready() -> void:
-	GlobalSignals.show_info_bar.connect(show_info)
-	GlobalSignals.hide_info_bar.connect(func(): self.hide())
+	_connect_signals()
+
+func _change_show_amount(amount:int) -> void:
+	show_amount += amount
+	
+	if show_amount > 0: show_info()
+	else: hide()
+
+func _connect_signals() -> void:
+	GlobalSignals.show_info_bar.connect(_change_show_amount.bind(1))
+	GlobalSignals.hide_info_bar.connect(_change_show_amount.bind(-1))
 
 func set_game_character(new_gc:GameCharacter):
 	game_char = new_gc
 	game_char.status_handler.status_added.connect(_add_status)
 	_update_info()
 	game_char.stat_handler.stats_changed.connect(_update_info)
+	
+	game_char.character_mouse_over.connect(_change_show_amount.bind(1))
+	game_char.character_mouse_left.connect(_change_show_amount.bind(-1))
 	
 func _update_info() -> void:
 	var level:String = "Lvl " + str(game_char.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL))

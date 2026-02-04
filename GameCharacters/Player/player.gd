@@ -21,9 +21,6 @@ func _ready() -> void:
 func _connect_signals() -> void:
 	GlobalSignals.enable_player_movement.connect(_enable_movement)
 	GlobalSignals.disable_player_movement.connect(_disable_movement)
-	
-	GlobalSignals.combat_start.connect(change_state.bind(CharacterState.IN_COMBAT))
-	GlobalSignals.combat_end.connect(change_state.bind(CharacterState.OUT_OF_COMBAT))
 
 #Overrided
 func enter_interact_state(interact_animation:CharacterModelHandler.CharAnimation) -> void:
