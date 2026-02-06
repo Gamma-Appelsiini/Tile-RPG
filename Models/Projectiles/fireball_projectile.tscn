@@ -1,12 +1,25 @@
 [gd_scene format=3 uid="uid://cdqg505uijw8u"]
 
 [ext_resource type="Script" uid="uid://0diajg4725av" path="res://Tile-RPG/Combat/projectile.gd" id="1_xxt1h"]
+[ext_resource type="Shader" uid="uid://cn70uchby11al" path="res://Tile-RPG/Shaders/fire_shader.gdshader" id="2_eqi36"]
 [ext_resource type="PackedScene" uid="uid://bpeot1hmtl0uy" path="res://Tile-RPG/Effects/burning_fire_effect.tscn" id="2_ri7ya"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_io5uv"]
-top_radius = 0.125
-bottom_radius = 0.0
-height = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6d34m"]
+render_priority = 0
+shader = ExtResource("2_eqi36")
+shader_parameter/flame_height = 1.0
+shader_parameter/taper_factor = 0.20000000298024
+shader_parameter/deviation = Vector3(0, 0, 0)
+shader_parameter/turbulence_speed = 9.0
+shader_parameter/turbulence_force = 7.0
+shader_parameter/inner_color = Color(1, 0.685744, 0.55499226, 1)
+shader_parameter/outer_color = Color(1.362, 1.023417, 0.22902253, 1)
+shader_parameter/bottom_color = Color(0.78, 0.11699998, 0, 1)
+shader_parameter/emission = 6.20000007748624
+shader_parameter/max_alpha = 0.55999998748288
+shader_parameter/border_width = 0.75
+shader_parameter/bottom_color_fade_y_end = 0.28999999351792
+shader_parameter/bottom_color_fade_y_start = 0.80999998189488
 
 [sub_resource type="SphereMesh" id="SphereMesh_xxt1h"]
 radius = 0.125
@@ -14,13 +27,10 @@ height = 0.25
 
 [node name="FireballProjectile" type="Node3D" unique_id=2054760756]
 script = ExtResource("1_xxt1h")
-projectile_speed = 8.0
+projectile_speed = 6.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1755516535]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.25727272)
-mesh = SubResource("CylinderMesh_io5uv")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=930293077]
+[node name="Ball" type="MeshInstance3D" parent="." unique_id=930293077]
+material_override = SubResource("ShaderMaterial_6d34m")
 mesh = SubResource("SphereMesh_xxt1h")
 
 [node name="BurningFireEffect" parent="." unique_id=109469803 instance=ExtResource("2_ri7ya")]

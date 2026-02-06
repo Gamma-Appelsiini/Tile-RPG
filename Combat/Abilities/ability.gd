@@ -48,6 +48,7 @@ var current_cooldown:int = 0
 var ability_description:String = "Default Ability Description"
 var target_char:GameCharacter = null
 var target_tile:Tile = null
+var ability_attack:Attack = null
 
 func _visualize_targetable_tiles() -> void:
 	var tile_manager:TileManager

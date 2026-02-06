@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bde7d0rbhjqxb"]
+
+[ext_resource type="Shader" uid="uid://cs1iy8qak528v" path="res://Tile-RPG/Shaders/explosion_shader.gdshader" id="1_ea568"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ea568")
+shader_parameter/color1 = Color(2.3092632, 1.1938161, 0, 0.5176471)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/threshold = 0.2
+shader_parameter/fresnel_sharpness = 1.0
+shader_parameter/intensity = 0.75600004
+shader_parameter/intensity_2 = 0.0
+shader_parameter/distortion_enabled = true
+shader_parameter/distortion_strength = 0.6
+shader_parameter/edge_distortion_power = 2.5
+shader_parameter/chromatic_aberration = 0.03
+shader_parameter/event_horizon_radius = 0.3
+shader_parameter/event_horizon_darkness = 0.85
+shader_parameter/blur_enabled = true
+shader_parameter/blur_amount = 3.0
+shader_parameter/blur_samples = 8
+shader_parameter/accretion_color = Color(1, 0.6, 0.2, 1)
+shader_parameter/accretion_intensity = 1.2
+shader_parameter/accretion_width = 3.0
+shader_parameter/noise_detail = 4
+shader_parameter/noise_inflate = 0.1
+shader_parameter/noise_speed = 0.1
+shader_parameter/invert_dissolve = false
+shader_parameter/noise_scale_min = 2.0
+shader_parameter/noise_scale_max = 4.0
+shader_parameter/noise_roughness_min = 0.5
+shader_parameter/noise_roughness_max = 0.3
+shader_parameter/ripple_enabled = true
+shader_parameter/ripple_time = 0.0
+shader_parameter/ripple_frequency = 12.0
+shader_parameter/ripple_speed = 3.0
+shader_parameter/ripple_amplitude = 0.08
+shader_parameter/ripple_fade_distance = 1.5
+shader_parameter/ripple_center = Vector3(0, -1, 0)

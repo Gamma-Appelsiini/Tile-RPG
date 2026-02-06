@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://def83grj4ohmj"]
+[gd_scene format=3 uid="uid://def83grj4ohmj"]
 
 [ext_resource type="Script" uid="uid://byc1r1xqku5vs" path="res://Tile-RPG/Combat/Abilities/fireball/fireball.gd" id="1_towhf"]
 [ext_resource type="Texture2D" uid="uid://be8erxtlfc13h" path="res://Tile-RPG/Images/Stats/fire.png" id="2_rgogx"]
 
-[node name="Fireball" type="Node3D"]
+[node name="Fireball" type="Node3D" unique_id=544477666]
 script = ExtResource("1_towhf")
 use_animation = 5
 targeting_animation = 6
@@ -11,11 +11,9 @@ target_type = 0
 ability_tags = Array[int]([1, 4, 5])
 ability_icon = ExtResource("2_rgogx")
 ability_name = "Fireball"
-ability_cooldown = 1
-ap_cost = 3
 ability_range = 5
-ability_aoe = 3
-damage_desc = "5 + [color=#ff914d]Lvl[/color] * 2 + [color=#8f39ee]Mystic[/color] / 2"
+ability_aoe = 2
+damage_desc = "2 + [color=#ff914d]Lvl[/color] * 2 + [color=#8f39ee]Mystic[/color] / 2"
 ability_desc = "Shoot an exploding fireball at target tile."
 scaling_desc = "Tile ignite %: 2 * [color=#53bb81]Luck[/color].
 Range: 2 + [color=#2b722f]Agility[/color] / 5.
