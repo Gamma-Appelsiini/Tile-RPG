@@ -1,6 +1,8 @@
 extends Node
 class_name Tile
 
+signal tile_entered(enterer:GameCharacter)
+signal tile_left(leaver:GameCharacter)
 
 var tile_manager:TileManager = null
 var neighbor_tiles:Array[Tile] = []

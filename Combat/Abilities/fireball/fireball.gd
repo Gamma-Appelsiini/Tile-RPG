@@ -3,6 +3,7 @@ class_name Fireball
 
 const FIREBALL_PROJECTILE := preload("uid://cdqg505uijw8u")
 const EXPLOSION_EFFECT := preload("uid://oa68ogevos7a")
+const TILE_BURN := preload("uid://dmwkl2a0tadls")
 
 func _shoot_fire_projectile(target:Tile) -> void:
 	var y_offset:float = 0.35
@@ -29,10 +30,22 @@ func use_ability_on_target_tile(target:Tile) -> void:
 
 	await _shoot_fire_projectile(target)
 	_spawn_explosion_effect(target)
+	_set_tiles_on_fire(tiles_in_aoe)
 	
 	for tile:Tile in tiles_in_aoe:
 		if tile.occupant:
 			AttackHandler.use_attack_on_char(tile.occupant, fire_attack)
+
+func _set_tiles_on_fire(tiles_in_aoe:Array[Tile]) -> void:
+	var fire_chance:int = 2 * ability_owner.stat_handler.get_stat_amount(Stats.MainStat.LUCK)
+	fire_chance = 75
+	
+	for tile:Tile in tiles_in_aoe:
+		if randi_range(1,100) < fire_chance:
+			var new_tile_fire:TileBurn = TILE_BURN.instantiate()
+			GlobalSignals.current_level.add_child(new_tile_fire)
+			new_tile_fire.set_on_tile(tile)
+
 
 func _spawn_explosion_effect(target:Tile) -> void:
 	var new_explosion:Effect = EXPLOSION_EFFECT.instantiate()

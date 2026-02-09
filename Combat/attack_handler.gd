@@ -48,6 +48,8 @@ static func _animate_take_damage_effect(target:GameCharacter) -> void:
 	target_char_mesh.material_overlay = null
 
 static func _apply_damage_increases() -> void:
+	if !attack.attacker: return
+	
 	for dmg_type:Stats.DmgType in attack.damages.keys():
 		if dmg_type == Stats.DmgType.PURE: continue
 		
@@ -58,6 +60,10 @@ static func _apply_damage_increases() -> void:
 			attack.damages[dmg_type] = int(attack.damages[dmg_type] * damage_multiplier )
 
 static func _choose_take_dmg_animation(attacker:GameCharacter) -> void:
+	if !attacker:
+		receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_FRONT)
+		return
+	
 	var local_pos: Vector3 = receiver.char_model_handler.to_local(attacker.global_position)
 	var dir: Vector3 = local_pos.normalized()
 
@@ -76,7 +82,7 @@ static func _receive_damage() -> void:
 	_choose_take_dmg_animation(attack.attacker)
 	_animate_take_damage_effect(receiver)
 	receiver.got_hit.emit()
-	print("Final damage: ", final_damage)
+
 	GlobalSignals.show_damage_number.emit(final_damage, receiver, attack.crit)
 	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, -final_damage)
 
@@ -93,8 +99,8 @@ static func _handle_thorns() -> void:
 	
 	AttackHandler.use_attack_on_char(attack.attacker, thorns_attack)
 
-static func _does_attack_hit() -> bool:
-	if attack.ability_tags.has(Ability.ABILITY_TAG.UNEVADEABLE): return true
+static func _does_receiver_dodge() -> bool:
+	if attack.ability_tags.has(Ability.ABILITY_TAG.UNEVADEABLE): return false
 	var hit_chance:int = 99
 	
 	var receiver_luck:int = receiver.stat_handler.main_stats[Stats.MainStat.LUCK]
@@ -103,7 +109,6 @@ static func _does_attack_hit() -> bool:
 	
 	hit_chance -= _get_evasion_chance()
 	if hit_chance < MIN_HIT_CHANCE: hit_chance = MIN_HIT_CHANCE
-	print("Hit chance: ", hit_chance)
 	
 	if hit_chance < randi_range(1,100):
 		receiver.stat_handler.attacks_dodged_in_a_row += 1
@@ -112,20 +117,33 @@ static func _does_attack_hit() -> bool:
 		
 		receiver.rotate_towards_point(attack.attacker.global_position)
 		receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DODGE)
-		return false
+		return true
+		
+	return false
 
-	receiver.stat_handler.attacks_dodged_in_a_row = 0
-	
-	#Block calc
+
+static func _does_receiver_block() -> bool:
+	if attack.ability_tags.has(Ability.ABILITY_TAG.UNBLOCKABLE): return false
 	var blocked:bool = _is_attack_blocked()
+
 	if blocked:
 		GlobalSignals.show_miss_text.emit("BLOCKED", receiver)
-		receiver.dodged.emit()
+		receiver.blocked.emit()
 		_handle_thorns()
 		
 		receiver.rotate_towards_point(attack.attacker.global_position)
 		receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.BLOCK)
-		return false
+		return true
+	
+	return false
+
+static func _does_attack_hit() -> bool:
+	if attack.ability_tags.has(Ability.ABILITY_TAG.DOT): return true
+	
+	if _does_receiver_dodge(): return false
+	receiver.stat_handler.attacks_dodged_in_a_row = 0
+	
+	if _does_receiver_block(): return false
 	
 	return true
 
@@ -227,7 +245,7 @@ static func _apply_armor() -> void:
 	var point:float = receiver_armor / float((final_damage + pure_damage + receiver_armor) * 2)
 	if point > 1.0: point = 1.0
 	var reduction:float = ARMOR_CURVE.sample(point)
-	print("Armor: ", receiver_armor, " Damage: ", final_damage + pure_damage, " Reduction: ", reduction)
+	#print("Armor: ", receiver_armor, " Damage: ", final_damage + pure_damage, " Reduction: ", reduction)
 	
 	var reduced_damage:int = int(final_damage * (1 - reduction))
 	if final_damage > 0 and reduced_damage <= 0: reduced_damage = 1

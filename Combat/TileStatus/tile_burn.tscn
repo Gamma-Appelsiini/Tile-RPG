@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dmwkl2a0tadls"]
+
+[ext_resource type="Script" uid="uid://cyl0hjtq5j3pt" path="res://Tile-RPG/Combat/TileStatus/tile_burn.gd" id="1_d88su"]
+[ext_resource type="PackedScene" uid="uid://bpeot1hmtl0uy" path="res://Tile-RPG/Effects/burning_fire_effect.tscn" id="2_pxgxl"]
+
+[node name="TileBurn" type="Node3D" unique_id=682552568]
+script = ExtResource("1_d88su")
+
+[node name="BurningFireEffect" parent="." unique_id=109469803 instance=ExtResource("2_pxgxl")]

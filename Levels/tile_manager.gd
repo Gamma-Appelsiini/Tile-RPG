@@ -77,10 +77,14 @@ func _set_char_on_tile(game_char:GameCharacter, new_tile:Tile)-> void:
 		prev_tile.occupant = null
 		prev_tile.blocked = false
 		
+		prev_tile.tile_left.emit(game_char)
+		
 	new_tile.occupant = game_char
 	new_tile.blocked = true
 	char_tiles[game_char] = new_tile
+	
 	game_char.moved_to_tile.emit(new_tile)
+	new_tile.tile_entered.emit(game_char)
 
 func move_character_to_character(move_char:GameCharacter, target_char:GameCharacter) -> void:
 	var path:Array[Tile] = get_shortest_path(char_tiles[move_char], char_tiles[target_char], false, true)
