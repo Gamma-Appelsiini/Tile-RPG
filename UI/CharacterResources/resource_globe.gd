@@ -30,7 +30,7 @@ func _ready() -> void:
 	liquid_mesh.set_surface_override_material(0,liquid_material)
 
 func _process(_delta: float) -> void:
-	camera_3d.global_transform = node_3d.global_transform
+	camera_3d.global_transform = node_3d.get_global_transform_interpolated()
 
 func resource_changed(sh:StatHandler, stat_type:LiquidType) -> void:
 	var current_amount:int = 0
