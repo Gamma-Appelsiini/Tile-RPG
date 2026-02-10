@@ -34,7 +34,8 @@ infobar = NodePath("CharacterInfoBar")
 char_model_handler = NodePath("CharacterModel")
 equipment_handler = NodePath("EquipmentHandler")
 
-[node name="CharacterModel" parent="." unique_id=1275603827 instance=ExtResource("4_udvo0")]
+[node name="CharacterModel" parent="." unique_id=1275603827 node_paths=PackedStringArray("game_character") instance=ExtResource("4_udvo0")]
+game_character = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1079198810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8702148, 0)

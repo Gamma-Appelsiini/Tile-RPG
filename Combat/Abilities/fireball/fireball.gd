@@ -35,6 +35,7 @@ func use_ability_on_target_tile(target:Tile) -> void:
 	for tile:Tile in tiles_in_aoe:
 		if tile.occupant:
 			AttackHandler.use_attack_on_char(tile.occupant, fire_attack)
+			_spawn_hit_effect(tile.occupant)
 
 func _set_tiles_on_fire(tiles_in_aoe:Array[Tile]) -> void:
 	var fire_chance:int = 2 * ability_owner.stat_handler.get_stat_amount(Stats.MainStat.LUCK)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ba5woaetqefuy"]
+[gd_scene format=3 uid="uid://ba5woaetqefuy"]
 
 [ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_ouqyu"]
 [ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="2_ilq20"]
@@ -18,7 +18,7 @@ height = 1.7
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8w85h"]
 radius = 1.0
 
-[node name="TestNPC" type="CharacterBody3D" node_paths=PackedStringArray("follow_hander", "heigth_node", "ai_handler", "char_model_handler", "equipment_handler")]
+[node name="TestNPC" type="CharacterBody3D" unique_id=1858229595 node_paths=PackedStringArray("follow_hander", "heigth_node", "ai_handler", "char_model_handler", "equipment_handler")]
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_ouqyu")
@@ -31,46 +31,47 @@ char_model_handler = NodePath("CharacterModel")
 equipment_handler = NodePath("EquipmentHandler")
 metadata/_custom_type_script = "uid://ks8scj6i4f0r"
 
-[node name="CharacterModel" parent="." instance=ExtResource("3_sej7w")]
+[node name="CharacterModel" parent="." unique_id=633851008 node_paths=PackedStringArray("game_character") instance=ExtResource("3_sej7w")]
+game_character = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=779006249]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_sjjpf")
 
-[node name="FollowHandler" type="Node" parent="." node_paths=PackedStringArray("area")]
+[node name="FollowHandler" type="Node" parent="." unique_id=825463018 node_paths=PackedStringArray("area")]
 script = ExtResource("5_yvq5j")
 area = NodePath("../Area3D")
 metadata/_custom_type_script = "uid://dq5x88665dpbq"
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1004999828]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1641391842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_8w85h")
 
-[node name="XpDropper" type="Node3D" parent="."]
+[node name="XpDropper" type="Node3D" parent="." unique_id=1064033412]
 script = ExtResource("4_ms4ik")
 xp_amount = 100
 metadata/_custom_type_script = "uid://cfaw7c8b3dbes"
 
-[node name="CombatStarter" parent="." instance=ExtResource("6_pf120")]
+[node name="CombatStarter" parent="." unique_id=2139847941 instance=ExtResource("6_pf120")]
 
-[node name="AIHandler" type="Node" parent="." node_paths=PackedStringArray("combatant", "offensive_abilities", "support_abilities")]
+[node name="AIHandler" type="Node" parent="." unique_id=1117037709 node_paths=PackedStringArray("combatant", "offensive_abilities", "support_abilities")]
 script = ExtResource("7_ilq20")
 combatant = NodePath("..")
 offensive_abilities = [NodePath("BasicAttack")]
 support_abilities = [NodePath("CureWounds")]
 metadata/_custom_type_script = "uid://3i4005pgv256"
 
-[node name="BasicAttack" parent="AIHandler" instance=ExtResource("8_nl7kr")]
+[node name="BasicAttack" parent="AIHandler" unique_id=1108464989 instance=ExtResource("8_nl7kr")]
 
-[node name="CureWounds" parent="AIHandler" instance=ExtResource("9_oevf2")]
+[node name="CureWounds" parent="AIHandler" unique_id=165642775 instance=ExtResource("9_oevf2")]
 
-[node name="EquipmentHandler" type="Node" parent="."]
+[node name="EquipmentHandler" type="Node" parent="." unique_id=30370907]
 script = ExtResource("10_sej7w")
 metadata/_custom_type_script = "uid://c4xywaxpmfcw0"
 
-[node name="HeigthNode" type="Node3D" parent="."]
+[node name="HeigthNode" type="Node3D" parent="." unique_id=183003660]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7123275, 0)

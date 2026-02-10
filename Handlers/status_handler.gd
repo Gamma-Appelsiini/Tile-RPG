@@ -50,6 +50,7 @@ func add_status(new_status:Status) -> void:
 	array_to_apply.push_back(new_status)
 	GlobalSignals.show_floating_text.emit(new_status.status_name, gchar, new_status.status_color)
 	status_added.emit(new_status)
+	new_status.on_status_added()
 
 func _remove_same_status(status_array:Array[Status], new_status:Status) -> void:
 	var remove_array := status_array.duplicate().filter(func(status:Status): return status.status_name == new_status.status_name)
@@ -67,5 +68,6 @@ func _remove_status(status_to_remove:Status) -> void:
 		buffs.erase(status_to_remove)
 	else: debuffs.erase(status_to_remove)
 	
+	status_to_remove.on_status_removed()
 	status_to_remove.queue_free()
 	print("removed status ", status_to_remove.status_name)

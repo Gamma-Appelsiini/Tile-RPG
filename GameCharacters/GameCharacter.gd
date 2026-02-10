@@ -75,7 +75,8 @@ func _enter_dead_state() -> void:
 	char_model_handler.die()
 
 func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
-	if prev_state == CharacterState.IN_COMBAT:
+	const WEAPON_HIDE_STATES:Array[CharacterState] = [CharacterState.IN_COMBAT, CharacterState.STUNNED, CharacterState.FROZEN]
+	if WEAPON_HIDE_STATES.has(prev_state):
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON,true, true)
 		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
 		hide_weapon.emit()
@@ -83,7 +84,8 @@ func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 		char_model_handler.play_idle_animation()
 
 func _enter_combat_state(prev_state:CharacterState) -> void:
-	if prev_state != CharacterState.IN_COMBAT:
+	const WEAPON_DRAW_STATES:Array[CharacterState] = [CharacterState.OUT_OF_COMBAT, CharacterState.RUNNING, CharacterState.INTERACTING]
+	if WEAPON_DRAW_STATES.has(prev_state):
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
 		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
 		draw_weapon.emit()

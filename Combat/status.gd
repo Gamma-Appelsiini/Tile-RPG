@@ -37,3 +37,11 @@ func _on_round_change(_round_count:int) -> void:
 #Override this
 func _connet_to_char_signals() -> void:
 	pass
+
+#Override this
+func on_status_added() -> void:
+	pass
+	
+#Override this
+func on_status_removed() -> void:
+	pass
