@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bs08mf1jnw3vi" path="res://Tile-RPG/Combat/Abilities/basic_attack.tscn" id="8_nl7kr"]
 [ext_resource type="PackedScene" uid="uid://cxigqlih8j8nv" path="res://Tile-RPG/Combat/Abilities/cure_wounds/cure_wounds.tscn" id="9_oevf2"]
 [ext_resource type="Script" uid="uid://c4xywaxpmfcw0" path="res://Tile-RPG/GameCharacters/equipment_handler.gd" id="10_sej7w"]
+[ext_resource type="PackedScene" uid="uid://cvi3liudalayl" path="res://Tile-RPG/UI/Status/info_bar.tscn" id="11_3t60n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sjjpf"]
 radius = 0.35
@@ -75,3 +76,5 @@ metadata/_custom_type_script = "uid://c4xywaxpmfcw0"
 
 [node name="HeigthNode" type="Node3D" parent="." unique_id=183003660]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7123275, 0)
+
+[node name="CharacterInfoBar" parent="." unique_id=1433897617 instance=ExtResource("11_3t60n")]

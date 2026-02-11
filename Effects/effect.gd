@@ -32,6 +32,7 @@ func _handle_start() -> void:
 	
 
 func play_effect() -> void:
+	print("play effect: ", name)
 	show()
 	
 	if starting_animation != "":

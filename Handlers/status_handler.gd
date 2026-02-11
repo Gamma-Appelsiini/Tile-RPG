@@ -5,19 +5,19 @@ signal status_added(status:Status)
 
 const GENERIC_BUFF_EFFECT := preload("uid://b8xk37t3i1ps4")
 const GENERIC_DEBUFF_EFFECT := preload("uid://duwkcoksgw1mw")
+const STUN_RESISTANCE_PER_STUN:int = 35
 
 var buffs:Array[Status] = []
 var debuffs:Array[Status] = []
 var gchar:GameCharacter = null
-const BLEED_STATUS = preload("uid://cfxrle4miamtb")
-const EVASION_STATUS = preload("uid://ctryr6cqir6ne")
+var stun_resistance:int = 0
 
 func _ready() -> void:
 	if get_parent() is GameCharacter: gchar = get_parent()
-	#await get_tree().create_timer(1).timeout
-	#var bl:EvasionBuff = EVASION_STATUS.instantiate()
-	#bl.set_evasion_stats(1,2)
-	#add_status(bl)
+	gchar.start_turn.connect(_reduce_stun_resistance)
+
+func _reduce_stun_resistance() -> void:
+	stun_resistance = clamp(stun_resistance - 25, 0, 100)
 
 func has_status(name_to_check:String) -> bool:
 	var all_statuses:Array[Status] = buffs.duplicate() + debuffs.duplicate()
@@ -26,7 +26,16 @@ func has_status(name_to_check:String) -> bool:
 	
 	return false
 
+func _is_cc_resisted(new_status:Status) -> bool:
+	if !new_status.is_crowd_control: return false
+	
+	if randi_range(0, 100) > stun_resistance: return false
+	
+	return true
+
 func add_status(new_status:Status) -> void:
+	if _is_cc_resisted(new_status): return
+	
 	var array_to_apply:Array[Status] = buffs
 	var status_effect:GenericBuff
 	
@@ -48,6 +57,7 @@ func add_status(new_status:Status) -> void:
 		gchar.stat_handler.update_stat(affix.increase_amount, affix.type_increase)
 
 	array_to_apply.push_back(new_status)
+	if new_status.is_crowd_control: stun_resistance += STUN_RESISTANCE_PER_STUN
 	GlobalSignals.show_floating_text.emit(new_status.status_name, gchar, new_status.status_color)
 	status_added.emit(new_status)
 	new_status.on_status_added()
@@ -69,5 +79,3 @@ func _remove_status(status_to_remove:Status) -> void:
 	else: debuffs.erase(status_to_remove)
 	
 	status_to_remove.on_status_removed()
-	status_to_remove.queue_free()
-	print("removed status ", status_to_remove.status_name)

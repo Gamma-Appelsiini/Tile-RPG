@@ -8,6 +8,7 @@ script = ExtResource("1_qgdck")
 status_name = "Freeze"
 status_type = 1
 unique = true
+is_crowd_control = true
 max_duration = 2
 picture = ExtResource("2_bigwh")
 status_color = Color(0.30969712, 0.5168531, 1, 1)

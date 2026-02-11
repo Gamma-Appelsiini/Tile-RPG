@@ -2,7 +2,6 @@
 
 [ext_resource type="Material" uid="uid://ujidnr35okc" path="res://Tile-RPG/Materials/ShaderMaterials/ice_material.tres" id="1_6s3i1"]
 [ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_882ph"]
-[ext_resource type="PackedScene" uid="uid://ccbe2k3nafrns" path="res://Tile-RPG/Models/CharacterModels/jack.tscn" id="2_b0ar5"]
 [ext_resource type="Texture2D" uid="uid://dt7cfn0bq6j71" path="res://Tile-RPG/Images/Textures/glass_scratches_normal.png" id="3_882ph"]
 [ext_resource type="Texture2D" uid="uid://byf23emp8s4h4" path="res://Tile-RPG/Images/Shaders/smoke1.png" id="4_b0ar5"]
 
@@ -311,8 +310,8 @@ material = SubResource("StandardMaterial3D_mw8lg")
 [node name="FreezeEffect" type="Node3D" unique_id=2086794566 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_882ph")
 start_on_spawn = true
+delete_on_end = false
 animation_player = NodePath("AnimationPlayer")
-starting_animation = "play_effect"
 ending_animation = "play_effect"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=13040534]
@@ -324,8 +323,6 @@ material_override = ExtResource("1_6s3i1")
 mesh = SubResource("ArrayMesh_1vc33")
 skeleton = NodePath("")
 
-[node name="CharacterModel" parent="." unique_id=1185490212 instance=ExtResource("2_b0ar5")]
-
 [node name="Blocks" type="GPUParticles3D" parent="." unique_id=539563649]
 emitting = false
 amount = 14
@@ -336,6 +333,7 @@ process_material = SubResource("ParticleProcessMaterial_6xtej")
 draw_pass_1 = SubResource("BoxMesh_1ldrh")
 
 [node name="Steam" type="GPUParticles3D" parent="." unique_id=703197026]
+emitting = false
 amount = 40
 lifetime = 1.7
 randomness = 0.1

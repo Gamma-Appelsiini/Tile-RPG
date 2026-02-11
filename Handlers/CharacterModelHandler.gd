@@ -117,6 +117,10 @@ func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_ba
 	play_idle_animation() 
 
 func play_idle_animation() -> void:
+	if !game_character:
+		print_debug("No game character. Mesh; ", character_mesh)
+		return
+	
 	if game_character.character_state == game_character.CharacterState.OUT_OF_COMBAT:
 		animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[CharAnimation.IDLE], BLEND_TIME)
 	elif game_character.character_state == game_character.CharacterState.IN_COMBAT:

@@ -8,8 +8,9 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	if !_can_use_ability(target): return
 	
 	#_use_resources()
-	#ability_owner.rotate_towards_point(target.global_position)
-	#await ability_owner.rotation_complete
+	
+	ability_owner.rotate_towards_point(target.global_position)
+	await ability_owner.rotation_complete
 	
 	_freeze_target(target)
 	_spawn_hit_effect(target)

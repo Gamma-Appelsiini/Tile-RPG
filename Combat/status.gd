@@ -9,6 +9,7 @@ enum STATUS_TYPE {BUFF, DEBUFF}
 @export var status_name:String = "Default Name"
 @export var status_type:STATUS_TYPE = STATUS_TYPE.BUFF
 @export var unique:bool = false
+@export var is_crowd_control:bool = false
 @export var remove_after_combat:bool = true
 @export var max_duration:int = 0
 @export var picture:Texture2D = null
@@ -44,4 +45,4 @@ func on_status_added() -> void:
 	
 #Override this
 func on_status_removed() -> void:
-	pass
+	queue_free()
