@@ -1,0 +1,136 @@
+[gd_scene format=4 uid="uid://8sp4d6thsghn"]
+
+[ext_resource type="Script" uid="uid://0diajg4725av" path="res://Tile-RPG/Combat/projectile.gd" id="1_0q4n8"]
+[ext_resource type="Texture2D" uid="uid://rk6vmh4o0uk0" path="res://Tile-RPG/Images/Shaders/Fire3.png" id="4_0q4n8"]
+[ext_resource type="Material" uid="uid://c2orrx318kv2q" path="res://Tile-RPG/Materials/ShaderMaterials/wind_effect_material.tres" id="4_wy4uf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gvp15"]
+frequency = 0.0193
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0q4n8"]
+noise = SubResource("FastNoiseLite_gvp15")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ooq3n"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wy4uf"]
+noise = SubResource("FastNoiseLite_ooq3n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kysdq"]
+transparency = 1
+albedo_color = Color(1.0296288, 1.5923595, 2.6374314, 0.54509807)
+roughness_texture = SubResource("NoiseTexture2D_wy4uf")
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = SubResource("NoiseTexture2D_0q4n8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0ek0"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kysy7"]
+_surfaces = [{
+"aabb": AABB(-0.90000004, 0, -0.63, 1.8000001, 4, 1.26),
+"format": 34896613377,
+"index_count": 90,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAQABAACAAMAAAAFAAEAAAAEAAYABgAHAAAABwAFAAAABgAEAAgACAAEAAMABgAIAAkABwAGAAkACQAIAAoACgAIAAMABwAJAAsACQAKAAsACwAKAAwACwAMAAcADAAKAAMADQAHAAwABQAHAA0ADAADAA4ADQAMAA4ABQANAA8ADwANAA4ABQAPABAADwAOABAADgADABAABQAQAAEAEAADAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("/38AAHEcAACB2v+/fSUAAP9//78AAAAA/3////9/AAB9Jf+/fSUAAGTGAACaOQAAmjkAAJo5AAD/fwAAjeMAAAAA/7//fwAAcRwAAP9/AAB9Jf+/gdoAAJo5AABkxgAA/3//v///AABkxgAAZMYAAIHa/7+B2gAAjeMAAP9/AAD///+//38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m4pny"]
+resource_name = "icicle_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.90000004, 0, -0.63, 1.8000001, 4, 1.26),
+"attribute_data": PackedByteArray("oor/f3iexeH/f2jgVqIOgVaiDoHerwnieJ7F4d6vRIHer0SBQ8HF4d6vCeJlvQ6BZb0OgbzfaOBDwcXhGdX/f96vCeI0hf//eJ7F4XiexeE0hf///39o4EPBxeGH2v//3q8J4rzfaOCH2v//Q8HF4f///v8v6RDl//9x4C/pEOW83zjwL+lg+y/pYPu83zjwoor/f3iexeFWog6B/39o4FaiDoHerwni3q9EgXiexeHer0SBQ8HF4WW9DoHerwniZb0OgbzfaOAZ1f9/Q8HF4d6vCeJ4nsXhNIX//3iexeH/f2jgNIX//0PBxeHerwnih9r//7zfaOBDwcXhh9r//w=="),
+"format": 34896613399,
+"index_count": 90,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEwAUABUAFgAXABgAGQAaABsAHAAdAB4AHwAcAB4AHAAfACAAHAAgACEAHQAcACIAHQAiACMAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANwA4ADkAOgA7ADwAPQA+AD8A"),
+"material": SubResource("StandardMaterial3D_y0ek0"),
+"primitive": 3,
+"uv_scale": Vector4(1.3972831, 2.0000002, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("/38AAHEcjv6B2v+/fSWO/v9//78AAI7+ZMYAAJo5jv5kxgAAmjlK/v///7//f0r+gdr/v30lSv6N4wAA/39K/o3jAAD/f0b+gdr/v4HaRv7///+//39G/mTGAABkxkb+ZMYAAGTGKf3/f/+///8p/YHa/7+B2in9/38AAI3jKf3///+//39Z6P9/////f1nogdr/v30lWeiB2v+/fSWg6f9/////f6Dp/3//vwAAoOmB2v+/gdqb8/9/////f5vz////v/9/m/P/f/+////n//9/////f+f/gdr/v4Ha5///fwAAjeP/P2TGAACaOf///38AAHEc/z+aOQAAmjn/P3EcAAD/f/8/mjkAAGTG/z9kxgAAZMb//43jAAD/f////38AAHEcjAt9Jf+/fSWMC5o5AACaOYwL/3//vwAAjAuaOQAAmjk6KgAA/7//fzoqcRwAAP9/Oip9Jf+/fSU6KnEcAAD/f69VfSX/v4Har1WaOQAAZMavVQAA/7//f69VmjkAAGTGA3T/f/+///8DdP9/AACN4wN0fSX/v4HaA3QAAP+//394J30l/799JXgn/3////9/eCd9Jf+/fSU5Cv9//78AADkK/3////9/OQp9Jf+/gdrcTgAA/7//f9xO/3////9/3E7/f/+///9KZ30l/7+B2kpn/3////9/SmfSA1WT0gNVk9IDVZPSA1WT9AG9r/QBva/0Ab2v9AG9r+8BM9LvATPS7wEz0u8BM9L4AUDw+AFA8PgBQPD4AUDwLMlzjSzJc40syXONCfEhgAnxIYAJ8SGA1KU/l9SlP5fUpT+X3IuvmdyLsJnci7CZAAD/f/9//z8AAP9/AAD/fwAA/38AAP9//3//P/9//z+Mebj7jHm4+4x5uPuMebj7FHoG/RR6Bv0Uegb9FHoG/fl1Avv5dQL7+XUC+/l1AvtTXVD0U11Q9FNdUPRTXVD0XY+W012PltNdj5bTHYCX4x2Al+MdgJfjjKj8wYyo/MGMqPzBUddQqFHXUKhR11Co")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kysy7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n27r"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hbwqx"]
+material = SubResource("StandardMaterial3D_8n27r")
+top_radius = 0.02
+height = 1.27
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Gradient" id="Gradient_gvp15"]
+offsets = PackedFloat32Array(0.009708738, 0.43203884, 1)
+colors = PackedColorArray(0.73709995, 0.794205, 0.81, 1, 1, 1, 1, 1, 0.186, 0.24386662, 0.62, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0q4n8"]
+gradient = SubResource("Gradient_gvp15")
+
+[sub_resource type="Curve" id="Curve_ooq3n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.03333333, 1), 0.0, 0.0, 0, 0, Vector2(0.7777777, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_wy4uf"]
+curve = SubResource("Curve_ooq3n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kysdq"]
+particle_flag_rotate_y = true
+angle_min = -24.99999
+angle_max = 25.000011
+angular_velocity_min = -45.000015
+angular_velocity_max = 44.999985
+gravity = Vector3(0, 0.5, 0)
+scale_min = 0.7
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_wy4uf")
+color_ramp = SubResource("GradientTexture1D_0q4n8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3g4y4"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("4_0q4n8")
+albedo_texture_force_srgb = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_086s3"]
+material = SubResource("StandardMaterial3D_3g4y4")
+size = Vector2(0.65, 0.65)
+
+[node name="IceProjectile" type="Node3D" unique_id=404186220 node_paths=PackedStringArray("meshes_to_show_on_shoot")]
+script = ExtResource("1_0q4n8")
+projectile_speed = 9.0
+meshes_to_show_on_shoot = [NodePath("WindMesh2")]
+
+[node name="Icicle" type="MeshInstance3D" parent="." unique_id=972783824]
+transform = Transform3D(0.08, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0.38808453)
+material_override = SubResource("StandardMaterial3D_kysdq")
+mesh = SubResource("ArrayMesh_m4pny")
+skeleton = NodePath("")
+
+[node name="WindMesh2" type="MeshInstance3D" parent="." unique_id=1989336196]
+transform = Transform3D(-0.15, -9.059749e-08, 6.6002364e-16, 0, -2.6226834e-08, -0.1, 2.2649372e-08, -0.6, 4.371139e-09, 0, 0, 0.4168435)
+visible = false
+material_overlay = ExtResource("4_wy4uf")
+mesh = SubResource("CylinderMesh_hbwqx")
+
+[node name="Steam" type="GPUParticles3D" parent="." unique_id=1433677051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.24293905)
+amount = 24
+lifetime = 1.7
+randomness = 0.1
+process_material = SubResource("ParticleProcessMaterial_kysdq")
+draw_pass_1 = SubResource("QuadMesh_086s3")

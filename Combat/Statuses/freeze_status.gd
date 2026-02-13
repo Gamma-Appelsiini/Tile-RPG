@@ -20,6 +20,7 @@ func on_status_added() -> void:
 	
 #Overrided
 func on_status_removed() -> void:
+	print("removed")
 	freeze_effect.end_effect()
 	
 	if in_combat:

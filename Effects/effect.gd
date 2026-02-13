@@ -32,7 +32,6 @@ func _handle_start() -> void:
 	
 
 func play_effect() -> void:
-	print("play effect: ", name)
 	show()
 	
 	if starting_animation != "":
@@ -42,12 +41,13 @@ func play_effect() -> void:
 	
 	animation_player.play(PLAY_STRING)
 	
-	if !looping:
+	if !looping and delete_on_end:
 		await get_tree().create_timer(animation_player.current_animation_length).timeout
 		end_effect()
 	elif looping and effect_sound: asp.play()
 
 func end_effect() -> void:
+	print("end effect: ", name)
 	animation_player.stop()
 	
 	if ending_animation == starting_animation and starting_animation != "":

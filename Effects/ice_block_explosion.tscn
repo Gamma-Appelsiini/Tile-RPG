@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://du0vc10vsrk5k"]
+
+[ext_resource type="Script" uid="uid://wymuwlwe7icf" path="res://Tile-RPG/Effects/effect.gd" id="1_5p7ps"]
+[ext_resource type="Texture2D" uid="uid://rk6vmh4o0uk0" path="res://Tile-RPG/Images/Shaders/Fire3.png" id="2_7v0vr"]
+
+[sub_resource type="Curve" id="Curve_2ound"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13999999, 1), 0.0, 0.0, 0, 0, Vector2(0.7577777, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_e42md"]
+curve = SubResource("Curve_2ound")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5p7ps"]
+particle_flag_rotate_y = true
+angle_min = -24.99999
+angle_max = 25.000011
+direction = Vector3(0, 1, 0)
+spread = 58.017
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+damping_max = 0.5
+scale_min = 0.39999998
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_e42md")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7v0vr"]
+load_path = "res://.godot/imported/glass_scratches_normal.png-19035804cc6a76e833b4de99ef3f7cc6.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_owaoo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e515x"]
+noise = SubResource("FastNoiseLite_owaoo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix36j"]
+transparency = 1
+albedo_color = Color(0.81, 0.886, 1, 0.72156864)
+metallic = 0.19
+metallic_specular = 0.97
+roughness = 0.14
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_7v0vr")
+rim_tint = 1.0
+clearcoat_enabled = true
+anisotropy_enabled = true
+refraction_enabled = true
+refraction_texture = SubResource("NoiseTexture2D_e515x")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0r1jq"]
+material = SubResource("StandardMaterial3D_ix36j")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Gradient" id="Gradient_owaoo"]
+offsets = PackedFloat32Array(0.009708738, 0.43203884, 1)
+colors = PackedColorArray(0.73709995, 0.794205, 0.81, 1, 1, 1, 1, 1, 0.186, 0.24386662, 0.62, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e515x"]
+gradient = SubResource("Gradient_owaoo")
+
+[sub_resource type="Curve" id="Curve_ix36j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.106666654, 1), 0.0, 0.0, 0, 0, Vector2(0.7777777, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0r1jq"]
+curve = SubResource("Curve_ix36j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vuo53"]
+lifetime_randomness = 1.0
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 2
+emission_sphere_radius = 1.0
+angle_min = -24.99999
+angle_max = 25.000011
+angular_velocity_min = -45.000015
+angular_velocity_max = 44.999985
+orbit_velocity_min = -0.8299999
+orbit_velocity_max = 0.66000015
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 0.69997764
+gravity = Vector3(0, 0.5, 0)
+scale_min = 0.79999995
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_0r1jq")
+color_ramp = SubResource("GradientTexture1D_e515x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0laii"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("2_7v0vr")
+albedo_texture_force_srgb = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_d4h4f"]
+material = SubResource("StandardMaterial3D_0laii")
+size = Vector2(0.65, 0.65)
+
+[sub_resource type="Animation" id="Animation_kci8r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Steam:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IceBlocks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_m032m"]
+resource_name = "play_effect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Steam:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IceBlocks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4340"]
+_data = {
+&"RESET": SubResource("Animation_kci8r"),
+&"play_effect": SubResource("Animation_m032m")
+}
+
+[node name="IceBlockExplosion" type="Node3D" unique_id=1088093530 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_5p7ps")
+start_on_spawn = true
+animation_player = NodePath("AnimationPlayer")
+
+[node name="IceBlocks" type="GPUParticles3D" parent="." unique_id=465355280]
+amount = 18
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5p7ps")
+draw_pass_1 = SubResource("BoxMesh_0r1jq")
+
+[node name="Steam" type="GPUParticles3D" parent="." unique_id=1210746630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.24293905)
+amount = 12
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+process_material = SubResource("ParticleProcessMaterial_vuo53")
+draw_pass_1 = SubResource("QuadMesh_d4h4f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=928706537]
+libraries/ = SubResource("AnimationLibrary_n4340")
