@@ -16,7 +16,6 @@ var movement_enabled:bool = true
 
 func _ready() -> void:
 	_connect_signals()
-	_set_infobar()
 
 func _connect_signals() -> void:
 	GlobalSignals.enable_player_movement.connect(_enable_movement)

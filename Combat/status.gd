@@ -25,19 +25,24 @@ func connect_status(new_char:GameCharacter) -> void:
 	current_duration = max_duration
 	affected_gchar = new_char
 	
-	GlobalSignals.combat_manager.round_changed.connect(_on_round_change)
-	if remove_after_combat: GlobalSignals.combat_end.connect(func(): remove_status.emit())
-	
 	_connet_to_char_signals()
-	
-func _on_round_change(_round_count:int) -> void:
+
+#Override this
+func _on_start_turn() -> void:
 	current_duration -= 1
 	duration_changed.emit()
 	if current_duration <= 0: remove_status.emit()
 
 #Override this
-func _connet_to_char_signals() -> void:
+func _on_end_turn() -> void:
 	pass
+
+#Override this
+func _connet_to_char_signals() -> void:
+	if remove_after_combat: GlobalSignals.combat_end.connect(func(): remove_status.emit())
+	
+	affected_gchar.start_turn.connect(_on_start_turn)
+	affected_gchar.end_turn.connect(_on_end_turn)
 
 #Override this
 func on_status_added() -> void:

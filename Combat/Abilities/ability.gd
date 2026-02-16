@@ -50,6 +50,14 @@ var target_char:GameCharacter = null
 var target_tile:Tile = null
 var ability_attack:Attack = null
 
+func connect_signals() -> void:
+	GlobalSignals.combat_start.connect(func(): current_cooldown = 0)
+	ability_owner.start_turn.connect(_change_cooldown.bind(-1))
+
+func _change_cooldown(amount:int) -> void:
+	current_cooldown = clamp(current_cooldown + amount, 0, ability_cooldown)
+	cooldown_changed.emit()
+
 func _visualize_targetable_tiles() -> void:
 	var tile_manager:TileManager
 	pass

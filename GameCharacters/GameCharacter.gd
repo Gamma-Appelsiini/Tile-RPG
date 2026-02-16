@@ -94,10 +94,6 @@ func _enter_combat_state(prev_state:CharacterState) -> void:
 	else:
 		char_model_handler.play_idle_animation()
 
-func _set_infobar() -> void:
-	if !infobar: return
-	infobar.set_game_character(self)
-
 func _init() -> void:
 	_add_handlers()
 	_connect_mouse_over_outlining()
@@ -130,7 +126,6 @@ func _connect_state_signals() -> void:
 
 func _ready() -> void:
 	if unique_id == "": print_debug("ID NOT SET: ", self)
-	_set_infobar()
 	
 func load_from_data(save_data:Dictionary) -> void:
 	var characters:Dictionary = save_data["game_characters"]

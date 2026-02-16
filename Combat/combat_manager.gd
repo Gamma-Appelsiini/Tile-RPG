@@ -115,11 +115,9 @@ func _next_turn() -> void:
 	char_to_act.start_turn.emit()
 	
 	if char_to_act is Player:
-		#TODO
 		GlobalSignals.play_audio.emit(player_turn_sound, AudioManager.AUDIO_TYPE.UI)
 		_player_turn()
 	else:
-		#TODO
 		GlobalSignals.play_audio.emit(turn_change_sound, AudioManager.AUDIO_TYPE.UI)
 		char_to_act.ai_handler.take_turn()
 		

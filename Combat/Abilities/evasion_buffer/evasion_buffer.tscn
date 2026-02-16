@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://wct51sa62ho1"]
+[gd_scene format=3 uid="uid://wct51sa62ho1"]
 
 [ext_resource type="Script" uid="uid://cjjr1xr0iq31n" path="res://Tile-RPG/Combat/Abilities/evasion_buffer/evasion_buffer.gd" id="1_hty33"]
 [ext_resource type="Texture2D" uid="uid://dea3jo74a31p8" path="res://Tile-RPG/Images/Stats/evasion.png" id="2_8vdj3"]
 
-[node name="EvasionBuffer" type="Node3D"]
+[node name="EvasionBuffer" type="Node" unique_id=1464684631]
 script = ExtResource("1_hty33")
-animation_type = 1
+use_animation = 5
+targeting_animation = 6
 usable_on_characters = Array[int]([0, 2])
-ability_tags = Array[int]([0, 4, 11])
+ability_tags = Array[int]([0, 4, 12, 14])
 ability_icon = ExtResource("2_8vdj3")
 ability_name = "Graceful Wind"
 ability_cooldown = 2

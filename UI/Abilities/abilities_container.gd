@@ -17,6 +17,7 @@ var original_pos:Vector2 = Vector2.ZERO
 const BASIC_ATTACK = preload("uid://bs08mf1jnw3vi")
 const FIREBALL = preload("uid://def83grj4ohmj")
 const ICE_BOLT = preload("uid://7xc2gc31hgti")
+const EVASION_BUFFER := preload("uid://wct51sa62ho1")
 
 var tooltip:AbilityTooltip = null
 
@@ -57,6 +58,10 @@ func set_player(new_player:Player) -> void:
 	var new_ability3:Ability = ICE_BOLT.instantiate()
 	new_ability3.ability_owner = new_player
 	add_new_ability(new_ability3)
+	
+	var new_ability4:Ability = EVASION_BUFFER.instantiate()
+	new_ability4.ability_owner = new_player
+	add_new_ability(new_ability4)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -97,6 +102,7 @@ func add_new_ability(new_ability:Ability) -> bool:
 			slot.set_ability(new_ability)
 			break
 	
+	new_ability.connect_signals()
 	return true
 
 func set_hovered(slot:AbilitySlot) -> void:

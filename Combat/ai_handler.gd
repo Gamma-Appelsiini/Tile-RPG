@@ -29,6 +29,7 @@ func _ready() -> void:
 	
 	for ability:Ability in offensive_abilities + support_abilities + movement_abilities:
 		ability.ability_owner = combatant
+		ability.connect_signals()
 
 func _is_combat_over() -> bool:
 	if enemies.is_empty() or is_combat_over:
@@ -36,7 +37,16 @@ func _is_combat_over() -> bool:
 		return true
 	return false
 
+func _is_crowd_controlled() -> bool:
+	if combatant.character_state == GameCharacter.CharacterState.FROZEN:
+		await get_tree().create_timer(1).timeout
+		return true
+		
+	return false
+
 func take_turn() -> void:
+	if await _is_crowd_controlled(): return
+	
 	tile_manager = GlobalSignals.current_level.tile_manager
 	_set_teams()
 	if _is_combat_over(): return

@@ -13,6 +13,7 @@ var show_amount:int = 0
 
 func _ready() -> void:
 	_connect_signals()
+	if get_parent() is GameCharacter: set_game_character(get_parent())
 
 func _change_show_amount(amount:int) -> void:
 	show_amount += amount
@@ -26,9 +27,11 @@ func _connect_signals() -> void:
 
 func set_game_character(new_gc:GameCharacter):
 	game_char = new_gc
+	game_char.infobar = self
+	
 	game_char.status_handler.status_added.connect(_add_status)
-	_update_info()
 	game_char.stat_handler.stats_changed.connect(_update_info)
+	_update_info()
 	
 	game_char.character_mouse_over.connect(_change_show_amount.bind(1))
 	game_char.character_mouse_left.connect(_change_show_amount.bind(-1))
@@ -54,6 +57,12 @@ func _remove_status(status_panel:StatusPanel):
 func _process(_delta: float) -> void:
 	if self.visible == false:
 		set_process(false)
+		return
+	
+	_set_screen_position()
+
+func _set_screen_position() -> void:
+	if !game_char:
 		return
 	
 	var current_camera:Camera3D =  get_viewport().get_camera_3d()
