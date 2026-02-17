@@ -81,6 +81,7 @@ func die() -> void:
 
 func start_casting_effects() -> void:
 	casting_hand_effect.play_effect()
+	casting_ground_effect.global_position = character_mesh.global_position
 	casting_ground_effect.play_effect()
 
 func stop_casting_effects() -> void:
@@ -99,7 +100,7 @@ func _ready() -> void:
 	casting_ground_effect = GROUND_CASTING_EFFECT.instantiate()
 	
 	off_hand_node.add_child(casting_hand_effect)
-	character_mesh.add_child(casting_ground_effect)
+	add_child(casting_ground_effect)
 
 func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_backwards:bool = false) -> void:
 	if game_character.character_state == game_character.CharacterState.STUNNED or game_character.character_state == game_character.CharacterState.FROZEN: return

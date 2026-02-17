@@ -47,7 +47,6 @@ func play_effect() -> void:
 	elif looping and effect_sound: asp.play()
 
 func end_effect() -> void:
-	print("end effect: ", name)
 	animation_player.stop()
 	
 	if ending_animation == starting_animation and starting_animation != "":

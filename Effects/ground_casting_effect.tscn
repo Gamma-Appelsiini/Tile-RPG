@@ -426,7 +426,6 @@ libraries/ = SubResource("AnimationLibrary_foplb")
 
 [node name="Balls" type="CPUParticles3D" parent="." unique_id=1877751583]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-emitting = false
 amount = 12
 randomness = 0.7
 mesh = SubResource("QuadMesh_foplb")
@@ -447,7 +446,6 @@ scale_amount_curve = SubResource("Curve_8hn51")
 
 [node name="Trails" type="GPUParticles3D" parent="." unique_id=1824771745]
 material_override = SubResource("StandardMaterial3D_37i5g")
-emitting = false
 amount = 3
 lifetime = 3.0
 fixed_fps = 60

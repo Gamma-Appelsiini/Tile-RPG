@@ -95,7 +95,7 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ScaleNode/BookParent/Cover:blend_shapes/Closed")
+tracks/0/path = NodePath("Node3D/ScaleNode/BookParent/Cover:blend_shapes/Closed")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -106,7 +106,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ScaleNode/BookParent/Pages:blend_shapes/Closed")
+tracks/1/path = NodePath("Node3D/ScaleNode/BookParent/Pages:blend_shapes/Closed")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -117,7 +117,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ScaleNode/BookParent/Page:visible")
+tracks/2/path = NodePath("Node3D/ScaleNode/BookParent/Page:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -129,7 +129,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ScaleNode/ScaleParent:scale:x")
+tracks/3/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:x")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -140,7 +140,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ScaleNode/ScaleParent:scale:y")
+tracks/4/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -151,7 +151,7 @@ tracks/4/keys = {
 tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ScaleNode/ScaleParent:scale:z")
+tracks/5/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:z")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -162,7 +162,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ScaleNode/Balls:emitting")
+tracks/6/path = NodePath("Node3D/ScaleNode/Balls:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -174,7 +174,7 @@ tracks/6/keys = {
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ScaleNode/BookParent/Page:rotation:z")
+tracks/7/path = NodePath("Node3D/ScaleNode/BookParent/Page:rotation:z")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -185,7 +185,7 @@ tracks/7/keys = {
 tracks/8/type = "bezier"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("ScaleNode/BookParent/Page:blend_shapes/Turned")
+tracks/8/path = NodePath("Node3D/ScaleNode/BookParent/Page:blend_shapes/Turned")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -196,7 +196,7 @@ tracks/8/keys = {
 tracks/9/type = "bezier"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("ScaleNode/BookParent:scale:x")
+tracks/9/path = NodePath("Node3D/ScaleNode/BookParent:scale:x")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -207,7 +207,7 @@ tracks/9/keys = {
 tracks/10/type = "bezier"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("ScaleNode/BookParent:scale:y")
+tracks/10/path = NodePath("Node3D/ScaleNode/BookParent:scale:y")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -218,7 +218,7 @@ tracks/10/keys = {
 tracks/11/type = "bezier"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("ScaleNode/BookParent:scale:z")
+tracks/11/path = NodePath("Node3D/ScaleNode/BookParent:scale:z")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -229,7 +229,7 @@ tracks/11/keys = {
 tracks/12/type = "bezier"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:r")
+tracks/12/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:r")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -240,7 +240,7 @@ tracks/12/keys = {
 tracks/13/type = "bezier"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:g")
+tracks/13/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:g")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -251,7 +251,7 @@ tracks/13/keys = {
 tracks/14/type = "bezier"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:b")
+tracks/14/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:b")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -262,12 +262,23 @@ tracks/14/keys = {
 tracks/15/type = "bezier"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:a")
+tracks/15/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:a")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0.11764706, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Node3D/ScaleNode/ScaleParent/OmniLight3D:light_energy")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.25, -0.175, 0, 0.175, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -278,7 +289,7 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ScaleNode/ScaleParent:scale:x")
+tracks/0/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -289,7 +300,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ScaleNode/ScaleParent:scale:y")
+tracks/1/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -300,7 +311,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ScaleNode/ScaleParent:scale:z")
+tracks/2/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:z")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -311,7 +322,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ScaleNode/BookParent/Pages:blend_shapes/Closed")
+tracks/3/path = NodePath("Node3D/ScaleNode/BookParent/Pages:blend_shapes/Closed")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -322,7 +333,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ScaleNode/BookParent/Cover:blend_shapes/Closed")
+tracks/4/path = NodePath("Node3D/ScaleNode/BookParent/Cover:blend_shapes/Closed")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -333,7 +344,7 @@ tracks/4/keys = {
 tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ScaleNode/BookParent/Page:rotation:z")
+tracks/5/path = NodePath("Node3D/ScaleNode/BookParent/Page:rotation:z")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -344,7 +355,7 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ScaleNode/BookParent/Page:blend_shapes/Turned")
+tracks/6/path = NodePath("Node3D/ScaleNode/BookParent/Page:blend_shapes/Turned")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -355,7 +366,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ScaleNode/BookParent/Page:visible")
+tracks/7/path = NodePath("Node3D/ScaleNode/BookParent/Page:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -367,7 +378,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("ScaleNode/Balls:emitting")
+tracks/8/path = NodePath("Node3D/ScaleNode/Balls:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -379,7 +390,7 @@ tracks/8/keys = {
 tracks/9/type = "bezier"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("ScaleNode/BookParent:scale:x")
+tracks/9/path = NodePath("Node3D/ScaleNode/BookParent:scale:x")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -390,7 +401,7 @@ tracks/9/keys = {
 tracks/10/type = "bezier"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("ScaleNode/BookParent:scale:y")
+tracks/10/path = NodePath("Node3D/ScaleNode/BookParent:scale:y")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -401,7 +412,7 @@ tracks/10/keys = {
 tracks/11/type = "bezier"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("ScaleNode/BookParent:scale:z")
+tracks/11/path = NodePath("Node3D/ScaleNode/BookParent:scale:z")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -412,7 +423,7 @@ tracks/11/keys = {
 tracks/12/type = "bezier"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:r")
+tracks/12/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:r")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -423,7 +434,7 @@ tracks/12/keys = {
 tracks/13/type = "bezier"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:g")
+tracks/13/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:g")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -434,7 +445,7 @@ tracks/13/keys = {
 tracks/14/type = "bezier"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:b")
+tracks/14/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:b")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -445,7 +456,7 @@ tracks/14/keys = {
 tracks/15/type = "bezier"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:a")
+tracks/15/path = NodePath("Node3D/ScaleNode/ScaleParent/Cross:mesh:material:albedo_color:a")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -453,14 +464,25 @@ tracks/15/keys = {
 "points": PackedFloat32Array(0.11764706, -0.25, 0, 0.25, 0, 0.039215688, -0.16666667, 0, 0.16666667, 0, 0.11764706, -0.33333334, 0, 0, 0),
 "times": PackedFloat32Array(0, 1, 2)
 }
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Node3D/ScaleNode/ScaleParent/OmniLight3D:light_energy")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0.25, -0.25, 0, 0.25, 0, 0.1, -0.16666667, 0.025000002, 0, 0, 0.25, -0.16666667, -0.025000002, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
 
 [sub_resource type="Animation" id="Animation_w2bgn"]
 resource_name = "start"
-length = 0.35
+length = 0.4
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ScaleNode/BookParent/Cover:blend_shapes/Closed")
+tracks/0/path = NodePath("Node3D/ScaleNode/BookParent/Cover:blend_shapes/Closed")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -471,7 +493,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ScaleNode/BookParent/Pages:blend_shapes/Closed")
+tracks/1/path = NodePath("Node3D/ScaleNode/BookParent/Pages:blend_shapes/Closed")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -482,7 +504,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ScaleNode/BookParent/Page:visible")
+tracks/2/path = NodePath("Node3D/ScaleNode/BookParent/Page:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -494,7 +516,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ScaleNode/Balls:emitting")
+tracks/3/path = NodePath("Node3D/ScaleNode/Balls:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -506,7 +528,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ScaleNode/ScaleParent:scale:x")
+tracks/4/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -517,7 +539,7 @@ tracks/4/keys = {
 tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ScaleNode/ScaleParent:scale:y")
+tracks/5/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -528,7 +550,7 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ScaleNode/ScaleParent:scale:z")
+tracks/6/path = NodePath("Node3D/ScaleNode/ScaleParent:scale:z")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -539,7 +561,7 @@ tracks/6/keys = {
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ScaleNode/BookParent:scale:x")
+tracks/7/path = NodePath("Node3D/ScaleNode/BookParent:scale:x")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -550,7 +572,7 @@ tracks/7/keys = {
 tracks/8/type = "bezier"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("ScaleNode/BookParent:scale:y")
+tracks/8/path = NodePath("Node3D/ScaleNode/BookParent:scale:y")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -561,13 +583,24 @@ tracks/8/keys = {
 tracks/9/type = "bezier"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("ScaleNode/BookParent:scale:z")
+tracks/9/path = NodePath("Node3D/ScaleNode/BookParent:scale:z")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "handle_modes": PackedInt32Array(0, 2),
 "points": PackedFloat32Array(0.01, -0.175, 0, 0.175, 0, 1, -0.02, -0.16499999, 0, 0),
 "times": PackedFloat32Array(0, 0.12)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Node3D/ScaleNode/ScaleParent/OmniLight3D:light_energy")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0),
+"points": PackedFloat32Array(0.25, -0.175, 0, 0.175, 0, 0, -0.00016666666, 0, 0.058166668, 0, 0.25, -0.058333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.0009999999, 0.36666667)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_boebe"]
@@ -591,7 +624,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_gkkuu"]
 material = SubResource("StandardMaterial3D_5ty5a")
-size = Vector2(2, 2)
+size = Vector2(2.5, 2.5)
 
 [sub_resource type="QuadMesh" id="QuadMesh_sv0eo"]
 material = ExtResource("5_aoute")
@@ -641,52 +674,60 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_w2bgn")
 delete_on_end = false
 looping = true
-animation_player = NodePath("ScaleNode/AnimationPlayer")
+animation_player = NodePath("Node3D/ScaleNode/AnimationPlayer")
 starting_animation = "start"
 ending_animation = "start"
 
-[node name="ScaleNode" type="Node3D" parent="." unique_id=834715711]
+[node name="Node3D" type="Node3D" parent="." unique_id=1812758602]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="ScaleNode" type="Node3D" parent="Node3D" unique_id=834715711]
 transform = Transform3D(-1.35, 1.1802075e-07, 0, -1.1802075e-07, -1.35, 0, 0, 0, 1.35, 0, 0, 1.6951776)
 
-[node name="BookParent" type="Node3D" parent="ScaleNode" unique_id=1553999972]
+[node name="BookParent" type="Node3D" parent="Node3D/ScaleNode" unique_id=1553999972]
 transform = Transform3D(1, 0, 0, 0, 0.8862521, -0.4632032, 0, 0.4632032, 0.8862521, 0, 0, 0)
 
-[node name="Cover" type="MeshInstance3D" parent="ScaleNode/BookParent" unique_id=14562518]
+[node name="Cover" type="MeshInstance3D" parent="Node3D/ScaleNode/BookParent" unique_id=14562518]
 mesh = SubResource("ArrayMesh_sjkol")
 skeleton = NodePath("")
 blend_shapes/Closed = 0.0
 
-[node name="Pages" type="MeshInstance3D" parent="ScaleNode/BookParent" unique_id=2065177922]
+[node name="Pages" type="MeshInstance3D" parent="Node3D/ScaleNode/BookParent" unique_id=2065177922]
 mesh = SubResource("ArrayMesh_qwxqo")
 skeleton = NodePath("")
 blend_shapes/Closed = 0.0
 
-[node name="Page" type="MeshInstance3D" parent="ScaleNode/BookParent" unique_id=1773283346]
+[node name="Page" type="MeshInstance3D" parent="Node3D/ScaleNode/BookParent" unique_id=1773283346]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.050000012, 0)
 mesh = SubResource("ArrayMesh_aoute")
 skeleton = NodePath("")
 blend_shapes/Turned = 1.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScaleNode" unique_id=1089553231]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/ScaleNode" unique_id=1089553231]
+root_node = NodePath("../../..")
 libraries/ = SubResource("AnimationLibrary_boebe")
 
-[node name="ScaleParent" type="Node3D" parent="ScaleNode" unique_id=646874240]
+[node name="ScaleParent" type="Node3D" parent="Node3D/ScaleNode" unique_id=646874240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20255685, 0.12539148)
 
-[node name="Star" type="MeshInstance3D" parent="ScaleNode/ScaleParent" unique_id=1093552927]
+[node name="Star" type="MeshInstance3D" parent="Node3D/ScaleNode/ScaleParent" unique_id=1093552927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 cast_shadow = 0
 mesh = SubResource("QuadMesh_gkkuu")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="Cross" type="MeshInstance3D" parent="ScaleNode/ScaleParent" unique_id=1365118434]
+[node name="Cross" type="MeshInstance3D" parent="Node3D/ScaleNode/ScaleParent" unique_id=1365118434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 cast_shadow = 0
 mesh = SubResource("QuadMesh_sv0eo")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="Balls" type="CPUParticles3D" parent="ScaleNode" unique_id=965634751]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/ScaleNode/ScaleParent" unique_id=496708288]
+transform = Transform3D(5.6731825, 0, 0, 0, 5.6731825, 0, 0, 0, 5.6731825, 7.8816726e-08, 0.90155834, 0.11367679)
+light_energy = 0.25
+omni_range = 14.967
+
+[node name="Balls" type="CPUParticles3D" parent="Node3D/ScaleNode" unique_id=965634751]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.096467435, 0)
 amount = 12
 randomness = 0.7
@@ -702,8 +743,8 @@ scale_amount_min = 0.25
 scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_boebe")
 
-[node name="Ball" type="MeshInstance3D" parent="ScaleNode" unique_id=358826973]
+[node name="Ball" type="MeshInstance3D" parent="Node3D/ScaleNode" unique_id=358826973]
 transform = Transform3D(0.99451435, 0, 0, 0, 0.99451435, 0, 0, 0, 0.99451435, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("QuadMesh_ftomg")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")

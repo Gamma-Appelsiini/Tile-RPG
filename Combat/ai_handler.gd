@@ -38,8 +38,9 @@ func _is_combat_over() -> bool:
 	return false
 
 func _is_crowd_controlled() -> bool:
-	if combatant.character_state == GameCharacter.CharacterState.FROZEN:
+	if combatant.character_state == GameCharacter.CharacterState.FROZEN or combatant.character_state == GameCharacter.CharacterState.STUNNED:
 		await get_tree().create_timer(1).timeout
+		end_turn.emit()
 		return true
 		
 	return false
