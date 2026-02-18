@@ -52,7 +52,8 @@ func end_effect() -> void:
 	if ending_animation == starting_animation and starting_animation != "":
 		animation_player.play_backwards(starting_animation)
 	elif ending_animation != "":
-		animation_player.play(ending_animation)
+		if ending_animation == PLAY_STRING: animation_player.play_backwards(PLAY_STRING)
+		else: animation_player.play(ending_animation)
 	
 	if animation_player.is_playing():
 		await get_tree().create_timer(animation_player.current_animation_length).timeout

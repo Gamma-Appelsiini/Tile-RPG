@@ -48,6 +48,8 @@ func _is_crowd_controlled() -> bool:
 func take_turn() -> void:
 	if await _is_crowd_controlled(): return
 	
+	await get_tree().create_timer(0.5).timeout
+	
 	tile_manager = GlobalSignals.current_level.tile_manager
 	_set_teams()
 	if _is_combat_over(): return
@@ -57,6 +59,7 @@ func take_turn() -> void:
 	elif combat_type == COMBAT_TYPE.SUPPORT: await _take_support_turn()
 	
 	await _handle_turn_end_movement()
+	await get_tree().create_timer(0.5).timeout
 	end_turn.emit()
 
 func _set_reachable_tiles() -> void:

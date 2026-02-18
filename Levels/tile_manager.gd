@@ -64,7 +64,6 @@ func get_tiles_in_aoe(start_tile:Tile, aoe:int) -> Array[Tile]:
 
 	return tiles_in_aoe
 
-
 func _create_indicator() -> void:
 	ground_indicator = GROUND_INDICATOR_SCENE.instantiate()
 	ground_indicator.visible = false

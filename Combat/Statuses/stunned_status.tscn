@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://nrt6scp03udd"]
+
+[ext_resource type="Script" uid="uid://dx50wwaxiak0u" path="res://Tile-RPG/Combat/Statuses/stunned_status.gd" id="1_nw3mu"]
+[ext_resource type="Texture2D" uid="uid://c6n2gwyif3khy" path="res://Tile-RPG/Images/Shaders/star.png" id="2_qu0my"]
+
+[node name="StunnedStatus" type="Node3D" unique_id=411449582]
+script = ExtResource("1_nw3mu")
+status_name = "Stun"
+status_type = 1
+unique = true
+is_crowd_control = true
+max_duration = 2
+picture = ExtResource("2_qu0my")
+status_color = Color(1, 0.908, 0.31, 1)
+description = "Target is stunned and cannot act"

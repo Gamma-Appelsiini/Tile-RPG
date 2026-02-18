@@ -53,7 +53,7 @@ func interact() -> void:
 
 func set_item(new_item:Item) -> void:
 	item_drop = new_item
-	interact_text = "(" + get_input_string("Interact") + ") " + new_item.item_name
+	interact_text = new_item.item_name
 	loot_beam.set_rarity(new_item.item_rarity)
 	
 	if new_item.item_model_path != "":

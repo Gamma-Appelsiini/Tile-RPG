@@ -64,6 +64,9 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	ability_finished.emit()
 
 func _freeze_target(target:GameCharacter) -> void:
+	await ability_owner.get_tree().create_timer(0.2).timeout
+	if target.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP) <= 0: return
+	
 	var freeze_chance:int = 5 + ability_owner.stat_handler.get_stat_amount(Stats.MainStat.LUCK)
 	if randi_range(0, 100) > freeze_chance: return
 	

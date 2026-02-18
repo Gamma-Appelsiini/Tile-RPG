@@ -20,12 +20,18 @@ func on_status_added() -> void:
 	
 #Overrided
 func on_status_removed() -> void:
-	print("removed")
 	freeze_effect.end_effect()
 	
 	if in_combat:
 		affected_gchar.change_state(GameCharacter.CharacterState.IN_COMBAT)
-	else:
-		affected_gchar.change_state(GameCharacter.CharacterState.OUT_OF_COMBAT)
 		
+	await freeze_effect.animation_player.animation_finished
 	queue_free()
+
+#Overrided
+func _on_start_turn() -> void:
+	current_duration -= 1
+	duration_changed.emit()
+	if current_duration <= 0: remove_status.emit()
+	else:
+		GlobalSignals.show_floating_text.emit("Frozen", affected_gchar,status_color)

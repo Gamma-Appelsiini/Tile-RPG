@@ -312,6 +312,7 @@ script = ExtResource("1_882ph")
 start_on_spawn = true
 delete_on_end = false
 animation_player = NodePath("AnimationPlayer")
+ending_animation = "play_effect"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=13040534]
 libraries/ = SubResource("AnimationLibrary_ebxu3")

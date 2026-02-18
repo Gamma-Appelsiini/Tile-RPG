@@ -15,6 +15,7 @@ enum CharAnimation {
 @export var main_hand_node: Node3D = null
 @export var off_hand_node: Node3D = null
 @export var shield_node: Node3D = null
+@export var head_node: Node3D = null
 
 const PLAYER_PREFIX:String = "animations/"
 const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {

@@ -47,6 +47,8 @@ func _connect_mouse_over_outlining() -> void:
 	)
 
 func change_state(new_state:CharacterState) -> void:
+	if character_state == CharacterState.DEAD: return
+	
 	var prev_state:CharacterState = character_state
 	self.character_state = new_state
 	
