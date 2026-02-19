@@ -14,6 +14,7 @@ var hovered_tile:Tile = null
 var aoe_indicators:Array[Node3D] = []
 var input_ok:bool = false
 var range_indicators:Array[RangeIndicator] = []
+var hidden_indicators:Array[RangeIndicator] = []
 var range_mesh:MeshInstance3D = null
 
 func _ready() -> void:
@@ -86,7 +87,6 @@ func set_ability_to_target(new_ability:Ability) -> void:
 	set_process_input(true)
 
 func cancel_ability_targeting() -> void:
-	print_debug("cancel abi targeting")
 	_stop_targeting_animation()
 	
 	_hide_range_indicators()
@@ -133,9 +133,19 @@ func _show_aoe() -> void:
 		add_child(new_indicator)
 		aoe_indicators.push_back(new_indicator)
 
+	for indicator:Node3D in hidden_indicators: indicator.show()
+	hidden_indicators = []
+	
 	for i:int in len(tiles_in_aoe):
 		aoe_indicators[i].visible = true
 		aoe_indicators[i].global_position = tiles_in_aoe[i].global_position
+		_hide_range_indicator_in_aoe_visualization(aoe_indicators[i])
+		
+func _hide_range_indicator_in_aoe_visualization(aoe_indicator:Node3D) -> void:
+	for indicator:Node3D in range_indicators:
+		if indicator.visible and indicator.global_position == aoe_indicator.global_position:
+			indicator.hide()
+			hidden_indicators.push_back(indicator)
 
 func _set_new_target_character(new_target:GameCharacter) -> void:
 	if hovered_character == new_target: return
