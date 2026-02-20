@@ -139,28 +139,32 @@ func _check_if_wall_between_tiles(tile_from:Tile, tile_to:Tile) -> bool:
 	var result := space_state.intersect_ray(query)
 	return !result.is_empty()
 
-func _add_diagonals(tile:Tile) -> void:
-	var topl:Tile = tiles.get(tile.global_position + (OFFSETS[1] + OFFSETS[2]))
-	var topr:Tile = tiles.get(tile.global_position + (OFFSETS[1] - OFFSETS[3]))
-	var botl:Tile = tiles.get(tile.global_position + (OFFSETS[0] + OFFSETS[2]))
-	var botr:Tile = tiles.get(tile.global_position + (OFFSETS[0] - OFFSETS[3]))
-	
-	var left:Tile = tiles.get(tile.global_position + OFFSETS[0])
-	var right:Tile = tiles.get(tile.global_position + OFFSETS[1])
-	var top:Tile = tiles.get(tile.global_position + OFFSETS[2])
-	var bot:Tile = tiles.get(tile.global_position + OFFSETS[3])
-	
-	if topl != null and left != null and right != null:
-		tile.diagonal_tiles.push_back(topl)
+func _add_diagonals(tile: Tile) -> void:
+	var n_front:Tile = tiles.get(tile.global_position + Vector3(0, 0, 1))
+	var n_back:Tile  = tiles.get(tile.global_position + Vector3(0, 0, -1))
+	var n_left:Tile  = tiles.get(tile.global_position + Vector3(-1, 0, 0))
+	var n_right:Tile = tiles.get(tile.global_position + Vector3(1, 0, 0))
+
+	var d_front_left:Tile  = tiles.get(tile.global_position + Vector3(-1, 0, 1))
+	var d_front_right:Tile = tiles.get(tile.global_position + Vector3(1, 0, 1))
+	var d_back_left:Tile   = tiles.get(tile.global_position + Vector3(-1, 0, -1))
+	var d_back_right:Tile  = tiles.get(tile.global_position + Vector3(1, 0, -1))
+
+	if d_front_left and n_front and n_left and tile.neighbor_tiles.has(n_front) and tile.neighbor_tiles.has(n_left):
+		if !_check_if_wall_between_tiles(d_front_left, n_front) and !_check_if_wall_between_tiles(d_front_left, n_left):
+			tile.diagonal_tiles.push_back(d_front_left)
 		
-	if topr != null and top != null and left != null:
-		tile.diagonal_tiles.push_back(topr)
+	if d_front_right and n_front and n_right and tile.neighbor_tiles.has(n_front) and tile.neighbor_tiles.has(n_right):
+		if !_check_if_wall_between_tiles(d_front_right, n_front) and !_check_if_wall_between_tiles(d_front_right, n_right):
+			tile.diagonal_tiles.push_back(d_front_right)
 		
-	if botl != null and left != null and bot != null:
-		tile.diagonal_tiles.push_back(botl)
+	if d_back_left and n_back and n_left and tile.neighbor_tiles.has(n_back) and tile.neighbor_tiles.has(n_left):
+		if !_check_if_wall_between_tiles(d_back_left, n_back) and !_check_if_wall_between_tiles(d_back_left, n_left):
+			tile.diagonal_tiles.push_back(d_back_left)
 		
-	if botr != null and bot != null and right != null:
-		tile.diagonal_tiles.push_back(botr)
+	if d_back_right and n_back and n_right and tile.neighbor_tiles.has(n_back) and tile.neighbor_tiles.has(n_right):
+		if !_check_if_wall_between_tiles(d_back_right, n_back) and !_check_if_wall_between_tiles(d_back_right, n_right):
+			tile.diagonal_tiles.push_back(d_back_right)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):

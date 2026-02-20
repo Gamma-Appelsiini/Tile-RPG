@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://8sp4d6thsghn"]
 
 [ext_resource type="Script" uid="uid://0diajg4725av" path="res://Tile-RPG/Combat/projectile.gd" id="1_0q4n8"]
+[ext_resource type="AudioStream" uid="uid://lq3wcgotfcq" path="res://Tile-RPG/Sounds/Effects/ice_hit.mp3" id="2_0q4n8"]
 [ext_resource type="Texture2D" uid="uid://rk6vmh4o0uk0" path="res://Tile-RPG/Images/Shaders/Fire3.png" id="4_0q4n8"]
 [ext_resource type="Material" uid="uid://c2orrx318kv2q" path="res://Tile-RPG/Materials/ShaderMaterials/wind_effect_material.tres" id="4_wy4uf"]
 
@@ -114,6 +115,7 @@ size = Vector2(0.65, 0.65)
 script = ExtResource("1_0q4n8")
 projectile_speed = 9.0
 meshes_to_show_on_shoot = [NodePath("WindMesh2")]
+hit_sound = ExtResource("2_0q4n8")
 
 [node name="Icicle" type="MeshInstance3D" parent="." unique_id=972783824]
 transform = Transform3D(0.08, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0.38808453)

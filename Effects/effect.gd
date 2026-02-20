@@ -34,8 +34,9 @@ func _handle_start() -> void:
 func play_effect() -> void:
 	show()
 	
+	GlobalSignals.play_audio.emit(start_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
+	
 	if starting_animation != "":
-		GlobalSignals.play_audio.emit(start_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 		animation_player.play(starting_animation)
 		await get_tree().create_timer(animation_player.current_animation_length).timeout
 	

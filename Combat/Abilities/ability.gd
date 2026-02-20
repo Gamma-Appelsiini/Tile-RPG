@@ -58,6 +58,10 @@ func _change_cooldown(amount:int) -> void:
 	current_cooldown = clamp(current_cooldown + amount, 0, ability_cooldown)
 	cooldown_changed.emit()
 
+#Override
+func get_tiles_in_aoe(_target:Tile) -> Array[Tile]:
+	return [null]
+
 func _visualize_targetable_tiles() -> void:
 	var tile_manager:TileManager
 	pass

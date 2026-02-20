@@ -5,6 +5,7 @@ signal hit_target
 
 @export var projectile_speed:float = 2.0
 @export var meshes_to_show_on_shoot:Array[Node3D] = []
+@export var hit_sound:AudioStream = null
 
 const time_per_meter:float = 1
 
@@ -28,6 +29,8 @@ func _show_meshes() -> void:
 
 #Override this
 func _on_hit() -> void:
+	GlobalSignals.play_audio.emit(hit_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
+	
 	for child:Node3D in get_children():
 		if child is GPUParticles3D:
 			child.emitting = false

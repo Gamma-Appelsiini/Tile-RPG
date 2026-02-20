@@ -126,7 +126,9 @@ func _hide_aoe() -> void:
 		aoe_ind.visible = false
 
 func _show_aoe() -> void:
-	var tiles_in_aoe:Array[Tile] = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
+	var tiles_in_aoe:Array[Tile] = selected_ability.get_tiles_in_aoe(hovered_tile)
+	if tiles_in_aoe == [null]: tiles_in_aoe = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
+	
 	while len(tiles_in_aoe) > len(aoe_indicators):
 		var new_indicator:Node3D = AOE_INDICATOR.instantiate()
 		new_indicator.visible = false

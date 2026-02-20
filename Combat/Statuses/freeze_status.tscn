@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://6enlcywwmbt7"]
 
 [ext_resource type="Script" uid="uid://cdjpt0lwy7hrd" path="res://Tile-RPG/Combat/Statuses/freeze_status.gd" id="1_qgdck"]
+[ext_resource type="AudioStream" uid="uid://b61un2mn31wo6" path="res://Tile-RPG/Sounds/Effects/freezing.mp3" id="2_4e0pq"]
 [ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="2_bigwh"]
 
 [node name="FreezeStatus" type="Node" unique_id=1815492617]
 script = ExtResource("1_qgdck")
+freeze_sound = ExtResource("2_4e0pq")
 status_name = "Freeze"
 status_type = 1
 unique = true

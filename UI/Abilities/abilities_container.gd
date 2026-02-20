@@ -18,6 +18,7 @@ const BASIC_ATTACK = preload("uid://bs08mf1jnw3vi")
 const FIREBALL = preload("uid://def83grj4ohmj")
 const ICE_BOLT = preload("uid://7xc2gc31hgti")
 const EVASION_BUFFER := preload("uid://wct51sa62ho1")
+const SKY_HAMMER := preload("uid://3uev06m0wx45")
 
 var tooltip:AbilityTooltip = null
 
@@ -62,6 +63,10 @@ func set_player(new_player:Player) -> void:
 	var new_ability4:Ability = EVASION_BUFFER.instantiate()
 	new_ability4.ability_owner = new_player
 	add_new_ability(new_ability4)
+	
+	var new_ability5:Ability = SKY_HAMMER.instantiate()
+	new_ability5.ability_owner = new_player
+	add_new_ability(new_ability5)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):

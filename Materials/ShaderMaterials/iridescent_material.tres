@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c4kiu6i1nes4s"]
+
+[ext_resource type="Shader" uid="uid://xnxe0q7jlsya" path="res://Tile-RPG/Shaders/iridescent_shader.gdshader" id="1_dbqqb"]
+
+[sub_resource type="Gradient" id="Gradient_1gamf"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.28139535, 0.5116279, 0.7046512, 1)
+colors = PackedColorArray(0.45789438, 0.56896013, 1, 1, 1, 0, 0.7333336, 1, 1, 0.95, 0, 1, 1.2513996e-06, 0.62732375, 0.20039901, 1, 0.20999998, 0.34166652, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4lfc6"]
+gradient = SubResource("Gradient_1gamf")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dbqqb")
+shader_parameter/base_color = Color(1, 1, 1, 0.6784314)
+shader_parameter/roughness = 0.02
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.0
+shader_parameter/iridescence_gradient = SubResource("GradientTexture1D_4lfc6")
+shader_parameter/iridescence_intensity = 4.08400019399
+shader_parameter/fresnel_power = 0.5
+shader_parameter/refraction_intensity = 0.05
+shader_parameter/aberration_amount = 0.02

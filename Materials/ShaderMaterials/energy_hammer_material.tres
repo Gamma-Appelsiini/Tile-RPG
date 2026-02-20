@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bmlwiy6jfyhdd"]
+
+[ext_resource type="Shader" uid="uid://b5egmwjwx1j6r" path="res://Tile-RPG/Shaders/glow_seethrough.gdshader" id="1_flxko"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_flxko")
+shader_parameter/emission_color = Color(0.43, 0.45849985, 1, 0)
+shader_parameter/emission_amount = 0.0
+shader_parameter/rim_sharpness = 16.0
