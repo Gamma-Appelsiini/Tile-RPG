@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciibj20uwiqwu"]
+[gd_scene format=3 uid="uid://ciibj20uwiqwu"]
 
 [ext_resource type="Script" uid="uid://bm3xstpfnu02l" path="res://Tile-RPG/Interactables/chest.gd" id="1_vugoh"]
 [ext_resource type="Texture2D" uid="uid://cnjp47v04w6lp" path="res://Tile-RPG/Images/Icons/Chest.png" id="2_lcgj3"]
@@ -12,7 +12,7 @@ size = Vector3(0.499878, 0.346558, 0.462891)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pipw1"]
 size = Vector3(0.5, 0.423828, 0.351318)
 
-[node name="Chest" type="Node3D" node_paths=PackedStringArray("animation_player", "loot_beam", "interact_area", "indicator_place")]
+[node name="Chest" type="Node3D" unique_id=623564092 node_paths=PackedStringArray("animation_player", "loot_beam", "interact_area", "indicator_place")]
 script = ExtResource("1_vugoh")
 container_image = ExtResource("2_lcgj3")
 animation_player = NodePath("new_chest/AnimationPlayer")
@@ -23,43 +23,44 @@ interact_text = "Open"
 face_interactable = true
 interact_animation = 18
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1097612189]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1106836086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, 0.172867, 0.231445)
 shape = SubResource("BoxShape3D_vugoh")
 
-[node name="IndicatorPlace" type="Node3D" parent="."]
+[node name="IndicatorPlace" type="Node3D" parent="." unique_id=1113893079]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.392833, 0.1865)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=435313522]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1686971076]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.210836, 0.000366211)
 shape = SubResource("BoxShape3D_pipw1")
 
-[node name="new_chest" parent="." instance=ExtResource("2_pipw1")]
+[node name="new_chest" parent="." unique_id=525753514 instance=ExtResource("2_pipw1")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="Skeleton3D" parent="new_chest/Armature" index="0"]
-bones/0/rotation = Quaternion(0.7337221, -1.6199483e-07, -1.7493456e-07, 0.67944974)
+bones/0/rotation = Quaternion(0.73432535, -1.6183944e-07, -1.7507843e-07, 0.67879766)
+bones/2/rotation = Quaternion(-2.870286e-07, 0.7488992, -0.6626839, 3.2436583e-07)
 
 [node name="Bot" parent="new_chest/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 4.121148e-12, 4.1637804e-12, 4.1495696e-12, 1.0000001, 6.631017e-07, -3.5313974e-12, 6.7055225e-07, 1.0000002, 2.842171e-14, 5.9604645e-08, -2.9802322e-07)
+transform = Transform3D(1, 4.2348347e-12, 4.131806e-12, 4.007461e-12, 0.9999984, -0.0017760247, -3.4603431e-12, 0.0017773658, 0.9999985, -1.1368684e-13, -0.0012419224, -0.0017781854)
 
 [node name="Lid" parent="new_chest/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 4.8316906e-12, -6.5227823e-12, 6.366463e-12, 1.0000001, -1.1026859e-06, 4.703793e-12, -8.791685e-07, 0.9999998, 5.684342e-14, 5.9604645e-08, -8.940697e-07)
+transform = Transform3D(1, 5.400125e-12, -1.3699264e-11, -2.3874236e-12, -0.9625199, 0.27121317, -1.3102408e-11, -0.27121145, -0.9625191, -5.570655e-12, 2.1523678, -1.1025506)
 
-[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+[node name="OutlineHandler" type="Node" parent="." unique_id=706046190 node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("4_15uek")
 mesh_to_outline = NodePath("../new_chest/Armature/Skeleton3D/Lid/Lid")
 metadata/_custom_type_script = "uid://g6rood38j5ok"
 
-[node name="LootBeam" parent="." instance=ExtResource("5_evfjl")]
+[node name="LootBeam" parent="." unique_id=1385251438 instance=ExtResource("5_evfjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10354106, 0)
 
 [editable path="new_chest"]

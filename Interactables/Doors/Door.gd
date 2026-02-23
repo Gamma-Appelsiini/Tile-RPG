@@ -46,7 +46,6 @@ func interact() -> void:
 		return_rotation = door_rotation * -1
 	
 	used = !used
-	hide_indicator()
 	
 	if used:
 		interact_text = "Close"
@@ -78,22 +77,15 @@ func _handle_blocked_tiles() -> void:
 		blocked_tiles[1].neighbor_tiles.push_back(blocked_tiles[0])
 
 #Overrided due to doors having 2 interact points
-func show_indicator(ind:Indicator, lab:Label3D) -> void:
-	indicator = ind
-	label = lab
-	
+func get_interact_pos() -> Node3D:
 	var distance_1:float = player.global_transform.origin.distance_to(side_1.global_transform.origin)
 	var distance_2:float = player.global_transform.origin.distance_to(side_2.global_transform.origin)
 	
 	closest_interact = side_1
 	if distance_2 < distance_1:
 		closest_interact = side_2
-	
-	lab.text = self.interact_text
-	lab.global_position = closest_interact.global_position
-	ind.global_position = closest_interact.global_position + Vector3(0,0.1,0)
-	lab.show()
-	ind.show_indicator()
+		
+	return closest_interact
 	
 #TODO add locked/key functionality
 func _handle_locked() -> void:

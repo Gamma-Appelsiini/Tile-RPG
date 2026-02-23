@@ -5,6 +5,7 @@ signal effect_done
 
 @export var start_on_spawn:bool = false
 @export var delete_on_end:bool = true
+@export var top_level_on_start:bool = false
 @export var looping:bool = false
 @export var start_sound:AudioStream = null
 @export var end_sound:AudioStream = null
@@ -33,6 +34,7 @@ func _handle_start() -> void:
 
 func play_effect() -> void:
 	show()
+	if top_level_on_start: top_level = true
 	
 	GlobalSignals.play_audio.emit(start_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	

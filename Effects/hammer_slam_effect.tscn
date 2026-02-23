@@ -291,7 +291,7 @@ tracks/21/keys = {
 
 [sub_resource type="Animation" id="Animation_qfyo1"]
 resource_name = "play_effect"
-length = 3.0
+length = 4.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = false
@@ -502,9 +502,9 @@ tracks/18/path = NodePath("Decal:albedo_mix")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 0),
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.17222224, 0, 0, 0, 1, -0.011111101, -0.16666667, 0, 0, 1, -0.02222222, 0, 0, 0, 1, -0.061111134, 0.034591205, 0.23333332, -0.13207546, 0, -0.12777779, 0.16666669, 0, 0),
-"times": PackedFloat32Array(0, 1.0333334, 1.1, 1.2333333, 1.6000001, 3)
+"times": PackedFloat32Array(0, 1.0333334, 1.1, 1.2333333, 3.2333333, 3.9)
 }
 tracks/19/type = "bezier"
 tracks/19/imported = false
@@ -610,6 +610,7 @@ size = Vector2(0.5, 3)
 [node name="HammerSlamEffect" type="Node3D" unique_id=1321249981 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_3oxor")
 start_on_spawn = true
+top_level_on_start = true
 start_sound = ExtResource("2_qfyo1")
 animation_player = NodePath("AnimationPlayer")
 
@@ -625,6 +626,7 @@ libraries/ = SubResource("AnimationLibrary_al1hi")
 [node name="ExplosionEffect" parent="." unique_id=1448355878 instance=ExtResource("4_al1hi")]
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, 0)
 start_on_spawn = false
+delete_on_end = false
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=412563233]
 stream = ExtResource("5_iswmg")

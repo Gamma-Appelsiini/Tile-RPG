@@ -43,12 +43,19 @@ func _add_range_tiles(amount:int) -> void:
 		add_child(new_indicator)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Left Click"):
+	if event.is_action_pressed("Left Click"): 
 		if !input_ok: return
 		_use_ability()
-	#TODO any other action cancels
-	elif event.is_action_pressed("Right Click"):
+	#Any other action other than camera movement in input map cancels
+	elif _is_input_non_cancelling(event):
+		return
+	elif event.is_pressed() and not event.is_echo():
 		cancel_ability_targeting()
+
+func _is_input_non_cancelling(event: InputEvent) -> bool:
+	if event.is_action_pressed("roll_up") or event.is_action_pressed("roll_down") or event.is_action_pressed("Backward") or event.is_action_pressed("Forward") or event.is_action_pressed("Left") or event.is_action_pressed("Right") or event.is_action_pressed("Rotate_Cam_L") or event.is_action_pressed("Rotate_Cam_R"):
+		return true
+	return false
 
 func _process(_delta: float) -> void:
 	_get_ability_target()

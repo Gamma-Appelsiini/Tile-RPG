@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://b61un2mn31wo6" path="res://Tile-RPG/Sounds/Effects/freezing.mp3" id="2_4e0pq"]
 [ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="2_bigwh"]
 
-[node name="FreezeStatus" type="Node" unique_id=1815492617]
+[node name="FreezeStatus" type="Node3D" unique_id=973926403]
 script = ExtResource("1_qgdck")
 freeze_sound = ExtResource("2_4e0pq")
 status_name = "Freeze"

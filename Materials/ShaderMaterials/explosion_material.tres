@@ -5,11 +5,11 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_ea568")
-shader_parameter/color1 = Color(2.3092632, 1.1938161, 0, 0.5176471)
+shader_parameter/color1 = Color(0.24, 0.24, 0.24, 0.5176471)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/threshold = 0.2
 shader_parameter/fresnel_sharpness = 1.0
-shader_parameter/intensity = 0.75600004
+shader_parameter/intensity = 0.0
 shader_parameter/intensity_2 = 0.0
 shader_parameter/distortion_enabled = true
 shader_parameter/distortion_strength = 0.6

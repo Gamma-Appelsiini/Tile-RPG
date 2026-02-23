@@ -386,7 +386,6 @@ func _set_teams() -> void:
 func _get_tiles_where_ability_in_range() -> Array[Tile]:
 	_set_reachable_tiles()
 	var in_range_tiles:Array[Tile] = []
-	asdasd()
 	
 	chosen_ability.target_tile = target_tile
 	chosen_ability.target_char = target_tile.occupant
@@ -396,10 +395,6 @@ func _get_tiles_where_ability_in_range() -> Array[Tile]:
 	chosen_ability.target_tile = null
 	chosen_ability.target_char = null
 	return in_range_tiles
-
-func asdasd():
-	for tile in tiles_to_move_to:
-		if tile.global_position == Vector3(3.0, 0.0, 4.0): print("YES Vector3(3.0, 0.0, 4.0) is in tiles to move to")
 
 func _get_possible_tiles_to_move_to() -> Array[Tile]:
 	var possibles:Array[Tile] = []

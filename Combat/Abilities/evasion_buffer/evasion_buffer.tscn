@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cjjr1xr0iq31n" path="res://Tile-RPG/Combat/Abilities/evasion_buffer/evasion_buffer.gd" id="1_hty33"]
 [ext_resource type="Texture2D" uid="uid://dea3jo74a31p8" path="res://Tile-RPG/Images/Stats/evasion.png" id="2_8vdj3"]
 
-[node name="EvasionBuffer" type="Node" unique_id=1464684631]
+[node name="EvasionBuffer" type="Node3D" unique_id=1925714645]
 script = ExtResource("1_hty33")
 use_animation = 5
 targeting_animation = 6

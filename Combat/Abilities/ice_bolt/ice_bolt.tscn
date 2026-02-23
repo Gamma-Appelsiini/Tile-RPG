@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bdijjbjmpvuhj" path="res://Tile-RPG/Combat/Abilities/ice_bolt/ice_bolt.gd" id="1_q3ksw"]
 [ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="2_6d0wi"]
 
-[node name="IceBolt" type="Node" unique_id=1644024601]
+[node name="IceBolt" type="Node3D" unique_id=417763505]
 script = ExtResource("1_q3ksw")
 use_animation = 5
 targeting_animation = 6

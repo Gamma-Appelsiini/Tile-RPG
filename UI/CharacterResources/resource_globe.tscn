@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bdpwih35s30mm"]
+[gd_scene format=4 uid="uid://bdpwih35s30mm"]
 
 [ext_resource type="Script" uid="uid://s25j2yw31ma5" path="res://Tile-RPG/UI/CharacterResources/resource_globe.gd" id="1_xkwcr"]
 [ext_resource type="Material" uid="uid://cqdi0kdmoffy2" path="res://Tile-RPG/UI/CharacterResources/globe_hp_glass_material.tres" id="2_xkwcr"]
@@ -69,17 +69,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kuwc8")
 
-[node name="ResourceGlobe" type="Node3D" node_paths=PackedStringArray("liquid_mesh", "sub_viewport", "camera_3d", "glass_ball")]
+[node name="ResourceGlobe" type="Node3D" unique_id=754506931 node_paths=PackedStringArray("liquid_mesh", "sub_viewport", "camera_3d", "glass_ball")]
 script = ExtResource("1_xkwcr")
 liquid_mesh = NodePath("Node3D/LiquidMesh")
 sub_viewport = NodePath("Node3D/SubViewport")
 camera_3d = NodePath("Node3D/SubViewport/Camera3D")
 glass_ball = NodePath("Node3D/GlassBall")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1755785136]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1.0000002, 0, -1.0000002, -4.37114e-08, 0, 0, 0)
 
-[node name="GlassBall" type="MeshInstance3D" parent="Node3D"]
+[node name="GlassBall" type="MeshInstance3D" parent="Node3D" unique_id=805635656]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("2_xkwcr")
@@ -87,7 +87,7 @@ cast_shadow = 0
 mesh = SubResource("ArrayMesh_paqye")
 skeleton = NodePath("")
 
-[node name="LiquidMesh" type="MeshInstance3D" parent="Node3D"]
+[node name="LiquidMesh" type="MeshInstance3D" parent="Node3D" unique_id=682598866]
 unique_name_in_owner = true
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 layers = 524288
@@ -95,17 +95,19 @@ mesh = SubResource("ArrayMesh_1503h")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_xkwcr")
 
-[node name="SubViewport" type="SubViewport" parent="Node3D"]
+[node name="SubViewport" type="SubViewport" parent="Node3D" unique_id=710955710]
 unique_name_in_owner = true
 transparent_bg = true
 gui_disable_input = true
 
-[node name="Camera3D" type="Camera3D" parent="Node3D/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Node3D/SubViewport" unique_id=1614833528]
 unique_name_in_owner = true
-transform = Transform3D(0.7071068, -0.7071068, -3.090862e-08, 0, -4.3711392e-08, 1, -0.7071068, -0.7071068, -3.090862e-08, 0, 1.5402069, -7.1054274e-15)
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.1845621, -3.5527137e-15)
 cull_mask = 786432
 projection = 1
 size = 0.6
 
-[node name="Node3D" type="Node3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.689969e-08, 1.5304865)
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Node3D" unique_id=1884857889]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, -5.177884e-08, 1.1845618)
+remote_path = NodePath("../SubViewport/Camera3D")

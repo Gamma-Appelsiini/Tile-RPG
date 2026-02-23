@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6syfvxx0amwj" path="res://Tile-RPG/Combat/Statuses/bleed/bleed_status.gd" id="1_kvudh"]
 [ext_resource type="Texture2D" uid="uid://daovsvggokbxv" path="res://Tile-RPG/Images/UI/cross.png" id="2_i3thh"]
 
-[node name="BleedStatus" type="Node" unique_id=363038335]
+[node name="BleedStatus" type="Node3D" unique_id=1831063825]
 script = ExtResource("1_kvudh")
 status_name = "Bleed"
 status_type = 1

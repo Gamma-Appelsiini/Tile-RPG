@@ -17,7 +17,6 @@ const GLOBE_HP_GLASS_MATERIAL = preload("uid://cqdi0kdmoffy2")
 const GLOBE_SPIRIT_GLASS_MATERIAL = preload("uid://c21kp4ucv22al")
 
 var liquid_material:ShaderMaterial = null
-@onready var node_3d: Node3D = $Node3D/Node3D
 
 func _ready() -> void:
 	if liquid_type == LiquidType.HP:
@@ -28,9 +27,6 @@ func _ready() -> void:
 		glass_ball.material_override = GLOBE_SPIRIT_GLASS_MATERIAL
 	
 	liquid_mesh.set_surface_override_material(0,liquid_material)
-
-func _process(_delta: float) -> void:
-	camera_3d.global_transform = node_3d.global_transform
 
 func resource_changed(sh:StatHandler, stat_type:LiquidType) -> void:
 	var current_amount:int = 0

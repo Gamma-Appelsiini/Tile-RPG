@@ -28,7 +28,7 @@ func _ready() -> void:
 func _on_creation() -> void:
 	#Set to scan GameCharacters
 	interact_area.set_collision_mask_value(4,true)
-	interact_text = "(" + get_input_string("Interact") + ") " + interact_text
+	interact_text = "[" + get_input_string("Interact") + "] " + interact_text
 	#TODO sub to signal when keybinds changed
 	interact_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
 	interact_area.connect("body_exited", Callable(self, "_on_Area3D_body_exited"))
@@ -44,25 +44,8 @@ func _on_Area3D_body_exited(body: Node) -> void:
 		var exited_player:Player = body as Player
 		exited_player.interact_handler.remove_interactable(self)
 
-func show_indicator(ind:Indicator, lab:Label3D) -> void:
-	indicator = ind
-	label = lab
-
-	lab.text = self.interact_text
-	lab.global_position = self.indicator_place.global_position
-	ind.global_position = self.indicator_place.global_position + Vector3(0,0.1,0)
-	lab.show()
-	ind.show_indicator()
-
-func hide_indicator(instant:bool = false) -> void:
-	if indicator == null: return
-	if label == null: return
-	
-	label.hide()
-	indicator.hide_indicator(instant)
-	
-	indicator = null
-	label = null
+func get_interact_pos() -> Node3D:
+	return indicator_place
 
 #Override this
 func interact() -> void:

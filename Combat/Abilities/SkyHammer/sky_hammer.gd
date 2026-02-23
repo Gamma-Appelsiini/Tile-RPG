@@ -42,8 +42,8 @@ func _create_attack() -> Attack:
 	hammer_attack.attacker = ability_owner
 	
 	var dmg_from_level:int = ability_owner.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL) * 2
-	var dmg_from_mystic:int = int( ability_owner.stat_handler.get_stat_amount(Stats.MainStat.MYSTIC) / 2.0 )
-	hammer_attack.damages[Stats.DmgType.PHYSICAL] = 2 + dmg_from_level + dmg_from_mystic
+	var dmg_from_might:int = int( ability_owner.stat_handler.get_stat_amount(Stats.MainStat.MIGHT) / 2.0 )
+	hammer_attack.damages[Stats.DmgType.PHYSICAL] = 2 + dmg_from_level + dmg_from_might
 	
 	return hammer_attack
 

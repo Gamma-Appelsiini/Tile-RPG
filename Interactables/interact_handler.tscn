@@ -1,21 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2xa3gaq15cp6"]
+[gd_scene format=3 uid="uid://b2xa3gaq15cp6"]
 
 [ext_resource type="Script" uid="uid://c6a28urtrpbgk" path="res://Tile-RPG/Interactables/InteractHandler.gd" id="1_lwnpv"]
 [ext_resource type="PackedScene" uid="uid://c0rkde0u5wckd" path="res://Tile-RPG/Interactables/indicator.tscn" id="2_cl3o0"]
 [ext_resource type="AudioStream" uid="uid://dmt22fc53w2ha" path="res://Tile-RPG/Sounds/no_interact.wav" id="2_ysihm"]
 [ext_resource type="AudioStream" uid="uid://dg5ljqvsx0gbw" path="res://Tile-RPG/Sounds/interact.wav" id="3_oecyw"]
+[ext_resource type="FontFile" uid="uid://cceot5u65qrcq" path="res://Tile-RPG/Fonts/GoogleFonts/MedievalSharp-Regular.ttf" id="5_oecyw"]
 
-[node name="InteractHandler" type="Node3D" node_paths=PackedStringArray("indicator", "label")]
+[node name="InteractHandler" type="Node" unique_id=902228103 node_paths=PackedStringArray("indicator", "label")]
 script = ExtResource("1_lwnpv")
 indicator = NodePath("Indicator")
 label = NodePath("Label3D")
 no_interaction_sound = ExtResource("2_ysihm")
 interaction_sound = ExtResource("3_oecyw")
 
-[node name="Indicator" parent="." instance=ExtResource("2_cl3o0")]
+[node name="Indicator" parent="." unique_id=462091729 instance=ExtResource("2_cl3o0")]
 visible = false
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=1243153979]
 top_level = true
 visible = false
 pixel_size = 0.001
@@ -24,5 +25,6 @@ no_depth_test = true
 fixed_size = true
 texture_filter = 0
 text = "Interact"
+font = ExtResource("5_oecyw")
 font_size = 46
 outline_size = 16

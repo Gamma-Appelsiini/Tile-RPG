@@ -158,9 +158,12 @@ func move_to_point(point: Vector3, start:bool = false, end:bool = false) -> void
 	var distance:float = self.global_position.distance_to(point)
 	var move_time:float = 0.4 * distance
 	move_tween = create_tween()
-	if start: move_tween.set_ease(Tween.EASE_OUT)
-	elif end: move_tween.set_ease(Tween.EASE_IN)
-	elif start and end: move_tween.set_ease(Tween.EASE_IN_OUT)
+	if start and end:
+		move_tween.set_ease(Tween.EASE_IN_OUT)
+	elif start:
+		move_tween.set_ease(Tween.EASE_OUT)
+	elif end:
+		move_tween.set_ease(Tween.EASE_IN)
 	
 	move_tween.tween_property(self, "global_position", point, move_time)
 	
