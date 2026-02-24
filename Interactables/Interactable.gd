@@ -52,6 +52,7 @@ func interact() -> void:
 	pass
 	
 func handle_oneshot() -> void:
+	if !oneshot: return
 	interact_area.monitoring = false
 	
 func get_input_string(action_name: String) -> String:

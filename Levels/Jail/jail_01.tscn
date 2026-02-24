@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bprnqik8q22ev"]
+[gd_scene format=4 uid="uid://bprnqik8q22ev"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
 [ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bscicchmh3q7c" path="res://Tile-RPG/Models/static_props/wooden_table.tscn" id="12_b3657"]
 [ext_resource type="PackedScene" uid="uid://cxkj2ce2h6v51" path="res://Tile-RPG/Models/static_props/wooden_stool.tscn" id="13_2ekbm"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="13_egjwj"]
+[ext_resource type="PackedScene" uid="uid://c0qockqbbtcc3" path="res://Tile-RPG/Interactables/lever.tscn" id="13_q2olv"]
 [ext_resource type="PackedScene" uid="uid://dd45u14lackui" path="res://Tile-RPG/Models/static_props/jail_bench.tscn" id="14_l321t"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="15_fkoil"]
 [ext_resource type="PackedScene" uid="uid://d1rgm1jeak2qy" path="res://Tile-RPG/Models/static_props/wall_chains.tscn" id="19_465oc"]
@@ -114,7 +115,7 @@ glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(0.080800556, 0.09207047, 0.10960706, 1)
 
-[node name="Jail_01" type="Node" node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "tile_manager", "player_spawn_positions")]
+[node name="Jail_01" type="Node" unique_id=173345460 node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "tile_manager", "player_spawn_positions")]
 script = ExtResource("1_c5me1")
 unique_id = "jail_01"
 game_characters_node = NodePath("GameCharacters")
@@ -126,451 +127,451 @@ player_spawn_positions = {
 "start": NodePath("spawn_pos_01")
 }
 
-[node name="Floors" type="Node3D" parent="."]
+[node name="Floors" type="Node3D" parent="." unique_id=1981779540]
 
-[node name="BlankFloor" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor" parent="Floors" unique_id=1075589645 instance=ExtResource("2_urkle")]
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor2" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor2" parent="Floors" unique_id=362585999 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor3" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor3" parent="Floors" unique_id=106917528 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor4" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor4" parent="Floors" unique_id=1361633757 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor5" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor5" parent="Floors" unique_id=990739197 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor6" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor6" parent="Floors" unique_id=801743500 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor7" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor7" parent="Floors" unique_id=1890270479 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor8" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor8" parent="Floors" unique_id=1174692499 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor33" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor33" parent="Floors" unique_id=2121022072 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor34" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor34" parent="Floors" unique_id=440431799 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor35" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor35" parent="Floors" unique_id=1634146999 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor36" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor36" parent="Floors" unique_id=1237120357 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor37" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor37" parent="Floors" unique_id=51675576 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor38" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor38" parent="Floors" unique_id=183927129 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor39" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor39" parent="Floors" unique_id=280278938 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor40" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor40" parent="Floors" unique_id=139761428 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor41" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor41" parent="Floors" unique_id=1143078589 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor42" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor42" parent="Floors" unique_id=1724988515 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor43" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor43" parent="Floors" unique_id=1154476503 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor44" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor44" parent="Floors" unique_id=2075590615 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor45" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor45" parent="Floors" unique_id=251793876 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor46" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor46" parent="Floors" unique_id=1113031961 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor47" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor47" parent="Floors" unique_id=687180640 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor48" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor48" parent="Floors" unique_id=1939473436 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor9" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor9" parent="Floors" unique_id=446513809 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor10" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor10" parent="Floors" unique_id=386380396 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor11" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor11" parent="Floors" unique_id=363100546 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor12" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor12" parent="Floors" unique_id=967239754 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor13" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor13" parent="Floors" unique_id=1633170718 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor14" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor14" parent="Floors" unique_id=1518029831 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor15" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor15" parent="Floors" unique_id=230920242 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor16" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor16" parent="Floors" unique_id=1977562434 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor17" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor17" parent="Floors" unique_id=1684956591 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor18" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor18" parent="Floors" unique_id=1282877531 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor19" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor19" parent="Floors" unique_id=2059481405 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor20" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor20" parent="Floors" unique_id=351593488 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor21" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor21" parent="Floors" unique_id=196765929 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor22" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor22" parent="Floors" unique_id=1141182055 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor23" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor23" parent="Floors" unique_id=741863351 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor24" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor24" parent="Floors" unique_id=1827571116 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor25" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor25" parent="Floors" unique_id=161754431 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor26" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor26" parent="Floors" unique_id=1510303690 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor27" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor27" parent="Floors" unique_id=1148769386 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor28" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor28" parent="Floors" unique_id=985231790 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor29" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor29" parent="Floors" unique_id=1463267527 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor30" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor30" parent="Floors" unique_id=44449524 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor31" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor31" parent="Floors" unique_id=596098263 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="BlankFloor32" parent="Floors" instance=ExtResource("2_urkle")]
+[node name="BlankFloor32" parent="Floors" unique_id=1616924104 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
 surface_material_override/0 = ExtResource("3_yniyx")
 
-[node name="Walls" type="Node3D" parent="."]
+[node name="Walls" type="Node3D" parent="." unique_id=322398891]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 
-[node name="BlankWall" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall" parent="Walls" unique_id=1327565135 instance=ExtResource("4_b3657")]
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall2" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall2" parent="Walls" unique_id=223411250 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall3" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall3" parent="Walls" unique_id=904554703 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = SubResource("ArrayMesh_cx1m6")
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall4" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall4" parent="Walls" unique_id=1171821558 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall5" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall5" parent="Walls" unique_id=596482400 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall6" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall6" parent="Walls" unique_id=973512124 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall7" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall7" parent="Walls" unique_id=1743443141 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall8" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall8" parent="Walls" unique_id=1075772532 instance=ExtResource("4_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall9" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall9" parent="Walls" unique_id=1791665938 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall10" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall10" parent="Walls" unique_id=933020290 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall11" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall11" parent="Walls" unique_id=1440937157 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall12" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall12" parent="Walls" unique_id=757563167 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall13" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall13" parent="Walls" unique_id=173227002 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall14" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall14" parent="Walls" unique_id=631545030 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall15" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall15" parent="Walls" unique_id=334010023 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall16" parent="Walls" instance=ExtResource("4_b3657")]
+[node name="BlankWall16" parent="Walls" unique_id=924394853 instance=ExtResource("4_b3657")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="Bars" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars" parent="Walls" unique_id=438463287 instance=ExtResource("6_l321t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="Bars2" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars2" parent="Walls" unique_id=601259264 instance=ExtResource("6_l321t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
-[node name="Bars3" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars3" parent="Walls" unique_id=452163274 instance=ExtResource("6_l321t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
 
-[node name="Bars4" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars4" parent="Walls" unique_id=212575466 instance=ExtResource("6_l321t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
 
-[node name="Bars5" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars5" parent="Walls" unique_id=47373795 instance=ExtResource("6_l321t")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5, 0, 2.5)
 
-[node name="Bars6" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars6" parent="Walls" unique_id=979895010 instance=ExtResource("6_l321t")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5, 0, 1.5)
 
-[node name="Bars7" parent="Walls" instance=ExtResource("6_l321t")]
+[node name="Bars7" parent="Walls" unique_id=1118320116 instance=ExtResource("6_l321t")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5, 0, 0.5)
 
-[node name="OtherWalls" type="Node3D" parent="Walls"]
+[node name="OtherWalls" type="Node3D" parent="Walls" unique_id=1731922136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
 
-[node name="BlankWall17" parent="Walls/OtherWalls" instance=ExtResource("4_b3657")]
+[node name="BlankWall17" parent="Walls/OtherWalls" unique_id=705414894 instance=ExtResource("4_b3657")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 6)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall18" parent="Walls/OtherWalls" instance=ExtResource("4_b3657")]
+[node name="BlankWall18" parent="Walls/OtherWalls" unique_id=1682004947 instance=ExtResource("4_b3657")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 5)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall19" parent="Walls/OtherWalls" instance=ExtResource("4_b3657")]
+[node name="BlankWall19" parent="Walls/OtherWalls" unique_id=1190689529 instance=ExtResource("4_b3657")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 4)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall20" parent="Walls/OtherWalls" instance=ExtResource("4_b3657")]
+[node name="BlankWall20" parent="Walls/OtherWalls" unique_id=1609744193 instance=ExtResource("4_b3657")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 3)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall21" parent="Walls/OtherWalls" instance=ExtResource("4_b3657")]
+[node name="BlankWall21" parent="Walls/OtherWalls" unique_id=1387424313 instance=ExtResource("4_b3657")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.1920929e-07, 0, 2)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="BlankWall22" parent="Walls/OtherWalls" instance=ExtResource("4_b3657")]
+[node name="BlankWall22" parent="Walls/OtherWalls" unique_id=1422960837 instance=ExtResource("4_b3657")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.1920929e-07, 0, 1)
 surface_material_override/0 = ExtResource("5_2ekbm")
 
-[node name="Lists" type="Node3D" parent="Walls/OtherWalls"]
+[node name="Lists" type="Node3D" parent="Walls/OtherWalls" unique_id=270236463]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="List2" parent="Walls/OtherWalls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List2" parent="Walls/OtherWalls/Lists" unique_id=988305060 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List3" parent="Walls/OtherWalls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List3" parent="Walls/OtherWalls/Lists" unique_id=1292267026 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 1)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List4" parent="Walls/OtherWalls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List4" parent="Walls/OtherWalls/Lists" unique_id=1537496880 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 2)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List5" parent="Walls/OtherWalls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List5" parent="Walls/OtherWalls/Lists" unique_id=1437774580 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 3)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List6" parent="Walls/OtherWalls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List6" parent="Walls/OtherWalls/Lists" unique_id=1558818457 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 4)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List7" parent="Walls/OtherWalls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List7" parent="Walls/OtherWalls/Lists" unique_id=198684965 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 5)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="Lists" type="Node3D" parent="Walls"]
+[node name="Lists" type="Node3D" parent="Walls" unique_id=126120026]
 
-[node name="List2" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List2" parent="Walls/Lists" unique_id=893055904 instance=ExtResource("9_egjwj")]
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List3" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List3" parent="Walls/Lists" unique_id=510788788 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List4" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List4" parent="Walls/Lists" unique_id=316928035 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List5" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List5" parent="Walls/Lists" unique_id=519609275 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List6" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List6" parent="Walls/Lists" unique_id=658521909 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List7" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List7" parent="Walls/Lists" unique_id=150823520 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List8" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List8" parent="Walls/Lists" unique_id=1912340551 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List9" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List9" parent="Walls/Lists" unique_id=1946236602 instance=ExtResource("9_egjwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List10" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List10" parent="Walls/Lists" unique_id=215282396 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List11" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List11" parent="Walls/Lists" unique_id=1171000483 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List12" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List12" parent="Walls/Lists" unique_id=505521539 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List13" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List13" parent="Walls/Lists" unique_id=4591064 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List14" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List14" parent="Walls/Lists" unique_id=1788166588 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List15" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List15" parent="Walls/Lists" unique_id=55247407 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List16" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List16" parent="Walls/Lists" unique_id=373215182 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="List17" parent="Walls/Lists" instance=ExtResource("9_egjwj")]
+[node name="List17" parent="Walls/Lists" unique_id=800063744 instance=ExtResource("9_egjwj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7, 0, 6)
 mesh = SubResource("ArrayMesh_0liqt")
 
-[node name="Corners" type="Node3D" parent="Walls"]
+[node name="Corners" type="Node3D" parent="Walls" unique_id=1476532717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
 
-[node name="BlankCorner" parent="Walls/Corners" instance=ExtResource("9_465oc")]
+[node name="BlankCorner" parent="Walls/Corners" unique_id=1571044754 instance=ExtResource("9_465oc")]
 
 [node name="Mesh" parent="Walls/Corners/BlankCorner" index="0"]
 mesh = SubResource("ArrayMesh_fkoil")
 
-[node name="BlankCorner2" parent="Walls/Corners" instance=ExtResource("9_465oc")]
+[node name="BlankCorner2" parent="Walls/Corners" unique_id=289008267 instance=ExtResource("9_465oc")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 6)
 
 [node name="Mesh" parent="Walls/Corners/BlankCorner2" index="0"]
 mesh = SubResource("ArrayMesh_fkoil")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1059845724]
 environment = SubResource("Environment_b4y7l")
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="Lights" type="Node3D" parent="." unique_id=816638224]
 
-[node name="LightStand" parent="Lights" instance=ExtResource("7_axm2k")]
+[node name="LightStand" parent="Lights" unique_id=781333171 instance=ExtResource("7_axm2k")]
 
-[node name="LightStand4" parent="Lights" instance=ExtResource("7_axm2k")]
+[node name="LightStand4" parent="Lights" unique_id=82524257 instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
-[node name="LightStand5" parent="Lights" instance=ExtResource("7_axm2k")]
+[node name="LightStand5" parent="Lights" unique_id=1212298408 instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
-[node name="LightStand8" parent="Lights" instance=ExtResource("7_axm2k")]
+[node name="LightStand8" parent="Lights" unique_id=1325129355 instance=ExtResource("7_axm2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
 
-[node name="Lantern" parent="Lights" instance=ExtResource("8_urkle")]
+[node name="Lantern" parent="Lights" unique_id=432220641 instance=ExtResource("8_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.7951717, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=545727851]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.5427742, 5.81936, 2.464391)
 layers = 524289
 light_color = Color(1, 0.955, 0.85, 1)
 light_energy = 0.826
 spot_range = 16.49
 
-[node name="GameCharacters" type="Node3D" parent="."]
+[node name="GameCharacters" type="Node3D" parent="." unique_id=809285651]
 
-[node name="Interactables" type="Node3D" parent="."]
+[node name="Interactables" type="Node3D" parent="." unique_id=1510140030]
 
-[node name="Chest" parent="Interactables" instance=ExtResource("13_egjwj")]
+[node name="Chest" parent="Interactables" unique_id=1311899053 instance=ExtResource("13_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 4)
 items_to_generate = Dictionary[int, int]({
 1: 0,
@@ -581,249 +582,252 @@ items_to_generate = Dictionary[int, int]({
 })
 unique_id = "TestChest1"
 
-[node name="Breakables" type="Node" parent="."]
+[node name="Lever" parent="Interactables" unique_id=1672743832 instance=ExtResource("13_q2olv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 0, 5.5)
 
-[node name="TileManager" type="Node3D" parent="." node_paths=PackedStringArray("door_node")]
+[node name="Breakables" type="Node" parent="." unique_id=428608692]
+
+[node name="TileManager" type="Node3D" parent="." unique_id=850318009 node_paths=PackedStringArray("door_node")]
 script = ExtResource("9_gomib")
 door_node = NodePath("../Doors")
 metadata/_custom_type_script = "uid://chv46rdn2gkni"
 
-[node name="@Node@90707" type="Node" parent="TileManager"]
+[node name="@Node@90707" type="Node" parent="TileManager" unique_id=126561693]
 script = ExtResource("15_fkoil")
 
-[node name="@Node@90708" type="Node" parent="TileManager"]
+[node name="@Node@90708" type="Node" parent="TileManager" unique_id=1292143531]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 1)
 
-[node name="@Node@90709" type="Node" parent="TileManager"]
+[node name="@Node@90709" type="Node" parent="TileManager" unique_id=1086024999]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 2)
 
-[node name="@Node@90710" type="Node" parent="TileManager"]
+[node name="@Node@90710" type="Node" parent="TileManager" unique_id=444313822]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 3)
 
-[node name="@Node@90711" type="Node" parent="TileManager"]
+[node name="@Node@90711" type="Node" parent="TileManager" unique_id=2108287333]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 4)
 
-[node name="@Node@90712" type="Node" parent="TileManager"]
+[node name="@Node@90712" type="Node" parent="TileManager" unique_id=1259296562]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 5)
 
-[node name="@Node@90713" type="Node" parent="TileManager"]
+[node name="@Node@90713" type="Node" parent="TileManager" unique_id=1058577257]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 0)
 
-[node name="@Node@90714" type="Node" parent="TileManager"]
+[node name="@Node@90714" type="Node" parent="TileManager" unique_id=572104740]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 1)
 
-[node name="@Node@90715" type="Node" parent="TileManager"]
+[node name="@Node@90715" type="Node" parent="TileManager" unique_id=2045427742]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 2)
 
-[node name="@Node@90716" type="Node" parent="TileManager"]
+[node name="@Node@90716" type="Node" parent="TileManager" unique_id=1114239112]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 3)
 
-[node name="@Node@90717" type="Node" parent="TileManager"]
+[node name="@Node@90717" type="Node" parent="TileManager" unique_id=1236471534]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 4)
 
-[node name="@Node@90718" type="Node" parent="TileManager"]
+[node name="@Node@90718" type="Node" parent="TileManager" unique_id=1916616114]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 5)
 
-[node name="@Node@90719" type="Node" parent="TileManager"]
+[node name="@Node@90719" type="Node" parent="TileManager" unique_id=1573034573]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 0)
 
-[node name="@Node@90720" type="Node" parent="TileManager"]
+[node name="@Node@90720" type="Node" parent="TileManager" unique_id=60496106]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 1)
 
-[node name="@Node@90721" type="Node" parent="TileManager"]
+[node name="@Node@90721" type="Node" parent="TileManager" unique_id=209134244]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 2)
 
-[node name="@Node@90722" type="Node" parent="TileManager"]
+[node name="@Node@90722" type="Node" parent="TileManager" unique_id=1408063758]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 3)
 
-[node name="@Node@90723" type="Node" parent="TileManager"]
+[node name="@Node@90723" type="Node" parent="TileManager" unique_id=150811531]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 4)
 
-[node name="@Node@90724" type="Node" parent="TileManager"]
+[node name="@Node@90724" type="Node" parent="TileManager" unique_id=395138516]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 5)
 
-[node name="@Node@90725" type="Node" parent="TileManager"]
+[node name="@Node@90725" type="Node" parent="TileManager" unique_id=180579412]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 0)
 
-[node name="@Node@90726" type="Node" parent="TileManager"]
+[node name="@Node@90726" type="Node" parent="TileManager" unique_id=703858919]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 1)
 
-[node name="@Node@90727" type="Node" parent="TileManager"]
+[node name="@Node@90727" type="Node" parent="TileManager" unique_id=1674985445]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 2)
 
-[node name="@Node@90728" type="Node" parent="TileManager"]
+[node name="@Node@90728" type="Node" parent="TileManager" unique_id=10400331]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 3)
 
-[node name="@Node@90729" type="Node" parent="TileManager"]
+[node name="@Node@90729" type="Node" parent="TileManager" unique_id=1346281660]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 4)
 
-[node name="@Node@90730" type="Node" parent="TileManager"]
+[node name="@Node@90730" type="Node" parent="TileManager" unique_id=1690327269]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 5)
 
-[node name="@Node@90731" type="Node" parent="TileManager"]
+[node name="@Node@90731" type="Node" parent="TileManager" unique_id=550903779]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 0)
 
-[node name="@Node@90732" type="Node" parent="TileManager"]
+[node name="@Node@90732" type="Node" parent="TileManager" unique_id=1258916165]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 1)
 
-[node name="@Node@90733" type="Node" parent="TileManager"]
+[node name="@Node@90733" type="Node" parent="TileManager" unique_id=1467494672]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 2)
 
-[node name="@Node@90734" type="Node" parent="TileManager"]
+[node name="@Node@90734" type="Node" parent="TileManager" unique_id=2147263545]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 3)
 
-[node name="@Node@90735" type="Node" parent="TileManager"]
+[node name="@Node@90735" type="Node" parent="TileManager" unique_id=2023837625]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 4)
 
-[node name="@Node@90736" type="Node" parent="TileManager"]
+[node name="@Node@90736" type="Node" parent="TileManager" unique_id=1981243277]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 5)
 
-[node name="@Node@90737" type="Node" parent="TileManager"]
+[node name="@Node@90737" type="Node" parent="TileManager" unique_id=204419095]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 0)
 
-[node name="@Node@90738" type="Node" parent="TileManager"]
+[node name="@Node@90738" type="Node" parent="TileManager" unique_id=1379319534]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 1)
 
-[node name="@Node@90739" type="Node" parent="TileManager"]
+[node name="@Node@90739" type="Node" parent="TileManager" unique_id=317784673]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 2)
 
-[node name="@Node@90740" type="Node" parent="TileManager"]
+[node name="@Node@90740" type="Node" parent="TileManager" unique_id=134660212]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 3)
 
-[node name="@Node@90741" type="Node" parent="TileManager"]
+[node name="@Node@90741" type="Node" parent="TileManager" unique_id=1239315151]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 4)
 
-[node name="@Node@90742" type="Node" parent="TileManager"]
+[node name="@Node@90742" type="Node" parent="TileManager" unique_id=883952073]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 5)
 
-[node name="@Node@90743" type="Node" parent="TileManager"]
+[node name="@Node@90743" type="Node" parent="TileManager" unique_id=1691804414]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 0)
 
-[node name="@Node@90744" type="Node" parent="TileManager"]
+[node name="@Node@90744" type="Node" parent="TileManager" unique_id=222264325]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 1)
 
-[node name="@Node@90745" type="Node" parent="TileManager"]
+[node name="@Node@90745" type="Node" parent="TileManager" unique_id=24515854]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 2)
 
-[node name="@Node@90746" type="Node" parent="TileManager"]
+[node name="@Node@90746" type="Node" parent="TileManager" unique_id=1540075278]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 3)
 
-[node name="@Node@90747" type="Node" parent="TileManager"]
+[node name="@Node@90747" type="Node" parent="TileManager" unique_id=1598413637]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 4)
 
-[node name="@Node@90748" type="Node" parent="TileManager"]
+[node name="@Node@90748" type="Node" parent="TileManager" unique_id=1224139947]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 5)
 
-[node name="@Node@90749" type="Node" parent="TileManager"]
+[node name="@Node@90749" type="Node" parent="TileManager" unique_id=1041077400]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 0)
 
-[node name="@Node@90750" type="Node" parent="TileManager"]
+[node name="@Node@90750" type="Node" parent="TileManager" unique_id=896211978]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 1)
 
-[node name="@Node@90751" type="Node" parent="TileManager"]
+[node name="@Node@90751" type="Node" parent="TileManager" unique_id=625864574]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 2)
 
-[node name="@Node@90752" type="Node" parent="TileManager"]
+[node name="@Node@90752" type="Node" parent="TileManager" unique_id=2059947021]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 3)
 
-[node name="@Node@90753" type="Node" parent="TileManager"]
+[node name="@Node@90753" type="Node" parent="TileManager" unique_id=638284119]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 4)
 
-[node name="@Node@90754" type="Node" parent="TileManager"]
+[node name="@Node@90754" type="Node" parent="TileManager" unique_id=2047186062]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 5)
 
-[node name="spawn_pos_01" type="Node3D" parent="."]
+[node name="spawn_pos_01" type="Node3D" parent="." unique_id=533481870]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 
-[node name="TouchInteractables" type="Node" parent="."]
+[node name="TouchInteractables" type="Node" parent="." unique_id=952997240]
 
-[node name="HayPile" parent="TouchInteractables" instance=ExtResource("11_yniyx")]
+[node name="HayPile" parent="TouchInteractables" unique_id=608330204 instance=ExtResource("11_yniyx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115053415, 0, 1.1149204)
 
-[node name="HayPile2" parent="TouchInteractables" instance=ExtResource("11_yniyx")]
+[node name="HayPile2" parent="TouchInteractables" unique_id=926774737 instance=ExtResource("11_yniyx")]
 transform = Transform3D(0.7912235, 0, 0.611527, 0, 1, 0, -0.611527, 0, 0.7912235, 0, 0, 1.867631)
 
-[node name="StaticProps" type="Node" parent="."]
+[node name="StaticProps" type="Node" parent="." unique_id=1560659361]
 
-[node name="WoodenTable" parent="StaticProps" instance=ExtResource("12_b3657")]
+[node name="WoodenTable" parent="StaticProps" unique_id=1773528197 instance=ExtResource("12_b3657")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="WoodenStool" parent="StaticProps" instance=ExtResource("13_2ekbm")]
+[node name="WoodenStool" parent="StaticProps" unique_id=25700420 instance=ExtResource("13_2ekbm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.647128, 0, 0.54681444)
 
-[node name="JailBench" parent="StaticProps" instance=ExtResource("14_l321t")]
+[node name="JailBench" parent="StaticProps" unique_id=1151477910 instance=ExtResource("14_l321t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
 
-[node name="Chains" parent="StaticProps" instance=ExtResource("19_465oc")]
+[node name="Chains" parent="StaticProps" unique_id=547779019 instance=ExtResource("19_465oc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.5)
 
-[node name="TileCreator" type="Node" parent="." node_paths=PackedStringArray("start_node", "end_node")]
+[node name="TileCreator" type="Node" parent="." unique_id=1042947425 node_paths=PackedStringArray("start_node", "end_node")]
 script = ExtResource("20_0liqt")
 start_node = NodePath("../Start")
 end_node = NodePath("../End")
 metadata/_custom_type_script = "uid://bp36ikilmc15g"
 
-[node name="GameCharacters2" type="Node" parent="."]
+[node name="GameCharacters2" type="Node" parent="." unique_id=546174203]
 
-[node name="TestNPC" parent="GameCharacters2" instance=ExtResource("21_cx1m6")]
+[node name="TestNPC" parent="GameCharacters2" unique_id=1284443745 instance=ExtResource("21_cx1m6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
 
-[node name="Start" type="Node3D" parent="."]
+[node name="Start" type="Node3D" parent="." unique_id=1461553448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049570918, 0)
 
-[node name="End" type="Node3D" parent="."]
+[node name="End" type="Node3D" parent="." unique_id=135467244]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.049570918, 5)
 
-[node name="Doors" type="Node" parent="."]
+[node name="Doors" type="Node" parent="." unique_id=1011531778]
 
-[node name="BarDoor" parent="Doors" instance=ExtResource("8_v6jrh")]
+[node name="BarDoor" parent="Doors" unique_id=880502523 instance=ExtResource("8_v6jrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
 
 [editable path="Walls/Corners/BlankCorner"]

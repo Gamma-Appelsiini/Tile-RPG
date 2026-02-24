@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://b13c641hp7wjx"]
+[gd_scene format=4 uid="uid://b13c641hp7wjx"]
 
 [ext_resource type="Script" uid="uid://dhbk2lg2t2ydq" path="res://Tile-RPG/Interactables/Doors/Door.gd" id="1_xyffr"]
 [ext_resource type="Material" uid="uid://cipbiftcxnbw1" path="res://Tile-RPG/Materials/TextureMaterials/metal_00.tres" id="2_23c7r"]
@@ -95,9 +95,9 @@ shadow_mesh = SubResource("ArrayMesh_bf5vp")
 size = Vector3(1, 2, 0.085)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xyffr"]
-size = Vector3(1, 1.87256, 1.99121)
+size = Vector3(1, 1.87256, 1.2783203)
 
-[node name="BarDoor" type="Node3D" node_paths=PackedStringArray("side_1", "side_2", "pivot", "collision_shape_3d", "interact_area", "indicator_place")]
+[node name="BarDoor" type="Node3D" unique_id=1031400606 node_paths=PackedStringArray("side_1", "side_2", "pivot", "collision_shape_3d", "interact_area", "indicator_place")]
 script = ExtResource("1_xyffr")
 side_1 = NodePath("Hinge/Side2")
 side_2 = NodePath("Hinge/Side1")
@@ -109,33 +109,33 @@ interact_text = "Open"
 face_interactable = true
 interact_animation = 18
 
-[node name="Hinge" type="Node3D" parent="."]
+[node name="Hinge" type="Node3D" parent="." unique_id=556817503]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44994637, 0, 0)
 
-[node name="Door2" type="MeshInstance3D" parent="Hinge"]
+[node name="Door2" type="MeshInstance3D" parent="Hinge" unique_id=356681089]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44994637, 0, 0)
 mesh = SubResource("ArrayMesh_fy17u")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Hinge/Door2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Hinge/Door2" unique_id=1165027017]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Door2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Door2/StaticBody3D" unique_id=218943070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998291, 0.00048828125)
 shape = SubResource("BoxShape3D_8mhqt")
 
-[node name="Side1" type="Node3D" parent="Hinge"]
+[node name="Side1" type="Node3D" parent="Hinge" unique_id=1834108746]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82363033, 1.0953276, 0.099140644)
 
-[node name="Side2" type="Node3D" parent="Hinge"]
+[node name="Side2" type="Node3D" parent="Hinge" unique_id=876290707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82363033, 1.0953276, -0.12583232)
 
-[node name="Area3D" type="Area3D" parent="Hinge"]
+[node name="Area3D" type="Area3D" parent="Hinge" unique_id=22424219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44994637, 0, 0)
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Area3D" unique_id=460858154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959717, 0)
 shape = SubResource("BoxShape3D_xyffr")
