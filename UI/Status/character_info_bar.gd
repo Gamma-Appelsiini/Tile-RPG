@@ -10,10 +10,22 @@ const STATUS_PANEL := preload("uid://ckjtakb74tlm2")
 
 var game_char:GameCharacter = null
 var show_amount:int = 0
+var is_hovered:bool = false
+var show_pressed:bool = false
 
 func _ready() -> void:
 	_connect_signals()
 	if get_parent() is GameCharacter: set_game_character(get_parent())
+
+func _show_pressed(pressed:bool) -> void:
+	show_pressed = pressed
+	if show_pressed or is_hovered: show_info()
+	else: hide()
+	
+func _char_hovered(hovered:bool) -> void:
+	is_hovered = hovered
+	if show_pressed or is_hovered: show_info()
+	else: hide()
 
 func _change_show_amount(amount:int) -> void:
 	show_amount += amount
@@ -22,8 +34,8 @@ func _change_show_amount(amount:int) -> void:
 	else: hide()
 
 func _connect_signals() -> void:
-	GlobalSignals.show_info_bar.connect(_change_show_amount.bind(1))
-	GlobalSignals.hide_info_bar.connect(_change_show_amount.bind(-1))
+	GlobalSignals.show_info_bar.connect(_show_pressed.bind(true))
+	GlobalSignals.hide_info_bar.connect(_show_pressed.bind(false))
 
 func set_game_character(new_gc:GameCharacter):
 	game_char = new_gc
@@ -33,8 +45,8 @@ func set_game_character(new_gc:GameCharacter):
 	game_char.stat_handler.stats_changed.connect(_update_info)
 	_update_info()
 	
-	game_char.character_mouse_over.connect(_change_show_amount.bind(1))
-	game_char.character_mouse_left.connect(_change_show_amount.bind(-1))
+	game_char.character_mouse_over.connect(_char_hovered.bind(true))
+	game_char.character_mouse_left.connect(_char_hovered.bind(false))
 	
 func _update_info() -> void:
 	var level:String = "Lvl " + str(game_char.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL))

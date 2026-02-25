@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://cyynyot8c60g2" path="res://Tile-RPG/Materials/TextureMaterials/wood_02.tres" id="2_3u6pn"]
 [ext_resource type="Material" uid="uid://ta83u001gwow" path="res://Tile-RPG/Materials/TextureMaterials/metal_01.tres" id="3_vkys4"]
 [ext_resource type="Material" uid="uid://bffu7hur1s7jf" path="res://Tile-RPG/Materials/TextureMaterials/grey_bricks.tres" id="4_26ppf"]
+[ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="5_vkys4"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1nyeb"]
 _surfaces = [{
@@ -130,3 +131,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.499063, 0.3324656)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("ArrayMesh_tt1lf")
 skeleton = NodePath("")
+
+[node name="OutlineHandler" type="Node" parent="." unique_id=2052631268 node_paths=PackedStringArray("mesh_to_outline")]
+script = ExtResource("5_vkys4")
+mesh_to_outline = NodePath("../WallMesh")
+metadata/_custom_type_script = "uid://g6rood38j5ok"

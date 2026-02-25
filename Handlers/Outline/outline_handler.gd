@@ -25,28 +25,31 @@ const CIRCLE_MATERIALS:Dictionary[OUTLINE_TYPE, ShaderMaterial] = {
 
 var character_circle:MeshInstance3D = null
 var outline_parent:GameCharacter = null
-var show_amount:int = 0
+var node_hovered:bool = false
+var show_outline_pressed:bool = false
 
 func _ready() -> void:
 	_connect_outline_signals()
 	_add_char_circle()
 
-func _modify_show_amount(amount:int) -> void:
-	show_amount += amount
+func _node_hovered(hovered:bool) -> void:
+	node_hovered = hovered
+	if node_hovered or show_outline_pressed: _show_outline()
+	else: _hide_outline()
 	
-	if show_amount > 0:
-		_show_outline()
-	else:
-		_hide_outline()
+func _outline_pressed(pressed:bool) -> void:
+	show_outline_pressed = pressed
+	if node_hovered or show_outline_pressed: _show_outline()
+	else: _hide_outline()
 
 func _connect_outline_signals() -> void:
-	GlobalSignals.show_outline.connect(_modify_show_amount.bind(1))
-	GlobalSignals.hide_outline.connect(_modify_show_amount.bind(-1))
+	GlobalSignals.show_outline.connect(_outline_pressed.bind(true))
+	GlobalSignals.hide_outline.connect(_outline_pressed.bind(false))
 	
 	if get_parent().get_parent() is GameCharacter:
 		outline_parent = get_parent().get_parent() as GameCharacter
-		outline_parent.character_mouse_over.connect(_modify_show_amount.bind(1) )
-		outline_parent.character_mouse_left.connect(_modify_show_amount.bind(-1) )
+		outline_parent.character_mouse_over.connect(_node_hovered.bind(true) )
+		outline_parent.character_mouse_left.connect(_node_hovered.bind(false) )
 
 func _add_char_circle() -> void:
 	if !CHARACTER_TYPES.has(outline_type): return
