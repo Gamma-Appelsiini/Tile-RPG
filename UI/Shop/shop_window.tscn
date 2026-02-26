@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://rjgqijg22g8l"]
+
+[ext_resource type="Script" uid="uid://c2khqkt8x8wuq" path="res://Tile-RPG/UI/Shop/shop_window.gd" id="1_4gs74"]
+
+[node name="ShopWindow" type="PanelContainer" unique_id=1374274591]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gs74")
+
+[node name="ShopItemsContainer" type="GridContainer" parent="." unique_id=1141260172]
+layout_mode = 2

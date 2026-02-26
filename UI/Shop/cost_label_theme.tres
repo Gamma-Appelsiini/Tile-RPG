@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://crj6kfsca2qxw"]
+
+[ext_resource type="FontFile" uid="uid://cd2shkn54kchq" path="res://Tile-RPG/Fonts/GoogleFonts/GrenzeGotisch-VariableFont_wght.ttf" id="1_ujoo6"]
+
+[resource]
+Label/colors/font_color = Color(0.8980392, 0.7137255, 0.45490196, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.60784316)
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 1
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_ujoo6")

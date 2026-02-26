@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://crtpgy4mb6mur"]
+
+[ext_resource type="Script" uid="uid://ccau60f2umvft" path="res://Tile-RPG/UI/generic_button.gd" id="1_gsqpp"]
+[ext_resource type="Texture2D" uid="uid://cvx8uabp055aj" path="res://Tile-RPG/Images/UI/Buttons/button_default.png" id="2_n0yn6"]
+[ext_resource type="Theme" uid="uid://crj6kfsca2qxw" path="res://Tile-RPG/UI/Shop/cost_label_theme.tres" id="3_n0yn6"]
+
+[node name="DefaultButton" type="PanelContainer" unique_id=1555197640 node_paths=PackedStringArray("button_texture_rect", "glow", "price_label")]
+custom_minimum_size = Vector2(55, 55)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -27.5
+offset_right = 50.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+script = ExtResource("1_gsqpp")
+button_texture_rect = NodePath("TextureRect")
+glow = NodePath("ColorRect")
+price_label = NodePath("PriceLabel")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1581713958]
+custom_minimum_size = Vector2(100, 55)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+texture = ExtResource("2_n0yn6")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=663615241]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.078431375)
+
+[node name="PriceLabel" type="Label" parent="." unique_id=358836716]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_n0yn6")
+text = "500"
+horizontal_alignment = 1
+vertical_alignment = 1
