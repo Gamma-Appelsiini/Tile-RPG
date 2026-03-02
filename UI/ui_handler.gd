@@ -60,6 +60,7 @@ func set_player(player:Player) -> void:
 
 func load_from_data(save_data:Dictionary) -> void:
 	await inventory.ready
+	GlobalSignals.ui_handler = self
 	inventory.load_inv_from_data(save_data)
 	
 	abilities_container.load_from_data(save_data)

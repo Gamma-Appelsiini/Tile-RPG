@@ -35,6 +35,10 @@ var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
 var drop_item_on_release:bool = false
+var player_currency:int = 0:
+	set(value):
+		player_currency = max(0, value)
+		_update_currency_amount(player_currency)
 
 func _ready() -> void:
 	x_button.x_pressed.connect(func(): self.visible = false)
@@ -98,8 +102,18 @@ func save_inv_to_data(save_data:Dictionary) -> void:
 	save_data["inventory"] = inv_data
 	_save_equipment(save_data)
 
+func _update_currency_amount(amount:int) -> void:
+	#TODO
+	pass
+
+func _load_currency(save_data:Dictionary) -> void:
+	if !save_data["quest_handler"].has("player_currency"): return
+	
+	player_currency = save_data["quest_handler"]["player_currency"]
+
 func load_inv_from_data(save_data:Dictionary) -> void:
 	if !save_data.has("inventory"):return
+	_load_currency(save_data)
 
 	for key:int in save_data["inventory"].keys():
 		var script: Script = load(save_data["inventory"][key]["item_type"])
@@ -170,7 +184,7 @@ func remove_slot(slot_to_remove:InventorySlot) -> void:
 	slots.erase(slot_to_remove)
 	slot_to_remove.mouse_exited.disconnect(_clear_hover)
 	slot_to_remove.mouse_entered.disconnect(_slot_hovered)
-	
+
 func add_item_to_inv(new_item:Item) -> bool:
 	if new_item == null:
 		print("ERROR TRYING TO ADD NULL ITEM TO INV")
@@ -246,6 +260,13 @@ func _item_released() -> void:
 	hovered_slot.set_item(selected_slot.item_in_slot,selected_slot)
 	selected_slot = null
 
+func get_empty_item_space() -> int:
+	var empty_inv_space:int = 0
+	for slot:InventorySlot in slots:
+		if slot.item_in_slot == null and !slot.equipment_slot: empty_inv_space += 1
+		
+	return empty_inv_space
+
 #Equipping a two handed weapon requires unequipping off and mainhand
 func _possible_to_equip() -> bool:
 	if !hovered_slot.equipment_slot: return true
@@ -265,9 +286,7 @@ func _possible_to_equip() -> bool:
 		if item_to_equip.hand_type == Weapon.HandType.ONE_HANDED: return true
 	
 	#Now we know we are trying to equip a two handed weapon
-	var empty_inv_space:int = 0
-	for slot:InventorySlot in slots:
-		if slot.item_in_slot == null and !slot.equipment_slot: empty_inv_space += 1
+	var empty_inv_space:int = get_empty_item_space()
 
 	#2 empty space required to unequip both hands
 	if item_in_mainhand != null and item_in_offhand != null and empty_inv_space < 2:

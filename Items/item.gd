@@ -19,7 +19,7 @@ enum ItemRarity {
 @export var item_value:int = 1
 @export var item_rarity:ItemRarity = ItemRarity.POOR
 @export var item_model_path:String = ""
-
+@export var unsellable:bool = false
 
 #Override this
 func save_to_data() -> Dictionary:

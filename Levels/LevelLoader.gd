@@ -20,6 +20,7 @@ var save_data:Dictionary = {
 	"abilities_container": [],
 	"game_characters": {},
 	"dead_ids": [],
+	"quest_handler": {},
 }
 
 var player:Player = null
@@ -29,6 +30,7 @@ func _ready() -> void:
 	await ui_handler.ready
 	_load_bin_file()
 	_load_player()
+	_load_quest_handler()
 	
 	var last_level_id:String = save_data["last_level_id"]
 	var loading:bool = false
@@ -40,6 +42,11 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
 		save_save_file()
+
+func _load_quest_handler() -> void:
+	var new_q_handler:QuestHandler = QuestHandler.new()
+	GlobalSignals.quest_handler = new_q_handler
+	new_q_handler.load_from_data(save_data)
 
 func _load_player() -> void:
 	player = load(PLAYER_PATH).instantiate()

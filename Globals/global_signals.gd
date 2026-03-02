@@ -3,6 +3,8 @@ extends Node
 var player:Player = null
 var current_level:Level = null
 var combat_manager:CombatManager = null
+var quest_handler:QuestHandler = null
+var ui_handler:UIHandler = null
 
 signal change_level(new_level:Level)
 signal show_container(new_container:LootContainer)
