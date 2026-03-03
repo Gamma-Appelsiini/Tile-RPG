@@ -18,6 +18,12 @@ var mouse_pressed:bool = false
 func set_price(amount:int) -> void:
 	price_label.text = str(amount)
 
+func reset_button() -> void:
+	if price_label.text == "Sold": _connect_signals()
+	_remove_text_override()
+	button_texture_rect.texture = BUTTON_DEFAULT
+	price_label.remove_theme_color_override("font_color")
+
 func set_as_sold() -> void:
 	set_process_input(false)
 	price_label.add_theme_color_override("font_color", Color(0.79, 0.095, 0.303, 1.0))

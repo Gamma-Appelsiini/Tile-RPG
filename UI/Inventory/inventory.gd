@@ -1,6 +1,8 @@
 extends Control
 class_name Inventory
 
+signal sell_item(item:Item)
+
 @onready var inv_slot_grid: GridContainer = %InvSlotGrid
 @onready var equipment_grid: GridContainer = %EquipmentGrid
 @onready var x_button: XButton = $x_button
@@ -35,7 +37,8 @@ var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
 var drop_item_on_release:bool = false
-var player_currency:int = 0:
+var sell_item_on_release:bool = false
+var player_currency:int = 555:
 	set(value):
 		player_currency = max(0, value)
 		_update_currency_amount(player_currency)
@@ -205,14 +208,12 @@ func add_item_to_inv(new_item:Item) -> bool:
 func _remake_tt(remake_item:Equipment) -> void:
 	tooltips[remake_item].generate_tooltip(remake_item)
 
-func remove_item_from_inv(remove_item:Item, destroy_item:bool = false) -> void:
-	for i:int in INV_SIZE:
-		if slots[i].item_in_slot != remove_item: continue
-		tooltips[remove_item].queue_free()
-		tooltips.erase(remove_item)
-		slots[i].remove_item()
-
-	if destroy_item: remove_item.queue_free()
+func remove_item_from_inv(remove_item:Item) -> void:
+	for slot:InventorySlot in player_inv_slots:
+		if slot.item_in_slot == remove_item:
+			tooltips[remove_item].queue_free()
+			tooltips.erase(remove_item)
+			slot.remove_item()
 
 func _create_item_tt(new_item:Item) -> void:
 	var new_tooltip:ItemTooltip = load(ITEM_TT_PATH).instantiate()
@@ -248,6 +249,11 @@ func _item_released() -> void:
 	if _drop_item():
 		selected_slot.remove_item()
 		selected_slot = null
+		return
+		
+	if sell_item_on_release:
+		sell_item.emit(selected_slot.item_in_slot)
+		_reset_selecting()
 		return
 	
 	#Hovering over nothing or own slot

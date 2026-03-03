@@ -10,6 +10,7 @@ class_name UIHandler
 @export var ability_targeter: AbilityTargeter = null
 @export var combat_ui: CombatUI = null
 @export var menu_buttons: MenuButtonsPanel = null
+@export var shop_window: ShopWindow = null
 
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
@@ -32,6 +33,8 @@ func _input(event: InputEvent) -> void:
 		_toggle_inv()
 	elif event.is_action_pressed("Abilities"):
 		_toggle_abilities()
+	elif event.is_action_pressed("shop"):
+		shop_window.open_shop()
 
 func _toggle_character() -> void:
 	stat_window.visible = !stat_window.visible

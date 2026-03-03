@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://duq8yqsolme5u" path="res://Tile-RPG/Combat/Abilities/ability_targeter.gd" id="10_8wimm"]
 [ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.tscn" id="10_60sei"]
 [ext_resource type="PackedScene" uid="uid://cc2jlwv1hf0dd" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.tscn" id="11_t6tkx"]
+[ext_resource type="PackedScene" uid="uid://rjgqijg22g8l" path="res://Tile-RPG/UI/Shop/shop_window.tscn" id="12_274ut"]
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
 [ext_resource type="AudioStream" uid="uid://dgatv1yix757b" path="res://Tile-RPG/Sounds/Music/combat_start.mp3" id="15_t6tkx"]
 
@@ -26,7 +27,7 @@ ui_handler = NodePath("../UIHandler")
 ability_targeter = NodePath("../AbilityTargeter")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
-[node name="UIHandler" type="Control" parent="." unique_id=2075231115 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter", "combat_ui", "menu_buttons") groups=["UI"]]
+[node name="UIHandler" type="Control" parent="." unique_id=2075231115 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter", "combat_ui", "menu_buttons", "shop_window") groups=["UI"]]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -45,6 +46,7 @@ abilities_container = NodePath("AbilitiesContainer")
 ability_targeter = NodePath("../AbilityTargeter")
 combat_ui = NodePath("CombatUI")
 menu_buttons = NodePath("MenuButtons")
+shop_window = NodePath("ShopWindow")
 
 [node name="GlobeUI" parent="UIHandler" unique_id=2098997298 instance=ExtResource("6_nqssf")]
 unique_name_in_owner = true
@@ -61,7 +63,6 @@ layout_mode = 1
 
 [node name="Inventory" parent="UIHandler" unique_id=457064333 instance=ExtResource("4_muwej")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 
 [node name="StatWindow" parent="UIHandler" unique_id=63015506 instance=ExtResource("3_0jhli")]
@@ -86,6 +87,11 @@ layout_mode = 1
 
 [node name="MenuButtons" parent="UIHandler" unique_id=849139490 instance=ExtResource("11_t6tkx")]
 layout_mode = 1
+
+[node name="ShopWindow" parent="UIHandler" unique_id=1374274591 node_paths=PackedStringArray("player_inventory") instance=ExtResource("12_274ut")]
+layout_mode = 0
+anchors_preset = 0
+player_inventory = NodePath("../Inventory")
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=2050587167]
 script = ExtResource("8_pu26t")
