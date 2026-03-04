@@ -16,12 +16,14 @@ const RARITIES:Array[Item.ItemRarity] = [Item.ItemRarity.POOR,Item.ItemRarity.PO
 @export var sell_container: PanelContainer = null
 
 var item_panels:Array[ShopItemPanel] = []
+var viewport_texture:ViewportTexture = null
 
 func _ready() -> void:
 	_add_slots()
 	sell_container.mouse_entered.connect(_on_mouse_enter_sell_area)
 	sell_container.mouse_exited.connect(_on_mouse_leave_sell_area)
 	player_inventory.sell_item.connect(sell_item)
+	viewport_texture = ViewportTexture.new()
 
 func open_shop() -> void:
 	_fill_items()
@@ -40,6 +42,9 @@ func _add_slots() -> void:
 		new_slot.array_pos = pos + i
 		player_inventory.connect_slot(new_slot)
 
+func _set_viewport_texture() -> void:
+	#TODO
+	viewport_texture.viewport_path = ""
 
 func _on_mouse_enter_sell_area() -> void:
 	player_inventory.sell_item_on_release = true
