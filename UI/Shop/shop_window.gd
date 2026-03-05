@@ -26,7 +26,6 @@ func _ready() -> void:
 	viewport_texture = ViewportTexture.new()
 
 func open_shop() -> void:
-	_fill_items()
 	show()
 
 func _add_slots() -> void:
@@ -59,7 +58,7 @@ func _on_mouse_leave_sell_area() -> void:
 	sell_label.text = SELL_TEXT
 	sell_label.remove_theme_color_override("font_color")
 
-func _fill_items() -> void:
+func fill_items() -> void:
 	for item_panel:ShopItemPanel in item_panels:
 		item_panel.default_button.reset_button()
 		var max_item_level:int = GlobalSignals.player.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL)

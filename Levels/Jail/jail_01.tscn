@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cxkj2ce2h6v51" path="res://Tile-RPG/Models/static_props/wooden_stool.tscn" id="13_2ekbm"]
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="13_egjwj"]
 [ext_resource type="PackedScene" uid="uid://c0qockqbbtcc3" path="res://Tile-RPG/Interactables/lever.tscn" id="13_q2olv"]
+[ext_resource type="PackedScene" uid="uid://kcntsyd64f1k" path="res://Tile-RPG/Interactables/shop.tscn" id="14_8d0px"]
 [ext_resource type="PackedScene" uid="uid://dd45u14lackui" path="res://Tile-RPG/Models/static_props/jail_bench.tscn" id="14_l321t"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="15_fkoil"]
 [ext_resource type="PackedScene" uid="uid://d1rgm1jeak2qy" path="res://Tile-RPG/Models/static_props/wall_chains.tscn" id="19_465oc"]
@@ -584,6 +585,9 @@ unique_id = "TestChest1"
 
 [node name="Lever" parent="Interactables" unique_id=1672743832 instance=ExtResource("13_q2olv")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 0, 5.5)
+
+[node name="Shop" parent="Interactables" unique_id=1275726709 instance=ExtResource("14_8d0px")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 1)
 
 [node name="Breakables" type="Node" parent="." unique_id=428608692]
 

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://kcntsyd64f1k"]
+
+[ext_resource type="Script" uid="uid://blpc14kged8v" path="res://Tile-RPG/Interactables/shop.gd" id="1_x41p4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x41p4"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_kcplm"]
+size = Vector3(0.3, 0.1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uiqlo"]
+size = Vector3(0.89038086, 1.9954226, 2)
+
+[node name="Shop" type="Node3D" unique_id=1275726709 node_paths=PackedStringArray("interact_area", "indicator_place")]
+script = ExtResource("1_x41p4")
+interact_area = NodePath("Area3D")
+indicator_place = NodePath("Node3D")
+interact_text = "Shop"
+face_interactable = true
+interact_animation = 17
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1141315608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9015752, 0)
+mesh = SubResource("CapsuleMesh_x41p4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060811953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5565945, 0.36905956)
+mesh = SubResource("BoxMesh_kcplm")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=542759797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.205067, 0.60253334)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1765072799]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1484980239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, 0.99729925, 0.9999995)
+shape = SubResource("BoxShape3D_uiqlo")

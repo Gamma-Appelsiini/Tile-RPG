@@ -21,6 +21,7 @@ var save_data:Dictionary = {
 	"game_characters": {},
 	"dead_ids": [],
 	"quest_handler": {},
+	"shops": [],
 }
 
 var player:Player = null
