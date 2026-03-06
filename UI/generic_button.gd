@@ -23,6 +23,7 @@ func reset_button() -> void:
 	_remove_text_override()
 	button_texture_rect.texture = BUTTON_DEFAULT
 	price_label.remove_theme_color_override("font_color")
+	price_label.text = ""
 
 func set_as_sold() -> void:
 	set_process_input(false)
@@ -41,7 +42,7 @@ func _on_m_enter() -> void:
 	
 func _on_m_leave() -> void:
 	glow.visible = false
-	if mouse_pressed == false: set_process_input(false)
+	if !mouse_pressed: set_process_input(false)
 	
 func _connect_signals() -> void:
 	button_texture_rect.mouse_entered.connect(_on_m_enter)

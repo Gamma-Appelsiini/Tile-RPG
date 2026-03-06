@@ -16,3 +16,8 @@ func add_item(rarity:Item.ItemRarity, item_lvl:int) -> void:
 	var price:int = int( new_item.item_value * randf_range(3, 5) )
 	item_price = price
 	default_button.set_price(price)
+
+func set_item(new_item:Item, price:int) -> void:
+	inventory_slot.set_item(new_item)
+	item_price = price
+	default_button.set_price(price)

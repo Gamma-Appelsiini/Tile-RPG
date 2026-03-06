@@ -25,6 +25,11 @@ func _ready() -> void:
 	player_inventory.sell_item.connect(sell_item)
 	viewport_texture = ViewportTexture.new()
 
+func reset_shop() -> void:
+	for item_panel:ShopItemPanel in item_panels:
+		item_panel.inventory_slot.remove_item()
+		item_panel.default_button.reset_button()
+
 func open_shop() -> void:
 	show()
 
@@ -38,6 +43,7 @@ func _add_slots() -> void:
 		new_item_panel.default_button.purchased.connect(_buy_item.bind(new_item_panel))
 		
 		var new_slot:InventorySlot = new_item_panel.inventory_slot
+		new_slot.dragging_disabled = true
 		new_slot.array_pos = pos + i
 		player_inventory.connect_slot(new_slot)
 

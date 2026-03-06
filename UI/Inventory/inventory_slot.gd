@@ -17,6 +17,7 @@ const EMPTY_SLOT:Texture2D = preload("uid://ca2rmcr4qwoye")
 var array_pos:int = -1
 var item_in_slot:Item = null
 var equipment_slot:Equipment.EquipmentSlot
+var dragging_disabled:bool = false
 
 func set_item(new_item:Item, old_slot:InventorySlot = null, skip_equipping:bool = false) -> void:
 	if new_item == null:

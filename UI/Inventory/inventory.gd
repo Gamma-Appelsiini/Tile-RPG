@@ -226,6 +226,7 @@ func _create_item_tt(new_item:Item) -> void:
 
 func _item_clicked() -> void:
 	if hovered_slot.item_in_slot == null: return
+	if hovered_slot.dragging_disabled: return
 	
 	GlobalSignals.play_audio.emit(INV_PICK, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 	_hide_tt(hovered_slot)
@@ -258,6 +259,10 @@ func _item_released() -> void:
 	
 	#Hovering over nothing or own slot
 	if hovered_slot == null or hovered_slot == selected_slot or !_possible_to_equip():
+		_reset_selecting()
+		return
+	
+	if hovered_slot.dragging_disabled:
 		_reset_selecting()
 		return
 	

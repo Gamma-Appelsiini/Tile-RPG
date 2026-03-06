@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://rjgqijg22g8l"]
 
 [ext_resource type="Script" uid="uid://c2khqkt8x8wuq" path="res://Tile-RPG/UI/Shop/shop_window.gd" id="1_4gs74"]
+[ext_resource type="Texture2D" uid="uid://ctkfq28vwb3v2" path="res://Tile-RPG/Images/UI/Borders/sharp_border1.png" id="1_pt4f5"]
 [ext_resource type="StyleBox" uid="uid://buahfddcqhavs" path="res://Tile-RPG/UI/Shop/shop_panel_theme.tres" id="2_l02y0"]
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="3_4td4y"]
 [ext_resource type="Texture2D" uid="uid://dle3hrj3db2t8" path="res://Tile-RPG/Images/UI/Buttons/button_pressed.png" id="3_jq5v4"]
+[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="4_0265s"]
 [ext_resource type="Theme" uid="uid://crj6kfsca2qxw" path="res://Tile-RPG/UI/Shop/cost_label_theme.tres" id="4_cauu1"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_1ibpp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qj41f"]
+texture = ExtResource("1_pt4f5")
+texture_margin_left = 19.0
+texture_margin_top = 19.0
+texture_margin_right = 19.0
+texture_margin_bottom = 19.0
 
 [node name="ShopWindow" type="PanelContainer" unique_id=1374274591 node_paths=PackedStringArray("shop_items_container", "sell_label", "viewport_rect", "sell_container")]
 anchors_preset = -1
@@ -17,54 +28,75 @@ offset_right = 102.0
 offset_bottom = 202.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qj41f")
 script = ExtResource("1_4gs74")
-shop_items_container = NodePath("HBoxContainer/ShopItemsContainer")
-sell_label = NodePath("HBoxContainer/VBoxContainer/SellContainer/SellLabel")
-viewport_rect = NodePath("HBoxContainer/VBoxContainer/PanelContainer/ViewportRect")
-sell_container = NodePath("HBoxContainer/VBoxContainer/SellContainer")
+shop_items_container = NodePath("PanelContainer2/HBoxContainer/ShopItemsContainer")
+sell_label = NodePath("PanelContainer2/HBoxContainer/VBoxContainer/SellContainer/SellLabel")
+viewport_rect = NodePath("PanelContainer2/HBoxContainer/VBoxContainer/PanelContainer/ViewportRect")
+sell_container = NodePath("PanelContainer2/HBoxContainer/VBoxContainer/SellContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1134861765]
+[node name="BgRect" type="TextureRect" parent="." unique_id=344789288]
+self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
+z_index = -1
+layout_mode = 2
+texture = ExtResource("3_4td4y")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1240575900]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_0265s")
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer2" unique_id=898087172]
+layout_mode = 2
+texture = ExtResource("5_1ibpp")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2" unique_id=1134861765]
 layout_mode = 2
 
-[node name="ShopItemsContainer" type="GridContainer" parent="HBoxContainer" unique_id=1141260172]
+[node name="ShopItemsContainer" type="GridContainer" parent="PanelContainer2/HBoxContainer" unique_id=1141260172]
 layout_mode = 2
 columns = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1509584904]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/HBoxContainer" unique_id=1509584904]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=1400672320]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/HBoxContainer/VBoxContainer" unique_id=1400672320]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_l02y0")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=1101725318]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1101725318]
 z_index = -1
 layout_mode = 2
 texture = ExtResource("3_jq5v4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ViewportRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=816238111]
+[node name="ViewportRect" type="TextureRect" parent="PanelContainer2/HBoxContainer/VBoxContainer/PanelContainer" unique_id=816238111]
 z_index = -1
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SellContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=1477973518]
+[node name="SellContainer" type="PanelContainer" parent="PanelContainer2/HBoxContainer/VBoxContainer" unique_id=1477973518]
 clip_contents = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_l02y0")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/SellContainer" unique_id=1476560641]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/HBoxContainer/VBoxContainer/SellContainer" unique_id=1476560641]
 z_index = -1
 layout_mode = 2
 texture = ExtResource("3_jq5v4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SellLabel" type="Label" parent="HBoxContainer/VBoxContainer/SellContainer" unique_id=1345937333]
+[node name="SellLabel" type="Label" parent="PanelContainer2/HBoxContainer/VBoxContainer/SellContainer" unique_id=1345937333]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("4_cauu1")

@@ -24,7 +24,6 @@ signal show_outline
 signal show_outline_on_target(target:Node3D)
 signal hide_outline
 signal hide_outline_on_target(target:Node3D)
-signal open_shop(shop:Shop)
 
 signal change_all_stats_visibility
 

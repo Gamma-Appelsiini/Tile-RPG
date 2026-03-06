@@ -30,7 +30,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Character"):
 		_toggle_character()
 	elif event.is_action_pressed("Bag"):
-		_toggle_inv()
+		toggle_inv()
 	elif event.is_action_pressed("Abilities"):
 		_toggle_abilities()
 	elif event.is_action_pressed("shop"):
@@ -39,8 +39,11 @@ func _input(event: InputEvent) -> void:
 func _toggle_character() -> void:
 	stat_window.visible = !stat_window.visible
 
-func _toggle_inv() -> void:
+func toggle_inv() -> void:
 	inventory.visible = !inventory.visible
+	
+	if shop_window.visible and !inventory.visible:
+		shop_window.hide()
 
 func _toggle_abilities() -> void:
 	if in_combat: return
@@ -50,7 +53,7 @@ func _toggle_abilities() -> void:
 func _connect_menu_buttons() -> void:
 	#TODO
 	menu_buttons.open_abi.connect(_toggle_abilities)
-	menu_buttons.open_inv.connect(_toggle_inv)
+	menu_buttons.open_inv.connect(toggle_inv)
 	menu_buttons.open_char.connect(_toggle_character)
 
 func set_player(player:Player) -> void:

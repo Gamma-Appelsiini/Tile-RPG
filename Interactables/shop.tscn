@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://kcntsyd64f1k"]
 
 [ext_resource type="Script" uid="uid://blpc14kged8v" path="res://Tile-RPG/Interactables/shop.gd" id="1_x41p4"]
+[ext_resource type="PackedScene" uid="uid://bfci7kboa8bxi" path="res://Tile-RPG/UI/Shop/equipment_displayer.tscn" id="2_kcplm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x41p4"]
 radius = 0.3
@@ -12,8 +13,9 @@ size = Vector3(0.3, 0.1, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_uiqlo"]
 size = Vector3(0.89038086, 1.9954226, 2)
 
-[node name="Shop" type="Node3D" unique_id=1275726709 node_paths=PackedStringArray("interact_area", "indicator_place")]
+[node name="Shop" type="Node3D" unique_id=1275726709 node_paths=PackedStringArray("equipment_displayer", "interact_area", "indicator_place")]
 script = ExtResource("1_x41p4")
+equipment_displayer = NodePath("EquipmentDisplayer")
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("Node3D")
 interact_text = "Shop"
@@ -38,3 +40,5 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1484980239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, 0.99729925, 0.9999995)
 shape = SubResource("BoxShape3D_uiqlo")
+
+[node name="EquipmentDisplayer" parent="." unique_id=2146458885 instance=ExtResource("2_kcplm")]

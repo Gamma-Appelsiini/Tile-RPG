@@ -11,8 +11,14 @@ var item_model:ItemModel = null
 func _ready() -> void:
 	const BASIC_SWORD := preload("uid://da0xr2nkj8xej")
 	set_item_to_display(BASIC_SWORD)
-	
+
+func remove_model() -> void:
+	if item_model == null: return
+	item_model.queue_free()
+	item_model = null
+
 func set_item_to_display(new_item:Item) -> void:
+	if new_item == null: return
 	if new_item.item_model_path == "": return
 	
 	item_model = load(new_item.item_model_path).instantiate()
