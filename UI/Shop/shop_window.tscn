@@ -16,6 +16,8 @@ texture_margin_top = 19.0
 texture_margin_right = 19.0
 texture_margin_bottom = 19.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_pt4f5"]
+
 [node name="ShopWindow" type="PanelContainer" unique_id=1374274591 node_paths=PackedStringArray("shop_items_container", "sell_label", "viewport_rect", "sell_container")]
 anchors_preset = -1
 anchor_left = 0.06
@@ -80,6 +82,7 @@ stretch_mode = 5
 [node name="ViewportRect" type="TextureRect" parent="PanelContainer2/HBoxContainer/VBoxContainer/PanelContainer" unique_id=816238111]
 z_index = -1
 layout_mode = 2
+texture = SubResource("ViewportTexture_pt4f5")
 expand_mode = 1
 stretch_mode = 5
 

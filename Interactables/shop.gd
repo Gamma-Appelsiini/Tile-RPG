@@ -18,9 +18,11 @@ var ui_handler:UIHandler = null
 #Overrided
 func interact() -> void:
 	_set_shop_window_ref()
+	shop_window.equipment_displayer = equipment_displayer
 	_generate_new_items()
 	shop_window.open_shop()
-	ui_handler.toggle_inv()
+	if !ui_handler.inventory.visible:
+		ui_handler.toggle_inv()
 
 func _set_shop_window_ref() -> void:
 	var UI := get_tree().get_nodes_in_group("UI")

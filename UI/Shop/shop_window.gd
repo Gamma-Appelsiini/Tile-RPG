@@ -17,6 +17,7 @@ const RARITIES:Array[Item.ItemRarity] = [Item.ItemRarity.POOR,Item.ItemRarity.PO
 
 var item_panels:Array[ShopItemPanel] = []
 var viewport_texture:ViewportTexture = null
+var equipment_displayer:EquipmentDisplayer = null
 
 func _ready() -> void:
 	_add_slots()
@@ -31,8 +32,14 @@ func reset_shop() -> void:
 		item_panel.default_button.reset_button()
 
 func open_shop() -> void:
+	_set_viewport()
 	show()
 
+func _set_viewport() -> void:
+	if viewport_rect.texture is ViewportTexture:
+		viewport_texture = viewport_rect.texture
+		viewport_texture.viewport_path = equipment_displayer.sub_viewport.get_path()
+		
 func _add_slots() -> void:
 	#Lootwindow has 10 slots
 	var pos:int = player_inventory.INV_SIZE + 10
@@ -46,6 +53,19 @@ func _add_slots() -> void:
 		new_slot.dragging_disabled = true
 		new_slot.array_pos = pos + i
 		player_inventory.connect_slot(new_slot)
+		
+		new_slot.mouse_entered.connect(_show_item_model.bind(new_slot))
+		new_slot.mouse_exited.connect(_hide_item_model)
+		
+func _show_item_model(item_slot:InventorySlot) -> void:
+	var new_item:Item = item_slot.item_in_slot
+	if new_item == null or equipment_displayer == null: return
+	
+	equipment_displayer.set_item_to_display(new_item)
+	
+func _hide_item_model() -> void:
+	if equipment_displayer == null: return
+	equipment_displayer.remove_model()
 
 func _set_viewport_texture() -> void:
 	#TODO

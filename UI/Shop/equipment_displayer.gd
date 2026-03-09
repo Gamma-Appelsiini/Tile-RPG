@@ -8,10 +8,6 @@ const OFFSETS:Dictionary[String, Vector3] = {"res://Tile-RPG/Items/ItemScenes/sw
 
 var item_model:ItemModel = null
 
-func _ready() -> void:
-	const BASIC_SWORD := preload("uid://da0xr2nkj8xej")
-	set_item_to_display(BASIC_SWORD)
-
 func remove_model() -> void:
 	if item_model == null: return
 	item_model.queue_free()
@@ -20,10 +16,12 @@ func remove_model() -> void:
 func set_item_to_display(new_item:Item) -> void:
 	if new_item == null: return
 	if new_item.item_model_path == "": return
-	
+
 	item_model = load(new_item.item_model_path).instantiate()
-	item_model.visible = false
+	item_model.visible = true
+
 	rotation_node.add_child(item_model)
+	item_model.global_position = rotation_node.global_position
 	
 	item_model.item_mesh.set_layer_mask_value(1,false)
 	item_model.item_mesh.set_layer_mask_value(16,true)
@@ -35,9 +33,10 @@ func set_item_to_display(new_item:Item) -> void:
 
 func _rotate_model() -> void:
 	if item_model == null: return
+	item_model.visible = true
 	
 	var tween:Tween = create_tween()
-	tween.tween_property(rotation_node,"rotation:y", rotation_node.rotation.y + 360, 4)
+	tween.tween_property(rotation_node,"rotation:y", rotation_node.rotation.y + 1, 3)
 	
 	await tween.finished
 	_rotate_model()
