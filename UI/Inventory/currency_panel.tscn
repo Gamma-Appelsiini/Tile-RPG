@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://g7fqyucfhiwn"]
+
+[ext_resource type="Texture2D" uid="uid://ctkfq28vwb3v2" path="res://Tile-RPG/Images/UI/Borders/sharp_border1.png" id="1_453fp"]
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="2_6p2ba"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="3_hg6wy"]
+[ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="4_o2fc1"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_07os7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jsgg1"]
+texture = ExtResource("1_453fp")
+texture_margin_left = 19.0
+texture_margin_top = 19.0
+texture_margin_right = 19.0
+texture_margin_bottom = 19.0
+
+[node name="CurrencyPanel" type="PanelContainer" unique_id=1133575878]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -44.0
+offset_right = 55.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_jsgg1")
+
+[node name="BgRect" type="TextureRect" parent="." unique_id=208393655]
+self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
+layout_mode = 2
+texture = ExtResource("2_6p2ba")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="BgRect" unique_id=1428419192]
+layout_mode = 0
+offset_right = 102.5
+offset_bottom = 27.0
+texture = ExtResource("3_hg6wy")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=383345803]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer" unique_id=395827789]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1305176543]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("4_o2fc1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CurrencyAmountLabel" type="Label" parent="HBoxContainer" unique_id=1606818099]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("5_07os7")
+theme_override_colors/font_color = Color(0.8980392, 0.7137255, 0.45490196, 1)
+theme_override_font_sizes/font_size = 22
+text = "55555"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=2099789639]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2

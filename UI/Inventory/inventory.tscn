@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwm8mixxh22t5"]
+[gd_scene format=3 uid="uid://cwm8mixxh22t5"]
 
 [ext_resource type="Script" uid="uid://bjf0h02xhxd3p" path="res://Tile-RPG/UI/Inventory/inventory.gd" id="1_box56"]
 [ext_resource type="Texture2D" uid="uid://c47ivluaw2iuj" path="res://Tile-RPG/Images/UI/Borders/detail_border4.png" id="2_xxh13"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_lcpxx"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_lcpxx"]
 [ext_resource type="PackedScene" uid="uid://cojb0yey4conu" path="res://Tile-RPG/UI/x_button.tscn" id="5_lcpxx"]
+[ext_resource type="PackedScene" uid="uid://g7fqyucfhiwn" path="res://Tile-RPG/UI/Inventory/currency_panel.tscn" id="6_1afs6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fb27k"]
 content_margin_left = 35.0
@@ -20,7 +21,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 draw_center = false
 
-[node name="Inventory" type="Control"]
+[node name="Inventory" type="Control" unique_id=525772754 node_paths=PackedStringArray("currency_amount_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,8 +30,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_box56")
+currency_amount_label = NodePath("CurrencyPanel/HBoxContainer/CurrencyAmountLabel")
 
-[node name="BgRect" type="TextureRect" parent="."]
+[node name="BgRect" type="TextureRect" parent="." unique_id=2119153238]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
 layout_mode = 0
 offset_left = 1242.0
@@ -41,7 +43,7 @@ texture = ExtResource("3_lcpxx")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=479656786]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.64
@@ -50,47 +52,47 @@ anchor_right = 0.99
 anchor_bottom = 0.95
 theme_override_styles/panel = SubResource("StyleBoxTexture_fb27k")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1964590230]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=980067146]
 layout_mode = 2
 theme = ExtResource("4_lcpxx")
 text = "Inventory"
 horizontal_alignment = 1
 
-[node name="EquipmentPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="EquipmentPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1268946914]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="EquipmentGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/EquipmentPanel"]
+[node name="EquipmentGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/EquipmentPanel" unique_id=225212400]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 3
 
-[node name="InvPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="InvPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1782368640]
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="InvSlotGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/InvPanel"]
+[node name="InvSlotGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/InvPanel" unique_id=954832342]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_constants/v_separation = -1
 columns = 5
 
-[node name="x_button" parent="." instance=ExtResource("5_lcpxx")]
+[node name="x_button" parent="." unique_id=592401962 instance=ExtResource("5_lcpxx")]
 layout_mode = 1
 offset_left = 872.0
 offset_top = -458.0
 offset_right = 872.0
 offset_bottom = -458.0
 
-[node name="ThrowOutArea" type="Control" parent="."]
+[node name="ThrowOutArea" type="Control" parent="." unique_id=966597330]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,3 +100,12 @@ anchor_bottom = 1.0
 offset_right = -682.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CurrencyPanel" parent="." unique_id=1133575878 instance=ExtResource("6_1afs6")]
+layout_mode = 1
+offset_left = 773.0
+offset_top = 21.0
+offset_right = 913.0
+offset_bottom = 86.0
+
+[editable path="CurrencyPanel"]
