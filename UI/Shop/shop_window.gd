@@ -6,6 +6,9 @@ const SHOP_ITEM_AMOUNT:int = 8
 const SELL_TEXT:String = "Drop to Sell"
 const RARITIES:Array[Item.ItemRarity] = [Item.ItemRarity.POOR,Item.ItemRarity.POOR,
 	Item.ItemRarity.COMMON,Item.ItemRarity.COMMON, Item.ItemRarity.RARE, Item.ItemRarity.RARE, Item.ItemRarity.EPIC, Item.ItemRarity.LEGENDARY]
+	
+const FLAVOR_TEXT_BUY:Array[String] = ["A good price.", "Good choice.", "I would have bought the same one myself."]
+const FLAVOR_TEXT_SELL:Array[String] = ["I'll take it off you.", "Where did you find this one.", "A common item."]
 
 @export var shop_items_container: GridContainer = null
 @export var purchase_sound:AudioStream = null
@@ -14,10 +17,16 @@ const RARITIES:Array[Item.ItemRarity] = [Item.ItemRarity.POOR,Item.ItemRarity.PO
 @export var sell_label: Label = null
 @export var viewport_rect: TextureRect = null
 @export var sell_container: PanelContainer = null
+@export var flavor_text_label: Label = null
+@export var shopkeeper_rect: TextureRect = null
 
 var item_panels:Array[ShopItemPanel] = []
 var viewport_texture:ViewportTexture = null
 var equipment_displayer:EquipmentDisplayer = null
+
+func _animate_flavor_text(new_text:String) -> void:
+	#TODO animation
+	flavor_text_label.text = new_text
 
 func _ready() -> void:
 	_add_slots()
@@ -104,6 +113,8 @@ func _buy_item(item_panel:ShopItemPanel) -> void:
 	
 	player_inventory.add_item_to_inv(item_panel.inventory_slot.item_in_slot)
 	item_panel.inventory_slot.remove_item()
+	
+	_animate_flavor_text(FLAVOR_TEXT_BUY.pick_random())
 
 func sell_item(item:Item) -> void:
 	if item.unsellable: return
@@ -111,4 +122,6 @@ func sell_item(item:Item) -> void:
 	GlobalSignals.play_audio.emit(sell_sound, AudioManager.AUDIO_TYPE.UI)
 	player_inventory.remove_item_from_inv(item)
 	player_inventory.player_currency += item.item_value
+	
+	_animate_flavor_text(FLAVOR_TEXT_SELL.pick_random())
 	

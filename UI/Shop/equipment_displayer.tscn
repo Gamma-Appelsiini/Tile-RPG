@@ -18,6 +18,7 @@ layers = 32769
 mesh = SubResource("BoxMesh_626gl")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1690981365]
+transparent_bg = true
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=1822321818]
 transform = Transform3D(1.0000001, -2.9802322e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, 0, 0, 1.1928859)
