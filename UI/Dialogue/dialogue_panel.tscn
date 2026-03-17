@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca2xbwhnef5ap"]
+[gd_scene format=3 uid="uid://ca2xbwhnef5ap"]
 
 [ext_resource type="Script" uid="uid://dxp1yhwpy2dvb" path="res://Tile-RPG/UI/Dialogue/dialogue_panel.gd" id="1_gouk5"]
 [ext_resource type="Texture2D" uid="uid://tlfhj0clcf0o" path="res://Tile-RPG/Images/UI/Borders/detail_border2.png" id="1_xdchr"]
@@ -16,7 +16,7 @@ texture_margin_bottom = 15.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="DialoguePanel" type="PanelContainer" node_paths=PackedStringArray("dialogue_label", "choice_container", "continue_rect")]
+[node name="DialoguePanel" type="PanelContainer" unique_id=773947272 node_paths=PackedStringArray("dialogue_label", "choice_container", "continue_rect")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,27 +31,27 @@ dialogue_label = NodePath("PanelContainer/VBoxContainer/MarginContainer/Dialogue
 choice_container = NodePath("PanelContainer/VBoxContainer/MarginContainer3/OptionsContainer")
 continue_rect = NodePath("PanelContainer/MarginContainer/ContinueRect")
 
-[node name="BgRect" type="TextureRect" parent="."]
+[node name="BgRect" type="TextureRect" parent="." unique_id=681441225]
 self_modulate = Color(0.124268405, 0.124095805, 0.1419102, 1)
 layout_mode = 2
 texture = ExtResource("3_qxjsi")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1340473943]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_xdchr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=913470708]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=2126492982]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 
-[node name="DialogueLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="DialogueLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=175049822]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
@@ -60,24 +60,24 @@ theme_override_font_sizes/font_size = 26
 text = "This is text"
 autowrap_mode = 3
 
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1153358703]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="OptionsContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3"]
+[node name="OptionsContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3" unique_id=360740713]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2057395260]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 25
 
-[node name="ContinueRect" type="TextureRect" parent="PanelContainer/MarginContainer"]
+[node name="ContinueRect" type="TextureRect" parent="PanelContainer/MarginContainer" unique_id=1110498929]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(50, 50)
@@ -89,7 +89,7 @@ texture = ExtResource("3_uq2d7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=9128888]
 layout_mode = 2
 texture = ExtResource("5_xdchr")
 patch_margin_left = 10

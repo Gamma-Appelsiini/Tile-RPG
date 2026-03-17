@@ -7,8 +7,9 @@ const SELL_TEXT:String = "Drop to Sell"
 const RARITIES:Array[Item.ItemRarity] = [Item.ItemRarity.POOR,Item.ItemRarity.POOR,
 	Item.ItemRarity.COMMON,Item.ItemRarity.COMMON, Item.ItemRarity.RARE, Item.ItemRarity.RARE, Item.ItemRarity.EPIC, Item.ItemRarity.LEGENDARY]
 	
-const FLAVOR_TEXT_BUY:Array[String] = ["A good price.", "Good choice.", "I would have bought the same one myself."]
-const FLAVOR_TEXT_SELL:Array[String] = ["I'll take it off you.", "Where did you find this one.", "A common item."]
+const FLAVOR_TEXT_BUY:Array[String] = ["Sold. For a good price.", "Good choice.", "I would have bought the same one myself."]
+const FLAVOR_TEXT_SELL:Array[String] = ["I'll take it off you.", "Where did you find this one?", "A common item."]
+const FLAVOR_TEXT_GOODBYE:Array[String] = ["Come back again.", "You're my best customer.", "Great deals here again tomorrow."]
 
 @export var shop_items_container: GridContainer = null
 @export var purchase_sound:AudioStream = null
@@ -17,31 +18,47 @@ const FLAVOR_TEXT_SELL:Array[String] = ["I'll take it off you.", "Where did you 
 @export var sell_label: Label = null
 @export var viewport_rect: TextureRect = null
 @export var sell_container: PanelContainer = null
-@export var flavor_text_label: Label = null
-@export var shopkeeper_rect: TextureRect = null
+@export var flavor_text_panel: DialoguePanel = null
+@export var shopkeeper_portrait: DialoguePortrait = null
 
 var item_panels:Array[ShopItemPanel] = []
 var viewport_texture:ViewportTexture = null
 var equipment_displayer:EquipmentDisplayer = null
+var opened_shop:Shop = null
 
 func _animate_flavor_text(new_text:String) -> void:
-	#TODO animation
-	flavor_text_label.text = new_text
+	flavor_text_panel.set_text(new_text)
+	await flavor_text_panel.text_ready
+
+func _show_goodbye_text() -> void:
+	if visible: return
+	opened_shop.show_shopkeeper_talking(FLAVOR_TEXT_GOODBYE.pick_random())
+
+func _on_inv_visibility_changed() -> void:
+	if !player_inventory.visible: self.visible = false
 
 func _ready() -> void:
 	_add_slots()
 	sell_container.mouse_entered.connect(_on_mouse_enter_sell_area)
 	sell_container.mouse_exited.connect(_on_mouse_leave_sell_area)
 	player_inventory.sell_item.connect(sell_item)
+	player_inventory.visibility_changed.connect(_on_inv_visibility_changed)
 	viewport_texture = ViewportTexture.new()
+	
+	flavor_text_panel.show_continue_rect = false
+	self.visibility_changed.connect(_show_goodbye_text)
 
 func reset_shop() -> void:
 	for item_panel:ShopItemPanel in item_panels:
 		item_panel.inventory_slot.remove_item()
 		item_panel.default_button.reset_button()
 
-func open_shop() -> void:
+func open_shop(new_shop:Shop) -> void:
+	opened_shop = new_shop
+	
 	_set_viewport()
+	shopkeeper_portrait.set_shopkeeper(new_shop)
+	
 	show()
 
 func _set_viewport() -> void:
@@ -75,10 +92,6 @@ func _show_item_model(item_slot:InventorySlot) -> void:
 func _hide_item_model() -> void:
 	if equipment_displayer == null: return
 	equipment_displayer.remove_model()
-
-func _set_viewport_texture() -> void:
-	#TODO
-	viewport_texture.viewport_path = ""
 
 func _on_mouse_enter_sell_area() -> void:
 	player_inventory.sell_item_on_release = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6xedavukxk8d"]
+[gd_scene format=3 uid="uid://6xedavukxk8d"]
 
 [ext_resource type="Script" uid="uid://c0p70k8koyggt" path="res://Tile-RPG/UI/Dialogue/dialogue_portrait.gd" id="1_3ygy6"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_j60w1"]
@@ -16,7 +16,7 @@ texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 modulate_color = Color(0.86, 0.81413335, 0.774, 1)
 
-[node name="DialoguePortrait" type="VBoxContainer" node_paths=PackedStringArray("name_label", "picture_rect", "color_rect")]
+[node name="DialoguePortrait" type="VBoxContainer" unique_id=1145167195 node_paths=PackedStringArray("name_label", "picture_rect", "color_rect")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -33,17 +33,17 @@ name_label = NodePath("PanelContainer/PanelContainer/PanelContainer/NameLabel")
 picture_rect = NodePath("PanelContainer/PanelContainer/PictureRect")
 color_rect = NodePath("PanelContainer/PanelContainer/ColorRect")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1924606503]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_ugm8h")
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=576566933]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_ugm8h")
 
-[node name="PictureRect" type="TextureRect" parent="PanelContainer/PanelContainer"]
+[node name="PictureRect" type="TextureRect" parent="PanelContainer/PanelContainer" unique_id=492663509]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 329)
 layout_mode = 2
@@ -51,21 +51,21 @@ texture = ExtResource("4_j60w1")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer/PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/PanelContainer" unique_id=1088860907]
 unique_name_in_owner = true
 layout_mode = 2
 color = Color(0.07, 0.07, 0.07, 0.3137255)
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/PanelContainer" unique_id=1217240814]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer/PanelContainer/PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/PanelContainer/PanelContainer" unique_id=509113988]
 layout_mode = 2
 color = Color(0, 0, 0, 0.22352941)
 
-[node name="NameLabel" type="Label" parent="PanelContainer/PanelContainer/PanelContainer"]
+[node name="NameLabel" type="Label" parent="PanelContainer/PanelContainer/PanelContainer" unique_id=511437983]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
@@ -78,7 +78,7 @@ text = "Jack, Faithful"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/PanelContainer" unique_id=42452552]
 layout_mode = 2
 texture = ExtResource("7_uxlqj")
 patch_margin_left = 10

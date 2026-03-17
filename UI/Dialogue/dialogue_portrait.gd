@@ -14,3 +14,7 @@ func set_active() -> void:
 	
 func set_passive() -> void:
 	color_rect.visible = true
+
+func set_shopkeeper(new_shop:Shop) -> void:
+	name_label.text = new_shop.shop_name
+	picture_rect.texture = new_shop.shop_portrait

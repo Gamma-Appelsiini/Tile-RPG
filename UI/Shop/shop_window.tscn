@@ -9,6 +9,8 @@
 [ext_resource type="Theme" uid="uid://crj6kfsca2qxw" path="res://Tile-RPG/UI/Shop/cost_label_theme.tres" id="4_cauu1"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_1ibpp"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="6_4td4y"]
+[ext_resource type="PackedScene" uid="uid://6xedavukxk8d" path="res://Tile-RPG/UI/Dialogue/dialogue_portrait.tscn" id="10_1ibpp"]
+[ext_resource type="PackedScene" uid="uid://ca2xbwhnef5ap" path="res://Tile-RPG/UI/Dialogue/dialogue_panel.tscn" id="11_qj41f"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qj41f"]
 texture = ExtResource("1_pt4f5")
@@ -19,7 +21,7 @@ texture_margin_bottom = 19.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pt4f5"]
 
-[node name="ShopWindow" type="PanelContainer" unique_id=1374274591 node_paths=PackedStringArray("shop_items_container", "sell_label", "viewport_rect", "sell_container")]
+[node name="ShopWindow" type="PanelContainer" unique_id=1374274591 node_paths=PackedStringArray("shop_items_container", "sell_label", "viewport_rect", "sell_container", "flavor_text_panel", "shopkeeper_portrait")]
 anchors_preset = -1
 anchor_left = 0.06
 anchor_top = 0.3
@@ -37,6 +39,8 @@ shop_items_container = NodePath("PanelContainer2/VBoxContainer/HBoxContainer/Sho
 sell_label = NodePath("PanelContainer2/VBoxContainer/HBoxContainer/SellContainer/SellLabel")
 viewport_rect = NodePath("PanelContainer2/VBoxContainer/HBoxContainer/ViewportPanel/ViewportRect")
 sell_container = NodePath("PanelContainer2/VBoxContainer/HBoxContainer/SellContainer")
+flavor_text_panel = NodePath("PanelContainer2/VBoxContainer/HBoxContainer2/DialoguePanel")
+shopkeeper_portrait = NodePath("PanelContainer2/VBoxContainer/HBoxContainer2/DialoguePortrait")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=344789288]
 self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
@@ -65,6 +69,7 @@ theme_override_constants/separation = 8
 [node name="Label" type="Label" parent="PanelContainer2/VBoxContainer" unique_id=1842763288]
 layout_mode = 2
 theme = ExtResource("6_4td4y")
+theme_override_font_sizes/font_size = 32
 text = "Shop"
 horizontal_alignment = 1
 
@@ -118,17 +123,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer" unique_id=1975524931]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer2/VBoxContainer" unique_id=122773008]
 layout_mode = 2
 
-[node name="ShopkeeperPortraitPanel" type="PanelContainer" parent="PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=1004695879]
+[node name="DialoguePortrait" parent="PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=903204521 instance=ExtResource("10_1ibpp")]
 layout_mode = 2
 
-[node name="ShopkeeperRect" type="TextureRect" parent="PanelContainer2/VBoxContainer/HBoxContainer2/ShopkeeperPortraitPanel" unique_id=360133539]
-layout_mode = 2
-
-[node name="TextPanel" type="PanelContainer" parent="PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=294108909]
-layout_mode = 2
-
-[node name="FlavorTextLabel" type="Label" parent="PanelContainer2/VBoxContainer/HBoxContainer2/TextPanel" unique_id=222315270]
+[node name="DialoguePanel" parent="PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=29589427 instance=ExtResource("11_qj41f")]
 layout_mode = 2

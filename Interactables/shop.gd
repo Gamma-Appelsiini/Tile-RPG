@@ -1,6 +1,8 @@
 extends Interactable
 class_name Shop
 
+@export var shop_name:String = "Shop Name"
+@export var shop_portrait:Texture2D = null
 @export var equipment_displayer:EquipmentDisplayer = null
 
 var shop_save_data:Dictionary = {
@@ -15,12 +17,18 @@ var last_open_lvl:int = -1
 var player_inventory:Inventory = null
 var ui_handler:UIHandler = null
 
+func show_shopkeeper_talking(new_text:String) -> void:
+	#TODO
+	pass
+
 #Overrided
 func interact() -> void:
 	_set_shop_window_ref()
 	shop_window.equipment_displayer = equipment_displayer
 	_generate_new_items()
-	shop_window.open_shop()
+	
+	shop_window.open_shop(self)
+	
 	if !ui_handler.inventory.visible:
 		ui_handler.toggle_inv()
 

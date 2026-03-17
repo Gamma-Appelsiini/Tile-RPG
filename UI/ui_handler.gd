@@ -34,7 +34,8 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("Abilities"):
 		_toggle_abilities()
 	elif event.is_action_pressed("shop"):
-		shop_window.open_shop()
+		#TODO remove
+		pass
 
 func _toggle_character() -> void:
 	stat_window.visible = !stat_window.visible

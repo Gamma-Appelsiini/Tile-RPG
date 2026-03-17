@@ -19,6 +19,8 @@ var dialogue_choices_res:DialogueChoicesResource = null
 var hovered_choice_number:int = -1
 var player:Player = null
 var choice_labels:Array[Label] = []
+var text_tween:Tween = null
+var show_continue_rect:bool = true
 
 func reset_text() -> void:
 	dialogue_label.text = ""
@@ -123,6 +125,8 @@ func _hide_continue() -> void:
 	tween.tween_property(continue_rect, "modulate:a", 0, 0.1)
 
 func _show_continue() -> void:
+	if !show_continue_rect: return
+	
 	continue_rect.custom_minimum_size.x = 0
 	continue_rect.visible = true
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
@@ -131,14 +135,16 @@ func _show_continue() -> void:
 
 func _change_label_text(label:Label,new_text:String, time_override:float = 0):
 	_hide_continue()
+	if text_tween != null: text_tween.stop()
 	
 	var change_time = new_text.length() * TIME_PER_LETTER
 	if time_override != 0: change_time = time_override
 	
 	label.text = ""
-	var tween:Tween = create_tween().set_parallel(true)
-	tween.tween_property(label,"text",new_text, change_time).set_ease(Tween.EASE_OUT)
-	await tween.finished
+	text_tween = create_tween()
+	text_tween.tween_property(label,"text",new_text, change_time).set_ease(Tween.EASE_OUT)
+	await text_tween.finished
+	text_tween = null
 	
 	text_ready.emit()
 	_show_continue()
