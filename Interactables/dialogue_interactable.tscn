@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7br5jtsjalha"]
+[gd_scene format=3 uid="uid://c7br5jtsjalha"]
 
 [ext_resource type="Script" uid="uid://dihvxwqavi6ln" path="res://Tile-RPG/Interactables/dialogue_interactable.gd" id="1_7xend"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7xend"]
 size = Vector3(0.92392, 0.389282, 1.54736)
 
-[node name="DialogueInteractable" type="Node3D" node_paths=PackedStringArray("interact_area", "indicator_place")]
+[node name="DialogueInteractable" type="Node3D" unique_id=811687816 node_paths=PackedStringArray("interact_area", "indicator_place")]
 script = ExtResource("1_7xend")
 interact_area = NodePath("Area3D")
 indicator_place = NodePath(".")
 interact_text = "Talk"
 
-[node name="IndicatorPlace" type="Node3D" parent="."]
+[node name="IndicatorPlace" type="Node3D" parent="." unique_id=419911726]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=304998191]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=120433802]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0555725, 0.194995, 0.00109863)
 shape = SubResource("BoxShape3D_7xend")

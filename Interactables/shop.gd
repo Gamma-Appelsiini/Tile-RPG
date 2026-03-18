@@ -1,9 +1,13 @@
 extends Interactable
 class_name Shop
 
+const DIALOGUE_BUBBLE := preload("uid://b7q77u7wvwvi3")
+
 @export var shop_name:String = "Shop Name"
 @export var shop_portrait:Texture2D = null
 @export var equipment_displayer:EquipmentDisplayer = null
+@export var dialogue_place:Node3D = null
+@export var enter_area:Area3D = null
 
 var shop_save_data:Dictionary = {
 	"currency_amount": 0,
@@ -17,9 +21,26 @@ var last_open_lvl:int = -1
 var player_inventory:Inventory = null
 var ui_handler:UIHandler = null
 
+#Overrided
+func _ready() -> void:
+	_on_creation()
+	if enter_area:
+		enter_area.connect("body_entered", Callable(self, "_on_enter_area_entered"))
+
+func _on_enter_area_entered(body:Node) -> void:
+	if body is not Player: return
+	
+	_show_welcome_dialogue()
+	enter_area.set_deferred("monitoring", false)
+
 func show_shopkeeper_talking(new_text:String) -> void:
-	#TODO
-	pass
+	var new_dialogue_bubble:DialogueBubble = DIALOGUE_BUBBLE.instantiate()
+	add_child(new_dialogue_bubble)
+	new_dialogue_bubble.set_params(shop_name,shop_portrait, dialogue_place, get_viewport().get_camera_3d())
+	new_dialogue_bubble.set_simple_dialogue(new_text)
+
+func _show_welcome_dialogue() -> void:
+	show_shopkeeper_talking(shop_window.FLAVOR_TEXT_WELCOME.pick_random())
 
 #Overrided
 func interact() -> void:

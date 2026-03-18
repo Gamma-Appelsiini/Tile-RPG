@@ -13,11 +13,13 @@ size = Vector3(0.3, 0.1, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_uiqlo"]
 size = Vector3(0.89038086, 1.9954226, 2)
 
-[node name="Shop" type="Node3D" unique_id=1275726709 node_paths=PackedStringArray("equipment_displayer", "interact_area", "indicator_place")]
+[node name="Shop" type="Node3D" unique_id=1275726709 node_paths=PackedStringArray("equipment_displayer", "dialogue_place", "enter_area", "interact_area", "indicator_place")]
 script = ExtResource("1_x41p4")
 equipment_displayer = NodePath("EquipmentDisplayer")
+dialogue_place = NodePath("DialoguePlace")
+enter_area = NodePath("EnterArea")
 interact_area = NodePath("Area3D")
-indicator_place = NodePath("Node3D")
+indicator_place = NodePath("IndicatorPlace")
 interact_text = "Shop"
 face_interactable = true
 interact_animation = 17
@@ -30,7 +32,7 @@ mesh = SubResource("CapsuleMesh_x41p4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5565945, 0.36905956)
 mesh = SubResource("BoxMesh_kcplm")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=542759797]
+[node name="IndicatorPlace" type="Node3D" parent="." unique_id=542759797]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.205067, 0.60253334)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1765072799]
@@ -41,5 +43,17 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, 0.99729925, 0.9999995)
 shape = SubResource("BoxShape3D_uiqlo")
 
+[node name="EnterArea" type="Area3D" parent="." unique_id=1711421922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.394031)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnterArea" unique_id=306018609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, 0.99729925, 0.9999995)
+shape = SubResource("BoxShape3D_uiqlo")
+
 [node name="EquipmentDisplayer" parent="." unique_id=2146458885 instance=ExtResource("2_kcplm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+
+[node name="DialoguePlace" type="Node3D" parent="." unique_id=929252255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

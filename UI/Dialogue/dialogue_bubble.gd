@@ -32,7 +32,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interact") or event.is_action_pressed("Jump"):
 		set_next_text()
 
-func set_params(dialogue_name,picture:Texture2D, dialogue_pos_node:Node3D, camera:Camera3D) -> void:
+func set_simple_dialogue(new_text:String) -> void:
+	set_process(true)
+	self.visible = true
+	_change_label_text(name_label, name_label.text,DISSOLVE_TIME)
+	
+	var tween:Tween = create_tween()
+	tween.tween_property(dissolve_material, "shader_parameter/dissolve_value", 1.0, DISSOLVE_TIME)
+	await tween.finished
+	
+	_change_label_text(dialogue_label, new_text, false)
+	
+	await get_tree().create_timer(1.5).timeout
+	_close_dialogue()
+
+func set_params(dialogue_name:String ,picture:Texture2D, dialogue_pos_node:Node3D, camera:Camera3D) -> void:
 	game_camera = camera
 	position_node = dialogue_pos_node
 	name_label.text = dialogue_name
@@ -81,11 +95,12 @@ func _close_dialogue() -> void:
 	
 	self.visible = false
 	set_process(false)
-	dialogue_resource.last_text.disconnect(_change_continue_pic)
+	if dialogue_resource:
+		dialogue_resource.last_text.disconnect(_change_continue_pic)
 	dialogue_finished.emit()
 	self.queue_free()
 
-func _change_label_text(label:Label,new_text:String, time_override:float = 0):
+func _change_label_text(label:Label,new_text:String, time_override:float = 0, show_continue:bool = true):
 	set_process_input(false)
 	continue_rect.visible = false
 
@@ -98,4 +113,4 @@ func _change_label_text(label:Label,new_text:String, time_override:float = 0):
 	await tween.finished
 	
 	set_process_input(true)
-	continue_rect.visible = true
+	if show_continue: continue_rect.visible = true

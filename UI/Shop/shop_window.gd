@@ -10,6 +10,7 @@ const RARITIES:Array[Item.ItemRarity] = [Item.ItemRarity.POOR,Item.ItemRarity.PO
 const FLAVOR_TEXT_BUY:Array[String] = ["Sold. For a good price.", "Good choice.", "I would have bought the same one myself."]
 const FLAVOR_TEXT_SELL:Array[String] = ["I'll take it off you.", "Where did you find this one?", "A common item."]
 const FLAVOR_TEXT_GOODBYE:Array[String] = ["Come back again.", "You're my best customer.", "Great deals here again tomorrow."]
+const FLAVOR_TEXT_WELCOME:Array[String] = ["Welcome to my shop.", "Good deals can be found here.", "Let me lighten your purse."]
 
 @export var shop_items_container: GridContainer = null
 @export var purchase_sound:AudioStream = null
@@ -30,12 +31,13 @@ func _animate_flavor_text(new_text:String) -> void:
 	flavor_text_panel.set_text(new_text)
 	await flavor_text_panel.text_ready
 
-func _show_goodbye_text() -> void:
+func _show_goodbye_text() -> void:	
 	if visible: return
 	opened_shop.show_shopkeeper_talking(FLAVOR_TEXT_GOODBYE.pick_random())
 
 func _on_inv_visibility_changed() -> void:
 	if !player_inventory.visible: self.visible = false
+	_show_goodbye_text()
 
 func _ready() -> void:
 	_add_slots()

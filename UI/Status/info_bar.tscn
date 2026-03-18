@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvi3liudalayl"]
+[gd_scene format=3 uid="uid://cvi3liudalayl"]
 
 [ext_resource type="Texture2D" uid="uid://b2k2et5ac8274" path="res://Tile-RPG/Images/UI/Borders/border_metal1.png" id="1_l3lam"]
 [ext_resource type="Script" uid="uid://cdumvox47gtec" path="res://Tile-RPG/UI/Status/character_info_bar.gd" id="1_v13ef"]
-[ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="3_prf3d"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="4_da10e"]
 [ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="5_bor84"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_prf3d"]
@@ -41,7 +40,7 @@ axis_stretch_vertical = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8354"]
 bg_color = Color(0.6674271, 0.927775, 0.70944804, 1)
 
-[node name="CharacterInfoBar" type="PanelContainer" node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar")]
+[node name="CharacterInfoBar" type="PanelContainer" unique_id=1859007216 node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar")]
 visible = false
 self_modulate = Color(1, 1, 1, 0.43137255)
 anchors_preset = 8
@@ -65,55 +64,54 @@ name_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/NameLabel")
 level_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/LvlLabel")
 hp_bar = NodePath("PanelContainer/VBoxContainer/PanelContainer/HpBar")
 
-[node name="BgRect" type="TextureRect" parent="."]
-material = ExtResource("3_prf3d")
+[node name="BgRect2" type="TextureRect" parent="." unique_id=120559195]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_da10e")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=6545336]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2v3o6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=716016859]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=149796457]
 layout_mode = 2
 
-[node name="LvlLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="LvlLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=134684900]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_bor84")
 theme_override_font_sizes/font_size = 16
 text = "Lvl 1"
 
-[node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1156501775]
 layout_mode = 2
 theme = ExtResource("5_prf3d")
 theme_override_font_sizes/font_size = 16
 text = "Name"
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1016959579]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_2v3o6")
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=405316959]
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HpBar" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer"]
+[node name="HpBar" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=671110281]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_o8354")
 show_percentage = false
 
-[node name="StatusContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="StatusContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=989547471]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="."]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1937661202]
 layout_mode = 2
 texture = ExtResource("6_bor84")
 patch_margin_left = 10
