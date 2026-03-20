@@ -4,7 +4,12 @@ class_name ReusableButton
 @export_category("Button appearance")
 @export var button_image: Texture2D = null
 @export var button_text: String = ""
+@export var text_size: int = 20
+@export var text_color: Color = Color("ffff")
 @export var button_color: Color = Color("ffff")
+@export var image_size: Vector2 = Vector2(20,20)
+@export var press_sound: AudioStream = null
+@export var hover_sound: AudioStream = null
 
 @export_category("Assignables")
 @export var color_rect: ColorRect = null
@@ -12,32 +17,41 @@ class_name ReusableButton
 @export var image_rect: TextureRect = null
 @export var text_label: Label = null
 
-
 const HIGHLIGHT_COLOR:Color = Color("ffffff14")
 const DARKEN_COLOR:Color = Color("0000002d")
 
 var moused_button:Callable = func():
 	color_rect.visible = !color_rect.visible
 	
+	if !color_rect.visible:
+		pass
+	else:
+		GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.UI)
+	
 var pressed_button:Callable = func():
 	color_rect.color = DARKEN_COLOR
+	text_label.add_theme_font_size_override("font_size", text_size - 1)
+	image_rect.custom_minimum_size = image_rect.size - Vector2(2,2)
+	GlobalSignals.play_audio.emit(press_sound, AudioManager.AUDIO_TYPE.UI)
 	
 var released_button:Callable = func():
 	color_rect.color = HIGHLIGHT_COLOR
+	text_label.add_theme_font_size_override("font_size", text_size)
+	image_rect.custom_minimum_size = image_size
 
 func _set_button_appearance() -> void:
 	color_rect.color = HIGHLIGHT_COLOR
 	image_rect.texture = button_image
 	text_label.text = button_text
+	text_label.add_theme_font_size_override("font_size", text_size)
+	image_rect.custom_minimum_size = image_size
 	
-	if button_image: button_image.show()
+	if button_color != Color("ffff"): texture_button.modulate = button_color
+	if button_image: image_rect.show()
 	if button_text != "": text_label.show()
 
 func _ready() -> void:
-	color_rect.color = HIGHLIGHT_COLOR
-	image_rect.texture = button_image
-	
-	if button_color != Color("ffff"): texture_button.modulate = button_color
+	_set_button_appearance()
 	
 	texture_button.mouse_entered.connect(moused_button)
 	texture_button.mouse_exited.connect(moused_button)

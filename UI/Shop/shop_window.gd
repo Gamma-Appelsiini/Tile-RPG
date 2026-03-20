@@ -37,7 +37,8 @@ func _show_goodbye_text() -> void:
 
 func _on_inv_visibility_changed() -> void:
 	if !player_inventory.visible: self.visible = false
-	_show_goodbye_text()
+	if opened_shop:
+		_show_goodbye_text()
 
 func _ready() -> void:
 	_add_slots()

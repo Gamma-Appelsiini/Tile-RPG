@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://cq63aydedr4fm"]
 
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="1_ks6m4"]
+[ext_resource type="Script" uid="uid://dqpug55pmsp2r" path="res://Tile-RPG/UI/Menus/main_menu.gd" id="1_ytrxx"]
+
 [node name="MainMenu" type="Control" unique_id=2074951668]
 layout_mode = 3
 anchors_preset = 15
@@ -7,8 +10,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ytrxx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=84915195]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1591483020]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=428590502]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -146.0
+offset_right = 100.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=84915195]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("1_ks6m4")]
+layout_mode = 2
+button_text = "Return to game"
+text_size = 16
+
+[node name="OptionsButton" parent="PanelContainer/VBoxContainer" unique_id=591736683 instance=ExtResource("1_ks6m4")]
+layout_mode = 2
+button_text = "Options"
+text_size = 16
+
+[node name="LoadButton" parent="PanelContainer/VBoxContainer" unique_id=836387096 instance=ExtResource("1_ks6m4")]
+layout_mode = 2
+button_text = "Load game"
+text_size = 16
+
+[node name="ExitButton" parent="PanelContainer/VBoxContainer" unique_id=1391941074 instance=ExtResource("1_ks6m4")]
+layout_mode = 2
+button_text = "Exit game"
+text_size = 16

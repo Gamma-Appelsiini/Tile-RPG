@@ -11,6 +11,7 @@ class_name UIHandler
 @export var combat_ui: CombatUI = null
 @export var menu_buttons: MenuButtonsPanel = null
 @export var shop_window: ShopWindow = null
+@export var main_menu: MainMenu = null
 
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
@@ -33,9 +34,17 @@ func _input(event: InputEvent) -> void:
 		toggle_inv()
 	elif event.is_action_pressed("Abilities"):
 		_toggle_abilities()
-	elif event.is_action_pressed("shop"):
-		#TODO remove
-		pass
+	elif event.is_action_pressed("Esc"):
+		_handle_esc()
+
+func _handle_esc() -> void:
+	if stat_window.visible or inventory.visible or shop_window.visible or abilities_container.visible:
+		stat_window.hide()
+		inventory.hide()
+		shop_window.hide()
+		abilities_container.hide_container()
+	else:
+		main_menu.visible = !main_menu.visible
 
 func _toggle_character() -> void:
 	stat_window.visible = !stat_window.visible

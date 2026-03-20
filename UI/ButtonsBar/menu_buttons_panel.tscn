@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cc2jlwv1hf0dd"]
+[gd_scene format=3 uid="uid://cc2jlwv1hf0dd"]
 
 [ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="1_072gd"]
 [ext_resource type="Script" uid="uid://kcr7u6klserf" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.gd" id="2_shfjn"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bmsbhgqlb0t5u" path="res://Tile-RPG/Images/UI/Buttons/party.png" id="7_clvx6"]
 [ext_resource type="Texture2D" uid="uid://cnw7wnk85gin8" path="res://Tile-RPG/Images/UI/Buttons/journal.png" id="7_e6eul"]
 [ext_resource type="Texture2D" uid="uid://cn8a6i7k5i1l6" path="res://Tile-RPG/Images/UI/Buttons/settings.png" id="8_a04dx"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="10_jvo6l"]
+[ext_resource type="Texture2D" uid="uid://ce1ofe2pyh8ep" path="res://Tile-RPG/Images/UI/Buttons/book_icon.png" id="11_bnhpq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fpxea"]
 texture = ExtResource("1_072gd")
@@ -17,7 +19,7 @@ texture_margin_top = 7.0
 texture_margin_right = 7.0
 texture_margin_bottom = 7.0
 
-[node name="MenuButtons" type="Control" node_paths=PackedStringArray("h_box_container")]
+[node name="MenuButtons" type="Control" unique_id=755339378 node_paths=PackedStringArray("h_box_container")]
 layout_mode = 3
 anchor_left = 0.75
 anchor_top = 0.96
@@ -30,7 +32,7 @@ mouse_filter = 2
 script = ExtResource("2_shfjn")
 h_box_container = NodePath("PanelContainer/HBoxContainer")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2108860838]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,50 +50,56 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_fpxea")
 
-[node name="BgRect" type="TextureRect" parent="PanelContainer"]
+[node name="BgRect" type="TextureRect" parent="PanelContainer" unique_id=1060714494]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
 layout_mode = 2
 texture = ExtResource("3_072gd")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=82225073]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="GenericButton" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+[node name="GenericButton" parent="PanelContainer/HBoxContainer" unique_id=203342484 instance=ExtResource("4_augf1")]
 layout_mode = 2
 
-[node name="GenericButton2" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+[node name="GenericButton2" parent="PanelContainer/HBoxContainer" unique_id=1173840689 instance=ExtResource("4_augf1")]
 layout_mode = 2
 
-[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton2" index="1"]
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton2" index="1" unique_id=1236935822]
 icon = ExtResource("5_m6mg1")
 
-[node name="GenericButton3" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+[node name="GenericButton3" parent="PanelContainer/HBoxContainer" unique_id=1522583378 instance=ExtResource("4_augf1")]
 layout_mode = 2
 
-[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton3" index="1"]
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton3" index="1" unique_id=1236935822]
 icon = ExtResource("6_rpejq")
 
-[node name="GenericButton4" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+[node name="GenericButton4" parent="PanelContainer/HBoxContainer" unique_id=233594914 instance=ExtResource("4_augf1")]
 layout_mode = 2
 
-[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton4" index="1"]
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton4" index="1" unique_id=1236935822]
 icon = ExtResource("7_e6eul")
 
-[node name="GenericButton5" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+[node name="GenericButton5" parent="PanelContainer/HBoxContainer" unique_id=1274217668 instance=ExtResource("4_augf1")]
 layout_mode = 2
 
-[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton5" index="1"]
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton5" index="1" unique_id=1236935822]
 icon = ExtResource("7_clvx6")
 
-[node name="GenericButton6" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_augf1")]
+[node name="GenericButton6" parent="PanelContainer/HBoxContainer" unique_id=1531169513 instance=ExtResource("4_augf1")]
 layout_mode = 2
 
-[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton6" index="1"]
+[node name="Button" parent="PanelContainer/HBoxContainer/GenericButton6" index="1" unique_id=1236935822]
 icon = ExtResource("8_a04dx")
+
+[node name="ReusableButton" parent="PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("10_jvo6l")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+button_image = ExtResource("11_bnhpq")
+button_color = Color(1, 0.8156863, 0.56078434, 1)
 
 [editable path="PanelContainer/HBoxContainer/GenericButton2"]
 [editable path="PanelContainer/HBoxContainer/GenericButton3"]

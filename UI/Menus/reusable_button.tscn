@@ -4,7 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://cvx8uabp055aj" path="res://Tile-RPG/Images/UI/Buttons/button_default.png" id="1_ddx3l"]
 [ext_resource type="Texture2D" uid="uid://dle3hrj3db2t8" path="res://Tile-RPG/Images/UI/Buttons/button_pressed.png" id="2_bhmsp"]
 
-[node name="ReusableButton" type="PanelContainer" unique_id=1928547599 node_paths=PackedStringArray("color_rect", "texture_button", "image_rect")]
+[sub_resource type="Gradient" id="Gradient_kvo5d"]
+colors = PackedColorArray(0, 0, 0, 0.1882353, 1, 1, 1, 0.078431375)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fukph"]
+gradient = SubResource("Gradient_kvo5d")
+fill_from = Vector2(1, 0.83760685)
+
+[node name="ReusableButton" type="PanelContainer" unique_id=1928547599 node_paths=PackedStringArray("color_rect", "texture_button", "image_rect", "text_label")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -20,6 +27,7 @@ script = ExtResource("1_bhmsp")
 color_rect = NodePath("ColorRect")
 texture_button = NodePath("TextureButton")
 image_rect = NodePath("ButtonImage")
+text_label = NodePath("Label")
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=443838234]
 layout_mode = 2
@@ -29,7 +37,11 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ButtonImage" type="TextureRect" parent="." unique_id=1959695283]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -45,3 +57,8 @@ visible = false
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.1764706)
+
+[node name="Gradient" type="TextureRect" parent="." unique_id=883177535]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_fukph")
