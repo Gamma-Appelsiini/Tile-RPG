@@ -2,8 +2,28 @@
 
 [ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="1_ks6m4"]
 [ext_resource type="Script" uid="uid://dqpug55pmsp2r" path="res://Tile-RPG/UI/Menus/main_menu.gd" id="1_ytrxx"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_4i8x7"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_gpqir"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_gpqir"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_gk7vg"]
 
-[node name="MainMenu" type="Control" unique_id=2074951668]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gk7vg"]
+texture = ExtResource("2_4i8x7")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e238p"]
+content_margin_left = 25.0
+content_margin_top = 12.0
+content_margin_right = 25.0
+content_margin_bottom = 35.0
+texture = ExtResource("4_gpqir")
+
+[node name="MainMenu" type="Control" unique_id=2074951668 node_paths=PackedStringArray("return_button", "options_button", "load_button", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +32,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ytrxx")
+return_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/ReturnButton")
+options_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/OptionsButton")
+load_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/LoadButton")
+exit_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/ExitButton")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1591483020]
 layout_mode = 1
@@ -35,28 +59,59 @@ offset_right = 100.0
 offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_gk7vg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=84915195]
+[node name="BgRect" type="TextureRect" parent="PanelContainer" unique_id=365897334]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_gpqir")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=657299548]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_e238p")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=84915195]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("1_ks6m4")]
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1536943392]
+layout_mode = 2
+theme = ExtResource("5_gk7vg")
+theme_override_font_sizes/font_size = 18
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="ReturnButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("1_ks6m4")]
 layout_mode = 2
 button_text = "Return to game"
 text_size = 16
+text_color = Color(0.99210423, 0.91400933, 0.7446358, 1)
 
-[node name="OptionsButton" parent="PanelContainer/VBoxContainer" unique_id=591736683 instance=ExtResource("1_ks6m4")]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=201512854]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="OptionsButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=591736683 instance=ExtResource("1_ks6m4")]
 layout_mode = 2
 button_text = "Options"
 text_size = 16
+text_color = Color(0.99215686, 0.9137255, 0.74509805, 1)
 
-[node name="LoadButton" parent="PanelContainer/VBoxContainer" unique_id=836387096 instance=ExtResource("1_ks6m4")]
+[node name="LoadButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=836387096 instance=ExtResource("1_ks6m4")]
 layout_mode = 2
 button_text = "Load game"
 text_size = 16
+text_color = Color(0.99215686, 0.9137255, 0.74509805, 1)
 
-[node name="ExitButton" parent="PanelContainer/VBoxContainer" unique_id=1391941074 instance=ExtResource("1_ks6m4")]
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=2007158060]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="ExitButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1391941074 instance=ExtResource("1_ks6m4")]
 layout_mode = 2
 button_text = "Exit game"
 text_size = 16
+text_color = Color(0.94, 0.21620002, 0.30064344, 1)

@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://b4lqhnsevcx4p"]
+
+[ext_resource type="Script" uid="uid://is4a15fnlbdf" path="res://Tile-RPG/UI/Menus/settings_panel.gd" id="1_lay5e"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_fduyr"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_oruj5"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_rjfje"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_fduyr"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="6_oruj5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_67myj"]
+texture = ExtResource("2_fduyr")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mctmf"]
+content_margin_left = 25.0
+content_margin_top = 12.0
+content_margin_right = 25.0
+content_margin_bottom = 35.0
+texture = ExtResource("4_rjfje")
+
+[node name="SettingsPanel" type="PanelContainer" unique_id=2011950495 node_paths=PackedStringArray("resolution_option", "window_mode_option", "main_volume_slider", "sfx_volume_slider", "ui_volume_slider", "music_volume_slider", "return_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.5
+offset_top = -282.0
+offset_right = 149.5
+offset_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lay5e")
+resolution_option = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer/ResolutionOption")
+window_mode_option = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer2/WindowModeOption")
+main_volume_slider = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer3/MainVolumeSlider")
+sfx_volume_slider = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer5/SfxVolumeSlider")
+ui_volume_slider = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer6/UiVolumeSlider")
+music_volume_slider = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer4/MusicVolumeSlider")
+return_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/ReturnButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=533716845]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_67myj")
+
+[node name="BgRect" type="TextureRect" parent="PanelContainer" unique_id=2067718354]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_oruj5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=2062662989]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mctmf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=2020879304]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1204794887]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_font_sizes/font_size = 18
+text = "Options"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=757054325]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=2065756391]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=165801093]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Resolution"
+
+[node name="ResolutionOption" type="OptionButton" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1549955534]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1395418560]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer2" unique_id=680727593]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Window mode"
+
+[node name="WindowModeOption" type="OptionButton" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer2" unique_id=843078999]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless Fullscreen"
+popup/item_2/id = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1235835583]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1843164504]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer3" unique_id=232640737]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Main Volume"
+
+[node name="MainVolumeSlider" type="HSlider" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer3" unique_id=1027890161]
+layout_mode = 2
+value = 100.0
+rounded = true
+tick_count = 8
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=340435821]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer4" unique_id=1510241481]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer4" unique_id=103882384]
+layout_mode = 2
+value = 100.0
+rounded = true
+tick_count = 8
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=2086468623]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer5" unique_id=1511294630]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sfx Volume"
+
+[node name="SfxVolumeSlider" type="HSlider" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer5" unique_id=1162565182]
+layout_mode = 2
+value = 100.0
+rounded = true
+tick_count = 8
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1961642379]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer6" unique_id=1484176557]
+layout_mode = 2
+theme = ExtResource("5_fduyr")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "UI Volume"
+
+[node name="UiVolumeSlider" type="HSlider" parent="PanelContainer/PanelContainer/VBoxContainer/VBoxContainer6" unique_id=1047067808]
+layout_mode = 2
+value = 100.0
+rounded = true
+tick_count = 8
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1492674998]
+layout_mode = 2
+
+[node name="ReturnButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("6_oruj5")]
+custom_minimum_size = Vector2(95, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_text = "Return"
+text_size = 12
+image_size = Vector2(0, 0)

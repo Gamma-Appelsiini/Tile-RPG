@@ -45,6 +45,7 @@ func _set_button_appearance() -> void:
 	text_label.text = button_text
 	text_label.add_theme_font_size_override("font_size", text_size)
 	image_rect.custom_minimum_size = image_size
+	text_label.modulate = text_color
 	
 	if button_color != Color("ffff"): texture_button.modulate = button_color
 	if button_image: image_rect.show()

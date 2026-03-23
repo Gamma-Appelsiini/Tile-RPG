@@ -9,8 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bmsbhgqlb0t5u" path="res://Tile-RPG/Images/UI/Buttons/party.png" id="7_clvx6"]
 [ext_resource type="Texture2D" uid="uid://cnw7wnk85gin8" path="res://Tile-RPG/Images/UI/Buttons/journal.png" id="7_e6eul"]
 [ext_resource type="Texture2D" uid="uid://cn8a6i7k5i1l6" path="res://Tile-RPG/Images/UI/Buttons/settings.png" id="8_a04dx"]
-[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="10_jvo6l"]
-[ext_resource type="Texture2D" uid="uid://ce1ofe2pyh8ep" path="res://Tile-RPG/Images/UI/Buttons/book_icon.png" id="11_bnhpq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fpxea"]
 texture = ExtResource("1_072gd")
@@ -94,12 +92,6 @@ layout_mode = 2
 
 [node name="Button" parent="PanelContainer/HBoxContainer/GenericButton6" index="1" unique_id=1236935822]
 icon = ExtResource("8_a04dx")
-
-[node name="ReusableButton" parent="PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("10_jvo6l")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-button_image = ExtResource("11_bnhpq")
-button_color = Color(1, 0.8156863, 0.56078434, 1)
 
 [editable path="PanelContainer/HBoxContainer/GenericButton2"]
 [editable path="PanelContainer/HBoxContainer/GenericButton3"]

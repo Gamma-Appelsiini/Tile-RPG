@@ -48,6 +48,10 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="." unique_id=772485102]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.53333336)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
 text = "Moi"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -62,3 +66,4 @@ color = Color(0, 0, 0, 0.1764706)
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_fukph")
+expand_mode = 1

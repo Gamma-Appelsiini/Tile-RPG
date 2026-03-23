@@ -22,6 +22,7 @@ var save_data:Dictionary = {
 	"dead_ids": [],
 	"quest_handler": {},
 	"shops": [],
+	"settings": {"window_mode": 0, "resolution": 3,},
 }
 
 var player:Player = null
