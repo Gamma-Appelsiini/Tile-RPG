@@ -62,7 +62,8 @@ func _process(_delta: float) -> void:
 
 func show_dialogue(new_dialogue:DialogueResource) -> void:
 	set_process(true)
-	set_process_input(true)
+	if dialogue_resource:
+		set_process_input(true)
 	self.visible = true
 	new_dialogue.last_text.connect(_change_continue_pic)
 	
@@ -112,5 +113,5 @@ func _change_label_text(label:Label,new_text:String, time_override:float = 0, sh
 	tween.tween_property(label,"text",new_text, change_time).set_ease(Tween.EASE_OUT)
 	await tween.finished
 	
-	set_process_input(true)
+	if dialogue_resource: set_process_input(true)
 	if show_continue: continue_rect.visible = true

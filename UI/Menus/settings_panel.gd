@@ -10,6 +10,12 @@ class_name SettingsPanel
 @export var return_button: ReusableButton = null
 
 const RESOLUTIONS:Array[Vector2i] = [Vector2i(960,540), Vector2i(1280,720), Vector2i(1600,900), Vector2i(1920,1080), Vector2i(2560,1440), Vector2i(3840,2160)]
+var sliders:Dictionary[AudioManager.AUDIO_TYPE, HSlider] = {
+	AudioManager.AUDIO_TYPE.MASTER: main_volume_slider,
+	AudioManager.AUDIO_TYPE.SOUND_EFFECT: sfx_volume_slider,
+	AudioManager.AUDIO_TYPE.UI: ui_volume_slider,
+	AudioManager.AUDIO_TYPE.MUSIC: music_volume_slider,
+}
 
 var game_save_data:Dictionary = {}
 
@@ -18,10 +24,14 @@ func _ready() -> void:
 	window_mode_option.item_selected.connect(_apply_window_mode)
 	return_button.texture_button.pressed.connect(hide)
 	
-	main_volume_slider.value_changed.connect(_audio_setting_changed)
-	sfx_volume_slider.value_changed.connect(_audio_setting_changed)
-	ui_volume_slider.value_changed.connect(_audio_setting_changed)
-	music_volume_slider.value_changed.connect(_audio_setting_changed)
+	main_volume_slider.value_changed.connect(_audio_setting_changed.bind(AudioManager.AUDIO_TYPE.MASTER))
+	sfx_volume_slider.value_changed.connect(_audio_setting_changed.bind(AudioManager.AUDIO_TYPE.SOUND_EFFECT))
+	ui_volume_slider.value_changed.connect(_audio_setting_changed.bind(AudioManager.AUDIO_TYPE.UI))
+	music_volume_slider.value_changed.connect(_audio_setting_changed.bind(AudioManager.AUDIO_TYPE.MUSIC))
+
+func _audio_setting_changed(value: float, audio_type:AudioManager.AUDIO_TYPE) -> void:
+	GlobalSignals.change_volume.emit(audio_type, value)
+	save_to_data(game_save_data)
 
 func _fill_resolutions() -> void:
 	var id:int = 0
@@ -32,22 +42,14 @@ func _fill_resolutions() -> void:
 	
 	resolution_option.item_selected.connect(_apply_resolution)
 
-func _audio_setting_changed() -> void:
-	#TODO Audio changes volume
-	
-	game_save_data["settings"]["main_volume"] = main_volume_slider.value
-	game_save_data["settings"]["music_volume"] = music_volume_slider.value
-	game_save_data["settings"]["sfx_volume"] = sfx_volume_slider.value
-	game_save_data["settings"]["ui_volume"] = ui_volume_slider.value
-
 func _apply_window_mode(id:int) -> void:
 	match id:
-		0: # Windowed
+		0: #Windowed
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		1: # Exclusive Fullscreen
+		1: #Exclusive Fullscreen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-		2: # Borderless Fullscreen
+		2: #Borderless Fullscreen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 
@@ -78,6 +80,8 @@ func load_from_data(save_data:Dictionary) -> void:
 	ui_volume_slider.value = setting_data["ui_volume"]
 	
 func save_to_data(save_data:Dictionary) -> void:
+	if game_save_data == {}: return
+	
 	var setting_data:Dictionary = {}
 	setting_data["window_mode"] = window_mode_option.selected
 	setting_data["resolution"] = resolution_option.selected
