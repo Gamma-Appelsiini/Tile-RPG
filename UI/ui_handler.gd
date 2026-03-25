@@ -43,19 +43,31 @@ func _handle_esc() -> void:
 		inventory.hide()
 		shop_window.hide()
 		abilities_container.hide_container()
-	else:
-		main_menu.visible = !main_menu.visible
+	else: _toggle_menu()
+		
+
+func _toggle_menu() -> void:
+	stat_window.hide()
+	inventory.hide()
+	shop_window.hide()
+	abilities_container.hide_container()
+	
+	if main_menu.settings_panel.visible: main_menu.settings_panel.hide()
+	else: main_menu.visible = !main_menu.visible
 
 func _toggle_character() -> void:
+	if main_menu.visible: return
 	stat_window.visible = !stat_window.visible
 
 func toggle_inv() -> void:
+	if main_menu.visible: return
 	inventory.visible = !inventory.visible
 	
 	if shop_window.visible and !inventory.visible:
 		shop_window.hide()
 
 func _toggle_abilities() -> void:
+	if main_menu.visible: return
 	if in_combat: return
 	if !abilities_container.visible: abilities_container.show_container()
 	else: abilities_container.hide_container()
@@ -65,6 +77,7 @@ func _connect_menu_buttons() -> void:
 	menu_buttons.open_abi.connect(_toggle_abilities)
 	menu_buttons.open_inv.connect(toggle_inv)
 	menu_buttons.open_char.connect(_toggle_character)
+	menu_buttons.open_settings.connect(_toggle_menu)
 
 func set_player(player:Player) -> void:
 	GlobalSignals.player = player
