@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://rjgqijg22g8l" path="res://Tile-RPG/UI/Shop/shop_window.tscn" id="12_274ut"]
 [ext_resource type="PackedScene" uid="uid://cq63aydedr4fm" path="res://Tile-RPG/UI/Menus/main_menu.tscn" id="13_dcvyg"]
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
+[ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="14_8wufk"]
 [ext_resource type="AudioStream" uid="uid://dgatv1yix757b" path="res://Tile-RPG/Sounds/Music/combat_start.mp3" id="15_t6tkx"]
 
 [node name="MainScene" type="Node3D" unique_id=756759122]
@@ -100,6 +101,10 @@ player_inventory = NodePath("../Inventory")
 [node name="MainMenu" parent="UIHandler" unique_id=2074951668 instance=ExtResource("13_dcvyg")]
 visible = false
 layout_mode = 1
+
+[node name="StartMenu" parent="UIHandler" unique_id=846789017 node_paths=PackedStringArray("level_loader") instance=ExtResource("14_8wufk")]
+layout_mode = 1
+level_loader = NodePath("../../LevelLoader")
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=2050587167]
 script = ExtResource("8_pu26t")

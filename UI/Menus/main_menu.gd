@@ -20,3 +20,7 @@ func _connect_signals() -> void:
 	exit_button.texture_button.pressed.connect(exit_game)
 	options_button.texture_button.pressed.connect(settings_panel.show)
 	visibility_changed.connect(handle_player_control)
+	load_button.texture_button.pressed.connect(func():
+		GlobalSignals.load_game.emit()
+		hide()
+		)

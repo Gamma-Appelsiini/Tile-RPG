@@ -1,6 +1,7 @@
 extends PanelContainer
 class_name SettingsPanel
 
+@export var load_settings_on_ready:bool = false
 @export var resolution_option: OptionButton = null
 @export var window_mode_option: OptionButton = null
 @export var main_volume_slider: HSlider = null
@@ -88,6 +89,7 @@ func _load_settings_file() -> bool:
 	return true
 
 func load_from_data() -> void:
+	if !load_settings_on_ready: return
 	if !_load_settings_file(): return
 	
 	resolution_option.select(setting_data["resolution"])

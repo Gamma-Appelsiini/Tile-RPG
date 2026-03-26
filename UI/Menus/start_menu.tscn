@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://crx7qfs63jr85"]
+
+[ext_resource type="Script" uid="uid://gehninur073x" path="res://Tile-RPG/UI/Menus/start_menu.gd" id="1_07c5g"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="2_74t4k"]
+[ext_resource type="PackedScene" uid="uid://b4lqhnsevcx4p" path="res://Tile-RPG/UI/Menus/settings_panel.tscn" id="3_74t4k"]
+[ext_resource type="PackedScene" uid="uid://dxcuvwnc1utv0" path="res://Tile-RPG/UI/Menus/load_panel.tscn" id="4_425mq"]
+
+[sub_resource type="Gradient" id="Gradient_425mq"]
+colors = PackedColorArray(0.29643983, 0.13871738, 0.65693057, 1, 0.039088435, 0.03138739, 0.02111646, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_top0n"]
+gradient = SubResource("Gradient_425mq")
+width = 1920
+height = 1080
+fill_to = Vector2(1, 1)
+
+[node name="StartMenu" type="Control" unique_id=846789017 node_paths=PackedStringArray("new_game_button", "load_game_button", "settings_button", "exit_button", "settings_panel", "buttons_container", "load_panel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_07c5g")
+new_game_button = NodePath("ButtonsContainer/NewButton")
+load_game_button = NodePath("ButtonsContainer/LoadButton")
+settings_button = NodePath("ButtonsContainer/SetButton")
+exit_button = NodePath("ButtonsContainer/ExitButton")
+settings_panel = NodePath("SettingsPanel")
+buttons_container = NodePath("ButtonsContainer")
+load_panel = NodePath("LoadPanel")
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=969912206]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_top0n")
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="." unique_id=1631320201]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 97.0
+offset_top = -103.0
+offset_right = 370.0
+offset_bottom = 246.0
+grow_vertical = 2
+theme_override_constants/separation = 26
+
+[node name="NewButton" parent="ButtonsContainer" unique_id=1928547599 instance=ExtResource("2_74t4k")]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+button_text = "New Game"
+text_color = Color(1, 0.9061642, 0.76638883, 1)
+button_color = Color(0.84015495, 0.80940366, 1, 1)
+
+[node name="LoadButton" parent="ButtonsContainer" unique_id=500526686 instance=ExtResource("2_74t4k")]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+button_text = "Load Game"
+text_color = Color(1, 0.9061642, 0.76638883, 1)
+button_color = Color(0.84015495, 0.80940366, 1, 1)
+
+[node name="SetButton" parent="ButtonsContainer" unique_id=645839047 instance=ExtResource("2_74t4k")]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+button_text = "Options"
+text_color = Color(1, 0.9061642, 0.76638883, 1)
+button_color = Color(0.84015495, 0.80940366, 1, 1)
+
+[node name="ExitButton" parent="ButtonsContainer" unique_id=179742578 instance=ExtResource("2_74t4k")]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+button_text = "Exit Game"
+text_color = Color(1, 0.9061642, 0.76638883, 1)
+button_color = Color(0.84015495, 0.80940366, 1, 1)
+
+[node name="SettingsPanel" parent="." unique_id=2011950495 instance=ExtResource("3_74t4k")]
+visible = false
+layout_mode = 1
+load_settings_on_ready = true
+
+[node name="LoadPanel" parent="." unique_id=1229663212 instance=ExtResource("4_425mq")]
+visible = false
+layout_mode = 1
+offset_left = -66.5
+offset_top = -40.0
+offset_right = 66.5
+offset_bottom = 40.0

@@ -7,6 +7,7 @@ var quest_handler:QuestHandler = null
 var ui_handler:UIHandler = null
 
 signal change_level(new_level:Level)
+signal load_game
 signal show_container(new_container:LootContainer)
 signal close_container(new_container:LootContainer)
 signal start_dialogue(new_dialogue:DialogueResource)

@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://dxcuvwnc1utv0"]
+
+[ext_resource type="Script" uid="uid://ch7kma18q2tnf" path="res://Tile-RPG/UI/Menus/load_panel.gd" id="1_tjqw3"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_arpm0"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="3_6m6vg"]
+
+[node name="LoadPanel" type="PanelContainer" unique_id=1229663212 node_paths=PackedStringArray("v_box_container", "no_saves_label", "return_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -8.0
+offset_right = 19.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tjqw3")
+v_box_container = NodePath("VBoxContainer")
+no_saves_label = NodePath("VBoxContainer/NoSavesLabel")
+return_button = NodePath("VBoxContainer/ReturnButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=10705902]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1994938980]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1570418391]
+layout_mode = 2
+
+[node name="SlotRect1" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1492571142]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SlotLabel1" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1849895882]
+layout_mode = 2
+theme = ExtResource("2_arpm0")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Slot 1"
+
+[node name="SlotButton1" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(95, 55)
+layout_mode = 2
+button_text = "Load"
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=266545333]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2" unique_id=858399881]
+layout_mode = 2
+
+[node name="SlotRect2" type="TextureRect" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=162365427]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SlotLabel2" type="Label" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1652967611]
+layout_mode = 2
+theme = ExtResource("2_arpm0")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Slot 1"
+
+[node name="SlotButton2" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=643295517 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(95, 55)
+layout_mode = 2
+button_text = "Load"
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer" unique_id=835964607]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3" unique_id=207338589]
+layout_mode = 2
+
+[node name="SlotRect3" type="TextureRect" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=790615078]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SlotLabel3" type="Label" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=466147203]
+layout_mode = 2
+theme = ExtResource("2_arpm0")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "Slot 1"
+
+[node name="SlotButton3" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=2116654555 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(95, 55)
+layout_mode = 2
+button_text = "Load"
+
+[node name="NoSavesLabel" type="Label" parent="VBoxContainer" unique_id=165946185]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_arpm0")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 12
+text = "No saves found."
+
+[node name="ReturnButton" parent="VBoxContainer" unique_id=1509659589 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+button_text = "Return"

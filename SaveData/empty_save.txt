@@ -1,6 +1,0 @@
-{
-	"last_level_id": "test_level_1",
-	"levels": {},
-	"game_characters": {},
-	"dead_ids": [],
-}

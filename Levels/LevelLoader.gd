@@ -4,13 +4,17 @@ class_name LevelLoader
 signal load_complete
 
 const PLAYER_PATH:String = "res://Tile-RPG/GameCharacters/Player/player.tscn"
-const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/save_data.bin"
+const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/"
+const SAVE_SUFFIX:String = "/save_data.bin"
+const SCREENSHOT_SUFFIX:String = "/screenshot.png"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
+
 @export var inventory: Inventory = null
 @export var globe_ui:GlobeUI = null
 @export var ui_handler: UIHandler = null
 @export var ability_targeter:AbilityTargeter = null
 
+var save_file_folder_path:String = "res://Tile-RPG/SaveData/slot1/"
 var save_file:JSON = null
 var save_data:Dictionary = {
 	"last_level_id": "jail_01",
@@ -28,8 +32,40 @@ var player:Player = null
 var current_level:Level = null
 
 func _ready() -> void:
-	await ui_handler.ready
-	_load_bin_file()
+	GlobalSignals.connect("change_level",change_levels)
+	GlobalSignals.load_game.connect(load_game)
+
+func new_game() -> void:
+	#TODO new game deletes old save
+	
+	save_data = {
+	"last_level_id": "jail_01",
+	"levels": {},
+	"inventory": {},
+	"ability_bar": [],
+	"abilities_container": [],
+	"game_characters": {},
+	"dead_ids": [],
+	"quest_handler": {},
+	"shops": [],
+	"save_date": "",
+	}
+	
+	load_game()
+
+func load_game_from_path(path:String) -> void:
+	if !FileAccess.file_exists(path):
+		print_debug("No save file with path: ", path)
+		return
+
+	var file:FileAccess = FileAccess.open(path, FileAccess.READ)
+	var data:Dictionary = file.get_var()
+	save_data = data.duplicate()
+	file.close()
+	
+	load_game()
+
+func load_game() -> void:
 	_load_player()
 	_load_quest_handler()
 	
@@ -37,12 +73,6 @@ func _ready() -> void:
 	var loading:bool = false
 	if last_level_id != "jail_01": loading = true
 	change_levels(last_level_id,loading)
-	
-	GlobalSignals.connect("change_level",change_levels)
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("test"):
-		save_save_file()
 
 func _load_quest_handler() -> void:
 	var new_q_handler:QuestHandler = QuestHandler.new()
@@ -64,32 +94,34 @@ func _connect_globes() -> void:
 	globe_ui.set_viewport_path(player.spirit_globe.get_viewport_path(), globe_ui.spirit_panel)
 	player.stat_handler.stats_changed.connect(player.spirit_globe.resource_changed.bind(player.stat_handler,ResourceGlobe.LiquidType.SPIRIT))
 
-func _load_bin_file() -> void:
-	return
-	if !FileAccess.file_exists(SAVE_FILE_PATH):
-		print("No save file")
-		return
-
-	var file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
-	var data:Dictionary = file.get_var()
-	save_data = data.duplicate()
-
-	file.close()
-
 func _save_current_level():
 	save_data["last_level_id"] = current_level.unique_id
 	current_level.save_to_data(save_data)
 
-func save_save_file() -> void:
+func save_game() -> void:
 	save_player()
 	_save_current_level()
 	ui_handler.save_to_data(save_data)
+	save_data["save_date"] = Time.get_datetime_string_from_system().replace(":", "-")
 	
 	#Creates new file if does not exist
-	var file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
+	var file:FileAccess = FileAccess.open(save_file_folder_path + SAVE_SUFFIX, FileAccess.WRITE)
 	file.store_var(save_data.duplicate())
 	file.close()
+
+func _take_screenshot() -> void:
+	await RenderingServer.frame_post_draw
 	
+	var viewport:Viewport = get_viewport()
+	var texture:ViewportTexture = viewport.get_texture()
+	var image:Image = texture.get_image()
+	
+	image.resize(854, 480, Image.INTERPOLATE_LANCZOS)
+	var image_save_path:String = save_file_folder_path + SCREENSHOT_SUFFIX
+	
+	var error := image.save_png(image_save_path)
+	if error != OK: print_debug("Failed to save screenshot. Error code: ", error)
+
 func _close_current_level() -> void:
 	if !current_level: return
 	
