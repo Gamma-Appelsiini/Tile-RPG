@@ -18,15 +18,17 @@
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
 [ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="14_8wufk"]
 [ext_resource type="AudioStream" uid="uid://dgatv1yix757b" path="res://Tile-RPG/Sounds/Music/combat_start.mp3" id="15_t6tkx"]
+[ext_resource type="PackedScene" uid="uid://bhya384vo3b7b" path="res://Tile-RPG/UI/Menus/loading_screen.tscn" id="15_yu8gn"]
 
 [node name="MainScene" type="Node3D" unique_id=756759122]
 
-[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("inventory", "globe_ui", "ui_handler", "ability_targeter")]
+[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("inventory", "globe_ui", "ui_handler", "ability_targeter", "loading_screen")]
 script = ExtResource("1_t2t4i")
 inventory = NodePath("../UIHandler/Inventory")
 globe_ui = NodePath("../UIHandler/GlobeUI")
 ui_handler = NodePath("../UIHandler")
 ability_targeter = NodePath("../AbilityTargeter")
+loading_screen = NodePath("../UIHandler/LoadingScreen")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
 [node name="UIHandler" type="Control" parent="." unique_id=2075231115 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "ability_targeter", "combat_ui", "menu_buttons", "shop_window", "main_menu") groups=["UI"]]
@@ -105,6 +107,10 @@ layout_mode = 1
 [node name="StartMenu" parent="UIHandler" unique_id=846789017 node_paths=PackedStringArray("level_loader") instance=ExtResource("14_8wufk")]
 layout_mode = 1
 level_loader = NodePath("../../LevelLoader")
+
+[node name="LoadingScreen" parent="UIHandler" unique_id=128380989 instance=ExtResource("15_yu8gn")]
+visible = false
+layout_mode = 1
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=2050587167]
 script = ExtResource("8_pu26t")

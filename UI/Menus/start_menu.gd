@@ -30,5 +30,6 @@ func _load_game() -> void:
 	load_panel.show()
 
 func _new_game() -> void:
-	hide()
 	level_loader.new_game()
+	await get_tree().create_timer(0.5).timeout
+	hide()

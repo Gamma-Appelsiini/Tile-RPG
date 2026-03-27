@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bhya384vo3b7b"]
+
+[ext_resource type="Script" uid="uid://1anxlxn1kmin" path="res://Tile-RPG/UI/Menus/loading_screen.gd" id="1_c3tsq"]
+[ext_resource type="Texture2D" uid="uid://cnepxnk6kx81n" path="res://Tile-RPG/Images/UI/Borders/level_bar.png" id="1_dtaqa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3tsq"]
+content_margin_left = 75.0
+content_margin_right = 75.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pehtx"]
+bg_color = Color(1, 0.9218379, 0.5703336, 1)
+
+[node name="LoadingScreen" type="Control" unique_id=128380989 node_paths=PackedStringArray("progress_bar")]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c3tsq")
+progress_bar = NodePath("VBoxContainer/PanelContainer/PanelContainer/ProgressBar")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1968301615]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=447005052]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=1936351238]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave]Loading ..."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1272423239]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer" unique_id=807063998]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c3tsq")
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/PanelContainer" unique_id=243856170]
+custom_minimum_size = Vector2(490, 5)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_pehtx")
+rounded = true
+show_percentage = false
+
+[node name="NinePatchRect" type="TextureRect" parent="VBoxContainer/PanelContainer" unique_id=358783258]
+layout_mode = 2
+texture = ExtResource("1_dtaqa")
+stretch_mode = 5

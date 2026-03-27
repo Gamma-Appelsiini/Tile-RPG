@@ -1,8 +1,27 @@
 [gd_scene format=3 uid="uid://dxcuvwnc1utv0"]
 
 [ext_resource type="Script" uid="uid://ch7kma18q2tnf" path="res://Tile-RPG/UI/Menus/load_panel.gd" id="1_tjqw3"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="1_y7uuj"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_arpm0"]
 [ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="3_6m6vg"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_lr0rv"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_0ig4y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4jqby"]
+texture = ExtResource("1_y7uuj")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y3fyx"]
+content_margin_left = 25.0
+content_margin_top = 12.0
+content_margin_right = 25.0
+content_margin_bottom = 35.0
+texture = ExtResource("4_0ig4y")
 
 [node name="LoadPanel" type="PanelContainer" unique_id=1229663212 node_paths=PackedStringArray("v_box_container", "no_saves_label", "return_button")]
 anchors_preset = 8
@@ -16,87 +35,119 @@ offset_right = 19.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4jqby")
 script = ExtResource("1_tjqw3")
-v_box_container = NodePath("VBoxContainer")
-no_saves_label = NodePath("VBoxContainer/NoSavesLabel")
-return_button = NodePath("VBoxContainer/ReturnButton")
+v_box_container = NodePath("PanelContainer/VBoxContainer")
+no_saves_label = NodePath("PanelContainer/VBoxContainer/NoSavesLabel")
+return_button = NodePath("PanelContainer/VBoxContainer/ReturnButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=10705902]
+[node name="BgRect" type="TextureRect" parent="." unique_id=702342896]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_lr0rv")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1946511838]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_y3fyx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=10705902]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=68355491]
+layout_mode = 2
+theme = ExtResource("2_arpm0")
+theme_override_font_sizes/font_size = 18
+text = "Save Slots"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1994938980]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1994938980]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1570418391]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1570418391]
-layout_mode = 2
-
-[node name="SlotRect1" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1492571142]
+[node name="SlotRect1" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1492571142]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SlotLabel1" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1849895882]
+[node name="SlotLabel1" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1849895882]
 layout_mode = 2
 theme = ExtResource("2_arpm0")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 20
 text = "Slot 1"
 
-[node name="SlotButton1" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("3_6m6vg")]
-custom_minimum_size = Vector2(95, 55)
+[node name="SlotButton1" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(85, 45)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 button_text = "Load"
+text_size = 16
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=266545333]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=266545333]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2" unique_id=858399881]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=858399881]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="SlotRect2" type="TextureRect" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=162365427]
+[node name="SlotRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=162365427]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SlotLabel2" type="Label" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1652967611]
+[node name="SlotLabel2" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1652967611]
 layout_mode = 2
 theme = ExtResource("2_arpm0")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 12
-text = "Slot 1"
+theme_override_font_sizes/font_size = 20
+text = "Slot 2"
 
-[node name="SlotButton2" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=643295517 instance=ExtResource("3_6m6vg")]
-custom_minimum_size = Vector2(95, 55)
+[node name="SlotButton2" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=643295517 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(85, 45)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 button_text = "Load"
+text_size = 16
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer" unique_id=835964607]
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=835964607]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3" unique_id=207338589]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer3" unique_id=207338589]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="SlotRect3" type="TextureRect" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=790615078]
+[node name="SlotRect3" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=790615078]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SlotLabel3" type="Label" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=466147203]
+[node name="SlotLabel3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=466147203]
 layout_mode = 2
 theme = ExtResource("2_arpm0")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 12
-text = "Slot 1"
+theme_override_font_sizes/font_size = 20
+text = "Slot 3"
 
-[node name="SlotButton3" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=2116654555 instance=ExtResource("3_6m6vg")]
-custom_minimum_size = Vector2(95, 55)
+[node name="SlotButton3" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=2116654555 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(85, 45)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 button_text = "Load"
+text_size = 16
 
-[node name="NoSavesLabel" type="Label" parent="VBoxContainer" unique_id=165946185]
+[node name="NoSavesLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=165946185]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_arpm0")
@@ -104,7 +155,12 @@ theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
 theme_override_font_sizes/font_size = 12
 text = "No saves found."
 
-[node name="ReturnButton" parent="VBoxContainer" unique_id=1509659589 instance=ExtResource("3_6m6vg")]
-custom_minimum_size = Vector2(0, 55)
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1261054824]
 layout_mode = 2
+
+[node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1509659589 instance=ExtResource("3_6m6vg")]
+custom_minimum_size = Vector2(120, 55)
+layout_mode = 2
+size_flags_horizontal = 4
 button_text = "Return"
+text_size = 18

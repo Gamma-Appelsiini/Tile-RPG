@@ -2,6 +2,7 @@ extends Node
 class_name LevelLoader
 
 signal load_complete
+signal resource_loader_finished_loading
 
 const PLAYER_PATH:String = "res://Tile-RPG/GameCharacters/Player/player.tscn"
 const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/"
@@ -13,6 +14,7 @@ const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
 @export var globe_ui:GlobeUI = null
 @export var ui_handler: UIHandler = null
 @export var ability_targeter:AbilityTargeter = null
+@export var loading_screen: LoadingScreen = null
 
 var save_file_folder_path:String = "res://Tile-RPG/SaveData/slot1/"
 var save_file:JSON = null
@@ -32,7 +34,8 @@ var player:Player = null
 var current_level:Level = null
 
 func _ready() -> void:
-	GlobalSignals.connect("change_level",change_levels)
+	set_process(false)
+	GlobalSignals.connect("change_level", change_levels)
 	GlobalSignals.load_game.connect(load_game)
 
 func new_game() -> void:
@@ -66,21 +69,42 @@ func load_game_from_path(path:String) -> void:
 	load_game()
 
 func load_game() -> void:
-	_load_player()
+	var last_level_id:String = save_data["last_level_id"]
 	_load_quest_handler()
 	
-	var last_level_id:String = save_data["last_level_id"]
+	loading_screen.load_next_level(last_level_id, true)
+	await loading_screen.loading_complete
+	
+	_load_player(loading_screen.loaded_player)
+	
 	var loading:bool = false
 	if last_level_id != "jail_01": loading = true
-	change_levels(last_level_id,loading)
+	
+	_close_current_level()
+	
+	var new_level:Level = loading_screen.loaded_level
+	_open_new_level(new_level,loading)
+	load_complete.emit()
+
+func change_levels(new_level_id:String) -> void:
+	loading_screen.load_next_level(new_level_id, false)
+	await loading_screen.loading_complete
+	
+	_close_current_level()
+	
+	var new_level:Level = loading_screen.loaded_level
+	_open_new_level(new_level, false)
+	load_complete.emit()
 
 func _load_quest_handler() -> void:
 	var new_q_handler:QuestHandler = QuestHandler.new()
 	GlobalSignals.quest_handler = new_q_handler
 	new_q_handler.load_from_data(save_data)
 
-func _load_player() -> void:
-	player = load(PLAYER_PATH).instantiate()
+func _load_player(new_player:Player) -> void:
+	if player: player.queue_free()
+	
+	player = new_player
 	player.load_from_data(save_data)
 	
 	ui_handler.set_player(player)
@@ -130,13 +154,8 @@ func _close_current_level() -> void:
 	self.remove_child(current_level)
 	current_level.queue_free()
 
-func _open_new_level(new_level_id:String, loading:bool = false) -> void:
-	if new_level_id not in LEVEL_FILES.levels.keys():
-		print("ERROR: Level ID not in LEVEL_FILES. ID: ", new_level_id)
-		return
-	
-	var new_level_path:String = LEVEL_FILES.levels[new_level_id]
-	current_level = load(new_level_path).instantiate()
+func _open_new_level(new_level:Level, loading:bool = false) -> void:
+	current_level = new_level
 	current_level.load_from_data(save_data)
 	current_level.tile_manager.set_player(player)
 	GlobalSignals.current_level = current_level
@@ -152,14 +171,6 @@ func _open_new_level(new_level_id:String, loading:bool = false) -> void:
 	else: player.global_position = save_data["game_characters"][player.unique_id]["global_position"]
 	
 	player.player_camera.make_current()
-
-func change_levels(new_level_id:String, loading:bool = false) -> void:
-	print("Change to level: ", new_level_id)
-	
-	_close_current_level()
-	_open_new_level(new_level_id,loading)
-	
-	load_complete.emit()
 
 func save_player() -> void:
 	player.save_to_data(save_data)
