@@ -2,10 +2,72 @@
 
 [ext_resource type="Script" uid="uid://blpc14kged8v" path="res://Tile-RPG/Interactables/shop.gd" id="1_x41p4"]
 [ext_resource type="PackedScene" uid="uid://bfci7kboa8bxi" path="res://Tile-RPG/UI/Shop/equipment_displayer.tscn" id="2_kcplm"]
+[ext_resource type="Shader" uid="uid://b5rfkuv2eyvk1" path="res://Tile-RPG/Shaders/gem_shader.gdshader" id="2_uiqlo"]
+
+[sub_resource type="Gradient" id="Gradient_bhn5n"]
+offsets = PackedFloat32Array(0, 0.2767442, 0.53488374, 0.7767442, 1)
+colors = PackedColorArray(1, 0.00999999, 0.00999999, 1, 0.9751809, 0.94999105, 0, 1, 0, 1, 0.5500002, 1, 0.5878569, 0.19839275, 0.9999998, 1, 0, 0.6833334, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3fahd"]
+gradient = SubResource("Gradient_bhn5n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hs2ln"]
+render_priority = 0
+shader = ExtResource("2_uiqlo")
+shader_parameter/gem_color = Color(0.6813461, 0, 0.2505509, 1)
+shader_parameter/gem_transparency = 0.8050000382375
+shader_parameter/interior_brightness = 3.4350001631625
+shader_parameter/prism_gradient = SubResource("GradientTexture1D_3fahd")
+shader_parameter/prism_intensity = 2.0570000977075
+shader_parameter/prism_sharpness = 9.990000450775
+shader_parameter/prism_scale = 3.98300018593262
+shader_parameter/prism_speed = 0.6800000323
+shader_parameter/prism_fresnel_power = 2.1410000779475
+shader_parameter/facet_sparkle_intensity = 1.4020000665949999
+shader_parameter/facet_sparkle_size = 65.394003058715
+shader_parameter/facet_sparkle_speed = 1.094000051965
+shader_parameter/roughness = 0.08400000399
+shader_parameter/specular_strength = 1.6930000804175
+shader_parameter/specular_tint = Color(1, 0.81666666, 0, 1)
+shader_parameter/glow_color = Color(0.9174753, 0.91933155, 1, 1)
+shader_parameter/glow_intensity = 8.0
+shader_parameter/glow_fresnel_power = 0.5
+shader_parameter/depth_darkening = 0.486000023085
+shader_parameter/depth_layers = 1.586000027835
+shader_parameter/env_reflection_strength = 0.9070000430825
+shader_parameter/env_color_a = Color(0.47233057, 0.0028385592, 0.95984, 1)
+shader_parameter/env_color_b = Color(0.67430973, 1.598598, 3.0854971, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x41p4"]
 radius = 0.3
 height = 1.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4x7hm"]
+render_priority = 0
+shader = ExtResource("2_uiqlo")
+shader_parameter/gem_color = Color(0.6813461, 0, 0.2505509, 1)
+shader_parameter/gem_transparency = 0.8050000382375
+shader_parameter/interior_brightness = 3.4350001631625
+shader_parameter/prism_gradient = SubResource("GradientTexture1D_3fahd")
+shader_parameter/prism_intensity = 2.0570000977075
+shader_parameter/prism_sharpness = 9.990000450775
+shader_parameter/prism_scale = 3.98300018593262
+shader_parameter/prism_speed = 0.6800000323
+shader_parameter/prism_fresnel_power = 2.1410000779475
+shader_parameter/facet_sparkle_intensity = 1.4020000665949999
+shader_parameter/facet_sparkle_size = 65.394003058715
+shader_parameter/facet_sparkle_speed = 1.094000051965
+shader_parameter/roughness = 0.08400000399
+shader_parameter/specular_strength = 1.6930000804175
+shader_parameter/specular_tint = Color(1, 0.81666666, 0, 1)
+shader_parameter/glow_color = Color(0.9174753, 0.91933155, 1, 1)
+shader_parameter/glow_intensity = 8.0
+shader_parameter/glow_fresnel_power = 0.5
+shader_parameter/depth_darkening = 0.486000023085
+shader_parameter/depth_layers = 1.586000027835
+shader_parameter/env_reflection_strength = 0.9070000430825
+shader_parameter/env_color_a = Color(0.47233057, 0.0028385592, 0.95984, 1)
+shader_parameter/env_color_b = Color(0.67430973, 1.598598, 3.0854971, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kcplm"]
 size = Vector3(0.3, 0.1, 0.2)
@@ -26,10 +88,12 @@ interact_animation = 17
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1141315608]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9015752, 0)
+material_override = SubResource("ShaderMaterial_hs2ln")
 mesh = SubResource("CapsuleMesh_x41p4")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060811953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5565945, 0.36905956)
+material_override = SubResource("ShaderMaterial_4x7hm")
 mesh = SubResource("BoxMesh_kcplm")
 
 [node name="IndicatorPlace" type="Node3D" parent="." unique_id=542759797]
