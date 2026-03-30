@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7q77u7wvwvi3"]
+[gd_scene format=3 uid="uid://b7q77u7wvwvi3"]
 
 [ext_resource type="Script" uid="uid://cqw3myjsxwd7f" path="res://Tile-RPG/UI/Dialogue/dialogue_bubble.gd" id="1_6tnie"]
 [ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="2_nghgg"]
@@ -25,7 +25,7 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 
-[node name="DialogueBubble" type="Control" node_paths=PackedStringArray("dialogue_label", "picture_rect", "name_label", "continue_rect")]
+[node name="DialogueBubble" type="Control" unique_id=1323493271 node_paths=PackedStringArray("dialogue_label", "picture_rect", "name_label", "continue_rect", "name_container")]
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 8
@@ -38,11 +38,12 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_6tnie")
 dialogue_label = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer/DialogueLabel")
-picture_rect = NodePath("VBoxContainer/HBoxContainer/PictureRect")
-name_label = NodePath("VBoxContainer/HBoxContainer/NameLabel")
+picture_rect = NodePath("VBoxContainer/NameContainer/PictureRect")
+name_label = NodePath("VBoxContainer/NameContainer/NameLabel")
 continue_rect = NodePath("VBoxContainer/PanelContainer/PanelContainer/VBoxContainer/ContinueRect")
+name_container = NodePath("VBoxContainer/NameContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1477891982]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -55,11 +56,11 @@ offset_right = 250.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="NameContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1363895902]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PictureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="PictureRect" type="TextureRect" parent="VBoxContainer/NameContainer" unique_id=379248998]
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
 custom_minimum_size = Vector2(30, 30)
@@ -68,7 +69,7 @@ texture = ExtResource("3_nghgg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/NameContainer" unique_id=329346946]
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
 layout_mode = 2
@@ -78,7 +79,7 @@ theme_override_fonts/font = ExtResource("5_e7nq5")
 theme_override_font_sizes/font_size = 22
 text = "Test Name"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1936642257]
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
 custom_minimum_size = Vector2(500, 100)
@@ -86,24 +87,24 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_ya6vl")
 
-[node name="BgRect" type="TextureRect" parent="VBoxContainer/PanelContainer"]
+[node name="BgRect" type="TextureRect" parent="VBoxContainer/PanelContainer" unique_id=1759559325]
 material = ExtResource("2_nghgg")
 layout_mode = 2
 texture = ExtResource("7_n75w8")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer" unique_id=1507995057]
 material = ExtResource("2_nghgg")
 layout_mode = 2
 theme_override_styles/panel = ExtResource("8_vrhd8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/PanelContainer" unique_id=353970317]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 0
 
-[node name="ContinueRect" type="TextureRect" parent="VBoxContainer/PanelContainer/PanelContainer/VBoxContainer"]
+[node name="ContinueRect" type="TextureRect" parent="VBoxContainer/PanelContainer/PanelContainer/VBoxContainer" unique_id=1502789516]
 unique_name_in_owner = true
 material = ExtResource("2_nghgg")
 custom_minimum_size = Vector2(20, 20)
@@ -114,18 +115,18 @@ texture = ExtResource("9_n75w8")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/PanelContainer/VBoxContainer" unique_id=1168997056]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/PanelContainer" unique_id=1743665961]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_n75w8")
 
-[node name="DialogueLabel" type="Label" parent="VBoxContainer/PanelContainer/PanelContainer/PanelContainer"]
+[node name="DialogueLabel" type="Label" parent="VBoxContainer/PanelContainer/PanelContainer/PanelContainer" unique_id=1012974855]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
@@ -139,7 +140,7 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 18
 autowrap_mode = 3
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/PanelContainer/PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/PanelContainer/PanelContainer" unique_id=222556234]
 material = ExtResource("2_nghgg")
 layout_mode = 2
 texture = ExtResource("10_l53j7")

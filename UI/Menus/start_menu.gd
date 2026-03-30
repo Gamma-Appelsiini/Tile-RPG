@@ -9,9 +9,11 @@ class_name StartMenu
 @export var settings_panel: SettingsPanel = null
 @export var buttons_container: VBoxContainer = null
 @export var load_panel: LoadPanel = null
+@export var save_slot_panel: SaveSlotPanel = null
 
 func _ready() -> void:
 	load_panel.level_loader = level_loader
+	save_slot_panel.level_loader = level_loader
 	_connect_buttons()
 	
 func _connect_buttons() -> void:
@@ -30,6 +32,5 @@ func _load_game() -> void:
 	load_panel.show()
 
 func _new_game() -> void:
-	level_loader.new_game()
-	await get_tree().create_timer(0.5).timeout
-	hide()
+	buttons_container.hide()
+	save_slot_panel.show()

@@ -33,6 +33,7 @@ var slots:Array[InventorySlot] = []
 var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}  
 var tooltips:Dictionary[Item,ItemTooltip] = {}
 
+var slots_generated:bool = false
 var hovered_slot:InventorySlot = null
 var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
@@ -68,8 +69,11 @@ func _drop_item() -> bool:
 
 func set_player(new_player:Player) -> void:
 	player = new_player
+	if slots_generated: return
+	
 	_add_inv_slots()
 	_add_equipment_slots()
+	slots_generated = true
 	
 func _save_equipment(save_data:Dictionary) -> void:
 	var equ_data:Dictionary = {}

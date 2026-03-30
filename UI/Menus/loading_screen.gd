@@ -79,6 +79,7 @@ func _show_loading() -> void:
 	tween.tween_property(self,"modulate:a", 1, 0.25)
 	await tween.finished
 	
+	progress_bar.value = 0
 	var tween2:Tween = create_tween().set_ease(Tween.EASE_IN)
 	tween2.tween_property(progress_bar,"value", 90, 4)
 	bar_tween = tween2

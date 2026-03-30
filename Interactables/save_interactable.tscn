@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://medpor34c8uk"]
+
+[ext_resource type="Script" uid="uid://bam8ljue00y6b" path="res://Tile-RPG/Interactables/save_interactable.gd" id="1_7htxr"]
+[ext_resource type="Material" uid="uid://dsl7g38iddh5n" path="res://Tile-RPG/Materials/TextureMaterials/gray_smooth_stone.tres" id="2_ap7j1"]
+[ext_resource type="Material" uid="uid://c4kiu6i1nes4s" path="res://Tile-RPG/Materials/ShaderMaterials/iridescent_material.tres" id="3_negak"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qrf5b"]
+lightmap_size_hint = Vector2i(6, 22)
+size = Vector3(0.2, 1.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s7dq0"]
+material = ExtResource("3_negak")
+size = Vector3(0.4, 0.2, 0.4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ap7j1"]
+height = 1.5
+radius = 0.75
+
+[node name="SaveInteractable" type="Node3D" unique_id=145723429 node_paths=PackedStringArray("moving_mesh", "interact_area", "indicator_place")]
+script = ExtResource("1_7htxr")
+moving_mesh = NodePath("MovingMesh")
+interact_area = NodePath("Area3D")
+indicator_place = NodePath("DialoguePlace")
+interact_text = "Save"
+face_interactable = true
+interact_animation = 15
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1581249342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+material_override = ExtResource("2_ap7j1")
+mesh = SubResource("BoxMesh_qrf5b")
+
+[node name="MovingMesh" type="MeshInstance3D" parent="." unique_id=1911509489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.110838026, 0)
+visible = false
+mesh = SubResource("BoxMesh_s7dq0")
+
+[node name="DialoguePlace" type="Node3D" parent="." unique_id=1283840847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7566261, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=641465487]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1932221433]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_ap7j1")

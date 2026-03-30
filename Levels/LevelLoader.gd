@@ -37,6 +37,7 @@ func _ready() -> void:
 	set_process(false)
 	GlobalSignals.connect("change_level", change_levels)
 	GlobalSignals.load_game.connect(load_game)
+	GlobalSignals.save_game.connect(save_game)
 
 func new_game() -> void:
 	#TODO new game deletes old save
@@ -54,7 +55,7 @@ func new_game() -> void:
 	"save_date": "",
 	}
 	
-	load_game()
+	load_game(false)
 
 func load_game_from_path(path:String) -> void:
 	if !FileAccess.file_exists(path):
@@ -66,9 +67,10 @@ func load_game_from_path(path:String) -> void:
 	save_data = data.duplicate()
 	file.close()
 	
+	#TODO inventory is empty
 	load_game()
 
-func load_game() -> void:
+func load_game(loading:bool = true) -> void:
 	var last_level_id:String = save_data["last_level_id"]
 	_load_quest_handler()
 	
@@ -76,14 +78,11 @@ func load_game() -> void:
 	await loading_screen.loading_complete
 	
 	_load_player(loading_screen.loaded_player)
-	
-	var loading:bool = false
-	if last_level_id != "jail_01": loading = true
-	
 	_close_current_level()
 	
 	var new_level:Level = loading_screen.loaded_level
 	_open_new_level(new_level,loading)
+
 	load_complete.emit()
 
 func change_levels(new_level_id:String) -> void:
@@ -150,7 +149,7 @@ func _close_current_level() -> void:
 	if !current_level: return
 	
 	current_level.save_to_data(save_data)
-	current_level.remove_child(player)
+	if player.get_parent(): current_level.remove_child(player)
 	self.remove_child(current_level)
 	current_level.queue_free()
 

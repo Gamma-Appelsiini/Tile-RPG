@@ -178,6 +178,11 @@ tick_count = 8
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1492674998]
 layout_mode = 2
 
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1111835513]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="ReturnButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("6_oruj5")]
 custom_minimum_size = Vector2(95, 35)
 layout_mode = 2

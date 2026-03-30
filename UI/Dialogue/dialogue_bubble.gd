@@ -7,6 +7,7 @@ signal dialogue_finished
 @export var picture_rect: TextureRect = null
 @export var name_label: Label = null
 @export var continue_rect: TextureRect = null
+@export var name_container: HBoxContainer = null
 
 const CONTINUE_ARROW:Texture2D = preload("uid://cs26xk72bt0wu")
 const CROSS:Texture2D = preload("res://Tile-RPG/Images/UI/cross.png")
@@ -47,6 +48,9 @@ func set_simple_dialogue(new_text:String) -> void:
 	_close_dialogue()
 
 func set_params(dialogue_name:String ,picture:Texture2D, dialogue_pos_node:Node3D, camera:Camera3D) -> void:
+	if dialogue_name == "" and picture == null:
+		name_container.hide()
+	
 	game_camera = camera
 	position_node = dialogue_pos_node
 	name_label.text = dialogue_name

@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://b0p3xie0yup0i"]
+
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="1_sxr3r"]
+[ext_resource type="Script" uid="uid://ba081qhmuwx3o" path="res://Tile-RPG/UI/Menus/save_slot_panel.gd" id="2_o0g6b"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_wsct7"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_12sde"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_qwoml"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="6_4tvrq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6xywx"]
+texture = ExtResource("1_sxr3r")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wxdty"]
+content_margin_left = 25.0
+content_margin_top = 12.0
+content_margin_right = 25.0
+content_margin_bottom = 35.0
+texture = ExtResource("4_12sde")
+
+[node name="SaveSlotPanel" type="PanelContainer" unique_id=220734391 node_paths=PackedStringArray("return_button", "v_box_container")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -176.5
+offset_right = 103.0
+offset_bottom = 176.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_6xywx")
+script = ExtResource("2_o0g6b")
+return_button = NodePath("PanelContainer/VBoxContainer/ReturnButton")
+v_box_container = NodePath("PanelContainer/VBoxContainer")
+
+[node name="BgRect" type="TextureRect" parent="." unique_id=63037320]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_wsct7")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1106888588]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_wxdty")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=38863718]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=511038806]
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_font_sizes/font_size = 18
+text = "Choose a Save Slot"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=2128593858]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1762573477]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SlotLabel1" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=968903270]
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 20
+text = "1."
+
+[node name="FileExistsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=685505320]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 14
+text = "File already exists"
+vertical_alignment = 2
+
+[node name="SlotButton1" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("6_4tvrq")]
+custom_minimum_size = Vector2(85, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+button_text = "Slot 1"
+text_size = 12
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=124912478]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=496078588]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SlotLabel2" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=2087842096]
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 20
+text = "2."
+
+[node name="FileExistsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=963103197]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 14
+text = "File already exists"
+vertical_alignment = 2
+
+[node name="SlotButton2" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1607149461 instance=ExtResource("6_4tvrq")]
+custom_minimum_size = Vector2(85, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+button_text = "Slot 2"
+text_size = 12
+
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1946807282]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer3" unique_id=1568628970]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SlotLabel3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1234380832]
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 20
+text = "3."
+
+[node name="FileExistsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=268267534]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("5_qwoml")
+theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
+theme_override_font_sizes/font_size = 14
+text = "File already exists"
+vertical_alignment = 2
+
+[node name="SlotButton3" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1414898700 instance=ExtResource("6_4tvrq")]
+custom_minimum_size = Vector2(85, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+button_text = "Slot 3"
+text_size = 12
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1911199291]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=149177977]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1456371010 instance=ExtResource("6_4tvrq")]
+custom_minimum_size = Vector2(120, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+button_text = "Return"
+text_size = 16

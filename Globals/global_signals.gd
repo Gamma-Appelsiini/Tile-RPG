@@ -8,6 +8,7 @@ var ui_handler:UIHandler = null
 
 signal change_level(new_level_id:String)
 signal load_game
+signal save_game
 signal show_container(new_container:LootContainer)
 signal close_container(new_container:LootContainer)
 signal start_dialogue(new_dialogue:DialogueResource)

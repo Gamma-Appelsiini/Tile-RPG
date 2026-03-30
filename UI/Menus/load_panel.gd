@@ -40,13 +40,14 @@ func _set_slot_screenshot(i:int) -> void:
 	
 		var texture_rect: TextureRect = v_box_container.get_children()[i].get_children()[0].get_children()[0]
 		texture_rect.texture = texture
-		
+
 func _connect_load_button(i:int, file_path:String) -> void:
 	var load_button:ReusableButton = v_box_container.get_children()[i+1].get_children()[0].get_children()[2]
-	load_button.texture_button.pressed.connect(func():
-		level_loader.save_file_folder_path = level_loader.SAVE_FILE_PATH + SAVE_SLOT_STRINGS[i]
-		level_loader.load_game_from_path.bind(file_path)
-		get_parent().buttons_container.show()
-		await get_tree().create_timer(0.5).timeout
-		get_parent().hide()
-		)
+	load_button.texture_button.pressed.connect(_on_load_button_pressed.bind(i, file_path))
+
+func _on_load_button_pressed(i:int, file_path:String) -> void:
+	level_loader.save_file_folder_path = level_loader.SAVE_FILE_PATH + SAVE_SLOT_STRINGS[i]
+	level_loader.load_game_from_path(file_path)
+	get_parent().buttons_container.show()
+	await get_tree().create_timer(0.5).timeout
+	get_parent().hide()

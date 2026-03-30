@@ -54,7 +54,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_y3fyx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=10705902]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=68355491]
 layout_mode = 2
@@ -158,9 +158,14 @@ text = "No saves found."
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1261054824]
 layout_mode = 2
 
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=498774490]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1509659589 instance=ExtResource("3_6m6vg")]
-custom_minimum_size = Vector2(120, 55)
+custom_minimum_size = Vector2(120, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 button_text = "Return"
-text_size = 18
+text_size = 16

@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://kcntsyd64f1k" path="res://Tile-RPG/Interactables/shop.tscn" id="14_8d0px"]
 [ext_resource type="PackedScene" uid="uid://dd45u14lackui" path="res://Tile-RPG/Models/static_props/jail_bench.tscn" id="14_l321t"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="15_fkoil"]
+[ext_resource type="PackedScene" uid="uid://medpor34c8uk" path="res://Tile-RPG/Interactables/save_interactable.tscn" id="15_ovxtn"]
 [ext_resource type="PackedScene" uid="uid://d1rgm1jeak2qy" path="res://Tile-RPG/Models/static_props/wall_chains.tscn" id="19_465oc"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="20_0liqt"]
 [ext_resource type="PackedScene" uid="uid://ba5woaetqefuy" path="res://Tile-RPG/GameCharacters/Jail1/test_npc.tscn" id="21_cx1m6"]
@@ -588,6 +589,9 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 0
 
 [node name="Shop" parent="Interactables" unique_id=1275726709 instance=ExtResource("14_8d0px")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 1)
+
+[node name="SaveInteractable" parent="Interactables" unique_id=145723429 instance=ExtResource("15_ovxtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
 
 [node name="Breakables" type="Node" parent="." unique_id=428608692]
 
