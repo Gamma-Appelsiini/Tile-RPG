@@ -146,9 +146,10 @@ func save_to_data(save_data:Dictionary) -> void:
 	save_data["abilities_container"] = save_array
 
 func load_from_data(save_data:Dictionary) -> void:
-	var save_array:Array[String] = save_data["abilities_container"]
+	var save_array:Array = save_data["abilities_container"]
 	if save_array == []: return
 	
 	for path:String in save_array:
 		var new_ability:Ability = load(path).instantiate()
+		new_ability.ability_owner = GlobalSignals.player
 		add_new_ability(new_ability)

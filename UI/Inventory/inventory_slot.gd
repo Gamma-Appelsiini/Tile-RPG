@@ -27,9 +27,10 @@ func set_item(new_item:Item, old_slot:InventorySlot = null, skip_equipping:bool 
 		old_slot.set_item(item_in_slot)
 	if item_in_slot != null: remove_item()
 	
-	if equipment_slot and !skip_equipping:
+	if equipment_slot:
 		bg_image.texture = EMPTY_SLOT
-		equip_item.emit(new_item)
+		if !skip_equipping:
+			equip_item.emit(new_item)
 
 	item_image.texture = new_item.inventory_image
 	item_in_slot = new_item

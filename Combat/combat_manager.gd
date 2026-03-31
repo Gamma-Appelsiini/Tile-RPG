@@ -26,6 +26,7 @@ var tile_manager:TileManager = null
 
 func _ready() -> void:
 	GlobalSignals.combat_manager = self
+	GlobalSignals.load_game.connect(_on_load)
 
 func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	_reset()
@@ -37,7 +38,6 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	combat_ui.show_text("Combat Start")
 	
 	player = GlobalSignals.player
-	#player.died.connect(_player_died)
 	#TODO Add player team
 	player_team.push_back(player)
 	
@@ -176,6 +176,11 @@ func _char_died(dead_char:GameCharacter) -> void:
 
 func _compare_initiative(a:GameCharacter, b:GameCharacter):
 	return a.stat_handler.secondary_stats[Stats.SecondaryStat.INITIATIVE] > b.stat_handler.secondary_stats[Stats.SecondaryStat.INITIATIVE]
+
+func _on_load() -> void:
+	GlobalSignals.combat_end.emit()
+	_reset()
+	if tile_manager: tile_manager.disable_shooting()
 
 func _end_combat() -> void:
 	_disable_ai_handlers()

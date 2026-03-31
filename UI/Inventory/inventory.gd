@@ -46,9 +46,21 @@ var player_currency:int = 555:
 		_update_currency_amount(player_currency)
 
 func _ready() -> void:
+	set_process(false)
+	set_process_input(false)
+	visibility_changed.connect(_on_vis_change)
+	
 	x_button.x_pressed.connect(func(): self.visible = false)
 	throw_out_area.mouse_entered.connect(func(): drop_item_on_release = true)
 	throw_out_area.mouse_exited.connect(func(): drop_item_on_release = false)
+
+func _on_vis_change() -> void:
+	if visible:
+		set_process(true)
+		set_process_input(true)
+	else:
+		set_process(false)
+		set_process_input(false)
 
 func _drop_item() -> bool:
 	if !drop_item_on_release: return false
@@ -99,6 +111,9 @@ func _load_equ_from_data(save_data:Dictionary) -> void:
 		player.equipment_handler.equipped_items[slot] = loaded_equ
 		var skip_equipping:bool = true
 		equipment_slots[slot].set_item(loaded_equ,null,skip_equipping)
+		
+	#TODO on load item models are not set correctly
+	player.equipment_handler.set_item_models_on_load()
 
 func save_inv_to_data(save_data:Dictionary) -> void:
 	var inv_data:Dictionary = {}
@@ -146,13 +161,6 @@ func _input(event: InputEvent) -> void:
 		_item_released()
 	elif event.is_action_released("Bag"):
 		_reset_selecting()
-	elif event.is_action_released("test2"):
-		add_item_to_inv(ItemGenerator.get_equipment())
-		add_item_to_inv(ItemGenerator.get_equipment())
-		add_item_to_inv(ItemGenerator.get_equipment())
-		add_item_to_inv(ItemGenerator.get_equipment())
-		add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.RANDOM,5,0,Item.ItemRarity.EPIC))
-		add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.RANDOM,5,0,Item.ItemRarity.RARE))
 
 func _restore_equ_slot_bg(slot:InventorySlot) -> void:
 	slot.bg_image.texture = BG_DICT[slot.equipment_slot]

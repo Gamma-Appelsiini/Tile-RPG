@@ -103,7 +103,9 @@ func _load_quest_handler() -> void:
 func _load_player(new_player:Player) -> void:
 	if player: player.queue_free()
 	
+	#TODO abilitiesowner is old player
 	player = new_player
+	GlobalSignals.player = new_player
 	player.load_from_data(save_data)
 	
 	ui_handler.set_player(player)
@@ -131,8 +133,11 @@ func save_game() -> void:
 	var file:FileAccess = FileAccess.open(save_file_folder_path + SAVE_SUFFIX, FileAccess.WRITE)
 	file.store_var(save_data.duplicate())
 	file.close()
+	
+	_take_screenshot()
 
 func _take_screenshot() -> void:
+	ui_handler.modulate.a = 0
 	await RenderingServer.frame_post_draw
 	
 	var viewport:Viewport = get_viewport()
@@ -144,6 +149,7 @@ func _take_screenshot() -> void:
 	
 	var error := image.save_png(image_save_path)
 	if error != OK: print_debug("Failed to save screenshot. Error code: ", error)
+	ui_handler.modulate.a = 1
 
 func _close_current_level() -> void:
 	if !current_level: return

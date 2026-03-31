@@ -88,13 +88,12 @@ func set_player(player:Player) -> void:
 	abilities_container.set_player(player)
 
 func load_from_data(save_data:Dictionary) -> void:
-	await inventory.ready
 	GlobalSignals.ui_handler = self
 	inventory.load_inv_from_data(save_data)
 	
 	abilities_container.load_from_data(save_data)
 	
-	var ability_bar_array:Array[String] = save_data["ability_bar"]
+	var ability_bar_array:Array = save_data["ability_bar"]
 	ability_bar.load_from_array(ability_bar_array)
 
 func save_to_data(save_data:Dictionary) -> void:

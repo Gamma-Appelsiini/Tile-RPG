@@ -131,7 +131,7 @@ func save_to_data() -> Array:
 		
 	return save_array
 
-func load_from_array(save_array:Array[String]) -> void:
+func load_from_array(save_array:Array) -> void:
 	if save_array == []: return
 	
 	var place:int = 0

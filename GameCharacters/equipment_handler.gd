@@ -24,6 +24,10 @@ func _ready() -> void:
 		equipment_owner = get_parent() as GameCharacter
 		_connect_signals()
 
+func set_item_models_on_load() -> void:
+	_set_item_model(equipped_items[Equipment.EquipmentSlot.MAIN_HAND])
+	_set_item_model(equipped_items[Equipment.EquipmentSlot.OFF_HAND])
+
 func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
 	GlobalSignals.combat_end.connect(func(): in_combat = false)
@@ -78,7 +82,10 @@ func _clear_item_model(equipment_slot:Equipment.EquipmentSlot) -> void:
 		main_hand_model = null
 
 func _set_item_model(new_item:Equipment) -> void:
-	if new_item.item_model_path == "": return
+	if new_item == null: return
+	if new_item.item_model_path == "":
+		print_debug("null item model path")
+		return
 	var item_model:ItemModel = load(new_item.item_model_path).instantiate()
 	
 	if new_item.equipment_slot == Equipment.EquipmentSlot.OFF_HAND:
