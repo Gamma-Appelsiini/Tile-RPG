@@ -20,10 +20,16 @@ var main_hand_model:ItemModel = null
 var off_hand_model:ItemModel = null
 
 func _ready() -> void:
-	if get_parent() is GameCharacter:
-		equipment_owner = get_parent() as GameCharacter
-		_connect_signals()
+	set_handler_owner()
 
+func set_handler_owner() -> void:
+	if get_parent() is GameCharacter:
+		var new_owner:GameCharacter = get_parent() as GameCharacter
+		if equipment_owner == new_owner: return
+		
+		equipment_owner = new_owner
+		_connect_signals()
+	
 func set_item_models_on_load() -> void:
 	_set_item_model(equipped_items[Equipment.EquipmentSlot.MAIN_HAND])
 	_set_item_model(equipped_items[Equipment.EquipmentSlot.OFF_HAND])
@@ -57,9 +63,13 @@ func can_equip() -> bool:
 	equipment_owner.stat_handler.update_stat(Stats.ResourceStat.CURRENT_AP, -1)
 	return true
 
-func equip_item(new_item:Equipment) -> void:
+func equip_item(new_item:Equipment, skip_stats:bool = false) -> void:
 	unequip_item(new_item.equipment_slot)
 	_set_item_model(new_item)
+	
+	if skip_stats:
+		equipped_items[new_item.equipment_slot] = new_item
+		return
 	
 	if new_item is Armor:_equip_armor_def(new_item)
 	elif new_item is Weapon: _equip_weapon(new_item)

@@ -107,13 +107,12 @@ func _load_equ_from_data(save_data:Dictionary) -> void:
 		_create_item_tt(loaded_equ)
 		loaded_equ.remake_tt.connect(_remake_tt.bind(loaded_equ))
 		
+		player.equipment_handler.set_handler_owner()
 		#Don't equip gear again, stats are saved with gear equipped
-		player.equipment_handler.equipped_items[slot] = loaded_equ
 		var skip_equipping:bool = true
+		player.equipment_handler.equip_item(loaded_equ, skip_equipping)
 		equipment_slots[slot].set_item(loaded_equ,null,skip_equipping)
-		
-	#TODO on load item models are not set correctly
-	player.equipment_handler.set_item_models_on_load()
+
 
 func save_inv_to_data(save_data:Dictionary) -> void:
 	var inv_data:Dictionary = {}
@@ -134,7 +133,7 @@ func _load_currency(save_data:Dictionary) -> void:
 	player_currency = save_data["quest_handler"]["player_currency"]
 
 func load_inv_from_data(save_data:Dictionary) -> void:
-	if !save_data.has("inventory"):return
+	if !save_data.has("inventory"): return
 	_load_currency(save_data)
 
 	for key:int in save_data["inventory"].keys():

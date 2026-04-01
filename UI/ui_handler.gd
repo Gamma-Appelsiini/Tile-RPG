@@ -80,7 +80,6 @@ func _connect_menu_buttons() -> void:
 	menu_buttons.open_settings.connect(_toggle_menu)
 
 func set_player(player:Player) -> void:
-	GlobalSignals.player = player
 	ability_bar.set_player(player)
 	inventory.set_player(player)
 	dialogue_window.set_player(player)

@@ -5,7 +5,7 @@ signal load_complete
 signal resource_loader_finished_loading
 
 const PLAYER_PATH:String = "res://Tile-RPG/GameCharacters/Player/player.tscn"
-const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/"
+const SAVE_FILE_PATH:String = "user://Tile-RPG/SaveData/"
 const SAVE_SUFFIX:String = "/save_data.bin"
 const SCREENSHOT_SUFFIX:String = "/screenshot.png"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
@@ -16,7 +16,7 @@ const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
 @export var ability_targeter:AbilityTargeter = null
 @export var loading_screen: LoadingScreen = null
 
-var save_file_folder_path:String = "res://Tile-RPG/SaveData/slot1/"
+var save_file_folder_path:String = "user://Tile-RPG/SaveData/slot1/"
 var save_file:JSON = null
 var save_data:Dictionary = {
 	"last_level_id": "jail_01",
@@ -33,8 +33,21 @@ var save_data:Dictionary = {
 var player:Player = null
 var current_level:Level = null
 
+func _create_folders() -> void:
+	const SAVE_SLOT_STRINGS:Array[String] = ["slot1", "slot2", "slot3"]
+	
+	for slot in SAVE_SLOT_STRINGS:
+		var full_path: String = SAVE_FILE_PATH + slot
+		
+		# Check if the folder already exists
+		if not DirAccess.dir_exists_absolute(full_path):
+			var error = DirAccess.make_dir_recursive_absolute(full_path)
+			
+			if error != OK: printerr("Failed to create directory: ", full_path, " Error code: ", error)
+
 func _ready() -> void:
 	set_process(false)
+	_create_folders()
 	GlobalSignals.connect("change_level", change_levels)
 	GlobalSignals.load_game.connect(load_game)
 	GlobalSignals.save_game.connect(save_game)
@@ -101,7 +114,9 @@ func _load_quest_handler() -> void:
 	new_q_handler.load_from_data(save_data)
 
 func _load_player(new_player:Player) -> void:
-	if player: player.queue_free()
+	if player:
+		player.queue_free()
+		player = null
 	
 	#TODO abilitiesowner is old player
 	player = new_player

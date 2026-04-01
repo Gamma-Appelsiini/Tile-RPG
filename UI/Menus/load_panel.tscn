@@ -71,7 +71,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="SlotRect1" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1492571142]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(214, 120)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
@@ -99,7 +99,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="SlotRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=162365427]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(214, 120)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
@@ -127,7 +127,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="SlotRect3" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=790615078]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(214, 120)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5

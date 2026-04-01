@@ -42,6 +42,8 @@ func _ready() -> void:
 		_add_diagonals(tile)
 		
 	_add_doors()
+	
+	GlobalSignals.load_game.connect(disable_shooting)
 
 func get_tiles_in_aoe(start_tile:Tile, aoe:int) -> Array[Tile]:
 	var tiles_in_aoe:Array[Tile] = []

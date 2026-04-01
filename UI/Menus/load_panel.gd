@@ -33,12 +33,12 @@ func _set_save_files() -> void:
 	if show_no_saves: no_saves_label.show()
 
 func _set_slot_screenshot(i:int) -> void:
-	var img_path: String = level_loader.SAVE_FILE_PATH + SAVE_SLOT_STRINGS[i] + ".png"
+	var img_path: String = level_loader.SAVE_FILE_PATH + SAVE_SLOT_STRINGS[i] + "/screenshot.png"
 	if FileAccess.file_exists(img_path):
 		var image = Image.load_from_file(img_path)
 		var texture = ImageTexture.create_from_image(image)
 	
-		var texture_rect: TextureRect = v_box_container.get_children()[i].get_children()[0].get_children()[0]
+		var texture_rect: TextureRect = v_box_container.get_children()[i+1].get_children()[0].get_children()[0]
 		texture_rect.texture = texture
 
 func _connect_load_button(i:int, file_path:String) -> void:
