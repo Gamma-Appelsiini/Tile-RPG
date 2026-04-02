@@ -7,12 +7,13 @@ class_name UIHandler
 @export var dialogue_window: DialogueWindow = null
 @export var ability_bar: AbilityBar = null
 @export var abilities_container: AbilitiesContainer = null
-@export var ability_targeter: AbilityTargeter = null
 @export var combat_ui: CombatUI = null
 @export var menu_buttons: MenuButtonsPanel = null
 @export var shop_window: ShopWindow = null
 @export var main_menu: MainMenu = null
-
+@export var loading_screen: LoadingScreen = null
+@export var start_menu: StartMenu = null
+@export var loot_window: LootWindow = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 
@@ -38,11 +39,12 @@ func _input(event: InputEvent) -> void:
 		_handle_esc()
 
 func _handle_esc() -> void:
-	if stat_window.visible or inventory.visible or shop_window.visible or abilities_container.visible:
+	if stat_window.visible or inventory.visible or shop_window.visible or abilities_container.visible or loot_window.visible:
 		stat_window.hide()
 		inventory.hide()
 		shop_window.hide()
 		abilities_container.hide_container()
+		loot_window.hide()
 	else: _toggle_menu()
 		
 
@@ -87,7 +89,6 @@ func set_player(player:Player) -> void:
 	abilities_container.set_player(player)
 
 func load_from_data(save_data:Dictionary) -> void:
-	GlobalSignals.ui_handler = self
 	inventory.load_inv_from_data(save_data)
 	
 	abilities_container.load_from_data(save_data)

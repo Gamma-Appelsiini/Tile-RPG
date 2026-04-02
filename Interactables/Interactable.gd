@@ -66,8 +66,10 @@ func get_input_string(action_name: String) -> String:
 
 #Override this
 func save_to_data(save_data:Dictionary) -> void:
-	print(save_data)
+	pass
+	#print_debug(save_data)
 
 #Override this
 func load_from_data(save_data:Dictionary) -> void:
-	print(save_data)
+	pass
+	#print_debug(save_data)

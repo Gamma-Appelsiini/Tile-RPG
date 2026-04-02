@@ -14,7 +14,7 @@ const INV_SLOT_SCENE:PackedScene = preload("res://Tile-RPG/UI/Inventory/inventor
 const BORDER_TEXTURES:Dictionary[LootContainer.ContainerStyle, Texture2D] = {LootContainer.ContainerStyle.WOOD: preload("uid://dfxc2i7p6w3ay")}
 
 var style_dict:Dictionary[LootContainer.ContainerStyle, TextureRect] = {}
-var inv_slots:Array[InventorySlot] = []
+var loot_window_slots:Array[InventorySlot] = []
 var loot_container:LootContainer = null
 
 func _ready() -> void:
@@ -24,12 +24,12 @@ func _ready() -> void:
 	style_dict[LootContainer.ContainerStyle.WOOD] = wood_bg
 
 func _connect_slots() -> void:
-	for slot:InventorySlot in inv_slots:
-		slot.item_placed.connect(_item_added_to_container)
+	for container_slot:InventorySlot in loot_window_slots:
+		container_slot.item_placed.connect(_item_added_to_container)
 		
-	for slot:InventorySlot in player_inventory.slots:
-		if slot.array_pos >= player_inventory.INV_SIZE: continue
-		slot.item_placed.connect(_item_added_to_inv)
+	for inventory_slot:InventorySlot in player_inventory.slots:
+		if inventory_slot.array_pos >= player_inventory.INV_SIZE: continue
+		inventory_slot.item_placed.connect(_item_added_to_inv)
 
 func _add_slots() -> void:
 	var pos:int = player_inventory.INV_SIZE
@@ -39,7 +39,7 @@ func _add_slots() -> void:
 		
 		grid_container.add_child(new_slot)
 		player_inventory.connect_slot(new_slot)
-		inv_slots.push_back(new_slot)
+		loot_window_slots.push_back(new_slot)
 
 func _item_added_to_inv(new_item:Item) -> void:
 	if loot_container.items.has(new_item):
@@ -66,7 +66,7 @@ func add_container(container:LootContainer) -> void:
 	_show_style_bg(container.container_style)
 
 func _add_item(item:Item) -> void:
-	for slot:InventorySlot in inv_slots:
+	for slot:InventorySlot in loot_window_slots:
 		if slot.item_in_slot != null: continue
 		
 		slot.set_item(item)
@@ -74,7 +74,7 @@ func _add_item(item:Item) -> void:
 		return
 	
 func _clear_container() -> void:
-	for slot:InventorySlot in inv_slots:
+	for slot:InventorySlot in loot_window_slots:
 		slot.item_placed.disconnect(_item_added_to_container)
 		slot.remove_item()
 		

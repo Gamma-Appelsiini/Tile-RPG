@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://c3phcvjwwddwt"]
+
+[ext_resource type="Script" uid="uid://2nkwjde2u5so" path="res://Tile-RPG/UI/ui_handler.gd" id="1_kjs8x"]
+[ext_resource type="PackedScene" uid="uid://dxmgw8d3dcpua" path="res://Tile-RPG/UI/CharacterResources/globe_ui.tscn" id="2_aysv3"]
+[ext_resource type="PackedScene" uid="uid://cs8aa2kl2ldyl" path="res://Tile-RPG/UI/Abilities/ability_bar.tscn" id="3_m7ybn"]
+[ext_resource type="PackedScene" uid="uid://cmjamn0h0y14r" path="res://Tile-RPG/UI/Dialogue/dialogue_window.tscn" id="4_pta8b"]
+[ext_resource type="PackedScene" uid="uid://cwm8mixxh22t5" path="res://Tile-RPG/UI/Inventory/inventory.tscn" id="5_e6bge"]
+[ext_resource type="PackedScene" uid="uid://cgycswqthcl8v" path="res://Tile-RPG/UI/StatWindow/stat_window.tscn" id="6_4p5fd"]
+[ext_resource type="PackedScene" uid="uid://di1h35368wxtx" path="res://Tile-RPG/UI/Inventory/loot_window.tscn" id="7_coc15"]
+[ext_resource type="PackedScene" uid="uid://cp3lhfafyqjva" path="res://Tile-RPG/UI/Abilities/abilities_container.tscn" id="8_xlwbf"]
+[ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.tscn" id="9_dra2u"]
+[ext_resource type="PackedScene" uid="uid://cc2jlwv1hf0dd" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.tscn" id="10_kdg4q"]
+[ext_resource type="PackedScene" uid="uid://rjgqijg22g8l" path="res://Tile-RPG/UI/Shop/shop_window.tscn" id="11_n2ffy"]
+[ext_resource type="PackedScene" uid="uid://cq63aydedr4fm" path="res://Tile-RPG/UI/Menus/main_menu.tscn" id="12_r4noa"]
+[ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="13_u553s"]
+[ext_resource type="PackedScene" uid="uid://bhya384vo3b7b" path="res://Tile-RPG/UI/Menus/loading_screen.tscn" id="14_24ytg"]
+
+[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "start_menu", "loot_window")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kjs8x")
+inventory = NodePath("Inventory")
+globe_ui = NodePath("GlobeUI")
+stat_window = NodePath("StatWindow")
+dialogue_window = NodePath("DialogueWindow")
+ability_bar = NodePath("AbilityBar")
+abilities_container = NodePath("AbilitiesContainer")
+combat_ui = NodePath("CombatUI")
+menu_buttons = NodePath("MenuButtons")
+shop_window = NodePath("ShopWindow")
+main_menu = NodePath("MainMenu")
+loading_screen = NodePath("LoadingScreen")
+start_menu = NodePath("StartMenu")
+loot_window = NodePath("LootWindow")
+
+[node name="GlobeUI" parent="." unique_id=536348896 instance=ExtResource("2_aysv3")]
+layout_mode = 1
+
+[node name="AbilityBar" parent="." unique_id=744257086 instance=ExtResource("3_m7ybn")]
+layout_mode = 1
+
+[node name="DialogueWindow" parent="." unique_id=360189605 instance=ExtResource("4_pta8b")]
+visible = false
+layout_mode = 1
+
+[node name="Inventory" parent="." unique_id=525772754 instance=ExtResource("5_e6bge")]
+visible = false
+layout_mode = 1
+
+[node name="StatWindow" parent="." unique_id=1650177064 instance=ExtResource("6_4p5fd")]
+visible = false
+layout_mode = 1
+
+[node name="LootWindow" parent="." unique_id=370299907 node_paths=PackedStringArray("player_inventory") instance=ExtResource("7_coc15")]
+visible = false
+layout_mode = 1
+player_inventory = NodePath("../Inventory")
+
+[node name="AbilitiesContainer" parent="." unique_id=654101807 node_paths=PackedStringArray("ability_bar") instance=ExtResource("8_xlwbf")]
+visible = false
+layout_mode = 1
+ability_bar = NodePath("../AbilityBar")
+
+[node name="CombatUI" parent="." unique_id=635224778 instance=ExtResource("9_dra2u")]
+visible = false
+layout_mode = 1
+
+[node name="MenuButtons" parent="." unique_id=755339378 instance=ExtResource("10_kdg4q")]
+layout_mode = 1
+
+[node name="ShopWindow" parent="." unique_id=1374274591 node_paths=PackedStringArray("player_inventory") instance=ExtResource("11_n2ffy")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 204.0
+offset_bottom = 404.0
+grow_horizontal = 1
+grow_vertical = 1
+player_inventory = NodePath("../Inventory")
+
+[node name="MainMenu" parent="." unique_id=2074951668 instance=ExtResource("12_r4noa")]
+visible = false
+layout_mode = 1
+
+[node name="StartMenu" parent="." unique_id=846789017 instance=ExtResource("13_u553s")]
+layout_mode = 1
+
+[node name="LoadingScreen" parent="." unique_id=128380989 instance=ExtResource("14_24ytg")]
+visible = false
+layout_mode = 1

@@ -41,7 +41,7 @@ func _load_interactables(save_data:Dictionary) -> void:
 func load_from_data(save_data:Dictionary) -> void:
 	var levels:Dictionary = save_data["levels"]
 	if !levels.has(unique_id):
-		print(unique_id, " level not in save data")
+		print_debug(unique_id, " level not in save data")
 		return
 	
 	_load_game_chars(save_data)

@@ -9,12 +9,14 @@ const SAVE_FILE_PATH:String = "user://Tile-RPG/SaveData/"
 const SAVE_SUFFIX:String = "/save_data.bin"
 const SCREENSHOT_SUFFIX:String = "/screenshot.png"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
+const UI_HANDLER := preload("uid://c3phcvjwwddwt")
 
 @export var inventory: Inventory = null
 @export var globe_ui:GlobeUI = null
 @export var ui_handler: UIHandler = null
 @export var ability_targeter:AbilityTargeter = null
 @export var loading_screen: LoadingScreen = null
+@export var combat_manager: CombatManager = null
 
 var save_file_folder_path:String = "user://Tile-RPG/SaveData/slot1/"
 var save_file:JSON = null
@@ -32,6 +34,25 @@ var save_data:Dictionary = {
 
 var player:Player = null
 var current_level:Level = null
+var ui_handler_needs_to_load:bool = false
+
+func _set_ui_handler() -> void:
+	print_debug("Set ui")
+	for node:Node in get_parent().get_children():
+		if node is UIHandler: node.queue_free()
+	
+	self.ui_handler = UI_HANDLER.instantiate()
+	get_parent().add_child.call_deferred(ui_handler)
+	GlobalSignals.ui_handler = ui_handler
+	
+	self.inventory = ui_handler.inventory
+	self.globe_ui = ui_handler.globe_ui
+	self.loading_screen = ui_handler.loading_screen
+	combat_manager.combat_ui = ui_handler.combat_ui
+	ui_handler.ability_bar.ability_targeter = ability_targeter
+	ui_handler.start_menu.level_loader = self
+	
+	if ui_handler_needs_to_load: ui_handler.start_menu.hide()
 
 func _create_folders() -> void:
 	const SAVE_SLOT_STRINGS:Array[String] = ["slot1", "slot2", "slot3"]
@@ -48,9 +69,12 @@ func _create_folders() -> void:
 func _ready() -> void:
 	set_process(false)
 	_create_folders()
+
 	GlobalSignals.connect("change_level", change_levels)
 	GlobalSignals.load_game.connect(load_game)
 	GlobalSignals.save_game.connect(save_game)
+	
+	_set_ui_handler()
 
 func new_game() -> void:
 	#TODO new game deletes old save
@@ -81,9 +105,13 @@ func load_game_from_path(path:String) -> void:
 	file.close()
 	
 	#TODO inventory is empty
+	
 	load_game()
 
 func load_game(loading:bool = true) -> void:
+	if ui_handler_needs_to_load: _set_ui_handler()
+	ui_handler_needs_to_load = true
+	
 	var last_level_id:String = save_data["last_level_id"]
 	_load_quest_handler()
 	
@@ -95,6 +123,7 @@ func load_game(loading:bool = true) -> void:
 	
 	var new_level:Level = loading_screen.loaded_level
 	_open_new_level(new_level,loading)
+	player.stat_handler.stats_changed.emit()
 
 	load_complete.emit()
 
@@ -152,7 +181,6 @@ func save_game() -> void:
 	_take_screenshot()
 
 func _take_screenshot() -> void:
-	ui_handler.modulate.a = 0
 	await RenderingServer.frame_post_draw
 	
 	var viewport:Viewport = get_viewport()
@@ -164,7 +192,6 @@ func _take_screenshot() -> void:
 	
 	var error := image.save_png(image_save_path)
 	if error != OK: print_debug("Failed to save screenshot. Error code: ", error)
-	ui_handler.modulate.a = 1
 
 func _close_current_level() -> void:
 	if !current_level: return

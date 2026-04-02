@@ -9,8 +9,6 @@ enum LiquidType {HP, SPIRIT}
 @export var glass_ball: MeshInstance3D = null
 @export var liquid_type:LiquidType = LiquidType.HP
 
-const MAX_AMOUNT:float = 1.5
-const MIN_AMOUNT:float = -0.5
 const HP_MATERIAL:ShaderMaterial = preload("uid://qwh5idv3iyrm")
 const SPIRIT_MATERIAL = preload("uid://cuukqo8bdq4jh")
 const GLOBE_HP_GLASS_MATERIAL = preload("uid://cqdi0kdmoffy2")
@@ -38,16 +36,16 @@ func resource_changed(sh:StatHandler, stat_type:LiquidType) -> void:
 	elif stat_type == LiquidType.SPIRIT:
 		current_amount = sh.resources[Stats.ResourceStat.CURRENT_SPIRIT]
 		max_amount = sh.resources[Stats.ResourceStat.MAX_SPIRIT]
-		
-	_set_amount(float(current_amount) / float(max_amount))
+
+	#Shader max 1.5, shader min -0.5
+	var ratio: float = float(current_amount) / float(max_amount)
+	var final_amount: float = lerp(-.5, 1.5, ratio)
+	_set_amount(final_amount)
 
 func _set_amount(liquid_amount:float) -> void:
-	liquid_amount = clamp(liquid_amount,0.0,1.0)
-	var amount:float = (MAX_AMOUNT+abs(MIN_AMOUNT)) * liquid_amount
-	
-	var tween_time:float = abs(liquid_material.get_shader_parameter("liquid_amount")/2 - liquid_amount) * 2
-	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	tween.tween_property(liquid_material, "shader_parameter/liquid_amount", MIN_AMOUNT + amount, tween_time)
+	var tween_time:float = 0.4
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(liquid_material, "shader_parameter/liquid_amount", liquid_amount, tween_time)
 
 func get_viewport_path() -> SubViewport:
 	return sub_viewport

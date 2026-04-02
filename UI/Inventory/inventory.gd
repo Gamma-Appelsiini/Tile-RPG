@@ -116,24 +116,18 @@ func _load_equ_from_data(save_data:Dictionary) -> void:
 
 func save_inv_to_data(save_data:Dictionary) -> void:
 	var inv_data:Dictionary = {}
-	
-	for islot:InventorySlot in slots:
-		if islot.array_pos != -1 and islot.item_in_slot != null:
-			inv_data[islot.array_pos] = islot.item_in_slot.save_to_data()
-			
+	for slot:InventorySlot in inv_slot_grid.get_children():
+		if slot.item_in_slot != null:
+			inv_data[slot.array_pos] = slot.item_in_slot.save_to_data()
+
 	save_data["inventory"] = inv_data
 	_save_equipment(save_data)
 
-func _update_currency_amount(amount:int) -> void:
-	currency_amount_label.text = str(amount)
-
-func _load_currency(save_data:Dictionary) -> void:
-	if !save_data["quest_handler"].has("player_currency"): return
-	
-	player_currency = save_data["quest_handler"]["player_currency"]
-
 func load_inv_from_data(save_data:Dictionary) -> void:
-	if !save_data.has("inventory"): return
+	if !save_data.has("inventory"):
+		print_debug("No inventory data in save")
+		return
+
 	_load_currency(save_data)
 
 	for key:int in save_data["inventory"].keys():
@@ -142,10 +136,20 @@ func load_inv_from_data(save_data:Dictionary) -> void:
 
 		loaded_item.load_from_data(save_data["inventory"][key])
 		loaded_item.remake_tt.connect(_remake_tt.bind(loaded_item))
-		slots[key].set_item(loaded_item)
+
+		var free_slot:InventorySlot = inv_slot_grid.get_children()[key] as InventorySlot
+		free_slot.set_item(loaded_item)
 		_create_item_tt(loaded_item)
 	
 	_load_equ_from_data(save_data)
+
+func _update_currency_amount(amount:int) -> void:
+	currency_amount_label.text = str(amount)
+
+func _load_currency(save_data:Dictionary) -> void:
+	if !save_data["quest_handler"].has("player_currency"): return
+	
+	player_currency = save_data["quest_handler"]["player_currency"]
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:

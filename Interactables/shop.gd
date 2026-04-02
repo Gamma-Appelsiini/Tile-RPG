@@ -54,11 +54,9 @@ func interact() -> void:
 		ui_handler.toggle_inv()
 
 func _set_shop_window_ref() -> void:
-	var UI := get_tree().get_nodes_in_group("UI")
-	if UI[0] is UIHandler:
-		ui_handler = UI[0] as UIHandler
-		shop_window = ui_handler.shop_window
-		player_inventory = ui_handler.inventory
+	ui_handler = GlobalSignals.ui_handler
+	shop_window = ui_handler.shop_window
+	player_inventory = ui_handler.inventory
 
 func _generate_new_items() -> void:
 	var player_lvl:int = GlobalSignals.player.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL)

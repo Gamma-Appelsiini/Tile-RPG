@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode cull_back, depth_draw_opaque, unshaded;
 
 group_uniforms Liquid_Settings;
-uniform float liquid_amount : hint_range(-0.1, 1.1) = 0.6; // 0.0 empty, 1.0 full
+uniform float liquid_amount : hint_range(-0.5, 1.5) = 1.5; // 0.0 empty, 1.0 full
 uniform vec3 deep_color : source_color = vec3(0.3, 0.0, 0.0); // The dark core
 uniform vec3 surface_color : source_color = vec3(1.0, 0.0, 0.0); // The brighter fluid
 uniform vec3 foam_color : source_color = vec3(1.0, 0.4, 0.2); // The top cut line

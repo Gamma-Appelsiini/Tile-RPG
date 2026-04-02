@@ -73,7 +73,7 @@ func _apply_resolution(id:int) -> void:
 	var screen_rect := DisplayServer.screen_get_usable_rect(screen_id)
 	var window_size := DisplayServer.window_get_size()
 
-	var center_pos := screen_rect.position + (screen_rect.size - window_size) / 2
+	var center_pos := screen_rect.position + Vector2i((screen_rect.size - window_size) / 2.0)
 	DisplayServer.window_set_position(center_pos)
 
 func _load_settings_file() -> bool:
