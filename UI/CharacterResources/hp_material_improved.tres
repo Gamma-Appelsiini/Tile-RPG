@@ -19,7 +19,7 @@ seamless = true
 [resource]
 render_priority = 0
 shader = ExtResource("1_66v63")
-shader_parameter/liquid_amount = 0.0020000238449999763
+shader_parameter/liquid_amount = 0.00200002384499997
 shader_parameter/deep_color = Color(0.3, 0, 0, 1)
 shader_parameter/surface_color = Color(1, 0, 0, 1)
 shader_parameter/foam_color = Color(2.329646, 0, 0, 1)
@@ -29,4 +29,4 @@ shader_parameter/noise_tex_primary = SubResource("NoiseTexture2D_qckxn")
 shader_parameter/noise_tex_warp = SubResource("NoiseTexture2D_lp1f3")
 shader_parameter/warp_strength = 0.1450000068875
 shader_parameter/inner_glow_power = 8.0
-shader_parameter/meniscus_thickness = 0.025000001187500002
+shader_parameter/meniscus_thickness = 0.0250000011875

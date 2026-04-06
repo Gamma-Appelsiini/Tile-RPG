@@ -4,6 +4,7 @@ class_name XpPanel
 @export var progress_bar: ProgressBar = null
 @export var texture_rect: TextureRect = null
 @export var green_bar: ProgressBar = null
+@export var emit_lvl_up:bool = false
 
 const FULL_BAR_TIME: float = 1.25
 
@@ -11,10 +12,6 @@ const FULL_BAR_TIME: float = 1.25
 var queue: Array[Dictionary] = []
 var is_animating: bool = false
 var stat_handler:StatHandler = null
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Journal"):
-		GlobalSignals.player.stat_handler.add_xp(25)
 
 func set_stat_handler(sh: StatHandler) -> void:
 	var start_max:int = sh.get_stat_amount(Stats.CharStat.MAX_XP)
@@ -57,7 +54,7 @@ func _sequence_level_up(new_max: int) -> void:
 	green_bar.value = 0
 	
 	await get_tree().create_timer(0.05).timeout
-	stat_handler.leveled_up.emit()
+	if emit_lvl_up: stat_handler.leveled_up.emit()
 
 func _sequence_gain(target_cur: int, target_max: int) -> void:
 	if texture_rect:

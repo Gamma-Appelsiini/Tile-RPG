@@ -34,6 +34,7 @@ func _animate_flavor_text(new_text:String) -> void:
 func _show_goodbye_text() -> void:	
 	if visible: return
 	opened_shop.show_shopkeeper_talking(FLAVOR_TEXT_GOODBYE.pick_random())
+	opened_shop = null
 
 func _on_inv_visibility_changed() -> void:
 	if !player_inventory.visible: self.visible = false

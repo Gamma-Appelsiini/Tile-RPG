@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://b6fcpgsyuv4oj"]
+
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="1_bmfcf"]
+[ext_resource type="Script" uid="uid://3vo8xjopmyky" path="res://Tile-RPG/UI/StatWindow/xp_panel.gd" id="1_kjpsm"]
+[ext_resource type="FontFile" uid="uid://ci51be7lgo08e" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-VariableFont_wght.ttf" id="3_aihcr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dd5c"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pesqp"]
+load_path = "res://.godot/imported/border_gold_trim256.png-b0f6dba9a7dcb6fced55b5a2ff35d1eb.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bmfcf"]
+texture = SubResource("CompressedTexture2D_pesqp")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aihcr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjrog"]
+bg_color = Color(0, 1, 0.5999999, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u64uh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_men4c"]
+bg_color = Color(0.8898403, 0.8674041, 0.71264464, 1)
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1077170898 node_paths=PackedStringArray("progress_bar", "texture_rect", "green_bar")]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(927, 8)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -2.0
+offset_right = 400.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_3dd5c")
+script = ExtResource("1_kjpsm")
+progress_bar = NodePath("PanelContainer/ProgressBar")
+texture_rect = NodePath("")
+green_bar = NodePath("PanelContainer/GreenBar")
+emit_lvl_up = true
+
+[node name="BgImage" type="TextureRect" parent="." unique_id=1986263934]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_bmfcf")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1322107247]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bmfcf")
+
+[node name="GreenBar" type="ProgressBar" parent="PanelContainer" unique_id=118887574]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_aihcr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tjrog")
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer" unique_id=622995216]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_u64uh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_men4c")
+show_percentage = false
+
+[node name="Label" type="Label" parent="." unique_id=612105896]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8901961, 0.8666667, 0.7137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_aihcr")
+theme_override_font_sizes/font_size = 6
+text = "Xp      "
+horizontal_alignment = 2
+vertical_alignment = 2

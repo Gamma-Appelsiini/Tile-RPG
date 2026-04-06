@@ -125,13 +125,11 @@ func set_unhovered(slot:AbilitySlot) -> void:
 func show_container() -> void:
 	visible = true
 	set_process_input(true)
-	ability_bar.show_bar()
 	
 func hide_container() -> void:
 	visible = false
 	set_process_input(false)
 	#TODO check if in combat
-	ability_bar.hide_bar()
 	
 func save_to_data(save_data:Dictionary) -> void:
 	var save_array:Array[String] = []

@@ -11,6 +11,7 @@ class_name AbilityBar
 @export var movement_label: Label = null
 @export var input_area: Control = null
 @export var end_turn_button: Button = null
+@export var xp_bar: XpPanel = null
 
 @export var end_turn_button_sound:AudioStream = null
 
@@ -31,6 +32,8 @@ func set_player(new_player:Player) -> void:
 	player.start_turn.connect(_on_turn_start)
 	player.end_turn.connect(_on_turn_end)
 	player.stat_handler.stats_changed.connect(_set_movement)
+	
+	xp_bar.set_stat_handler(player.stat_handler)
 
 func _ready() -> void:
 	set_process_input(false)
@@ -47,8 +50,6 @@ func _add_slots() -> void:
 func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
 	GlobalSignals.combat_end.connect(func(): in_combat = false)
-	GlobalSignals.combat_start.connect(show_bar)
-	GlobalSignals.combat_end.connect(hide_bar)
 	
 	GlobalSignals.combat_start.connect(func(): info_container.visible = true)
 	GlobalSignals.combat_end.connect(func(): info_container.visible = false)
@@ -88,8 +89,7 @@ func _slot_pressed() -> void:
 	if !selected_ability._is_enough_resources():
 		print_debug("selected_ability not enought resources")
 		return
-	
-	print("clicked; ", selected_ability.ability_name)
+
 	ability_targeter.set_ability_to_target(selected_ability)
 
 func hide_bar() -> void:
