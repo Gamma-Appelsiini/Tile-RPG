@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cx4rh55tmwqpa"]
+
+[ext_resource type="Shader" uid="uid://dh50wxxpfo73o" path="res://Tile-RPG/Shaders/select_glow_shader.gdshader" id="1_li0oh"]
+
+[resource]
+shader = ExtResource("1_li0oh")
+shader_parameter/glow_color = Color(1, 0.808, 0.52, 0.7058824)
+shader_parameter/glow_speed = 5.0000002375
+shader_parameter/glow_thickness = 0.238000011305
+shader_parameter/glow_intensity = 0.8510000404225
+shader_parameter/pulse_amount = 0.902000042845

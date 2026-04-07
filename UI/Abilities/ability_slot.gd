@@ -11,6 +11,8 @@ const ABILITY_TOOLTIP := preload("uid://dwwbtybjbkw7p")
 @export var cooldown_label: Label = null
 @export var select_rect: TextureRect = null
 @export var hover_audio:AudioStream = null
+@export var number_label: Label = null
+@export var glow_rect: ColorRect = null
 
 var ability_in_slot:Ability = null
 var tooltip:AbilityTooltip = null
@@ -18,6 +20,10 @@ var tooltip:AbilityTooltip = null
 func _ready() -> void:
 	self.mouse_entered.connect(_mouse_entered)
 	self.mouse_exited.connect(_mouse_left)
+
+func set_number(number:int) -> void:
+	number_label.text = "  " + str(number)
+	number_label.show()
 
 func set_ability(new_ability:Ability) -> void:
 	new_ability.cooldown_changed.connect(_set_cooldown)

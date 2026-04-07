@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ctv8dai26hq8c" path="res://Tile-RPG/UI/Abilities/ability_slot.gd" id="1_4dhx1"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="2_n6ghh"]
+[ext_resource type="Material" uid="uid://cx4rh55tmwqpa" path="res://Tile-RPG/Materials/ShaderMaterials/select_glow.tres" id="4_ue6e8"]
 [ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="5_frumo"]
 [ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="5_ue6e8"]
+[ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="6_008pa"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_ue6e8"]
 
-[node name="AbilitySlot" type="PanelContainer" unique_id=568718494 node_paths=PackedStringArray("ability_icon_rect", "cooldown_rect", "cooldown_label", "select_rect")]
+[node name="AbilitySlot" type="PanelContainer" unique_id=568718494 node_paths=PackedStringArray("ability_icon_rect", "cooldown_rect", "cooldown_label", "select_rect", "number_label", "glow_rect")]
 custom_minimum_size = Vector2(50, 50)
 offset_right = 100.0
 offset_bottom = 100.0
@@ -19,6 +21,8 @@ ability_icon_rect = NodePath("AbilityIconRect")
 cooldown_rect = NodePath("CooldownRect")
 cooldown_label = NodePath("CooldownLabel")
 select_rect = NodePath("SelectRect")
+number_label = NodePath("NumberLabel")
+glow_rect = NodePath("GlowRect")
 
 [node name="BgImage" type="TextureRect" parent="." unique_id=983212640]
 layout_mode = 2
@@ -64,6 +68,12 @@ texture = ExtResource("5_ue6e8")
 expand_mode = 3
 stretch_mode = 5
 
+[node name="GlowRect" type="ColorRect" parent="." unique_id=42142096]
+visible = false
+material = ExtResource("4_ue6e8")
+layout_mode = 2
+mouse_filter = 2
+
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=995238118]
 layout_mode = 2
 texture = ExtResource("6_ue6e8")
@@ -78,3 +88,13 @@ mouse_filter = 2
 texture = ExtResource("5_frumo")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="NumberLabel" type="Label" parent="." unique_id=2072412500]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.6528635, 0.6528636, 0.6528636, 1)
+theme_override_fonts/font = ExtResource("6_008pa")
+theme_override_font_sizes/font_size = 14
+text = "  1"

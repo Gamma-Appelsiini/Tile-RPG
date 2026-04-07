@@ -21,10 +21,16 @@ var hovered_slot:AbilitySlot = null
 var player:Player = null
 var selected_ability:Ability = null
 var in_combat:bool = false
+var bind_slot_dict:Dictionary[String, AbilitySlot] = {}
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
 		_slot_pressed()
+	else:
+		for action:String in bind_slot_dict.keys():
+			if event.is_action_pressed(action):
+				print(action + " in dict")
+
 
 func set_player(new_player:Player) -> void:
 	player = new_player
@@ -41,11 +47,17 @@ func _ready() -> void:
 	_add_slots()
 
 func _add_slots() -> void:
+	var number:int = 1
 	for abi_slot:AbilitySlot in ability_slot_container.get_children():
 		slots.push_back(abi_slot)
 		abi_slot.ability_hovered.connect(_set_hovered_slot)
 		abi_slot.mouse_entered.connect(_on_container_mouse_entered)
 		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
+		
+		if number == 10: number = 0
+		abi_slot.set_number(number)
+		bind_slot_dict["ability " + str(number)] = abi_slot	
+		number += 1
 
 func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
@@ -77,6 +89,7 @@ func _clear_hovered_slot(new_slot:AbilitySlot) -> void:
 	if hovered_slot == new_slot: hovered_slot = null
 
 func _slot_pressed() -> void:
+	print("Pressed")
 	if color_rect.visible: return
 	
 	if hovered_slot == null:
@@ -90,6 +103,7 @@ func _slot_pressed() -> void:
 		print_debug("selected_ability not enought resources")
 		return
 
+	hovered_slot.glow_rect.show()
 	ability_targeter.set_ability_to_target(selected_ability)
 
 func hide_bar() -> void:

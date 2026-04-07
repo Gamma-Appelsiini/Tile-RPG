@@ -38,7 +38,7 @@ info_container = NodePath("InputArea/InfoContainer")
 movement_label = NodePath("InputArea/InfoContainer/MovementContainer/CenterContainer/MovementLabel")
 input_area = NodePath("InputArea")
 end_turn_button = NodePath("InputArea/InfoContainer/ButtonContainer/EndTurnButton")
-xp_bar = NodePath("xp_bar")
+xp_bar = NodePath("InputArea/xp_bar")
 
 [node name="InputArea" type="Control" parent="." unique_id=628170850]
 unique_name_in_owner = true
@@ -58,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -463.5
-offset_top = 8.0
-offset_right = 463.5
-offset_bottom = 68.0
+offset_left = -259.5
+offset_top = 2.0
+offset_right = 259.5
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -77,9 +77,6 @@ stretch_mode = 1
 [node name="AbilitySlotContainer" type="HBoxContainer" parent="InputArea/PanelContainer" unique_id=1484041970]
 layout_mode = 2
 theme_override_constants/separation = 1
-
-[node name="AbilitySlot12" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=941265568 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
 
 [node name="AbilitySlot" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=1818825113 instance=ExtResource("1_fh5s2")]
 layout_mode = 2
@@ -111,32 +108,22 @@ layout_mode = 2
 [node name="AbilitySlot10" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=568718494 instance=ExtResource("1_fh5s2")]
 layout_mode = 2
 
-[node name="AbilitySlot11" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=210114107 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot13" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=1965137094 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot14" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=183952179 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot15" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=189988173 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot16" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=1177174227 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot17" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=1254608375 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
-[node name="AbilitySlot18" parent="InputArea/PanelContainer/AbilitySlotContainer" unique_id=1783673420 instance=ExtResource("1_fh5s2")]
-layout_mode = 2
-
 [node name="ColorRect" type="ColorRect" parent="InputArea/PanelContainer" unique_id=1980300023]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.44705883)
+
+[node name="xp_bar" parent="InputArea" unique_id=1077170898 instance=ExtResource("9_b3exp")]
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -465.0
+offset_top = -19.0
+offset_right = 466.0
+offset_bottom = -2.0
+grow_vertical = 0
 
 [node name="InfoContainer" type="HBoxContainer" parent="InputArea" unique_id=1176299022]
 visible = false
@@ -218,16 +205,5 @@ unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 icon_alignment = 1
-
-[node name="xp_bar" parent="." unique_id=1077170898 instance=ExtResource("9_b3exp")]
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -465.0
-offset_top = -11.0
-offset_right = 466.0
-offset_bottom = 3.0
-grow_vertical = 0
 
 [connection signal="pressed" from="InputArea/InfoContainer/ButtonContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
