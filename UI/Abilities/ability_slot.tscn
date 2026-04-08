@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="6_008pa"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_ue6e8"]
 
-[node name="AbilitySlot" type="PanelContainer" unique_id=568718494 node_paths=PackedStringArray("ability_icon_rect", "cooldown_rect", "cooldown_label", "select_rect", "number_label", "glow_rect")]
+[node name="AbilitySlot" type="PanelContainer" unique_id=568718494 node_paths=PackedStringArray("ability_icon_rect", "cooldown_rect", "cooldown_label", "select_rect", "number_label", "glow_rect", "button")]
 custom_minimum_size = Vector2(50, 50)
 offset_right = 100.0
 offset_bottom = 100.0
@@ -23,6 +23,7 @@ cooldown_label = NodePath("CooldownLabel")
 select_rect = NodePath("SelectRect")
 number_label = NodePath("NumberLabel")
 glow_rect = NodePath("GlowRect")
+button = NodePath("Button")
 
 [node name="BgImage" type="TextureRect" parent="." unique_id=983212640]
 layout_mode = 2
@@ -98,3 +99,8 @@ theme_override_colors/font_color = Color(0.6528635, 0.6528636, 0.6528636, 1)
 theme_override_fonts/font = ExtResource("6_008pa")
 theme_override_font_sizes/font_size = 14
 text = "  1"
+
+[node name="Button" type="Button" parent="." unique_id=1258331120]
+self_modulate = Color(1, 0, 0, 0)
+layout_mode = 2
+mouse_filter = 1

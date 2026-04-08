@@ -32,13 +32,13 @@ func _ready() -> void:
 	for i in SLOTS:
 		var new_slot:AbilitySlot = ABILITY_SLOT.instantiate()
 		grid_container.add_child(new_slot)
-		new_slot.ability_hovered.connect(set_hovered)
-		new_slot.ability_unhovered.connect(set_hovered)
+		new_slot.mouse_entered.connect(set_hovered.bind(new_slot))
+		new_slot.mouse_exited.connect(set_hovered.bind(new_slot))
 		new_slot.tooltip = self.tooltip
 		
 	for slot:AbilitySlot in ability_bar.slots:
-		slot.ability_hovered.connect(set_hovered)
-		slot.ability_unhovered.connect(set_hovered)
+		slot.mouse_entered.connect(set_hovered.bind(slot))
+		slot.mouse_exited.connect(set_hovered.bind(slot))
 		slot.tooltip = self.tooltip
 
 func _create_tooltip() -> void:

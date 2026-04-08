@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource("1_li0oh")
-shader_parameter/glow_color = Color(1, 0.808, 0.52, 0.7058824)
+shader_parameter/glow_color = Color(0.9999997, 0.8312396, 0.5839804, 1)
 shader_parameter/glow_speed = 5.0000002375
 shader_parameter/glow_thickness = 0.238000011305
 shader_parameter/glow_intensity = 0.8510000404225

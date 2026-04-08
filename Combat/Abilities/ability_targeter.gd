@@ -9,6 +9,7 @@ var player_camera:Camera3D = null
 var tile_manager:TileManager = null
 
 var selected_ability:Ability = null
+var selected_slot:AbilitySlot = null
 var hovered_character:GameCharacter = null
 var hovered_tile:Tile = null
 var aoe_indicators:Array[Node3D] = []
@@ -55,6 +56,11 @@ func _input(event: InputEvent) -> void:
 func _is_input_non_cancelling(event: InputEvent) -> bool:
 	if event.is_action_pressed("roll_up") or event.is_action_pressed("roll_down") or event.is_action_pressed("Backward") or event.is_action_pressed("Forward") or event.is_action_pressed("Left") or event.is_action_pressed("Right") or event.is_action_pressed("Rotate_Cam_L") or event.is_action_pressed("Rotate_Cam_R"):
 		return true
+	
+	const ABI_INPUTS:Array[String] = ["ability 0", "ability 1", "ability 2", "ability 3", "ability 4", "ability 5", "ability 6", "ability 7", "ability 8", "ability 9", ]
+	for input_name:String in ABI_INPUTS:
+		if event.is_action_pressed(input_name): return true
+	
 	return false
 
 func _process(_delta: float) -> void:
@@ -77,34 +83,50 @@ func _visualize_tiles_in_range() -> void:
 			indicator.set_enemy_color()
 		indicator.show()
 
-func set_ability_to_target(new_ability:Ability) -> void:
-	print_debug("set abi to target")
-	if new_ability == null: return
+func set_ability_to_target(new_slot:AbilitySlot) -> void:
+	var new_ability:Ability = new_slot.ability_in_slot
 	
+	if new_ability == null:
+		print("new abi null")
+		cancel_ability_targeting()
+		return
+	
+	if selected_ability == new_ability or selected_slot == new_slot: 
+		print("same abi, cancelling target")
+		cancel_ability_targeting()
+		return
+	elif selected_ability: cancel_ability_targeting()
+	
+	selected_ability = new_ability
 	GlobalSignals.current_level.tile_manager.targeting_ability = true
+	selected_slot = new_slot
+	selected_slot.glow_rect.show()
 	
 	if player == null:
 		player = GlobalSignals.player
 		player_camera = player.player_camera
 
-	selected_ability = new_ability
 	_start_targeting_animation()
 	_visualize_tiles_in_range()
 	set_process(true)
 	set_process_input(true)
 
 func cancel_ability_targeting() -> void:
-	_stop_targeting_animation()
+	if selected_ability == null: return
 	
+	_stop_targeting_animation()
 	_hide_range_indicators()
 	set_process_input(false)
 	set_process(false)
 	_hide_aoe()
+	
+	selected_slot.glow_rect.hide()
+	selected_slot = null
 	GlobalSignals.hide_outline_on_target.emit(hovered_character)
 	hovered_tile = null
 	hovered_character = null
 	selected_ability = null
-	await get_tree().create_timer(.1).timeout
+	#await get_tree().create_timer(.01).timeout
 	GlobalSignals.current_level.tile_manager.targeting_ability = false
 
 func _set_collision_mask(query:PhysicsRayQueryParameters3D) -> void:

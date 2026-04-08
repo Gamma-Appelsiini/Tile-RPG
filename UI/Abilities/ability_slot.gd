@@ -1,8 +1,8 @@
 extends Control
 class_name AbilitySlot
 
-signal ability_hovered(slot:AbilitySlot)
-signal ability_unhovered(slot:AbilitySlot)
+#signal ability_hovered(slot:AbilitySlot)
+#signal ability_unhovered(slot:AbilitySlot)
 
 const ABILITY_TOOLTIP := preload("uid://dwwbtybjbkw7p")
 
@@ -13,6 +13,7 @@ const ABILITY_TOOLTIP := preload("uid://dwwbtybjbkw7p")
 @export var hover_audio:AudioStream = null
 @export var number_label: Label = null
 @export var glow_rect: ColorRect = null
+@export var button: Button = null
 
 var ability_in_slot:Ability = null
 var tooltip:AbilityTooltip = null
@@ -62,13 +63,13 @@ func _mouse_entered() -> void:
 	
 	select_rect.visible = true
 	GlobalSignals.play_audio.emit(hover_audio, AudioManager.AUDIO_TYPE.UI)
-	ability_hovered.emit(self)
+	#ability_hovered.emit(self)
 	
 func _mouse_left() -> void:
 	if tooltip: tooltip.visible = false
 
 	select_rect.visible = false
-	ability_unhovered.emit(self)
+	#ability_unhovered.emit(self)
 
 func _show_tt():
 	if !tooltip or !ability_in_slot: return
