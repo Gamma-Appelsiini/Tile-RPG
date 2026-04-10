@@ -87,17 +87,16 @@ func set_ability_to_target(new_slot:AbilitySlot) -> void:
 	var new_ability:Ability = new_slot.ability_in_slot
 	
 	if new_ability == null:
-		print("new abi null")
 		cancel_ability_targeting()
 		return
 	
 	if selected_ability == new_ability or selected_slot == new_slot: 
-		print("same abi, cancelling target")
 		cancel_ability_targeting()
 		return
 	elif selected_ability: cancel_ability_targeting()
 	
 	selected_ability = new_ability
+	GlobalSignals.set_mouse_state.emit(MouseHandler.MOUSE_STATE.TARGETING)
 	GlobalSignals.current_level.tile_manager.targeting_ability = true
 	selected_slot = new_slot
 	selected_slot.glow_rect.show()
@@ -128,6 +127,7 @@ func cancel_ability_targeting() -> void:
 	selected_ability = null
 	#await get_tree().create_timer(.01).timeout
 	GlobalSignals.current_level.tile_manager.targeting_ability = false
+	GlobalSignals.set_mouse_state.emit(MouseHandler.MOUSE_STATE.NORMAL)
 
 func _set_collision_mask(query:PhysicsRayQueryParameters3D) -> void:
 	if selected_ability.target_type == Ability.TARGET_TYPE.TILE:

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7xc2gc31hgti"]
 
 [ext_resource type="Script" uid="uid://bdijjbjmpvuhj" path="res://Tile-RPG/Combat/Abilities/ice_bolt/ice_bolt.gd" id="1_q3ksw"]
-[ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="2_6d0wi"]
+[ext_resource type="Texture2D" uid="uid://bxha3tt233ct8" path="res://Tile-RPG/Images/Abilities/ice_bolt.png" id="2_q3ksw"]
 
 [node name="IceBolt" type="Node3D" unique_id=417763505]
 script = ExtResource("1_q3ksw")
@@ -9,7 +9,7 @@ use_animation = 5
 targeting_animation = 6
 usable_on_characters = Array[int]([1])
 ability_tags = Array[int]([0, 4, 5, 9])
-ability_icon = ExtResource("2_6d0wi")
+ability_icon = ExtResource("2_q3ksw")
 ability_name = "Ice Bolt"
 ability_cooldown = 1
 ability_range = 4

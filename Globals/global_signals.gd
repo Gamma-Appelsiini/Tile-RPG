@@ -30,6 +30,9 @@ signal show_outline_on_target(target:Node3D)
 signal hide_outline
 signal hide_outline_on_target(target:Node3D)
 
+signal mouse_hovered(amount:int)
+signal set_mouse_state(state:MouseHandler.MOUSE_STATE)
+
 signal change_all_stats_visibility
 
 signal combat_start

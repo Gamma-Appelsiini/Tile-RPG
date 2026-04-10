@@ -34,8 +34,12 @@ func _ready() -> void:
 
 func _node_hovered(hovered:bool) -> void:
 	node_hovered = hovered
-	if node_hovered or show_outline_pressed: _show_outline()
-	else: _hide_outline()
+	if node_hovered or show_outline_pressed:
+		GlobalSignals.mouse_hovered.emit(1)
+		_show_outline()
+	else:
+		GlobalSignals.mouse_hovered.emit(-1)
+		_hide_outline()
 	
 func _outline_pressed(pressed:bool) -> void:
 	show_outline_pressed = pressed

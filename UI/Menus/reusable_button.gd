@@ -24,8 +24,9 @@ var moused_button:Callable = func():
 	color_rect.visible = !color_rect.visible
 	
 	if !color_rect.visible:
-		pass
+		GlobalSignals.mouse_hovered.emit(-1)
 	else:
+		GlobalSignals.mouse_hovered.emit(1)
 		GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.UI)
 	
 var pressed_button:Callable = func():

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3uev06m0wx45"]
 
 [ext_resource type="Script" uid="uid://3ustlblamgko" path="res://Tile-RPG/Combat/Abilities/SkyHammer/sky_hammer.gd" id="1_vx7l0"]
-[ext_resource type="Texture2D" uid="uid://crc76ag1t1tkn" path="res://Tile-RPG/Images/Shaders/Ball2.png" id="2_bhko1"]
+[ext_resource type="Texture2D" uid="uid://cn74qpcdxyygl" path="res://Tile-RPG/Images/Abilities/giant_hammer.png" id="2_bhko1"]
 
 [node name="SkyHammer" type="Node3D" unique_id=1519392739]
 script = ExtResource("1_vx7l0")
