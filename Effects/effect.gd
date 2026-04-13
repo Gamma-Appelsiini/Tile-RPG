@@ -33,6 +33,7 @@ func _handle_start() -> void:
 	
 
 func play_effect() -> void:
+	animation_player.stop()
 	show()
 	if top_level_on_start: top_level = true
 	

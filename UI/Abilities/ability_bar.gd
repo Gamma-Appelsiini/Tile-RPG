@@ -15,6 +15,8 @@ class_name AbilityBar
 
 @export var end_turn_button_sound:AudioStream = null
 
+const ABILITY_TOOLTIP := preload("uid://dwwbtybjbkw7p")
+
 var controls:Array[bool] = []
 var slots:Array[AbilitySlot] = []
 var hovered_slot:AbilitySlot = null
@@ -22,6 +24,7 @@ var player:Player = null
 var selected_ability:Ability = null
 var in_combat:bool = false
 var bind_slot_dict:Dictionary[String, AbilitySlot] = {}
+var ability_tooltip:AbilityTooltip = null
 
 func _unhandled_input(event: InputEvent) -> void:
 	for action:String in bind_slot_dict.keys():
@@ -40,7 +43,14 @@ func set_player(new_player:Player) -> void:
 func _ready() -> void:
 	set_process_unhandled_input(false)
 	_connect_signals()
+	_create_tooltip()
 	_add_slots()
+
+func _create_tooltip() -> void:
+	var new_tt:AbilityTooltip = ABILITY_TOOLTIP.instantiate()
+	ability_tooltip = new_tt
+	new_tt.visible = false
+	add_child(new_tt)
 
 func _add_slots() -> void:
 	var number:int = 1
@@ -50,6 +60,7 @@ func _add_slots() -> void:
 		abi_slot.button.pressed.connect(_ability_slot_pressed.bind(abi_slot))
 		abi_slot.mouse_entered.connect(_on_container_mouse_entered)
 		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
+		abi_slot.tooltip = ability_tooltip
 		
 		if number == 10: number = 0
 		abi_slot.set_number(number)
@@ -79,10 +90,7 @@ func _connect_signals() -> void:
 	GlobalSignals.combat_start.connect(func(): set_process_unhandled_input(true))
 	GlobalSignals.combat_end.connect(func(): set_process_unhandled_input(false))
 	
-	input_area.mouse_entered.connect(_on_container_mouse_entered)
-	input_area.mouse_exited.connect(_on_container_mouse_exited)
-	end_turn_button.mouse_entered.connect(_on_container_mouse_entered)
-	end_turn_button.mouse_exited.connect(_on_container_mouse_exited)
+	GlobalSignals.combat_end.connect(color_rect.show)
 
 func _set_movement() -> void:
 	movement_label.text = str(player.stat_handler.resources[Stats.ResourceStat.CURRENT_MOVEMENT])
@@ -115,17 +123,12 @@ func show_bar() -> void:
 func _on_container_mouse_entered() -> void:
 	controls.push_back(true)
 	ability_targeter.input_ok = false
-	
-	#Dont try to move when mouse in bar
-	GlobalSignals.current_level.tile_manager.shooting_ok = false
-
 
 func _on_container_mouse_exited() -> void:
 	controls.pop_back()
 	if len(controls) != 0: return
 	
 	ability_targeter.input_ok = true
-	GlobalSignals.current_level.tile_manager.shooting_ok = true
 
 func save_to_data() -> Array:
 	var save_array:Array[String] = []

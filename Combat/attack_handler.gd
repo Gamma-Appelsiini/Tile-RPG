@@ -56,7 +56,7 @@ static func _apply_damage_increases() -> void:
 		#Dmg increases keys are +50 compared to dmg types
 		if attack.attacker.stat_handler.dmg_increases.has(dmg_type + 50):
 			var damage_multiplier:float = 1.0 + (attack.attacker.stat_handler.dmg_increases[dmg_type + 50] / 100.0)
-			print("Has increase: ", damage_multiplier)
+			#print_debug("Has increase: ", damage_multiplier)
 			attack.damages[dmg_type] = int(attack.damages[dmg_type] * damage_multiplier )
 
 static func _choose_take_dmg_animation(attacker:GameCharacter) -> void:
@@ -170,7 +170,7 @@ static func _get_evasion_chance() -> int:
 	var point:float = (receiver_evasion * 0.3) / divider
 	if point > 1.0: point = 1.0
 	var evasion_chance:float = EVASION_CURVE.sample(point)
-	print("evasion chance: ", evasion_chance)
+	#print_debug("evasion chance: ", evasion_chance)
 	
 	var dodge_chance:int = receiver.stat_handler.defences[Stats.Defence.DODGE]
 	if attack.ability_tags.has(Ability.ABILITY_TAG.SPELL): dodge_chance = receiver.stat_handler.defences[Stats.Defence.SPELL_DODGE]
@@ -245,7 +245,7 @@ static func _apply_armor() -> void:
 	var point:float = receiver_armor / float((final_damage + pure_damage + receiver_armor) * 2)
 	if point > 1.0: point = 1.0
 	var reduction:float = ARMOR_CURVE.sample(point)
-	#print("Armor: ", receiver_armor, " Damage: ", final_damage + pure_damage, " Reduction: ", reduction)
+	#print_debug("Armor: ", receiver_armor, " Damage: ", final_damage + pure_damage, " Reduction: ", reduction)
 	
 	var reduced_damage:int = int(final_damage * (1 - reduction))
 	if final_damage > 0 and reduced_damage <= 0: reduced_damage = 1

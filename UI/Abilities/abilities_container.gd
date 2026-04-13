@@ -39,7 +39,6 @@ func _ready() -> void:
 	for slot:AbilitySlot in ability_bar.slots:
 		slot.mouse_entered.connect(set_hovered.bind(slot))
 		slot.mouse_exited.connect(set_hovered.bind(slot))
-		slot.tooltip = self.tooltip
 
 func _create_tooltip() -> void:
 	var new_tt:AbilityTooltip = ABILITY_TOOLTIP.instantiate()

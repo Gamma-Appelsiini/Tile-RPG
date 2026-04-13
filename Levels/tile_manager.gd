@@ -30,6 +30,7 @@ func _add_doors() -> void:
 
 
 func _ready() -> void:
+	set_process_input(false)
 	_create_new_path_visuals(8)
 	_create_indicator()
 	
@@ -170,7 +171,7 @@ func _add_diagonals(tile: Tile) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
-		if hovered_tile != null and shooting_ok and !targeting_ability:
+		if hovered_tile != null and shooting_ok and !targeting_ability and !_is_mouse_pos_below_percentage():
 			_move_character_to_tile(player, hovered_tile)
 			disable_shooting()
 			await character_moved
@@ -191,13 +192,14 @@ func disable_shooting() -> void:
 	_set_hovered_tile(null)
 
 func _set_hovered_tile(new_tile:Tile) -> void:
-	if hovered_tile == new_tile:
-		return
 	if new_tile == null:
 		ground_indicator.visible = false
 		_hide_path()
 		hovered_tile = null
 		return
+		
+	if hovered_tile == new_tile:
+		if !recreate_path: return
 	
 	hovered_tile = new_tile
 	ground_indicator.visible = true
@@ -210,10 +212,17 @@ func _set_hovered_tile(new_tile:Tile) -> void:
 	path = path.slice(0,player_move_amount + 1)
 	_visualize_path(path)
 
+func _is_mouse_pos_below_percentage(percentage:float = 10.0) -> bool:
+	var viewport_height:float = get_viewport().get_visible_rect().size.y
+	var mouse_y:float = get_viewport().get_mouse_position().y
+	
+	var threshold:float = viewport_height * (1.0 - (percentage / 100.0))
+	return (mouse_y >= threshold)
+
 func _choose_tile() -> void:
 	if !shooting: return
-	
-	if shooting_ok and !targeting_ability:
+
+	if shooting_ok and !targeting_ability and !_is_mouse_pos_below_percentage():
 		var mouse_point:Vector3 = _get_mouse_point()
 		var closest_tile:Tile = get_closest_tile(mouse_point)
 		_set_hovered_tile(closest_tile)
@@ -221,7 +230,7 @@ func _choose_tile() -> void:
 		ground_indicator.visible = false
 		_hide_path()
 		
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.05).timeout
 	_choose_tile()
 
 func _get_mouse_point() -> Vector3:
@@ -327,9 +336,11 @@ func get_shortest_path(start:Tile, end:Tile, out_of_combat:bool = false, end_til
 	path.reverse()
 	return path
 
+var recreate_path:bool = false
 func _hide_path() -> void:
 	for visual:PathVisual in path_visuals:
 		visual.hide_visual()
+	recreate_path = true
 
 func _create_new_path_visuals(path_length:int) -> void:
 	while path_length > len(path_visuals):
@@ -338,9 +349,11 @@ func _create_new_path_visuals(path_length:int) -> void:
 		new_pv.hide_visual()
 		path_visuals.push_back(new_pv)
 
+var old_path:Array[PathVisual] = []
 func _visualize_path(path:Array[Tile]) -> void:
 	_create_new_path_visuals(len(path))
 	_hide_path()
+	recreate_path = false
 	
 	#Visualization starts after first tile
 	for i in range(1, path.size()):
@@ -354,7 +367,7 @@ func _visualize_path(path:Array[Tile]) -> void:
 		if next_tile: next_dir = (next_tile.global_position - tile.global_position).normalized()
 		
 		var rotation_amount:float = 0
-		var path_visual:PathVisual = path_visuals[i]
+		var path_visual:PathVisual = path_visuals[i-1]
 		path_visual.global_position = tile.global_position
 		var visual_type:PathVisual.VISUAL
 		
@@ -373,8 +386,8 @@ func _visualize_path(path:Array[Tile]) -> void:
 			visual_type = PathVisual.VISUAL.CORNER
 			rotation_amount = _get_corner_rotation(prev_tile, tile, next_tile)
 		
-		path_visual.show_visual(visual_type)
 		path_visual.set_visual_rotation(rotation_amount)
+		path_visual.show_visual(visual_type)
 		
 func _get_corner_rotation(prev_tile:Tile, tile:Tile, next_tile:Tile) -> float:
 	var rotation_amount:float = 0

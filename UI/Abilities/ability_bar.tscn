@@ -127,7 +127,6 @@ offset_bottom = -2.0
 grow_vertical = 0
 
 [node name="InfoContainer" type="HBoxContainer" parent="InputArea" unique_id=1176299022]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1

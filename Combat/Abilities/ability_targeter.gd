@@ -3,6 +3,14 @@ class_name AbilityTargeter
 
 const AOE_INDICATOR:PackedScene = preload("uid://mn3gwrbcqycm")
 const RANGE_INDICATOR := preload("uid://ff1heogqgu75")
+#Using & before the strings makes them StringName types
+const NON_CANCELLING_ACTIONS: Array[StringName] = [
+	&"roll_up", &"roll_down", &"Backward", &"Forward", 
+	&"Left", &"Right", &"Rotate_Cam_L", &"Rotate_Cam_R",
+	&"ability 0", &"ability 1", &"ability 2", &"ability 3", 
+	&"ability 4", &"ability 5", &"ability 6", &"ability 7", 
+	&"ability 8", &"ability 9",
+]
 
 var player:Player = null
 var player_camera:Camera3D = null
@@ -18,7 +26,7 @@ var range_indicators:Array[RangeIndicator] = []
 var hidden_indicators:Array[RangeIndicator] = []
 var range_mesh:MeshInstance3D = null
 
-func _ready() -> void:
+func _ready() -> void:	
 	set_process(false)
 	set_process_input(false)
 	_add_range_tiles(20)
@@ -45,7 +53,9 @@ func _add_range_tiles(amount:int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"): 
-		if !input_ok: return
+		if !input_ok:
+			print("input not ok")
+			return
 		_use_ability()
 	#Any other action other than camera movement in input map cancels
 	elif _is_input_non_cancelling(event):
@@ -54,14 +64,8 @@ func _input(event: InputEvent) -> void:
 		cancel_ability_targeting()
 
 func _is_input_non_cancelling(event: InputEvent) -> bool:
-	if event.is_action_pressed("roll_up") or event.is_action_pressed("roll_down") or event.is_action_pressed("Backward") or event.is_action_pressed("Forward") or event.is_action_pressed("Left") or event.is_action_pressed("Right") or event.is_action_pressed("Rotate_Cam_L") or event.is_action_pressed("Rotate_Cam_R"):
-		return true
-	
-	const ABI_INPUTS:Array[String] = ["ability 0", "ability 1", "ability 2", "ability 3", "ability 4", "ability 5", "ability 6", "ability 7", "ability 8", "ability 9", ]
-	for input_name:String in ABI_INPUTS:
-		if event.is_action_pressed(input_name): return true
-	
-	return false
+	return NON_CANCELLING_ACTIONS.any(func(action): return event.is_action_pressed(action))
+
 
 func _process(_delta: float) -> void:
 	_get_ability_target()
@@ -97,7 +101,7 @@ func set_ability_to_target(new_slot:AbilitySlot) -> void:
 	
 	selected_ability = new_ability
 	GlobalSignals.set_mouse_state.emit(MouseHandler.MOUSE_STATE.TARGETING)
-	GlobalSignals.current_level.tile_manager.targeting_ability = true
+	GlobalSignals.current_level.tile_manager.disable_shooting()
 	selected_slot = new_slot
 	selected_slot.glow_rect.show()
 	
@@ -125,8 +129,8 @@ func cancel_ability_targeting() -> void:
 	hovered_tile = null
 	hovered_character = null
 	selected_ability = null
-	#await get_tree().create_timer(.01).timeout
-	GlobalSignals.current_level.tile_manager.targeting_ability = false
+
+	GlobalSignals.current_level.tile_manager.enable_shooting()
 	GlobalSignals.set_mouse_state.emit(MouseHandler.MOUSE_STATE.NORMAL)
 
 func _set_collision_mask(query:PhysicsRayQueryParameters3D) -> void:
