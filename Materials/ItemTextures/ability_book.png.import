@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxv5c2h3y0r6y"
-path.s3tc="res://.godot/imported/agility.png-029155c039c61b1519ccaa8d332ec06d.s3tc.ctex"
+uid="uid://bgktnnunio617"
+path.s3tc="res://.godot/imported/ability_book.png-37a632791d834ca631fc0e755071882b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Stats/agility.png"
-dest_files=["res://.godot/imported/agility.png-029155c039c61b1519ccaa8d332ec06d.s3tc.ctex"]
+source_file="res://Tile-RPG/Materials/ItemTextures/ability_book.png"
+dest_files=["res://.godot/imported/ability_book.png-37a632791d834ca631fc0e755071882b.s3tc.ctex"]
 
 [params]
 

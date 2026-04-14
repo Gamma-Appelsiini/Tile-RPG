@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://nbpso7y2jse1"]
+
+[ext_resource type="Script" uid="uid://ci6x8ekd0njgw" path="res://Tile-RPG/Interactables/ability_tome.gd" id="1_p5reu"]
+[ext_resource type="Material" uid="uid://c5lpnu7c74uau" path="res://Tile-RPG/Materials/ShaderMaterials/highlight_material.tres" id="2_df00y"]
+[ext_resource type="PackedScene" uid="uid://bp67ydoqt8yv2" path="res://Tile-RPG/Items/ItemScenes/tome_model.tscn" id="3_pl8qy"]
+[ext_resource type="PackedScene" uid="uid://cmgb3ivkgrbqb" path="res://Tile-RPG/Effects/loot_beam/loot_beam.tscn" id="4_thnfm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xvdpl"]
+height = 0.4
+radius = 0.4
+
+[node name="AbilityTome" type="Node3D" unique_id=1525961808 node_paths=PackedStringArray("tome_model", "cover_mesh", "stat_mesh", "loot_beam", "parent_node")]
+script = ExtResource("1_p5reu")
+tome_model = NodePath("TomeModel")
+cover_mesh = NodePath("TomeModel/ScaleNode/Cover")
+stat_mesh = NodePath("TomeModel/ScaleNode/Cover/StatMesh")
+loot_beam = NodePath("ParentNode/LootBeam")
+highlight_material = ExtResource("2_df00y")
+parent_node = NodePath("ParentNode")
+
+[node name="TomeModel" parent="." unique_id=538003794 instance=ExtResource("3_pl8qy")]
+
+[node name="ParentNode" type="Node3D" parent="." unique_id=198520769]
+
+[node name="InteractPos" type="Node3D" parent="ParentNode" unique_id=66048606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14404905, 0)
+
+[node name="LootBeam" parent="ParentNode" unique_id=787245338 instance=ExtResource("4_thnfm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03894286, 0)
+visible = false
+
+[node name="Area3D" type="Area3D" parent="ParentNode" unique_id=1990909211]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParentNode/Area3D" unique_id=751223240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_xvdpl")
+
+[editable path="TomeModel"]

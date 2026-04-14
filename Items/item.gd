@@ -28,3 +28,7 @@ func save_to_data() -> Dictionary:
 #Override this
 func load_from_data(save_data:Dictionary) -> void:
 	print(save_data)
+
+#Overrided
+func _on_double_click() -> void:
+	pass
