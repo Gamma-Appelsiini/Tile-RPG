@@ -21,7 +21,6 @@ var selected_slot:AbilitySlot = null
 var hovered_character:GameCharacter = null
 var hovered_tile:Tile = null
 var aoe_indicators:Array[Node3D] = []
-var input_ok:bool = false
 var range_indicators:Array[RangeIndicator] = []
 var hidden_indicators:Array[RangeIndicator] = []
 var range_mesh:MeshInstance3D = null
@@ -53,9 +52,6 @@ func _add_range_tiles(amount:int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"): 
-		if !input_ok:
-			print("input not ok")
-			return
 		_use_ability()
 	#Any other action other than camera movement in input map cancels
 	elif _is_input_non_cancelling(event):
@@ -114,7 +110,7 @@ func set_ability_to_target(new_slot:AbilitySlot) -> void:
 	set_process(true)
 	set_process_input(true)
 
-func cancel_ability_targeting() -> void:
+func cancel_ability_targeting(enable_movement:bool = true) -> void:
 	if selected_ability == null: return
 	
 	_stop_targeting_animation()
@@ -130,7 +126,7 @@ func cancel_ability_targeting() -> void:
 	hovered_character = null
 	selected_ability = null
 
-	GlobalSignals.current_level.tile_manager.enable_shooting()
+	if enable_movement: GlobalSignals.current_level.tile_manager.enable_shooting()
 	GlobalSignals.set_mouse_state.emit(MouseHandler.MOUSE_STATE.NORMAL)
 
 func _set_collision_mask(query:PhysicsRayQueryParameters3D) -> void:
@@ -221,11 +217,19 @@ func _get_hovered_character() -> GameCharacter:
 	return hovered_char
 
 func _use_ability() -> void:
-	if selected_ability.target_type == Ability.TARGET_TYPE.TILE:
-		if hovered_tile != null:
-			selected_ability.use_ability_on_target_tile(hovered_tile)
-	elif selected_ability.target_type == Ability.TARGET_TYPE.GAME_CHARACTER:
-		if hovered_character != null:
-			selected_ability.use_ability_on_target_character(hovered_character)
+	var abi_to_use:Ability = selected_ability
+	var tile_to_use_on:Tile = hovered_tile
+	var char_to_use_on:GameCharacter = hovered_character
+	cancel_ability_targeting(false)
 	
-	cancel_ability_targeting()
+	if abi_to_use.target_type == Ability.TARGET_TYPE.TILE:
+		if tile_to_use_on != null:
+			abi_to_use.use_ability_on_target_tile(tile_to_use_on)
+			await abi_to_use.ability_finished
+	elif abi_to_use.target_type == Ability.TARGET_TYPE.GAME_CHARACTER:
+		if char_to_use_on != null:
+			abi_to_use.use_ability_on_target_character(char_to_use_on)
+			await abi_to_use.ability_finished
+	
+	GlobalSignals.current_level.tile_manager.enable_shooting()
+	

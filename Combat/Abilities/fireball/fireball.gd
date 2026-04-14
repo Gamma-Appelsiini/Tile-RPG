@@ -17,7 +17,9 @@ func _shoot_fire_projectile(target:Tile) -> void:
 	await new_projectile.hit_target
 
 func use_ability_on_target_tile(target:Tile) -> void:
-	if !_can_use_ability(target): return
+	if !_can_use_ability(target):
+		ability_finished.emit()
+		return
 
 	_use_resources()
 	var tiles_in_aoe:Array[Tile] = GlobalSignals.current_level.tile_manager.get_tiles_in_aoe(target, ability_aoe)
@@ -36,6 +38,8 @@ func use_ability_on_target_tile(target:Tile) -> void:
 		if tile.occupant:
 			AttackHandler.use_attack_on_char(tile.occupant, fire_attack)
 			_spawn_hit_effect(tile.occupant)
+			
+	ability_finished.emit()
 
 func _set_tiles_on_fire(tiles_in_aoe:Array[Tile]) -> void:
 	var fire_chance:int = 2 * ability_owner.stat_handler.get_stat_amount(Stats.MainStat.LUCK)

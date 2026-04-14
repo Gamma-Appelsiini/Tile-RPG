@@ -27,10 +27,21 @@ var character_circle:MeshInstance3D = null
 var outline_parent:GameCharacter = null
 var node_hovered:bool = false
 var show_outline_pressed:bool = false
+var disabled:bool = false
 
 func _ready() -> void:
 	_connect_outline_signals()
 	_add_char_circle()
+
+func disable(_dead_parent:GameCharacter) -> void:
+	disabled = true
+	_hide_outline()
+	
+	GlobalSignals.show_outline.disconnect(_outline_pressed.bind(true))
+	GlobalSignals.hide_outline.disconnect(_outline_pressed.bind(false))
+	
+	outline_parent.character_mouse_over.disconnect(_node_hovered.bind(true) )
+	outline_parent.character_mouse_left.disconnect(_node_hovered.bind(false) )
 
 func _node_hovered(hovered:bool) -> void:
 	node_hovered = hovered
@@ -54,6 +65,7 @@ func _connect_outline_signals() -> void:
 		outline_parent = get_parent().get_parent() as GameCharacter
 		outline_parent.character_mouse_over.connect(_node_hovered.bind(true) )
 		outline_parent.character_mouse_left.connect(_node_hovered.bind(false) )
+		outline_parent.died.connect(disable)
 
 func _add_char_circle() -> void:
 	if !CHARACTER_TYPES.has(outline_type): return
@@ -67,6 +79,7 @@ func _add_char_circle() -> void:
 	GlobalSignals.combat_end.connect(func(): character_circle.hide())
 
 func _show_outline() -> void:
+	if disabled: return
 	var outline_material:ShaderMaterial = OUTLINES[outline_type]
 	mesh_to_outline.material_overlay = outline_material
 

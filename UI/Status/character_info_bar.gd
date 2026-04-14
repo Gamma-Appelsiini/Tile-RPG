@@ -12,10 +12,18 @@ var game_char:GameCharacter = null
 var show_amount:int = 0
 var is_hovered:bool = false
 var show_pressed:bool = false
+var disabled:bool = false
 
 func _ready() -> void:
-	_connect_signals()
 	if get_parent() is GameCharacter: set_game_character(get_parent())
+	_connect_signals()
+
+func disable(_parent_char:GameCharacter) -> void:
+	disabled = true
+	hide()
+	set_process(false)
+	GlobalSignals.show_info_bar.disconnect(_show_pressed.bind(true))
+	GlobalSignals.hide_info_bar.disconnect(_show_pressed.bind(false))
 
 func _show_pressed(pressed:bool) -> void:
 	show_pressed = pressed
@@ -34,6 +42,7 @@ func _change_show_amount(amount:int) -> void:
 	else: hide()
 
 func _connect_signals() -> void:
+	game_char.died.connect(disable)
 	GlobalSignals.show_info_bar.connect(_show_pressed.bind(true))
 	GlobalSignals.hide_info_bar.connect(_show_pressed.bind(false))
 
@@ -83,5 +92,6 @@ func _set_screen_position() -> void:
 	self.global_position = screen_position + offset
 
 func show_info() -> void:
+	if disabled: return
 	set_process(true)
 	self.visible = true

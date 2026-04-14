@@ -6,7 +6,9 @@ const HAMMER_SLAM_EFFECT := preload("uid://ducmby7ykroxt")
 const SLAM_TIME:float = 1.0
 
 func use_ability_on_target_tile(target:Tile) -> void:
-	if !_can_use_ability(target): return
+	if !_can_use_ability(target):
+		ability_finished.emit()
+		return
 
 	_use_resources()
 
@@ -30,6 +32,8 @@ func use_ability_on_target_tile(target:Tile) -> void:
 			AttackHandler.use_attack_on_char(tile.occupant, hammer_attack)
 			_spawn_hit_effect(tile.occupant)
 			_stun_target(tile.occupant)
+			
+	ability_finished.emit()
 
 #Overrided
 func get_tiles_in_aoe(target:Tile) -> Array[Tile]:

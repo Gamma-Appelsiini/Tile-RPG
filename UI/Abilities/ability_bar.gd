@@ -58,8 +58,6 @@ func _add_slots() -> void:
 		slots.push_back(abi_slot)
 		
 		abi_slot.button.pressed.connect(_ability_slot_pressed.bind(abi_slot))
-		abi_slot.mouse_entered.connect(_on_container_mouse_entered)
-		abi_slot.mouse_exited.connect(_on_container_mouse_exited)
 		abi_slot.tooltip = ability_tooltip
 		
 		if number == 10: number = 0
@@ -119,16 +117,6 @@ func show_bar() -> void:
 	#TODO animate
 	self.visible = true
 	if in_combat: info_container.show()
-
-func _on_container_mouse_entered() -> void:
-	controls.push_back(true)
-	ability_targeter.input_ok = false
-
-func _on_container_mouse_exited() -> void:
-	controls.pop_back()
-	if len(controls) != 0: return
-	
-	ability_targeter.input_ok = true
 
 func save_to_data() -> Array:
 	var save_array:Array[String] = []

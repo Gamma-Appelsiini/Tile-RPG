@@ -6,7 +6,9 @@ const ARROW_MODEL := preload("uid://bu2olcu1uujmx")
 
 func use_ability_on_target_character(target:GameCharacter) -> void:
 	var new_attack:Attack = _create_attack()
-	if !_can_use_ability(target): return
+	if !_can_use_ability(target):
+		ability_finished.emit()
+		return
 	
 	_use_resources()
 	ability_owner.rotate_towards_point(target.global_position)

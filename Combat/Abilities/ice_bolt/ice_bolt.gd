@@ -44,7 +44,9 @@ func _spawn_explosion(pos:Vector3) -> void:
 	blocks.global_position = pos
 
 func use_ability_on_target_character(target:GameCharacter) -> void:
-	if !_can_use_ability(target): return
+	if !_can_use_ability(target):
+		ability_finished.emit()
+		return
 	
 	_use_resources()
 	

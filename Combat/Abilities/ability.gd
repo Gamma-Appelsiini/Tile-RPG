@@ -63,7 +63,7 @@ func get_tiles_in_aoe(_target:Tile) -> Array[Tile]:
 	return [null]
 
 func _visualize_targetable_tiles() -> void:
-	var tile_manager:TileManager
+	#var tile_manager:TileManager
 	pass
 
 #Override

@@ -4,7 +4,9 @@ class_name CureWounds
 const HEAL_EFFECT := preload("uid://bftoty805070m")
 
 func use_ability_on_target_character(target:GameCharacter) -> void:
-	if !_can_use_ability(target): return
+	if !_can_use_ability(target):
+		ability_finished.emit()
+		return
 	
 	_use_resources()
 	#TODO animate caster
