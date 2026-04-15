@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bp67ydoqt8yv2"]
 
-[ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_05yys"]
+[ext_resource type="Script" uid="uid://6pms1k8pwdo6" path="res://Tile-RPG/Items/ItemScenes/tome_model.gd" id="1_05yys"]
 [ext_resource type="Texture2D" uid="uid://bgktnnunio617" path="res://Tile-RPG/Materials/ItemTextures/ability_book.png" id="1_yu7mu"]
 [ext_resource type="Texture2D" uid="uid://cvougw8fp3thy" path="res://Tile-RPG/Models/props/book_book.png" id="2_05yys"]
 [ext_resource type="Texture2D" uid="uid://cxv5c2h3y0r6y" path="res://Tile-RPG/Images/Stats/agility.png" id="3_7p1v3"]
@@ -78,8 +78,13 @@ albedo_texture = ExtResource("3_7p1v3")
 [sub_resource type="BoxShape3D" id="BoxShape3D_7p1v3"]
 size = Vector3(0.3564453, 0.095214844, 0.40039063)
 
-[node name="TomeModel" type="RigidBody3D" unique_id=538003794 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+[node name="TomeModel" type="RigidBody3D" unique_id=538003794 node_paths=PackedStringArray("tome_model", "cover_mesh", "stat_mesh", "collision_shape_3d", "item_mesh")]
+collision_layer = 16
+collision_mask = 23
 script = ExtResource("1_05yys")
+tome_model = NodePath(".")
+cover_mesh = NodePath("ScaleNode/Cover")
+stat_mesh = NodePath("ScaleNode/Cover/StatMesh")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("ScaleNode/Cover")
 

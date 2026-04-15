@@ -31,4 +31,5 @@ func load_from_data(save_data:Dictionary) -> void:
 
 #Overrided
 func _on_double_click() -> void:
+	print("Double clicked item")
 	pass

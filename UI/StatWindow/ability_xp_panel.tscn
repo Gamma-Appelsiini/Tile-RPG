@@ -36,7 +36,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_men4c"]
 bg_color = Color(0.8898403, 0.8674041, 0.71264464, 1)
 
-[node name="PanelContainer" type="PanelContainer" unique_id=1077170898 node_paths=PackedStringArray("progress_bar", "texture_rect", "green_bar")]
+[node name="PanelContainer" type="PanelContainer" unique_id=1077170898 node_paths=PackedStringArray("progress_bar", "green_bar")]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(927, 8)
 anchors_preset = 8
@@ -55,7 +55,6 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_3dd5c")
 script = ExtResource("1_kjpsm")
 progress_bar = NodePath("PanelContainer/ProgressBar")
-texture_rect = NodePath("")
 green_bar = NodePath("PanelContainer/GreenBar")
 emit_lvl_up = true
 

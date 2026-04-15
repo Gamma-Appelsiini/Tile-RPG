@@ -155,9 +155,36 @@ func _process(_delta: float) -> void:
 	if selected_slot != null:
 		selected_slot.item_image.global_position = get_viewport().get_mouse_position() + Vector2(-img_offset,-img_offset)
 
+func _handle_double_click() -> void:
+	if hovered_slot == null: return
+	if hovered_slot.item_in_slot == null: return
+	
+	#Equip equipment from inv
+	if player_inv_slots.has(hovered_slot):
+		if hovered_slot.item_in_slot is Equipment:
+			var equ_in_slot:Equipment = hovered_slot.item_in_slot
+			var slot_to_equip_to:InventorySlot = equipment_slots[equ_in_slot.equipment_slot]
+			
+			GlobalSignals.play_audio.emit(INV_DROP, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
+			slot_to_equip_to.set_item(equ_in_slot,hovered_slot)
+			selected_slot = null
+		else:
+			hovered_slot.item_in_slot._on_double_click()
+
+	#Unequip equipment from equipment slots
+	elif equipment_slots.values().has(hovered_slot):
+		var item_in_equ_slot:Equipment = hovered_slot.item_in_slot
+		hovered_slot.remove_item()
+		add_item_to_inv(item_in_equ_slot)
+		GlobalSignals.play_audio.emit(INV_DROP, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
+
+
 func _input(event: InputEvent) -> void:
 	if !visible: return
-	if event.is_action_pressed("Left Click"):
+	
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+		_handle_double_click()
+	elif event.is_action_pressed("Left Click"):
 		if hovered_slot == null: return
 		_item_clicked()
 	elif event.is_action_released("Left Click"):

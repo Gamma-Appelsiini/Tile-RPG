@@ -21,5 +21,5 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	GlobalSignals.show_damage_number.emit(heal_amount, target)
 	_spawn_hit_effect(target)
 	
-	await get_tree().create_timer(0.3).timeout
+	await ability_owner.get_tree().create_timer(0.3).timeout
 	ability_finished.emit()

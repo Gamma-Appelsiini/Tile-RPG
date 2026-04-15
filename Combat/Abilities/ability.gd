@@ -19,6 +19,7 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var target_type:TARGET_TYPE = TARGET_TYPE.GAME_CHARACTER
 @export var usable_on_characters:Array[CHARACTER_TYPE] = []
 @export var ability_tags:Array[ABILITY_TAG] = []
+@export var ability_main_stat: Stats.MainStat = Stats.MainStat.AGILITY
 @export var ability_icon: Texture = null
 @export var ability_name:String = "Default Ability Name"
 @export var ability_cooldown: int = 0

@@ -40,7 +40,16 @@ func _close_container(lootC:LootContainer) -> void:
 		animation_player.play(CLOSE_ANIM_NAME)
 		await animation_player.animation_finished
 	interact_area.monitoring = true
+
+func _add_ability_tome() -> void:
+	if len(items) == CONTAINER_SIZE: return
 	
+	var new_tome:Tome = Tome.new()
+	var new_abi_path:String = AbilityGenerator.get_random_ability_path()
+	new_tome.ability_path_taught_by_tome = new_abi_path
+		
+	items.push_back(new_tome)
+
 func _generate_loot() -> void:
 	if generated: return
 	generated = true
@@ -51,6 +60,8 @@ func _generate_loot() -> void:
 	for rarity:Item.ItemRarity in items_to_generate.keys():
 		var loot_type:ItemGenerator.LOOT_TYPE = items_to_generate[rarity]
 		items.push_back(ItemGenerator.get_equipment(loot_type,chest_lvl,max_tier,rarity))
+		
+	_add_ability_tome()
 
 func set_highest_rarity() -> void:
 	if len(items) == 0:

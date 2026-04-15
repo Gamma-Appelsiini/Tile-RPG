@@ -33,6 +33,7 @@ func save_to_data() -> Dictionary:
 		"inventory_image": inventory_image.resource_path,
 		"item_value": item_value,
 		"item_name": item_name,
+		"item_model_path": item_model_path
 	}
 	
 	return equipment_data

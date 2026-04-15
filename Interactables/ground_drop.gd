@@ -32,10 +32,7 @@ func _process(_delta: float) -> void:
 	parent_node.global_position = item_model.global_position
 
 func _set_inventory_ref() -> void:
-	var UI := get_tree().get_nodes_in_group("UI")
-	if UI[0] is UIHandler:
-		var ui_handler:UIHandler = UI[0] as UIHandler
-		player_inventory = ui_handler.inventory
+	player_inventory = GlobalSignals.ui_handler.inventory
 
 func interact() -> void:
 	var added:bool = player_inventory.add_item_to_inv(item_drop)
