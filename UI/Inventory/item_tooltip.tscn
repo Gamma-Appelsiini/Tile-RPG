@@ -1,16 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnufbt7pmxsc2"]
+[gd_scene format=3 uid="uid://cnufbt7pmxsc2"]
 
 [ext_resource type="Script" uid="uid://cu0e206ecriqc" path="res://Tile-RPG/UI/Inventory/item_tooltip.gd" id="1_qwjvr"]
 [ext_resource type="StyleBox" uid="uid://b3vr8tssueexw" path="res://Tile-RPG/UI/Inventory/tooltip_panel.tres" id="2_svmp5"]
 [ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="3_8sl7m"]
 [ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="3_svmp5"]
+[ext_resource type="Texture2D" uid="uid://bmtxfiuwniily" path="res://Tile-RPG/Images/Items/ArmorHelmet.png" id="4_6vqm6"]
 [ext_resource type="FontFile" uid="uid://bvdd0umnhlivu" path="res://Tile-RPG/Fonts/MaryJaneCavazos-L9W.ttf" id="4_skqig"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_8sl7m"]
 color = Color(0.574328, 0.57432777, 0.5743278, 1)
 thickness = 2
 
-[node name="ItemTooltip" type="Control" node_paths=PackedStringArray("v_box_container", "name_label", "ilvl_label", "affix_container", "aff_label_template", "implicit_label", "weapon_stats", "price_label", "price_container", "price_separator", "affix_separator", "tt_container")]
+[node name="ItemTooltip" type="Control" unique_id=1864536680 node_paths=PackedStringArray("v_box_container", "name_label", "ilvl_label", "affix_container", "aff_label_template", "implicit_label", "weapon_stats", "price_label", "price_container", "price_separator", "affix_separator", "tt_container", "ability_rect")]
 z_index = 3
 layout_mode = 3
 anchors_preset = 8
@@ -36,20 +37,21 @@ price_container = NodePath("TTContainer/VBoxContainer/PriceContainer")
 price_separator = NodePath("TTContainer/VBoxContainer/PriceSeparator")
 affix_separator = NodePath("TTContainer/VBoxContainer/AffixSeparator")
 tt_container = NodePath("TTContainer")
+ability_rect = NodePath("TTContainer/VBoxContainer/AbilityRect")
 
-[node name="TTContainer" type="PanelContainer" parent="."]
+[node name="TTContainer" type="PanelContainer" parent="." unique_id=2120260789]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = ExtResource("2_svmp5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TTContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TTContainer" unique_id=1023277272]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="NameLabel" type="Label" parent="TTContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="TTContainer/VBoxContainer" unique_id=28409550]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -62,7 +64,14 @@ text = "Default Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IlvlLabel" type="Label" parent="TTContainer/VBoxContainer"]
+[node name="AbilityRect" type="TextureRect" parent="TTContainer/VBoxContainer" unique_id=446403594]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_6vqm6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IlvlLabel" type="Label" parent="TTContainer/VBoxContainer" unique_id=1971529964]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5673, 0.61, 0.58865, 1)
@@ -74,12 +83,12 @@ theme_override_font_sizes/font_size = 12
 text = "Lvl 5"
 horizontal_alignment = 1
 
-[node name="WeaponStats" type="VBoxContainer" parent="TTContainer/VBoxContainer"]
+[node name="WeaponStats" type="VBoxContainer" parent="TTContainer/VBoxContainer" unique_id=1422592104]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ImplicitLabel" type="Label" parent="TTContainer/VBoxContainer"]
+[node name="ImplicitLabel" type="Label" parent="TTContainer/VBoxContainer" unique_id=1163309971]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -92,19 +101,19 @@ theme_override_font_sizes/font_size = 16
 text = "Armor"
 horizontal_alignment = 1
 
-[node name="AffixSeparator" type="HSeparator" parent="TTContainer/VBoxContainer"]
+[node name="AffixSeparator" type="HSeparator" parent="TTContainer/VBoxContainer" unique_id=12690784]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 theme_override_styles/separator = SubResource("StyleBoxLine_8sl7m")
 
-[node name="AffixContainer" type="VBoxContainer" parent="TTContainer/VBoxContainer"]
+[node name="AffixContainer" type="VBoxContainer" parent="TTContainer/VBoxContainer" unique_id=351438378]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="AffLabelTemplate" type="Label" parent="TTContainer/VBoxContainer/AffixContainer"]
+[node name="AffLabelTemplate" type="Label" parent="TTContainer/VBoxContainer/AffixContainer" unique_id=1980454599]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -116,20 +125,20 @@ theme_override_font_sizes/font_size = 12
 text = "+5 to Template"
 horizontal_alignment = 1
 
-[node name="PriceSeparator" type="HSeparator" parent="TTContainer/VBoxContainer"]
+[node name="PriceSeparator" type="HSeparator" parent="TTContainer/VBoxContainer" unique_id=980332151]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="PriceContainer" type="HBoxContainer" parent="TTContainer/VBoxContainer"]
+[node name="PriceContainer" type="HBoxContainer" parent="TTContainer/VBoxContainer" unique_id=850199922]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="PriceLabel" type="Label" parent="TTContainer/VBoxContainer/PriceContainer"]
+[node name="PriceLabel" type="Label" parent="TTContainer/VBoxContainer/PriceContainer" unique_id=668694275]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -143,7 +152,7 @@ text = "5"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BuxRect" type="TextureRect" parent="TTContainer/VBoxContainer/PriceContainer"]
+[node name="BuxRect" type="TextureRect" parent="TTContainer/VBoxContainer/PriceContainer" unique_id=489464816]
 layout_mode = 2
 texture = ExtResource("3_svmp5")
 expand_mode = 2

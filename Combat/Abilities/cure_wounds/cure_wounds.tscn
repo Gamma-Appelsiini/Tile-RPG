@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxigqlih8j8nv"]
+[gd_scene format=3 uid="uid://cxigqlih8j8nv"]
 
 [ext_resource type="Script" uid="uid://drtyesevjtfx5" path="res://Tile-RPG/Combat/Abilities/cure_wounds/cure_wounds.gd" id="1_0p50q"]
 [ext_resource type="Texture2D" uid="uid://crlg63ublnftt" path="res://Tile-RPG/Images/UI/arrow_green.png" id="2_nh20y"]
 
-[node name="CureWounds" type="Node3D"]
+[node name="CureWounds" type="Node3D" unique_id=1887230479]
 script = ExtResource("1_0p50q")
-animation_type = 1
 usable_on_characters = Array[int]([0, 2])
 ability_tags = Array[int]([0, 4, 10])
+ability_main_stat = 6
 ability_icon = ExtResource("2_nh20y")
 ability_name = "Cure Wounds"
 ability_cooldown = 2

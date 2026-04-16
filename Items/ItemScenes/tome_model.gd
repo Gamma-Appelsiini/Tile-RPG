@@ -13,11 +13,11 @@ func _ready() -> void:
 	self.visible = false
 	freeze = true
 	
+func set_book_stat(main_stat:Stats.MainStat) -> void:
 	cover_material = cover_mesh.material_override
 	stat_material = stat_mesh.material_override
 	
-func set_book_stat(main_stat:Stats.MainStat) -> void:
 	var stat_texture:Texture2D = load(EnumStrings.MAIN_STAT_PICS[main_stat])
 	stat_material.albedo_texture = stat_texture
 	
-	cover_material.albedo_color = EnumStrings.MAIN_STAT_COLORS[Stats.MainStat.MIGHT]
+	cover_material.albedo_color = EnumStrings.MAIN_STAT_COLORS[main_stat]

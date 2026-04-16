@@ -58,6 +58,10 @@ func set_item(new_item:Item) -> void:
 		item_model.visible = false
 		add_child(item_model)
 
+	if new_item is Tome:
+		var tome_model:TomeModel = item_model as TomeModel
+		tome_model.set_book_stat(new_item.ability.ability_main_stat)
+
 func _play_drop_sound() -> void:
 	GlobalSignals.play_audio.emit(DROP_SOUNDS[item_drop.item_rarity], AudioManager.AUDIO_TYPE.SOUND_EFFECT, global_position)
 

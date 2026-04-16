@@ -46,8 +46,8 @@ func _add_ability_tome() -> void:
 	
 	var new_tome:Tome = Tome.new()
 	var new_abi_path:String = AbilityGenerator.get_random_ability_path()
-	new_tome.ability_path_taught_by_tome = new_abi_path
-		
+	new_tome.set_ability_path(new_abi_path)
+
 	items.push_back(new_tome)
 
 func _generate_loot() -> void:

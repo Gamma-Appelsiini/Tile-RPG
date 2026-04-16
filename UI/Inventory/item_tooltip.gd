@@ -13,6 +13,7 @@ class_name ItemTooltip
 @export var price_separator: HSeparator
 @export var affix_separator: HSeparator
 @export var tt_container: PanelContainer
+@export var ability_rect: TextureRect = null
 
 const WL_PATH:String = "res://Tile-RPG/UI/Inventory/weapon_line.tscn"
 
@@ -25,10 +26,17 @@ func _reset_tooltip() -> void:
 	for label:Label in affix_container.get_children():
 		if label != aff_label_template:
 			label.queue_free()
+	
+	ability_rect.hide()
 
 func generate_tooltip(new_item:Item) -> void:
+	if new_item is Tome:
+		_generate_tome_tooltip(new_item)
+		return
+	
 	_reset_tooltip()
 	name_label.text = new_item.item_name
+	
 	if new_item is Equipment: _equipment_handling(new_item as Equipment)
 	
 	if new_item is Armor: _armor_handling(new_item as Armor)
@@ -36,7 +44,19 @@ func generate_tooltip(new_item:Item) -> void:
 	
 	_set_colors(new_item)
 	_set_sell_price(new_item)
+
+func _generate_tome_tooltip(new_tome:Tome) -> void:
+	_reset_tooltip()
 	
+	ilvl_label.text = new_tome.ability.ability_desc
+	name_label.text = new_tome.item_name
+	ability_rect.texture = new_tome.ability.ability_icon
+	ability_rect.show()
+	
+	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel").duplicate()
+	stylebox.border_color = Color(EnumStrings.MAIN_STAT_COLORS[new_tome.ability.ability_main_stat])
+	tt_container.add_theme_stylebox_override("panel", stylebox)
+
 func _equipment_handling(new_equipment:Equipment) -> void:
 	ilvl_label.visible = true
 	

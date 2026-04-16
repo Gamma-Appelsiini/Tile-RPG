@@ -32,6 +32,7 @@ var player_inv_slots:Array[InventorySlot] = []
 var slots:Array[InventorySlot] = []
 var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}  
 var tooltips:Dictionary[Item,ItemTooltip] = {}
+var shared_tooltip:ItemTooltip = null
 
 var slots_generated:bool = false
 var hovered_slot:InventorySlot = null
@@ -232,7 +233,7 @@ func remove_slot(slot_to_remove:InventorySlot) -> void:
 
 func add_item_to_inv(new_item:Item) -> bool:
 	if new_item == null:
-		print("ERROR TRYING TO ADD NULL ITEM TO INV")
+		print_debug("ERROR TRYING TO ADD NULL ITEM TO INV")
 		return false
 
 	for slot:InventorySlot in slots:

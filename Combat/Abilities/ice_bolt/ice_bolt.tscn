@@ -9,6 +9,7 @@ use_animation = 5
 targeting_animation = 6
 usable_on_characters = Array[int]([1])
 ability_tags = Array[int]([0, 4, 5, 9])
+ability_main_stat = 4
 ability_icon = ExtResource("2_q3ksw")
 ability_name = "Ice Bolt"
 ability_cooldown = 1

@@ -9,6 +9,7 @@ use_animation = 1
 targeting_animation = 6
 target_type = 0
 ability_tags = Array[int]([1, 4, 5, 7])
+ability_main_stat = 3
 ability_icon = ExtResource("2_bhko1")
 ability_name = "Hammer from the Sky"
 ability_range = 3

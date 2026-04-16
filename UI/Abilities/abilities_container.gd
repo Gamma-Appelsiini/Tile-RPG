@@ -4,6 +4,7 @@ class_name AbilitiesContainer
 @export var grid_container: GridContainer = null
 @export var ability_bar:AbilityBar = null
 @export var x_button: XButton = null
+@export var learn_ability_sound: AudioStream = null
 
 const SLOTS:int = 6 * 5
 const ABILITY_SLOT := preload("uid://camo5qmy5xx2a")
@@ -106,6 +107,7 @@ func add_new_ability(new_ability:Ability) -> bool:
 			slot.set_ability(new_ability)
 			break
 	
+	GlobalSignals.play_audio.emit(learn_ability_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 	new_ability.connect_signals()
 	return true
 

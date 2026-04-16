@@ -43,3 +43,18 @@ static func get_random_ability_path(max_tier:int = -1) -> String:
 	new_ability_path = possible_ability_paths.pick_random()
 	
 	return new_ability_path
+
+static func get_ability_type_from_path(path:String) -> Stats.MainStat:
+	for path_array:Array in ATTACK_ABILITIES.values():
+		if path_array.has(path): return Stats.MainStat.MIGHT
+		
+	for path_array:Array in SPELL_ABILITIES.values():
+		if path_array.has(path): return Stats.MainStat.MYSTIC
+		
+	for path_array:Array in SUPPORT_ABILITIES.values():
+		if path_array.has(path): return Stats.MainStat.VALOR
+		
+	for path_array:Array in MOVEMENT_ABILITIES.values():
+		if path_array.has(path): return Stats.MainStat.AGILITY
+	
+	return Stats.MainStat.ENDURANCE

@@ -29,6 +29,7 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var allow_diagonal: bool = false
 @export var ability_aoe: int = 0
 @export var ability_power: int = 0
+@export var ability_value: int = 100
 @export_multiline var damage_desc: String = "Damage Description"
 @export_multiline var ability_desc: String = "Ability Description"
 @export_multiline var scaling_desc: String = "[color=#2b722f]Agility[/color],[color=#ee5356]Endurance[/color],
@@ -46,7 +47,7 @@ const ATTACK_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
 
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0
-var ability_description:String = "Default Ability Description"
+#var ability_description:String = "Default Ability Description"
 var target_char:GameCharacter = null
 var target_tile:Tile = null
 var ability_attack:Attack = null
@@ -69,7 +70,7 @@ func _visualize_targetable_tiles() -> void:
 
 #Override
 func get_description() -> String:
-	return ability_description
+	return ability_desc
 
 #Override
 func use_ability_on_target_character(target:GameCharacter) -> void:
