@@ -65,6 +65,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AbilityRect" type="TextureRect" parent="TTContainer/VBoxContainer" unique_id=446403594]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("4_6vqm6")

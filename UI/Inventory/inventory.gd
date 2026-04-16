@@ -31,7 +31,6 @@ var player:Player = null
 var player_inv_slots:Array[InventorySlot] = []
 var slots:Array[InventorySlot] = []
 var equipment_slots:Dictionary[Equipment.EquipmentSlot,InventorySlot] = {}  
-var tooltips:Dictionary[Item,ItemTooltip] = {}
 var shared_tooltip:ItemTooltip = null
 
 var slots_generated:bool = false
@@ -50,6 +49,10 @@ func _ready() -> void:
 	set_process(false)
 	set_process_input(false)
 	visibility_changed.connect(_on_vis_change)
+	
+	shared_tooltip = load(ITEM_TT_PATH).instantiate()
+	shared_tooltip.visible = false
+	add_child(shared_tooltip)
 	
 	x_button.x_pressed.connect(func(): self.visible = false)
 	throw_out_area.mouse_entered.connect(func(): drop_item_on_release = true)
@@ -105,8 +108,6 @@ func _load_equ_from_data(save_data:Dictionary) -> void:
 		var script: Script = load(save_data["equipment"][slot]["item_type"])
 		var loaded_equ:Equipment = script.new()
 		loaded_equ.load_from_data(save_data["equipment"][slot])
-		_create_item_tt(loaded_equ)
-		loaded_equ.remake_tt.connect(_remake_tt.bind(loaded_equ))
 		
 		player.equipment_handler.set_handler_owner()
 		#Don't equip gear again, stats are saved with gear equipped
@@ -136,11 +137,9 @@ func load_inv_from_data(save_data:Dictionary) -> void:
 		var loaded_item:Item = script.new()
 
 		loaded_item.load_from_data(save_data["inventory"][key])
-		loaded_item.remake_tt.connect(_remake_tt.bind(loaded_item))
 
 		var free_slot:InventorySlot = inv_slot_grid.get_children()[key] as InventorySlot
 		free_slot.set_item(loaded_item)
-		_create_item_tt(loaded_item)
 	
 	_load_equ_from_data(save_data)
 
@@ -239,33 +238,15 @@ func add_item_to_inv(new_item:Item) -> bool:
 	for slot:InventorySlot in slots:
 		if slot.item_in_slot != null or slot.equipment_slot or slot.array_pos >= INV_SIZE: continue
 		slot.set_item(new_item)
-		_create_item_tt(new_item)
-		
-		if not new_item.remake_tt.is_connected(_remake_tt.bind(new_item)):
-			new_item.remake_tt.connect(_remake_tt.bind(new_item))
-			
+
 		return true
 
 	return false
 
-func _remake_tt(remake_item:Equipment) -> void:
-	tooltips[remake_item].generate_tooltip(remake_item)
-
 func remove_item_from_inv(remove_item:Item) -> void:
 	for slot:InventorySlot in player_inv_slots:
 		if slot.item_in_slot == remove_item:
-			tooltips[remove_item].queue_free()
-			tooltips.erase(remove_item)
 			slot.remove_item()
-
-func _create_item_tt(new_item:Item) -> void:
-	var new_tooltip:ItemTooltip = load(ITEM_TT_PATH).instantiate()
-	new_tooltip.visible = false
-	add_child(new_tooltip)
-	new_tooltip.generate_tooltip(new_item)
-	
-	tooltips[new_item] = new_tooltip
-
 
 func _item_clicked() -> void:
 	if hovered_slot.item_in_slot == null: return
@@ -377,23 +358,23 @@ func _show_tt(slot:InventorySlot) -> void:
 	if slot.item_in_slot == null: return
 	if slot.array_pos <= -2: return
 	
-	var tooltip:ItemTooltip = tooltips[slot.item_in_slot]
-	tooltip.visible = true
+	shared_tooltip.generate_tooltip(slot.item_in_slot)
+	shared_tooltip.visible = true
 	
-	var offset_x:float = tooltip.get_tt_size().x
-	var offset_y:float = (tooltip.get_tt_size().y - slot.size.y) / 2
+	var offset_x:float = shared_tooltip.get_tt_size().x
+	var offset_y:float = (shared_tooltip.get_tt_size().y - slot.size.y) / 2
 	
 	#Show TT on slot right side instead of left
 	if slot.array_pos >= INV_SIZE:
 		pass
 	
 	if slot.array_pos >= INV_SIZE:
-		tooltip.global_position = slot.global_position + Vector2(slot.size.x + 15, -offset_y)
+		shared_tooltip.global_position = slot.global_position + Vector2(slot.size.x + 15, -offset_y)
 	else:
-		tooltip.global_position = slot.global_position - Vector2(offset_x + 15, offset_y)
+		shared_tooltip.global_position = slot.global_position - Vector2(offset_x + 15, offset_y)
 	
 func _hide_tt(slot:InventorySlot) -> void:
 	if slot.item_in_slot == null: return
 	if slot.array_pos <= -2: return
 	
-	tooltips[slot.item_in_slot].visible = false
+	shared_tooltip.hide()

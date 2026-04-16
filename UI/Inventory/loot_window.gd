@@ -70,7 +70,6 @@ func _add_item(item:Item) -> void:
 		if slot.item_in_slot != null: continue
 		
 		slot.set_item(item)
-		player_inventory._create_item_tt(item)
 		return
 	
 func _clear_container() -> void:

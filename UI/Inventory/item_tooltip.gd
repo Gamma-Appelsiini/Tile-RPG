@@ -28,6 +28,7 @@ func _reset_tooltip() -> void:
 			label.queue_free()
 	
 	ability_rect.hide()
+	implicit_label.hide()
 
 func generate_tooltip(new_item:Item) -> void:
 	if new_item is Tome:
@@ -53,9 +54,8 @@ func _generate_tome_tooltip(new_tome:Tome) -> void:
 	ability_rect.texture = new_tome.ability.ability_icon
 	ability_rect.show()
 	
-	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel").duplicate()
+	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
 	stylebox.border_color = Color(EnumStrings.MAIN_STAT_COLORS[new_tome.ability.ability_main_stat])
-	tt_container.add_theme_stylebox_override("panel", stylebox)
 
 func _equipment_handling(new_equipment:Equipment) -> void:
 	ilvl_label.visible = true
@@ -125,9 +125,8 @@ func _set_colors(new_item:Item) -> void:
 	var color_string:String = EnumStrings.RARITY_COLORS[new_item.item_rarity]
 	name_label.add_theme_color_override("font_color",Color(color_string))
 	
-	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel").duplicate()
+	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
 	stylebox.border_color = Color(color_string)
-	tt_container.add_theme_stylebox_override("panel", stylebox)
 
 func _set_sell_price(new_item:Item) -> void:
 	if 0 >= new_item.item_value: return
