@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bbo8w6mfprah4"]
+[gd_scene format=4 uid="uid://bbo8w6mfprah4"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_o2gn0"]
 [ext_resource type="Texture2D" uid="uid://bj72q11gsyidh" path="res://Tile-RPG/Materials/ItemTextures/basic_gloves_LeatherGlove.png" id="2_xkv7k"]
@@ -49,18 +49,18 @@ shadow_mesh = SubResource("ArrayMesh_xng7c")
 [sub_resource type="BoxShape3D" id="BoxShape3D_hw81f"]
 size = Vector3(0.21972656, 0.051757813, 0.26342773)
 
-[node name="GlovesModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="GlovesModel" type="RigidBody3D" unique_id=701801307 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_o2gn0")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Hand")
 
-[node name="Hand" type="MeshInstance3D" parent="."]
+[node name="Hand" type="MeshInstance3D" parent="." unique_id=1793168582]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_hs8te")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1525660848]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.009765625)
 shape = SubResource("BoxShape3D_hw81f")

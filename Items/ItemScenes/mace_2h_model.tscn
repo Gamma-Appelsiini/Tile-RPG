@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://5ciilafb5i1i"]
+[gd_scene format=4 uid="uid://5ciilafb5i1i"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_6eeap"]
 [ext_resource type="Texture2D" uid="uid://bqyw2u6xs6lt3" path="res://Tile-RPG/Materials/ItemTextures/basic_mace_Mace.png" id="1_x3hpu"]
@@ -78,17 +78,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8einq")
 
-[node name="Mace2HModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="Mace2HModel" type="RigidBody3D" unique_id=1243716040 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_6eeap")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Mace")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1163194544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47753906, 0)
 shape = SubResource("BoxShape3D_y0hlf")
 
-[node name="Mace" type="MeshInstance3D" parent="."]
+[node name="Mace" type="MeshInstance3D" parent="." unique_id=704485763]
 mesh = SubResource("ArrayMesh_6eeap")
 skeleton = NodePath("")

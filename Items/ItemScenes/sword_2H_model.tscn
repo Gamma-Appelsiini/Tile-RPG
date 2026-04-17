@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://b82y3l0mri5xq"]
+[gd_scene format=4 uid="uid://b82y3l0mri5xq"]
 
 [ext_resource type="Texture2D" uid="uid://dpwbb4oak1co0" path="res://Tile-RPG/Materials/ItemTextures/basic_2h_sword_swordtext.png" id="1_hhige"]
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_u025q"]
@@ -136,18 +136,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_n0r3v")
 
-[node name="Sword2HModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="Sword2HModel" type="RigidBody3D" unique_id=1641334104 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_u025q")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Sword")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1597560576]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576416, 0)
 shape = SubResource("BoxShape3D_xdogs")
 
-[node name="Sword" type="MeshInstance3D" parent="."]
+[node name="Sword" type="MeshInstance3D" parent="." unique_id=718856233]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_u025q")
 skeleton = NodePath("")

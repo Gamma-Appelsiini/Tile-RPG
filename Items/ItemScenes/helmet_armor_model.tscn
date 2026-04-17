@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://s8otk5hjrnr6"]
+[gd_scene format=4 uid="uid://s8otk5hjrnr6"]
 
 [ext_resource type="Texture2D" uid="uid://bjshxotaklcmu" path="res://Tile-RPG/Materials/ItemTextures/basic_helmet_Potta.png" id="1_hoces"]
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_n2fwx"]
@@ -81,17 +81,17 @@ shadow_mesh = SubResource("ArrayMesh_sk7lc")
 height = 0.23242188
 radius = 0.091796875
 
-[node name="HelmetModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="HelmetModel" type="RigidBody3D" unique_id=534770984 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_n2fwx")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Helmet")
 
-[node name="Helmet" type="MeshInstance3D" parent="."]
+[node name="Helmet" type="MeshInstance3D" parent="." unique_id=895383262]
 mesh = SubResource("ArrayMesh_0fv6h")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1417217108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011230469, 0)
 shape = SubResource("CylinderShape3D_n2fwx")

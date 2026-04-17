@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cdygb2i5ig78p"]
+[gd_scene format=4 uid="uid://cdygb2i5ig78p"]
 
 [ext_resource type="Texture2D" uid="uid://cxfbt5hx8ltbj" path="res://Tile-RPG/Materials/ItemTextures/basic_amulet_amulet.png" id="1_tpkon"]
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_tpn7l"]
@@ -124,18 +124,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nqxl2")
 
-[node name="AmuletModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="AmuletModel" type="RigidBody3D" unique_id=957103651 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_tpn7l")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Amulet")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1481352841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.082611084, 0)
 shape = SubResource("BoxShape3D_f3eer")
 
-[node name="Amulet" type="MeshInstance3D" parent="."]
+[node name="Amulet" type="MeshInstance3D" parent="." unique_id=831054564]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_g4cfg")
 skeleton = NodePath("")

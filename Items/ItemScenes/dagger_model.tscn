@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c4wk6uoijnpx8"]
+[gd_scene format=4 uid="uid://c4wk6uoijnpx8"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_80rvn"]
 [ext_resource type="Texture2D" uid="uid://bptgtb7tl46i7" path="res://Tile-RPG/Materials/ItemTextures/basic_dagger_Dagger.png" id="2_2s3vd"]
@@ -111,18 +111,18 @@ shadow_mesh = SubResource("ArrayMesh_e1lbn")
 [sub_resource type="BoxShape3D" id="BoxShape3D_80rvn"]
 size = Vector3(0.041015625, 0.40481567, 0.015625)
 
-[node name="DaggerModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="DaggerModel" type="RigidBody3D" unique_id=1442314177 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_80rvn")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Dagger")
 
-[node name="Dagger" type="MeshInstance3D" parent="."]
+[node name="Dagger" type="MeshInstance3D" parent="." unique_id=1789654659]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 mesh = SubResource("ArrayMesh_65mth")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=775616069]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14091492, 0)
 shape = SubResource("BoxShape3D_80rvn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b28jjdctjblsy"]
+[gd_scene format=4 uid="uid://b28jjdctjblsy"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_vw1u0"]
 [ext_resource type="Texture2D" uid="uid://dirnay0cr358w" path="res://Tile-RPG/Materials/ItemTextures/basic_ring_Ring.png" id="2_aeam7"]
@@ -75,17 +75,17 @@ shadow_mesh = SubResource("ArrayMesh_62ylv")
 height = 0.03125
 radius = 0.041015625
 
-[node name="RingModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="RingModel" type="RigidBody3D" unique_id=671205296 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_vw1u0")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Ring")
 
-[node name="Ring" type="MeshInstance3D" parent="."]
+[node name="Ring" type="MeshInstance3D" parent="." unique_id=540599541]
 mesh = SubResource("ArrayMesh_24sqh")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422146807]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_nmfwj")

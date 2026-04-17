@@ -79,8 +79,8 @@ albedo_texture = ExtResource("3_7p1v3")
 size = Vector3(0.3564453, 0.095214844, 0.40039063)
 
 [node name="TomeModel" type="RigidBody3D" unique_id=538003794 node_paths=PackedStringArray("tome_model", "cover_mesh", "stat_mesh", "collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_05yys")
 tome_model = NodePath(".")
 cover_mesh = NodePath("ScaleNode/Cover")

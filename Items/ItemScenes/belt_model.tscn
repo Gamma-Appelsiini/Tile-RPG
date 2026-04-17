@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bkh21apy6rptm"]
+[gd_scene format=4 uid="uid://bkh21apy6rptm"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_i374y"]
 [ext_resource type="Texture2D" uid="uid://dcxya7o70kqfa" path="res://Tile-RPG/Materials/ItemTextures/basic_belt_Belt.png" id="2_1ocih"]
@@ -80,16 +80,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_au6oi")
 
-[node name="BeltModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="BeltModel" type="RigidBody3D" unique_id=2018440499 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_i374y")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Belt")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2007074517]
 shape = SubResource("CylinderShape3D_ayjkf")
 
-[node name="Belt" type="MeshInstance3D" parent="."]
+[node name="Belt" type="MeshInstance3D" parent="." unique_id=1852468336]
 mesh = SubResource("ArrayMesh_afgo6")
 skeleton = NodePath("")

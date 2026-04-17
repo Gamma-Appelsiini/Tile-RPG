@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://c5uabfc4j1wl2"]
+[gd_scene format=4 uid="uid://c5uabfc4j1wl2"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_gvq3h"]
 [ext_resource type="Texture2D" uid="uid://di7ku2add5rcq" path="res://Tile-RPG/Materials/ItemTextures/basic_staff_Staff.png" id="2_cwx6r"]
@@ -78,18 +78,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tfg4r")
 
-[node name="StaffModel" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="StaffModel" type="RigidBody3D" unique_id=1461923707 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_gvq3h")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Staff")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1166715337]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026245117, 0.0034637451, 0.009521484)
 shape = SubResource("BoxShape3D_cwx6r")
 
-[node name="Staff" type="MeshInstance3D" parent="."]
+[node name="Staff" type="MeshInstance3D" parent="." unique_id=1587047952]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1uv68")
 skeleton = NodePath("")

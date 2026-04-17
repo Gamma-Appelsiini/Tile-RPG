@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=4 uid="uid://dcgfw3cs3rfuw"]
+[gd_scene format=4 uid="uid://dcgfw3cs3rfuw"]
 
 [ext_resource type="Script" uid="uid://bbqjjguiy4xwh" path="res://Tile-RPG/Breakables/breakable.gd" id="1_jjjtq"]
 [ext_resource type="Texture2D" uid="uid://8dms8t0mdbu1" path="res://Tile-RPG/Models/Breakables/barrel_broken_Barrel.png" id="2_7wi28"]
@@ -7,10 +7,7 @@
 [ext_resource type="Script" uid="uid://dx6urqvsbtxd7" path="res://Tile-RPG/Breakables/fragment.gd" id="2_yn1xq"]
 [ext_resource type="Shader" uid="uid://cob6fqoifkxfi" path="res://Tile-RPG/Shaders/dissolve_shader.gdshader" id="3_udes3"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="7_udes3"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_7wi28"]
-height = 2.12744
-radius = 1.01074
+[ext_resource type="PackedScene" uid="uid://bt2b2jr8wgoj2" path="res://Tile-RPG/Interactables/breakable_loot_interactable.tscn" id="8_ckif8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mcdnb"]
 height = 2.07007
@@ -1692,42 +1689,38 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e4fmq")
 
-[node name="WoodenBarrel" type="Node3D" node_paths=PackedStringArray("hit_area", "static_body", "original_model", "fragments_node")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m35mq"]
+height = 0.81396484
+radius = 0.81689453
+
+[node name="WoodenBarrel" type="Node3D" unique_id=498782213 node_paths=PackedStringArray("static_body", "original_model", "fragments_node")]
 script = ExtResource("1_jjjtq")
-hit_area = NodePath("ScaleNode/Area3D")
 static_body = NodePath("ScaleNode/StaticBody3D")
 break_sound = ExtResource("2_udes3")
 original_model = NodePath("ScaleNode/Barrel")
 fragments_node = NodePath("ScaleNode/Fragments")
 block_tiles = true
+wait_time = 0.5
 
-[node name="ScaleNode" type="Node3D" parent="."]
+[node name="ScaleNode" type="Node3D" parent="." unique_id=1629796972]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0145127, 0)
 
-[node name="Area3D" type="Area3D" parent="ScaleNode"]
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ScaleNode/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03296, 0)
-shape = SubResource("CylinderShape3D_7wi28")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="ScaleNode"]
+[node name="StaticBody3D" type="StaticBody3D" parent="ScaleNode" unique_id=1225708060]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ScaleNode/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScaleNode/StaticBody3D" unique_id=443278526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00427, 0)
 shape = SubResource("CylinderShape3D_mcdnb")
 
-[node name="Barrel" type="MeshInstance3D" parent="ScaleNode"]
+[node name="Barrel" type="MeshInstance3D" parent="ScaleNode" unique_id=739593143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("ArrayMesh_yn1xq")
 skeleton = NodePath("")
 
-[node name="Fragments" type="Node3D" parent="ScaleNode"]
+[node name="Fragments" type="Node3D" parent="ScaleNode" unique_id=1600612729]
 
-[node name="@RigidBody3D@41089" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41089" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=519184703 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1737,15 +1730,15 @@ collision_shape = NodePath("@CollisionShape3D@41090")
 dissolve_shader = SubResource("ShaderMaterial_ckif8")
 fragment_mesh = NodePath("Barrel_001")
 
-[node name="@CollisionShape3D@41090" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41089"]
+[node name="@CollisionShape3D@41090" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41089" unique_id=497321367]
 shape = SubResource("ConvexPolygonShape3D_m35mq")
 
-[node name="Barrel_001" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41089"]
+[node name="Barrel_001" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41089" unique_id=1303993139]
 material_override = SubResource("ShaderMaterial_ckif8")
 mesh = SubResource("ArrayMesh_mcdnb")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41091" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41091" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1255669785 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1755,15 +1748,15 @@ collision_shape = NodePath("@CollisionShape3D@41092")
 dissolve_shader = SubResource("ShaderMaterial_h73r5")
 fragment_mesh = NodePath("Barrel_002")
 
-[node name="@CollisionShape3D@41092" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41091"]
+[node name="@CollisionShape3D@41092" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41091" unique_id=912704866]
 shape = SubResource("ConvexPolygonShape3D_5fhwm")
 
-[node name="Barrel_002" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41091"]
+[node name="Barrel_002" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41091" unique_id=1423060622]
 material_override = SubResource("ShaderMaterial_h73r5")
 mesh = SubResource("ArrayMesh_udes3")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41093" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41093" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=480215004 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1773,15 +1766,15 @@ collision_shape = NodePath("@CollisionShape3D@41094")
 dissolve_shader = SubResource("ShaderMaterial_48f5d")
 fragment_mesh = NodePath("Barrel_003")
 
-[node name="@CollisionShape3D@41094" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41093"]
+[node name="@CollisionShape3D@41094" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41093" unique_id=748957733]
 shape = SubResource("ConvexPolygonShape3D_eavyo")
 
-[node name="Barrel_003" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41093"]
+[node name="Barrel_003" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41093" unique_id=950584553]
 material_override = SubResource("ShaderMaterial_48f5d")
 mesh = SubResource("ArrayMesh_ckif8")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41095" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41095" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1044236907 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1791,15 +1784,15 @@ collision_shape = NodePath("@CollisionShape3D@41096")
 dissolve_shader = SubResource("ShaderMaterial_opbu1")
 fragment_mesh = NodePath("Barrel_004")
 
-[node name="@CollisionShape3D@41096" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41095"]
+[node name="@CollisionShape3D@41096" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41095" unique_id=670339924]
 shape = SubResource("ConvexPolygonShape3D_c2wjx")
 
-[node name="Barrel_004" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41095"]
+[node name="Barrel_004" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41095" unique_id=128448165]
 material_override = SubResource("ShaderMaterial_opbu1")
 mesh = SubResource("ArrayMesh_m35mq")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41097" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41097" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=701241926 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1809,15 +1802,15 @@ collision_shape = NodePath("@CollisionShape3D@41098")
 dissolve_shader = SubResource("ShaderMaterial_weq5d")
 fragment_mesh = NodePath("Barrel_016")
 
-[node name="@CollisionShape3D@41098" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41097"]
+[node name="@CollisionShape3D@41098" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41097" unique_id=128616883]
 shape = SubResource("ConvexPolygonShape3D_wj57w")
 
-[node name="Barrel_016" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41097"]
+[node name="Barrel_016" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41097" unique_id=749367822]
 material_override = SubResource("ShaderMaterial_weq5d")
 mesh = SubResource("ArrayMesh_h73r5")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41099" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41099" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=247336407 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1827,15 +1820,15 @@ collision_shape = NodePath("@CollisionShape3D@41100")
 dissolve_shader = SubResource("ShaderMaterial_5rrio")
 fragment_mesh = NodePath("Barrel_017")
 
-[node name="@CollisionShape3D@41100" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41099"]
+[node name="@CollisionShape3D@41100" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41099" unique_id=1396154919]
 shape = SubResource("ConvexPolygonShape3D_y08os")
 
-[node name="Barrel_017" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41099"]
+[node name="Barrel_017" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41099" unique_id=1048483083]
 material_override = SubResource("ShaderMaterial_5rrio")
 mesh = SubResource("ArrayMesh_5fhwm")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41101" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41101" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=584903749 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1845,15 +1838,15 @@ collision_shape = NodePath("@CollisionShape3D@41102")
 dissolve_shader = SubResource("ShaderMaterial_haid5")
 fragment_mesh = NodePath("Barrel_018")
 
-[node name="@CollisionShape3D@41102" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41101"]
+[node name="@CollisionShape3D@41102" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41101" unique_id=1461927902]
 shape = SubResource("ConvexPolygonShape3D_fs4sb")
 
-[node name="Barrel_018" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41101"]
+[node name="Barrel_018" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41101" unique_id=482018376]
 material_override = SubResource("ShaderMaterial_haid5")
 mesh = SubResource("ArrayMesh_48f5d")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41103" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41103" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=958523103 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1863,15 +1856,15 @@ collision_shape = NodePath("@CollisionShape3D@41104")
 dissolve_shader = SubResource("ShaderMaterial_5snuw")
 fragment_mesh = NodePath("Barrel_019")
 
-[node name="@CollisionShape3D@41104" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41103"]
+[node name="@CollisionShape3D@41104" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41103" unique_id=1438891765]
 shape = SubResource("ConvexPolygonShape3D_qwb76")
 
-[node name="Barrel_019" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41103"]
+[node name="Barrel_019" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41103" unique_id=1281482046]
 material_override = SubResource("ShaderMaterial_5snuw")
 mesh = SubResource("ArrayMesh_eavyo")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41105" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41105" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=673128015 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1881,15 +1874,15 @@ collision_shape = NodePath("@CollisionShape3D@41106")
 dissolve_shader = SubResource("ShaderMaterial_0b2li")
 fragment_mesh = NodePath("Barrel_020")
 
-[node name="@CollisionShape3D@41106" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41105"]
+[node name="@CollisionShape3D@41106" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41105" unique_id=1579399021]
 shape = SubResource("ConvexPolygonShape3D_a2ox3")
 
-[node name="Barrel_020" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41105"]
+[node name="Barrel_020" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41105" unique_id=843768899]
 material_override = SubResource("ShaderMaterial_0b2li")
 mesh = SubResource("ArrayMesh_opbu1")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41107" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41107" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=653411369 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1899,15 +1892,15 @@ collision_shape = NodePath("@CollisionShape3D@41108")
 dissolve_shader = SubResource("ShaderMaterial_7lct1")
 fragment_mesh = NodePath("Barrel_021")
 
-[node name="@CollisionShape3D@41108" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41107"]
+[node name="@CollisionShape3D@41108" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41107" unique_id=1737834394]
 shape = SubResource("ConvexPolygonShape3D_tr3m7")
 
-[node name="Barrel_021" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41107"]
+[node name="Barrel_021" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41107" unique_id=463359763]
 material_override = SubResource("ShaderMaterial_7lct1")
 mesh = SubResource("ArrayMesh_c2wjx")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41109" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41109" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1028029014 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1917,15 +1910,15 @@ collision_shape = NodePath("@CollisionShape3D@41110")
 dissolve_shader = SubResource("ShaderMaterial_vphax")
 fragment_mesh = NodePath("Barrel_022")
 
-[node name="@CollisionShape3D@41110" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41109"]
+[node name="@CollisionShape3D@41110" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41109" unique_id=1751625691]
 shape = SubResource("ConvexPolygonShape3D_i2p84")
 
-[node name="Barrel_022" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41109"]
+[node name="Barrel_022" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41109" unique_id=2120431109]
 material_override = SubResource("ShaderMaterial_vphax")
 mesh = SubResource("ArrayMesh_weq5d")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41111" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41111" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=678445121 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1935,15 +1928,15 @@ collision_shape = NodePath("@CollisionShape3D@41112")
 dissolve_shader = SubResource("ShaderMaterial_e7f88")
 fragment_mesh = NodePath("Barrel_023")
 
-[node name="@CollisionShape3D@41112" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41111"]
+[node name="@CollisionShape3D@41112" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41111" unique_id=1967857231]
 shape = SubResource("ConvexPolygonShape3D_cshhc")
 
-[node name="Barrel_023" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41111"]
+[node name="Barrel_023" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41111" unique_id=2009366568]
 material_override = SubResource("ShaderMaterial_e7f88")
 mesh = SubResource("ArrayMesh_wj57w")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41113" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41113" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1963784348 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1953,15 +1946,15 @@ collision_shape = NodePath("@CollisionShape3D@41114")
 dissolve_shader = SubResource("ShaderMaterial_kr4i7")
 fragment_mesh = NodePath("Barrel_024")
 
-[node name="@CollisionShape3D@41114" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41113"]
+[node name="@CollisionShape3D@41114" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41113" unique_id=2033358667]
 shape = SubResource("ConvexPolygonShape3D_wh4bq")
 
-[node name="Barrel_024" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41113"]
+[node name="Barrel_024" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41113" unique_id=1531614010]
 material_override = SubResource("ShaderMaterial_kr4i7")
 mesh = SubResource("ArrayMesh_5rrio")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41115" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41115" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1708718510 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1971,15 +1964,15 @@ collision_shape = NodePath("@CollisionShape3D@41116")
 dissolve_shader = SubResource("ShaderMaterial_g14of")
 fragment_mesh = NodePath("Barrel_025")
 
-[node name="@CollisionShape3D@41116" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41115"]
+[node name="@CollisionShape3D@41116" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41115" unique_id=808399530]
 shape = SubResource("ConvexPolygonShape3D_c74f0")
 
-[node name="Barrel_025" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41115"]
+[node name="Barrel_025" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41115" unique_id=1891206263]
 material_override = SubResource("ShaderMaterial_g14of")
 mesh = SubResource("ArrayMesh_y08os")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41117" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41117" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=132181523 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -1989,15 +1982,15 @@ collision_shape = NodePath("@CollisionShape3D@41118")
 dissolve_shader = SubResource("ShaderMaterial_uodod")
 fragment_mesh = NodePath("Barrel_026")
 
-[node name="@CollisionShape3D@41118" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41117"]
+[node name="@CollisionShape3D@41118" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41117" unique_id=960585118]
 shape = SubResource("ConvexPolygonShape3D_kloos")
 
-[node name="Barrel_026" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41117"]
+[node name="Barrel_026" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41117" unique_id=1379027773]
 material_override = SubResource("ShaderMaterial_uodod")
 mesh = SubResource("ArrayMesh_haid5")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41119" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41119" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1108275460 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2007,15 +2000,15 @@ collision_shape = NodePath("@CollisionShape3D@41120")
 dissolve_shader = SubResource("ShaderMaterial_ig83s")
 fragment_mesh = NodePath("Barrel_027")
 
-[node name="@CollisionShape3D@41120" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41119"]
+[node name="@CollisionShape3D@41120" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41119" unique_id=987478532]
 shape = SubResource("ConvexPolygonShape3D_hlf5m")
 
-[node name="Barrel_027" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41119"]
+[node name="Barrel_027" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41119" unique_id=1024246941]
 material_override = SubResource("ShaderMaterial_ig83s")
 mesh = SubResource("ArrayMesh_fs4sb")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41121" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41121" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1908901172 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2025,15 +2018,15 @@ collision_shape = NodePath("@CollisionShape3D@41122")
 dissolve_shader = SubResource("ShaderMaterial_vsmh3")
 fragment_mesh = NodePath("Barrel_028")
 
-[node name="@CollisionShape3D@41122" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41121"]
+[node name="@CollisionShape3D@41122" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41121" unique_id=1845094539]
 shape = SubResource("ConvexPolygonShape3D_ld61d")
 
-[node name="Barrel_028" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41121"]
+[node name="Barrel_028" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41121" unique_id=877061555]
 material_override = SubResource("ShaderMaterial_vsmh3")
 mesh = SubResource("ArrayMesh_5snuw")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41123" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41123" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=491068541 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2043,15 +2036,15 @@ collision_shape = NodePath("@CollisionShape3D@41124")
 dissolve_shader = SubResource("ShaderMaterial_yhor6")
 fragment_mesh = NodePath("Barrel_029")
 
-[node name="@CollisionShape3D@41124" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41123"]
+[node name="@CollisionShape3D@41124" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41123" unique_id=1395655618]
 shape = SubResource("ConvexPolygonShape3D_8c3b4")
 
-[node name="Barrel_029" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41123"]
+[node name="Barrel_029" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41123" unique_id=335381069]
 material_override = SubResource("ShaderMaterial_yhor6")
 mesh = SubResource("ArrayMesh_qwb76")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41125" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41125" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=2135035277 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2061,15 +2054,15 @@ collision_shape = NodePath("@CollisionShape3D@41126")
 dissolve_shader = SubResource("ShaderMaterial_855mj")
 fragment_mesh = NodePath("Barrel_030")
 
-[node name="@CollisionShape3D@41126" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41125"]
+[node name="@CollisionShape3D@41126" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41125" unique_id=2004863083]
 shape = SubResource("ConvexPolygonShape3D_ihe0p")
 
-[node name="Barrel_030" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41125"]
+[node name="Barrel_030" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41125" unique_id=234668703]
 material_override = SubResource("ShaderMaterial_855mj")
 mesh = SubResource("ArrayMesh_0b2li")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41127" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41127" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=907275639 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2079,15 +2072,15 @@ collision_shape = NodePath("@CollisionShape3D@41128")
 dissolve_shader = SubResource("ShaderMaterial_w4p13")
 fragment_mesh = NodePath("Barrel_031")
 
-[node name="@CollisionShape3D@41128" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41127"]
+[node name="@CollisionShape3D@41128" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41127" unique_id=1552834681]
 shape = SubResource("ConvexPolygonShape3D_h5tfw")
 
-[node name="Barrel_031" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41127"]
+[node name="Barrel_031" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41127" unique_id=485613673]
 material_override = SubResource("ShaderMaterial_w4p13")
 mesh = SubResource("ArrayMesh_a2ox3")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41129" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41129" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=2139585990 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2097,15 +2090,15 @@ collision_shape = NodePath("@CollisionShape3D@41130")
 dissolve_shader = SubResource("ShaderMaterial_cph8w")
 fragment_mesh = NodePath("Barrel_032")
 
-[node name="@CollisionShape3D@41130" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41129"]
+[node name="@CollisionShape3D@41130" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41129" unique_id=1629250888]
 shape = SubResource("ConvexPolygonShape3D_g6dvp")
 
-[node name="Barrel_032" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41129"]
+[node name="Barrel_032" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41129" unique_id=1219942002]
 material_override = SubResource("ShaderMaterial_cph8w")
 mesh = SubResource("ArrayMesh_7lct1")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41131" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41131" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=2134231405 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2115,15 +2108,15 @@ collision_shape = NodePath("@CollisionShape3D@41132")
 dissolve_shader = SubResource("ShaderMaterial_7pwrs")
 fragment_mesh = NodePath("Barrel_033")
 
-[node name="@CollisionShape3D@41132" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41131"]
+[node name="@CollisionShape3D@41132" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41131" unique_id=202993063]
 shape = SubResource("ConvexPolygonShape3D_3bfms")
 
-[node name="Barrel_033" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41131"]
+[node name="Barrel_033" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41131" unique_id=1993955565]
 material_override = SubResource("ShaderMaterial_7pwrs")
 mesh = SubResource("ArrayMesh_tr3m7")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41133" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41133" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1976550966 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2133,15 +2126,15 @@ collision_shape = NodePath("@CollisionShape3D@41134")
 dissolve_shader = SubResource("ShaderMaterial_x7amw")
 fragment_mesh = NodePath("Barrel_034")
 
-[node name="@CollisionShape3D@41134" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41133"]
+[node name="@CollisionShape3D@41134" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41133" unique_id=1977222910]
 shape = SubResource("ConvexPolygonShape3D_yxcmv")
 
-[node name="Barrel_034" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41133"]
+[node name="Barrel_034" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41133" unique_id=1820769795]
 material_override = SubResource("ShaderMaterial_x7amw")
 mesh = SubResource("ArrayMesh_vphax")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41135" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41135" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1447139719 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2151,15 +2144,15 @@ collision_shape = NodePath("@CollisionShape3D@41136")
 dissolve_shader = SubResource("ShaderMaterial_ejirv")
 fragment_mesh = NodePath("Barrel_035")
 
-[node name="@CollisionShape3D@41136" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41135"]
+[node name="@CollisionShape3D@41136" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41135" unique_id=394081117]
 shape = SubResource("ConvexPolygonShape3D_ly0of")
 
-[node name="Barrel_035" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41135"]
+[node name="Barrel_035" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41135" unique_id=1715459920]
 material_override = SubResource("ShaderMaterial_ejirv")
 mesh = SubResource("ArrayMesh_i2p84")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41137" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41137" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1154060456 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2169,15 +2162,15 @@ collision_shape = NodePath("@CollisionShape3D@41138")
 dissolve_shader = SubResource("ShaderMaterial_tcqw3")
 fragment_mesh = NodePath("Barrel_036")
 
-[node name="@CollisionShape3D@41138" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41137"]
+[node name="@CollisionShape3D@41138" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41137" unique_id=561165350]
 shape = SubResource("ConvexPolygonShape3D_oeh6e")
 
-[node name="Barrel_036" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41137"]
+[node name="Barrel_036" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41137" unique_id=61375923]
 material_override = SubResource("ShaderMaterial_tcqw3")
 mesh = SubResource("ArrayMesh_e7f88")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41139" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41139" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=438319550 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2187,15 +2180,15 @@ collision_shape = NodePath("@CollisionShape3D@41140")
 dissolve_shader = SubResource("ShaderMaterial_4v7fh")
 fragment_mesh = NodePath("Barrel_037")
 
-[node name="@CollisionShape3D@41140" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41139"]
+[node name="@CollisionShape3D@41140" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41139" unique_id=714493002]
 shape = SubResource("ConvexPolygonShape3D_3s6o4")
 
-[node name="Barrel_037" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41139"]
+[node name="Barrel_037" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41139" unique_id=1522083025]
 material_override = SubResource("ShaderMaterial_4v7fh")
 mesh = SubResource("ArrayMesh_cshhc")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41141" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41141" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=870702867 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2205,15 +2198,15 @@ collision_shape = NodePath("@CollisionShape3D@41142")
 dissolve_shader = SubResource("ShaderMaterial_7i7pa")
 fragment_mesh = NodePath("Barrel_038")
 
-[node name="@CollisionShape3D@41142" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41141"]
+[node name="@CollisionShape3D@41142" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41141" unique_id=865962739]
 shape = SubResource("ConvexPolygonShape3D_b5smg")
 
-[node name="Barrel_038" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41141"]
+[node name="Barrel_038" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41141" unique_id=648270773]
 material_override = SubResource("ShaderMaterial_7i7pa")
 mesh = SubResource("ArrayMesh_kr4i7")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41143" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41143" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1103120548 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2223,15 +2216,15 @@ collision_shape = NodePath("@CollisionShape3D@41144")
 dissolve_shader = SubResource("ShaderMaterial_2ust8")
 fragment_mesh = NodePath("Barrel_039")
 
-[node name="@CollisionShape3D@41144" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41143"]
+[node name="@CollisionShape3D@41144" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41143" unique_id=141676269]
 shape = SubResource("ConvexPolygonShape3D_6db6w")
 
-[node name="Barrel_039" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41143"]
+[node name="Barrel_039" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41143" unique_id=1491714945]
 material_override = SubResource("ShaderMaterial_2ust8")
 mesh = SubResource("ArrayMesh_wh4bq")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41145" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41145" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=946729517 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2241,15 +2234,15 @@ collision_shape = NodePath("@CollisionShape3D@41146")
 dissolve_shader = SubResource("ShaderMaterial_04qfr")
 fragment_mesh = NodePath("Barrel_040")
 
-[node name="@CollisionShape3D@41146" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41145"]
+[node name="@CollisionShape3D@41146" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41145" unique_id=1390920055]
 shape = SubResource("ConvexPolygonShape3D_8s43r")
 
-[node name="Barrel_040" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41145"]
+[node name="Barrel_040" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41145" unique_id=1928746885]
 material_override = SubResource("ShaderMaterial_04qfr")
 mesh = SubResource("ArrayMesh_g14of")
 skeleton = NodePath("")
 
-[node name="@RigidBody3D@41147" type="RigidBody3D" parent="ScaleNode/Fragments" node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
+[node name="@RigidBody3D@41147" type="RigidBody3D" parent="ScaleNode/Fragments" unique_id=1191186762 node_paths=PackedStringArray("collision_shape", "fragment_mesh")]
 visible = false
 collision_layer = 16
 collision_mask = 31
@@ -2259,15 +2252,31 @@ collision_shape = NodePath("@CollisionShape3D@41148")
 dissolve_shader = SubResource("ShaderMaterial_4m4si")
 fragment_mesh = NodePath("Barrel_041")
 
-[node name="@CollisionShape3D@41148" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41147"]
+[node name="@CollisionShape3D@41148" type="CollisionShape3D" parent="ScaleNode/Fragments/@RigidBody3D@41147" unique_id=284682388]
 shape = SubResource("ConvexPolygonShape3D_yt83u")
 
-[node name="Barrel_041" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41147"]
+[node name="Barrel_041" type="MeshInstance3D" parent="ScaleNode/Fragments/@RigidBody3D@41147" unique_id=1375888430]
 material_override = SubResource("ShaderMaterial_4m4si")
 mesh = SubResource("ArrayMesh_c74f0")
 skeleton = NodePath("")
 
-[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+[node name="OutlineHandler" type="Node" parent="." unique_id=1296289110 node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("7_udes3")
 mesh_to_outline = NodePath("../ScaleNode/Barrel")
 metadata/_custom_type_script = "uid://g6rood38j5ok"
+
+[node name="IndicatorPlace" type="Node3D" parent="." unique_id=1331895540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0040455, 0)
+
+[node name="InteractArea" type="Area3D" parent="." unique_id=1484982974]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" unique_id=570808588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41235352, 0)
+shape = SubResource("CylinderShape3D_m35mq")
+
+[node name="BreakableLootInteractable" parent="." unique_id=507819919 node_paths=PackedStringArray("breakable", "interact_area", "indicator_place") instance=ExtResource("8_ckif8")]
+breakable = NodePath("..")
+interact_area = NodePath("../InteractArea")
+indicator_place = NodePath("../IndicatorPlace")

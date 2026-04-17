@@ -4,30 +4,32 @@ class_name Breakable
 signal broken
 
 @export var explosion_speed:float = 6
-@export var hit_area: Area3D
 @export var static_body:StaticBody3D
 @export var break_sound: AudioStream = null
 @export var original_model:MeshInstance3D = null
 @export var fragments_node:Node3D = null
 @export var pieces_node:Node3D = null
 @export var block_tiles:bool = false
+@export var break_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.ATTACK_PUNCH
+@export var wait_time:float = 0.4
+@export var particle_emitters:Array[GPUParticles3D] = []
 
 var explode_origin:Vector3 = Vector3.ZERO
 
-func _ready() -> void:
-	hit_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
-
-#TODO change to be destroyed by hitting with weapon
-func _on_Area3D_body_entered(body: Node) -> void:
-	if body is Player:
-		explode_origin = body.global_position
-		_explode()
+func on_interaction(body: Player) -> void:
+	body.char_model_handler.play_animation(break_animation)
+	await get_tree().create_timer(wait_time).timeout
+	
+	explode_origin = body.global_position
+	_explode()
 
 func _explode() -> void:
 	broken.emit()
-	hit_area.set_deferred("monitoring", false)
 	original_model.visible = false
 	static_body.queue_free()
+	
+	for emitter:GPUParticles3D in particle_emitters:
+		emitter.emitting = true
 	
 	var last_frag:Fragment = fragments_node.get_children().back()
 	last_frag.dissolved.connect(queue_free)

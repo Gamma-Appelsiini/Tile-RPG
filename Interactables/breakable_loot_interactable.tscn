@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bt2b2jr8wgoj2"]
+
+[ext_resource type="Script" uid="uid://dkh38eycc3fm" path="res://Tile-RPG/Breakables/breakable_loot_interactable.gd" id="1_tqhel"]
+
+[node name="BreakableLootInteractable" type="Node3D" unique_id=507819919 node_paths=PackedStringArray("interact_area")]
+script = ExtResource("1_tqhel")
+interact_area = NodePath("")
+interact_text = "Break"
+oneshot = true
+face_interactable = true

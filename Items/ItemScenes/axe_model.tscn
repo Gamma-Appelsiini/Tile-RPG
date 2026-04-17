@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://ce8a4f4uqov31"]
+[gd_scene format=4 uid="uid://ce8a4f4uqov31"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_riq6w"]
 [ext_resource type="Texture2D" uid="uid://4h2aad3gxxyp" path="res://Tile-RPG/Materials/ItemTextures/basic_axe_Axe.png" id="2_fp1h1"]
@@ -79,18 +79,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uxo05")
 
-[node name="axe_model" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="axe_model" type="RigidBody3D" unique_id=1541406810 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_riq6w")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Axe")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1333180223]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053222656, 0.33398438, 0)
 shape = SubResource("BoxShape3D_mpnyo")
 
-[node name="Axe" type="MeshInstance3D" parent="."]
+[node name="Axe" type="MeshInstance3D" parent="." unique_id=1379924794]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_11xvy")
 skeleton = NodePath("")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dafvxr2wff552"]
+[gd_scene format=4 uid="uid://dafvxr2wff552"]
 
 [ext_resource type="Script" uid="uid://175ftkf502cv" path="res://Tile-RPG/Items/item_model.gd" id="1_8b3nh"]
 [ext_resource type="Texture2D" uid="uid://c401ejlj6jdlp" path="res://Tile-RPG/Materials/ItemTextures/basic_shield_shieldtext.png" id="2_u0ypd"]
@@ -143,18 +143,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hloh4")
 
-[node name="shield_model" type="RigidBody3D" node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
-collision_layer = 16
-collision_mask = 23
+[node name="shield_model" type="RigidBody3D" unique_id=1548144905 node_paths=PackedStringArray("collision_shape_3d", "item_mesh")]
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_8b3nh")
 collision_shape_3d = NodePath("CollisionShape3D")
 item_mesh = NodePath("Shield")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1225331381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.030677795, 0.058849335)
 shape = SubResource("BoxShape3D_ro6yt")
 
-[node name="Shield" type="MeshInstance3D" parent="."]
+[node name="Shield" type="MeshInstance3D" parent="." unique_id=708540408]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 mesh = SubResource("ArrayMesh_6cbmj")
 skeleton = NodePath("")
