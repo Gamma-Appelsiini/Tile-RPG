@@ -2,7 +2,7 @@ class_name ItemGenerator
 
 enum LOOT_TYPE {
 	RANDOM, SWORD, AXE, STAFF, SHIELD, MACE, BOW, RING, AMULET, BODY_ARMOR, HELMET, BELT, DAGGER,
-	BOOTS, GLOVES,
+	BOOTS, GLOVES, GOLD, TOME,
 	}
 
 #Items are sorted by tiers
@@ -79,6 +79,17 @@ static func get_equipment(loot_type:LOOT_TYPE = LOOT_TYPE.RANDOM, ilvl:int = 1, 
 	new_equipment = _choose_equipment_type(loot_type,ilvl,max_tier,item_rarity)
 	
 	return new_equipment
+
+static func get_money_drop_amount(player_level:int = 1, multiplier:int = 1) -> int:
+	var amount:int = randi_range(1, player_level * 5) * multiplier
+	
+	return amount
+
+static func get_money() -> GoldItem:
+	var new_gold:GoldItem = GoldItem.new()
+	new_gold.set_gold_amount(get_money_drop_amount())
+	
+	return new_gold
 
 static func _get_random_rarity() -> Item.ItemRarity:
 	var new_rarity:Item.ItemRarity = Item.ItemRarity.POOR

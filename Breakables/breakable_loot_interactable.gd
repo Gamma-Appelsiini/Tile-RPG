@@ -18,11 +18,19 @@ func _create_loot() -> void:
 		pass
 	elif number <= 8:
 		#money
-		#TODO add money drop
-		pass
+		_drop_money()
 	else:
 		#grea
 		_drop_random_loot()
+
+func _drop_money() -> void:
+	await breakable.broken
+	
+	var ground_drop:GroundDrop = GROUND_DROP.instantiate()
+	ground_drop.set_money()
+	GlobalSignals.current_level.add_child(ground_drop)
+	ground_drop.global_position = breakable.global_position
+	ground_drop.shoot_rigidbody()
 
 func _drop_random_loot() -> void:
 	await breakable.broken

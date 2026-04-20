@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnv056ef465te"]
+
+[ext_resource type="Texture2D" uid="uid://cq5argnk3g3ss" path="res://Tile-RPG/Materials/Textures/jail_bars_rusty-metal-normal-512x512.png" id="1_jlblh"]
+
+[resource]
+albedo_color = Color(0.87, 0.69368005, 0.31320003, 1)
+metallic = 1.0
+roughness_texture = ExtResource("1_jlblh")
+normal_enabled = true
+normal_scale = -0.4
+normal_texture = ExtResource("1_jlblh")

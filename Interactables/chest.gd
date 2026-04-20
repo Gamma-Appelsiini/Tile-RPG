@@ -59,9 +59,10 @@ func _generate_loot() -> void:
 	
 	for rarity:Item.ItemRarity in items_to_generate.keys():
 		var loot_type:ItemGenerator.LOOT_TYPE = items_to_generate[rarity]
-		items.push_back(ItemGenerator.get_equipment(loot_type,chest_lvl,max_tier,rarity))
 		
-	_add_ability_tome()
+		if loot_type == ItemGenerator.LOOT_TYPE.GOLD: items.push_back(ItemGenerator.get_money())
+		elif loot_type == ItemGenerator.LOOT_TYPE.TOME: _add_ability_tome()
+		else: items.push_back(ItemGenerator.get_equipment(loot_type,chest_lvl,max_tier,rarity))
 
 func set_highest_rarity() -> void:
 	if len(items) == 0:

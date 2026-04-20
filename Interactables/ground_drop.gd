@@ -7,6 +7,7 @@ class_name GroundDrop
 @export var loot_failed_sound:AudioStream = null
 @export var parent_node:Node3D = null
 
+const GOLD_MODEL := preload("uid://bkvws5aj8ql8w")
 const DROP_SOUNDS:Dictionary[Item.ItemRarity, AudioStream] = {
 	Item.ItemRarity.POOR: preload("uid://beceydscqgmhx"),
 	Item.ItemRarity.COMMON: preload("uid://dl3w21m34eg57"),
@@ -48,6 +49,11 @@ func interact() -> void:
 	await loot_beam.beam_hidden
 	queue_free()
 
+func set_money(amount:int = -1) -> void:
+	var gold_item:GoldItem = GoldItem.new()
+	gold_item.set_gold_amount(amount)
+	set_item(gold_item)
+
 func set_item(new_item:Item) -> void:
 	item_drop = new_item
 	interact_text = new_item.item_name
@@ -72,6 +78,10 @@ func shoot_rigidbody() -> void:
 	set_process(true)
 	item_model.item_mesh.material_overlay = highlight_material
 	item_model.appear()
+	
+	if item_drop is GoldItem:
+		interact_area.monitoring = true
+		return
 	
 	var force:float = randf_range(5,8)
 	var horizontal_dir := Vector3(randf_range(-0.5, 0.5), 0, randf_range(-0.5, 0.5)).normalized()

@@ -235,6 +235,10 @@ func add_item_to_inv(new_item:Item) -> bool:
 		print_debug("ERROR TRYING TO ADD NULL ITEM TO INV")
 		return false
 
+	if new_item is GoldItem:
+		player_currency += new_item.item_value
+		return true
+
 	for slot:InventorySlot in slots:
 		if slot.item_in_slot != null or slot.equipment_slot or slot.array_pos >= INV_SIZE: continue
 		slot.set_item(new_item)
