@@ -28,3 +28,18 @@ func set_gold_amount(amount:int = -1)  -> void:
 		if item_value <= treshold:
 			break
 		item_rarity = GOLD_AMOUNT_RARITIES[treshold]
+
+#Overrided
+func save_to_data() -> Dictionary:
+	return {
+		"item_value": item_value,
+		"item_name": item_name,
+		"item_rarity": item_rarity,
+		"item_type": "res://Tile-RPG/Items/gold_item.gd"
+	}
+
+#Overrided
+func load_from_data(save_data:Dictionary) -> void:
+	item_value = save_data["item_value"]
+	item_name = save_data["item_name"]
+	item_rarity = save_data["item_rarity"]

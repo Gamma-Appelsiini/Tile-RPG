@@ -155,6 +155,19 @@ func _process(_delta: float) -> void:
 	if selected_slot != null:
 		selected_slot.item_image.global_position = get_viewport().get_mouse_position() + Vector2(-img_offset,-img_offset)
 
+func _can_equip(to_equip:Equipment) -> bool:
+	var equipped_main_hand:Equipment = equipment_slots[Equipment.EquipmentSlot.MAIN_HAND].item_in_slot
+	var equipped_off_hand:Equipment = equipment_slots[Equipment.EquipmentSlot.OFF_HAND].item_in_slot
+	
+	if to_equip.equipment_slot == Equipment.EquipmentSlot.OFF_HAND:
+		if equipped_main_hand and equipped_main_hand is Weapon: if equipped_main_hand.hand_type == Weapon.HandType.TWO_HANDED: return false
+		
+	if to_equip is Weapon:
+		if to_equip.hand_type == Weapon.HandType.TWO_HANDED:
+			if equipped_off_hand: return false
+	
+	return true
+
 func _handle_double_click() -> void:
 	if hovered_slot == null: return
 	if hovered_slot.item_in_slot == null: return
@@ -165,12 +178,21 @@ func _handle_double_click() -> void:
 			var equ_in_slot:Equipment = hovered_slot.item_in_slot
 			var slot_to_equip_to:InventorySlot = equipment_slots[equ_in_slot.equipment_slot]
 			
+			if !_can_equip(equ_in_slot):
+				_reset_selecting()
+				return
+				
 			GlobalSignals.play_audio.emit(INV_DROP, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 			slot_to_equip_to.set_item(equ_in_slot,hovered_slot)
 			selected_slot = null
 		else:
 			hovered_slot.item_in_slot._on_double_click()
 
+	#Not in own slots, loot to inv then
+	elif hovered_slot.array_pos >= INV_SIZE:
+		if add_item_to_inv(hovered_slot.item_in_slot):
+			hovered_slot.remove_item()
+	
 	#Unequip equipment from equipment slots
 	elif equipment_slots.values().has(hovered_slot):
 		var item_in_equ_slot:Equipment = hovered_slot.item_in_slot
