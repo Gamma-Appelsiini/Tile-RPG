@@ -63,15 +63,20 @@ func _toggle_character() -> void:
 
 func toggle_inv() -> void:
 	if main_menu.visible: return
-	inventory.visible = !inventory.visible
 	
+	inventory.visible = !inventory.visible
+	if abilities_container.visible and inventory.visible: abilities_container.hide()
 	if shop_window.visible and !inventory.visible:
 		shop_window.hide()
 
 func _toggle_abilities() -> void:
-	if main_menu.visible: return
+	if main_menu.visible or shop_window.visible: return
 	if in_combat: return
-	if !abilities_container.visible: abilities_container.show_container()
+
+	if !abilities_container.visible:
+		inventory.hide()
+		stat_window.hide()
+		abilities_container.show_container()
 	else: abilities_container.hide_container()
 
 func _connect_menu_buttons() -> void:

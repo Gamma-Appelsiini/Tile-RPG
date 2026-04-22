@@ -52,6 +52,11 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="AbilitiesContainer" parent="." unique_id=654101807 node_paths=PackedStringArray("ability_bar") instance=ExtResource("8_xlwbf")]
+visible = false
+layout_mode = 1
+ability_bar = NodePath("../AbilityBar")
+
 [node name="StatWindow" parent="." unique_id=1650177064 instance=ExtResource("6_4p5fd")]
 visible = false
 layout_mode = 1
@@ -60,11 +65,6 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 player_inventory = NodePath("../Inventory")
-
-[node name="AbilitiesContainer" parent="." unique_id=654101807 node_paths=PackedStringArray("ability_bar") instance=ExtResource("8_xlwbf")]
-visible = false
-layout_mode = 1
-ability_bar = NodePath("../AbilityBar")
 
 [node name="CombatUI" parent="." unique_id=635224778 instance=ExtResource("9_dra2u")]
 visible = false

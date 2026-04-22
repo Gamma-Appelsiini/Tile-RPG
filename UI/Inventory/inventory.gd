@@ -6,7 +6,6 @@ signal sell_item(item:Item)
 @onready var inv_slot_grid: GridContainer = %InvSlotGrid
 @onready var equipment_grid: GridContainer = %EquipmentGrid
 @onready var x_button: XButton = $x_button
-@onready var throw_out_area: Control = $ThrowOutArea
 @export var currency_amount_label: Label = null
 
 const INV_SIZE:int = 15
@@ -38,7 +37,6 @@ var hovered_slot:InventorySlot = null
 var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
-var drop_item_on_release:bool = false
 var sell_item_on_release:bool = false
 var player_currency:int = 555:
 	set(value):
@@ -55,8 +53,6 @@ func _ready() -> void:
 	add_child(shared_tooltip)
 	
 	x_button.x_pressed.connect(func(): self.visible = false)
-	throw_out_area.mouse_entered.connect(func(): drop_item_on_release = true)
-	throw_out_area.mouse_exited.connect(func(): drop_item_on_release = false)
 
 func _on_vis_change() -> void:
 	if visible:
@@ -66,8 +62,18 @@ func _on_vis_change() -> void:
 		set_process(false)
 		set_process_input(false)
 
+func _is_mouse_in_drop_position() -> bool:
+	const FROM_LEFT:float = 0.65
+	
+	var viewport:Viewport = get_viewport()
+	var mouse_x:float = viewport.get_mouse_position().x
+	var screen_width:float = viewport.get_visible_rect().size.x
+
+	return mouse_x <= (screen_width * FROM_LEFT)
+
 func _drop_item() -> bool:
-	if !drop_item_on_release: return false
+	if !_is_mouse_in_drop_position(): return false
+	
 	var selected_item:Item = selected_slot.item_in_slot
 	if selected_item == null: return false
 	
