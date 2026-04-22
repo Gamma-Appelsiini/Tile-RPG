@@ -10,15 +10,19 @@ signal broken
 @export var fragments_node:Node3D = null
 @export var pieces_node:Node3D = null
 @export var block_tiles:bool = false
-@export var break_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.ATTACK_PUNCH
-@export var wait_time:float = 0.4
 @export var particle_emitters:Array[GPUParticles3D] = []
+@export var interactable:Interactable = null
+
+const WAIT_TIMES:Dictionary[CharacterModelHandler.CharAnimation, float] = {
+	CharacterModelHandler.CharAnimation.ATTACK_PUNCH: 0.4,
+	
+}
 
 var explode_origin:Vector3 = Vector3.ZERO
 
 func on_interaction(body: Player) -> void:
-	body.char_model_handler.play_animation(break_animation)
-	await get_tree().create_timer(wait_time).timeout
+	if WAIT_TIMES.has(interactable.interact_animation):
+		await get_tree().create_timer(WAIT_TIMES[interactable.interact_animation]).timeout
 	
 	explode_origin = body.global_position
 	_explode()

@@ -322,6 +322,13 @@ func _item_released() -> void:
 		_reset_selecting()
 		return
 	
+	if selected_slot.item_in_slot is GoldItem:
+		#TODO gold sound
+		add_item_to_inv(selected_slot.item_in_slot)
+		selected_slot.remove_item()
+		selected_slot = null
+		return
+	
 	GlobalSignals.play_audio.emit(INV_DROP, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 	selected_slot.item_image.global_position = old_slot_pos
 	hovered_slot.set_item(selected_slot.item_in_slot,selected_slot)

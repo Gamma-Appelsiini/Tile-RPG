@@ -1778,15 +1778,15 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_48f5d")
 size = Vector2(0.5, 0.4)
 
-[node name="WoodenBarrel" type="Node3D" unique_id=498782213 node_paths=PackedStringArray("static_body", "original_model", "fragments_node", "particle_emitters")]
+[node name="WoodenBarrel" type="Node3D" unique_id=498782213 node_paths=PackedStringArray("static_body", "original_model", "fragments_node", "particle_emitters", "interactable")]
 script = ExtResource("1_jjjtq")
 static_body = NodePath("ScaleNode/StaticBody3D")
 break_sound = ExtResource("2_udes3")
 original_model = NodePath("ScaleNode/Barrel")
 fragments_node = NodePath("ScaleNode/Fragments")
 block_tiles = true
-wait_time = 0.5
 particle_emitters = [NodePath("Smoke"), NodePath("Wood")]
+interactable = NodePath("BreakableLootInteractable")
 
 [node name="ScaleNode" type="Node3D" parent="." unique_id=1629796972]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0145127, 0)
@@ -2366,6 +2366,7 @@ shape = SubResource("CylinderShape3D_m35mq")
 breakable = NodePath("..")
 interact_area = NodePath("../InteractArea")
 indicator_place = NodePath("../IndicatorPlace")
+interact_animation = 3
 
 [node name="Smoke" type="GPUParticles3D" parent="." unique_id=861659794]
 emitting = false

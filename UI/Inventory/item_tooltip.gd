@@ -29,15 +29,24 @@ func _reset_tooltip() -> void:
 			label.hide()
 			label.queue_free()
 	
+	_reset_colors()
+	
 	ability_rect.hide()
 	implicit_label.hide()
+	ilvl_label.show()
+	name_label.show()
+	affix_separator.show()
 
 func generate_tooltip(new_item:Item) -> void:
+	_reset_tooltip()
+
 	if new_item is Tome:
 		_generate_tome_tooltip(new_item)
 		return
+	elif new_item is GoldItem:
+		_generate_gold_tooltip(new_item)
+		return
 	
-	_reset_tooltip()
 	name_label.text = new_item.item_name
 	
 	if new_item is Equipment: _equipment_handling(new_item as Equipment)
@@ -48,9 +57,12 @@ func generate_tooltip(new_item:Item) -> void:
 	_set_colors(new_item)
 	_set_sell_price(new_item)
 
+func _generate_gold_tooltip(_new_gold:GoldItem) -> void:
+	affix_separator.hide()
+	name_label.hide()
+	ilvl_label.hide()
+
 func _generate_tome_tooltip(new_tome:Tome) -> void:
-	_reset_tooltip()
-	
 	ilvl_label.text = new_tome.ability.ability_desc
 	name_label.text = new_tome.item_name
 	ability_rect.texture = new_tome.ability.ability_icon
@@ -122,7 +134,12 @@ func _create_affix_line(aff:Affix) -> void:
 		new_label.visible = true
 		new_label.text = aff.affix_text
 		affix_container.add_child(new_label)
-		
+
+func _reset_colors() -> void:
+	name_label.remove_theme_color_override("font_color")
+	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
+	stylebox.border_color = Color(EnumStrings.RARITY_COLORS[Item.ItemRarity.POOR])
+	
 func _set_colors(new_item:Item) -> void:
 	var color_string:String = EnumStrings.RARITY_COLORS[new_item.item_rarity]
 	name_label.add_theme_color_override("font_color",Color(color_string))

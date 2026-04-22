@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgycswqthcl8v"]
+[gd_scene format=3 uid="uid://cgycswqthcl8v"]
 
 [ext_resource type="Script" uid="uid://cje3wgmngvedd" path="res://Tile-RPG/UI/StatWindow/stat_window.gd" id="1_kemfi"]
 [ext_resource type="PackedScene" uid="uid://p73hmiwkq3cm" path="res://Tile-RPG/UI/StatWindow/picture_container.tscn" id="2_b5fdx"]
@@ -27,7 +27,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 draw_center = false
 
-[node name="StatWindow" type="Control" node_paths=PackedStringArray("skill_panel", "xp_panel")]
+[node name="StatWindow" type="Control" unique_id=1178384249 node_paths=PackedStringArray("skill_panel", "xp_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +41,7 @@ script = ExtResource("1_kemfi")
 skill_panel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/SkillPanel")
 xp_panel = NodePath("PanelContainer/VBoxContainer/XpPanel")
 
-[node name="BgRect" type="TextureRect" parent="."]
+[node name="BgRect" type="TextureRect" parent="." unique_id=1108223799]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
 layout_mode = 0
 offset_left = 100.0
@@ -52,7 +52,7 @@ texture = ExtResource("2_uo5gd")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1536411509]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -64,11 +64,11 @@ grow_vertical = 2
 scale = Vector2(0.981, 1)
 theme_override_styles/panel = SubResource("StyleBoxTexture_ji44i")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=117339886]
 layout_mode = 2
 theme_override_constants/separation = 7
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=852742722]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
@@ -77,40 +77,40 @@ text = "Character"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1856675761]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="PictureContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_b5fdx")]
+[node name="PictureContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1237739202 instance=ExtResource("2_b5fdx")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=97852318]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MainStatPanel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_8o8bp")]
+[node name="MainStatPanel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=306216234 instance=ExtResource("3_8o8bp")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SkillPanel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_ap1mc")]
+[node name="SkillPanel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1263568322 instance=ExtResource("7_ap1mc")]
 layout_mode = 2
 
-[node name="DefencePanel" parent="PanelContainer/VBoxContainer" instance=ExtResource("4_vubcl")]
+[node name="DefencePanel" parent="PanelContainer/VBoxContainer" unique_id=1655060634 instance=ExtResource("4_vubcl")]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="ResistancePanel" parent="PanelContainer/VBoxContainer" instance=ExtResource("8_abnyx")]
+[node name="ResistancePanel" parent="PanelContainer/VBoxContainer" unique_id=256075280 instance=ExtResource("8_abnyx")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="XpPanel" parent="PanelContainer/VBoxContainer" instance=ExtResource("10_uo5gd")]
+[node name="XpPanel" parent="PanelContainer/VBoxContainer" unique_id=1528563102 instance=ExtResource("10_uo5gd")]
 layout_mode = 2
 
-[node name="SecondaryStatsPanel" parent="." instance=ExtResource("9_le317")]
+[node name="SecondaryStatsPanel" parent="." unique_id=1468118522 instance=ExtResource("9_le317")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -121,7 +121,7 @@ offset_bottom = 19.1683
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="x_button" parent="." instance=ExtResource("13_r27gf")]
+[node name="x_button" parent="." unique_id=650161629 instance=ExtResource("13_r27gf")]
 layout_mode = 1
 offset_left = -268.0
 offset_top = -459.0
