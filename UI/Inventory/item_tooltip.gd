@@ -22,9 +22,11 @@ func get_tt_size() -> Vector2:
 
 func _reset_tooltip() -> void:
 	for line:WeaponLine in weapon_stats.get_children():
+		line.hide()
 		line.queue_free()
 	for label:Label in affix_container.get_children():
 		if label != aff_label_template:
+			label.hide()
 			label.queue_free()
 	
 	ability_rect.hide()

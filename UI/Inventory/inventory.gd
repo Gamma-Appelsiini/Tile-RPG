@@ -385,7 +385,6 @@ func _show_tt(slot:InventorySlot) -> void:
 	if slot.array_pos <= -2: return
 	
 	shared_tooltip.generate_tooltip(slot.item_in_slot)
-	shared_tooltip.visible = true
 	
 	var offset_x:float = shared_tooltip.get_tt_size().x
 	var offset_y:float = (shared_tooltip.get_tt_size().y - slot.size.y) / 2
@@ -398,6 +397,8 @@ func _show_tt(slot:InventorySlot) -> void:
 		shared_tooltip.global_position = slot.global_position + Vector2(slot.size.x + 15, -offset_y)
 	else:
 		shared_tooltip.global_position = slot.global_position - Vector2(offset_x + 15, offset_y)
+		
+	shared_tooltip.visible = true
 	
 func _hide_tt(slot:InventorySlot) -> void:
 	if slot.item_in_slot == null: return
