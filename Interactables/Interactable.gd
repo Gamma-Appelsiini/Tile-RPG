@@ -20,15 +20,17 @@ const INTERACT_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
 var used:bool = false
 var player:Player = null
 var indicator:Indicator = null
-var label:Label3D = null
+var prompt:InteractPrompt = null
 
 func _ready() -> void:
 	_on_creation()
 
+func get_interact_text() -> String:
+	return interact_text
+
 func _on_creation() -> void:
 	#Set to scan GameCharacters
 	interact_area.set_collision_mask_value(4,true)
-	interact_text = "[" + get_input_string("Interact") + "] " + interact_text
 	#TODO sub to signal when keybinds changed
 	interact_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
 	interact_area.connect("body_exited", Callable(self, "_on_Area3D_body_exited"))
@@ -54,15 +56,6 @@ func interact() -> void:
 func handle_oneshot() -> void:
 	if !oneshot: return
 	interact_area.monitoring = false
-	
-func get_input_string(action_name: String) -> String:
-	var events:Array[InputEvent] = InputMap.action_get_events(action_name)
-	if events.size() > 0:
-		var event:InputEvent = events[0]
-		var button_name: String = OS.get_keycode_string( event.physical_keycode )
-		return button_name
-
-	return "Unknown"
 
 #Override this
 func save_to_data(save_data:Dictionary) -> void:

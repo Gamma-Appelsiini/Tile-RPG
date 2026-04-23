@@ -3,9 +3,9 @@ class_name InteractHandler
 
 @export var player:Player
 @export var indicator:Indicator
-@export var label:Label3D
 @export var no_interaction_sound:AudioStream
 @export var interaction_sound:AudioStream
+@export var interact_prompt: InteractPrompt = null
 
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
@@ -13,7 +13,7 @@ var interactable:Interactable = null
 var disabled:bool = false
 var interacting:bool = false
 var indicators:Array[Indicator] = []
-var labels:Array[Label3D] = []
+var prompts:Array[InteractPrompt] = []
 
 func _ready() -> void:
 	set_process(false)
@@ -30,13 +30,13 @@ func _add_indicators() -> void:
 	add_child(indicator)
 	indicators.push_back(indicator)
 	
-	labels = [label]
-	label = label.duplicate()
-	add_child(label)
-	labels.push_back(label)
-	label = label.duplicate()
-	add_child(label)
-	labels.push_back(label)
+	prompts = [interact_prompt]
+	interact_prompt = interact_prompt.duplicate()
+	add_child(interact_prompt)
+	prompts.push_back(interact_prompt)
+	interact_prompt = interact_prompt.duplicate()
+	add_child(interact_prompt)
+	prompts.push_back(interact_prompt)
 
 func _disable_interacting() -> void:
 	disabled = true
@@ -111,41 +111,30 @@ func show_indicator(new_interactable:Interactable) -> void:
 	free_indicator.global_position = indicator_place.global_position + Vector3(0,0.1,0)
 	free_indicator.reset_physics_interpolation()
 	free_indicator.show_indicator()
-	
-	var free_label:Label3D = null
-	if new_interactable.label != null: free_label = new_interactable.label
-	else:
-		for lab:Label3D in labels: if lab.visible == false: free_label = lab
-		if free_label == null: free_label = labels[0]
-	
-	free_label.hide()
-	free_label.text = new_interactable.interact_text
-	free_label.global_position = indicator_place.global_position
-	free_label.reset_physics_interpolation()
-	
-	free_label.modulate.a = 0
-	free_label.show()
-	var tween:Tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT)
-	tween.tween_property(free_label, "modulate:a", 1, .15)
-	tween.tween_property(free_label, "outline_modulate:a", 1, .15)
-	
 	new_interactable.indicator = free_indicator
-	new_interactable.label = free_label
+	
+	_show_prompt(new_interactable)
+	
+
+func _show_prompt(new_interactable:Interactable) -> void:
+	var free_prompt:InteractPrompt = null
+	if new_interactable.prompt != null: free_prompt = new_interactable.prompt
+	else:
+		for prompt:InteractPrompt in prompts: if prompt.visible == false: free_prompt = prompt
+		if free_prompt == null: free_prompt = prompts[0]
+	
+	free_prompt.show_prompt(new_interactable)
+	new_interactable.prompt = free_prompt
 
 func hide_indicator(new_interactable:Interactable) -> void:
 	if new_interactable.indicator == null: return
-	if new_interactable.label == null: return
+	if new_interactable.prompt == null: return
 	
 	new_interactable.indicator.hide_indicator()
-	
-	var tween:Tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT)
-	tween.tween_property(new_interactable.label, "modulate:a", 0, .15)
-	tween.tween_property(new_interactable.label, "outline_modulate:a", 0, .15)
-	await tween.finished
-	new_interactable.label.hide()
+	new_interactable.prompt.hide_prompt()
 	
 	new_interactable.indicator = null
-	new_interactable.label = null
+	new_interactable.prompt = null
 
 func add_interactable(inter:Interactable) -> void:
 	interactables.append(inter)
