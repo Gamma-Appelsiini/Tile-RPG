@@ -44,6 +44,7 @@ var player_currency:int = 555:
 		_update_currency_amount(player_currency)
 
 func _ready() -> void:
+	player_currency = player_currency
 	set_process(false)
 	set_process_input(false)
 	visibility_changed.connect(_on_vis_change)
@@ -128,6 +129,7 @@ func save_inv_to_data(save_data:Dictionary) -> void:
 		if slot.item_in_slot != null:
 			inv_data[slot.array_pos] = slot.item_in_slot.save_to_data()
 
+	save_data["currency"] = player_currency
 	save_data["inventory"] = inv_data
 	_save_equipment(save_data)
 
@@ -153,9 +155,9 @@ func _update_currency_amount(amount:int) -> void:
 	currency_amount_label.text = str(amount)
 
 func _load_currency(save_data:Dictionary) -> void:
-	if !save_data["quest_handler"].has("player_currency"): return
+	if !save_data.has("currency"): return
 	
-	player_currency = save_data["quest_handler"]["player_currency"]
+	player_currency = save_data["currency"]
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:

@@ -115,8 +115,6 @@ func fill_items() -> void:
 		item_panel.default_button.reset_button()
 		var max_item_level:int = GlobalSignals.player.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL)
 		item_panel.add_item(RARITIES.pick_random(), max_item_level)
-		player_inventory._create_item_tt(item_panel.inventory_slot.item_in_slot)
-		
 
 func _buy_item(item_panel:ShopItemPanel) -> void:
 	var player_cash:int = player_inventory.player_currency
