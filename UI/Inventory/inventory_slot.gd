@@ -3,7 +3,7 @@ class_name InventorySlot
 
 signal equip_item(item:Equipment)
 signal unequip_item(item:Equipment)
-signal item_placed(item:Equipment)
+signal item_placed(item:Item)
 signal item_removed
 signal put_back_equ_bg
 
