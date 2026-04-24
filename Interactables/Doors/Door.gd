@@ -29,6 +29,7 @@ func add_blocked_tiles(tile_manager:TileManager) -> void:
 	_handle_blocked_tiles()
 
 func interact() -> void:
+	interact_complete.emit()
 	if !interaction_enabled: return
 	_handle_locked()
 	if locked: return

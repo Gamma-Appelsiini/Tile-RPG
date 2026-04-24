@@ -1,6 +1,8 @@
 extends Node3D
 class_name Interactable
 
+signal interact_complete
+
 @export var unique_id:String = ""
 @export var interact_area:Area3D
 @export var indicator_place:Node3D
@@ -31,7 +33,6 @@ func get_interact_text() -> String:
 func _on_creation() -> void:
 	#Set to scan GameCharacters
 	interact_area.set_collision_mask_value(4,true)
-	#TODO sub to signal when keybinds changed
 	interact_area.connect("body_entered", Callable(self, "_on_Area3D_body_entered"))
 	interact_area.connect("body_exited", Callable(self, "_on_Area3D_body_exited"))
 
@@ -51,7 +52,7 @@ func get_interact_pos() -> Node3D:
 
 #Override this
 func interact() -> void:
-	pass
+	interact_complete.emit()
 	
 func handle_oneshot() -> void:
 	if !oneshot: return

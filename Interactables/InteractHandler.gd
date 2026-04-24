@@ -10,8 +10,7 @@ class_name InteractHandler
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
 var interactable:Interactable = null
-var disabled:bool = false
-var interacting:bool = false
+#var disabled:bool = false
 var indicators:Array[Indicator] = []
 var prompts:Array[InteractPrompt] = []
 
@@ -39,18 +38,15 @@ func _add_indicators() -> void:
 	prompts.push_back(interact_prompt)
 
 func _disable_interacting() -> void:
-	disabled = true
 	set_process(false)
 	set_process_input(false)
-	indicator.hide_indicator()
+	for child in get_children(): child.hide()
+	current_interactee = null
 	
 func _enable_interacting() -> void:
-	disabled = false
 	set_process_input(true)
-	
 	if interactables.is_empty(): return
 	set_process(true)
-	_show_right_interactee()
 
 func _process(_delta: float) -> void:
 	_show_right_interactee()
@@ -60,14 +56,13 @@ func _input(event: InputEvent) -> void:
 		_interact()
 
 func _interact() -> void:
-	if player.character_state == GameCharacter.CharacterState.INTERACTING or interacting: return
+	#if player.character_state == GameCharacter.CharacterState.INTERACTING or interacting: return
 	if current_interactee == null:
 		GlobalSignals.play_audio.emit(no_interaction_sound, AudioManager.AUDIO_TYPE.UI)
 		return
 	
-	interacting = true
-	#current_interactee can move away while interacting
 	interactable = current_interactee
+	_disable_interacting()
 
 	if interactable.interact_position:
 		player.move_to_point(interactable.interact_position.global_position)
@@ -84,11 +79,13 @@ func _interact() -> void:
 
 	_interact_with_interactable()
 	interactable = null
-	interacting = false
 	
 func _interact_with_interactable() -> void:
 	GlobalSignals.play_audio.emit(interaction_sound, AudioManager.AUDIO_TYPE.UI)
 	interactable.interact()
+	
+	await interactable.interact_complete
+	_enable_interacting()
 	
 	if interactable == null :
 		interactables.clear()
@@ -141,7 +138,6 @@ func add_interactable(inter:Interactable) -> void:
 	inter.player = self.player
 	_show_right_interactee()
 	
-	if disabled: return
 	if len(interactables) > 1: set_process(true)
 	else: set_process(false)
 	
@@ -150,13 +146,10 @@ func remove_interactable(inter:Interactable) -> void:
 		interactables.erase(inter)
 		_show_right_interactee()
 	
-	if disabled: return
 	if len(interactables) > 1: set_process(true)
 	else: set_process(false)
 	
 func _show_right_interactee() -> void:
-	if disabled: return
-	
 	if interactables.is_empty():
 		if current_interactee == null: return
 		hide_indicator(current_interactee)

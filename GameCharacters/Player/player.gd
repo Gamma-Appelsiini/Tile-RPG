@@ -13,23 +13,24 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 var came_from_id:String = "menu"
 var _last_move_dir: Vector3 = Vector3.BACK
 var movement_enabled:bool = true
+var movement_disablers:int = 0
 
 func _ready() -> void:
 	_connect_signals()
 
 func _connect_signals() -> void:
-	GlobalSignals.enable_player_movement.connect(_enable_movement)
-	GlobalSignals.disable_player_movement.connect(_disable_movement)
+	GlobalSignals.enable_player_movement.connect(enable_movement)
+	GlobalSignals.disable_player_movement.connect(disable_movement)
 
 #Overrided
 func enter_interact_state(interact_animation:CharacterModelHandler.CharAnimation) -> void:
-	_disable_movement()
+	disable_movement()
 	set_process_input(false)
 	
 	char_model_handler.play_animation(interact_animation, false)
 	await char_model_handler.animation_player.animation_finished
 	
-	_enable_movement()
+	enable_movement()
 	set_process_input(true)
 	change_state(CharacterState.OUT_OF_COMBAT)
 
@@ -40,13 +41,13 @@ func _enter_out_of_combat_state(prev_state:CharacterState) -> void:
 		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
 		hide_weapon.emit()
 		await char_model_handler.animation_player.animation_finished
-		_enable_movement()
+		enable_movement()
 	else:
 		char_model_handler.play_idle_animation()
 
 #Overrided
 func _enter_combat_state(prev_state:CharacterState) -> void:
-	_disable_movement()
+	disable_movement()
 	if prev_state != CharacterState.IN_COMBAT:
 		char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DRAW_WEAPON, false)
 		await get_tree().create_timer(char_model_handler.DELAYS[CharacterModelHandler.CharAnimation.DRAW_WEAPON]).timeout
@@ -71,11 +72,16 @@ func _input(event: InputEvent) -> void:
 		GlobalSignals.hide_outline.emit()
 		GlobalSignals.hide_info_bar.emit()
 
-func _enable_movement() -> void:
-	set_physics_process(true)
-	movement_enabled = true
+func enable_movement() -> void:
+	movement_disablers -= 1
+
+	if movement_disablers <= 0:
+		set_physics_process(true)
+		movement_enabled = true
 	
-func _disable_movement() -> void:
+func disable_movement() -> void:
+	movement_disablers += 1
+
 	set_physics_process(false)
 	movement_enabled = false
 

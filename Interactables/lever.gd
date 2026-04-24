@@ -15,6 +15,7 @@ func interact() -> void:
 	interact_area.monitoring = false
 	
 	await _rotate_lever()
+	interact_complete.emit()
 	
 	if node_to_call != null:
 		if node_to_call.has_method("on_lever_use"): node_to_call.on_lever_use()

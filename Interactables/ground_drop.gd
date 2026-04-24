@@ -36,6 +36,7 @@ func _set_inventory_ref() -> void:
 	player_inventory = GlobalSignals.ui_handler.inventory
 
 func interact() -> void:
+	interact_complete.emit()
 	var added:bool = player_inventory.add_item_to_inv(item_drop)
 	if !added:
 		GlobalSignals.play_audio.emit(loot_failed_sound, AudioManager.AUDIO_TYPE.UI, global_position)

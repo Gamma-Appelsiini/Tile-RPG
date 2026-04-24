@@ -9,6 +9,8 @@ const GROUND_DROP := preload("uid://cuocgxmrrsjwt")
 func interact() -> void:
 	_create_loot()
 	breakable.on_interaction(player)
+	await breakable.broken
+	interact_complete.emit()
 
 func _create_loot() -> void:
 	var number:int = randi_range(1,10)

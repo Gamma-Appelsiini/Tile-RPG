@@ -31,6 +31,8 @@ func _animate_saving() -> void:
 	
 	await tween2.finished
 	moving_mesh.hide()
+	
+	interact_complete.emit()
 
 func _show_saved_message():
 	var new_dialogue_bubble:DialogueBubble = DIALOGUE_BUBBLE.instantiate()

@@ -33,6 +33,7 @@ func interact() -> void:
 	
 func _close_container(lootC:LootContainer) -> void:
 	if lootC != self: return
+	interact_complete.emit()
 	GlobalSignals.close_container.disconnect(_close_container)
 	
 	loot_beam.hide_beam()
