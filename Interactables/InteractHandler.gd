@@ -10,7 +10,6 @@ class_name InteractHandler
 var interactables: Array[Interactable] = []
 var current_interactee:Interactable = null
 var interactable:Interactable = null
-#var disabled:bool = false
 var indicators:Array[Indicator] = []
 var prompts:Array[InteractPrompt] = []
 
@@ -56,7 +55,6 @@ func _input(event: InputEvent) -> void:
 		_interact()
 
 func _interact() -> void:
-	#if player.character_state == GameCharacter.CharacterState.INTERACTING or interacting: return
 	if current_interactee == null:
 		GlobalSignals.play_audio.emit(no_interaction_sound, AudioManager.AUDIO_TYPE.UI)
 		return
@@ -77,24 +75,23 @@ func _interact() -> void:
 		if interactable.INTERACT_DELAYS.has(interactable.interact_animation):
 			await get_tree().create_timer(interactable.INTERACT_DELAYS[interactable.interact_animation]).timeout
 
-	_interact_with_interactable()
+	await _interact_with_interactable()
 	interactable = null
 	
 func _interact_with_interactable() -> void:
 	GlobalSignals.play_audio.emit(interaction_sound, AudioManager.AUDIO_TYPE.UI)
+	if interactable.disable_movement: GlobalSignals.disable_player_movement.emit()
 	interactable.interact()
 	
+	#Some interactables give signal too early and they have to wait with timer?
 	await interactable.interact_complete
+	if interactable.disable_movement: GlobalSignals.enable_player_movement.emit()
 	_enable_interacting()
-	
-	if interactable == null :
-		interactables.clear()
-		return
+
 	if interactable.oneshot:
 		interactables.erase(interactable)
 		interactable.handle_oneshot()
-		_show_right_interactee()
-		
+
 func show_indicator(new_interactable:Interactable) -> void:
 	var indicator_place:Node3D = new_interactable.get_interact_pos()
 	

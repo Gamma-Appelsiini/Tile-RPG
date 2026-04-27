@@ -7,6 +7,7 @@ size = Vector3(0.92392, 0.389282, 1.54736)
 
 [node name="DialogueInteractable" type="Node3D" unique_id=811687816 node_paths=PackedStringArray("interact_area", "indicator_place")]
 script = ExtResource("1_7xend")
+disable_movement = true
 interact_area = NodePath("Area3D")
 indicator_place = NodePath(".")
 interact_text = "Talk"

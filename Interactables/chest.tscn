@@ -17,6 +17,7 @@ script = ExtResource("1_vugoh")
 container_image = ExtResource("2_lcgj3")
 animation_player = NodePath("new_chest/AnimationPlayer")
 loot_beam = NodePath("LootBeam")
+disable_movement = true
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("IndicatorPlace")
 interact_text = "Open"

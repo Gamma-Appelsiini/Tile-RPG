@@ -9,12 +9,11 @@ func _ready() -> void:
 	_on_creation()
 	crafting_window.visible = false
 	crafting_window.window_closed.connect(_crafting_closed)
-	player_inv = get_tree().get_nodes_in_group("Inventory")[0]
+	player_inv = GlobalSignals.ui_handler.inventory
 
 func interact() -> void:
 	_connect_cw_slot_to_inv()
 	
-	player.movement_enabled = false
 	crafting_window.visible = true
 	player_inv.visible = true
 	interact_area.monitoring = false
@@ -38,5 +37,6 @@ func _crafting_closed() -> void:
 	
 	crafting_window.visible = false
 	player_inv.visible = false
-	player.movement_enabled = true
 	interact_area.monitoring = true
+	
+	interact_complete.emit()

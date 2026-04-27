@@ -13,7 +13,6 @@ const ROTATION_AMOUNT:float = -2.65
 var door_rotation:float = 0
 var return_rotation:float = 0
 var locked:bool = false
-var interaction_enabled:bool = true
 var closest_interact:Node3D = null
 var door_open:bool = false
 
@@ -29,11 +28,11 @@ func add_blocked_tiles(tile_manager:TileManager) -> void:
 	_handle_blocked_tiles()
 
 func interact() -> void:
-	interact_complete.emit()
-	if !interaction_enabled: return
 	_handle_locked()
-	if locked: return
-	interaction_enabled = false
+	if locked:
+		await get_tree().create_timer(0.01).timeout
+		interact_complete.emit()
+		return
 	interact_area.monitoring = false
 	
 	if used: door_rotation = return_rotation
@@ -64,8 +63,8 @@ func interact() -> void:
 	await tween.finished
 	
 	if door_open: collision_shape_3d.disabled = true
-	interaction_enabled = true
 	interact_area.monitoring = true
+	interact_complete.emit()
 
 func _handle_blocked_tiles() -> void:
 	if len(blocked_tiles) != 2: return

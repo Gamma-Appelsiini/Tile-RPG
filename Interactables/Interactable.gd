@@ -4,6 +4,7 @@ class_name Interactable
 signal interact_complete
 
 @export var unique_id:String = ""
+@export var disable_movement:bool = false
 @export var interact_area:Area3D
 @export var indicator_place:Node3D
 @export var interact_sound: AudioStream = null

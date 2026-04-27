@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnw6ibd7fwlqf"]
+[gd_scene format=3 uid="uid://dnw6ibd7fwlqf"]
 
 [ext_resource type="Script" uid="uid://dixnwcnac0pek" path="res://Tile-RPG/Interactables/character_dialogue_interactable.gd" id="1_hbsey"]
 
@@ -6,16 +6,17 @@
 height = 1.0
 radius = 1.0
 
-[node name="CharacterDialogueInteractable" type="Node3D" node_paths=PackedStringArray("interact_area", "indicator_place")]
+[node name="CharacterDialogueInteractable" type="Node3D" unique_id=1656279495 node_paths=PackedStringArray("interact_area", "indicator_place")]
 script = ExtResource("1_hbsey")
+disable_movement = true
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("InteractPos")
 interact_text = "Talk"
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1817891549]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=341378490]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_hbsey")
 
-[node name="InteractPos" type="Node3D" parent="."]
+[node name="InteractPos" type="Node3D" parent="." unique_id=546887580]

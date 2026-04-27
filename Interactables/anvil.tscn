@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://2b0xh0a27vb8"]
+[gd_scene format=4 uid="uid://2b0xh0a27vb8"]
 
 [ext_resource type="Script" uid="uid://bjf15g0ncnvb1" path="res://Tile-RPG/Interactables/anvil.gd" id="1_og7ni"]
 [ext_resource type="Texture2D" uid="uid://chyow8elnov82" path="res://Tile-RPG/Models/Interactables/anvil_Anvil.png" id="2_2kqpt"]
@@ -53,40 +53,42 @@ size = Vector3(0.99408, 0.389282, 0.637451)
 [sub_resource type="BoxShape3D" id="BoxShape3D_og7ni"]
 size = Vector3(0.783447, 0.415771, 0.29126)
 
-[node name="Anvil" type="Node3D" node_paths=PackedStringArray("interact_area", "indicator_place")]
+[node name="Anvil" type="Node3D" unique_id=563338212 node_paths=PackedStringArray("interact_area", "indicator_place")]
 script = ExtResource("1_og7ni")
+disable_movement = true
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("IndicatorPlace")
 interact_text = "Craft"
+metadata/_custom_type_script = "uid://dgcve45y3uah7"
 
-[node name="AnvilMesh" type="MeshInstance3D" parent="."]
+[node name="AnvilMesh" type="MeshInstance3D" parent="." unique_id=1502768235]
 mesh = SubResource("ArrayMesh_w1ksw")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=349574640]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1515153721]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0555725, 0.194995, 0.00109863)
 shape = SubResource("BoxShape3D_2kqpt")
 
-[node name="IndicatorPlace" type="Node3D" parent="."]
+[node name="IndicatorPlace" type="Node3D" parent="." unique_id=1104011698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54988, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1703834236]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1347461188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0637283, 0.208191, 0.000610352)
 shape = SubResource("BoxShape3D_og7ni")
 
-[node name="CraftingWindow" parent="." instance=ExtResource("3_2kqpt")]
+[node name="CraftingWindow" parent="." unique_id=1861276651 instance=ExtResource("3_2kqpt")]
 unique_name_in_owner = true
 visible = false
 
-[node name="OutlineHandler" type="Node" parent="." node_paths=PackedStringArray("mesh_to_outline")]
+[node name="OutlineHandler" type="Node" parent="." unique_id=1085840494 node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("4_md1ui")
 mesh_to_outline = NodePath("../AnvilMesh")
 metadata/_custom_type_script = "uid://g6rood38j5ok"

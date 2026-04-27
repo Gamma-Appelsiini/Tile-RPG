@@ -20,6 +20,7 @@ func _animate_saving() -> void:
 	tween.tween_property(moving_mesh, "position", moving_mesh.position + Vector3(0,1.25,0), 1.5)
 	
 	await tween.finished
+	interact_complete.emit()
 	
 	GlobalSignals.play_audio.emit(saved_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, moving_mesh.global_position)
 	_show_saved_message()
@@ -32,7 +33,6 @@ func _animate_saving() -> void:
 	await tween2.finished
 	moving_mesh.hide()
 	
-	interact_complete.emit()
 
 func _show_saved_message():
 	var new_dialogue_bubble:DialogueBubble = DIALOGUE_BUBBLE.instantiate()

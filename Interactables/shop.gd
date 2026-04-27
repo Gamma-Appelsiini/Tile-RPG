@@ -20,6 +20,7 @@ var shop_window:ShopWindow = null
 var last_open_lvl:int = -1
 var player_inventory:Inventory = null
 var ui_handler:UIHandler = null
+var dialogue_on_cd:bool = false
 
 #Overrided
 func _ready() -> void:
@@ -34,10 +35,16 @@ func _on_enter_area_entered(body:Node) -> void:
 	enter_area.set_deferred("monitoring", false)
 
 func show_shopkeeper_talking(new_text:String) -> void:
+	if dialogue_on_cd: return
+	dialogue_on_cd = true
+	
 	var new_dialogue_bubble:DialogueBubble = DIALOGUE_BUBBLE.instantiate()
 	add_child(new_dialogue_bubble)
 	new_dialogue_bubble.set_params(shop_name,shop_portrait, dialogue_place, get_viewport().get_camera_3d())
 	new_dialogue_bubble.set_simple_dialogue(new_text)
+
+	await new_dialogue_bubble.dialogue_finished
+	dialogue_on_cd = false
 
 func _show_welcome_dialogue() -> void:
 	show_shopkeeper_talking(shop_window.FLAVOR_TEXT_WELCOME.pick_random())
@@ -49,9 +56,16 @@ func interact() -> void:
 	_generate_new_items()
 	
 	shop_window.open_shop(self)
+	shop_window.visibility_changed.connect(_on_shop_close)
 	
 	if !ui_handler.inventory.visible:
 		ui_handler.toggle_inv()
+
+func _on_shop_close():
+	if shop_window.visible: return
+	
+	interact_complete.emit()
+	shop_window.visibility_changed.disconnect(_on_shop_close)
 
 func _set_shop_window_ref() -> void:
 	ui_handler = GlobalSignals.ui_handler

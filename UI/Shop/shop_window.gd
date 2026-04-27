@@ -33,11 +33,10 @@ func _animate_flavor_text(new_text:String) -> void:
 
 func _show_goodbye_text() -> void:	
 	if visible: return
+	
 	opened_shop.show_shopkeeper_talking(FLAVOR_TEXT_GOODBYE.pick_random())
 	opened_shop.interact_complete.emit()
 	opened_shop = null
-	#GlobalSignals.enable_player_movement.emit()
-	#GlobalSignals.player.interact_handler._enable_interacting()
 
 func _on_inv_visibility_changed() -> void:
 	if !player_inventory.visible: self.visible = false
@@ -61,13 +60,9 @@ func reset_shop() -> void:
 		item_panel.default_button.reset_button()
 
 func open_shop(new_shop:Shop) -> void:
-	#GlobalSignals.player.interact_handler._disable_interacting()
 	opened_shop = new_shop
-	
 	_set_viewport()
 	shopkeeper_portrait.set_shopkeeper(new_shop)
-	
-	#GlobalSignals.disable_player_movement.emit()
 	show()
 
 func _set_viewport() -> void:

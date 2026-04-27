@@ -36,16 +36,20 @@ func _set_inventory_ref() -> void:
 	player_inventory = GlobalSignals.ui_handler.inventory
 
 func interact() -> void:
-	interact_complete.emit()
 	var added:bool = player_inventory.add_item_to_inv(item_drop)
 	if !added:
 		GlobalSignals.play_audio.emit(loot_failed_sound, AudioManager.AUDIO_TYPE.UI, global_position)
+		interact_complete.emit()
 		return
 	
 	GlobalSignals.play_audio.emit(loot_successful_sound, AudioManager.AUDIO_TYPE.UI,global_position)
 	interact_area.monitoring = false
 	item_model.visible = false
 	loot_beam.hide_beam()
+	
+	#Timeout or interacthandler does not get signal back
+	await get_tree().create_timer(0.01).timeout
+	interact_complete.emit()
 	
 	await loot_beam.beam_hidden
 	queue_free()
