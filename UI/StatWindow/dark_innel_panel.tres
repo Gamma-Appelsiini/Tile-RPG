@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://deevthuiearin"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://deevthuiearin"]
 
 [ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="1_62dgn"]
 

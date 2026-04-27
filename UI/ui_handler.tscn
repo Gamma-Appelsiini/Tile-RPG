@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwm8mixxh22t5" path="res://Tile-RPG/UI/Inventory/inventory.tscn" id="5_e6bge"]
 [ext_resource type="PackedScene" uid="uid://cgycswqthcl8v" path="res://Tile-RPG/UI/StatWindow/stat_window.tscn" id="6_4p5fd"]
 [ext_resource type="PackedScene" uid="uid://di1h35368wxtx" path="res://Tile-RPG/UI/Inventory/loot_window.tscn" id="7_coc15"]
+[ext_resource type="PackedScene" uid="uid://ct761wejgx40c" path="res://Tile-RPG/UI/Crafting/crafting_window.tscn" id="8_aysv3"]
 [ext_resource type="PackedScene" uid="uid://cp3lhfafyqjva" path="res://Tile-RPG/UI/Abilities/abilities_container.tscn" id="8_xlwbf"]
 [ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.tscn" id="9_dra2u"]
 [ext_resource type="PackedScene" uid="uid://cc2jlwv1hf0dd" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.tscn" id="10_kdg4q"]
@@ -15,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="13_u553s"]
 [ext_resource type="PackedScene" uid="uid://bhya384vo3b7b" path="res://Tile-RPG/UI/Menus/loading_screen.tscn" id="14_24ytg"]
 
-[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "start_menu", "loot_window")]
+[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "start_menu", "loot_window", "crafting_window")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +38,7 @@ main_menu = NodePath("MainMenu")
 loading_screen = NodePath("LoadingScreen")
 start_menu = NodePath("StartMenu")
 loot_window = NodePath("LootWindow")
+crafting_window = NodePath("CraftingWindow")
 
 [node name="GlobeUI" parent="." unique_id=536348896 instance=ExtResource("2_aysv3")]
 layout_mode = 1
@@ -58,6 +60,10 @@ layout_mode = 1
 ability_bar = NodePath("../AbilityBar")
 
 [node name="StatWindow" parent="." unique_id=1650177064 instance=ExtResource("6_4p5fd")]
+visible = false
+layout_mode = 1
+
+[node name="CraftingWindow" parent="." unique_id=257818258 instance=ExtResource("8_aysv3")]
 visible = false
 layout_mode = 1
 

@@ -14,6 +14,7 @@ class_name UIHandler
 @export var loading_screen: LoadingScreen = null
 @export var start_menu: StartMenu = null
 @export var loot_window: LootWindow = null
+@export var crafting_window: CraftingWindow = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 

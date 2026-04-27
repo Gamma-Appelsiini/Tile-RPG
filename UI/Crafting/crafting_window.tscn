@@ -1,9 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://ct761wejgx40c"]
+[gd_scene format=3 uid="uid://ct761wejgx40c"]
 
 [ext_resource type="Script" uid="uid://cikgpqlo6kbjj" path="res://Tile-RPG/UI/Crafting/crafting_window.gd" id="1_1iunn"]
 [ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="2_bwirk"]
 [ext_resource type="PackedScene" uid="uid://c8lvxyflk4ru8" path="res://Tile-RPG/UI/Inventory/inventory_slot.tscn" id="3_1iunn"]
-[ext_resource type="Texture2D" uid="uid://c47ivluaw2iuj" path="res://Tile-RPG/Images/UI/Borders/detail_border4.png" id="3_p2l15"]
+[ext_resource type="Texture2D" uid="uid://ca43mwb20mx0g" path="res://Tile-RPG/Images/UI/Borders/sharp_border3.png" id="3_10wou"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_ckoyc"]
 [ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="5_fdih8"]
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_0md6y"]
@@ -13,24 +13,25 @@
 [ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="7_m03l5"]
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="8_5j8om"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="8_10wou"]
-[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="8_dssmb"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="11_ooejg"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="12_10wou"]
 [ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="13_dssmb"]
 [ext_resource type="PackedScene" uid="uid://cojb0yey4conu" path="res://Tile-RPG/UI/x_button.tscn" id="17_0md6y"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooejg"]
-content_margin_left = 35.0
-content_margin_top = 20.0
-content_margin_right = 35.0
-content_margin_bottom = 35.0
-texture = ExtResource("3_p2l15")
-texture_margin_left = 25.0
-texture_margin_top = 25.0
-texture_margin_right = 25.0
-texture_margin_bottom = 25.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-draw_center = false
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dssmb"]
+content_margin_left = 50.0
+content_margin_right = 50.0
+texture = ExtResource("3_10wou")
+texture_margin_left = 45.0
+texture_margin_top = 55.0
+texture_margin_right = 45.0
+texture_margin_bottom = 55.0
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yxc6d"]
 texture = ExtResource("6_0md6y")
@@ -42,12 +43,22 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 draw_center = false
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0md6y"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+content_margin_bottom = 5.0
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ysrgi"]
 texture = ExtResource("6_d0je4")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooejg"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
 
 [sub_resource type="Curve" id="Curve_m03l5"]
 _limits = [0.0, 0.2, 0.0, 0.944664]
@@ -58,7 +69,7 @@ point_count = 4
 offsets = PackedFloat32Array(0, 0.20562771, 1)
 colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000001, 0, 0)
 
-[node name="CraftingWindow" type="Control" node_paths=PackedStringArray("aff_container", "rem_aff_button", "add_aff_button", "inventory_slot", "add_ilvl_button", "add_max_aff_button", "cpu_particles_2d", "button_container", "x_button")]
+[node name="CraftingWindow" type="Control" unique_id=257818258 node_paths=PackedStringArray("aff_container", "inventory_slot", "cpu_particles_2d", "button_container", "x_button", "disable_rect", "rem_aff_button", "add_aff_button", "add_ilvl_button", "add_max_aff_button")]
 layout_mode = 3
 anchor_left = 0.15
 anchor_top = 0.1
@@ -69,17 +80,18 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1iunn")
 aff_container = NodePath("PanelContainer/VBoxContainer/PanelContainer/PanelContainer/AffContainer")
-rem_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/RemAffButton")
-add_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddAffButton")
 inventory_slot = NodePath("PanelContainer/VBoxContainer/InventorySlot")
-add_ilvl_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddIlvlButton")
-add_max_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddMaxAffButton")
 cpu_particles_2d = NodePath("PanelContainer/VBoxContainer/CPUParticles2D")
 button_container = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer")
 x_button = NodePath("x_button")
+disable_rect = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/DisableRect")
+rem_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/RemButton")
+add_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddAButton")
+add_ilvl_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddIButton")
+add_max_aff_button = NodePath("PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer/AddMAButton")
 
-[node name="BgRect" type="TextureRect" parent="."]
-self_modulate = Color(0.322908, 0.322635, 0.3624696, 1)
+[node name="BgRect" type="TextureRect" parent="." unique_id=366000238]
+self_modulate = Color(0.2824075, 0.28240746, 0.28240746, 1)
 layout_mode = 0
 offset_left = 17.0
 offset_top = 16.0
@@ -89,59 +101,44 @@ texture = ExtResource("2_bwirk")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-self_modulate = Color(0.76, 0.6500533, 0.2888, 1)
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2006131801]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ooejg")
+theme_override_styles/panel = SubResource("StyleBoxTexture_dssmb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=818737432]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1001005783]
 layout_mode = 2
 theme = ExtResource("4_ckoyc")
 text = "Crafting"
 horizontal_alignment = 1
 
-[node name="InventorySlot" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_1iunn")]
+[node name="InventorySlot" parent="PanelContainer/VBoxContainer" unique_id=835777164 instance=ExtResource("3_1iunn")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(145, 145)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1607912816]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_yxc6d")
 
-[node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer"]
-self_modulate = Color(0.4, 0.39253333, 0.368, 1)
+[node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=789679516]
+self_modulate = Color(0.21710122, 0.21710122, 0.21710122, 1)
 layout_mode = 2
 texture = ExtResource("7_0md6y")
 expand_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("8_dssmb")
-
-[node name="AffContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer/AffContainer"]
-layout_mode = 2
-theme = ExtResource("4_ckoyc")
-text = "Affixes"
-horizontal_alignment = 1
-
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=171061974]
 layout_mode = 2
 texture = ExtResource("8_10wou")
 patch_margin_left = 10
@@ -149,64 +146,72 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1509223037]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0md6y")
+
+[node name="AffContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer" unique_id=952458196]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/PanelContainer/AffContainer" unique_id=868754857]
+layout_mode = 2
+theme = ExtResource("4_ckoyc")
+text = "Affixes"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1164224492]
+layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_ysrgi")
 
-[node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2"]
+[node name="BgRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=1387887016]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
 layout_mode = 2
 texture = ExtResource("11_ooejg")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=1492529451]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("8_dssmb")
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ooejg")
 
-[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer" unique_id=2019205306]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 40
 alignment = 1
 
-[node name="RemAffButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+[node name="RemButton" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer" unique_id=1928547599 instance=ExtResource("12_10wou")]
+custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
-tooltip_text = "Remove Affix"
-icon = ExtResource("5_fdih8")
-icon_alignment = 1
-expand_icon = true
+button_image = ExtResource("5_fdih8")
+image_size = Vector2(40, 40)
 
-[node name="AddAffButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+[node name="AddAButton" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer" unique_id=1118270900 instance=ExtResource("12_10wou")]
+custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
-tooltip_text = "Add Random Affix"
-icon = ExtResource("6_u54fj")
-icon_alignment = 1
-expand_icon = true
+button_image = ExtResource("6_u54fj")
+image_size = Vector2(40, 40)
 
-[node name="AddIlvlButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+[node name="AddIButton" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer" unique_id=1618085122 instance=ExtResource("12_10wou")]
+custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
-tooltip_text = "Increase Item Level"
-icon = ExtResource("7_m03l5")
-icon_alignment = 1
-expand_icon = true
+button_image = ExtResource("7_m03l5")
+image_size = Vector2(40, 40)
 
-[node name="AddMaxAffButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+[node name="AddMAButton" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer/ButtonContainer" unique_id=960462266 instance=ExtResource("12_10wou")]
+custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
-tooltip_text = "Increase Max Affix Count"
-icon = ExtResource("8_5j8om")
-icon_alignment = 1
-expand_icon = true
+button_image = ExtResource("8_5j8om")
+image_size = Vector2(40, 40)
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer"]
+[node name="DisableRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer2/PanelContainer" unique_id=724280024]
+layout_mode = 2
+color = Color(0, 0, 0, 0.5254902)
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=1143490244]
 layout_mode = 2
 texture = ExtResource("8_10wou")
 patch_margin_left = 10
@@ -214,7 +219,7 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="PanelContainer/VBoxContainer"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="PanelContainer/VBoxContainer" unique_id=1431972994]
 z_index = 4
 position = Vector2(204, 118)
 scale = Vector2(0.2, 0.2)
@@ -245,7 +250,7 @@ color_ramp = SubResource("Gradient_ysrgi")
 hue_variation_min = -0.58
 hue_variation_max = 0.55
 
-[node name="x_button" parent="." instance=ExtResource("17_0md6y")]
+[node name="x_button" parent="." unique_id=1504393720 instance=ExtResource("17_0md6y")]
 layout_mode = 1
 offset_left = 173.0
 offset_top = -405.0

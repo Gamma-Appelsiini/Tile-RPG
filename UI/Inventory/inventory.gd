@@ -38,6 +38,7 @@ var selected_slot:InventorySlot = null
 var old_slot_pos:Vector2 = Vector2.ZERO
 var img_offset:int = 0
 var sell_item_on_release:bool = false
+var crafting_window_open:bool = false
 var player_currency:int = 555:
 	set(value):
 		player_currency = max(0, value)
@@ -64,6 +65,7 @@ func _on_vis_change() -> void:
 		set_process_input(false)
 
 func _is_mouse_in_drop_position() -> bool:
+	if crafting_window_open: return false
 	const FROM_LEFT:float = 0.65
 	
 	var viewport:Viewport = get_viewport()

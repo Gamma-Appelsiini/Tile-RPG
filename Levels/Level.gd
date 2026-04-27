@@ -58,7 +58,11 @@ func _load_game_chars(save_data:Dictionary) -> void:
 		else: gchar.load_from_data(save_data)
 
 func _handle_tile_blockers() -> void:
-	for interactable:Interactable in interactables_node.get_children():
+	for interactable:Node3D in interactables_node.get_children():
+		if interactable is not Interactable:
+			print_debug("NON INTERACTABLE IN LEVEL INTERACTABLES NODE: ", interactable)
+			continue
+		
 		if interactable.block_tiles:
 			var occupied_tile:Tile = tile_manager.get_closest_tile(interactable.global_position)
 			occupied_tile.add_blocker(interactable)

@@ -1,19 +1,22 @@
 extends Control
-class_name CraftinWindow
+class_name CraftingWindow
 
 signal window_closed
 
 enum CraftAction {REMOVE_RAND_AFF,REMOVE_SPEF_AFF, ADD_AFF, ADD_ILVL, ADD_MAX_AFF, NOTHING}
 
 @export var aff_container: VBoxContainer = null
-@export var rem_aff_button: Button = null
-@export var add_aff_button: Button = null
 @export var inventory_slot: InventorySlot = null
-@export var add_ilvl_button: Button = null
-@export var add_max_aff_button: Button = null
 @export var cpu_particles_2d: CPUParticles2D = null
 @export var button_container: HBoxContainer = null
 @export var x_button: XButton = null
+@export var disable_rect: ColorRect = null
+
+@export_category("Buttons")
+@export var rem_aff_button: ReusableButton = null
+@export var add_aff_button: ReusableButton = null
+@export var add_ilvl_button: ReusableButton = null
+@export var add_max_aff_button: ReusableButton = null
 
 const AFF_PAN_SCENE:PackedScene = preload("res://Tile-RPG/UI/Crafting/affix_panel.tscn")
 const ITEM_TT_PATH:String = ("res://Tile-RPG/UI/Inventory/item_tooltip.tscn")
@@ -29,9 +32,10 @@ func _ready() -> void:
 	_add_tooltip()
 	_connect_buttons()
 	_disable_buttons()
+	
+	GlobalSignals.open_crafting.connect(_open_crafting)
 
 func _input(event: InputEvent) -> void:
-	if !visible: return
 	if event.is_action_pressed("Left Click"):
 		if action == CraftAction.REMOVE_SPEF_AFF:
 			_remove_affix()
@@ -39,15 +43,27 @@ func _input(event: InputEvent) -> void:
 			_add_affix()
 
 func _disable_buttons() -> void:
-	for but:Button in button_container.get_children():
-		but.disabled = true
+	disable_rect.show()
 
 func _enable_buttons() -> void:
-	for but:Button in button_container.get_children():
-		but.disabled = false
+	disable_rect.hide()
+
+func _connect_cw_slot_to_inv() -> void:
+	pass
+	#crafting_window.inventory_slot.array_pos = -2
+	#player_inv.connect_slot(crafting_window.inventory_slot)
+
+func _remove_cw_slot_from_inv() -> void:
+	pass
+	#player_inv.remove_slot(crafting_window.inventory_slot)
+
+func _open_crafting() -> void:
+	show()
+	set_process_input(true)
 
 func _close_crafting() -> void:
-	window_closed.emit()
+	hide()
+	set_process_input(false)
 
 func _add_tooltip() -> void:
 	equ_tt = load(ITEM_TT_PATH).instantiate()
@@ -94,14 +110,15 @@ func _add_max_aff() -> void:
 	action = CraftAction.NOTHING
 
 func _connect_buttons() -> void:
-	rem_aff_button.pressed.connect(_set_action.bind(CraftAction.REMOVE_SPEF_AFF))
-	add_aff_button.pressed.connect(_set_action.bind(CraftAction.ADD_AFF))
+	rem_aff_button.texture_button.pressed.connect(_set_action.bind(CraftAction.REMOVE_SPEF_AFF))
+	add_aff_button.texture_button.pressed.connect(_set_action.bind(CraftAction.ADD_AFF))
+	add_ilvl_button.texture_button.pressed.connect(_set_action.bind(CraftAction.ADD_ILVL))
+	add_max_aff_button.texture_button.pressed.connect(_set_action.bind(CraftAction.ADD_MAX_AFF))
+	
 	inventory_slot.mouse_entered.connect(_equ_slot_hovered)
 	inventory_slot.mouse_exited.connect(_equ_slot_exited)
-	add_ilvl_button.pressed.connect(_set_action.bind(CraftAction.ADD_ILVL))
-	add_max_aff_button.pressed.connect(_set_action.bind(CraftAction.ADD_MAX_AFF))
-	x_button.x_pressed.connect(_close_crafting)
 	
+	x_button.x_pressed.connect(_close_crafting)
 	inventory_slot.item_placed.connect(set_equ)
 	inventory_slot.item_removed.connect(clear_equ)
 
@@ -113,7 +130,10 @@ func clear_equ() -> void:
 	_clear_affix_panels()
 	_disable_buttons()
 
-func set_equ(new_equ:Equipment) -> void:
+func set_equ(new_equ:Item) -> void:
+	if new_equ is not Equipment:
+		return
+	
 	crafting_equipment = new_equ
 	equ_tt.generate_tooltip(new_equ)
 	_add_affix_panels(new_equ.prefixes)

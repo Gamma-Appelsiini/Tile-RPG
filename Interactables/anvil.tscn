@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bjf15g0ncnvb1" path="res://Tile-RPG/Interactables/anvil.gd" id="1_og7ni"]
 [ext_resource type="Texture2D" uid="uid://chyow8elnov82" path="res://Tile-RPG/Models/Interactables/anvil_Anvil.png" id="2_2kqpt"]
-[ext_resource type="PackedScene" uid="uid://ct761wejgx40c" path="res://Tile-RPG/UI/Crafting/crafting_window.tscn" id="3_2kqpt"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="4_md1ui"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0t8r"]
@@ -59,6 +58,8 @@ disable_movement = true
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("IndicatorPlace")
 interact_text = "Craft"
+face_interactable = true
+interact_animation = 18
 metadata/_custom_type_script = "uid://dgcve45y3uah7"
 
 [node name="AnvilMesh" type="MeshInstance3D" parent="." unique_id=1502768235]
@@ -83,10 +84,6 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1347461188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0637283, 0.208191, 0.000610352)
 shape = SubResource("BoxShape3D_og7ni")
-
-[node name="CraftingWindow" parent="." unique_id=1861276651 instance=ExtResource("3_2kqpt")]
-unique_name_in_owner = true
-visible = false
 
 [node name="OutlineHandler" type="Node" parent="." unique_id=1085840494 node_paths=PackedStringArray("mesh_to_outline")]
 script = ExtResource("4_md1ui")

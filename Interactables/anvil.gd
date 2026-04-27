@@ -1,42 +1,28 @@
 extends Interactable
 class_name Anvil
 
-@onready var crafting_window: CraftinWindow = %CraftingWindow
-
-var player_inv:Inventory = null
+var ui_handler:UIHandler = null
 
 func _ready() -> void:
 	_on_creation()
-	crafting_window.visible = false
-	crafting_window.window_closed.connect(_crafting_closed)
-	player_inv = GlobalSignals.ui_handler.inventory
 
 func interact() -> void:
-	_connect_cw_slot_to_inv()
-	
-	crafting_window.visible = true
-	player_inv.visible = true
-	interact_area.monitoring = false
-
-func _connect_cw_slot_to_inv() -> void:
-	crafting_window.inventory_slot.array_pos = -2
-	player_inv.connect_slot(crafting_window.inventory_slot)
-
-func _remove_cw_slot_from_inv() -> void:
-	player_inv.remove_slot(crafting_window.inventory_slot)
+	ui_handler = GlobalSignals.ui_handler
+	ui_handler.inventory.crafting_window_open = true
+	GlobalSignals.open_crafting.emit()
+	ui_handler.crafting_window.visibility_changed.connect(_crafting_closed, CONNECT_ONE_SHOT)
 
 func _add_crafted_item_back_to_inv() -> void:
-	if !crafting_window.crafting_equipment: return
+	pass
+	#if !crafting_window.crafting_equipment: return
 	
-	var added:bool = player_inv.add_item_to_inv(crafting_window.crafting_equipment)
-	if added: crafting_window.clear_equ()
+	#var added:bool = player_inv.add_item_to_inv(crafting_window.crafting_equipment)
+	#if added: crafting_window.clear_equ()
 
 func _crafting_closed() -> void:
-	_remove_cw_slot_from_inv()
-	_add_crafted_item_back_to_inv()
+	if ui_handler.crafting_window.visible:
+		ui_handler.crafting_window.visibility_changed.connect(_crafting_closed, CONNECT_ONE_SHOT)
+		return
 	
-	crafting_window.visible = false
-	player_inv.visible = false
-	interact_area.monitoring = true
-	
+	ui_handler.inventory.crafting_window_open = false
 	interact_complete.emit()
