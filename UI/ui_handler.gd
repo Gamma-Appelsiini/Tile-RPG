@@ -40,7 +40,9 @@ func _input(event: InputEvent) -> void:
 		_handle_esc()
 
 func _handle_esc() -> void:
-	if stat_window.visible or inventory.visible or shop_window.visible or abilities_container.visible or loot_window.visible:
+	if main_menu.visible: _toggle_menu()
+	elif stat_window.visible or inventory.visible or shop_window.visible or abilities_container.visible or loot_window.visible or crafting_window.visible:
+		if crafting_window.visible: crafting_window._close_crafting()
 		stat_window.hide()
 		inventory.hide()
 		shop_window.hide()

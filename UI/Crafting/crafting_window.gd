@@ -20,6 +20,7 @@ enum CraftAction {REMOVE_RAND_AFF,REMOVE_SPEF_AFF, ADD_AFF, ADD_ILVL, ADD_MAX_AF
 
 const AFF_PAN_SCENE:PackedScene = preload("res://Tile-RPG/UI/Crafting/affix_panel.tscn")
 const ITEM_TT_PATH:String = ("res://Tile-RPG/UI/Inventory/item_tooltip.tscn")
+const GROUND_DROP_PATH:String = "uid://cuocgxmrrsjwt"
 
 var crafting_equipment:Equipment = null
 var equ_tt:ItemTooltip = null
@@ -49,19 +50,35 @@ func _enable_buttons() -> void:
 	disable_rect.hide()
 
 func _connect_cw_slot_to_inv() -> void:
-	pass
-	#crafting_window.inventory_slot.array_pos = -2
-	#player_inv.connect_slot(crafting_window.inventory_slot)
+	inventory_slot.array_pos = -2
+	GlobalSignals.ui_handler.inventory.connect_slot(inventory_slot)
 
 func _remove_cw_slot_from_inv() -> void:
-	pass
-	#player_inv.remove_slot(crafting_window.inventory_slot)
+	GlobalSignals.ui_handler.inventory.remove_slot(inventory_slot)
 
 func _open_crafting() -> void:
+	GlobalSignals.ui_handler.inventory.show()
+	_connect_cw_slot_to_inv()
 	show()
 	set_process_input(true)
 
+func _add_crafting_item_back_to_inv() -> void:
+	if inventory_slot.item_in_slot == null: return
+	
+	if GlobalSignals.ui_handler.inventory.add_item_to_inv(inventory_slot.item_in_slot):
+		inventory_slot.remove_item()
+	else:
+		var new_ground_drop:GroundDrop = load(GROUND_DROP_PATH).instantiate()
+		new_ground_drop.set_item(inventory_slot.item_in_slot)
+		GlobalSignals.current_level.add_child(new_ground_drop)
+		new_ground_drop.global_position = GlobalSignals.player.global_position + Vector3(0,0.5,0)
+		new_ground_drop.shoot_rigidbody()
+		inventory_slot.remove_item()
+
 func _close_crafting() -> void:
+	_add_crafting_item_back_to_inv()
+	GlobalSignals.ui_handler.inventory.hide()
+	_remove_cw_slot_from_inv()
 	hide()
 	set_process_input(false)
 
