@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ckgonjkqks5ra"]
+
+[ext_resource type="Shader" uid="uid://dwebukjr2tj6f" path="res://Tile-RPG/Shaders/range_tile_edge_shader.gdshader" id="1_6lxyj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mtnf1"]
+noise_type = 4
+frequency = 0.0178
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kmolf"]
+noise = SubResource("FastNoiseLite_mtnf1")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6lxyj")
+shader_parameter/base_color = Color(0.13119337, 0.22662774, 0.34223267, 1)
+shader_parameter/edge_color = Color(0.1910901, 0.5880972, 0.9999998, 1)
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_intensity = 0.5
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_kmolf")
+shader_parameter/noise_scale = 1.0
+shader_parameter/edge_thickness = 0.050000002375
+shader_parameter/edge_softness = 0.10000000475
