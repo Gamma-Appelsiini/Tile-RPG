@@ -71,11 +71,17 @@ func _hide_range_indicators() -> void:
 	range_mesh.hide()
 	range_mesh.queue_free()
 	range_mesh = null
-	return
+
+func _visualize_aoe() -> void:
+	var tiles_in_aoe:Array[Tile] = selected_ability.get_tiles_in_aoe(hovered_tile)
+	if tiles_in_aoe == [null]: tiles_in_aoe = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
 	
-	for ind:RangeIndicator in range_indicators:
-		ind._reset_color()
-		ind.hide()
+	for i:int in len(tiles_in_aoe):
+		var indicator:RangeIndicator = range_indicators[i]
+		indicator.global_position = tiles_in_aoe[i].global_position
+		if tiles_in_aoe[i].occupant:
+			indicator.set_enemy_color()
+		indicator.show()
 
 func _visualize_tiles_in_range() -> void:
 	var player_tile:Tile = tile_manager.char_tiles[player]
@@ -84,14 +90,7 @@ func _visualize_tiles_in_range() -> void:
 	
 	tiles_in_range.push_back(player_tile)
 	range_mesh = _create_array_mesh(tiles_in_range, player_tile)
-	return
-	
-	for i:int in len(tiles_in_range):
-		var indicator:RangeIndicator = range_indicators[i]
-		indicator.global_position = tiles_in_range[i].global_position
-		if tiles_in_range[i].occupant:
-			indicator.set_enemy_color()
-		indicator.show()
+	range_mesh.material_override = RANGE_MESH_MATERIAL
 
 func set_ability_to_target(new_slot:AbilitySlot) -> void:
 	var new_ability:Ability = new_slot.ability_in_slot
@@ -158,15 +157,16 @@ func _set_new_target_tile(new_target:Tile) -> void:
 
 	_hide_aoe()
 	hovered_tile = new_target
-	_show_aoe()
+	_visualize_aoe()
 
 func _hide_aoe() -> void:
 	for aoe_ind:Node3D in aoe_indicators:
 		aoe_ind.visible = false
+		
+	for ind:RangeIndicator in range_indicators:
+		ind._reset_color()
+		ind.hide()
 
-# Create an array mesh based on the tiles.
-# Origin of mesh should be start tile. Start tile is in tiles array.
-# Tiles are 1x1 meter squares that have global_position Vector3.
 func _create_array_mesh(tiles: Array[Tile], start_tile: Tile) -> MeshInstance3D:
 	var new_mesh: MeshInstance3D = MeshInstance3D.new()
 	var new_array_mesh: ArrayMesh = ArrayMesh.new()
@@ -236,11 +236,9 @@ func _create_array_mesh(tiles: Array[Tile], start_tile: Tile) -> MeshInstance3D:
 
 	add_child(new_mesh)
 	new_mesh.global_position = start_tile.global_position + Vector3(0,0.05,0)
-	new_mesh.material_override = RANGE_MESH_MATERIAL
 
 	return new_mesh
 
-# Helper math function: Shortest distance from a point to a line segment
 func _dist_to_segment(p: Vector2, v: Vector2, w: Vector2) -> float:
 	var length_squared = v.distance_squared_to(w)
 	if length_squared == 0.0: 
