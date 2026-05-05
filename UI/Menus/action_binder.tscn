@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c20ycfpjhiukv"]
+
+[ext_resource type="Script" uid="uid://bh8d2css00204" path="res://Tile-RPG/UI/Menus/action_binder.gd" id="1_gl08q"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="2_vymir"]
+
+[node name="ActionBinder" type="HBoxContainer" unique_id=384999972 node_paths=PackedStringArray("action_name_label", "bind_button")]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -10.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("1_gl08q")
+action_name_label = NodePath("HBoxContainer/ActionLabel")
+bind_button = NodePath("HBoxContainer2/ReusableButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=982944707]
+layout_mode = 2
+
+[node name="ActionLabel" type="Label" parent="HBoxContainer" unique_id=465298422]
+layout_mode = 2
+text = "Action name"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1055883845]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ReusableButton" parent="HBoxContainer2" unique_id=1928547599 instance=ExtResource("2_vymir")]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+button_text = "Bind"

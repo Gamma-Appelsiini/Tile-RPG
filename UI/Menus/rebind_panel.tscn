@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://h818xdukg8kh"]
+
+[ext_resource type="Script" uid="uid://digij3qicrfrn" path="res://Tile-RPG/UI/Menus/rebind_panel.gd" id="1_hqejb"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_qnsh1"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_kub5m"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_wxw6x"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_8eaom"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="6_sjsdt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pareg"]
+texture = ExtResource("2_qnsh1")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hcxv1"]
+content_margin_left = 25.0
+content_margin_top = 12.0
+content_margin_right = 25.0
+content_margin_bottom = 35.0
+texture = ExtResource("4_wxw6x")
+
+[node name="RebindPanel" type="PanelContainer" unique_id=571106148 node_paths=PackedStringArray("movement_binds", "ability_binds", "general_binds", "camera_binds")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hqejb")
+movement_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/MovementBinds")
+ability_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/AbilityBinds")
+general_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/GeneralBinds")
+camera_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/CameraBinds")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1396959200]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_pareg")
+
+[node name="BgRect" type="TextureRect" parent="PanelContainer" unique_id=1158526103]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("3_kub5m")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1582610491]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hcxv1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=1507049634]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=238886608]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_font_sizes/font_size = 18
+text = "Key  Bindings"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=174817768]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1590525784]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
+theme_override_font_sizes/font_size = 12
+text = "Action"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1917942853]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1584866196]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
+theme_override_font_sizes/font_size = 12
+text = "Keybind"
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1969142142]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=171750158]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
+theme_override_font_sizes/font_size = 12
+text = "Movement   Keys"
+
+[node name="MovementBinds" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=359610439]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1480655525]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
+theme_override_font_sizes/font_size = 12
+text = "General   Keys"
+
+[node name="GeneralBinds" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=2035078583]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=711534815]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
+theme_override_font_sizes/font_size = 12
+text = "Camera   Keys"
+
+[node name="CameraBinds" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=703067408]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=500683672]
+layout_mode = 2
+theme = ExtResource("5_8eaom")
+theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
+theme_override_font_sizes/font_size = 12
+text = "Ability   Keys"
+
+[node name="AbilityBinds" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=299321369]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=47244243]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1924491781]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ReturnButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("6_sjsdt")]
+custom_minimum_size = Vector2(95, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_text = "Return"
+text_size = 12
+image_size = Vector2(0, 0)
