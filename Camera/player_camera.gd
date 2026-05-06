@@ -14,13 +14,13 @@ func _ready() -> void:
 	GlobalSignals.combat_end.connect(_on_combat_end)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Rotate_Cam_L"):
+	if event.is_action_pressed("Rotate Cam L"):
 		_rotate_cam(-90)
-	elif event.is_action_pressed("Rotate_Cam_R"):
+	elif event.is_action_pressed("Rotate Cam R"):
 		_rotate_cam(90)
-	elif event.is_action_pressed("roll_up"):
+	elif event.is_action_pressed("Zoom In"):
 		_zoom_cam(-1)
-	elif event.is_action_pressed("roll_down"):
+	elif event.is_action_pressed("Zoom Out"):
 		_zoom_cam(1)
 
 func _on_combat_start() -> void:

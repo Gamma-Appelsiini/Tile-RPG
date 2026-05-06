@@ -12,7 +12,7 @@ offset_top = -10.5
 offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 18
 script = ExtResource("1_gl08q")
 action_name_label = NodePath("HBoxContainer/ActionLabel")
 bind_button = NodePath("HBoxContainer2/ReusableButton")
@@ -22,6 +22,7 @@ layout_mode = 2
 
 [node name="ActionLabel" type="Label" parent="HBoxContainer" unique_id=465298422]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Action name"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1055883845]
@@ -33,3 +34,4 @@ alignment = 2
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 button_text = "Bind"
+text_size = 10

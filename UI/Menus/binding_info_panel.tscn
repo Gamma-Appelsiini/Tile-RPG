@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cmtkrvrqolsn5"]
+
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="1_ciphl"]
+[ext_resource type="Script" uid="uid://5uwty37r3s7k" path="res://Tile-RPG/UI/Menus/binding_info_panel.gd" id="1_nvgnd"]
+[ext_resource type="FontFile" uid="uid://dribh6r4yntik" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-Regular.ttf" id="2_sw2iw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwt0w"]
+content_margin_left = 25.0
+content_margin_top = 15.0
+content_margin_right = 25.0
+content_margin_bottom = 15.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.58896005, 0.15840003, 1)
+
+[node name="BindingInfoPanel" type="Control" unique_id=1838323018 node_paths=PackedStringArray("cancel_button", "rich_text_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nvgnd")
+cancel_button = NodePath("PanelContainer/VBoxContainer/CancelButton")
+rich_text_label = NodePath("PanelContainer/VBoxContainer/RichTextLabel")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=624864524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1159622346]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mwt0w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=761039854]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=12988633]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.20999998, 1, 0.9209999, 1)
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=3.0]Binding[/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1366682079]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer" unique_id=669362728]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.57700837, 0.5770084, 0.57700837, 1)
+theme_override_fonts/font = ExtResource("2_sw2iw")
+theme_override_font_sizes/font_size = 10
+text = "Esc to cancel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CancelButton" parent="PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("1_ciphl")]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+button_text = "Cancel"
+text_size = 10
+text_color = Color(1, 0.33999997, 0.33999997, 1)
