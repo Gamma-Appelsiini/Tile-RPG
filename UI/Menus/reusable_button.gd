@@ -4,6 +4,8 @@ class_name ReusableButton
 @export_category("Button appearance")
 @export var button_image: Texture2D = null
 @export var button_text: String = ""
+@export var button_font: Font = null
+@export var button_shadow: Vector2i = Vector2(2,1)
 @export var text_size: int = 20
 @export var text_color: Color = Color("ffff")
 @export var button_color: Color = Color("ffff")
@@ -44,6 +46,9 @@ func _set_button_appearance() -> void:
 	color_rect.color = HIGHLIGHT_COLOR
 	image_rect.texture = button_image
 	text_label.text = button_text
+	if button_font: text_label.add_theme_font_override("font", button_font)
+	text_label.add_theme_constant_override("shadow_offset_x", button_shadow.x)
+	text_label.add_theme_constant_override("shadow_offset_y", button_shadow.y)
 	text_label.add_theme_font_size_override("font_size", text_size)
 	image_rect.custom_minimum_size = image_size
 	text_label.modulate = text_color

@@ -25,7 +25,8 @@ content_margin_right = 25.0
 content_margin_bottom = 35.0
 texture = ExtResource("4_wxw6x")
 
-[node name="RebindPanel" type="PanelContainer" unique_id=571106148 node_paths=PackedStringArray("movement_binds", "ability_binds", "general_binds", "camera_binds", "binding_info_panel")]
+[node name="RebindPanel" type="PanelContainer" unique_id=571106148 node_paths=PackedStringArray("movement_binds", "ability_binds", "general_binds", "camera_binds", "binding_info_panel", "reset_button", "return_button")]
+custom_minimum_size = Vector2(450, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -43,6 +44,8 @@ ability_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContai
 general_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/GeneralBinds")
 camera_binds = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CameraBinds")
 binding_info_panel = NodePath("BindingInfoPanel")
+reset_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/ResetButton")
+return_button = NodePath("PanelContainer/PanelContainer/VBoxContainer/ReturnButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1396959200]
 layout_mode = 2
@@ -62,7 +65,6 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_hcxv1")
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=1507049634]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=238886608]
@@ -74,34 +76,28 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=174817768]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1590525784]
-layout_mode = 2
-theme = ExtResource("5_8eaom")
-theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
-theme_override_font_sizes/font_size = 12
-text = "Action"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1917942853]
-layout_mode = 2
-size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1584866196]
+[node name="ResetButton" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("6_sjsdt")]
+custom_minimum_size = Vector2(90, 25)
 layout_mode = 2
-theme = ExtResource("5_8eaom")
-theme_override_colors/font_color = Color(0.8627451, 0.7764706, 0.5176471, 1)
-theme_override_font_sizes/font_size = 12
-text = "Keybind"
+button_text = "Reset to Defaults"
+button_font = ExtResource("6_qnsh1")
+button_shadow = Vector2i(1, 1)
+text_size = 9
+button_color = Color(1, 0.38, 0.38, 1)
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1969142142]
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1461400102]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 30
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1063868887]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
@@ -118,6 +114,7 @@ text = "Movement   Keys"
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=30775047]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
@@ -135,9 +132,12 @@ layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1343530226]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 30
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer3" unique_id=2055125138]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
@@ -154,6 +154,7 @@ text = "Camera   Keys"
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer3" unique_id=1130087611]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
@@ -177,7 +178,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="ReturnButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1928547599 instance=ExtResource("6_sjsdt")]
+[node name="ReturnButton" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1357541291 instance=ExtResource("6_sjsdt")]
 custom_minimum_size = Vector2(95, 35)
 layout_mode = 2
 size_flags_horizontal = 4

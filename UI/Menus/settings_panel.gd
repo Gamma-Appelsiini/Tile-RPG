@@ -9,6 +9,8 @@ class_name SettingsPanel
 @export var ui_volume_slider: HSlider = null
 @export var music_volume_slider: HSlider = null
 @export var return_button: ReusableButton = null
+@export var binds_button: ReusableButton = null
+@export var rebind_panel: RebindPanel = null
 
 const SETTINGS_FILE_PATH:String = "res://Tile-RPG/SaveData/setting_data.bin"
 const RESOLUTIONS:Array[Vector2i] = [Vector2i(960,540), Vector2i(1280,720), Vector2i(1600,900), Vector2i(1920,1080), Vector2i(2560,1440), Vector2i(3840,2160)]
@@ -31,6 +33,7 @@ func _ready() -> void:
 	_fill_resolutions()
 	window_mode_option.item_selected.connect(_apply_window_mode)
 	return_button.texture_button.pressed.connect(hide)
+	binds_button.texture_button.pressed.connect(rebind_panel.show)
 	
 	main_volume_slider.value_changed.connect(_audio_setting_changed.bind(AudioManager.AUDIO_TYPE.MASTER))
 	sfx_volume_slider.value_changed.connect(_audio_setting_changed.bind(AudioManager.AUDIO_TYPE.SOUND_EFFECT))

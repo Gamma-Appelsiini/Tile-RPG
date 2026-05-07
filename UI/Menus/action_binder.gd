@@ -14,7 +14,6 @@ var action: StringName
 var keybind: InputEvent
 
 func unbind_action() -> void:
-	print("Unbinded ", keybind)
 	InputMap.action_erase_events(action)
 	_update_bind_label()
 
@@ -42,7 +41,6 @@ func set_action(action_name: StringName) -> void:
 	_update_bind_label()
 
 func _bind_new_action(event: InputEvent) -> void:
-	#Rebind action to new input
 	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
 	keybind = event

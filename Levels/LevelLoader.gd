@@ -5,7 +5,7 @@ signal load_complete
 signal resource_loader_finished_loading
 
 const PLAYER_PATH:String = "res://Tile-RPG/GameCharacters/Player/player.tscn"
-const SAVE_FILE_PATH:String = "user://Tile-RPG/SaveData/"
+const SAVE_FILE_PATH:String = "res://Tile-RPG/SaveData/"
 const SAVE_SUFFIX:String = "/save_data.bin"
 const SCREENSHOT_SUFFIX:String = "/screenshot.png"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
