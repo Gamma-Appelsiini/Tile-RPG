@@ -5,8 +5,8 @@ const AOE_INDICATOR:PackedScene = preload("uid://mn3gwrbcqycm")
 const RANGE_INDICATOR := preload("uid://ff1heogqgu75")
 #Using & before the strings makes them StringName types
 const NON_CANCELLING_ACTIONS: Array[StringName] = [
-	&"roll_up", &"roll_down", &"Backward", &"Forward", 
-	&"Left", &"Right", &"Rotate_Cam_L", &"Rotate_Cam_R",
+	&"Zoom In", &"Zoom Out", &"Backward", &"Forward", 
+	&"Left", &"Right", &"Rotate Cam L", &"Rotate Cam R",
 	&"ability 0", &"ability 1", &"ability 2", &"ability 3", 
 	&"ability 4", &"ability 5", &"ability 6", &"ability 7", 
 	&"ability 8", &"ability 9",
