@@ -15,7 +15,7 @@ var keybind: InputEvent
 
 func unbind_action() -> void:
 	InputMap.action_erase_events(action)
-	_update_bind_label()
+	update_bind_label()
 
 func _input(event: InputEvent) -> void:
 	if not event.is_pressed():
@@ -38,7 +38,7 @@ func _ready() -> void:
 func set_action(action_name: StringName) -> void:
 	action = action_name
 	action_name_label.text = action_name.capitalize()
-	_update_bind_label()
+	update_bind_label()
 
 func _bind_new_action(event: InputEvent) -> void:
 	InputMap.action_erase_events(action)
@@ -46,7 +46,7 @@ func _bind_new_action(event: InputEvent) -> void:
 	keybind = event
 	print("Rebinded ", action, " to ", event)
 	
-	_update_bind_label()
+	update_bind_label()
 	keybind_set.emit(self)
 	_stop_binding()
 
@@ -58,7 +58,7 @@ func _stop_binding() -> void:
 	set_process_input(false)
 	stop_binding.emit()
 
-func _update_bind_label() -> void:
+func update_bind_label() -> void:
 	var events = InputMap.action_get_events(action)
 	if events.size() > 0:
 		keybind = events[0]

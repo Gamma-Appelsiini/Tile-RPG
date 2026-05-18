@@ -25,15 +25,15 @@ func _ready() -> void:
 	_load_keybinds()
 
 func _reset_to_default_bindings() -> void:
-	#Don't implement this yet
-	pass
+	InputMap.load_from_project_settings()
+	for binder:ActionBinder in binders:
+		binder.update_bind_label()
 
 func _save_keybinds() -> void:
 	hide()
 
 	var binds_dict: Dictionary[StringName, InputEvent] = {}
 	for binder:ActionBinder in binders:
-		#print("Action: ", binder.action, " Keybind: ", binder.keybind)
 		binds_dict[binder.action] = binder.keybind
 	
 	var file := FileAccess.open(BINDS_FILE_PATH, FileAccess.WRITE)
@@ -57,18 +57,20 @@ func _load_keybinds() -> void:
 		
 		if saved_binds.has(binder.action):
 			var saved_event: InputEvent = saved_binds[binder.action]
-			#print("Action: ", binder.action, " Keybind: ", binder.keybind, " Saved Event: ", saved_event)
 			binder.keybind = saved_event
-			binder._update_bind_label()
+			binder.update_bind_label()
 
 			if InputMap.has_action(binder.action):
 				InputMap.action_erase_events(binder.action)
-				InputMap.action_add_event(binder.action, saved_event)
+				if saved_event != null:
+					InputMap.action_add_event(binder.action, saved_event)
 
 func _show_binding_info(binder:ActionBinder) -> void:
 	binding_info_panel.show_panel(binder.action)
-	binding_info_panel.cancel_button.texture_button.pressed.connect(binder._stop_binding, CONNECT_ONE_SHOT)
-	binder.stop_binding.connect(binding_info_panel.hide, CONNECT_ONE_SHOT)
+	if not binding_info_panel.cancel_button.texture_button.pressed.is_connected(binder._stop_binding):
+		binding_info_panel.cancel_button.texture_button.pressed.connect(binder._stop_binding, CONNECT_ONE_SHOT)
+	if not binder.stop_binding.is_connected(binding_info_panel.hide):
+		binder.stop_binding.connect(binding_info_panel.hide, CONNECT_ONE_SHOT)
 
 func _unbind_overlap(rebound_binder:ActionBinder):	
 	for binder:ActionBinder in binders:
