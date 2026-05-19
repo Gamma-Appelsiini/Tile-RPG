@@ -37,6 +37,7 @@ offset_bottom = 282.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lay5e")
+load_settings_on_ready = true
 resolution_option = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer/ResolutionOption")
 window_mode_option = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer2/WindowModeOption")
 main_volume_slider = NodePath("PanelContainer/PanelContainer/VBoxContainer/VBoxContainer3/MainVolumeSlider")

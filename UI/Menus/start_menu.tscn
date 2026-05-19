@@ -16,6 +16,7 @@ height = 1080
 fill_to = Vector2(1, 1)
 
 [node name="StartMenu" type="Control" unique_id=846789017 node_paths=PackedStringArray("new_game_button", "load_game_button", "settings_button", "exit_button", "settings_panel", "buttons_container", "load_panel", "save_slot_panel")]
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,6 +91,9 @@ visible = false
 layout_mode = 1
 load_settings_on_ready = true
 
+[node name="RebindPanel" parent="SettingsPanel" index="1" unique_id=571106148]
+load_binds = true
+
 [node name="LoadPanel" parent="." unique_id=1229663212 instance=ExtResource("4_425mq")]
 visible = false
 layout_mode = 1
@@ -103,3 +107,5 @@ visible = false
 layout_mode = 1
 offset_left = -170.5
 offset_right = 170.5
+
+[editable path="SettingsPanel"]

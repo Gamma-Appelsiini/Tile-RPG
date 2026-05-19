@@ -11,12 +11,10 @@ const SCREENSHOT_SUFFIX:String = "/screenshot.png"
 const LEVEL_FILES:LevelFiles = preload("res://Tile-RPG/Levels/level_files.tres")
 const UI_HANDLER := preload("uid://c3phcvjwwddwt")
 
-@export var inventory: Inventory = null
-@export var globe_ui:GlobeUI = null
-@export var ui_handler: UIHandler = null
 @export var ability_targeter:AbilityTargeter = null
-@export var loading_screen: LoadingScreen = null
 @export var combat_manager: CombatManager = null
+@export var ui_node: Node = null
+@export var start_menu: StartMenu = null
 
 var save_file_folder_path:String = "user://Tile-RPG/SaveData/slot1/"
 var save_file:JSON = null
@@ -32,17 +30,20 @@ var save_data:Dictionary = {
 	"shops": [],
 }
 
+var inventory: Inventory = null
+var globe_ui:GlobeUI = null
+var ui_handler: UIHandler = null
 var player:Player = null
 var current_level:Level = null
-var ui_handler_needs_to_load:bool = false
+var loading_screen: LoadingScreen = null
 
 func _set_ui_handler() -> void:
-	print_debug("Set ui")
-	for node:Node in get_parent().get_children():
+	for node:Node in ui_node.get_children():
 		if node is UIHandler: node.queue_free()
 	
 	self.ui_handler = UI_HANDLER.instantiate()
-	get_parent().add_child.call_deferred(ui_handler)
+	ui_handler.start_menu = start_menu
+	ui_node.add_child.call_deferred(ui_handler)
 	GlobalSignals.ui_handler = ui_handler
 	
 	self.inventory = ui_handler.inventory
@@ -50,9 +51,6 @@ func _set_ui_handler() -> void:
 	self.loading_screen = ui_handler.loading_screen
 	combat_manager.combat_ui = ui_handler.combat_ui
 	ui_handler.ability_bar.ability_targeter = ability_targeter
-	ui_handler.start_menu.level_loader = self
-	
-	if ui_handler_needs_to_load: ui_handler.start_menu.hide()
 
 func _create_folders() -> void:
 	const SAVE_SLOT_STRINGS:Array[String] = ["slot1", "slot2", "slot3"]
@@ -74,7 +72,7 @@ func _ready() -> void:
 	GlobalSignals.load_game.connect(load_game)
 	GlobalSignals.save_game.connect(save_game)
 	
-	_set_ui_handler()
+	start_menu.level_loader = self
 
 func new_game() -> void:
 	#TODO new game deletes old save
@@ -104,13 +102,10 @@ func load_game_from_path(path:String) -> void:
 	save_data = data.duplicate()
 	file.close()
 	
-	#TODO inventory is empty
-	
 	load_game()
 
 func load_game(loading:bool = true) -> void:
-	if ui_handler_needs_to_load: _set_ui_handler()
-	ui_handler_needs_to_load = true
+	_set_ui_handler()
 	
 	var last_level_id:String = save_data["last_level_id"]
 	_load_quest_handler()

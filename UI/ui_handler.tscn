@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://cc2jlwv1hf0dd" path="res://Tile-RPG/UI/ButtonsBar/menu_buttons_panel.tscn" id="10_kdg4q"]
 [ext_resource type="PackedScene" uid="uid://rjgqijg22g8l" path="res://Tile-RPG/UI/Shop/shop_window.tscn" id="11_n2ffy"]
 [ext_resource type="PackedScene" uid="uid://cq63aydedr4fm" path="res://Tile-RPG/UI/Menus/main_menu.tscn" id="12_r4noa"]
-[ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="13_u553s"]
 [ext_resource type="PackedScene" uid="uid://bhya384vo3b7b" path="res://Tile-RPG/UI/Menus/loading_screen.tscn" id="14_24ytg"]
 
 [node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "start_menu", "loot_window", "crafting_window")]
@@ -36,7 +35,7 @@ menu_buttons = NodePath("MenuButtons")
 shop_window = NodePath("ShopWindow")
 main_menu = NodePath("MainMenu")
 loading_screen = NodePath("LoadingScreen")
-start_menu = NodePath("StartMenu")
+start_menu = NodePath("")
 loot_window = NodePath("LootWindow")
 crafting_window = NodePath("CraftingWindow")
 
@@ -97,9 +96,6 @@ player_inventory = NodePath("../Inventory")
 
 [node name="MainMenu" parent="." unique_id=2074951668 instance=ExtResource("12_r4noa")]
 visible = false
-layout_mode = 1
-
-[node name="StartMenu" parent="." unique_id=846789017 instance=ExtResource("13_u553s")]
 layout_mode = 1
 
 [node name="LoadingScreen" parent="." unique_id=128380989 instance=ExtResource("14_24ytg")]

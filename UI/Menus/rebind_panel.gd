@@ -42,28 +42,28 @@ func _save_keybinds() -> void:
 	else: push_error("Failed to save keybinds. Error code: ", FileAccess.get_open_error())
 
 func _load_keybinds() -> void:
+	print("load keybinds")
 	if not FileAccess.file_exists(BINDS_FILE_PATH):
 		print_debug("No binds file")
 		return
 	
 	var file := FileAccess.open(BINDS_FILE_PATH, FileAccess.READ)
 	if !file:
-		push_error("Failed to load keybinds. Error code: ", FileAccess.get_open_error())
+		print_debug("Failed to load keybinds. Error code: ", FileAccess.get_open_error())
 		return
 		
 	var saved_binds:Dictionary = file.get_var(true)
-	
 	for binder:ActionBinder in binders:
+		if !saved_binds.has(binder.action): continue
 		
-		if saved_binds.has(binder.action):
-			var saved_event: InputEvent = saved_binds[binder.action]
-			binder.keybind = saved_event
-			binder.update_bind_label()
-
-			if InputMap.has_action(binder.action):
-				InputMap.action_erase_events(binder.action)
-				if saved_event != null:
-					InputMap.action_add_event(binder.action, saved_event)
+		var saved_event: InputEvent = saved_binds[binder.action]
+		if InputMap.has_action(binder.action):
+			InputMap.action_erase_events(binder.action)
+			if saved_event != null:
+				InputMap.action_add_event(binder.action, saved_event)
+		
+		binder.keybind = saved_event
+		binder.update_bind_label()
 
 func _show_binding_info(binder:ActionBinder) -> void:
 	binding_info_panel.show_panel(binder.action)

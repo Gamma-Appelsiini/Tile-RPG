@@ -5,6 +5,7 @@ var current_level:Level = null
 var combat_manager:CombatManager = null
 var quest_handler:QuestHandler = null
 var ui_handler:UIHandler = null
+var keybinds_loaded:bool = false
 
 signal change_level(new_level_id:String)
 signal load_game

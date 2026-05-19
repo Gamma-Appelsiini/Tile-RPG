@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://c4r45ochi8y3f" path="res://Tile-RPG/Handlers/mouse_handler.gd" id="6_nqssf"]
+[ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="7_efb4g"]
 [ext_resource type="Script" uid="uid://dg2l3uhho1dlk" path="res://Tile-RPG/Sounds/audio_manager.gd" id="8_pu26t"]
 [ext_resource type="Script" uid="uid://duq8yqsolme5u" path="res://Tile-RPG/Combat/Abilities/ability_targeter.gd" id="10_8wimm"]
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
@@ -9,10 +10,12 @@
 
 [node name="MainScene" type="Node3D" unique_id=756759122]
 
-[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("ability_targeter", "combat_manager")]
+[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("ability_targeter", "combat_manager", "ui_node", "start_menu")]
 script = ExtResource("1_t2t4i")
 ability_targeter = NodePath("../AbilityTargeter")
 combat_manager = NodePath("../CombatManager")
+ui_node = NodePath("../UINode")
+start_menu = NodePath("../StartMenu")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=2050587167]
@@ -32,3 +35,7 @@ metadata/_custom_type_script = "uid://dwdy8svwx3gnc"
 [node name="MouseHandler" type="Node" parent="." unique_id=769543679]
 script = ExtResource("6_nqssf")
 metadata/_custom_type_script = "uid://c4r45ochi8y3f"
+
+[node name="UINode" type="Node" parent="." unique_id=2107693019]
+
+[node name="StartMenu" parent="." unique_id=846789017 instance=ExtResource("7_efb4g")]
