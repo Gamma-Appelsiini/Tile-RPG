@@ -10,6 +10,7 @@ var diagonal_tiles:Array[Tile] = []
 var occupant:GameCharacter = null
 var blockers:Array[Node3D] = []
 
+@export var surface_normal: Vector3 = Vector3.UP
 @export var global_position:Vector3 = Vector3.ZERO
 
 var visited:bool = false

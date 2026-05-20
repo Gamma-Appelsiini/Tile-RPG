@@ -130,7 +130,55 @@ func _add_neighbors(tile:Tile) -> void:
 		if neighbor != null:
 			if !_check_if_wall_between_tiles(tile, neighbor):
 				tile.neighbor_tiles.push_back(neighbor)
-		
+	
+	if tile.surface_normal != Vector3.UP: _add_ramp_neighbors(tile)
+	#if tile.global_position == Vector3(5.0, 0.25, 2.0): _add_ramp_neighbors(tile)
+
+func _add_ramp_neighbors(tile:Tile) -> void:
+	print("adding ramp neighbors: ")
+	const y_offset:float = 0.25
+	var up_offset := Vector3.ZERO
+	var down_offset := Vector3.ZERO
+
+	# Check if the ramp is sloped along the X axis or the Z axis
+	if abs(tile.surface_normal.x) > abs(tile.surface_normal.z):
+		# Normal tilts left (-X) -> Ramp climbs right (+X)
+		if tile.surface_normal.x < 0:
+			up_offset = Vector3(1, 0, 0)
+			down_offset = Vector3(-1, 0, 0)
+			# Normal tilts right (+X) -> Ramp climbs left (-X)
+		else:
+			up_offset = Vector3(-1, 0, 0)
+			down_offset = Vector3(1, 0, 0)
+	else:
+		# Normal tilts forward (-Z) -> Ramp climbs backward (+Z)
+		if tile.surface_normal.z < 0:
+			up_offset = Vector3(0, 0, 1)
+			down_offset = Vector3(0, 0, -1)
+			# Normal tilts backward (+Z) -> Ramp climbs forward (-Z)
+		else:
+			up_offset = Vector3(0, 0, -1)
+			down_offset = Vector3(0, 0, 1)
+
+	# CHECK UPWARD NEIGHBOR (+y_offset)
+	var up_neighbor:Tile = self.tiles.get(tile.global_position + up_offset + Vector3(0, y_offset, 0))
+	if up_neighbor != null:
+		tile.neighbor_tiles.push_back(up_neighbor)
+		# Force the two-way connection so the upper tile doesn't have to look for this ramp
+		if not up_neighbor.neighbor_tiles.has(tile):
+			up_neighbor.neighbor_tiles.push_back(tile)
+			
+	# CHECK DOWNWARD NEIGHBOR (-y_offset)
+	var down_neighbor:Tile = self.tiles.get(tile.global_position + down_offset + Vector3(0, -y_offset, 0))
+	if down_neighbor != null:
+		tile.neighbor_tiles.push_back(down_neighbor)
+		# Force the two-way connection so the lower tile doesn't have to look for this ramp
+		if not down_neighbor.neighbor_tiles.has(tile):
+			down_neighbor.neighbor_tiles.push_back(tile)
+			
+	for ntile:Tile in tile.neighbor_tiles:
+		print(ntile.global_position)
+
 func _check_if_wall_between_tiles(tile_from:Tile, tile_to:Tile) -> bool:
 	const vertical_offset:Vector3 = Vector3(0,1,0)
 	var space_state:PhysicsDirectSpaceState3D  = get_world_3d().direct_space_state
@@ -258,7 +306,7 @@ func get_closest_tile(pos:Vector3) -> Tile:
 	
 	var rounded_x:int = int(round(pos.x))
 	var rounded_z:int = int(round(pos.z))
-	var rounded_y:int = int((pos.y))
+	var rounded_y:float = round(pos.y / 0.25) * 0.25
 	var rounded_pos:Vector3 = Vector3((rounded_x),rounded_y,(rounded_z))
 	
 	if tiles.has(rounded_pos): closest_tile = tiles[rounded_pos]
@@ -369,6 +417,8 @@ func _visualize_path(path:Array[Tile]) -> void:
 		var rotation_amount:float = 0
 		var path_visual:PathVisual = path_visuals[i-1]
 		path_visual.global_position = tile.global_position
+		var alignment_quat:Quaternion = Quaternion(Vector3.UP, tile.surface_normal)
+		path_visual.transform.basis = Basis(alignment_quat)
 		var visual_type:PathVisual.VISUAL
 		
 		if next_tile == null:

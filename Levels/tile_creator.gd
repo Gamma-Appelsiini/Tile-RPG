@@ -34,24 +34,20 @@ func _add_tiles() -> void:
 	while x <= end_node.global_position.x:
 		z = start_node.global_position.z
 		while z <= end_node.global_position.z:
-			var from:Vector3 = Vector3(x,y,z)
-			var result:Vector3 = _shoot_ray(from)
-			if !result: pass
-			if result != from:
-				var rounded_x:int = int(result.x)
-				var rounded_z:int = int(result.z)
-				var rounded_y:int = int(result.y)
-				var rounded_pos:Vector3 = Vector3(rounded_x,rounded_y,rounded_z)
-				_add_tile(rounded_pos)
+			var from:Vector3 = Vector3(x,y + 5,z)
+			var result:Dictionary = _shoot_ray(from)
+			if result.is_empty():
+				z += 1
+				continue
+			var hit_pos:Vector3 = result["position"]
+			var rounded_x:int = int(hit_pos.x)
+			var rounded_z:int = int(hit_pos.z)
+			var rounded_pos:Vector3 = Vector3(rounded_x,hit_pos.y,rounded_z)
+			_add_tile(rounded_pos, result["normal"])
 			z += 1
 		x += 1
 
-func _add_neighbors(tile:Tile) -> void:
-	for offset:Vector3 in OFFSETS:
-		var neighbor:Tile = tile_manager.tiles.get(tile.global_position + offset)
-		if neighbor != null: tile.neighbor_tiles.push_back(neighbor)
-
-func _shoot_ray(from:Vector3) -> Vector3:
+func _shoot_ray(from:Vector3) -> Dictionary:
 	var space := start_node.get_world_3d().direct_space_state
 	var to = from + Vector3.DOWN * 50
 	var ray_query:PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.new()
@@ -60,13 +56,14 @@ func _shoot_ray(from:Vector3) -> Vector3:
 	ray_query.from = from
 	ray_query.to = to
 	var raycast_result := space.intersect_ray(ray_query)
-
-	if raycast_result.is_empty(): return from
-	return raycast_result["position"]
+	return raycast_result
 	
-func _add_tile(pos:Vector3) -> void:
+func _add_tile(pos:Vector3, normal:Vector3) -> void:
 	var new_tile:Tile = Tile.new()
 	created_tiles.push_back(new_tile)
 	tile_manager.add_child(new_tile)
 	new_tile.owner = get_tree().edited_scene_root
 	new_tile.global_position = pos
+	#TODO this is not saved
+	new_tile.surface_normal = normal
+	#if normal != Vector3.UP: print("Ramp: ", pos, " normal: ", normal, "Name: ", new_tile)

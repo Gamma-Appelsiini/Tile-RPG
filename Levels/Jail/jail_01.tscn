@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
 [ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
-[ext_resource type="Material" uid="uid://rjrr5scewucu" path="res://Tile-RPG/Materials/TextureMaterials/tile_floor_01.tres" id="3_yniyx"]
 [ext_resource type="PackedScene" uid="uid://cex17x14cxnlr" path="res://Tile-RPG/Models/MapBasics/blank_wall.tscn" id="4_b3657"]
 [ext_resource type="Material" uid="uid://cf0e48ujisxhk" path="res://Tile-RPG/Materials/TextureMaterials/wall_01.tres" id="5_2ekbm"]
 [ext_resource type="PackedScene" uid="uid://dwluacsgis5a3" path="res://Tile-RPG/Levels/Walls/bars.tscn" id="6_l321t"]
@@ -27,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://d1rgm1jeak2qy" path="res://Tile-RPG/Models/static_props/wall_chains.tscn" id="19_465oc"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="20_0liqt"]
 [ext_resource type="PackedScene" uid="uid://ba5woaetqefuy" path="res://Tile-RPG/GameCharacters/Jail1/test_npc.tscn" id="21_cx1m6"]
+[ext_resource type="PackedScene" uid="uid://bhcsynreixoe4" path="res://Tile-RPG/Models/MapBasics/ramp.glb" id="28_b3ul2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbpx"]
 
@@ -134,195 +134,147 @@ player_spawn_positions = {
 [node name="Floors" type="Node3D" parent="." unique_id=1981779540]
 
 [node name="BlankFloor" parent="Floors" unique_id=1075589645 instance=ExtResource("2_urkle")]
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor2" parent="Floors" unique_id=362585999 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor3" parent="Floors" unique_id=106917528 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor4" parent="Floors" unique_id=1361633757 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor5" parent="Floors" unique_id=990739197 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor6" parent="Floors" unique_id=801743500 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor7" parent="Floors" unique_id=1890270479 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor8" parent="Floors" unique_id=1174692499 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor33" parent="Floors" unique_id=2121022072 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor34" parent="Floors" unique_id=440431799 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor35" parent="Floors" unique_id=1634146999 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor36" parent="Floors" unique_id=1237120357 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor37" parent="Floors" unique_id=51675576 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor38" parent="Floors" unique_id=183927129 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor39" parent="Floors" unique_id=280278938 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor40" parent="Floors" unique_id=139761428 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor41" parent="Floors" unique_id=1143078589 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor42" parent="Floors" unique_id=1724988515 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor43" parent="Floors" unique_id=1154476503 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor44" parent="Floors" unique_id=2075590615 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor45" parent="Floors" unique_id=251793876 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor46" parent="Floors" unique_id=1113031961 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor47" parent="Floors" unique_id=687180640 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor48" parent="Floors" unique_id=1939473436 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor9" parent="Floors" unique_id=446513809 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor10" parent="Floors" unique_id=386380396 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor11" parent="Floors" unique_id=363100546 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor12" parent="Floors" unique_id=967239754 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor13" parent="Floors" unique_id=1633170718 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor14" parent="Floors" unique_id=1518029831 instance=ExtResource("2_urkle")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 1)
 
 [node name="BlankFloor15" parent="Floors" unique_id=230920242 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor16" parent="Floors" unique_id=1977562434 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor17" parent="Floors" unique_id=1684956591 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor18" parent="Floors" unique_id=1282877531 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor19" parent="Floors" unique_id=2059481405 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor20" parent="Floors" unique_id=351593488 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor21" parent="Floors" unique_id=196765929 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor22" parent="Floors" unique_id=1141182055 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor23" parent="Floors" unique_id=741863351 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor24" parent="Floors" unique_id=1827571116 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor25" parent="Floors" unique_id=161754431 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor26" parent="Floors" unique_id=1510303690 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor27" parent="Floors" unique_id=1148769386 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor28" parent="Floors" unique_id=985231790 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor29" parent="Floors" unique_id=1463267527 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor30" parent="Floors" unique_id=44449524 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor31" parent="Floors" unique_id=596098263 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="BlankFloor32" parent="Floors" unique_id=1616924104 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
-surface_material_override/0 = ExtResource("3_yniyx")
 
 [node name="Walls" type="Node3D" parent="." unique_id=322398891]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
@@ -611,194 +563,195 @@ script = ExtResource("9_gomib")
 door_node = NodePath("../Doors")
 metadata/_custom_type_script = "uid://chv46rdn2gkni"
 
-[node name="@Node@90707" type="Node" parent="TileManager" unique_id=126561693]
+[node name="@Node@53632" type="Node" parent="TileManager" unique_id=1968238223]
 script = ExtResource("15_fkoil")
 
-[node name="@Node@90708" type="Node" parent="TileManager" unique_id=1292143531]
+[node name="@Node@53633" type="Node" parent="TileManager" unique_id=199398599]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 1)
 
-[node name="@Node@90709" type="Node" parent="TileManager" unique_id=1086024999]
+[node name="@Node@53634" type="Node" parent="TileManager" unique_id=2058645716]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 2)
 
-[node name="@Node@90710" type="Node" parent="TileManager" unique_id=444313822]
+[node name="@Node@53635" type="Node" parent="TileManager" unique_id=1742463256]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 3)
 
-[node name="@Node@90711" type="Node" parent="TileManager" unique_id=2108287333]
+[node name="@Node@53636" type="Node" parent="TileManager" unique_id=1351797126]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 4)
 
-[node name="@Node@90712" type="Node" parent="TileManager" unique_id=1259296562]
+[node name="@Node@53637" type="Node" parent="TileManager" unique_id=1756713811]
 script = ExtResource("15_fkoil")
 global_position = Vector3(0, 0, 5)
 
-[node name="@Node@90713" type="Node" parent="TileManager" unique_id=1058577257]
+[node name="@Node@53638" type="Node" parent="TileManager" unique_id=1269911926]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 0)
 
-[node name="@Node@90714" type="Node" parent="TileManager" unique_id=572104740]
+[node name="@Node@53639" type="Node" parent="TileManager" unique_id=255573537]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 1)
 
-[node name="@Node@90715" type="Node" parent="TileManager" unique_id=2045427742]
+[node name="@Node@53640" type="Node" parent="TileManager" unique_id=268261100]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 2)
 
-[node name="@Node@90716" type="Node" parent="TileManager" unique_id=1114239112]
+[node name="@Node@53641" type="Node" parent="TileManager" unique_id=317089320]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 3)
 
-[node name="@Node@90717" type="Node" parent="TileManager" unique_id=1236471534]
+[node name="@Node@53642" type="Node" parent="TileManager" unique_id=376819521]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 4)
 
-[node name="@Node@90718" type="Node" parent="TileManager" unique_id=1916616114]
+[node name="@Node@53643" type="Node" parent="TileManager" unique_id=1727597130]
 script = ExtResource("15_fkoil")
 global_position = Vector3(1, 0, 5)
 
-[node name="@Node@90719" type="Node" parent="TileManager" unique_id=1573034573]
+[node name="@Node@53644" type="Node" parent="TileManager" unique_id=1030614523]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 0)
 
-[node name="@Node@90720" type="Node" parent="TileManager" unique_id=60496106]
+[node name="@Node@53645" type="Node" parent="TileManager" unique_id=2120723195]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 1)
 
-[node name="@Node@90721" type="Node" parent="TileManager" unique_id=209134244]
+[node name="@Node@53646" type="Node" parent="TileManager" unique_id=1345015161]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 2)
 
-[node name="@Node@90722" type="Node" parent="TileManager" unique_id=1408063758]
+[node name="@Node@53647" type="Node" parent="TileManager" unique_id=1207048437]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 3)
 
-[node name="@Node@90723" type="Node" parent="TileManager" unique_id=150811531]
+[node name="@Node@53648" type="Node" parent="TileManager" unique_id=1217394259]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 4)
 
-[node name="@Node@90724" type="Node" parent="TileManager" unique_id=395138516]
+[node name="@Node@53649" type="Node" parent="TileManager" unique_id=553309338]
 script = ExtResource("15_fkoil")
 global_position = Vector3(2, 0, 5)
 
-[node name="@Node@90725" type="Node" parent="TileManager" unique_id=180579412]
+[node name="@Node@53650" type="Node" parent="TileManager" unique_id=542573096]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 0)
 
-[node name="@Node@90726" type="Node" parent="TileManager" unique_id=703858919]
+[node name="@Node@53651" type="Node" parent="TileManager" unique_id=1923940258]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 1)
 
-[node name="@Node@90727" type="Node" parent="TileManager" unique_id=1674985445]
+[node name="@Node@53652" type="Node" parent="TileManager" unique_id=983234492]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 2)
 
-[node name="@Node@90728" type="Node" parent="TileManager" unique_id=10400331]
+[node name="@Node@53653" type="Node" parent="TileManager" unique_id=272182682]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 3)
 
-[node name="@Node@90729" type="Node" parent="TileManager" unique_id=1346281660]
+[node name="@Node@53654" type="Node" parent="TileManager" unique_id=87904851]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 4)
 
-[node name="@Node@90730" type="Node" parent="TileManager" unique_id=1690327269]
+[node name="@Node@53655" type="Node" parent="TileManager" unique_id=1431871952]
 script = ExtResource("15_fkoil")
 global_position = Vector3(3, 0, 5)
 
-[node name="@Node@90731" type="Node" parent="TileManager" unique_id=550903779]
+[node name="@Node@53656" type="Node" parent="TileManager" unique_id=1485784538]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 0)
 
-[node name="@Node@90732" type="Node" parent="TileManager" unique_id=1258916165]
+[node name="@Node@53657" type="Node" parent="TileManager" unique_id=647425090]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 1)
 
-[node name="@Node@90733" type="Node" parent="TileManager" unique_id=1467494672]
+[node name="@Node@53658" type="Node" parent="TileManager" unique_id=1356625883]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 2)
 
-[node name="@Node@90734" type="Node" parent="TileManager" unique_id=2147263545]
+[node name="@Node@53659" type="Node" parent="TileManager" unique_id=898108661]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 3)
 
-[node name="@Node@90735" type="Node" parent="TileManager" unique_id=2023837625]
+[node name="@Node@53660" type="Node" parent="TileManager" unique_id=1621627784]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 4)
 
-[node name="@Node@90736" type="Node" parent="TileManager" unique_id=1981243277]
+[node name="@Node@53661" type="Node" parent="TileManager" unique_id=1096728552]
 script = ExtResource("15_fkoil")
 global_position = Vector3(4, 0, 5)
 
-[node name="@Node@90737" type="Node" parent="TileManager" unique_id=204419095]
+[node name="@Node@53662" type="Node" parent="TileManager" unique_id=134211526]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 0)
 
-[node name="@Node@90738" type="Node" parent="TileManager" unique_id=1379319534]
+[node name="@Node@53663" type="Node" parent="TileManager" unique_id=1934134484]
 script = ExtResource("15_fkoil")
-global_position = Vector3(5, 0, 1)
+global_position = Vector3(5, 0.5, 1)
 
-[node name="@Node@90739" type="Node" parent="TileManager" unique_id=317784673]
+[node name="@Node@53664" type="Node" parent="TileManager" unique_id=1031270465]
 script = ExtResource("15_fkoil")
-global_position = Vector3(5, 0, 2)
+surface_normal = Vector3(5.3312014e-08, 0.8944272, 0.44721365)
+global_position = Vector3(5, 0.25, 2)
 
-[node name="@Node@90740" type="Node" parent="TileManager" unique_id=134660212]
+[node name="@Node@53665" type="Node" parent="TileManager" unique_id=38483937]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 3)
 
-[node name="@Node@90741" type="Node" parent="TileManager" unique_id=1239315151]
+[node name="@Node@53666" type="Node" parent="TileManager" unique_id=54142886]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 4)
 
-[node name="@Node@90742" type="Node" parent="TileManager" unique_id=883952073]
+[node name="@Node@53667" type="Node" parent="TileManager" unique_id=257506928]
 script = ExtResource("15_fkoil")
 global_position = Vector3(5, 0, 5)
 
-[node name="@Node@90743" type="Node" parent="TileManager" unique_id=1691804414]
+[node name="@Node@53668" type="Node" parent="TileManager" unique_id=1929486173]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 0)
 
-[node name="@Node@90744" type="Node" parent="TileManager" unique_id=222264325]
+[node name="@Node@53669" type="Node" parent="TileManager" unique_id=1483250351]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 1)
 
-[node name="@Node@90745" type="Node" parent="TileManager" unique_id=24515854]
+[node name="@Node@53670" type="Node" parent="TileManager" unique_id=364068832]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 2)
 
-[node name="@Node@90746" type="Node" parent="TileManager" unique_id=1540075278]
+[node name="@Node@53671" type="Node" parent="TileManager" unique_id=650502240]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 3)
 
-[node name="@Node@90747" type="Node" parent="TileManager" unique_id=1598413637]
+[node name="@Node@53672" type="Node" parent="TileManager" unique_id=531687839]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 4)
 
-[node name="@Node@90748" type="Node" parent="TileManager" unique_id=1224139947]
+[node name="@Node@53673" type="Node" parent="TileManager" unique_id=796106656]
 script = ExtResource("15_fkoil")
 global_position = Vector3(6, 0, 5)
 
-[node name="@Node@90749" type="Node" parent="TileManager" unique_id=1041077400]
+[node name="@Node@53674" type="Node" parent="TileManager" unique_id=1203201724]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 0)
 
-[node name="@Node@90750" type="Node" parent="TileManager" unique_id=896211978]
+[node name="@Node@53675" type="Node" parent="TileManager" unique_id=1586390283]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 1)
 
-[node name="@Node@90751" type="Node" parent="TileManager" unique_id=625864574]
+[node name="@Node@53676" type="Node" parent="TileManager" unique_id=756759316]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 2)
 
-[node name="@Node@90752" type="Node" parent="TileManager" unique_id=2059947021]
+[node name="@Node@53677" type="Node" parent="TileManager" unique_id=1957093894]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 3)
 
-[node name="@Node@90753" type="Node" parent="TileManager" unique_id=638284119]
+[node name="@Node@53678" type="Node" parent="TileManager" unique_id=2126306639]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 4)
 
-[node name="@Node@90754" type="Node" parent="TileManager" unique_id=2047186062]
+[node name="@Node@53679" type="Node" parent="TileManager" unique_id=1338710299]
 script = ExtResource("15_fkoil")
 global_position = Vector3(7, 0, 5)
 
@@ -827,8 +780,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
 [node name="Chains" parent="StaticProps" unique_id=547779019 instance=ExtResource("19_465oc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.5)
 
-[node name="TileCreator" type="Node" parent="." unique_id=1042947425 node_paths=PackedStringArray("start_node", "end_node")]
+[node name="TileCreator" type="Node" parent="." unique_id=1042947425 node_paths=PackedStringArray("tile_manager", "start_node", "end_node")]
 script = ExtResource("20_0liqt")
+tile_manager = NodePath("../TileManager")
 start_node = NodePath("../Start")
 end_node = NodePath("../End")
 metadata/_custom_type_script = "uid://bp36ikilmc15g"
@@ -848,6 +802,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.049570918, 5)
 
 [node name="BarDoor" parent="Doors" unique_id=880502523 instance=ExtResource("8_v6jrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
+
+[node name="ramp" parent="." unique_id=139068169 instance=ExtResource("28_b3ul2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 2)
 
 [editable path="Walls/Corners/BlankCorner"]
 [editable path="Walls/Corners/BlankCorner2"]
