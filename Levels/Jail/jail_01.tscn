@@ -790,7 +790,7 @@ metadata/_custom_type_script = "uid://bp36ikilmc15g"
 [node name="GameCharacters2" type="Node" parent="." unique_id=546174203]
 
 [node name="TestNPC" parent="GameCharacters2" unique_id=1284443745 instance=ExtResource("21_cx1m6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 1)
 
 [node name="Start" type="Node3D" parent="." unique_id=1461553448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049570918, 0)

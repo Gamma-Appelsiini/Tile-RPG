@@ -205,16 +205,29 @@ func _create_array_mesh(tiles: Array[Tile], start_tile: Tile) -> MeshInstance3D:
 		# 3. Pack the mask into a float (0.0 to 1.0) to send to the shader
 		var color_val = float(mask) / 255.0
 		var tile_color = Color(color_val, 0.0, 0.0, 1.0)
+		
+		#Normal
+		var surf_normal: Vector3 = tile.surface_normal.normalized()
+		var tilt_quat: Quaternion
+
+		# Prevent Quaternion math errors if vectors are perfectly parallel or opposite
+		if surf_normal.is_equal_approx(Vector3.UP):
+			tilt_quat = Quaternion.IDENTITY
+		elif surf_normal.is_equal_approx(Vector3.DOWN):
+			tilt_quat = Quaternion(Vector3.RIGHT, PI) # Flip 180 degrees
+		else:
+			# Generate a rotation from the standard UP vector to our target normal
+			tilt_quat = Quaternion(Vector3.UP, surf_normal)
 
 		# 4. Build the Quad
 		vertices.append_array([
-			local + Vector3(-0.5, 0, -0.5), # TL
-			local + Vector3(-0.5, 0, 0.5),  # BL
-			local + Vector3(0.5, 0, 0.5),   # BR
-			local + Vector3(0.5, 0, -0.5)   # TR
+			local + (tilt_quat * Vector3(-0.5, 0, -0.5)), # TL
+			local + (tilt_quat * Vector3(-0.5, 0, 0.5)),  # BL
+			local + (tilt_quat * Vector3(0.5, 0, 0.5)),   # BR
+			local + (tilt_quat * Vector3(0.5, 0, -0.5))   # TR
 		])
 
-		normals.append_array([Vector3.UP, Vector3.UP, Vector3.UP, Vector3.UP])
+		normals.append_array([surf_normal, surf_normal, surf_normal, surf_normal])
 		uvs.append_array([Vector2(0, 0), Vector2(0, 1), Vector2(1, 1), Vector2(1, 0)])
 		colors.append_array([tile_color, tile_color, tile_color, tile_color])
 

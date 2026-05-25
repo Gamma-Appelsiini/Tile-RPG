@@ -252,6 +252,10 @@ func _set_hovered_tile(new_tile:Tile) -> void:
 	hovered_tile = new_tile
 	ground_indicator.visible = true
 	ground_indicator.global_position = new_tile.global_position
+
+	var alignment_quat:Quaternion = Quaternion(Vector3.UP, hovered_tile.surface_normal)
+	ground_indicator.transform.basis = Basis(alignment_quat)
+	
 	if hovered_tile.blocked or hovered_tile.occupant != null: ground_indicator.set_indicator_color(false)
 	else: ground_indicator.set_indicator_color(true)
 	
@@ -324,7 +328,7 @@ func get_tile_distance(start:Tile, end:Tile, allow_diagonal:bool = false) -> int
 	if allow_diagonal: int(max( abs(start.global_position.x - end.global_position.x), abs(start.global_position.z - end.global_position.z)))
 	return int(abs(start.global_position.x - end.global_position.x) + abs(start.global_position.z - end.global_position.z))
 	
-func get_tiles_in_range(start:Tile, range_amount:int, allow_diagonal:bool = false) -> Array[Tile]:
+func get_tiles_in_range(start:Tile, range_amount:int, allow_diagonal:bool = false, use_raycast:bool = false	) -> Array[Tile]:
 	var possible_tiles:Array[Tile] = []
 	for tile:Tile in tiles.values():
 		if tile == start: continue

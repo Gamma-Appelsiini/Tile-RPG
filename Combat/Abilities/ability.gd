@@ -17,6 +17,7 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var hit_delay:float = 0.2
 
 @export var target_type:TARGET_TYPE = TARGET_TYPE.GAME_CHARACTER
+@export var pathing_for_targeting:bool = false
 @export var usable_on_characters:Array[CHARACTER_TYPE] = []
 @export var ability_tags:Array[ABILITY_TAG] = []
 @export var ability_main_stat: Stats.MainStat = Stats.MainStat.AGILITY
@@ -159,16 +160,31 @@ func _is_in_range(override_tile:Tile = null) -> bool:
 	var distance:int = -1
 	
 	if target_type == TARGET_TYPE.NONE: return true
-	elif target_type == TARGET_TYPE.TILE:
-		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile, allow_diagonal)
-	else:
+	elif target_type == TARGET_TYPE.GAME_CHARACTER:
 		if target_char == ability_owner: return true
-		var ability_target_tile:Tile = tile_manager.char_tiles[target_char]
-		distance = tile_manager.get_distance_to_tile(ability_user_tile, ability_target_tile, allow_diagonal)
-
-	if distance == -1 or distance > get_range():
-		return false
+		target_tile = tile_manager.char_tiles[target_char]
 	
+	if pathing_for_targeting:
+		distance = tile_manager.get_distance_to_tile(ability_user_tile, target_tile, allow_diagonal)
+	else: distance = tile_manager.get_tile_distance(ability_user_tile, target_tile)
+
+	if distance == -1 or distance > get_range(): return false
+	if !pathing_for_targeting: return _has_line_of_sight(ability_user_tile, target_tile)
+
+	return true
+
+func _has_line_of_sight(start_tile:Tile, end_tile:Tile) -> bool:
+	var y_offset:Vector3 = Vector3(0,1.5,0)
+	var start_pos:Vector3 = start_tile.global_position + y_offset
+	var end_pos:Vector3 = end_tile.global_position + y_offset
+	
+	var space_state := GlobalSignals.player.get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(start_pos, end_pos)
+	#Floor + wall collision
+	query.collision_mask = 1 + 2
+	var result:Dictionary = space_state.intersect_ray(query)
+	
+	if !result.is_empty(): return false
 	return true
 
 func _get_weapon_dmg_to_attack(attack:Attack) -> void:
