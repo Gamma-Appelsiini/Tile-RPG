@@ -5,7 +5,7 @@ enum CharAnimation {
 	ATTACK_1H, ATTACK_2H, ATTACK_BOW, ATTACK_PUNCH, BLOCK, CAST_SPELL, CASTING, COMBAT_IDLE_1,
 	DIE_1, DIE_2, DODGE, DRAW_WEAPON, DRINK_POTION, FROZEN, IDLE, IDLE_ACTION_2, IDLE_ACTION_3,
 	IDLE_ACTION_4, INTERACT, MINE, OPEN_DOOR_1, PICKUP, RUN, STUNNED, TAKE_DAMAGE_FROM_BACK,
-	TAKE_DAMAGE_FROM_FRONT, TAKE_DAMAGE_FROM_LEFT, TAKE_DAMAGE_FROM_RIGHT, NULL}
+	TAKE_DAMAGE_FROM_FRONT, TAKE_DAMAGE_FROM_LEFT, TAKE_DAMAGE_FROM_RIGHT, TAKE_DAMAGE, NULL}
 
 @export var character_mesh:MeshInstance3D = null
 @export var animation_player: AnimationPlayer = null
@@ -16,6 +16,7 @@ enum CharAnimation {
 @export var off_hand_node: Node3D = null
 @export var shield_node: Node3D = null
 @export var head_node: Node3D = null
+@export var animation_overrides:AnimationOverrides = null
 
 const PLAYER_PREFIX:String = "animations/"
 const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
@@ -47,6 +48,7 @@ const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
 	CharAnimation.TAKE_DAMAGE_FROM_FRONT: "take_damage_from_front",
 	CharAnimation.TAKE_DAMAGE_FROM_LEFT: "take_damage_from_left",
 	CharAnimation.TAKE_DAMAGE_FROM_RIGHT: "take_damage_from_right",
+	CharAnimation.TAKE_DAMAGE: "take_damage"
 }
 const BLEND_TIME:float = 0.1
 const DEATH_ANIMATIONS:Array[CharAnimation] = [CharAnimation.DIE_1,CharAnimation.DIE_2]
@@ -100,11 +102,25 @@ func _ready() -> void:
 	casting_hand_effect = CASTING_EFFECT.instantiate()
 	casting_ground_effect = GROUND_CASTING_EFFECT.instantiate()
 	
-	off_hand_node.add_child(casting_hand_effect)
+	if off_hand_node: off_hand_node.add_child(casting_hand_effect)
 	add_child(casting_ground_effect)
+
+func _play_animation_override(animation:CharAnimation) -> bool:
+	if animation_overrides:
+		if animation_overrides.overrides.has(animation):
+			animation_player.play(animation_overrides.overrides[animation])
+			return true
+	return false
 
 func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_backwards:bool = false) -> void:
 	if game_character.character_state == game_character.CharacterState.STUNNED or game_character.character_state == game_character.CharacterState.FROZEN: return
+	
+	if _play_animation_override(animation):
+		if !return_to_idle: return
+	
+		await animation_player.animation_finished
+		play_idle_animation() 
+		return
 	
 	if !ANIMATION_ENUM_TO_STRING.has(animation):
 		print_debug("No animation ", animation, " in animation dict")

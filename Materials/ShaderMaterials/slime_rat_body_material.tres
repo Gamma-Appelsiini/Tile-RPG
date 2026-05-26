@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dsidheai75bel"]
+
+[ext_resource type="Shader" uid="uid://qtmvkwmumyvm" path="res://Tile-RPG/Shaders/goo_shader.gdshader" id="1_38xaj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_38xaj")
+shader_parameter/Specular = 0.5
+shader_parameter/Hardness = 50.0
+shader_parameter/BaseColor = Color(0, 1, 0.083333254, 1)
+shader_parameter/HighlightColor = Color(0.39999998, 0.65000004, 1, 1)
+shader_parameter/Opacity = 0.2
+shader_parameter/refraction = 60000.0
