@@ -17,6 +17,7 @@ enum CharAnimation {
 @export var shield_node: Node3D = null
 @export var head_node: Node3D = null
 @export var animation_overrides:AnimationOverrides = null
+@export var unique_animations:bool = false
 
 const PLAYER_PREFIX:String = "animations/"
 const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
@@ -119,15 +120,18 @@ func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_ba
 		if !return_to_idle: return
 	
 		await animation_player.animation_finished
-		play_idle_animation() 
+		play_idle_animation()
 		return
 	
-	if !ANIMATION_ENUM_TO_STRING.has(animation):
+	var animation_name:String = PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[animation]
+	if unique_animations: animation_name = ANIMATION_ENUM_TO_STRING[animation]
+	
+	if !ANIMATION_ENUM_TO_STRING.has(animation) and !unique_animations:
 		print_debug("No animation ", animation, " in animation dict")
 		return
 	
-	if play_backwards: animation_player.play_backwards(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[animation], BLEND_TIME)
-	else: animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[animation], BLEND_TIME)
+	if play_backwards: animation_player.play_backwards(animation_name, BLEND_TIME)
+	else: animation_player.play(animation_name, BLEND_TIME)
 	
 	if !return_to_idle: return
 	
@@ -139,9 +143,18 @@ func play_idle_animation() -> void:
 		print_debug("No game character. Mesh; ", character_mesh)
 		return
 	
+	var char_animation:CharAnimation = CharAnimation.IDLE
+	var animation_to_play:String = ""
+	
 	if game_character.character_state == game_character.CharacterState.OUT_OF_COMBAT:
-		animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[CharAnimation.IDLE], BLEND_TIME)
+		char_animation = CharAnimation.IDLE
 	elif game_character.character_state == game_character.CharacterState.IN_COMBAT:
-		animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[CharAnimation.COMBAT_IDLE_1], BLEND_TIME)
+		char_animation = CharAnimation.COMBAT_IDLE_1
 	elif game_character.character_state == game_character.CharacterState.STUNNED:
-		animation_player.play(PLAYER_PREFIX + ANIMATION_ENUM_TO_STRING[CharAnimation.STUNNED], BLEND_TIME)
+		char_animation = CharAnimation.STUNNED
+	
+	if _play_animation_override(char_animation): return
+	animation_to_play = ANIMATION_ENUM_TO_STRING[char_animation]
+	
+	if !unique_animations: animation_to_play = PLAYER_PREFIX + animation_to_play
+	animation_player.play(animation_to_play, BLEND_TIME)

@@ -26,7 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://d1rgm1jeak2qy" path="res://Tile-RPG/Models/static_props/wall_chains.tscn" id="19_465oc"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="20_0liqt"]
 [ext_resource type="PackedScene" uid="uid://ba5woaetqefuy" path="res://Tile-RPG/GameCharacters/Jail1/test_npc.tscn" id="21_cx1m6"]
+[ext_resource type="PackedScene" uid="uid://wq3nuj6tmdtg" path="res://Tile-RPG/GameCharacters/Jail1/slime_rat_npc.tscn" id="26_fvjqo"]
 [ext_resource type="PackedScene" uid="uid://bhcsynreixoe4" path="res://Tile-RPG/Models/MapBasics/ramp.glb" id="28_b3ul2"]
+[ext_resource type="PackedScene" uid="uid://cjxr6uush4nq0" path="res://Tile-RPG/Combat/combat_starter.tscn" id="29_kp3o5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbpx"]
 
@@ -118,6 +120,9 @@ ssao_enabled = true
 glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(0.080800556, 0.09207047, 0.10960706, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4g4r"]
+size = Vector3(2.956604, 0.91607666, 1.7612305)
 
 [node name="Jail_01" type="Node" unique_id=173345460 node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "tile_manager", "player_spawn_positions")]
 script = ExtResource("1_c5me1")
@@ -792,6 +797,9 @@ metadata/_custom_type_script = "uid://bp36ikilmc15g"
 [node name="TestNPC" parent="GameCharacters2" unique_id=1284443745 instance=ExtResource("21_cx1m6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 1)
 
+[node name="SlimeRatNpc" parent="GameCharacters2" unique_id=1188377270 instance=ExtResource("26_fvjqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+
 [node name="Start" type="Node3D" parent="." unique_id=1461553448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049570918, 0)
 
@@ -806,5 +814,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
 [node name="ramp" parent="." unique_id=139068169 instance=ExtResource("28_b3ul2")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 2)
 
+[node name="CombatStarter" parent="." unique_id=1942640745 node_paths=PackedStringArray("combatants") instance=ExtResource("29_kp3o5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+combatants = [NodePath("../GameCharacters2/SlimeRatNpc"), NodePath("../GameCharacters2/TestNPC")]
+
+[node name="CollisionShape3D" parent="CombatStarter/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032562256, 0.46395874, -0.401932)
+shape = SubResource("BoxShape3D_e4g4r")
+
 [editable path="Walls/Corners/BlankCorner"]
 [editable path="Walls/Corners/BlankCorner2"]
+[editable path="CombatStarter"]

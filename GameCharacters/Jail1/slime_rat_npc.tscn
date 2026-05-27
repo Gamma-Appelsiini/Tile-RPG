@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://wq3nuj6tmdtg"]
+
+[ext_resource type="Script" uid="uid://ks8scj6i4f0r" path="res://Tile-RPG/GameCharacters/GameCharacter.gd" id="1_eatko"]
+[ext_resource type="PackedScene" uid="uid://tk7ei0cav5th" path="res://Tile-RPG/Models/CharacterModels/rat_character_model.tscn" id="2_bnc5r"]
+[ext_resource type="Script" uid="uid://dq5x88665dpbq" path="res://Tile-RPG/GameCharacters/follow_handler.gd" id="3_08klt"]
+[ext_resource type="Script" uid="uid://cfaw7c8b3dbes" path="res://Tile-RPG/Handlers/XpDropper/xp_dropper.gd" id="4_gorek"]
+[ext_resource type="Script" uid="uid://3i4005pgv256" path="res://Tile-RPG/Combat/ai_handler.gd" id="5_yabwv"]
+[ext_resource type="Script" uid="uid://c4xywaxpmfcw0" path="res://Tile-RPG/GameCharacters/equipment_handler.gd" id="6_a2vm6"]
+[ext_resource type="PackedScene" uid="uid://bs08mf1jnw3vi" path="res://Tile-RPG/Combat/Abilities/basic_attack.tscn" id="6_gorek"]
+[ext_resource type="PackedScene" uid="uid://cvi3liudalayl" path="res://Tile-RPG/UI/Status/info_bar.tscn" id="7_oprr1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eatko"]
+radius = 0.32630616
+height = 0.6526123
+
+[node name="SlimeRatNpc" type="CharacterBody3D" unique_id=1188377270 node_paths=PackedStringArray("follow_hander", "heigth_node", "infobar", "ai_handler", "char_model_handler", "equipment_handler")]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_eatko")
+display_name = "Slime Rat"
+follow_hander = NodePath("FollowHandler")
+heigth_node = NodePath("HeigthNode")
+infobar = NodePath("CharacterInfoBar")
+ai_handler = NodePath("AIHandler")
+char_model_handler = NodePath("RatCharacterModel")
+equipment_handler = NodePath("EquipmentHandler")
+
+[node name="RatCharacterModel" parent="." unique_id=447376427 node_paths=PackedStringArray("game_character") instance=ExtResource("2_bnc5r")]
+game_character = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1472319963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32630616, 0)
+shape = SubResource("CapsuleShape3D_eatko")
+
+[node name="FollowHandler" type="Node" parent="." unique_id=830461199]
+script = ExtResource("3_08klt")
+metadata/_custom_type_script = "uid://dq5x88665dpbq"
+
+[node name="XpDropper" type="Node3D" parent="." unique_id=160172532 node_paths=PackedStringArray("dropping_character")]
+script = ExtResource("4_gorek")
+xp_amount = 10
+dropping_character = NodePath("..")
+metadata/_custom_type_script = "uid://cfaw7c8b3dbes"
+
+[node name="AIHandler" type="Node" parent="." unique_id=737562945 node_paths=PackedStringArray("combatant", "offensive_abilities")]
+script = ExtResource("5_yabwv")
+combatant = NodePath("..")
+combat_intelligence = 0
+offensive_abilities = [NodePath("BasicAttack")]
+metadata/_custom_type_script = "uid://3i4005pgv256"
+
+[node name="BasicAttack" parent="AIHandler" unique_id=920726119 instance=ExtResource("6_gorek")]
+
+[node name="EquipmentHandler" type="Node" parent="." unique_id=1516178155]
+script = ExtResource("6_a2vm6")
+metadata/_custom_type_script = "uid://c4xywaxpmfcw0"
+
+[node name="HeigthNode" type="Node3D" parent="." unique_id=1072696144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3756112, 0)
+
+[node name="CharacterInfoBar" parent="." unique_id=1859007216 instance=ExtResource("7_oprr1")]

@@ -6,11 +6,8 @@ class_name CombatStarter
 
 func _start_combat_with_combatants() -> void:
 	var combat_manager:CombatManager = GlobalSignals.combat_manager
-	if !combatants.has(get_parent_node_3d()): combatants.push_back(get_parent_node_3d())
-	combat_manager.start_combat(combatants)
-	
+	if !combatants.is_empty(): combat_manager.start_combat(combatants)
 	disable_group_combat_starters()
-
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is not Player: return
@@ -21,6 +18,7 @@ func disable_combat_starter() -> void:
 	queue_free()
 	
 func disable_group_combat_starters() -> void:
+	disable_combat_starter()
 	for combatant:GameCharacter in combatants:
 		for node in combatant.get_children():
 			if node is CombatStarter: node.disable_combat_starter()
