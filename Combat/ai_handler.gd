@@ -32,6 +32,7 @@ func _ready() -> void:
 		ability.connect_signals()
 
 func _is_combat_over() -> bool:
+	_set_teams()
 	if enemies.is_empty() or is_combat_over:
 		is_combat_over = true
 		return true
