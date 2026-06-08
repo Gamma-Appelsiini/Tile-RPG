@@ -1,0 +1,43 @@
+[gd_scene format=4 uid="uid://cade3n3a58f4i"]
+
+[ext_resource type="Script" uid="uid://xwo6k20q88aa" path="res://Tile-RPG/Interactables/mineable_rock.gd" id="1_ec7jc"]
+[ext_resource type="PackedScene" uid="uid://chlx30udcd3a1" path="res://Tile-RPG/Breakables/mineable_rock_breakable.tscn" id="2_ec7jc"]
+[ext_resource type="PackedScene" uid="uid://ds6b424ncovr1" path="res://Tile-RPG/Handlers/CraftingGem/crafting_gem.tscn" id="3_bnbpc"]
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_kjdnx"]
+data = PackedByteArray("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")
+format = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ec7jc"]
+height = 0.69818115
+radius = 0.6
+
+[node name="MineableRock" type="Node3D" unique_id=689019546 node_paths=PackedStringArray("breakable_rocks", "crafting_gem", "interact_area", "indicator_place")]
+script = ExtResource("1_ec7jc")
+breakable_rocks = NodePath("MineableRockBreakable")
+impact_sound = SubResource("AudioStreamWAV_kjdnx")
+crafting_gem = NodePath("CraftingGem")
+disable_movement = true
+interact_area = NodePath("InteractArea3D")
+indicator_place = NodePath("IndicatorPlace")
+interact_text = "Mine"
+oneshot = true
+face_interactable = true
+block_tiles = true
+interact_animation = 19
+
+[node name="MineableRockBreakable" parent="." unique_id=847004778 instance=ExtResource("2_ec7jc")]
+
+[node name="InteractArea3D" type="Area3D" parent="." unique_id=1679527655]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea3D" unique_id=1932179336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35116577, 0)
+shape = SubResource("CylinderShape3D_ec7jc")
+
+[node name="IndicatorPlace" type="Node3D" parent="." unique_id=829370215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.713777, 0)
+
+[node name="CraftingGem" parent="." unique_id=1328855328 instance=ExtResource("3_bnbpc")]
+transform = Transform3D(0.97913426, 0.064847425, -0.19259015, 0, 0.9477183, 0.3191082, 0.20321454, -0.31244975, 0.92794347, 0.14451674, 0.37383932, -0.05684781)

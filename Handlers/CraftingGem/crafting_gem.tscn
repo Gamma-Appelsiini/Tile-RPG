@@ -1,0 +1,93 @@
+[gd_scene format=4 uid="uid://ds6b424ncovr1"]
+
+[ext_resource type="Script" uid="uid://drwatcaca7w0c" path="res://Tile-RPG/Handlers/CraftingGem/crafting_gem_orb.gd" id="1_22xlh"]
+[ext_resource type="AudioStream" uid="uid://wv4yxw8e1e73" path="res://Tile-RPG/Sounds/Effects/gem_pickup.ogg" id="2_pl3og"]
+[ext_resource type="AudioStream" uid="uid://cpfhmgb2i4sfy" path="res://Tile-RPG/Sounds/Drops/drop_gem.wav" id="3_3ahjl"]
+[ext_resource type="Material" uid="uid://c4kiu6i1nes4s" path="res://Tile-RPG/Materials/ShaderMaterials/iridescent_material.tres" id="3_fsasr"]
+[ext_resource type="Texture2D" uid="uid://dl1if4cb3s0rk" path="res://Tile-RPG/Images/Shaders/trail.png" id="4_voa8i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0tfdk"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8fc2m"]
+_surfaces = [{
+"aabb": AABB(-0.100000024, -0.20000005, -0.100000024, 0.20000005, 0.4000001, 0.20000005),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAQAEAAMABQAAAAIABQAEAAAABgAFAAIABgAEAAUAAwAHAAIAAwAEAAcACAAGAAIACAAEAAYACQAIAAIACQAEAAgABwAJAAIABwAEAAkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("/3//fwAAAACB2v9/fSUAAP9/////fwAA////f/9/AAD/fwAA/38AAH0l/399JQAAAAD/f/9/AACB2v9/gdoAAH0l/3+B2gAA/3//f///AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kfp8i"]
+resource_name = "gem_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.100000024, -0.20000005, -0.100000024, 0.20000005, 0.4000001, 0.20000005),
+"attribute_data": PackedByteArray("///////f////3wAA/9////+/////vwAA/7////+f////nwAA/5////9/////fwAA/3////9f////XwAA/1////8/////PwAA/z////8f////HwAA/x///wAA//8AAAAA///////fAAD/3////9////+/AAD/v////7////+fAAD/n////5////9/AAD/f////3////9fAAD/X////1////8/AAD/P////z////8fAAD/H////x///wAAAAAAAP//"),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8A"),
+"material": SubResource("StandardMaterial3D_0tfdk"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("/3//fwAAX/CB2v9/fSVf8P9/////f1/wgdr/f30lQtH///9//39C0f9/////f0LR////f/9/xbKB2v9/gdrFsv9/////f8Wygdr/f4HauZf/f/9///+5l/9/////f7mX/3//f///uZd9Jf9/gdq5l/9/////f7mXfSX/f4HaxbIAAP9//3/Fsv9/////f8WyAAD/f/9/QtF9Jf9/fSVC0f9/////f0LRfSX/f30lX/D/f/9/AABf8P9/////f1/w/3//fwAAnw//fwAA/3+fD4Ha/399JZ8Pgdr/f30lvC7/fwAA/3+8Lv///3//f7wu////f/9/OU3/fwAA/385TYHa/3+B2jlNgdr/f4HaRWj/fwAA/39FaP9//3///0Vo/3//f///RWj/fwAA/39FaH0l/3+B2kVofSX/f4HaOU3/fwAA/385TQAA/3//fzlNAAD/f/9/vC7/fwAA/3+8Ln0l/399JbwufSX/f30lnw//fwAA/3+fD/9//38AAJ8PspptBLKabQSymm0EV6LBDVeiwQ1XosENWq0wG1qtMBtarTAb8cjXPPHI1zzxyNc817wMt9e8DLfXvAy3L5uj0i+bo9Ivm6PSwY2m3cGNpt3BjabdbYRM5W2ETOVthEzlkXuyGpF7shqRe7IaPXJYIj1yWCI9clgiz2RbLc9kWy3PZFstJ0PySCdD8kgnQ/JIDTcnww03J8MNNyfDpFLO5KRSzuSkUs7kp1098qddPfKnXT3yTGWR+0xlkftMZZH7")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8fc2m")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8r50q"]
+points = PackedVector3Array(-0.100000024, -3.914535e-05, -1.9572675e-05, -1.9572675e-05, -0.20000005, -1.9572675e-05, -0.070712626, -3.914535e-05, 0.070693046, -1.9572675e-05, 0.20000005, -1.9572675e-05, -0.070712626, -3.914535e-05, -0.070712626, -1.9572675e-05, -3.914535e-05, -0.100000024, 0.070693046, -3.914535e-05, -0.070712626, 0.100000024, -3.914535e-05, -1.9572675e-05, 0.070693046, -3.914535e-05, 0.070693046, -1.9572675e-05, -3.914535e-05, 0.100000024)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hq67h"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(2.5683465, 1.2388172, 0, 1)
+albedo_texture = ExtResource("4_voa8i")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ndpgm"]
+size = Vector2(0.035, 0.035)
+
+[sub_resource type="Curve" id="Curve_3y1aa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.116000004, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="CraftingGem" type="RigidBody3D" unique_id=1328855328 node_paths=PackedStringArray("gem_mesh", "particles", "collision_shape_3d")]
+collision_layer = 16
+collision_mask = 31
+mass = 2.0
+script = ExtResource("1_22xlh")
+gem_mesh = NodePath("GemMesh")
+gem_pickup_sound = ExtResource("2_pl3og")
+gem_drop_sound = ExtResource("3_3ahjl")
+particles = NodePath("CPUParticles3D")
+collision_shape_3d = NodePath("CollisionShape3D")
+
+[node name="GemMesh" type="MeshInstance3D" parent="." unique_id=1735431954]
+material_override = ExtResource("3_fsasr")
+mesh = SubResource("ArrayMesh_kfp8i")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=196977002]
+shape = SubResource("ConvexPolygonShape3D_8r50q")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=849932277]
+material_override = SubResource("StandardMaterial3D_hq67h")
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.2
+mesh = SubResource("QuadMesh_ndpgm")
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+scale_amount_curve = SubResource("Curve_3y1aa")

@@ -7,6 +7,7 @@ signal sell_item(item:Item)
 @onready var equipment_grid: GridContainer = %EquipmentGrid
 @onready var x_button: XButton = $x_button
 @export var currency_amount_label: Label = null
+@export var gem_amount_label: Label = null
 
 const INV_SIZE:int = 15
 const INV_SLOT_PATH:String = "res://Tile-RPG/UI/Inventory/inventory_slot.tscn"
@@ -43,6 +44,11 @@ var player_currency:int = 555:
 	set(value):
 		player_currency = max(0, value)
 		_update_currency_amount(player_currency)
+		
+var player_gems:int = 0:
+	set(value):
+		player_gems = max(0, value)
+		_update_gem_amount(player_gems)
 
 func _ready() -> void:
 	player_currency = player_currency
@@ -155,6 +161,9 @@ func load_inv_from_data(save_data:Dictionary) -> void:
 
 func _update_currency_amount(amount:int) -> void:
 	currency_amount_label.text = str(amount)
+	
+func _update_gem_amount(amount:int) -> void:
+	gem_amount_label.text = str(amount)
 
 func _load_currency(save_data:Dictionary) -> void:
 	if !save_data.has("currency"): return

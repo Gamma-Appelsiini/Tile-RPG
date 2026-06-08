@@ -1,6 +1,8 @@
 extends Node
 class_name EquipmentHandler
 
+const PICKAXE_MODEL:PackedScene = preload("uid://bkkfnrqhmnhjn")
+
 var equipment_owner:GameCharacter = null
 var equipped_items:Dictionary[Equipment.EquipmentSlot, Equipment] = {
 	Equipment.EquipmentSlot.MAIN_HAND: null,
@@ -18,9 +20,24 @@ var in_combat:bool = false
 var owner_turn:bool = false
 var main_hand_model:ItemModel = null
 var off_hand_model:ItemModel = null
+var pickaxe_model:ItemModel = null
 
 func _ready() -> void:
 	set_handler_owner()
+	_add_pickaxe()
+	
+func _add_pickaxe() -> void:
+	if equipment_owner is not Player: return
+	
+	pickaxe_model = PICKAXE_MODEL.instantiate()
+	equipment_owner.char_model_handler.main_hand_node.add_child(pickaxe_model)
+	pickaxe_model.hide()
+
+func show_pickaxe() -> void:
+	pickaxe_model.show()
+	
+func hide_pickaxe() -> void:
+	pickaxe_model.hide()
 
 func set_handler_owner() -> void:
 	if get_parent() is GameCharacter:

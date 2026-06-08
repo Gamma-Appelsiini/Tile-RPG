@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://btkgjx50f4tv3"]
+
+[ext_resource type="Texture2D" uid="uid://dmebqyuq4ir5m" path="res://Tile-RPG/Materials/Textures/grunge-rock-stone-512x512.png" id="1_71st6"]
+[ext_resource type="Texture2D" uid="uid://cnopwce2hox73" path="res://Tile-RPG/Materials/Textures/grunge-rock-stone-512x512_normal.png" id="2_gpfm5"]
+
+[resource]
+albedo_texture = ExtResource("1_71st6")
+roughness = 0.75
+normal_enabled = true
+normal_texture = ExtResource("2_gpfm5")

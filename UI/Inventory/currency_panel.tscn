@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="3_hg6wy"]
 [ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="4_o2fc1"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_07os7"]
+[ext_resource type="Texture2D" uid="uid://bg6apx7ktkrfm" path="res://Tile-RPG/Images/UI/Inv/gem3.png" id="6_6p2ba"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jsgg1"]
 texture = ExtResource("1_453fp")
@@ -38,7 +39,7 @@ stretch_mode = 1
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="BgRect" unique_id=1428419192]
 layout_mode = 0
-offset_right = 102.5
+offset_right = 199.0
 offset_bottom = 27.0
 texture = ExtResource("3_hg6wy")
 patch_margin_left = 10
@@ -55,7 +56,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1305176543]
+[node name="GoldTextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1305176543]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -75,6 +76,30 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=2099789639]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="GemTextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1078096204]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_6p2ba")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GemAmountLabel" type="Label" parent="HBoxContainer" unique_id=258639152]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("5_07os7")
+theme_override_colors/font_color = Color(0.8980392, 0.7137255, 0.45490196, 1)
+theme_override_font_sizes/font_size = 22
+text = "55555"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer" unique_id=639441338]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2

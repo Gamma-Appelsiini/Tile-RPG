@@ -1699,20 +1699,20 @@ radius = 0.81689453
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.11333333, 1), 0.0, 0.0, 0, 0, Vector2(0.78666663, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_5fhwm"]
+[sub_resource type="CurveTexture" id="CurveTexture_h73r5"]
 curve = SubResource("Curve_h73r5")
 
 [sub_resource type="Gradient" id="Gradient_48f5d"]
 colors = PackedColorArray(1, 1, 1, 1, 0.63375676, 0.6337568, 0.63375676, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_eavyo"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5fhwm"]
 gradient = SubResource("Gradient_48f5d")
 
 [sub_resource type="Curve" id="Curve_opbu1"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.055555552, 1), 0.0, 0.0, 0, 0, Vector2(0.66222215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_c2wjx"]
+[sub_resource type="CurveTexture" id="CurveTexture_48f5d"]
 curve = SubResource("Curve_opbu1")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_weq5d"]
@@ -1725,11 +1725,11 @@ initial_velocity_max = 2.0
 gravity = Vector3(0, 2, 0)
 scale_min = 0.59999996
 scale_max = 1.1999999
-scale_curve = SubResource("CurveTexture_c2wjx")
-color_ramp = SubResource("GradientTexture1D_eavyo")
-alpha_curve = SubResource("CurveTexture_5fhwm")
+scale_curve = SubResource("CurveTexture_48f5d")
+color_ramp = SubResource("GradientTexture1D_5fhwm")
+alpha_curve = SubResource("CurveTexture_h73r5")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wj57w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eavyo"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -1741,13 +1741,13 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_5rrio"]
-material = SubResource("StandardMaterial3D_wj57w")
+material = SubResource("StandardMaterial3D_eavyo")
 
 [sub_resource type="Curve" id="Curve_5fhwm"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14666665, 1), 0.0, 0.0, 0, 0, Vector2(0.80444443, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_48f5d"]
+[sub_resource type="CurveTexture" id="CurveTexture_opbu1"]
 curve = SubResource("Curve_5fhwm")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5fhwm"]
@@ -1762,9 +1762,9 @@ initial_velocity_max = 4.0
 gravity = Vector3(0, -12, 0)
 scale_min = 0.39999998
 scale_max = 1.3
-scale_curve = SubResource("CurveTexture_48f5d")
+scale_curve = SubResource("CurveTexture_opbu1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48f5d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2wjx"]
 transparency = 1
 albedo_color = Color(0.38, 0.28449333, 0.1596, 1)
 albedo_texture = ExtResource("10_h73r5")
@@ -1775,7 +1775,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_eavyo"]
-material = SubResource("StandardMaterial3D_48f5d")
+material = SubResource("StandardMaterial3D_c2wjx")
 size = Vector2(0.5, 0.4)
 
 [node name="WoodenBarrel" type="Node3D" unique_id=498782213 node_paths=PackedStringArray("static_body", "original_model", "fragments_node", "particle_emitters", "interactable")]

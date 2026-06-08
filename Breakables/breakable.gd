@@ -6,9 +6,8 @@ signal broken
 @export var explosion_speed:float = 6
 @export var static_body:StaticBody3D
 @export var break_sound: AudioStream = null
-@export var original_model:MeshInstance3D = null
+@export var original_model:Node3D = null
 @export var fragments_node:Node3D = null
-@export var pieces_node:Node3D = null
 @export var block_tiles:bool = false
 @export var particle_emitters:Array[GPUParticles3D] = []
 @export var interactable:Interactable = null
@@ -29,7 +28,7 @@ func on_interaction(body: Player) -> void:
 
 func _explode() -> void:
 	broken.emit()
-	original_model.visible = false
+	if original_model: original_model.visible = false
 	static_body.queue_free()
 	
 	for emitter:GPUParticles3D in particle_emitters:

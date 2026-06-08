@@ -21,7 +21,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 draw_center = false
 
-[node name="Inventory" type="Control" unique_id=525772754 node_paths=PackedStringArray("currency_amount_label")]
+[node name="Inventory" type="Control" unique_id=525772754 node_paths=PackedStringArray("currency_amount_label", "gem_amount_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,6 +31,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_box56")
 currency_amount_label = NodePath("CurrencyPanel/HBoxContainer/CurrencyAmountLabel")
+gem_amount_label = NodePath("CurrencyPanel/HBoxContainer/GemAmountLabel")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=2119153238]
 self_modulate = Color(0.735, 0.8697501, 0.98, 1)
@@ -94,9 +95,9 @@ offset_bottom = -459.0
 
 [node name="CurrencyPanel" parent="." unique_id=1133575878 instance=ExtResource("6_1afs6")]
 layout_mode = 1
-offset_left = 793.0
+offset_left = 694.5
 offset_top = 21.0
-offset_right = 933.0
+offset_right = 931.5
 offset_bottom = 86.0
 
 [editable path="CurrencyPanel"]

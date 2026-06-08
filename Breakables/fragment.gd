@@ -3,7 +3,7 @@ class_name Fragment
 
 signal dissolved
 
-@export var lifetime:float = 2
+@export var lifetime:float = 3
 @export var collision_shape:CollisionShape3D
 @export var dissolve_shader:ShaderMaterial = null
 @export var fragment_mesh:MeshInstance3D = null
