@@ -156,12 +156,14 @@ func _move_camera_to_char(current_actor:GameCharacter) -> void:
 	camera_move_finished.emit()
 
 func _char_died(dead_char:GameCharacter) -> void:
-	print_debug("Char died: ", dead_char)
 	if dead_char in player_team: player_team.erase(dead_char)
 	elif dead_char in enemy_team: enemy_team.erase(dead_char)
+	
+	tile_manager.remove_char_from_its_tile(dead_char)
 	chars_in_combat.erase(dead_char)
 	round_order.erase(dead_char)
 	dead_char.died.disconnect(_char_died)
+	
 	combat_ui.update_portraits(round_order)
 	await combat_ui.portraits_added
 	

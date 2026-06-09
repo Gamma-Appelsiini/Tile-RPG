@@ -185,6 +185,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
 
 [node name="BlankFloor40" parent="Floors" unique_id=139761428 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+material_override = ExtResource("10_465oc")
 
 [node name="BlankFloor41" parent="Floors" unique_id=1143078589 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
@@ -257,6 +258,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 
 [node name="BlankFloor24" parent="Floors" unique_id=1827571116 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+material_override = ExtResource("10_465oc")
 
 [node name="BlankFloor25" parent="Floors" unique_id=161754431 instance=ExtResource("2_urkle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)

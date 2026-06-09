@@ -95,7 +95,7 @@ layout_mode = 2
 theme = ExtResource("5_07os7")
 theme_override_colors/font_color = Color(0.8980392, 0.7137255, 0.45490196, 1)
 theme_override_font_sizes/font_size = 22
-text = "55555"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

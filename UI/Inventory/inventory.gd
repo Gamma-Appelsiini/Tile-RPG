@@ -138,6 +138,7 @@ func save_inv_to_data(save_data:Dictionary) -> void:
 			inv_data[slot.array_pos] = slot.item_in_slot.save_to_data()
 
 	save_data["currency"] = player_currency
+	save_data["crafting_gems"] = player_gems
 	save_data["inventory"] = inv_data
 	_save_equipment(save_data)
 
@@ -166,9 +167,10 @@ func _update_gem_amount(amount:int) -> void:
 	gem_amount_label.text = str(amount)
 
 func _load_currency(save_data:Dictionary) -> void:
-	if !save_data.has("currency"): return
-	
-	player_currency = save_data["currency"]
+	if save_data.has("currency"):
+		player_currency = save_data["currency"]
+	if save_data.has("crafting_gems"):
+		player_gems = save_data["crafting_gems"]
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:

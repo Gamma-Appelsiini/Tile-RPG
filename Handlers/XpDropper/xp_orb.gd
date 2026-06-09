@@ -5,6 +5,7 @@ class_name XpOrb
 @export var collision_shape:CollisionShape3D = null
 @export var xp_pick_sound:AudioStream = null
 @export var particles:CPUParticles3D = null
+@export var curve_mover: CurveMover = null
 
 const EPIC_MATERIAL = preload("uid://00flkueqj2ft")
 const IRIDESCENT_MATERIAL = preload("uid://cniioqeusvqpk")
@@ -36,26 +37,15 @@ const ORB_SIZES:Dictionary[int,float] ={
 
 var xp_amount:int = 0
 var target:GameCharacter = null
-var timer:Timer = null
-
-var _bezier_t: float = 0.0
-var _bezier_duration: float = 0.5
-var _bezier_start: Vector3 = Vector3(0,0,0)
-var _bezier_control: Vector3 = Vector3(0,0,0)
-var _bezier_end: Vector3 = Vector3(0,0,0)
 
 func _ready() -> void:
-	set_process(false)
 	top_level = true
-	timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = randf_range(1.7,2.1)
-	timer.one_shot = true
-	timer.timeout.connect(_move_to_target)
-	timer.start()
+	await get_tree().create_timer(randf_range(1.7,2.1)).timeout
+	_move_orb()
 
-func _process(delta: float) -> void:
-	_move_with_curve(delta)
+func _move_orb() -> void:
+	curve_mover.target_reached.connect(disappear)
+	curve_mover.move_to_target(self, GlobalSignals.player)
 
 func set_params(orb_size:int, target_char:GameCharacter):
 	xp_amount = orb_size
@@ -70,34 +60,6 @@ func disappear():
 	GlobalSignals.play_audio.emit(xp_pick_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	target.stat_handler.add_xp(xp_amount)
 	_tween_orb()
-
-func _move_to_target(target_node:Node3D = target)-> void:
-	set_process(true)
-	collision_shape.disabled = true
-	self.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
-	freeze_mode = FREEZE_MODE_STATIC
-	freeze = true
-	target = target_node
-	
-	_bezier_t = 0.0
-	_bezier_start = global_position
-	_bezier_end = target.global_position + Vector3(0,1.5,0)
-
-	var random_offset:Vector3 = Vector3(randf() - 0.5, randf() * 0.5, randf() - 0.5).normalized() * 2.0
-	_bezier_control = (_bezier_start + _bezier_end) * 0.5 + random_offset
-
-func _move_with_curve(delta: float) -> void:
-	_bezier_t += delta / _bezier_duration
-	var t = clamp(_bezier_t, 0.0, 1.0)
-
-	global_position = _quadratic_bezier(_bezier_start, _bezier_control, _bezier_end, t)
-
-	if t >= 1.0:
-		set_process(false)
-		disappear()
-
-func _quadratic_bezier(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:
-	return (1.0 - t) * (1.0 - t) * p0 + 2.0 * (1.0 - t) * t * p1 + t * t * p2
 
 func _tween_orb():
 	self.freeze = true

@@ -72,7 +72,7 @@ func _create_indicator() -> void:
 	ground_indicator.visible = false
 	get_parent().add_child.call_deferred(ground_indicator)
 
-func _set_char_on_tile(game_char:GameCharacter, new_tile:Tile)-> void:
+func _set_char_on_tile(game_char:GameCharacter, new_tile:Tile) -> void:
 
 	if char_tiles.has(game_char):
 		var prev_tile:Tile = char_tiles[game_char]
@@ -87,6 +87,11 @@ func _set_char_on_tile(game_char:GameCharacter, new_tile:Tile)-> void:
 	
 	game_char.moved_to_tile.emit(new_tile)
 	new_tile.tile_entered.emit(game_char)
+
+func remove_char_from_its_tile(game_char:GameCharacter) -> void:
+	if char_tiles.has(game_char):
+		char_tiles[game_char].occupant = null
+		char_tiles[game_char].blocked = false
 
 func move_character_to_character(move_char:GameCharacter, target_char:GameCharacter) -> void:
 	var path:Array[Tile] = get_shortest_path(char_tiles[move_char], char_tiles[target_char], false, true)

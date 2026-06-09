@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://1c7pcn3y1xl2"]
+[gd_scene format=3 uid="uid://1c7pcn3y1xl2"]
 
 [ext_resource type="Script" uid="uid://6aw2q2i24wtp" path="res://Tile-RPG/Handlers/XpDropper/xp_orb.gd" id="1_asict"]
 [ext_resource type="Material" uid="uid://cinmwl8lufsce" path="res://Tile-RPG/Handlers/XpDropper/common_material.tres" id="2_5kfjl"]
 [ext_resource type="Material" uid="uid://cvefy81ib74xm" path="res://Tile-RPG/Handlers/XpDropper/common_rim_material.tres" id="3_aasrg"]
 [ext_resource type="Texture2D" uid="uid://dl1if4cb3s0rk" path="res://Tile-RPG/Images/Shaders/trail.png" id="4_aasrg"]
+[ext_resource type="Script" uid="uid://cb3y5f7tugb66" path="res://Tile-RPG/Handlers/curve_mover.gd" id="5_wkqug"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_asict"]
 radius = 0.05
@@ -33,23 +34,24 @@ size = Vector2(0.035, 0.035)
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.116000004, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="XpOrb" type="RigidBody3D" node_paths=PackedStringArray("ball_mesh", "collision_shape", "particles")]
+[node name="XpOrb" type="RigidBody3D" unique_id=2022137657 node_paths=PackedStringArray("ball_mesh", "collision_shape", "particles", "curve_mover")]
 collision_layer = 16
 collision_mask = 7
 script = ExtResource("1_asict")
 ball_mesh = NodePath("BallMesh")
 collision_shape = NodePath("CollisionShape3D")
 particles = NodePath("CPUParticles3D")
+curve_mover = NodePath("CurveMover")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=731694898]
 shape = SubResource("SphereShape3D_asict")
 
-[node name="BallMesh" type="MeshInstance3D" parent="."]
+[node name="BallMesh" type="MeshInstance3D" parent="." unique_id=866353168]
 material_override = ExtResource("2_5kfjl")
 material_overlay = ExtResource("3_aasrg")
 mesh = SubResource("SphereMesh_wcoly")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1310488442]
 material_override = SubResource("StandardMaterial3D_wkqug")
 emitting = false
 amount = 10
@@ -62,3 +64,10 @@ spread = 15.0
 initial_velocity_min = 2.0
 initial_velocity_max = 3.0
 scale_amount_curve = SubResource("Curve_mi322")
+
+[node name="CurveMover" type="Node" parent="." unique_id=587740768]
+script = ExtResource("5_wkqug")
+speed = 8.0
+curve_amount = 2.4
+acceleration_easing = 2.516767
+metadata/_custom_type_script = "uid://cb3y5f7tugb66"
