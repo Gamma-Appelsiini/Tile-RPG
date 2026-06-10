@@ -79,12 +79,14 @@ static func _choose_take_dmg_animation(attacker:GameCharacter) -> void:
 			receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_FRONT)
 
 static func _receive_damage() -> void:
-	_choose_take_dmg_animation(attack.attacker)
 	_animate_take_damage_effect(receiver)
 	receiver.got_hit.emit()
 
 	GlobalSignals.show_damage_number.emit(final_damage, receiver, attack.crit)
 	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, -final_damage)
+	
+	if receiver.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP) > 0:
+		_choose_take_dmg_animation(attack.attacker)
 
 static func _handle_thorns() -> void:
 	if attack.ability_tags.has(Ability.ABILITY_TAG.NO_RETALIATION): return
