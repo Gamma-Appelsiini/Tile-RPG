@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://eyte2pykj4xg" path="res://Tile-RPG/Interactables/interact_prompt.gd" id="1_d2lhn"]
 [ext_resource type="Texture2D" uid="uid://dle3hrj3db2t8" path="res://Tile-RPG/Images/UI/Buttons/button_pressed.png" id="2_jaenu"]
 [ext_resource type="FontFile" uid="uid://dribh6r4yntik" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-Regular.ttf" id="3_oli4i"]
-[ext_resource type="Texture2D" uid="uid://c47ivluaw2iuj" path="res://Tile-RPG/Images/UI/Borders/detail_border4.png" id="4_d2lhn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pk5tv"]
 content_margin_left = 8.0
@@ -11,6 +10,17 @@ content_margin_top = 4.0
 content_margin_right = 8.0
 content_margin_bottom = 4.0
 bg_color = Color(0.11858138, 0.11858138, 0.11858138, 0.5882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hcsl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 8.0
+expand_margin_top = 5.0
+expand_margin_right = 8.0
+expand_margin_bottom = 5.0
 
 [node name="InteractPrompt" type="PanelContainer" unique_id=802148190 node_paths=PackedStringArray("button_label", "text_label")]
 self_modulate = Color(1, 1, 1, 0)
@@ -25,31 +35,37 @@ offset_right = 46.5
 offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 script = ExtResource("1_d2lhn")
 button_label = NodePath("PanelContainer/HBoxContainer/PanelContainer/ButtonLabel")
 text_label = NodePath("PanelContainer/HBoxContainer/TextLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=2144107523]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_pk5tv")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1814863290]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer" unique_id=778408726]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelContainer" unique_id=48725970]
 self_modulate = Color(1, 1, 1, 0.6666667)
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+size_flags_horizontal = 4
 texture = ExtResource("2_jaenu")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="ButtonLabel" type="Label" parent="PanelContainer/HBoxContainer/PanelContainer" unique_id=1851155907]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.36040723, 0.91067874, 0.9999998, 1)
 theme_override_fonts/font = ExtResource("3_oli4i")
 theme_override_font_sizes/font_size = 20
@@ -59,6 +75,7 @@ vertical_alignment = 1
 
 [node name="TextLabel" type="Label" parent="PanelContainer/HBoxContainer" unique_id=1111278228]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.9742449, 0.83585143, 0.6034306, 1)
 theme_override_fonts/font = ExtResource("3_oli4i")
 theme_override_font_sizes/font_size = 18
@@ -66,14 +83,6 @@ text = "Open"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="NinePatchRect" parent="." unique_id=1475831831]
-texture_filter = 2
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1084742150]
 layout_mode = 2
-texture = ExtResource("4_d2lhn")
-draw_center = false
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_4hcsl")
