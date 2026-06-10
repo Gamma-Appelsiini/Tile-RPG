@@ -21,20 +21,16 @@ func _ready() -> void:
 
 func _add_indicators() -> void:
 	indicators = [indicator]
-	indicator = indicator.duplicate()
-	add_child(indicator)
-	indicators.push_back(indicator)
-	indicator = indicator.duplicate()
-	add_child(indicator)
-	indicators.push_back(indicator)
-	
 	prompts = [interact_prompt]
-	interact_prompt = interact_prompt.duplicate()
-	add_child(interact_prompt)
-	prompts.push_back(interact_prompt)
-	interact_prompt = interact_prompt.duplicate()
-	add_child(interact_prompt)
-	prompts.push_back(interact_prompt)
+	
+	while len(indicators) <= 5:
+		var new_indicator:Indicator = indicator.duplicate()
+		add_child(new_indicator)
+		indicators.push_back(new_indicator)
+	
+		var new_interact_prompt:InteractPrompt = interact_prompt.duplicate()
+		add_child(new_interact_prompt)
+		prompts.push_back(new_interact_prompt)
 
 func _disable_interacting() -> void:
 	set_process(false)
@@ -77,6 +73,7 @@ func _interact() -> void:
 
 	await _interact_with_interactable()
 	interactable = null
+	_show_right_interactee()
 	
 func _interact_with_interactable() -> void:
 	GlobalSignals.play_audio.emit(interaction_sound, AudioManager.AUDIO_TYPE.UI)
