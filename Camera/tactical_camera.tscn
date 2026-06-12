@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dhinrgp8071me" path="res://Tile-RPG/Camera/tactical_camera.gd" id="1_fjm65"]
 
-[node name="TacticalCamera" type="Node3D" unique_id=1714084226 node_paths=PackedStringArray("camera_3d")]
+[node name="TacticalCamera" type="Node3D" unique_id=1714084226 node_paths=PackedStringArray("camera_3d", "move_node", "audio_listener_3d")]
 script = ExtResource("1_fjm65")
 camera_3d = NodePath("MoveNode/Camera3D")
+move_node = NodePath("MoveNode")
+audio_listener_3d = NodePath("MoveNode/Camera3D/AudioListener3D")
 
 [node name="MoveNode" type="Node3D" parent="." unique_id=1430075484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
@@ -12,3 +14,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 [node name="Camera3D" type="Camera3D" parent="MoveNode" unique_id=289269649]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 cull_mask = 524287
+
+[node name="AudioListener3D" type="AudioListener3D" parent="MoveNode/Camera3D" unique_id=1090531512]

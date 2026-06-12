@@ -1,13 +1,19 @@
-extends Camera3D
+extends Node3D
 class_name PlayerCamera
 
-@export var pivot:Node3D
+@export var pivot:Node3D = null
+@export var camera_3d: Camera3D = null
+@export var audio_listener_3d: AudioListener3D = null
 
 var rotating:bool = false
 var zoom_enabled:bool = true
 const ZOOM_DEFAULT:float = 11
 const RESET_TIME:float = 0.75
 var old_zoom:float = 0
+
+var default_pos:Vector3
+var target_position: Vector3 = Vector3.ZERO
+var zoom_tween: Tween = null
 
 func _ready() -> void:
 	GlobalSignals.combat_start.connect(_on_combat_start)
@@ -40,6 +46,24 @@ func _rotate_cam(amount:float) -> void:
 	
 	await tween.finished
 	rotating = false
+
+func _move_camera(towards: bool) -> void:
+	if !zoom_enabled: return
+	const MOVE_AMOUNT: float = 0.5
+	const ZOOM_DURATION: float = 0.25
+
+	if !zoom_tween or !zoom_tween.is_valid():
+		target_position = camera_3d.position
+
+	var direction: Vector3 = -camera_3d.transform.basis.z if towards else camera_3d.transform.basis.z
+	target_position += direction * MOVE_AMOUNT
+
+	if zoom_tween and zoom_tween.is_valid():
+		zoom_tween.kill()
+
+	zoom_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	zoom_tween.tween_property(camera_3d, "position", target_position, ZOOM_DURATION)
+
 
 func _zoom_cam(dir:float) -> void:
 	if !zoom_enabled: return

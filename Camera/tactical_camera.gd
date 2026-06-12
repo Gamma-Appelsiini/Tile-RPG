@@ -3,6 +3,7 @@ class_name TacticalCamera
 
 @export var camera_3d: Camera3D = null
 @export var move_node: Node3D = null
+@export var audio_listener_3d: AudioListener3D = null
 
 const MAX_DISTANCE:float = 20
 const CAMERA_SPEED:float = 3

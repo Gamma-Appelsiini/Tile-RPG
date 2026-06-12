@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://x88bj8wie6u3"]
+
+[ext_resource type="Script" uid="uid://becq5m2xf77k2" path="res://Tile-RPG/Camera/camera_handler.gd" id="1_x1iyv"]
+[ext_resource type="PackedScene" uid="uid://bhhgayrjij34w" path="res://Tile-RPG/Camera/tactical_camera.tscn" id="2_r7eav"]
+
+[node name="CameraHandler" type="Node3D" unique_id=1118739667]
+script = ExtResource("1_x1iyv")
+
+[node name="TacticalCamera" parent="." unique_id=1714084226 instance=ExtResource("2_r7eav")]
