@@ -15,9 +15,14 @@ var default_pos:Vector3
 var target_position: Vector3 = Vector3.ZERO
 var zoom_tween: Tween = null
 
-func _ready() -> void:
-	GlobalSignals.combat_start.connect(_on_combat_start)
-	GlobalSignals.combat_end.connect(_on_combat_end)
+func set_as_active_camera() -> void:
+	set_process_input(true)
+	set_physics_process(true)
+	audio_listener_3d.make_current()
+	
+func disactivate_camera() -> void:
+	set_process_input(false)
+	set_physics_process(false)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Cam L"):
@@ -25,15 +30,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("Rotate Cam R"):
 		_rotate_cam(90)
 	elif event.is_action_pressed("Zoom In"):
-		_zoom_cam(-1)
+		_move_camera(true)
 	elif event.is_action_pressed("Zoom Out"):
-		_zoom_cam(1)
-
-func _on_combat_start() -> void:
-	set_process_input(false)
-
-func _on_combat_end() -> void:
-	set_process_input(true)
+		_move_camera(false)
 
 func _rotate_cam(amount:float) -> void:
 	if rotating: return
@@ -49,13 +48,20 @@ func _rotate_cam(amount:float) -> void:
 
 func _move_camera(towards: bool) -> void:
 	if !zoom_enabled: return
+	
 	const MOVE_AMOUNT: float = 0.5
 	const ZOOM_DURATION: float = 0.25
+	const MAX_IN_AMOUNT:float = 2.0
+	const MAX_OUT_AMOUNT:float = 20.0
 
 	if !zoom_tween or !zoom_tween.is_valid():
 		target_position = camera_3d.position
 
 	var direction: Vector3 = -camera_3d.transform.basis.z if towards else camera_3d.transform.basis.z
+	var new_target:Vector3 = target_position + (direction * MOVE_AMOUNT)
+	if Vector3.ZERO.distance_to(new_target) > MAX_OUT_AMOUNT or Vector3.ZERO.distance_to(new_target) < MAX_IN_AMOUNT:
+		return
+	
 	target_position += direction * MOVE_AMOUNT
 
 	if zoom_tween and zoom_tween.is_valid():
@@ -63,7 +69,6 @@ func _move_camera(towards: bool) -> void:
 
 	zoom_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	zoom_tween.tween_property(camera_3d, "position", target_position, ZOOM_DURATION)
-
 
 func _zoom_cam(dir:float) -> void:
 	if !zoom_enabled: return

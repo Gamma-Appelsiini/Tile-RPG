@@ -69,7 +69,6 @@ func _zoom_cam(dir:float) -> void:
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(move_node, "position:y", final_pos, 0.1)
 	
-	
 func _handle_movement_input() -> Vector3:
 	var direction:Vector3 = Vector3.ZERO
 	

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://2t1sfq74ubss"]
+
+[ext_resource type="Script" uid="uid://cbx55eojd6n6j" path="res://Tile-RPG/Camera/combat_camera.gd" id="1_af7nx"]
+
+[node name="CombatCamera" type="Node3D" unique_id=1990670043 node_paths=PackedStringArray("pivot", "camera_3d", "audio_listener_3d")]
+script = ExtResource("1_af7nx")
+pivot = NodePath("CameraPivot")
+camera_3d = NodePath("CameraPivot/Camera3D")
+audio_listener_3d = NodePath("CameraPivot/Camera3D/AudioListener3D")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1986479065]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.15003, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=358640978]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3.57628e-07, 4, 2.82843)
+cull_mask = 229375
+v_offset = -0.5
+current = true
+size = 4.0
+near = 1.0
+far = 50.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/Camera3D" unique_id=1487258466]
+doppler_tracking = 2

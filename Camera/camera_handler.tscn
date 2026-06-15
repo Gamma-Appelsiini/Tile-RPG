@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://x88bj8wie6u3"]
 
 [ext_resource type="Script" uid="uid://becq5m2xf77k2" path="res://Tile-RPG/Camera/camera_handler.gd" id="1_x1iyv"]
+[ext_resource type="PackedScene" uid="uid://db4nomyblcc4" path="res://Tile-RPG/Camera/player_camera.tscn" id="2_d6ki8"]
 [ext_resource type="PackedScene" uid="uid://bhhgayrjij34w" path="res://Tile-RPG/Camera/tactical_camera.tscn" id="2_r7eav"]
+[ext_resource type="PackedScene" uid="uid://2t1sfq74ubss" path="res://Tile-RPG/Camera/combat_camera.tscn" id="4_87sns"]
 
-[node name="CameraHandler" type="Node3D" unique_id=1118739667]
+[node name="CameraHandler" type="Node3D" unique_id=1118739667 node_paths=PackedStringArray("tactical_camera", "combat_camera", "player_camera")]
 script = ExtResource("1_x1iyv")
+tactical_camera = NodePath("TacticalCamera")
+combat_camera = NodePath("CombatCamera")
+player_camera = NodePath("PlayerCamera")
+
+[node name="PlayerCamera" parent="." unique_id=925636686 instance=ExtResource("2_d6ki8")]
 
 [node name="TacticalCamera" parent="." unique_id=1714084226 instance=ExtResource("2_r7eav")]
+
+[node name="CombatCamera" parent="." unique_id=1990670043 instance=ExtResource("4_87sns")]

@@ -3,10 +3,10 @@ class_name Player
 
 @export var movement_speed:float = 8
 @export var acceleration:float = 14
-@export var player_camera:Camera3D
 @export var interact_handler:InteractHandler
 @export var hp_globe: ResourceGlobe = null
 @export var spirit_globe: ResourceGlobe = null
+@export var camera_handler: CameraHandler = null
 
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -14,9 +14,11 @@ var came_from_id:String = "menu"
 var _last_move_dir: Vector3 = Vector3.BACK
 var movement_enabled:bool = true
 var movement_disablers:int = 0
+var player_camera:Camera3D = null
 
 func _ready() -> void:
 	_connect_signals()
+	player_camera = camera_handler.player_camera.camera_3d
 
 func _connect_signals() -> void:
 	GlobalSignals.enable_player_movement.connect(enable_movement)
