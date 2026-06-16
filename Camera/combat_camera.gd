@@ -1,8 +1,6 @@
 extends PlayerCamera
 class_name CombatCamera
 
-const MAX_DISTANCE:float = 20
-
 var camera_speed:float = 3
 var parent_node:Node3D = null
 
@@ -25,9 +23,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("Rotate Cam R"):
 		_rotate_cam(90)
 	elif event.is_action_pressed("Zoom In"):
-		_zoom_cam(-1)
+		_move_camera(true)
 	elif event.is_action_pressed("Zoom Out"):
-		_zoom_cam(1)
+		_move_camera(false)
 
 func _distance_to_parent() -> float:
 	return self.global_position.distance_to(parent_node.global_position)

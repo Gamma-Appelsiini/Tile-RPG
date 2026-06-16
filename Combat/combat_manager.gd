@@ -50,7 +50,7 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 		game_char.died.connect(_char_died, true)
 		_move_to_tile_after_draw_weapon_animation(game_char)
 	
-	_set_combat_camera()
+	#await player.camera_handler.camera_switched
 	
 	await get_tree().create_timer(1).timeout
 	_next_round()
@@ -59,26 +59,12 @@ func _move_to_tile_after_draw_weapon_animation(game_char:GameCharacter) -> void:
 	await game_char.ready_to_move
 	tile_manager.set_on_closest_tile(game_char)
 
-func _set_combat_camera() -> void:
-	if spectate_camera_pivot: spectate_camera_pivot.queue_free()
-	if spectate_camera: spectate_camera.queue_free()
-	
-	spectate_camera_pivot = player.player_camera.get_parent().duplicate()
-	spectate_camera = player.player_camera.duplicate()
-	spectate_camera.set_script(CombatCamera)
-	spectate_camera.set_process_input(false)
-	spectate_camera.set_physics_process(false)
-	spectate_camera_pivot.add_child(spectate_camera)
-	add_child(spectate_camera_pivot)
-	spectate_camera_pivot.global_position = player.player_camera.get_parent().global_position
-	
-	spectate_camera.make_current()
-
 func _return_to_player_camera() -> void:
 	spectate_camera.set_process_input(false)
 	spectate_camera.set_physics_process(false)
-	_move_camera_to_char(player)
-	await camera_move_finished
+	
+	#TODO CAMERA TO PLAYER
+	
 	player.player_camera.pivot.global_basis = spectate_camera_pivot.global_basis
 	player.player_camera.size = spectate_camera.size
 	
@@ -112,8 +98,8 @@ func _next_turn() -> void:
 	combat_ui.set_turn_haver(char_to_act)
 	combat_ui.show_text(char_to_act.display_name + ("'s turn"))
 	
-	_handle_camera(char_to_act)
-	await camera_move_finished
+	#_handle_camera(char_to_act)
+	await player.camera_handler.camera_move_finished
 	char_to_act.start_turn.emit()
 	
 	if char_to_act is Player:
@@ -131,29 +117,6 @@ func _player_turn() -> void:
 	
 	await player.end_turn
 	tile_manager.disable_shooting()
-
-func _handle_camera(current_actor:GameCharacter) -> void:
-	spectate_camera_pivot.reparent(current_actor)
-	set_process_input(false)
-	_move_camera_to_char(current_actor)
-	await camera_move_finished
-	
-	if current_actor is Player:
-		spectate_camera.set_process_input(true)
-		spectate_camera.set_physics_process(true)
-	else:
-		spectate_camera.set_process_input(false)
-		spectate_camera.set_physics_process(false)
-
-
-func _move_camera_to_char(current_actor:GameCharacter) -> void:
-	var distance:float = current_actor.global_position.distance_to(spectate_camera_pivot.global_position)
-	var time_to_point:float = distance * 0.2 + 0.2
-	
-	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(spectate_camera_pivot, "global_position", current_actor.global_position, time_to_point)
-	await tween.finished
-	camera_move_finished.emit()
 
 func _char_died(dead_char:GameCharacter) -> void:
 	if dead_char in player_team: player_team.erase(dead_char)

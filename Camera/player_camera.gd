@@ -70,14 +70,6 @@ func _move_camera(towards: bool) -> void:
 	zoom_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	zoom_tween.tween_property(camera_3d, "position", target_position, ZOOM_DURATION)
 
-func _zoom_cam(dir:float) -> void:
-	if !zoom_enabled: return
-	const MAX_ZOOM_IN:float = 4.0
-	const MAX_ZOOM_OUT:float = 10
-	
-	var move_amount: float = 0.5
-	self.size = clamp(self.size + move_amount * dir, MAX_ZOOM_IN, MAX_ZOOM_OUT)
-
 func disable_zooming() -> void:
 	zoom_enabled = false
 	old_zoom = self.size
