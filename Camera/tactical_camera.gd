@@ -1,8 +1,6 @@
 extends CombatCamera
 class_name TacticalCamera
 
-@export var move_node: Node3D = null
-
 const MAX_DISTANCE:float = 100
 
 func _physics_process(delta: float) -> void:
@@ -11,15 +9,8 @@ func _physics_process(delta: float) -> void:
 	move_direction = move_direction.normalized()
 	
 	if move_direction != Vector3.ZERO:
-		var new_pos := self.global_position + move_direction * camera_speed * delta
-		var offset := new_pos - self.global_position
-		var dist := offset.length()
-
-		if dist > MAX_DISTANCE:
-			offset = offset.normalized() * MAX_DISTANCE
-			new_pos = self.global_position + offset
-
-		self.global_position = new_pos
+		var new_pos := global_position + move_direction * camera_speed * delta
+		global_position = new_pos
 	
 #Overrided
 func _rotate_cam(amount:float) -> void:
@@ -33,7 +24,8 @@ func _rotate_cam(amount:float) -> void:
 	
 	await tween.finished
 	rotating = false
-	
+
+#Overrided
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Cam L"):
 		_rotate_cam(-90)

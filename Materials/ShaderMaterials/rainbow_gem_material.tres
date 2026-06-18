@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://kfh6ohl7t45a"]
+
+[ext_resource type="Shader" uid="uid://dfhvsc1bug4ql" path="res://Tile-RPG/Shaders/stylized_gem_shader.gdshader" id="1_37423"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_37423")
+shader_parameter/base_color = Color(0.02, 0.06, 0.28, 1)
+shader_parameter/edge_color = Color(0, 1, 0.95000005, 1)
+shader_parameter/edge_thickness = 0.0
+shader_parameter/edge_threshold = 0.0
+shader_parameter/edge_softness = 1.0
+shader_parameter/edge_glow = 0.438000020805
+shader_parameter/rim_power = 12.27100057961262
+shader_parameter/rim_strength = 0.982000046645
+shader_parameter/fresnel_power = 2.1220000975351203
+shader_parameter/iridescence_strength = 1.614000076665
+shader_parameter/iridescence_scale = 7.33900034534262
+shader_parameter/iridescence_shift = 1.802000085595
+shader_parameter/time_speed = 0.1750000083125
+shader_parameter/spec_color_1 = Color(1, 0.85, 0.55, 1)
+shader_parameter/spec_color_2 = Color(0.55, 0.8, 1, 1)
+shader_parameter/light_dir_1 = Vector3(0.4, 0.85, 0.3)
+shader_parameter/light_dir_2 = Vector3(-0.6, 0.3, -0.5)
+shader_parameter/specular_sharpness = 125.2110059000225
+shader_parameter/specular_strength = 1.3590000645525

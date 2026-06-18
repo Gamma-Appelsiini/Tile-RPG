@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cpfhmgb2i4sfy" path="res://Tile-RPG/Sounds/Drops/drop_gem.wav" id="3_3ahjl"]
 [ext_resource type="Material" uid="uid://c4kiu6i1nes4s" path="res://Tile-RPG/Materials/ShaderMaterials/iridescent_material.tres" id="3_fsasr"]
 [ext_resource type="Texture2D" uid="uid://dl1if4cb3s0rk" path="res://Tile-RPG/Images/Shaders/trail.png" id="4_voa8i"]
+[ext_resource type="Material" uid="uid://kfh6ohl7t45a" path="res://Tile-RPG/Materials/ShaderMaterials/rainbow_gem_material.tres" id="5_178r7"]
 [ext_resource type="Script" uid="uid://cb3y5f7tugb66" path="res://Tile-RPG/Handlers/curve_mover.gd" id="6_ykjjh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0tfdk"]
@@ -73,7 +74,13 @@ collision_shape_3d = NodePath("CollisionShape3D")
 curve_mover = NodePath("CurveMover")
 
 [node name="GemMesh" type="MeshInstance3D" parent="." unique_id=1735431954]
+visible = false
 material_override = ExtResource("3_fsasr")
+mesh = SubResource("ArrayMesh_kfp8i")
+skeleton = NodePath("")
+
+[node name="GemMesh2" type="MeshInstance3D" parent="." unique_id=1498574154]
+material_override = ExtResource("5_178r7")
 mesh = SubResource("ArrayMesh_kfp8i")
 skeleton = NodePath("")
 

@@ -8,12 +8,13 @@ signal camera_move_finished
 @export var combat_camera: CombatCamera = null
 @export var player_camera: PlayerCamera = null
 
-const SWITCH_TIME:float = 1
+const SWITCH_TIME:float = 0.5
 
 var active_camera:Node3D = null
 var in_combat:bool = false
 
 func _ready() -> void:
+	set_process_input(false)
 	active_camera = player_camera
 	GlobalSignals.combat_start.connect(_on_combat_start)
 	GlobalSignals.combat_end.connect(_on_combat_end)
@@ -47,12 +48,11 @@ func _on_combat_start() -> void:
 	
 	player_camera.disactivate_camera()
 	_switch_to_combat_camera()
-	#await camera_switched
-	
-	combat_camera.set_as_active_camera()
 	active_camera = combat_camera
+	
+	await get_tree().create_timer(1).timeout
+	combat_camera.set_as_active_camera()
 	set_process_input(true)
-	print(123)
 
 func _on_combat_end() -> void:
 	in_combat = false
@@ -73,13 +73,14 @@ func switch_to_camera(new_camera:Camera3D) -> void:
 	switch_camera.fov = current_camera.fov
 	switch_camera.environment = current_camera.environment
 	switch_camera.attributes = current_camera.attributes
+	switch_camera.cull_mask = current_camera.cull_mask
 	
 	switch_camera.top_level = true
 	switch_camera.make_current()
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
-	tween.tween_property(switch_camera, "fov", new_camera.fov, 0.3)
-	tween.tween_property(switch_camera, "global_transform", new_camera.transform, SWITCH_TIME)
+	tween.tween_property(switch_camera, "fov", new_camera.fov, SWITCH_TIME)
+	tween.tween_property(switch_camera, "global_transform", new_camera.global_transform, SWITCH_TIME)
 	
 	await tween.finished
 	new_camera.make_current()
@@ -89,7 +90,7 @@ func switch_to_camera(new_camera:Camera3D) -> void:
 
 func _switch_to_combat_camera() -> void:
 	combat_camera.pivot.transform = player_camera.pivot.transform
-	combat_camera.global_position = player_camera.global_position
+	combat_camera.position = player_camera.position
 	combat_camera.camera_3d.make_current()
 	
 func _handle_camera(current_actor:GameCharacter) -> void:

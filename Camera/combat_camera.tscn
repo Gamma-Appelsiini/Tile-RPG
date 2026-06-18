@@ -6,20 +6,21 @@
 script = ExtResource("1_af7nx")
 pivot = NodePath("CameraPivot")
 camera_3d = NodePath("CameraPivot/Camera3D")
-audio_listener_3d = NodePath("CameraPivot/Camera3D/AudioListener3D")
+audio_listener_3d = NodePath("AudioListener3D")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1487258466]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 5.8, 4.2)
+doppler_tracking = 2
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1986479065]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.15003, 0)
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=358640978]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3.57628e-07, 4, 2.82843)
+transform = Transform3D(1, 0, 0, 0, 0.70710695, 0.70710695, 0, -0.70710695, 0.70710695, 0, 8.8, 6.75)
 cull_mask = 229375
 v_offset = -0.5
 current = true
-fov = 30.0
+fov = 15.0
 size = 4.0
 near = 1.0
 far = 50.0
-
-[node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/Camera3D" unique_id=1487258466]
-doppler_tracking = 2

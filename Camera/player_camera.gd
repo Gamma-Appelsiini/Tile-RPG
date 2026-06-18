@@ -26,9 +26,9 @@ func disactivate_camera() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Cam L"):
-		_rotate_cam(-90)
+		_rotate_cam(-45)
 	elif event.is_action_pressed("Rotate Cam R"):
-		_rotate_cam(90)
+		_rotate_cam(45)
 	elif event.is_action_pressed("Zoom In"):
 		_move_camera(true)
 	elif event.is_action_pressed("Zoom Out"):
@@ -51,8 +51,8 @@ func _move_camera(towards: bool) -> void:
 	
 	const MOVE_AMOUNT: float = 0.5
 	const ZOOM_DURATION: float = 0.25
-	const MAX_IN_AMOUNT:float = 2.0
-	const MAX_OUT_AMOUNT:float = 20.0
+	const MAX_IN_AMOUNT:float = 4.0
+	const MAX_OUT_AMOUNT:float = 30.0
 
 	if !zoom_tween or !zoom_tween.is_valid():
 		target_position = camera_3d.position
