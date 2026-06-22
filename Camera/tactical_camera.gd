@@ -11,19 +11,7 @@ func _physics_process(delta: float) -> void:
 	if move_direction != Vector3.ZERO:
 		var new_pos := global_position + move_direction * camera_speed * delta
 		global_position = new_pos
-	
-#Overrided
-func _rotate_cam(amount:float) -> void:
-	if rotating: return
-	rotating = true
-	
-	var rotation_time:float = 0.25
-	var tween:Tween = create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(camera_3d,"rotation:y",camera_3d.rotation.y + deg_to_rad(amount), rotation_time)
-	
-	await tween.finished
-	rotating = false
+
 
 #Overrided
 func _input(event: InputEvent) -> void:
