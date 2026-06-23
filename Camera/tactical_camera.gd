@@ -3,16 +3,6 @@ class_name TacticalCamera
 
 const MAX_DISTANCE:float = 100
 
-func _physics_process(delta: float) -> void:
-	var move_direction := _handle_movement_input()
-	move_direction.y = 0.0
-	move_direction = move_direction.normalized()
-	
-	if move_direction != Vector3.ZERO:
-		var new_pos := global_position + move_direction * camera_speed * delta
-		global_position = new_pos
-
-
 #Overrided
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Cam L"):

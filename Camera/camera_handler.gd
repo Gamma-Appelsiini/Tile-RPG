@@ -28,8 +28,10 @@ func _tactical_camera_switch() -> void:
 	
 	if active_camera == combat_camera:
 		combat_camera.disactivate_camera()
-		var rounded_y: float = roundf(combat_camera.pivot.rotation.y / 90.0) * 90.0
-		tactical_camera.pivot.rotation.y = rounded_y
+		tactical_camera.global_position = combat_camera.global_position
+
+		var rounded_y: float = roundf(rad_to_deg(combat_camera.pivot.rotation.y) / 90.0) * 90.0
+		tactical_camera.pivot.rotation.y = deg_to_rad(rounded_y)
 		switch_to_camera(tactical_camera.camera_3d)
 		
 		await camera_switched
@@ -37,8 +39,10 @@ func _tactical_camera_switch() -> void:
 		active_camera = tactical_camera
 	else:
 		tactical_camera.disactivate_camera()
-		var rounded_y: float = roundf(tactical_camera.pivot.rotation.y / 45.0) * 45.0
-		combat_camera.pivot.rotation.y = rounded_y
+		combat_camera.global_position = tactical_camera.global_position
+		
+		var rounded_y: float = roundf(rad_to_deg(tactical_camera.pivot.rotation.y) / 45.0) * 45.0
+		combat_camera.pivot.rotation.y = deg_to_rad(rounded_y)
 		switch_to_camera(combat_camera.camera_3d)
 		
 		await camera_switched
@@ -100,7 +104,8 @@ func _switch_to_combat_camera() -> void:
 	new_combat_camera.fov = player_camera.camera_3d.fov
 	new_combat_camera.transform = player_camera.camera_3d.transform
 	
-	#await get_tree().create_timer(0.1).timeout
+	#TODO Jerks up a little when switching
+	await get_tree().create_timer(1).timeout
 	combat_camera.camera_3d.make_current()
 	active_camera = combat_camera
 	
