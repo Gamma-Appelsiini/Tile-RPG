@@ -1,8 +1,6 @@
 extends CombatCamera
 class_name TacticalCamera
 
-const MAX_DISTANCE:float = 100
-
 #Overrided
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Cam L"):

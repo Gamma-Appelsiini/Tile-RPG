@@ -1,6 +1,8 @@
 extends PlayerCamera
 class_name CombatCamera
 
+const MAX_DISTANCE:float = 100
+
 var camera_speed:float = 3
 var parent_node:Node3D = null
 
@@ -15,6 +17,8 @@ func _physics_process(delta: float) -> void:
 	
 	if move_direction != Vector3.ZERO:
 		var new_pos := global_position + move_direction * camera_speed * delta
+		
+		if new_pos.distance_to(GlobalSignals.player.global_position) >= MAX_DISTANCE: return
 		global_position = new_pos
 
 func _handle_movement_input() -> Vector3:

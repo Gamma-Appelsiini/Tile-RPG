@@ -60,6 +60,7 @@ func _on_combat_start() -> void:
 	await get_tree().create_timer(1).timeout
 	combat_camera.set_as_active_camera()
 	set_process_input(true)
+	camera_switched.emit()
 
 func _on_combat_end() -> void:
 	in_combat = false
@@ -109,15 +110,19 @@ func _switch_to_combat_camera() -> void:
 	combat_camera.camera_3d.make_current()
 	active_camera = combat_camera
 	
-func _handle_camera(current_actor:GameCharacter) -> void:
+func handle_turn_camera(current_actor:GameCharacter) -> void:
+	combat_camera.set_process(false)
 	combat_camera.reparent(current_actor)
 	_move_camera_to_char(current_actor)
 	await camera_move_finished
 	
 	if current_actor is Player:
-		pass
+		combat_camera.top_level = true
+		combat_camera.set_process(true)
 	else:
-		pass
+		combat_camera.top_level = false
+		
+	camera_move_finished.emit()
 
 func _move_camera_to_char(current_actor:GameCharacter) -> void:
 	var distance:float = current_actor.global_position.distance_to(combat_camera.global_position)

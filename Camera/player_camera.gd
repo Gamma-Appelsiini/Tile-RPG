@@ -18,6 +18,7 @@ var zoom_tween: Tween = null
 func set_as_active_camera() -> void:
 	set_process_input(true)
 	set_physics_process(true)
+	GlobalSignals.player.player_camera = camera_3d
 	audio_listener_3d.make_current()
 	
 func disactivate_camera() -> void:
