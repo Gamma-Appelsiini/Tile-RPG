@@ -53,11 +53,8 @@ func _tactical_camera_switch() -> void:
 
 func _on_combat_start() -> void:
 	in_combat = true
-	
 	player_camera.disactivate_camera()
-	_switch_to_combat_camera()
-	
-	await get_tree().create_timer(1).timeout
+	await _switch_to_combat_camera()
 	combat_camera.set_as_active_camera()
 	set_process_input(true)
 	camera_switched.emit()
@@ -89,6 +86,7 @@ func switch_to_camera(new_camera:Camera3D) -> void:
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	tween.tween_property(switch_camera, "global_transform", new_camera.global_transform, SWITCH_TIME)
 	tween.tween_property(switch_camera, "fov", new_camera.fov, SWITCH_TIME)
+	tween.tween_property(switch_camera, "v_offset", new_camera.v_offset, SWITCH_TIME)
 	
 	await tween.finished
 	new_camera.make_current()
@@ -97,18 +95,25 @@ func switch_to_camera(new_camera:Camera3D) -> void:
 	camera_switched.emit()
 
 func _switch_to_combat_camera() -> void:
+	combat_camera.top_level = false
 	combat_camera.pivot.transform = player_camera.pivot.transform
-	combat_camera.global_position = player_camera.global_position
+	combat_camera.global_transform = player_camera.global_transform
 	
 	var new_combat_camera:Camera3D = combat_camera.camera_3d
 	new_combat_camera.cull_mask = player_camera.camera_3d.cull_mask
 	new_combat_camera.fov = player_camera.camera_3d.fov
 	new_combat_camera.transform = player_camera.camera_3d.transform
-	
-	#TODO Jerks up a little when switching
-	await get_tree().create_timer(1).timeout
-	combat_camera.camera_3d.make_current()
+	new_combat_camera.v_offset = player_camera.camera_3d.v_offset
+
+	combat_camera.force_update_transform()
+	combat_camera.pivot.force_update_transform()
+	new_combat_camera.force_update_transform()
+
+	await get_tree().create_timer(1.5).timeout
+	new_combat_camera.make_current()
 	active_camera = combat_camera
+	
+	camera_switched.emit()
 	
 func handle_turn_camera(current_actor:GameCharacter) -> void:
 	combat_camera.set_process(false)

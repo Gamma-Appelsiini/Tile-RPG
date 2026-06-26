@@ -28,6 +28,7 @@ func _process(_delta: float) -> void:
 	_update_pos()
 
 func _update_pos() -> void:
+	current_camera =  get_viewport().get_camera_3d()
 	var screen_position:Vector2 = current_camera.unproject_position(position_node.global_transform.origin)
 	var offset:Vector2 = Vector2(-self.size.x / 2, -self.size.y / 3)
 	self.global_position = screen_position + offset

@@ -16,6 +16,7 @@ var target_position: Vector3 = Vector3.ZERO
 var zoom_tween: Tween = null
 
 func set_as_active_camera() -> void:
+	print("SET AS ACTIVE: ", name)
 	set_process_input(true)
 	set_physics_process(true)
 	GlobalSignals.player.player_camera = camera_3d

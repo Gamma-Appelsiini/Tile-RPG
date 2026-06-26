@@ -42,14 +42,13 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	player_team.push_back(player)
 	
 	enemy_team = new_enemies
-	#print("enemy team: ", enemy_team)
-	#print("player team: ", player_team)
 	chars_in_combat = player_team.duplicate() + enemy_team.duplicate()
 
 	for game_char:GameCharacter in chars_in_combat:
 		game_char.died.connect(_char_died, true)
 		_move_to_tile_after_draw_weapon_animation(game_char)
 	
+	await player.camera_handler.camera_switched
 	await get_tree().create_timer(1).timeout
 	
 	_next_round()
