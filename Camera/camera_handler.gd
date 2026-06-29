@@ -12,8 +12,10 @@ const SWITCH_TIME:float = 0.5
 
 var active_camera:Node3D = null
 var in_combat:bool = false
+var switch_camera:Camera3D = Camera3D.new()
 
 func _ready() -> void:
+	add_child(switch_camera)
 	set_process_input(false)
 	active_camera = player_camera
 	GlobalSignals.combat_start.connect(_on_combat_start)
@@ -71,9 +73,7 @@ func _on_combat_end() -> void:
 
 func switch_to_camera(new_camera:Camera3D) -> void:
 	var current_camera:Camera3D = get_viewport().get_camera_3d()
-	var switch_camera:Camera3D = Camera3D.new()
 	
-	add_child(switch_camera)
 	switch_camera.global_transform = current_camera.global_transform
 	switch_camera.fov = current_camera.fov
 	switch_camera.environment = current_camera.environment
@@ -90,7 +90,6 @@ func switch_to_camera(new_camera:Camera3D) -> void:
 	
 	await tween.finished
 	new_camera.make_current()
-	switch_camera.queue_free()
 	
 	camera_switched.emit()
 
@@ -137,3 +136,20 @@ func _move_camera_to_char(current_actor:GameCharacter) -> void:
 	tween.tween_property(combat_camera, "global_position", current_actor.global_position, time_to_point)
 	await tween.finished
 	camera_move_finished.emit()
+
+func save_to_data(save_data:Dictionary) -> void:
+	var cam_data:Dictionary = {
+		"camera_transform": player_camera.camera_3d.transform,
+		"transform": player_camera.transform,
+		"pivot": player_camera.pivot.transform
+	}
+	save_data["camera"] = cam_data
+
+func load_from_data(save_data:Dictionary) -> void:
+	if !save_data.has("camera"): return
+	var cam_data:Dictionary = save_data["camera"]
+	
+	player_camera.camera_3d.transform = cam_data["camera_transform"]
+	player_camera.transform = cam_data["transform"]
+	player_camera.pivot.transform = cam_data["pivot"]
+	

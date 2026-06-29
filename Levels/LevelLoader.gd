@@ -146,6 +146,7 @@ func _load_player(new_player:Player) -> void:
 	player = new_player
 	GlobalSignals.player = new_player
 	player.load_from_data(save_data)
+	player.camera_handler.load_from_data(save_data)
 	
 	ui_handler.set_player(player)
 	ui_handler.load_from_data(save_data)
@@ -216,5 +217,5 @@ func _open_new_level(new_level:Level, loading:bool = false) -> void:
 
 func save_player() -> void:
 	player.save_to_data(save_data)
-	
+	player.camera_handler.save_to_data(save_data)
 	#TODO add player specific saving (inventory, quests)
