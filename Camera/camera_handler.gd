@@ -10,7 +10,7 @@ signal camera_move_finished
 
 const SWITCH_TIME:float = 0.5
 
-var active_camera:Node3D = null
+var active_camera:PlayerCamera = null
 var in_combat:bool = false
 var switch_camera:Camera3D = Camera3D.new()
 
@@ -18,8 +18,21 @@ func _ready() -> void:
 	add_child(switch_camera)
 	set_process_input(false)
 	active_camera = player_camera
+	
 	GlobalSignals.combat_start.connect(_on_combat_start)
 	GlobalSignals.combat_end.connect(_on_combat_end)
+	GlobalSignals.change_to_override_cam.connect(_switch_to_override_cam)
+	GlobalSignals.change_off_override_cam.connect(_switch_from_override_cam)
+
+func _switch_to_override_cam(override_cam:Camera3D) -> void:
+	active_camera.disactivate_camera()
+	switch_to_camera(override_cam)
+	GlobalSignals.player.player_camera = override_cam
+
+func _switch_from_override_cam() -> void:
+	switch_to_camera(active_camera.camera_3d)
+	await camera_switched
+	active_camera.set_as_active_camera()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Tactical View"):
@@ -81,6 +94,8 @@ func switch_to_camera(new_camera:Camera3D) -> void:
 	switch_camera.cull_mask = current_camera.cull_mask
 	
 	switch_camera.top_level = true
+	switch_camera.force_update_transform()
+	await get_tree().create_timer(0.05).timeout
 	switch_camera.make_current()
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
