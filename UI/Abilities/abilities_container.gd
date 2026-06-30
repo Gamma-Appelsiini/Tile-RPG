@@ -20,6 +20,7 @@ const FIREBALL = preload("uid://def83grj4ohmj")
 const ICE_BOLT = preload("uid://7xc2gc31hgti")
 const EVASION_BUFFER := preload("uid://wct51sa62ho1")
 const SKY_HAMMER := preload("uid://3uev06m0wx45")
+const MULTI_SHOT := preload("uid://cg6w2ac88f422")
 
 var tooltip:AbilityTooltip = null
 
@@ -40,6 +41,11 @@ func _ready() -> void:
 	for slot:AbilitySlot in ability_bar.slots:
 		slot.mouse_entered.connect(set_hovered.bind(slot))
 		slot.mouse_exited.connect(set_hovered.bind(slot))
+		
+	#TODO REMOVE
+	await get_tree().create_timer(1).timeout
+	var new_ability:Ability = MULTI_SHOT.instantiate()
+	add_new_ability(new_ability)
 
 func _create_tooltip() -> void:
 	var new_tt:AbilityTooltip = ABILITY_TOOLTIP.instantiate()
@@ -109,6 +115,7 @@ func add_new_ability(new_ability:Ability) -> bool:
 	
 	GlobalSignals.play_audio.emit(learn_ability_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT)
 	new_ability.connect_signals()
+	new_ability.ability_owner = GlobalSignals.player
 	return true
 
 func set_hovered(slot:AbilitySlot) -> void:

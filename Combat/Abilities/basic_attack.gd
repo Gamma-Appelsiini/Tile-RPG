@@ -4,13 +4,15 @@ class_name BasicAttack
 const ARROW_PROJECTILE := preload("uid://vyagdu7xmhu3")
 const ARROW_MODEL := preload("uid://bu2olcu1uujmx")
 
-func use_ability_on_target_character(target:GameCharacter) -> void:
+func use_ability_on_target_character(target:GameCharacter, check_usability:bool = true) -> void:
 	var new_attack:Attack = _create_attack()
-	if !_can_use_ability(target):
-		ability_finished.emit()
-		return
 	
-	_use_resources()
+	if check_usability:
+		if !_can_use_ability(target):
+			ability_finished.emit()
+			return
+		_use_resources()
+		
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
 	

@@ -68,13 +68,16 @@ func _process(_delta: float) -> void:
 	_get_ability_target()
 
 func _hide_range_indicators() -> void:
+	if !range_mesh: return
+	
 	range_mesh.hide()
 	range_mesh.queue_free()
 	range_mesh = null
 
 func _visualize_aoe() -> void:
 	var tiles_in_aoe:Array[Tile] = selected_ability.get_tiles_in_aoe(hovered_tile)
-	if tiles_in_aoe == [null]: tiles_in_aoe = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
+	if selected_ability.target_type == Ability.TARGET_TYPE.NONE: tiles_in_aoe = tile_manager.get_tiles_in_aoe(tile_manager.char_tiles[selected_ability.ability_owner], selected_ability.ability_aoe)
+	elif tiles_in_aoe == [null]: tiles_in_aoe = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
 	
 	for i:int in len(tiles_in_aoe):
 		var indicator:RangeIndicator = range_indicators[i]
@@ -84,6 +87,8 @@ func _visualize_aoe() -> void:
 		indicator.show()
 
 func _visualize_tiles_in_range() -> void:
+	if selected_ability.target_type == Ability.TARGET_TYPE.NONE: return
+	
 	var player_tile:Tile = tile_manager.char_tiles[player]
 	var tiles_in_range:Array[Tile] = tile_manager.get_tiles_in_range(player_tile, selected_ability.get_range())
 	_add_range_tiles(len(tiles_in_range))
@@ -150,7 +155,9 @@ func _get_ability_target() -> void:
 		if point != Vector3.INF:
 			_set_new_target_tile(tile_manager.get_closest_tile(point))
 	elif selected_ability.target_type == Ability.TARGET_TYPE.GAME_CHARACTER:
-		_set_new_target_character(_get_hovered_character()) 
+		_set_new_target_character(_get_hovered_character())
+	elif selected_ability.target_type == Ability.TARGET_TYPE.NONE:
+		_visualize_aoe()
 
 func _set_new_target_tile(new_target:Tile) -> void:
 	if hovered_tile == new_target: return
@@ -336,6 +343,9 @@ func _use_ability() -> void:
 		if char_to_use_on != null:
 			abi_to_use.use_ability_on_target_character(char_to_use_on)
 			await abi_to_use.ability_finished
+	elif abi_to_use.target_type == Ability.TARGET_TYPE.NONE:
+		abi_to_use.use_ability()
+		await abi_to_use.ability_finished
 	
 	GlobalSignals.current_level.tile_manager.enable_shooting()
 	

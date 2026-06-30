@@ -31,8 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://wq3nuj6tmdtg" path="res://Tile-RPG/GameCharacters/Jail1/slime_rat_npc.tscn" id="26_fvjqo"]
 [ext_resource type="PackedScene" uid="uid://bhcsynreixoe4" path="res://Tile-RPG/Models/MapBasics/ramp.glb" id="28_b3ul2"]
 [ext_resource type="PackedScene" uid="uid://cjxr6uush4nq0" path="res://Tile-RPG/Combat/combat_starter.tscn" id="29_kp3o5"]
-[ext_resource type="PackedScene" uid="uid://binhma3ty4iqs" path="res://Tile-RPG/Camera/cam_override_area.tscn" id="32_71027"]
-[ext_resource type="PackedScene" uid="uid://b1x872mb0bt38" path="res://Tile-RPG/Camera/follow_camera.tscn" id="33_2n3eu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbpx"]
 
@@ -836,18 +834,6 @@ combatants = [NodePath("../GameCharacters2/SlimeRatNpc"), NodePath("../GameChara
 [node name="CollisionShape3D" parent="CombatStarter/Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032562256, 0.46395874, -0.401932)
 shape = SubResource("BoxShape3D_e4g4r")
-
-[node name="CamOverride" type="Node3D" parent="." unique_id=1405221815]
-
-[node name="CamOverrideArea" parent="CamOverride" unique_id=1034554594 node_paths=PackedStringArray("override_camera") instance=ExtResource("32_71027")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37530708, 0, 4.01583)
-override_camera = NodePath("../FollowCamera")
-
-[node name="FollowCamera" parent="CamOverride" unique_id=988906899 instance=ExtResource("33_2n3eu")]
-follow_z = true
-
-[node name="CamOverrideArea2" parent="CamOverride" unique_id=1218329622 instance=ExtResource("32_71027")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [editable path="Walls/Corners/BlankCorner"]
 [editable path="Walls/Corners/BlankCorner2"]

@@ -16,6 +16,7 @@ enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 @export var targeting_animation:CharacterModelHandler.CharAnimation = CharacterModelHandler.CharAnimation.NULL
 @export var hit_delay:float = 0.2
 
+@export var allowed_weapon_types:Array[Weapon.WeaponType] = []
 @export var target_type:TARGET_TYPE = TARGET_TYPE.GAME_CHARACTER
 @export var pathing_for_targeting:bool = false
 @export var usable_on_characters:Array[CHARACTER_TYPE] = []
@@ -48,12 +49,12 @@ const ATTACK_DELAYS:Dictionary[CharacterModelHandler.CharAnimation, float] = {
 
 var ability_owner:GameCharacter = null
 var current_cooldown:int = 0
-#var ability_description:String = "Default Ability Description"
 var target_char:GameCharacter = null
 var target_tile:Tile = null
 var ability_attack:Attack = null
 
 func connect_signals() -> void:
+	if ability_owner == null: ability_owner = GlobalSignals.player
 	GlobalSignals.combat_start.connect(func(): current_cooldown = 0)
 	ability_owner.start_turn.connect(_change_cooldown.bind(-1))
 
@@ -81,6 +82,11 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 #Override
 func use_ability_on_target_tile(target:Tile) -> void:
 	print(target.name)
+	pass
+	
+#Override
+func use_ability() -> void:
+	print("Use without target")
 	pass
 
 #Override
@@ -111,6 +117,8 @@ func get_cd() -> int:
 	return ability_cooldown
 	
 func _is_target_valid(target:Node) -> bool:
+	if target_type == TARGET_TYPE.NONE: return true
+	
 	if target is GameCharacter:
 		if self.target_type != TARGET_TYPE.GAME_CHARACTER: return false
 		if !usable_on_characters.has(CHARACTER_TYPE.SELF) and target == ability_owner: return false
@@ -145,15 +153,25 @@ func _is_enough_resources() -> bool:
 func _can_use_ability(target:Node) -> bool:
 	if target is GameCharacter: target_char = target
 	elif target is Tile: target_tile = target
-	else: return false
+	elif target_type != TARGET_TYPE.NONE: return false
 	
 	if !_is_enough_resources(): return false
 	if !_is_target_valid(target): return false
 	if !_is_in_range(): return false
+	if !_has_required_weapon_type(): return false
 	
 	return true
 
+func _has_required_weapon_type() -> bool:
+	if allowed_weapon_types.is_empty(): return true
+	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
+	if allowed_weapon_types.has(weapon.weapon_type): return true
+	
+	return false
+
 func _is_in_range(override_tile:Tile = null) -> bool:
+	if target_type == TARGET_TYPE.NONE: return true
+	
 	var tile_manager:TileManager = GlobalSignals.current_level.tile_manager
 	var ability_user_tile:Tile = tile_manager.char_tiles[ability_owner]
 	if override_tile: ability_user_tile = override_tile

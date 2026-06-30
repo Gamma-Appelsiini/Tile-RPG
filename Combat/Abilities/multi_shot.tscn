@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cg6w2ac88f422"]
+
+[ext_resource type="Script" uid="uid://c1ylywawc6rr6" path="res://Tile-RPG/Combat/Abilities/multi_shot.gd" id="1_0ekfl"]
+[ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_gwdsd"]
+
+[node name="MultiShot" type="Node3D" unique_id=135597098]
+script = ExtResource("1_0ekfl")
+allowed_weapon_types = Array[int]([59])
+target_type = 2
+ability_icon = ExtResource("2_gwdsd")
+ability_name = "Multi Shot"
+ability_range = 0
+ability_aoe = 3
