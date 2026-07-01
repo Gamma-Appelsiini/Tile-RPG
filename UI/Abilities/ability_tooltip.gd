@@ -16,6 +16,7 @@ class_name AbilityTooltip
 @export var scaling_label: RichTextLabel = null
 @export var damage_container: HBoxContainer = null
 @export var dmg_description_label: RichTextLabel = null
+@export var warning_label: Label = null
 
 var ability:Ability = null
 
@@ -27,11 +28,16 @@ func set_ability(new_ability:Ability) -> void:
 	_set_scaling()
 	update_tooltip()
 
+func _check_weapon_validity() -> void:
+	if ability.has_required_weapon_type(): warning_label.hide()
+	else: warning_label.show()
+
 func update_tooltip() -> void:
 	cooldown_label.text = str(ability.get_cd())
 	_set_value_label(ability.get_range(), range_label, range_texture_rect)
 	_set_value_label(ability.get_aoe(), aoe_label, aoe_texture_rect)
 	_set_value_label(ability.get_sp_cost(), sp_label, sp_texture_rect)
+	_check_weapon_validity()
 
 func _set_value_label(amount:int, label:Label, image_rect:TextureRect) -> void:
 	label.text = str(amount)

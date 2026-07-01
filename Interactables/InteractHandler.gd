@@ -12,6 +12,7 @@ var current_interactee:Interactable = null
 var interactable:Interactable = null
 var indicators:Array[Indicator] = []
 var prompts:Array[InteractPrompt] = []
+var interaction_disabled:bool = false
 
 func _ready() -> void:
 	set_process(false)
@@ -33,12 +34,14 @@ func _add_indicators() -> void:
 		prompts.push_back(new_interact_prompt)
 
 func _disable_interacting() -> void:
+	interaction_disabled = true
 	set_process(false)
 	set_process_input(false)
 	for child in get_children(): child.hide()
 	current_interactee = null
 	
 func _enable_interacting() -> void:
+	interaction_disabled = false
 	set_process_input(true)
 	if interactables.is_empty(): return
 	set_process(true)
@@ -144,6 +147,8 @@ func remove_interactable(inter:Interactable) -> void:
 	else: set_process(false)
 	
 func _show_right_interactee() -> void:
+	if interaction_disabled: return
+	
 	if interactables.is_empty():
 		if current_interactee == null: return
 		hide_indicator(current_interactee)

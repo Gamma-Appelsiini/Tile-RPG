@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwwbtybjbkw7p"]
+[gd_scene format=3 uid="uid://dwwbtybjbkw7p"]
 
 [ext_resource type="Script" uid="uid://bs1tmvoxke3ud" path="res://Tile-RPG/UI/Abilities/ability_tooltip.gd" id="1_o3f25"]
 [ext_resource type="Texture2D" uid="uid://h21gl570sx8f" path="res://Tile-RPG/Images/UI/ApBall.png" id="3_igjpu"]
@@ -25,7 +25,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="AbilityTooltip" type="VBoxContainer" node_paths=PackedStringArray("panel_container", "name_label", "description_label", "cooldown_label", "range_label", "aoe_label", "sp_label", "aoe_texture_rect", "sp_texture_rect", "range_texture_rect", "cost_container", "scaling_container", "scaling_label", "damage_container", "dmg_description_label")]
+[node name="AbilityTooltip" type="VBoxContainer" unique_id=1236845809 node_paths=PackedStringArray("panel_container", "name_label", "description_label", "cooldown_label", "range_label", "aoe_label", "sp_label", "aoe_texture_rect", "sp_texture_rect", "range_texture_rect", "cost_container", "scaling_container", "scaling_label", "damage_container", "dmg_description_label", "warning_label")]
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,68 +57,84 @@ scaling_container = NodePath("PanelContainer/VBoxContainer/ScalingContainer")
 scaling_label = NodePath("PanelContainer/VBoxContainer/ScalingContainer/ScalingLabel")
 damage_container = NodePath("PanelContainer/VBoxContainer/DamageContainer")
 dmg_description_label = NodePath("PanelContainer/VBoxContainer/DamageContainer/DmgDescriptionLabel")
+warning_label = NodePath("PanelContainer/VBoxContainer/WarningLabel")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1792743795]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ersg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=363790677]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 6
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=235348006]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 15
 
-[node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer7"]
+[node name="NameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer7" unique_id=475396173]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Default Name"
 
-[node name="CostContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer7"]
+[node name="CostContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer7" unique_id=1351180499]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/separation = -2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer" unique_id=706810414]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("3_igjpu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer"]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer" unique_id=1133085597]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("3_igjpu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer"]
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer" unique_id=1815181421]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("3_igjpu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer"]
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer7/CostContainer" unique_id=341437874]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 texture = ExtResource("3_igjpu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1636016437]
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="DescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="WarningLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1500224852]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.9999998, 0.20671752, 0.07080244, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7176471)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 15
+text = "Unsupported weapon equipped"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=271886264]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 6
@@ -131,13 +147,13 @@ theme_override_font_sizes/font_size = 18
 text = "Description"
 autowrap_mode = 3
 
-[node name="ScalingContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="ScalingContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=273071416]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="ScalingTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/ScalingContainer"]
+[node name="ScalingTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/ScalingContainer" unique_id=1639621140]
 self_modulate = Color(0.60929835, 0.4473, 0.71, 1)
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
@@ -147,7 +163,7 @@ texture = ExtResource("3_jwe0q")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ScalingLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScalingContainer"]
+[node name="ScalingLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScalingContainer" unique_id=1641030939]
 custom_minimum_size = Vector2(250, 35)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.783241, 0.83403987, 0.851964, 1)
@@ -162,13 +178,13 @@ fit_content = true
 scroll_active = false
 vertical_alignment = 1
 
-[node name="DamageContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="DamageContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1494082663]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="DmgTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/DamageContainer"]
+[node name="DmgTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/DamageContainer" unique_id=2085122010]
 self_modulate = Color(0.8235294, 0.27058825, 0.26666668, 1)
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
@@ -178,7 +194,7 @@ texture = ExtResource("3_kb0k5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DmgDescriptionLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/DamageContainer"]
+[node name="DmgDescriptionLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/DamageContainer" unique_id=649500040]
 custom_minimum_size = Vector2(250, 35)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.78431374, 0.8352941, 0.8509804, 1)
@@ -193,23 +209,23 @@ fit_content = true
 scroll_active = false
 vertical_alignment = 1
 
-[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1678015504]
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="IconContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="IconContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1176617252]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer" unique_id=1410009201]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="CdTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer"]
+[node name="CdTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer" unique_id=883766130]
 self_modulate = Color(0.008477317, 0.30457103, 0.43204436, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -217,7 +233,7 @@ texture = ExtResource("4_qnk44")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CooldownLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer"]
+[node name="CooldownLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer" unique_id=437114844]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
@@ -229,12 +245,12 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer" unique_id=906883606]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="RangeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer2"]
+[node name="RangeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer2" unique_id=1618665021]
 self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -242,7 +258,7 @@ texture = ExtResource("5_kb0k5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer2"]
+[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer2" unique_id=1962804716]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
@@ -254,12 +270,12 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer" unique_id=1594887036]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="AoeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer3"]
+[node name="AoeTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer3" unique_id=659252421]
 self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -267,7 +283,7 @@ texture = ExtResource("6_jwe0q")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AoeLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer3"]
+[node name="AoeLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer3" unique_id=343618678]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)
@@ -279,12 +295,12 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/IconContainer" unique_id=1448503086]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="SpTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer4"]
+[node name="SpTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer4" unique_id=937520075]
 self_modulate = Color(0.007843138, 0.30588236, 0.43137255, 1)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -292,7 +308,7 @@ texture = ExtResource("7_6vllo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SpLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer4"]
+[node name="SpLabel" type="Label" parent="PanelContainer/VBoxContainer/IconContainer/HBoxContainer4" unique_id=8013831]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02745098, 0.50980395, 0.70980394, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.58431375)

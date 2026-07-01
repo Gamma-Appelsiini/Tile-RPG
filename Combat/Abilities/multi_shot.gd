@@ -20,8 +20,13 @@ func use_ability() -> void:
 
 	for tile:Tile in tiles_in_aoe:
 		if !tile.occupant or tile.occupant == ability_owner: continue
+		if GlobalSignals.combat_manager.is_in_same_team(ability_owner, tile.occupant): continue
 			
 		basic_attack.use_ability_on_target_character(tile.occupant, false)
 		await basic_attack.ability_finished
 
 	ability_finished.emit()
+
+#Overrided
+func get_aoe() -> int:
+	return ability_aoe + int(ability_owner.stat_handler.get_stat_amount(Stats.MainStat.AGILITY) / 15.0)

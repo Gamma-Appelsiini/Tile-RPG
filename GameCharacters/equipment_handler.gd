@@ -1,6 +1,8 @@
 extends Node
 class_name EquipmentHandler
 
+signal equipment_changed
+
 const PICKAXE_MODEL:PackedScene = preload("uid://bkkfnrqhmnhjn")
 
 var equipment_owner:GameCharacter = null
@@ -98,6 +100,7 @@ func equip_item(new_item:Equipment, skip_stats:bool = false) -> void:
 		suf.apply_to_character(equipment_owner)
 		
 	equipped_items[new_item.equipment_slot] = new_item
+	equipment_changed.emit()
 
 func _clear_item_model(equipment_slot:Equipment.EquipmentSlot) -> void:
 	if equipment_slot == Equipment.EquipmentSlot.OFF_HAND and off_hand_model:

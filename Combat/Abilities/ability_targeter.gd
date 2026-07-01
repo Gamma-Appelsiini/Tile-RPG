@@ -81,7 +81,9 @@ func _visualize_aoe() -> void:
 	
 	for i:int in len(tiles_in_aoe):
 		var indicator:RangeIndicator = range_indicators[i]
-		indicator.global_position = tiles_in_aoe[i].global_position
+		var alignment_quat:Quaternion = Quaternion(Vector3.UP, tiles_in_aoe[i].surface_normal)
+		indicator.transform.basis = Basis(alignment_quat)
+		indicator.global_position = tiles_in_aoe[i].global_position + Vector3(0,0.05,0)
 		if tiles_in_aoe[i].occupant:
 			indicator.set_enemy_color()
 		indicator.show()

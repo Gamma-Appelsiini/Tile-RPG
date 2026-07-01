@@ -37,6 +37,8 @@ func use_ability_on_target_tile(target:Tile) -> void:
 
 #Overrided
 func get_tiles_in_aoe(target:Tile) -> Array[Tile]:
+	if target == null: return []
+	
 	var tiles_in_aoe:Array[Tile] =  target.diagonal_tiles + target.neighbor_tiles
 	tiles_in_aoe.push_back(target)
 	return tiles_in_aoe

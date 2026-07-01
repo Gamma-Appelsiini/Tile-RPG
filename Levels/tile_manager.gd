@@ -140,7 +140,6 @@ func _add_neighbors(tile:Tile) -> void:
 	#if tile.global_position == Vector3(5.0, 0.25, 2.0): _add_ramp_neighbors(tile)
 
 func _add_ramp_neighbors(tile:Tile) -> void:
-	print("adding ramp neighbors: ")
 	const y_offset:float = 0.25
 	var up_offset := Vector3.ZERO
 	var down_offset := Vector3.ZERO
@@ -181,8 +180,6 @@ func _add_ramp_neighbors(tile:Tile) -> void:
 		if not down_neighbor.neighbor_tiles.has(tile):
 			down_neighbor.neighbor_tiles.push_back(tile)
 			
-	for ntile:Tile in tile.neighbor_tiles:
-		print(ntile.global_position)
 
 func _check_if_wall_between_tiles(tile_from:Tile, tile_to:Tile) -> bool:
 	const vertical_offset:Vector3 = Vector3(0,1,0)
@@ -319,6 +316,9 @@ func get_closest_tile(pos:Vector3) -> Tile:
 	var rounded_pos:Vector3 = Vector3((rounded_x),rounded_y,(rounded_z))
 	
 	if tiles.has(rounded_pos): closest_tile = tiles[rounded_pos]
+	else:
+		if tiles.has(rounded_pos + Vector3(0,0.25,0)): closest_tile = tiles[rounded_pos + Vector3(0,0.25,0)]
+		elif tiles.has(rounded_pos + Vector3(0,-0.25,0)): closest_tile = tiles[rounded_pos + Vector3(0,-0.25,0)]
 	return closest_tile
 	
 func set_player(new_player:Player) -> void:

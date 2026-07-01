@@ -70,6 +70,11 @@ func _ability_slot_pressed(pressed_slot:AbilitySlot) -> void:
 	selected_ability = pressed_slot.ability_in_slot
 	
 	if selected_ability != null:
+		if !selected_ability.has_required_weapon_type():
+			#TODO visual indication
+			print_debug("selected_ability not compatible weapon")
+			ability_targeter.cancel_ability_targeting()
+			return
 		if !selected_ability._is_enough_resources():
 			#TODO visual indication
 			print_debug("selected_ability not enought resources")

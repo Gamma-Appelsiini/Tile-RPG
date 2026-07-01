@@ -158,13 +158,14 @@ func _can_use_ability(target:Node) -> bool:
 	if !_is_enough_resources(): return false
 	if !_is_target_valid(target): return false
 	if !_is_in_range(): return false
-	if !_has_required_weapon_type(): return false
+	if !has_required_weapon_type(): return false
 	
 	return true
 
-func _has_required_weapon_type() -> bool:
+func has_required_weapon_type() -> bool:
 	if allowed_weapon_types.is_empty(): return true
 	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
+	if !weapon: return false
 	if allowed_weapon_types.has(weapon.weapon_type): return true
 	
 	return false

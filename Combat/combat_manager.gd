@@ -53,6 +53,12 @@ func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	
 	_next_round()
 
+func is_in_same_team(game_char_1:GameCharacter, game_char_2:GameCharacter) -> bool:
+	if player_team.has(game_char_1) and player_team.has(game_char_2): return true
+	if enemy_team.has(game_char_1) and enemy_team.has(game_char_2): return true
+	
+	return false
+
 func _move_to_tile_after_draw_weapon_animation(game_char:GameCharacter) -> void:
 	await game_char.ready_to_move
 	tile_manager.set_on_closest_tile(game_char)
