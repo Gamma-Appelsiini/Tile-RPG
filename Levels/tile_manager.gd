@@ -399,6 +399,11 @@ func _hide_path() -> void:
 		visual.hide_visual()
 	recreate_path = true
 
+func get_character_tile(game_char:GameCharacter) -> Tile:
+	if !char_tiles[game_char]: return null
+	
+	return char_tiles[game_char]
+
 func _create_new_path_visuals(path_length:int) -> void:
 	while path_length > len(path_visuals):
 		var new_pv:PathVisual = PATH_VISUAL_SCENE.instantiate()
