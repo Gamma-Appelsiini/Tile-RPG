@@ -21,6 +21,7 @@ const ICE_BOLT = preload("uid://7xc2gc31hgti")
 const EVASION_BUFFER := preload("uid://wct51sa62ho1")
 const SKY_HAMMER := preload("uid://3uev06m0wx45")
 const MULTI_SHOT := preload("uid://cg6w2ac88f422")
+const SUNDER := preload("uid://by4dp8msu73rb")
 
 var tooltip:AbilityTooltip = null
 
@@ -44,7 +45,7 @@ func _ready() -> void:
 		
 	#TODO REMOVE
 	await get_tree().create_timer(1).timeout
-	var new_ability:Ability = MULTI_SHOT.instantiate()
+	var new_ability:Ability = SUNDER.instantiate()
 	add_new_ability(new_ability)
 
 func _create_tooltip() -> void:

@@ -539,7 +539,7 @@ spot_range = 16.49
 [node name="Chest" parent="Interactables" unique_id=1311899053 instance=ExtResource("13_egjwj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 4)
 items_to_generate = Dictionary[int, int]({
-1: 0,
+1: 2,
 2: 6,
 4: 4,
 5: 16,

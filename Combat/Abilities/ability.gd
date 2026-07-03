@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name Ability
 
 signal ability_finished
@@ -102,6 +102,7 @@ func get_range() -> int:
 	var range_increase:int = 0
 	if ability_tags.has(ABILITY_TAG.SPELL): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_RANGE]
 	if ability_tags.has(ABILITY_TAG.RANGED): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
+	print("Abi range:", ability_range)
 	return ability_range + range_increase
 	
 #Override
@@ -155,10 +156,18 @@ func _can_use_ability(target:Node) -> bool:
 	elif target is Tile: target_tile = target
 	elif target_type != TARGET_TYPE.NONE: return false
 	
-	if !_is_enough_resources(): return false
-	if !_is_target_valid(target): return false
-	if !_is_in_range(): return false
-	if !has_required_weapon_type(): return false
+	if !_is_enough_resources():
+		print_debug("No resour")
+		return false
+	if !_is_target_valid(target):
+		print_debug("No valid target")
+		return false
+	if !_is_in_range():
+		print_debug("No in range")
+		return false
+	if !has_required_weapon_type():
+		print_debug("No required weapon")
+		return false
 	
 	return true
 

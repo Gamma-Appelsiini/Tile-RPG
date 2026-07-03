@@ -15,6 +15,5 @@ ability_icon = ExtResource("2_pcx47")
 ability_name = "Sunder"
 ap_cost = 2
 ability_range = 4
-allow_diagonal = true
 damage_desc = "150% of Weapon Damage"
 ability_desc = "Smash a wave of rocks towards the target with your melee weapon, hitting anything in its path"

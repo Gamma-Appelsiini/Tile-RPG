@@ -26,27 +26,37 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	_spawn_rocks(target)
 	await rocks_finished
 	ability_finished.emit()
-	
+
+#Overrided
+func _set_ability_weapon_range(_weapon:Weapon) -> void:
+	pass
+
+#Overrided
+func get_range() -> int:
+	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
+	var range_increase:int = weapon.weapon_stats[Weapon.WeaponStat.RANGE]
+	return ability_range + range_increase
+
 	
 func _spawn_rocks(target:GameCharacter) -> void:
 	var owner_tile:Tile = GlobalSignals.current_level.tile_manager.get_character_tile(ability_owner)
 	var enemy_tile:Tile = GlobalSignals.current_level.tile_manager.get_character_tile(target)
-	var path_to_target:Array[Tile] = GlobalSignals.current_level.tile_manager.get_shortest_path(owner_tile, enemy_tile)
-	
+	var path_to_target:Array[Tile] = GlobalSignals.current_level.tile_manager.get_shortest_path(owner_tile, enemy_tile, false, true)
+	path_to_target = path_to_target.slice(1)
 
 	for tile:Tile in path_to_target:
 		var new_rock:SunderRock = rock.duplicate()
+		
+		ability_owner.get_parent().add_child(new_rock)
 		new_rock.global_position = tile.global_position
-		
-		add_child(new_rock)
 		new_rock.spawn_rock()
+		await ability_owner.get_tree().create_timer(0.35).timeout
 		
+		if !tile.occupant: continue
 		if GlobalSignals.combat_manager.is_in_same_team(ability_owner, tile.occupant): continue
 		_spawn_hit_effect(tile.occupant)
 		AttackHandler.use_attack_on_char(tile.occupant, attack)
-		
-		await get_tree().create_timer(0.15).timeout
-		
+
 	rocks_finished.emit()
 
 func _create_attack() -> Attack:
