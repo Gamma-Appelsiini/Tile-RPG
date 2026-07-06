@@ -545,6 +545,7 @@ items_to_generate = Dictionary[int, int]({
 5: 16,
 7: 15
 })
+abilities_to_add = Array[String](["res://Tile-RPG/Combat/Abilities/Sunder/sunder.tscn"])
 unique_id = "TestChest1"
 
 [node name="Lever" parent="Interactables" unique_id=1672743832 instance=ExtResource("13_q2olv")]

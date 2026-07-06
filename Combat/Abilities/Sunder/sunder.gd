@@ -48,9 +48,10 @@ func _spawn_rocks(target:GameCharacter) -> void:
 		var new_rock:SunderRock = rock.duplicate()
 		
 		ability_owner.get_parent().add_child(new_rock)
+		if tile == path_to_target.back(): new_rock.scale = Vector3(1.3,1.3,1.3)
 		new_rock.global_position = tile.global_position
 		new_rock.spawn_rock()
-		await ability_owner.get_tree().create_timer(0.35).timeout
+		await ability_owner.get_tree().create_timer(0.25).timeout
 		
 		if !tile.occupant: continue
 		if GlobalSignals.combat_manager.is_in_same_team(ability_owner, tile.occupant): continue

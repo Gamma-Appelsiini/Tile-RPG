@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://dq5x88665dpbq" path="res://Tile-RPG/GameCharacters/follow_handler.gd" id="5_yvq5j"]
 [ext_resource type="Script" uid="uid://3i4005pgv256" path="res://Tile-RPG/Combat/ai_handler.gd" id="7_ilq20"]
 [ext_resource type="PackedScene" uid="uid://bs08mf1jnw3vi" path="res://Tile-RPG/Combat/Abilities/basic_attack.tscn" id="8_nl7kr"]
+[ext_resource type="PackedScene" uid="uid://7xc2gc31hgti" path="res://Tile-RPG/Combat/Abilities/ice_bolt/ice_bolt.tscn" id="9_3t60n"]
 [ext_resource type="PackedScene" uid="uid://cxigqlih8j8nv" path="res://Tile-RPG/Combat/Abilities/cure_wounds/cure_wounds.tscn" id="9_oevf2"]
+[ext_resource type="PackedScene" uid="uid://3uev06m0wx45" path="res://Tile-RPG/Combat/Abilities/SkyHammer/sky_hammer.tscn" id="10_ce2p7"]
 [ext_resource type="Script" uid="uid://c4xywaxpmfcw0" path="res://Tile-RPG/GameCharacters/equipment_handler.gd" id="10_sej7w"]
 [ext_resource type="PackedScene" uid="uid://cvi3liudalayl" path="res://Tile-RPG/UI/Status/info_bar.tscn" id="11_3t60n"]
 
@@ -60,13 +62,17 @@ metadata/_custom_type_script = "uid://cfaw7c8b3dbes"
 [node name="AIHandler" type="Node" parent="." unique_id=1117037709 node_paths=PackedStringArray("combatant", "offensive_abilities", "support_abilities")]
 script = ExtResource("7_ilq20")
 combatant = NodePath("..")
-offensive_abilities = [NodePath("BasicAttack")]
+offensive_abilities = [NodePath("BasicAttack"), NodePath("IceBolt"), NodePath("SkyHammer")]
 support_abilities = [NodePath("CureWounds")]
 metadata/_custom_type_script = "uid://3i4005pgv256"
 
 [node name="BasicAttack" parent="AIHandler" unique_id=1108464989 instance=ExtResource("8_nl7kr")]
 
 [node name="CureWounds" parent="AIHandler" unique_id=165642775 instance=ExtResource("9_oevf2")]
+
+[node name="IceBolt" parent="AIHandler" unique_id=417763505 instance=ExtResource("9_3t60n")]
+
+[node name="SkyHammer" parent="AIHandler" unique_id=1519392739 instance=ExtResource("10_ce2p7")]
 
 [node name="EquipmentHandler" type="Node" parent="." unique_id=30370907]
 script = ExtResource("10_sej7w")

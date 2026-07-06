@@ -42,11 +42,7 @@ func _ready() -> void:
 	for slot:AbilitySlot in ability_bar.slots:
 		slot.mouse_entered.connect(set_hovered.bind(slot))
 		slot.mouse_exited.connect(set_hovered.bind(slot))
-		
-	#TODO REMOVE
-	await get_tree().create_timer(1).timeout
-	var new_ability:Ability = SUNDER.instantiate()
-	add_new_ability(new_ability)
+	
 
 func _create_tooltip() -> void:
 	var new_tt:AbilityTooltip = ABILITY_TOOLTIP.instantiate()
@@ -57,6 +53,10 @@ func _create_tooltip() -> void:
 func set_player(new_player:Player) -> void:
 	var new_ability:Ability = BASIC_ATTACK.instantiate()
 	new_ability.ability_owner = new_player
+	add_new_ability(new_ability)
+	
+	var new_ability6:Ability = SUNDER.instantiate()
+	new_ability6.ability_owner = new_player
 	add_new_ability(new_ability)
 	
 	var new_ability2:Ability = FIREBALL.instantiate()

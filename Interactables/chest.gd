@@ -7,6 +7,7 @@ enum ContainerStyle {WOOD}
 @export var max_tier:int = -1
 @export var container_style:ContainerStyle = ContainerStyle.WOOD
 @export var items_to_generate:Dictionary[Item.ItemRarity, ItemGenerator.LOOT_TYPE]
+@export var abilities_to_add:Array[String] = []
 @export var container_name:String = "Chest"
 @export var container_image:Texture2D = null
 @export var animation_player:AnimationPlayer = null
@@ -42,12 +43,17 @@ func _close_container(lootC:LootContainer) -> void:
 		await animation_player.animation_finished
 	interact_area.monitoring = true
 
-func _add_ability_tome() -> void:
+func _add_abilities() -> void:
+	for path:String in abilities_to_add:
+		_add_ability_tome(path)
+
+func _add_ability_tome(path:String = "") -> void:
 	if len(items) == CONTAINER_SIZE: return
 	
 	var new_tome:Tome = Tome.new()
-	var new_abi_path:String = AbilityGenerator.get_random_ability_path()
-	new_tome.set_ability_path(new_abi_path)
+	if path == "":
+		path = AbilityGenerator.get_random_ability_path()
+	new_tome.set_ability_path(path)
 
 	items.push_back(new_tome)
 
@@ -64,6 +70,8 @@ func _generate_loot() -> void:
 		if loot_type == ItemGenerator.LOOT_TYPE.GOLD: items.push_back(ItemGenerator.get_money())
 		elif loot_type == ItemGenerator.LOOT_TYPE.TOME: _add_ability_tome()
 		else: items.push_back(ItemGenerator.get_equipment(loot_type,chest_lvl,max_tier,rarity))
+	
+	_add_abilities()
 
 func set_highest_rarity() -> void:
 	if len(items) == 0:

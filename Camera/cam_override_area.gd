@@ -9,7 +9,6 @@ func _ready() -> void:
 	
 func _area_entered(enterer:Node3D) -> void:
 	if enterer is not Player: return
-	print(enterer)
 
 	interact_area.set_deferred("monitoring", false)
 	if !override_camera:

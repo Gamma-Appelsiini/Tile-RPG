@@ -1,7 +1,7 @@
 class_name AbilityGenerator
 
 const ATTACK_ABILITIES:Dictionary[int, Array] = {
-	0: [],
+	0: ["res://Tile-RPG/Combat/Abilities/Sunder/sunder.tscn", "res://Tile-RPG/Combat/Abilities/multi_shot.tscn"],
 }
 
 const SPELL_ABILITIES:Dictionary[int, Array] = {

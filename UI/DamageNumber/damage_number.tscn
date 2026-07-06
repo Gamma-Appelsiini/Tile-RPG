@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dac2s2r20qif4"]
+[gd_scene format=3 uid="uid://dac2s2r20qif4"]
 
-[ext_resource type="Script" uid="uid://d3nciah8aj1oh" path="res://Tile-RPG/UI/DamageNumber/damage_number.gd" id="1_qab1v"]
-[ext_resource type="FontFile" uid="uid://d0yoohyaar2bi" path="res://Tile-RPG/Fonts/GoogleFonts/CinzelDecorative-Bold.ttf" id="2_dqu6n"]
+[ext_resource type="Script" uid="uid://dsbfjamtkibgf" path="res://Tile-RPG/UI/DamageNumber/dmg_number.gd" id="1_fljb1"]
+[ext_resource type="FontFile" uid="uid://b1x6glvnxmaeu" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-SemiBold.ttf" id="2_ohw5c"]
+[ext_resource type="Material" uid="uid://d2aa7m0xj50m" path="res://Tile-RPG/Materials/ShaderMaterials/dmg_number_material.tres" id="2_ufsas"]
 [ext_resource type="Shader" uid="uid://kn40q3r6vb31" path="res://Tile-RPG/Shaders/damage_number_shader.gdshader" id="3_ohw5c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fljb1"]
@@ -17,7 +18,7 @@ shader_parameter/Position_Min = 0.25
 shader_parameter/Position_Max = 0.5
 shader_parameter/Alpha = 1.0
 
-[node name="DamageNumber" type="CenterContainer" node_paths=PackedStringArray("number_label")]
+[node name="DamageNumber" type="CenterContainer" unique_id=1508905663]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -32,24 +33,24 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("1_qab1v")
-number_label = NodePath("NumberLabel")
+script = ExtResource("1_fljb1")
 
-[node name="NumberLabel" type="Label" parent="."]
+[node name="NumberLabel" type="Label" parent="." unique_id=533473063]
 unique_name_in_owner = true
 clip_children = 2
 texture_filter = 2
+material = ExtResource("2_ufsas")
 layout_mode = 2
-theme_override_colors/font_color = Color(0.92678726, 0.00015127494, 0.26939332, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("2_dqu6n")
-theme_override_font_sizes/font_size = 48
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_ohw5c")
+theme_override_font_sizes/font_size = 55
 text = "123"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="NumberLabel"]
+[node name="ColorRect" type="ColorRect" parent="NumberLabel" unique_id=428341922]
+visible = false
 material = SubResource("ShaderMaterial_fljb1")
 layout_mode = 1
 anchors_preset = 15

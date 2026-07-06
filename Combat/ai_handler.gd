@@ -342,10 +342,26 @@ func _use_the_best_ability(usable_abilities:Array[Ability]) -> void:
 			_move_to_tile(tiles.pick_random())
 			await GlobalSignals.combat_manager.tile_manager.character_moved
 	
+	await _play_targeting_animation()
+	
 	if chosen_ability.target_type == Ability.TARGET_TYPE.TILE: chosen_ability.use_ability_on_target_tile(target_tile)
 	else: chosen_ability.use_ability_on_target_character(target_char)
 	
 	await chosen_ability.ability_finished
+	await combatant.get_tree().create_timer(1.0).timeout
+
+func _play_targeting_animation() -> void:
+	if chosen_ability.targeting_animation == CharacterModelHandler.CharAnimation.NULL: return 
+
+	if chosen_ability.targeting_animation == CharacterModelHandler.CharAnimation.CASTING:
+		combatant.char_model_handler.start_casting_effects()
+	
+	combatant.char_model_handler.play_animation(chosen_ability.targeting_animation, false)
+
+	await combatant.get_tree().create_timer(1 + chosen_ability.ability_power).timeout
+	combatant.char_model_handler.stop_casting_effects()
+	
+	chosen_ability.use_ability_on_target_character(target_char)
 
 func _filter_non_usable_abilities(abilities:Array[Ability]) -> Array[Ability]:
 	var usable_abilities:Array[Ability] = abilities.duplicate().filter(func(abi:Ability): return abi.current_cooldown == 0)

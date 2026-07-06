@@ -102,7 +102,6 @@ func get_range() -> int:
 	var range_increase:int = 0
 	if ability_tags.has(ABILITY_TAG.SPELL): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_RANGE]
 	if ability_tags.has(ABILITY_TAG.RANGED): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
-	print("Abi range:", ability_range)
 	return ability_range + range_increase
 	
 #Override

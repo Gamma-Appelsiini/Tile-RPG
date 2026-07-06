@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cq63aydedr4fm" path="res://Tile-RPG/UI/Menus/main_menu.tscn" id="12_r4noa"]
 [ext_resource type="PackedScene" uid="uid://bhya384vo3b7b" path="res://Tile-RPG/UI/Menus/loading_screen.tscn" id="14_24ytg"]
 
-[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "start_menu", "loot_window", "crafting_window")]
+[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "loot_window", "crafting_window")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +35,6 @@ menu_buttons = NodePath("MenuButtons")
 shop_window = NodePath("ShopWindow")
 main_menu = NodePath("MainMenu")
 loading_screen = NodePath("LoadingScreen")
-start_menu = NodePath("")
 loot_window = NodePath("LootWindow")
 crafting_window = NodePath("CraftingWindow")
 
