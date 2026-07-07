@@ -1,9 +1,19 @@
 [gd_scene format=3 uid="uid://dac2s2r20qif4"]
 
-[ext_resource type="Script" uid="uid://dsbfjamtkibgf" path="res://Tile-RPG/UI/DamageNumber/dmg_number.gd" id="1_fljb1"]
+[ext_resource type="Script" uid="uid://d3nciah8aj1oh" path="res://Tile-RPG/UI/DamageNumber/damage_number.gd" id="1_ohw5c"]
+[ext_resource type="Material" uid="uid://fe40pih55fp1" path="res://Tile-RPG/Materials/ShaderMaterials/damage_number_material.tres" id="2_fljb1"]
 [ext_resource type="FontFile" uid="uid://b1x6glvnxmaeu" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-SemiBold.ttf" id="2_ohw5c"]
-[ext_resource type="Material" uid="uid://d2aa7m0xj50m" path="res://Tile-RPG/Materials/ShaderMaterials/dmg_number_material.tres" id="2_ufsas"]
 [ext_resource type="Shader" uid="uid://kn40q3r6vb31" path="res://Tile-RPG/Shaders/damage_number_shader.gdshader" id="3_ohw5c"]
+
+[sub_resource type="Gradient" id="Gradient_fljb1"]
+offsets = PackedFloat32Array(0.20502092, 0.4707113, 1)
+colors = PackedColorArray(0.91666675, 1, 0, 1, 0.99999994, 0.0057959533, 0.24278575, 1, 0.99999994, 0.0057959533, 0.24278575, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
+gradient = SubResource("Gradient_fljb1")
+width = 200
+height = 70
+fill_from = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fljb1"]
 shader = ExtResource("3_ohw5c")
@@ -18,36 +28,49 @@ shader_parameter/Position_Min = 0.25
 shader_parameter/Position_Max = 0.5
 shader_parameter/Alpha = 1.0
 
-[node name="DamageNumber" type="CenterContainer" unique_id=1508905663]
+[node name="DamageNumber" type="CenterContainer" unique_id=1508905663 node_paths=PackedStringArray("number_label")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -37.0
-offset_top = -32.5
-offset_right = 37.0
-offset_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 6
+size_flags_vertical = 6
 mouse_filter = 2
-script = ExtResource("1_fljb1")
+use_top_left = true
+script = ExtResource("1_ohw5c")
+number_label = NodePath("NumberLabel")
 
 [node name="NumberLabel" type="Label" parent="." unique_id=533473063]
 unique_name_in_owner = true
 clip_children = 2
 texture_filter = 2
-material = ExtResource("2_ufsas")
+material = ExtResource("2_fljb1")
 layout_mode = 2
+offset_transform_position = Vector2(-127.745, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 1
+theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("2_ohw5c")
 theme_override_font_sizes/font_size = 55
-text = "123"
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NumberLabel" unique_id=1450688566]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.5
+offset_right = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_eaqtt")
+expand_mode = 2
+stretch_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="NumberLabel" unique_id=428341922]
 visible = false

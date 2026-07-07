@@ -6,14 +6,15 @@ class_name DmgNumber
 @export var max_horizontal_drift: float = 14.0
 @onready var number_label: Label = %NumberLabel
 
-const TAKE_DAMAGE_MATERIAL := preload("uid://b72rjc52ql4wf")
+const DMG_NUMBER_MATERIAL := preload("uid://d2aa7m0xj50m")
 
 var offset:Vector3 = Vector3(0.5,1.5,0.5)
-var number_material:ShaderMaterial = TAKE_DAMAGE_MATERIAL.duplicate()
+var number_material:ShaderMaterial = DMG_NUMBER_MATERIAL.duplicate()
 var position_node:Node3D = null
 var free_to_use:bool = true
 
 func _ready() -> void:
+	hide()
 	set_process(false)
 	number_label.material = number_material
 	number_material.set_shader_parameter("seed", randf())
@@ -26,12 +27,15 @@ func _process(_delta: float) -> void:
 	
 	var screen_position:Vector2 = get_viewport().get_camera_3d().unproject_position(position_node.global_transform.origin + offset)
 	self.global_position = screen_position
-	
-	if number_material.get_shader_parameter("progress") == lifetime:
+
+	if number_material.get_shader_parameter("progress") == 1.0:
 		set_process(false)
 		free_to_use = true
+		
+		hide()
 
 func setup(value: int, target_node:Node3D, is_crit: bool = false) -> void:
+	show()
 	offset = Vector3(randf_range(-0.2,0.2),randf_range(1.45,1.85),randf_range(-0.2,0.2))
 	free_to_use = false
 	position_node = target_node

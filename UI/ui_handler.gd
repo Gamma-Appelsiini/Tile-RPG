@@ -17,9 +17,10 @@ class_name UIHandler
 @export var crafting_window: CraftingWindow = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
+const DAMAGE_NUMBER = preload("uid://dac2s2r20qif4")
 
 var in_combat:bool = false
-var dmg_numbers:Array[DmgNumber] = []
+var dmg_numbers:Array[DamageNumber] = []
 
 func _ready() -> void:
 	GlobalSignals.show_damage_number.connect(show_damage_number)
@@ -33,7 +34,9 @@ func _ready() -> void:
 
 func _generate_dmg_numbers() -> void:
 	while dmg_numbers.size() < 10:
-		dmg_numbers.push_back(DAMAGE_NUMBER_SCENE.instantiate())
+		var new_number:DamageNumber = DAMAGE_NUMBER.instantiate()
+		add_child(new_number)
+		dmg_numbers.push_back(new_number)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Character"):
@@ -116,16 +119,16 @@ func save_to_data(save_data:Dictionary) -> void:
 	save_data["ability_bar"] = ability_bar.save_to_data()
 
 func show_damage_number(amount:int, target_node:Node3D, crit:bool = false) -> void:
-	var free_dmg_number:DmgNumber = null
+	var free_dmg_number:DamageNumber = null
 	for i:int in len(dmg_numbers):
 		if dmg_numbers[i].free_to_use: free_dmg_number = dmg_numbers[i]
 		
 	if free_dmg_number == null:
-		dmg_numbers.push_back(DAMAGE_NUMBER_SCENE.instantiate())
+		dmg_numbers.push_back(DAMAGE_NUMBER.instantiate())
 		free_dmg_number = dmg_numbers.back()
+		add_child(free_dmg_number)
 
-	add_child(free_dmg_number)
-	free_dmg_number.setup(amount,target_node, crit)
+	free_dmg_number.spawn_at_node(amount,target_node, crit)
 
 func show_miss_text(miss_text:String, target_node:Node3D) -> void:
 	return
