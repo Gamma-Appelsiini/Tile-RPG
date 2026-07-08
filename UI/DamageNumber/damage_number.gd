@@ -2,12 +2,14 @@ extends Control
 class_name DamageNumber
 
 @export var number_label:Label = null
+@export var text_gradient:GradientTexture2D = null
 
 const DURATION:float = 1.5
 const DAMAGE_NUMBER_MATERIAL := preload("uid://fe40pih55fp1")
 const DAMAGE_NUMBER_GRADIENT := preload("uid://b7uj8f4tclini")
-const OUTLINE_SIZE:int = 7
-const FONT_SIZE:int = 55
+const DAMAGE_NUMBER_CRIT_GRADIENT := preload("uid://bnf1hn57eskdt")
+const OUTLINE_SIZE:int = 5
+const FONT_SIZE:int = 45
 const UP_HEIGHT:float = 100
 
 var offset:Vector3 = Vector3(0.5,1.5,0.5)
@@ -21,16 +23,37 @@ func _ready() -> void:
 	number_label.material = damage_material
 	set_process(false)
 
-func spawn_text_at_node(new_text:String, target_pos:Node3D, font_color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
+func spawn_text_at_node(new_text:String, target_pos:Node3D, color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
+	free_to_use = false
+	_reset_visuals()
+	
 	self.position_node = target_pos
 	number_label.text = new_text
+	_set_text_gradient(color)
+	damage_material.set_shader_parameter("gradient_texture", text_gradient)
+	offset = Vector3(randf_range(-0.2,0.2),randf_range(-0.2,0.2),randf_range(-0.2,0.2))
 	
-	number_label.add_theme_color_override("font_outline_color", Color(0.065, 0.006, 0.0, 1.0))
-	number_label.add_theme_color_override("font_color", font_color)
-	
-	offset = Vector3(randf_range(-0.2,0.2),randf_range(1.45,1.85),randf_range(-0.2,0.2))
 	set_process(true)
+	show()
 	_animate_label()
+
+#gradient has 2 points, set the two points to be the color slightly hue shifted to different directions
+func _set_text_gradient(color:Color) -> void:
+	var shift: float = 0.05 
+	
+	var h: float = color.h
+	var s: float = color.s
+	var v: float = color.v
+	var a: float = color.a
+	
+	var h1: float = wrapf(h - shift, 0.0, 1.0)
+	var h2: float = wrapf(h + shift, 0.0, 1.0)
+	
+	var color1: Color = Color.from_hsv(h1, s, v, a)
+	var color2: Color = Color.from_hsv(h2, s, v, a)
+
+	text_gradient.gradient.set_color(0, color1)
+	text_gradient.gradient.set_color(1, color2)
 
 func _reset_visuals() -> void:
 	up_offset = 0
@@ -40,7 +63,7 @@ func _reset_visuals() -> void:
 	
 	number_label.add_theme_font_size_override("font_size", FONT_SIZE)
 	damage_material.set_shader_parameter("is_crit", false)
-	damage_material.set_shader_parameter("gradient_texture", DAMAGE_NUMBER_GRADIENT)
+	damage_material.set_shader_parameter("gradient_texture", DAMAGE_NUMBER_CRIT_GRADIENT)
 	number_label.add_theme_constant_override("outline_size", OUTLINE_SIZE)
 
 func spawn_at_node(number:int, target_pos:Node3D, crit:bool = false) -> void:
@@ -50,7 +73,7 @@ func spawn_at_node(number:int, target_pos:Node3D, crit:bool = false) -> void:
 	self.position_node = target_pos
 	number_label.text = str(number)
 	#TODO get height
-	offset = Vector3(randf_range(-0.2,0.2),randf_range(1.45,1.85),randf_range(-0.2,0.2))
+	offset = Vector3(randf_range(-0.2,0.2),randf_range(-0.2,0.2),randf_range(-0.2,0.2))
 	set_process(true)
 	show()
 	

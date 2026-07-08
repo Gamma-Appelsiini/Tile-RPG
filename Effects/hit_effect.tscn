@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bh8ym5yvmklps"]
+[gd_scene format=3 uid="uid://bh8ym5yvmklps"]
 
 [ext_resource type="Script" uid="uid://dfopx7c0fiupk" path="res://Tile-RPG/Effects/hit_effect.gd" id="1_nwr1t"]
 [ext_resource type="AudioStream" uid="uid://dfou684kfibmc" path="res://Tile-RPG/Sounds/Effects/small_rock.mp3" id="2_fyibu"]
@@ -43,12 +43,13 @@ alpha_curve = SubResource("CurveTexture_s035r")
 
 [sub_resource type="QuadMesh" id="QuadMesh_oh2la"]
 
-[node name="HitEffect" type="Node3D"]
+[node name="HitEffect" type="Node3D" unique_id=1315288579 node_paths=PackedStringArray("gpu_particles_3d")]
 script = ExtResource("1_nwr1t")
+gpu_particles_3d = NodePath("GPUParticles3D")
 start_on_spawn = true
 effect_sound = ExtResource("2_fyibu")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=908617246]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.056806922, 0, 0)
 material_override = SubResource("ShaderMaterial_u75fo")

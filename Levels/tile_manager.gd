@@ -230,6 +230,7 @@ func _input(event: InputEvent) -> void:
 		if hovered_tile:
 			print("tile pos: ", hovered_tile.global_position)
 
+
 func enable_shooting() -> void:
 	set_process_input(true)
 	shooting = true

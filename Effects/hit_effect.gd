@@ -6,7 +6,7 @@ class_name HitEffect
 @export var gradient:GradientTexture1D = null
 @export var hit_sounds:Array[AudioStream] = []
 
-@onready var gpu_particles_3d: GPUParticles3D = %GPUParticles3D
+@export var gpu_particles_3d: GPUParticles3D = null
 
 func _ready() -> void:
 	_handle_hit_modifications()
@@ -23,6 +23,7 @@ func _handle_hit_modifications() -> void:
 
 #Overrided
 func play_effect() -> void:
+	show() 
 	_play_effect_sound()
 	gpu_particles_3d.emitting = true
 	await get_tree().create_timer(gpu_particles_3d.lifetime).timeout

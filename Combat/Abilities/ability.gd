@@ -270,13 +270,11 @@ func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
 	attack.main_damage_type = weapon.damage_type
 	attack.base_crit_chance = weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT]
 	attack.base_crit_multiplier = weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER]
-	attack.calculate_crit()
+	attack.calculate_crit()	
 
 func _get_hit_position(target:GameCharacter) -> Vector3:
-	var pos:Vector3 = target.global_position + Vector3(0,1.5,0)
-	
+	var pos:Vector3 = target.heigth_node.global_position + Vector3(0,randf_range(-0.2,0.2),0)
 	pos = pos.move_toward(ability_owner.global_position, 0.35)
-	
 	return pos
 
 func _spawn_hit_effect(target:GameCharacter) -> void:

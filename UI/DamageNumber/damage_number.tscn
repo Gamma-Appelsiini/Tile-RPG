@@ -3,30 +3,14 @@
 [ext_resource type="Script" uid="uid://d3nciah8aj1oh" path="res://Tile-RPG/UI/DamageNumber/damage_number.gd" id="1_ohw5c"]
 [ext_resource type="Material" uid="uid://fe40pih55fp1" path="res://Tile-RPG/Materials/ShaderMaterials/damage_number_material.tres" id="2_fljb1"]
 [ext_resource type="FontFile" uid="uid://b1x6glvnxmaeu" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-SemiBold.ttf" id="2_ohw5c"]
-[ext_resource type="Shader" uid="uid://kn40q3r6vb31" path="res://Tile-RPG/Shaders/damage_number_shader.gdshader" id="3_ohw5c"]
 
-[sub_resource type="Gradient" id="Gradient_fljb1"]
-offsets = PackedFloat32Array(0.20502092, 0.4707113, 1)
-colors = PackedColorArray(0.91666675, 1, 0, 1, 0.99999994, 0.0057959533, 0.24278575, 1, 0.99999994, 0.0057959533, 0.24278575, 1)
+[sub_resource type="Gradient" id="Gradient_ohw5c"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
-gradient = SubResource("Gradient_fljb1")
-width = 200
-height = 70
-fill_from = Vector2(1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fljb1"]
-shader = ExtResource("3_ohw5c")
-shader_parameter/Line_Smoothness = 0.10000000149012
-shader_parameter/Line_Width = 0.1250000059375
-shader_parameter/Brightness = 3.0
-shader_parameter/Rotation_deg = -22.1429967767925
-shader_parameter/Distortion = 1.8
-shader_parameter/Speed = 0.4
-shader_parameter/Position = 0.0
-shader_parameter/Position_Min = 0.25
-shader_parameter/Position_Max = 0.5
-shader_parameter/Alpha = 1.0
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ohw5c"]
+gradient = SubResource("Gradient_ohw5c")
+fill_from = Vector2(0.0056980057, 0.5840456)
+fill_to = Vector2(0.4900285, 0.46723646)
 
 [node name="DamageNumber" type="CenterContainer" unique_id=1508905663 node_paths=PackedStringArray("number_label")]
 anchors_preset = 8
@@ -42,6 +26,7 @@ mouse_filter = 2
 use_top_left = true
 script = ExtResource("1_ohw5c")
 number_label = NodePath("NumberLabel")
+text_gradient = SubResource("GradientTexture2D_ohw5c")
 
 [node name="NumberLabel" type="Label" parent="." unique_id=533473063]
 unique_name_in_owner = true
@@ -54,30 +39,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("2_ohw5c")
 theme_override_font_sizes/font_size = 55
-text = "1"
+text = "MISS"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="NumberLabel" unique_id=1450688566]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -58.5
-offset_right = 33.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_eaqtt")
-expand_mode = 2
-stretch_mode = 3
-
-[node name="ColorRect" type="ColorRect" parent="NumberLabel" unique_id=428341922]
-visible = false
-material = SubResource("ShaderMaterial_fljb1")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

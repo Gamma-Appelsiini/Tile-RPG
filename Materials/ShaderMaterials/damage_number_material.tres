@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://fe40pih55fp1"]
 
 [ext_resource type="Shader" uid="uid://coxdkso563k5j" path="res://Tile-RPG/Shaders/damage_label_shader.gdshader" id="1_2xfcw"]
-[ext_resource type="Texture2D" uid="uid://b7uj8f4tclini" path="res://Tile-RPG/Materials/Textures/damage_number_gradient.tres" id="2_lqpjg"]
+[ext_resource type="Texture2D" uid="uid://bnf1hn57eskdt" path="res://Tile-RPG/Materials/Textures/damage_number_crit_gradient.tres" id="2_lqpjg"]
 
 [resource]
 shader = ExtResource("1_2xfcw")
@@ -15,6 +15,6 @@ shader_parameter/shine_speed = 1.6790000797525
 shader_parameter/shine_width = 0.16600000625506
 shader_parameter/shine_color = Color(1, 0.9, 0.7, 1)
 shader_parameter/is_crit = false
-shader_parameter/crit_pulse_speed = 1.5230000248425
+shader_parameter/crit_pulse_speed = 2.0000000475
 shader_parameter/crit_aura_color = Color(1, 1, 1, 0)
-shader_parameter/crit_shake_intensity = 0.7470000354825
+shader_parameter/crit_shake_intensity = 2.000000095

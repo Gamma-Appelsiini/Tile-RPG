@@ -82,7 +82,7 @@ static func _receive_damage() -> void:
 	_animate_take_damage_effect(receiver)
 	receiver.got_hit.emit()
 
-	GlobalSignals.show_damage_number.emit(final_damage, receiver, attack.crit)
+	GlobalSignals.show_damage_number.emit(final_damage, receiver.heigth_node, attack.crit)
 	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, -final_damage)
 	
 	if receiver.stat_handler.get_stat_amount(Stats.ResourceStat.CURRENT_HP) > 0:
@@ -115,7 +115,7 @@ static func _does_receiver_dodge() -> bool:
 	if hit_chance < randi_range(1,100):
 		receiver.stat_handler.attacks_dodged_in_a_row += 1
 		receiver.dodged.emit()
-		GlobalSignals.show_miss_text.emit("MISS", receiver)
+		GlobalSignals.show_miss_text.emit("MISS", receiver.heigth_node)
 		
 		receiver.rotate_towards_point(attack.attacker.global_position)
 		receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.DODGE)
@@ -129,7 +129,7 @@ static func _does_receiver_block() -> bool:
 	var blocked:bool = _is_attack_blocked()
 
 	if blocked:
-		GlobalSignals.show_miss_text.emit("BLOCKED", receiver)
+		GlobalSignals.show_miss_text.emit("BLOCKED", receiver.heigth_node)
 		receiver.blocked.emit()
 		_handle_thorns()
 		

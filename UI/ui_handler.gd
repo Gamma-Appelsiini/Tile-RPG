@@ -119,6 +119,10 @@ func save_to_data(save_data:Dictionary) -> void:
 	save_data["ability_bar"] = ability_bar.save_to_data()
 
 func show_damage_number(amount:int, target_node:Node3D, crit:bool = false) -> void:
+	var free_dmg_number:DamageNumber = _get_free_dmg_number()
+	free_dmg_number.spawn_at_node(amount,target_node, crit)
+
+func _get_free_dmg_number() -> DamageNumber:
 	var free_dmg_number:DamageNumber = null
 	for i:int in len(dmg_numbers):
 		if dmg_numbers[i].free_to_use: free_dmg_number = dmg_numbers[i]
@@ -127,16 +131,14 @@ func show_damage_number(amount:int, target_node:Node3D, crit:bool = false) -> vo
 		dmg_numbers.push_back(DAMAGE_NUMBER.instantiate())
 		free_dmg_number = dmg_numbers.back()
 		add_child(free_dmg_number)
-
-	free_dmg_number.spawn_at_node(amount,target_node, crit)
+	
+	return free_dmg_number
 
 func show_miss_text(miss_text:String, target_node:Node3D) -> void:
-	return
-	var new_number:DamageNumber = DAMAGE_NUMBER_SCENE.instantiate()
-	add_child(new_number)
-	new_number.spawn_text_at_node(miss_text, target_node)
+	const MISS_COLOR:Color = Color(0.222, 0.211, 1.0, 1.0)
+	var free_dmg_number:DamageNumber = _get_free_dmg_number()
+	free_dmg_number.spawn_text_at_node(miss_text, target_node, MISS_COLOR)
 	
 func show_text_at_pos(miss_text:String, target_node:Node3D, font_color:Color) -> void:
-	var new_number:DamageNumber = DAMAGE_NUMBER_SCENE.instantiate()
-	add_child(new_number)
-	new_number.spawn_text_at_node(miss_text, target_node, font_color)
+	var free_dmg_number:DamageNumber = _get_free_dmg_number()
+	free_dmg_number.spawn_text_at_node(miss_text, target_node, font_color)
