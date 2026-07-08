@@ -20,11 +20,11 @@ const MAIN_STAT_COLORS := {
 	
 const MAIN_STAT_DESCRIPTIONS := {
 	Stats.MainStat.AGILITY: "To be where they are not",
-	Stats.MainStat.ENDURANCE: "The will to carry the burden",
-	Stats.MainStat.LUCK: "Some more fortunate than others",
+	Stats.MainStat.ENDURANCE: "Enduring will to carry the burden",
+	Stats.MainStat.LUCK: "Some are more fortunate than others",
 	Stats.MainStat.MIGHT: "Overpowering enemies",
 	Stats.MainStat.MYSTIC: "Knowing what remains unseen",
-	Stats.MainStat.SKILL: "The skilled always beat the one who lacks it",
+	Stats.MainStat.SKILL: "The skilled always beat the ones who lack it",
 	Stats.MainStat.VALOR: "Burn bright so others may see",}
 
 const MAIN_STAT_SCALING := {
@@ -92,6 +92,24 @@ const RES_PICS := {
 	Stats.DmgType.MYSTICAL: "res://Tile-RPG/Images/Stats/magic.png",
 	Stats.DmgType.PHYSICAL: "res://Tile-RPG/Images/Stats/physical.png",
 	Stats.DmgType.TOXIC: "res://Tile-RPG/Images/Stats/toxic.png",
+}
+
+const SKILLS_PICS := {
+	Stats.SkillStat.VIGOR: "res://Tile-RPG/Images/Stats/vigor.png",
+	Stats.SkillStat.FOCUS: "res://Tile-RPG/Images/Stats/focus.png",
+	Stats.SkillStat.INSIGHT: "res://Tile-RPG/Images/Stats/insight.png"
+}
+
+const SKILLS_COLORS := {
+	Stats.SkillStat.VIGOR: "ff838c",
+	Stats.SkillStat.FOCUS: "5effc0",
+	Stats.SkillStat.INSIGHT: "8093ff"
+}
+
+const SKILLS_NAMES := {
+	Stats.SkillStat.VIGOR: "Vigor",
+	Stats.SkillStat.FOCUS: "Focus",
+	Stats.SkillStat.INSIGHT: "Insight"
 }
 
 const RES_NAMES := {
@@ -185,4 +203,13 @@ const DEF_COLORS := {
 	Stats.Defence.DODGE: "#38df68",
 	Stats.Defence.SPELL_DODGE: "#ed6fbd",
 	Stats.Defence.GLANCE: "#d0556c"}
-	
+
+const DEF_PICS := {
+	Stats.Defence.ARMOR: "res://Tile-RPG/Images/Stats/armor.png",
+	Stats.Defence.EVASION: "res://Tile-RPG/Images/Stats/evasion.png",
+	Stats.Defence.WARD: "res://Tile-RPG/Images/Stats/ward.png",
+	Stats.Defence.BLOCK: "res://Tile-RPG/Images/Stats/block.png",
+	Stats.Defence.SPELL_BLOCK: "res://Tile-RPG/Images/Stats/spell_block.png",
+	Stats.Defence.DODGE: "res://Tile-RPG/Images/Stats/dodge.png",
+	Stats.Defence.SPELL_DODGE: "res://Tile-RPG/Images/Stats/spell_dodge.png",
+	Stats.Defence.GLANCE: "res://Tile-RPG/Images/Stats/glance.png"}

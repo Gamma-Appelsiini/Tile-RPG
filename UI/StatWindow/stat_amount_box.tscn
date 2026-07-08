@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://baa3wachk2q7f"]
+
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="1_b2x5v"]
+[ext_resource type="Script" uid="uid://cjtrb13orvxj2" path="res://Tile-RPG/UI/StatWindow/stat_amount_box.gd" id="1_snua4"]
+[ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_snua4"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="3_dpeun"]
+
+[node name="StatAmountBox" type="VBoxContainer" unique_id=1465005866]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_snua4")
+
+[node name="StatNameLabel" type="Label" parent="." unique_id=986833475]
+layout_mode = 2
+theme = ExtResource("1_b2x5v")
+theme_override_font_sizes/font_size = 16
+text = "Armor"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1459043992]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="StatRect" type="TextureRect" parent="HBoxContainer" unique_id=1132043270]
+self_modulate = Color(0.70980394, 0.7176471, 0.7921569, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_snua4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatAmountLabel" type="Label" parent="HBoxContainer" unique_id=2091828161]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("3_dpeun")
+theme_override_font_sizes/font_size = 32
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1

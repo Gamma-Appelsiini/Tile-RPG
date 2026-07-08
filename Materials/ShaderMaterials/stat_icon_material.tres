@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cb4rkkgxtauot"]
+
+[ext_resource type="Shader" uid="uid://binagvpj8uqfn" path="res://Tile-RPG/Shaders/stat_icon_shader.gdshader" id="1_b373b"]
+
+[resource]
+shader = ExtResource("1_b373b")
+shader_parameter/stat_color = Color(0.5019608, 0.5764706, 1, 1)
+shader_parameter/shade_color = Color(2.1767131e-05, 0.057249285, 0.25442833, 1)
+shader_parameter/gradient_strength = 0.46800002223
+shader_parameter/outline_color = Color(0.032707587, 1.031803e-05, 0.18066871, 1)
+shader_parameter/outline_width = 4.0
+shader_parameter/glow_color = Color(0, 0, 0, 1)
+shader_parameter/glow_strength = 0.50000002375
+shader_parameter/glow_size = 8.0
+shader_parameter/brightness = 1.200000057

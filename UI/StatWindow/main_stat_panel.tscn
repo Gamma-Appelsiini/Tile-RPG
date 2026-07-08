@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6ga0ogmtdt61"]
+[gd_scene format=3 uid="uid://b6ga0ogmtdt61"]
 
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_i4mvd"]
 [ext_resource type="Script" uid="uid://d368hjnspsu8w" path="res://Tile-RPG/UI/StatWindow/main_stat_panel.gd" id="1_mkmlm"]
@@ -17,7 +17,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 draw_center = false
 
-[node name="MainStatPanel" type="PanelContainer"]
+[node name="MainStatPanel" type="PanelContainer" unique_id=565949736]
 anchors_preset = -1
 anchor_right = 0.2
 anchor_bottom = 0.4
@@ -31,19 +31,19 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_u83ea")
 script = ExtResource("1_mkmlm")
 
-[node name="BgRect2" type="TextureRect" parent="."]
+[node name="BgRect2" type="TextureRect" parent="." unique_id=1728408577]
 self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
 layout_mode = 2
 texture = ExtResource("3_u83ea")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1586218899]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("4_ljmis")
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=311487230]
 layout_mode = 2
 texture = ExtResource("5_g7pht")
 patch_margin_left = 10
@@ -51,18 +51,18 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1319200113]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=388881159]
 layout_mode = 2
 theme = ExtResource("3_i4mvd")
 text = "Main Stats"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=139253043]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/v_separation = -4

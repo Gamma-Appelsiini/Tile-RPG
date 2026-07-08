@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://di7mctw4yr74d"]
+[gd_scene format=3 uid="uid://di7mctw4yr74d"]
 
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_3qeme"]
 [ext_resource type="Script" uid="uid://7rplsahgutl5" path="res://Tile-RPG/UI/StatWindow/skill_panel.gd" id="2_ivc55"]
@@ -11,6 +11,7 @@
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="6_ivc55"]
 [ext_resource type="Texture2D" uid="uid://b6rwi4usnvpms" path="res://Tile-RPG/Images/Stats/insight.png" id="6_u53cc"]
 [ext_resource type="Texture2D" uid="uid://dy6xybxhtps0v" path="res://Tile-RPG/Images/Stats/vigor.png" id="7_qhbmb"]
+[ext_resource type="Material" uid="uid://cb4rkkgxtauot" path="res://Tile-RPG/Materials/ShaderMaterials/stat_icon_material.tres" id="8_b4u1d"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_egfmp"]
 texture = ExtResource("1_3qeme")
@@ -22,7 +23,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 draw_center = false
 
-[node name="SkillPanel" type="PanelContainer" node_paths=PackedStringArray("focus_amount", "insight_amount", "vigor_amount")]
+[node name="SkillPanel" type="PanelContainer" unique_id=1248339495 node_paths=PackedStringArray("focus_amount", "insight_amount", "vigor_amount")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,18 +37,18 @@ focus_amount = NodePath("PanelContainer/VBoxContainer/GridContainer/HBoxContaine
 insight_amount = NodePath("PanelContainer/VBoxContainer/GridContainer/HBoxContainer2/InsightAmount")
 vigor_amount = NodePath("PanelContainer/VBoxContainer/GridContainer/HBoxContainer3/VigorAmount")
 
-[node name="BgRect2" type="TextureRect" parent="."]
+[node name="BgRect2" type="TextureRect" parent="." unique_id=776861655]
 self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
 layout_mode = 2
 texture = ExtResource("3_gsdhw")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1390565417]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_qhbmb")
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1972139712]
 layout_mode = 2
 texture = ExtResource("5_b4u1d")
 patch_margin_left = 10
@@ -55,49 +56,50 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1494104106]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1309488144]
 layout_mode = 2
 theme = ExtResource("4_gsdhw")
 text = "Skills"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=599929745]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = -10
 columns = 3
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=296616887]
 layout_mode = 2
 theme = ExtResource("6_ivc55")
 theme_override_font_sizes/font_size = 16
 text = "Focus"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1174268991]
 layout_mode = 2
 theme = ExtResource("6_ivc55")
 theme_override_font_sizes/font_size = 16
 text = "Insight"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=428227924]
 layout_mode = 2
 theme = ExtResource("6_ivc55")
 theme_override_font_sizes/font_size = 16
 text = "Vigor"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=498705074]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-self_modulate = Color(0.50330573, 0.5770903, 0.99999934, 1)
+[node name="FocusRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer" unique_id=542225858]
+self_modulate = Color(0.5019608, 0.5764706, 1, 1)
+material = ExtResource("8_b4u1d")
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -105,7 +107,7 @@ texture = ExtResource("4_ivc55")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="FocusAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
+[node name="FocusAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer" unique_id=1075439530]
 layout_mode = 2
 theme = ExtResource("6_gsdhw")
 theme_override_font_sizes/font_size = 32
@@ -113,12 +115,12 @@ text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=695315755]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-self_modulate = Color(0.3670069, 0.9999997, 0.751761, 1)
+[node name="InsightRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=1332308808]
+self_modulate = Color(0.36862746, 1, 0.7529412, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -126,7 +128,7 @@ texture = ExtResource("6_u53cc")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="InsightAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
+[node name="InsightAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=992279394]
 layout_mode = 2
 theme = ExtResource("6_gsdhw")
 theme_override_font_sizes/font_size = 32
@@ -134,12 +136,12 @@ text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=369624982]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-self_modulate = Color(0.99999756, 0.5134415, 0.54996383, 1)
+[node name="VigorRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=1451769661]
+self_modulate = Color(1, 0.5137255, 0.54901963, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -147,7 +149,7 @@ texture = ExtResource("7_qhbmb")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VigorAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
+[node name="VigorAmount" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=696170463]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("6_gsdhw")
