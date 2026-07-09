@@ -5,24 +5,28 @@
 [ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_snua4"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="3_dpeun"]
 
-[node name="StatAmountBox" type="VBoxContainer" unique_id=1465005866]
+[node name="StatAmountBox" type="VBoxContainer" unique_id=1465005866 node_paths=PackedStringArray("stat_name_label", "stat_rect", "stat_amount_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -8
 script = ExtResource("1_snua4")
+stat_name_label = NodePath("StatNameLabel")
+stat_rect = NodePath("HBoxContainer/StatRect")
+stat_amount_label = NodePath("HBoxContainer/StatAmountLabel")
 
 [node name="StatNameLabel" type="Label" parent="." unique_id=986833475]
 layout_mode = 2
 theme = ExtResource("1_b2x5v")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Armor"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1459043992]
 layout_mode = 2
-theme_override_constants/separation = -6
+theme_override_constants/separation = -18
 
 [node name="StatRect" type="TextureRect" parent="HBoxContainer" unique_id=1132043270]
 self_modulate = Color(0.70980394, 0.7176471, 0.7921569, 1)

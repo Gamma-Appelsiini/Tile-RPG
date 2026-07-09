@@ -1,21 +1,16 @@
 extends PanelContainer
 class_name DefencePanel
 
-@export var armor_amount: Label = null
-@export var evasion_amount: Label = null
-@export var ward_amount: Label = null
-@export var glance_amount: Label = null
-@export var block_amount: Label = null
-@export var sblock_amount: Label = null
-@export var dodge_amount: Label = null
-@export var sdodge_amount: Label = null
+@export var grid_container: GridContainer = null
+
+const STAT_AMOUNT_BOX := preload("uid://baa3wachk2q7f")
+
+func _ready() -> void:
+	for def:Stats.Defence in EnumStrings.DEF_NAMES.keys():
+		var new_box:StatAmountBox = STAT_AMOUNT_BOX.instantiate()
+		new_box.set_stat(def)
+		grid_container.add_child(new_box)
 
 func update_defs(sh:StatHandler) -> void:
-	armor_amount.text = str(sh.defences[Stats.Defence.ARMOR])
-	evasion_amount.text = str(sh.defences[Stats.Defence.EVASION])
-	ward_amount.text = str(sh.defences[Stats.Defence.WARD])
-	glance_amount.text = str(sh.defences[Stats.Defence.GLANCE])
-	block_amount.text = str(sh.defences[Stats.Defence.BLOCK])
-	sblock_amount.text = str(sh.defences[Stats.Defence.SPELL_BLOCK])
-	dodge_amount.text = str(sh.defences[Stats.Defence.DODGE])
-	sdodge_amount.text = str(sh.defences[Stats.Defence.SPELL_DODGE])
+	for stat_box:StatAmountBox in grid_container.get_children():
+		stat_box.update_amount(sh.get_stat_amount(stat_box.stat))

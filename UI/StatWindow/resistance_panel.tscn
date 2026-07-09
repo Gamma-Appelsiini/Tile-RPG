@@ -1,18 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c73cgi56oj84j"]
+[gd_scene format=3 uid="uid://c73cgi56oj84j"]
 
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="1_ar6o5"]
-[ext_resource type="Texture2D" uid="uid://be8erxtlfc13h" path="res://Tile-RPG/Images/Stats/fire.png" id="2_55eqp"]
 [ext_resource type="Script" uid="uid://2dcork07rtcm" path="res://Tile-RPG/UI/StatWindow/resistance_panel.gd" id="2_g3s71"]
 [ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="3_ar6o5"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="3_h256m"]
-[ext_resource type="Texture2D" uid="uid://ds7q8eraatovc" path="res://Tile-RPG/Images/Stats/ice.png" id="4_oucjx"]
 [ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="4_qeq60"]
-[ext_resource type="Texture2D" uid="uid://ql4jiw1fnvi7" path="res://Tile-RPG/Images/Stats/lightning.png" id="5_h256m"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_xy26t"]
-[ext_resource type="Texture2D" uid="uid://b4g5r4imur8jo" path="res://Tile-RPG/Images/Stats/magic.png" id="6_ar6o5"]
-[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="6_sgwty"]
-[ext_resource type="Texture2D" uid="uid://bkr1kejrrmaoi" path="res://Tile-RPG/Images/Stats/physical.png" id="7_sgwty"]
-[ext_resource type="Texture2D" uid="uid://daink35hnrn4g" path="res://Tile-RPG/Images/Stats/toxic.png" id="8_qeq60"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qeq60"]
 texture = ExtResource("1_ar6o5")
@@ -24,7 +17,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 draw_center = false
 
-[node name="ResistancePanel" type="PanelContainer"]
+[node name="ResistancePanel" type="PanelContainer" unique_id=2139701259 node_paths=PackedStringArray("grid_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -34,19 +27,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_qeq60")
 script = ExtResource("2_g3s71")
+grid_container = NodePath("PanelContainer/VBoxContainer/GridContainer")
 
-[node name="BgRect" type="TextureRect" parent="."]
+[node name="BgRect" type="TextureRect" parent="." unique_id=157607207]
 self_modulate = Color(0.34631824, 0.3537659, 0.37611505, 1)
 layout_mode = 2
 texture = ExtResource("3_ar6o5")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=368935252]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_qeq60")
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=615601934]
 layout_mode = 2
 texture = ExtResource("5_xy26t")
 patch_margin_left = 10
@@ -54,146 +48,19 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=461269647]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=262909821]
 layout_mode = 2
 theme = ExtResource("3_h256m")
 text = "Resistances"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=687976141]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/h_separation = 36
 columns = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-tooltip_text = "Fire"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-self_modulate = Color(0.8627451, 0.19607843, 0.09803922, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("2_55eqp")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="FireLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("6_sgwty")
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-tooltip_text = "Frost"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-self_modulate = Color(0.5294118, 0.88235295, 1, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_oucjx")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="IceLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("6_sgwty")
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-tooltip_text = "Lightning"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-self_modulate = Color(0.9411765, 1, 0.43137255, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_h256m")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="LightningLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("6_sgwty")
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-tooltip_text = "Mystical"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
-self_modulate = Color(0.23529412, 0.23529412, 0.7254902, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_ar6o5")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MysticalLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("6_sgwty")
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-tooltip_text = "Physical"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
-self_modulate = Color(0.60784316, 0.64705884, 0.6666667, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("7_sgwty")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="PhysicalLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("6_sgwty")
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-tooltip_text = "Toxic"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer6"]
-self_modulate = Color(0.5882353, 0.21568628, 0.9019608, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("8_qeq60")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ToxicLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer6"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("6_sgwty")
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-max_lines_visible = 1
