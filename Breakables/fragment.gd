@@ -17,6 +17,7 @@ func _ready() -> void:
 	self.visible = false
 	set_process(false)
 	freeze = true
+	apply_shader()
 
 func _process(delta: float) -> void:
 	elapsed_time += delta
@@ -30,11 +31,6 @@ func explode(vel:Vector3) -> void:
 
 func _dissolve() -> void:
 	set_process(false)
-	
-	dissolve_shader.resource_local_to_scene = true
-	dissolve_shader = dissolve_shader.duplicate()
-	fragment_mesh.material_override = dissolve_shader
-	
 	var tween:Tween = create_tween()
 	tween.tween_property(fragment_mesh.material_override, "shader_parameter/dissolveSlider", 1, DISSOLVE_TIME)
 	
@@ -44,5 +40,9 @@ func _dissolve() -> void:
 
 func apply_shader() -> void:
 	dissolve_shader = FRAGMENT_DISSOLVE_MATERIAL.duplicate()
-	dissolve_shader.set_shader_parameter("baseColorTexture", fragment_mesh.mesh.surface_get_material(0).albedo_texture)
+	var original_material:StandardMaterial3D = fragment_mesh.mesh.surface_get_material(0)
+	dissolve_shader.set_shader_parameter("baseColorTexture", original_material.albedo_texture)
+	dissolve_shader.set_shader_parameter("normalTexture", original_material.normal_texture)
+	dissolve_shader.set_shader_parameter("heightTexture", original_material.heightmap_texture)
+	dissolve_shader.set_shader_parameter("roughnessTexture", original_material.roughness_texture)
 	fragment_mesh.material_override = dissolve_shader
