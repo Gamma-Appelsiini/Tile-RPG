@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://5jx43r23nj"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://5jx43r23nj"]
 
 [ext_resource type="Shader" uid="uid://cob6fqoifkxfi" path="res://Tile-RPG/Shaders/dissolve_shader.gdshader" id="1_8ucqn"]
 
@@ -6,6 +6,8 @@
 render_priority = 0
 shader = ExtResource("1_8ucqn")
 shader_parameter/baseColor = Color(1, 1, 1, 1)
+shader_parameter/use_roughness_texture = true
+shader_parameter/roughnessSlider = 0.5
 shader_parameter/dissolveSlider = 0.0
 shader_parameter/dissolveNoiseScale = 4.0
 shader_parameter/edgeNoiseScale = 0.0

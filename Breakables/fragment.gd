@@ -41,8 +41,15 @@ func _dissolve() -> void:
 func apply_shader() -> void:
 	dissolve_shader = FRAGMENT_DISSOLVE_MATERIAL.duplicate()
 	var original_material:StandardMaterial3D = fragment_mesh.mesh.surface_get_material(0)
+	
 	dissolve_shader.set_shader_parameter("baseColorTexture", original_material.albedo_texture)
 	dissolve_shader.set_shader_parameter("normalTexture", original_material.normal_texture)
 	dissolve_shader.set_shader_parameter("heightTexture", original_material.heightmap_texture)
-	dissolve_shader.set_shader_parameter("roughnessTexture", original_material.roughness_texture)
+	
+	if original_material.roughness_texture:
+		dissolve_shader.set_shader_parameter("roughnessTexture", original_material.roughness_texture)
+	else:
+		dissolve_shader.set_shader_parameter("use_roughness_texture", false)
+		dissolve_shader.set_shader_parameter("roughnessSlider", original_material.roughness)
+	
 	fragment_mesh.material_override = dissolve_shader

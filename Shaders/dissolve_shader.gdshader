@@ -13,10 +13,12 @@ uniform sampler2D baseColorTexture : source_color;
 
 // Group: Extra Maps
 group_uniforms extra_maps;
-uniform sampler2D normalTexture : hint_normal;            
+uniform sampler2D normalTexture : hint_normal;             
 uniform sampler2D aoTexture : hint_default_white;           
 uniform sampler2D heightTexture : hint_default_black;      
 uniform sampler2D roughnessTexture : hint_default_white;    
+uniform bool use_roughness_texture = true;
+uniform float roughnessSlider : hint_range(0.0, 1.0) = 0.5;
 
 // Group: Dissolve
 group_uniforms dissolve;
@@ -112,7 +114,6 @@ void vertex() {
 
 void fragment() {
     // Compute parallax UV coordinates using height mapping.
-    // (If no height texture is assigned, the default black returns 0.)
     vec2 texUV = uv;
     float height = texture(heightTexture, uv).r;
     float heightScale = 0.05; // Adjust for parallax intensity.
@@ -126,7 +127,6 @@ void fragment() {
     vec4 albedoColor = baseColor * texture(baseColorTexture, texUV);
     
     // Apply normal mapping.
-    // (If no normal texture is assigned, the default neutral normal is used.)
     vec3 nMap = texture(normalTexture, texUV).rgb;
     nMap = nMap * 2.0 - 1.0;
     T = normalize(TANGENT);
@@ -134,11 +134,14 @@ void fragment() {
     NORMAL = normalize(T * nMap.x + B * nMap.y + NORMAL * nMap.z);
     
     // Set ambient occlusion.
-    // (Default white AO texture yields AO = 1.0)
     AO = texture(aoTexture, texUV).r;
     
-    // Set roughness.
-    ROUGHNESS = texture(roughnessTexture, texUV).r;
+    // Set roughness based on the toggle.
+    if (use_roughness_texture) {
+        ROUGHNESS = texture(roughnessTexture, texUV).r;
+    } else {
+        ROUGHNESS = roughnessSlider;
+    }
     
     // Dissolve and edge effects.
     float dissolveNoise = cnoise(localPos * dissolveNoiseScale) * 0.5 + 0.5;
