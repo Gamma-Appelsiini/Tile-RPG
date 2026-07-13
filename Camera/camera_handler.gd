@@ -79,6 +79,10 @@ func _on_combat_end() -> void:
 	
 	combat_camera.disactivate_camera()
 	tactical_camera.disactivate_camera()
+	
+	var rounded_y: float = roundf(rad_to_deg(active_camera.pivot.rotation.y) / 45.0) * 45.0
+	player_camera.pivot.rotation.y = deg_to_rad(rounded_y)
+	
 	await switch_to_camera(player_camera.camera_3d)
 	
 	player_camera.set_as_active_camera()
