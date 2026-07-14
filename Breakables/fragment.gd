@@ -39,6 +39,10 @@ func _dissolve() -> void:
 	queue_free()
 
 func apply_shader() -> void:
+	if fragment_mesh.material_override:
+		fragment_mesh.material_override = fragment_mesh.material_override.duplicate()
+		return
+	
 	dissolve_shader = FRAGMENT_DISSOLVE_MATERIAL.duplicate()
 	var original_material:StandardMaterial3D = fragment_mesh.mesh.surface_get_material(0)
 	

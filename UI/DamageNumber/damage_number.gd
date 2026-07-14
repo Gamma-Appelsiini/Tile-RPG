@@ -30,17 +30,21 @@ func spawn_text_at_node(new_text:String, target_pos:Node3D, color:Color = Color(
 	self.position_node = target_pos
 	number_label.text = new_text
 	_set_text_gradient(color)
-	damage_material.set_shader_parameter("gradient_texture", text_gradient)
+	
 	offset = Vector3(randf_range(-0.2,0.2),randf_range(-0.2,0.2),randf_range(-0.2,0.2))
 	
 	set_process(true)
 	show()
 	_animate_label()
 
-#gradient has 2 points, set the two points to be the color slightly hue shifted to different directions
 func _set_text_gradient(color:Color) -> void:
+	if Color(1.0, 1.0, 1.0, 1.0) == color:
+		text_gradient.gradient.set_color(0, color)
+		text_gradient.gradient.set_color(1, color)
+		damage_material.set_shader_parameter("gradient_texture", text_gradient)
+		return
+		
 	var shift: float = 0.05 
-	
 	var h: float = color.h
 	var s: float = color.s
 	var v: float = color.v
@@ -54,6 +58,7 @@ func _set_text_gradient(color:Color) -> void:
 
 	text_gradient.gradient.set_color(0, color1)
 	text_gradient.gradient.set_color(1, color2)
+	damage_material.set_shader_parameter("gradient_texture", text_gradient)
 
 func _reset_visuals() -> void:
 	up_offset = 0
@@ -63,7 +68,7 @@ func _reset_visuals() -> void:
 	
 	number_label.add_theme_font_size_override("font_size", FONT_SIZE)
 	damage_material.set_shader_parameter("is_crit", false)
-	damage_material.set_shader_parameter("gradient_texture", DAMAGE_NUMBER_CRIT_GRADIENT)
+	damage_material.set_shader_parameter("gradient_texture", DAMAGE_NUMBER_GRADIENT)
 	number_label.add_theme_constant_override("outline_size", OUTLINE_SIZE)
 
 func spawn_at_node(number:int, target_pos:Node3D, crit:bool = false) -> void:
@@ -72,7 +77,6 @@ func spawn_at_node(number:int, target_pos:Node3D, crit:bool = false) -> void:
 	
 	self.position_node = target_pos
 	number_label.text = str(number)
-	#TODO get height
 	offset = Vector3(randf_range(-0.2,0.2),randf_range(-0.2,0.2),randf_range(-0.2,0.2))
 	set_process(true)
 	show()
@@ -82,7 +86,7 @@ func spawn_at_node(number:int, target_pos:Node3D, crit:bool = false) -> void:
 
 func _handle_crit() -> void:
 	number_label.add_theme_font_size_override("font_size", FONT_SIZE + 7)
-	damage_material.set_shader_parameter("gradient_texture", DAMAGE_NUMBER_GRADIENT)
+	damage_material.set_shader_parameter("gradient_texture", DAMAGE_NUMBER_CRIT_GRADIENT)
 	number_label.add_theme_constant_override("outline_size", OUTLINE_SIZE + 3)
 	damage_material.set_shader_parameter("is_crit", true)
 
