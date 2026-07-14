@@ -139,6 +139,6 @@ func show_miss_text(miss_text:String, target_node:Node3D) -> void:
 	var free_dmg_number:DamageNumber = _get_free_dmg_number()
 	free_dmg_number.spawn_text_at_node(miss_text, target_node, MISS_COLOR)
 	
-func show_text_at_pos(miss_text:String, target_node:Node3D, font_color:Color) -> void:
+func show_text_at_pos(miss_text:String, target_node:Node3D, font_color:Color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
 	var free_dmg_number:DamageNumber = _get_free_dmg_number()
 	free_dmg_number.spawn_text_at_node(miss_text, target_node, font_color)

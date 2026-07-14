@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://kqhg8g1etiif"]
+
+[ext_resource type="Shader" uid="uid://b5rfkuv2eyvk1" path="res://Tile-RPG/Shaders/gem_shader.gdshader" id="1_tnie3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_tnie3")
+shader_parameter/gem_color = Color(0.13, 0.63750017, 1, 1)
+shader_parameter/gem_transparency = 1.0
+shader_parameter/interior_brightness = 2.2
+shader_parameter/prism_intensity = 1.4
+shader_parameter/prism_sharpness = 4.0
+shader_parameter/prism_scale = 2.0
+shader_parameter/prism_speed = 0.8570000407075
+shader_parameter/prism_fresnel_power = 4.5850001940375
+shader_parameter/facet_sparkle_intensity = 1.9950000947625
+shader_parameter/facet_sparkle_size = 33.8590015608025
+shader_parameter/facet_sparkle_speed = 1.146000054435
+shader_parameter/roughness = 0.02
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_tint = Color(1, 1, 1, 1)
+shader_parameter/glow_color = Color(2.253293, 1.4328098, 0.28413314, 1)
+shader_parameter/glow_intensity = 1.6
+shader_parameter/glow_fresnel_power = 1.8
+shader_parameter/depth_darkening = 0.55
+shader_parameter/depth_layers = 1.0
+shader_parameter/env_reflection_strength = 0.7
+shader_parameter/env_color_a = Color(0.05, 0, 0.15, 1)
+shader_parameter/env_color_b = Color(0.8, 0.6, 1, 1)

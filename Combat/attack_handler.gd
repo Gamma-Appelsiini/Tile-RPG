@@ -79,8 +79,13 @@ static func _choose_take_dmg_animation(attacker:GameCharacter) -> void:
 			receiver.char_model_handler.play_animation(CharacterModelHandler.CharAnimation.TAKE_DAMAGE_FROM_FRONT)
 
 static func _receive_damage() -> void:
-	_animate_take_damage_effect(receiver)
+	for status:Status in receiver.status_handler.buffs:
+		if status is GuardStatus:
+			receiver.got_hit.emit()
+			return
+	
 	receiver.got_hit.emit()
+	_animate_take_damage_effect(receiver)
 
 	GlobalSignals.show_damage_number.emit(final_damage, receiver.heigth_node, attack.crit)
 	receiver.stat_handler.update_stat(Stats.ResourceStat.CURRENT_HP, -final_damage)

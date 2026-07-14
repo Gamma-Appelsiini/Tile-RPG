@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dbu2tcjw1ihgh"]
+
+[ext_resource type="Script" uid="uid://cwkotuan16qo6" path="res://Tile-RPG/Combat/Statuses/guard_status.gd" id="1_ptn6f"]
+
+[node name="GuardStatus" type="Node3D" unique_id=742050312]
+script = ExtResource("1_ptn6f")

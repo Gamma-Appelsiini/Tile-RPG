@@ -13,6 +13,7 @@ signal effect_done
 @export var animation_player:AnimationPlayer = null
 @export var starting_animation:String = ""
 @export var ending_animation:String = ""
+@export var looping_animation:String = ""
 
 const PLAY_STRING:String = "play_effect"
 
@@ -43,12 +44,17 @@ func play_effect() -> void:
 		animation_player.play(starting_animation)
 		await get_tree().create_timer(animation_player.current_animation_length).timeout
 	
-	animation_player.play(PLAY_STRING)
+	if animation_player.has_animation(PLAY_STRING):
+		animation_player.play(PLAY_STRING)
 	
 	if !looping and delete_on_end:
 		await get_tree().create_timer(animation_player.current_animation_length).timeout
 		end_effect()
-	elif looping and effect_sound: asp.play()
+	elif looping and effect_sound:
+		asp.play()
+	else:
+		if looping_animation != "":
+			animation_player.play(looping_animation)
 
 func end_effect() -> void:
 	animation_player.stop()

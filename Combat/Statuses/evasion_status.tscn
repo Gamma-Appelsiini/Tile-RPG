@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctryr6cqir6ne"]
+[gd_scene format=3 uid="uid://ctryr6cqir6ne"]
 
 [ext_resource type="Script" uid="uid://diovubevfne01" path="res://Tile-RPG/Combat/Statuses/evasion_buff.gd" id="1_aegw1"]
 [ext_resource type="Texture2D" uid="uid://dea3jo74a31p8" path="res://Tile-RPG/Images/Stats/evasion.png" id="2_dnmad"]
 
-[node name="EvasionStatus" type="Node"]
+[node name="EvasionStatus" type="Node" unique_id=226124425]
 script = ExtResource("1_aegw1")
 status_name = "Increased Evasion"
 picture = ExtResource("2_dnmad")
