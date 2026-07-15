@@ -41,8 +41,9 @@ axis_stretch_vertical = 2
 bg_color = Color(0.6674271, 0.927775, 0.70944804, 1)
 
 [node name="CharacterInfoBar" type="PanelContainer" unique_id=1859007216 node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar")]
-visible = false
 self_modulate = Color(1, 1, 1, 0.43137255)
+custom_minimum_size = Vector2(255, 0)
+custom_maximum_size = Vector2(255, -1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -107,9 +108,12 @@ layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_o8354")
 show_percentage = false
 
-[node name="StatusContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=989547471]
+[node name="StatusContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=1992985424]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 4
+columns = 7
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1937661202]
 layout_mode = 2

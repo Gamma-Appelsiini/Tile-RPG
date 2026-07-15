@@ -49,6 +49,7 @@ theme_override_styles/panel = ExtResource("2_svmp5")
 [node name="VBoxContainer" type="VBoxContainer" parent="TTContainer" unique_id=1023277272]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
 [node name="NameLabel" type="Label" parent="TTContainer/VBoxContainer" unique_id=28409550]
@@ -68,12 +69,14 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("4_6vqm6")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="IlvlLabel" type="Label" parent="TTContainer/VBoxContainer" unique_id=1971529964]
 unique_name_in_owner = true
+custom_maximum_size = Vector2(185, -1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5673, 0.61, 0.58865, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -83,10 +86,12 @@ theme_override_fonts/font = ExtResource("4_skqig")
 theme_override_font_sizes/font_size = 12
 text = "Lvl 5"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="WeaponStats" type="VBoxContainer" parent="TTContainer/VBoxContainer" unique_id=1422592104]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
 [node name="ImplicitLabel" type="Label" parent="TTContainer/VBoxContainer" unique_id=1163309971]
@@ -106,12 +111,14 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_constants/separation = 6
 theme_override_styles/separator = SubResource("StyleBoxLine_8sl7m")
 
 [node name="AffixContainer" type="VBoxContainer" parent="TTContainer/VBoxContainer" unique_id=351438378]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 1
 
 [node name="AffLabelTemplate" type="Label" parent="TTContainer/VBoxContainer/AffixContainer" unique_id=1980454599]
@@ -131,11 +138,13 @@ unique_name_in_owner = true
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 6
 
 [node name="PriceContainer" type="HBoxContainer" parent="TTContainer/VBoxContainer" unique_id=850199922]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 6
 alignment = 1
 
@@ -143,7 +152,6 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.896251, 0.712011, 0.456124, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3

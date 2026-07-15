@@ -2,6 +2,7 @@ extends Node
 class_name StatusHandler
 
 signal status_added(status:Status)
+signal status_removed(status:Status)
 
 const GENERIC_BUFF_EFFECT := preload("uid://b8xk37t3i1ps4")
 const GENERIC_DEBUFF_EFFECT := preload("uid://duwkcoksgw1mw")
@@ -54,7 +55,7 @@ func add_status(new_status:Status) -> void:
 	new_status.connect_status(gchar)
 	
 	for affix:Affix in new_status.affixes:
-		gchar.stat_handler.update_stat(affix.increase_amount, affix.type_increase)
+		gchar.stat_handler.update_stat(affix.type_increase, affix.increase_amount)
 
 	array_to_apply.push_back(new_status)
 	if new_status.is_crowd_control: stun_resistance += STUN_RESISTANCE_PER_STUN

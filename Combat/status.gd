@@ -50,4 +50,5 @@ func on_status_added() -> void:
 	
 #Override this
 func on_status_removed() -> void:
+	remove_status.emit()
 	queue_free()

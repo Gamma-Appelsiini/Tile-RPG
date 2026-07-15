@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cwgg57mh7e61w"]
+
+[ext_resource type="Script" uid="uid://wwtnvvvcax68" path="res://Tile-RPG/Combat/Abilities/guard_buffer/guard_buffer.gd" id="1_4ahne"]
+[ext_resource type="Texture2D" uid="uid://bsn3fj8ynvjn1" path="res://Tile-RPG/Images/Stats/block.png" id="2_ea71f"]
+
+[node name="GuardBuffer" type="Node3D" unique_id=607338785]
+script = ExtResource("1_4ahne")
+use_animation = 5
+targeting_animation = 6
+usable_on_characters = Array[int]([2, 0])
+ability_tags = Array[int]([0, 4, 12, 14])
+ability_main_stat = 6
+ability_icon = ExtResource("2_ea71f")
+ability_name = "God Shield"
+ability_cooldown = 3
+ap_cost = 2
+allow_diagonal = true
+ability_power = 2
+damage_desc = ""
+ability_desc = "Guards the target from the next attack"
+scaling_desc = "Range: 1 + [color=#d1b81b]Valor[/color] / 10"

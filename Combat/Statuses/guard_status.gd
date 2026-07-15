@@ -13,13 +13,14 @@ func _on_hit() -> void:
 	GlobalSignals.show_floating_text.emit("Guarded", affected_gchar.heigth_node, Color(0.788, 0.686, 0.014, 1.0))
 	affected_gchar.status_handler._remove_status(self)
 
-#Override this
+#Overrided
 func on_status_added() -> void:
 	shield_effect = GUARD_SHIELDS.instantiate()
 	affected_gchar.add_child(shield_effect)
 	shield_effect.position.y += affected_gchar.heigth_node.position.y / 2
 
-#Override this
+#Overrided
 func on_status_removed() -> void:
+	remove_status.emit()
 	shield_effect.end_effect()
 	queue_free()

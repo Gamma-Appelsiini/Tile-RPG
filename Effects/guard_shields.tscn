@@ -199,7 +199,7 @@ shader_parameter/glow_intensity = 6.9470003299825
 shader_parameter/glow_fresnel_power = 0.5
 shader_parameter/depth_darkening = 0.4750000225625
 shader_parameter/depth_layers = 5.9150002334625
-shader_parameter/env_reflection_strength = 1.2930000614175001
+shader_parameter/env_reflection_strength = 1.2930000614175
 shader_parameter/env_color_a = Color(0.66211355, 0.2854015, 0.39649063, 1)
 shader_parameter/env_color_b = Color(0.8, 0.6, 1, 1)
 
@@ -441,7 +441,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.083333336, 0.16666667, 1, -0.083333336, 0, 0, 0),
+"points": PackedFloat32Array(0.01, 0, 0, 0.083333336, 0.16666667, 1, -0.083333336, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/type = "bezier"
@@ -452,7 +452,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.083333336, 0.16666667, 1, -0.083333336, 0, 0, 0),
+"points": PackedFloat32Array(0.01, 0, 0, 0.083333336, 0.16666667, 1, -0.083333336, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/2/type = "bezier"
@@ -463,7 +463,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.083333336, 0.16666667, 1, -0.083333336, 0, 0, 0),
+"points": PackedFloat32Array(0.01, 0, 0, 0.083333336, 0.16666667, 1, -0.083333336, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/3/type = "value"

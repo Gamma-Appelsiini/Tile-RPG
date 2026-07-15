@@ -1,7 +1,7 @@
 extends Control
 class_name CharacterInfoBar
 
-@export var status_container: HBoxContainer = null
+@export var status_container: GridContainer = null
 @export var name_label: Label = null
 @export var level_label: Label = null
 @export var hp_bar: ProgressBar = null
@@ -51,6 +51,7 @@ func set_game_character(new_gc:GameCharacter):
 	game_char.infobar = self
 	
 	game_char.status_handler.status_added.connect(_add_status)
+	#game_char.status_handler.status_removed.connect(_remove_status)
 	game_char.stat_handler.stats_changed.connect(_update_info)
 	_update_info()
 	
@@ -67,12 +68,16 @@ func _update_info() -> void:
 
 func _add_status(new_status:Status):
 	var new_spanel:StatusPanel = STATUS_PANEL.instantiate()
-	new_status.remove_status.connect(_remove_status.bind(new_spanel))
+	new_status.remove_status.connect(_remove_status_panel.bind(new_spanel))
 	status_container.add_child(new_spanel)
 	new_spanel.set_status(new_status)
 	
-func _remove_status(status_panel:StatusPanel):
-	status_container.remove_child(status_panel)
+func _remove_stat() -> void:
+	pass
+	
+func _remove_status_panel(status_panel:StatusPanel) -> void:
+	if status_panel.get_parent() == status_container:
+		status_container.remove_child(status_panel)
 	status_panel.queue_free()
 
 func _process(_delta: float) -> void:

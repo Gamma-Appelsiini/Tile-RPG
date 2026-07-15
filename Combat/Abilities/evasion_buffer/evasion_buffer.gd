@@ -12,7 +12,7 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	var evasion_status:EvasionBuff = EVASION_STATUS.instantiate()
 	status_duration = 2
 	evasion_amount = 5 + ability_owner.stat_handler.get_stat_amount(Stats.MainStat.AGILITY) * 3 + ability_owner.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL) * 2
-	
+	evasion_status.description = "Evasion increased by " + str(evasion_amount)
 	evasion_status.set_evasion_stats(evasion_amount, status_duration)
 	target.status_handler.add_status(evasion_status)
 	

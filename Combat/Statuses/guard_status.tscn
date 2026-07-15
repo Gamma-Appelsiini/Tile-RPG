@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://dbu2tcjw1ihgh"]
 
 [ext_resource type="Script" uid="uid://cwkotuan16qo6" path="res://Tile-RPG/Combat/Statuses/guard_status.gd" id="1_ptn6f"]
+[ext_resource type="Texture2D" uid="uid://bsn3fj8ynvjn1" path="res://Tile-RPG/Images/Stats/block.png" id="2_uf0j3"]
 
 [node name="GuardStatus" type="Node3D" unique_id=742050312]
 script = ExtResource("1_ptn6f")
+status_name = "Guard"
+unique = true
+max_duration = 1
+picture = ExtResource("2_uf0j3")
+description = "Negate next received attack"
