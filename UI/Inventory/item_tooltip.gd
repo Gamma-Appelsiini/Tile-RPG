@@ -10,12 +10,18 @@ class_name ItemTooltip
 @export var weapon_stats: VBoxContainer
 @export var price_label: Label
 @export var price_container: HBoxContainer
-@export var price_separator: HSeparator
-@export var affix_separator: HSeparator
+@export var price_separator: TextureRect
+@export var affix_separator: TextureRect
 @export var tt_container: PanelContainer
 @export var ability_rect: TextureRect = null
+@export var gradient_rect: TextureRect = null
 
 const WL_PATH:String = "res://Tile-RPG/UI/Inventory/weapon_line.tscn"
+
+var gradient:GradientTexture2D = null
+
+func _ready() -> void:
+	gradient = gradient_rect.texture
 
 func get_tt_size() -> Vector2:
 	return tt_container.size
@@ -108,7 +114,7 @@ func _weapon_handling(new_weapon:Weapon) -> void:
 	_add_weapon_stat_label("Range: ",wep_range)
 	_add_weapon_stat_label("Crit Chance: ",crit_chance + "%")
 	_add_weapon_stat_label("Crit Multiplier: ",crit_multi + "%")
-	_add_weapon_stat_label("Scaling: ",stat_scale + " " + scale_amount + "x", Color(stat_color))
+	_add_weapon_stat_label("Scaling: ", scale_amount + "x", Color(stat_color))
 	
 func _add_weapon_stat_label(text1:String, text2:String,color_override:Color = Color("ffffff")) -> void:
 	var new_line:WeaponLine = load(WL_PATH).instantiate()
@@ -143,6 +149,7 @@ func _reset_colors() -> void:
 func _set_colors(new_item:Item) -> void:
 	var color_string:String = EnumStrings.RARITY_COLORS[new_item.item_rarity]
 	name_label.add_theme_color_override("font_color",Color(color_string))
+	gradient.gradient.set_color(1, Color(color_string))
 	
 	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
 	stylebox.border_color = Color(color_string)

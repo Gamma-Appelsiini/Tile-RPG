@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://dgw82tir2fr0q"]
+
+[ext_resource type="Texture2D" uid="uid://b2k2et5ac8274" path="res://Tile-RPG/Images/UI/Borders/border_metal1.png" id="1_c2c1w"]
+[ext_resource type="Shader" uid="uid://dpf54pr4w663f" path="res://Tile-RPG/UI/Inventory/item_name_container.gdshader" id="2_mgeyu"]
+[ext_resource type="FontVariation" uid="uid://4ohos258ag" path="res://Tile-RPG/Fonts/spectralSC_font_variation.tres" id="3_di8sn"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="3_e0prf"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_di8sn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e0prf"]
+texture = ExtResource("1_c2c1w")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+draw_center = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckr0t"]
+shader = ExtResource("2_mgeyu")
+shader_parameter/uv_scale = Vector2(1, 0.1)
+
+[sub_resource type="Gradient" id="Gradient_mgeyu"]
+colors = PackedColorArray(0, 0, 0, 0, 1.6364455e-06, 0.72342265, 0.6598565, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
+gradient = SubResource("Gradient_mgeyu")
+fill_from = Vector2(1, 0.64102566)
+fill_to = Vector2(1, 0.11396012)
+
+[node name="ItemNameContainer" type="PanelContainer" unique_id=409037229]
+custom_minimum_size = Vector2(0, 45)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -19.0
+offset_right = 102.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_e0prf")
+
+[node name="BgRect" type="TextureRect" parent="." unique_id=1447751109]
+self_modulate = Color(0.54, 0.54, 0.54, 0.91764706)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ckr0t")
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 1)
+mouse_filter = 2
+texture = ExtResource("3_e0prf")
+expand_mode = 1
+
+[node name="GradientRect" type="TextureRect" parent="." unique_id=1956524354]
+self_modulate = Color(0.8521372, 0.8521372, 0.8521372, 0.49400002)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ckr0t")
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_eaqtt")
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="." unique_id=1141901834]
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69803923)
+theme_override_constants/line_spacing = -4
+theme_override_fonts/font = ExtResource("3_di8sn")
+theme_override_font_sizes/font_size = 16
+text = "Default Name of Greater asding"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1713418393]
+self_modulate = Color(1, 1, 1, 0.31300002)
+layout_mode = 2
+texture = ExtResource("5_di8sn")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10

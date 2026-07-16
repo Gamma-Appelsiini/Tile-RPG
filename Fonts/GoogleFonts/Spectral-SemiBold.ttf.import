@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cql0xcb3nskgy"
-path="res://.godot/imported/Primitive-4yGY.ttf-00668623856c8cc904342387d476e0c5.fontdata"
+uid="uid://24hmrcin6ag5"
+path="res://.godot/imported/Spectral-SemiBold.ttf-d40b62ff7c8d7ed6c17fd591894059e5.fontdata"
 
 [deps]
 
-source_file="res://Tile-RPG/Fonts/Primitive-4yGY.ttf"
-dest_files=["res://.godot/imported/Primitive-4yGY.ttf-00668623856c8cc904342387d476e0c5.fontdata"]
+source_file="res://Tile-RPG/Fonts/GoogleFonts/Spectral-SemiBold.ttf"
+dest_files=["res://.godot/imported/Spectral-SemiBold.ttf-d40b62ff7c8d7ed6c17fd591894059e5.fontdata"]
 
 [params]
 
@@ -21,7 +21,8 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
+modulate_color_glyphs=false
+hinting=3
 subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0

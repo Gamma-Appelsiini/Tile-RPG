@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://gfbtpvpx47v"]
+[gd_scene format=3 uid="uid://gfbtpvpx47v"]
 
 [ext_resource type="Script" uid="uid://bfujl0of2m7mo" path="res://Tile-RPG/UI/Inventory/weapon_line.gd" id="1_mk68y"]
+[ext_resource type="FontFile" uid="uid://do4yeoqemwlve" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-Medium.ttf" id="2_ca804"]
+[ext_resource type="FontFile" uid="uid://b1x6glvnxmaeu" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-SemiBold.ttf" id="3_ca804"]
 
-[node name="WeaponLine" type="HBoxContainer" node_paths=PackedStringArray("label_1", "label_2")]
+[node name="WeaponLine" type="HBoxContainer" unique_id=987953711 node_paths=PackedStringArray("label_1", "label_2")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,22 +15,24 @@ script = ExtResource("1_mk68y")
 label_1 = NodePath("Label1")
 label_2 = NodePath("Label2")
 
-[node name="Label1" type="Label" parent="."]
+[node name="Label1" type="Label" parent="." unique_id=1536354750]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.70275, 0.435, 1)
+theme_override_colors/font_color = Color(0.8718718, 0.83330554, 0.6101672, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_ca804")
 theme_override_font_sizes/font_size = 12
 text = "Physical Damage: "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." unique_id=1549147741]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_ca804")
+theme_override_font_sizes/font_size = 11
 text = "5 - 15"

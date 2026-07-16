@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bvdd0umnhlivu"
-path="res://.godot/imported/MaryJaneCavazos-L9W.ttf-742f836174186d69b58933431185678c.fontdata"
+uid="uid://cggggsvfl1oay"
+path="res://.godot/imported/SpectralSC-SemiBold.ttf-a0b82a843df384ff5b368709eb1af19e.fontdata"
 
 [deps]
 
-source_file="res://Tile-RPG/Fonts/MaryJaneCavazos-L9W.ttf"
-dest_files=["res://.godot/imported/MaryJaneCavazos-L9W.ttf-742f836174186d69b58933431185678c.fontdata"]
+source_file="res://Tile-RPG/Fonts/GoogleFonts/SpectralSC-SemiBold.ttf"
+dest_files=["res://.godot/imported/SpectralSC-SemiBold.ttf-a0b82a843df384ff5b368709eb1af19e.fontdata"]
 
 [params]
 
@@ -21,7 +21,8 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
+modulate_color_glyphs=false
+hinting=3
 subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0

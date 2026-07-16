@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bh6ic5bos25ju"
-path="res://.godot/imported/Carmen-7r3B.ttf-b8349030b5812cea7f5f8e1b59b9b8d8.fontdata"
+uid="uid://do4yeoqemwlve"
+path="res://.godot/imported/Spectral-Medium.ttf-0c0f2f94560e019737dfb77ddaa60b17.fontdata"
 
 [deps]
 
-source_file="res://Tile-RPG/Fonts/Carmen-7r3B.ttf"
-dest_files=["res://.godot/imported/Carmen-7r3B.ttf-b8349030b5812cea7f5f8e1b59b9b8d8.fontdata"]
+source_file="res://Tile-RPG/Fonts/GoogleFonts/Spectral-Medium.ttf"
+dest_files=["res://.godot/imported/Spectral-Medium.ttf-0c0f2f94560e019737dfb77ddaa60b17.fontdata"]
 
 [params]
 
@@ -21,7 +21,8 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
+modulate_color_glyphs=false
+hinting=3
 subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0

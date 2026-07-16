@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" format=3 uid="uid://4ohos258ag"]
+
+[ext_resource type="FontFile" uid="uid://cqf28j6cd20lt" path="res://Tile-RPG/Fonts/GoogleFonts/SpectralSC-Medium.ttf" id="1_wtlv0"]
+
+[resource]
+base_font = ExtResource("1_wtlv0")
+spacing_glyph = -1
+spacing_space = 2
+spacing_top = -3
+spacing_bottom = -3

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b2tju4yee78wi"
-path="res://.godot/imported/Stifly-8MGpA.ttf-928f2fca4619d4f3808831d2ffd4abe4.fontdata"
+uid="uid://ci0sovox5ufo"
+path="res://.godot/imported/SpectralSC-Bold.ttf-fe21ddac8e037ba1f5d8d3d406abb39a.fontdata"
 
 [deps]
 
-source_file="res://Tile-RPG/Fonts/Stifly-8MGpA.ttf"
-dest_files=["res://.godot/imported/Stifly-8MGpA.ttf-928f2fca4619d4f3808831d2ffd4abe4.fontdata"]
+source_file="res://Tile-RPG/Fonts/GoogleFonts/SpectralSC-Bold.ttf"
+dest_files=["res://.godot/imported/SpectralSC-Bold.ttf-fe21ddac8e037ba1f5d8d3d406abb39a.fontdata"]
 
 [params]
 
@@ -21,7 +21,8 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
+modulate_color_glyphs=false
+hinting=3
 subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0

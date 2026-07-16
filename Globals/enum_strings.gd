@@ -174,13 +174,15 @@ const RARITY_NAMES := {Item.ItemRarity.POOR : "Poor",
 	Item.ItemRarity.GOD_ROLL: "God Roll",
 	Item.ItemRarity.FABLED: "Fabled"}
 
+var col:Color = Color("d08527ff")
+
 const RARITY_COLORS := {Item.ItemRarity.POOR : "#d2d2d2",
 	Item.ItemRarity.COMMON: "#32c346",
-	Item.ItemRarity.RARE: "#1469e1",
-	Item.ItemRarity.EPIC: "#6405fa",
-	Item.ItemRarity.LEGENDARY: "#e17d00",
-	Item.ItemRarity.GOD_ROLL: "#e00003",
-	Item.ItemRarity.FABLED: "#915a14"}
+	Item.ItemRarity.RARE: "#49a6fbff",
+	Item.ItemRarity.EPIC: "#7d63ffff",
+	Item.ItemRarity.LEGENDARY: "#ffa353ff",
+	Item.ItemRarity.GOD_ROLL: "#ff251cff",
+	Item.ItemRarity.FABLED: "#d08527ff"}
 
 const SLOT_STRINGS := {
 	Equipment.EquipmentSlot.MAIN_HAND: "Weapon",
