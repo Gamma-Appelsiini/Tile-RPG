@@ -18,6 +18,9 @@ func set_stat(stat_enum:int) -> void:
 	elif EnumStrings.DEF_NAMES.has(stat_enum):
 		stat_name_label.text = EnumStrings.DEF_NAMES[stat_enum]
 		stat_rect.texture = load(EnumStrings.DEF_PICS[stat_enum])
+	elif EnumStrings.MAIN_STAT_NAMES.has(stat_enum):
+		stat_name_label.text = EnumStrings.MAIN_STAT_NAMES[stat_enum]
+		stat_rect.texture = load(EnumStrings.MAIN_STAT_PICS[stat_enum])
 	else:
 		stat_name_label.text = EnumStrings.SKILLS_NAMES[stat_enum]
 		stat_rect.texture = load(EnumStrings.SKILLS_PICS[stat_enum])
@@ -31,6 +34,7 @@ func _set_material(stat_number:int) -> void:
 	
 	if EnumStrings.RES_COLORS.has(stat_number): color = Color(EnumStrings.RES_COLORS[stat_number])
 	elif EnumStrings.DEF_COLORS.has(stat_number): color = Color(EnumStrings.DEF_COLORS[stat_number])
+	elif EnumStrings.MAIN_STAT_COLORS.has(stat_number): color = Color(EnumStrings.MAIN_STAT_COLORS[stat_number])
 	else: color = Color(EnumStrings.SKILLS_COLORS[stat_number])
 	
 	new_material.set_shader_parameter("stat_color", color)

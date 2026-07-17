@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c2i7l0opoxvsd"]
+
+[ext_resource type="Script" uid="uid://clkor3ycjdnr" path="res://Tile-RPG/UI/StatWindow/compact_char_info_panel.gd" id="1_uqa08"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_o7hh8"]
+[ext_resource type="Texture2D" uid="uid://bnv6ct2eeonos" path="res://Tile-RPG/Images/UI/Borders/sharp_border5.png" id="3_25o3u"]
+
+[node name="CompactCharInfoPanel" type="PanelContainer" unique_id=1431369614]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(455, 255)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_uqa08")
+
+[node name="BgRect2" type="TextureRect" parent="." unique_id=516893962]
+self_modulate = Color(0.4326237, 0.43262374, 0.4326237, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.85, 0.8)
+mouse_filter = 2
+texture = ExtResource("2_o7hh8")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=329696473]
+layout_mode = 2
+texture = ExtResource("3_25o3u")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1583083150]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(35, 35)
+
+[node name="MainStatContainer" type="GridContainer" parent="HBoxContainer" unique_id=539066650]
+layout_mode = 2
+theme_override_constants/h_separation = -8
+theme_override_constants/v_separation = -8
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=2042885762]
+layout_mode = 2
+
+[node name="SkillContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1258192514]
+layout_mode = 2
+
+[node name="DefContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer" unique_id=2141774535]
+layout_mode = 2
+columns = 3

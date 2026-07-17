@@ -26,7 +26,7 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1459043992]
 layout_mode = 2
-theme_override_constants/separation = -18
+theme_override_constants/separation = -14
 
 [node name="StatRect" type="TextureRect" parent="HBoxContainer" unique_id=1132043270]
 self_modulate = Color(0.70980394, 0.7176471, 0.7921569, 1)
@@ -43,6 +43,6 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("3_dpeun")
 theme_override_font_sizes/font_size = 32
-text = "12"
+text = "123"
 horizontal_alignment = 1
 vertical_alignment = 1
