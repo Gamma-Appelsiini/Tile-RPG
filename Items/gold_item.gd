@@ -1,7 +1,7 @@
 extends Item
 class_name GoldItem
 
-const BUX_TEXTURE := preload("uid://ckinxcwmg4vsd")
+const BUX_TEXTURE := preload("uid://b3e2xoxcjikc8")
 const GOLD_MODEL_PATH:String = "res://Tile-RPG/Items/ItemScenes/gold_model.tscn"
 
 const GOLD_AMOUNT_RARITIES:Dictionary[int, Item.ItemRarity] = {

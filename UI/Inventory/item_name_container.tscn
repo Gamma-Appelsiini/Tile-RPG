@@ -20,14 +20,6 @@ draw_center = false
 shader = ExtResource("2_mgeyu")
 shader_parameter/uv_scale = Vector2(1, 0.1)
 
-[sub_resource type="Gradient" id="Gradient_mgeyu"]
-colors = PackedColorArray(0, 0, 0, 0, 1.6364455e-06, 0.72342265, 0.6598565, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
-gradient = SubResource("Gradient_mgeyu")
-fill_from = Vector2(1, 0.64102566)
-fill_to = Vector2(1, 0.11396012)
-
 [node name="ItemNameContainer" type="PanelContainer" unique_id=409037229]
 custom_minimum_size = Vector2(0, 45)
 anchors_preset = 8
@@ -44,23 +36,13 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e0prf")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=1447751109]
-self_modulate = Color(0.54, 0.54, 0.54, 0.91764706)
+self_modulate = Color(0.54, 0.54, 0.54, 0.49803922)
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ckr0t")
 layout_mode = 2
 offset_transform_scale = Vector2(0.5, 1)
 mouse_filter = 2
 texture = ExtResource("3_e0prf")
-expand_mode = 1
-
-[node name="GradientRect" type="TextureRect" parent="." unique_id=1956524354]
-self_modulate = Color(0.8521372, 0.8521372, 0.8521372, 0.49400002)
-texture_repeat = 2
-material = SubResource("ShaderMaterial_ckr0t")
-layout_mode = 2
-offset_transform_scale = Vector2(0.5, 1)
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_eaqtt")
 expand_mode = 1
 
 [node name="NameLabel" type="Label" parent="." unique_id=1141901834]

@@ -21,7 +21,7 @@ func _ready() -> void:
 func disable(_parent_char:GameCharacter) -> void:
 	disabled = true
 	hide()
-	set_process(false)
+	set_physics_process(false)
 	GlobalSignals.show_info_bar.disconnect(_show_pressed.bind(true))
 	GlobalSignals.hide_info_bar.disconnect(_show_pressed.bind(false))
 
@@ -80,9 +80,9 @@ func _remove_status_panel(status_panel:StatusPanel) -> void:
 		status_container.remove_child(status_panel)
 	status_panel.queue_free()
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if self.visible == false:
-		set_process(false)
+		set_physics_process(false)
 		return
 	
 	_set_screen_position()
@@ -98,5 +98,5 @@ func _set_screen_position() -> void:
 
 func show_info() -> void:
 	if disabled: return
-	set_process(true)
+	set_physics_process(true)
 	self.visible = true

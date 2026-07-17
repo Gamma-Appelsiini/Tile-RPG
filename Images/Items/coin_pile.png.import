@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckinxcwmg4vsd"
-path="res://.godot/imported/bux.png-d04bd28d8c2acab83d4305d9abeb62f4.ctex"
+uid="uid://b3e2xoxcjikc8"
+path="res://.godot/imported/coin_pile.png-b7da371d2547ed7ffb780acb6db93f6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Images/UI/bux.png"
-dest_files=["res://.godot/imported/bux.png-d04bd28d8c2acab83d4305d9abeb62f4.ctex"]
+source_file="res://Tile-RPG/Images/Items/coin_pile.png"
+dest_files=["res://.godot/imported/coin_pile.png-b7da371d2547ed7ffb780acb6db93f6e.ctex"]
 
 [params]
 

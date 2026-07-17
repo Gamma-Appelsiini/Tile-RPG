@@ -15,6 +15,7 @@ class_name ItemTooltip
 @export var tt_container: PanelContainer
 @export var ability_rect: TextureRect = null
 @export var gradient_rect: TextureRect = null
+@onready var bux_rect: TextureRect = $TTContainer/VBoxContainer/PriceContainer/CenterContainer/BuxRect
 
 const WL_PATH:String = "res://Tile-RPG/UI/Inventory/weapon_line.tscn"
 
@@ -37,11 +38,14 @@ func _reset_tooltip() -> void:
 	
 	_reset_colors()
 	
+	price_separator.show()
 	ability_rect.hide()
 	implicit_label.hide()
 	ilvl_label.show()
 	name_label.show()
 	affix_separator.show()
+	bux_rect.custom_minimum_size = Vector2(15,15)
+	price_label.add_theme_font_size_override("font_size", 14)
 
 func generate_tooltip(new_item:Item) -> void:
 	_reset_tooltip()
@@ -65,17 +69,25 @@ func generate_tooltip(new_item:Item) -> void:
 
 func _generate_gold_tooltip(_new_gold:GoldItem) -> void:
 	affix_separator.hide()
-	name_label.hide()
+	price_separator.hide()
+	_set_gradient_color(Color(1.0, 0.725, 0.03, 0.0))
+	price_container.scale = Vector2(1.5,1.5)
+	name_label.text = "Pile of Bux"
 	ilvl_label.hide()
+	bux_rect.custom_minimum_size = Vector2(25,25)
+	price_label.add_theme_font_size_override("font_size", 24)
 
 func _generate_tome_tooltip(new_tome:Tome) -> void:
 	ilvl_label.text = new_tome.ability.ability_desc
 	name_label.text = new_tome.item_name
 	ability_rect.texture = new_tome.ability.ability_icon
 	ability_rect.show()
+	affix_separator.hide()
 	
+	var tome_color:Color = Color(EnumStrings.MAIN_STAT_COLORS[new_tome.ability.ability_main_stat])
 	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
-	stylebox.border_color = Color(EnumStrings.MAIN_STAT_COLORS[new_tome.ability.ability_main_stat])
+	stylebox.border_color = tome_color
+	_set_gradient_color(tome_color)
 
 func _equipment_handling(new_equipment:Equipment) -> void:
 	ilvl_label.visible = true
@@ -106,7 +118,7 @@ func _weapon_handling(new_weapon:Weapon) -> void:
 	var wep_range:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.RANGE])
 	var crit_chance:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT])
 	var crit_multi:String = str(new_weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER])
-	var stat_scale:String = EnumStrings.MAIN_STAT_NAMES[new_weapon.scale_stat]
+	#var stat_scale:String = EnumStrings.MAIN_STAT_NAMES[new_weapon.scale_stat]
 	var scale_amount:String = str(float(new_weapon.weapon_stats[Weapon.WeaponStat.SCALE_AMOUNT]) / 100)
 	var stat_color:String = EnumStrings.MAIN_STAT_COLORS[new_weapon.scale_stat]
 	
@@ -145,11 +157,17 @@ func _reset_colors() -> void:
 	name_label.remove_theme_color_override("font_color")
 	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
 	stylebox.border_color = Color(EnumStrings.RARITY_COLORS[Item.ItemRarity.POOR])
-	
+
+func _set_gradient_color(color:Color) -> void:
+	gradient.gradient.set_color(1, color)
+	var gradient_color2:Color = color
+	gradient_color2.a = 0
+	gradient.gradient.set_color(0, gradient_color2)
+
 func _set_colors(new_item:Item) -> void:
 	var color_string:String = EnumStrings.RARITY_COLORS[new_item.item_rarity]
 	name_label.add_theme_color_override("font_color",Color(color_string))
-	gradient.gradient.set_color(1, Color(color_string))
+	_set_gradient_color(Color(color_string))
 	
 	var stylebox: StyleBoxFlat = tt_container.get_theme_stylebox("panel")
 	stylebox.border_color = Color(color_string)

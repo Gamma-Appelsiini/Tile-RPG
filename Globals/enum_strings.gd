@@ -16,14 +16,14 @@ const MAIN_STAT_COLORS := {
 	Stats.MainStat.MIGHT: "#bd5136",
 	Stats.MainStat.MYSTIC: "#8f39ee",
 	Stats.MainStat.SKILL: "#f18690",
-	Stats.MainStat.VALOR: "#d1b81b",}
+	Stats.MainStat.VALOR: "#fece37ff",}
 	
 const MAIN_STAT_DESCRIPTIONS := {
 	Stats.MainStat.AGILITY: "To be where they are not",
-	Stats.MainStat.ENDURANCE: "Enduring will to carry the burden",
+	Stats.MainStat.ENDURANCE: "The enduring will to bear the weight",
 	Stats.MainStat.LUCK: "Some are more fortunate than others",
 	Stats.MainStat.MIGHT: "Overpowering enemies",
-	Stats.MainStat.MYSTIC: "Knowing what remains unseen",
+	Stats.MainStat.MYSTIC: "Knowing the unseen",
 	Stats.MainStat.SKILL: "The skilled always beat the ones who lack it",
 	Stats.MainStat.VALOR: "Burn bright so others may see",}
 
@@ -174,7 +174,6 @@ const RARITY_NAMES := {Item.ItemRarity.POOR : "Poor",
 	Item.ItemRarity.GOD_ROLL: "God Roll",
 	Item.ItemRarity.FABLED: "Fabled"}
 
-var col:Color = Color("d08527ff")
 
 const RARITY_COLORS := {Item.ItemRarity.POOR : "#d2d2d2",
 	Item.ItemRarity.COMMON: "#32c346",
