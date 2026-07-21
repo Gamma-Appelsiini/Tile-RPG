@@ -101,3 +101,9 @@ enum ResPenetrations {
 	FROST,
 	TOXIC,
 }
+
+enum CombatStat {
+	ACCURACY = 550,
+	CRIT,
+	DAMAGE,
+}

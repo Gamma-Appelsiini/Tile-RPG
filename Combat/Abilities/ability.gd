@@ -73,6 +73,14 @@ func _visualize_targetable_tiles() -> void:
 #Override
 func get_description() -> String:
 	return ability_desc
+	
+#Override
+func get_crit_chance() -> float:
+	return 0
+	
+#Override
+func get_attack(_min:bool = false, _max:bool = false) -> Attack:
+	return Attack.new()
 
 #Override
 func use_ability_on_target_character(target:GameCharacter) -> void:

@@ -110,10 +110,6 @@ static func _does_receiver_dodge() -> bool:
 	if attack.ability_tags.has(Ability.ABILITY_TAG.UNEVADEABLE): return false
 	var hit_chance:int = 99
 	
-	var receiver_luck:int = receiver.stat_handler.main_stats[Stats.MainStat.LUCK]
-	var attacker_luck:int = attack.attacker.stat_handler.main_stats[Stats.MainStat.LUCK]
-	if attacker_luck > receiver_luck: hit_chance -= 4
-	
 	hit_chance -= _get_evasion_chance()
 	if hit_chance < MIN_HIT_CHANCE: hit_chance = MIN_HIT_CHANCE
 	
@@ -147,7 +143,9 @@ static func _does_receiver_block() -> bool:
 static func _does_attack_hit() -> bool:
 	if attack.ability_tags.has(Ability.ABILITY_TAG.DOT): return true
 	
-	if _does_receiver_dodge(): return false
+	if _does_receiver_dodge():
+		if !attack.ability_tags.has(Ability.ABILITY_TAG.UNEVADEABLE):
+			return false
 	receiver.stat_handler.attacks_dodged_in_a_row = 0
 	
 	if _does_receiver_block(): return false
@@ -187,9 +185,13 @@ static func _get_evasion_chance() -> int:
 	var final_evasion_chance:int = int(evasion_chance * 100) + dodge_chance
 	if final_evasion_chance > MAX_EVADE_CHANCE: final_evasion_chance = MAX_EVADE_CHANCE
 	
+	var receiver_luck:int = receiver.stat_handler.main_stats[Stats.MainStat.LUCK]
+	var attacker_luck:int = attack.attacker.stat_handler.main_stats[Stats.MainStat.LUCK]
+	if attacker_luck > receiver_luck: final_evasion_chance -= 4
+	
 	return final_evasion_chance
 
-static func _is_attack_blocked() -> bool:
+static func _get_block_chance() -> int:
 	var block_chance:int = receiver.stat_handler.defences[Stats.Defence.BLOCK]
 	var block_reduction:int = attack.defence_penetrations[Stats.Defence.BLOCK]
 	if attack.ability_tags.has(Ability.ABILITY_TAG.SPELL):
@@ -200,6 +202,11 @@ static func _is_attack_blocked() -> bool:
 	
 	var block_penetration:float = 1.0 - (block_reduction / 100.0)
 	block_chance = int(block_chance * block_penetration )
+	
+	return block_chance
+
+static func _is_attack_blocked() -> bool:
+	var block_chance:int = _get_block_chance()
 	
 	if block_chance >= randi_range(1,100): return true
 	return false
@@ -258,3 +265,24 @@ static func _apply_armor() -> void:
 	if final_damage > 0 and reduced_damage <= 0: reduced_damage = 1
 	
 	final_damage = reduced_damage + pure_damage
+	
+static func get_hit_chance(new_receiver:GameCharacter, new_attack:Attack) -> int:
+	attack = new_attack
+	receiver = new_receiver
+	var hit_chance:int = 99
+	
+	hit_chance -= _get_evasion_chance()
+	hit_chance -= _get_block_chance()
+	
+	return hit_chance
+	
+static func get_expected_damage(new_receiver:GameCharacter, new_attack:Attack) -> int:
+	final_damage = 0
+	attack = new_attack
+	receiver = new_receiver
+	
+	_apply_damage_increases()
+	attack.damages = _apply_resistances(attack.damages.duplicate())
+	_apply_armor()
+	
+	return final_damage

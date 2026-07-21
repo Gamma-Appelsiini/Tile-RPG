@@ -214,3 +214,9 @@ const DEF_PICS := {
 	Stats.Defence.DODGE: "res://Tile-RPG/Images/Stats/dodge.png",
 	Stats.Defence.SPELL_DODGE: "res://Tile-RPG/Images/Stats/spell_dodge.png",
 	Stats.Defence.GLANCE: "res://Tile-RPG/Images/Stats/glance.png"}
+
+const COMBAT_COLORS := {
+	Stats.CombatStat.ACCURACY: "ff838c",
+	Stats.CombatStat.CRIT: "5effc0",
+	Stats.CombatStat.DAMAGE: "8093ff"
+}

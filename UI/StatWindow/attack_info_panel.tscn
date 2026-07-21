@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dkl5sg3sthut2"]
+
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="1_20mir"]
+[ext_resource type="Script" uid="uid://bllnv0sbxk7hd" path="res://Tile-RPG/UI/StatWindow/attack_info_panel.gd" id="1_c40ro"]
+[ext_resource type="Texture2D" uid="uid://ctkfq28vwb3v2" path="res://Tile-RPG/Images/UI/Borders/sharp_border1.png" id="2_82wqq"]
+[ext_resource type="Texture2D" uid="uid://dhdlmalm24ha4" path="res://Tile-RPG/Images/UI/accuracy.png" id="3_cws0h"]
+[ext_resource type="FontFile" uid="uid://b1x6glvnxmaeu" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-SemiBold.ttf" id="4_c40ro"]
+[ext_resource type="Texture2D" uid="uid://odqg5ea3oo3m" path="res://Tile-RPG/Images/UI/Crit.png" id="5_c40ro"]
+[ext_resource type="Texture2D" uid="uid://djhr5n3yki3di" path="res://Tile-RPG/Images/UI/Damage.png" id="6_k4dv7"]
+
+[node name="AttackInfoPanel" type="PanelContainer" unique_id=1764166266]
+self_modulate = Color(1, 1, 1, 0)
+custom_maximum_size = Vector2(350, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.5
+offset_top = -127.5
+offset_right = 227.5
+offset_bottom = 127.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_c40ro")
+
+[node name="BgRect2" type="TextureRect" parent="." unique_id=1934963926]
+self_modulate = Color(0.43, 0.43, 0.43, 0.5882353)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.93, 0.93)
+mouse_filter = 2
+texture = ExtResource("1_20mir")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1681459840]
+self_modulate = Color(1, 1, 1, 0.40784314)
+layout_mode = 2
+texture = ExtResource("2_82wqq")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=435859302]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(25, 0)
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="VBoxContainer" unique_id=1769335038]
+layout_mode = 2
+text = "Ability Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1681442789]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AccuracyContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1775663169]
+custom_maximum_size = Vector2(-1, 55)
+layout_mode = 2
+
+[node name="AccuracyRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/AccuracyContainer" unique_id=1423977216]
+layout_mode = 2
+texture = ExtResource("3_cws0h")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AccuracyLabel" type="Label" parent="VBoxContainer/HBoxContainer/AccuracyContainer" unique_id=226458024]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_c40ro")
+theme_override_font_sizes/font_size = 32
+text = "15%"
+
+[node name="CritContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=634307783]
+custom_maximum_size = Vector2(-1, 55)
+layout_mode = 2
+
+[node name="CritRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/CritContainer" unique_id=811022007]
+layout_mode = 2
+texture = ExtResource("5_c40ro")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="CritLabel" type="Label" parent="VBoxContainer/HBoxContainer/CritContainer" unique_id=183594454]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_c40ro")
+theme_override_font_sizes/font_size = 32
+text = "15%"
+
+[node name="DmgContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=698012408]
+custom_maximum_size = Vector2(-1, 55)
+layout_mode = 2
+
+[node name="DmgRect" type="TextureRect" parent="VBoxContainer/DmgContainer" unique_id=1897514969]
+layout_mode = 2
+texture = ExtResource("6_k4dv7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DmgLabel" type="Label" parent="VBoxContainer/DmgContainer" unique_id=951981843]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_c40ro")
+theme_override_font_sizes/font_size = 44
+text = "1-14"
