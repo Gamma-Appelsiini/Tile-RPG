@@ -15,7 +15,7 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 		return
 	
 	_use_resources()
-	attack = _create_attack()
+	attack = get_attack()
 	
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
@@ -60,12 +60,14 @@ func _spawn_rocks(target:GameCharacter) -> void:
 
 	rocks_finished.emit()
 
-func _create_attack() -> Attack:
+#Overrided
+func get_attack(is_min:bool = false, is_max:bool = false) -> Attack:
 	var new_attack:Attack = Attack.new()
 	new_attack.attacker = ability_owner
 	
-	_get_weapon_dmg_to_attack(new_attack)
+	_get_weapon_dmg_to_attack(new_attack, is_min, is_max)
 	new_attack.calculate_weapon_damage_increase()
+	new_attack.apply_damage_increases()
 	new_attack.calculate_crit()
 	
 	return new_attack

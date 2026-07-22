@@ -21,11 +21,7 @@ func _shoot_ice_projectile(target:GameCharacter) -> void:
 	_spawn_explosion(target.global_position + Vector3(0,y_offset,0))
 
 #Overrided
-func get_dmg() -> Dictionary[Stats.DmgType,int]:
-	var attack:Attack = _create_attack()
-	return attack.damages
-
-func _create_attack() -> Attack:
+func get_attack(is_min:bool = false, is_max:bool = false) -> Attack:
 	var ice_attack:Attack = Attack.new()
 	ice_attack.attacker = ability_owner
 	
@@ -33,7 +29,13 @@ func _create_attack() -> Attack:
 	var dmg_from_mystic:int = int( ability_owner.stat_handler.get_stat_amount(Stats.MainStat.MYSTIC) / 1.5 )
 	var max_dmg:int = 2 + dmg_from_level + dmg_from_mystic
 	var min_dmg:int = 1
+	
+	if is_min: ice_attack.damages[Stats.DmgType.FROST] = min_dmg
+	elif is_max: ice_attack.damages[Stats.DmgType.FROST] = max_dmg
 	ice_attack.damages[Stats.DmgType.FROST] = randi_range(min_dmg, max_dmg)
+	
+	ice_attack.apply_damage_increases()
+	ice_attack.calculate_crit()
 	
 	return ice_attack
 
@@ -59,7 +61,7 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	_freeze_target(target)
 	_spawn_hit_effect(target)
 	
-	var ice_attack:Attack = _create_attack()
+	var ice_attack:Attack = get_attack()
 	AttackHandler.use_attack_on_char(target, ice_attack)
 	
 	await ability_owner.char_model_handler.animation_player.animation_finished

@@ -21,4 +21,5 @@ func set_amounts(receiver:GameCharacter, ability:Ability) -> void:
 	
 	var min_dmg:String = str(AttackHandler.get_expected_damage(receiver,ability.get_attack(true)))
 	var max_dmg:String = str(AttackHandler.get_expected_damage(receiver,ability.get_attack(false, true)))
-	dmg_label.text = min_dmg + "-" + max_dmg
+	if min_dmg == max_dmg: dmg_label.text = min_dmg
+	else: dmg_label.text = min_dmg + "-" + max_dmg

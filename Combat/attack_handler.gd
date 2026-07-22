@@ -23,7 +23,6 @@ static func use_attack_on_char(new_receiver:GameCharacter, new_attack:Attack) ->
 	
 	if !_does_attack_hit(): return
 	
-	_apply_damage_increases()
 	attack.damages = _apply_resistances(attack.damages.duplicate())
 	_apply_armor()
 	_receive_damage()
@@ -47,7 +46,7 @@ static func _animate_take_damage_effect(target:GameCharacter) -> void:
 	await tween.finished
 	target_char_mesh.material_overlay = null
 
-static func _apply_damage_increases() -> void:
+static func _apply_damage_increasesa() -> void:
 	if !attack.attacker: return
 	
 	for dmg_type:Stats.DmgType in attack.damages.keys():
@@ -281,7 +280,6 @@ static func get_expected_damage(new_receiver:GameCharacter, new_attack:Attack) -
 	attack = new_attack
 	receiver = new_receiver
 	
-	_apply_damage_increases()
 	attack.damages = _apply_resistances(attack.damages.duplicate())
 	_apply_armor()
 	

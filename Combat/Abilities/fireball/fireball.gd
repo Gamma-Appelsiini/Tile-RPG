@@ -23,7 +23,7 @@ func use_ability_on_target_tile(target:Tile) -> void:
 
 	_use_resources()
 	var tiles_in_aoe:Array[Tile] = GlobalSignals.current_level.tile_manager.get_tiles_in_aoe(target, ability_aoe)
-	var fire_attack:Attack = _create_attack()
+	var fire_attack:Attack = get_attack()
 	
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
@@ -62,7 +62,8 @@ func _spawn_explosion_effect(target:Tile) -> void:
 	new_explosion.global_position = target.global_position
 	new_explosion.play_effect()
 
-func _create_attack() -> Attack:
+#Overrided
+func get_attack(_is_min:bool = false, _is_max:bool = false) -> Attack:
 	var fire_attack:Attack = Attack.new()
 	fire_attack.attacker = ability_owner
 	
@@ -70,12 +71,10 @@ func _create_attack() -> Attack:
 	var dmg_from_mystic:int = int( ability_owner.stat_handler.get_stat_amount(Stats.MainStat.MYSTIC) / 2.0 )
 	fire_attack.damages[Stats.DmgType.FIRE] = 2 + dmg_from_level + dmg_from_mystic
 	
+	fire_attack.apply_damage_increases()
+	fire_attack.calculate_crit()
+	
 	return fire_attack
-
-#Overrided
-func get_dmg() -> Dictionary[Stats.DmgType,int]:
-	var attack:Attack = _create_attack()
-	return attack.damages
 
 #Overrided
 func get_range() -> int:

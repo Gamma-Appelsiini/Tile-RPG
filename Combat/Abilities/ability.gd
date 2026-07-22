@@ -98,10 +98,6 @@ func use_ability() -> void:
 	pass
 
 #Override
-func get_dmg() -> Dictionary[Stats.DmgType,int]:
-	return {}
-
-#Override
 func get_ap_cost() -> int:
 	return ap_cost
 
@@ -222,20 +218,23 @@ func _has_line_of_sight(start_tile:Tile, end_tile:Tile) -> bool:
 	if !result.is_empty(): return false
 	return true
 
-func _get_weapon_dmg_to_attack(attack:Attack) -> void:
+func _get_weapon_dmg_to_attack(attack:Attack, is_min:bool = false, is_max:bool = false) -> void:
 	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
 	_set_ability_weapon_range(weapon)
 	
 	if weapon == null:
-		_unarmed_attack(attack)
+		_unarmed_attack(attack, is_min, is_max)
 		return
-	_weapon_attack(attack, weapon)
+	_weapon_attack(attack, weapon, is_min, is_max)
 
-func _unarmed_attack(attack:Attack) -> void:
+func _unarmed_attack(attack:Attack, is_min:bool = false, is_max:bool = false) -> void:
 	use_animation = CharacterModelHandler.CharAnimation.ATTACK_PUNCH
 	hit_delay = ATTACK_DELAYS[CharacterModelHandler.CharAnimation.ATTACK_PUNCH]
 	
-	attack.damages[Stats.DmgType.PHYSICAL] = randi_range(1,ability_owner.stat_handler.main_stats[Stats.MainStat.MIGHT])
+	if is_min: attack.damages[Stats.DmgType.PHYSICAL] = 1
+	elif is_max: attack.damages[Stats.DmgType.PHYSICAL] = ability_owner.stat_handler.main_stats[Stats.MainStat.MIGHT]
+	else: attack.damages[Stats.DmgType.PHYSICAL] = randi_range(1,ability_owner.stat_handler.main_stats[Stats.MainStat.MIGHT])
+	
 	attack.ability_tags.push_back(ABILITY_TAG.MELEE)
 	attack.ability_tags.push_back(ABILITY_TAG.HIT)
 	attack.ability_tags.push_back(ABILITY_TAG.SINGLE_TARGET)
@@ -251,7 +250,7 @@ func _set_ability_weapon_range(weapon:Weapon) -> void:
 	if weapon.weapon_type == Weapon.WeaponType.BOW:
 		self.ability_range += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
 
-func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
+func _weapon_attack(attack:Attack, weapon:Weapon, is_min:bool = false, is_max:bool = false) -> void:
 	if weapon.hand_type == Weapon.HandType.ONE_HANDED:
 		use_animation = CharacterModelHandler.CharAnimation.ATTACK_1H
 		hit_delay = ATTACK_DELAYS[CharacterModelHandler.CharAnimation.ATTACK_1H]
@@ -269,7 +268,11 @@ func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
 	attack.ability_tags.push_back(ABILITY_TAG.WEAPON)
 	attack.ability_tags.push_back(ABILITY_TAG.SINGLE_TARGET)
 	
-	var base_damage:int = randi_range(weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG], weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG])
+	var base_damage:int = 0
+	if is_min: base_damage = weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG]
+	elif is_max: base_damage = weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG]
+	else: base_damage = randi_range(weapon.weapon_stats[Weapon.WeaponStat.MIN_DMG], weapon.weapon_stats[Weapon.WeaponStat.MAX_DMG])
+	
 	var scale_stat_amount:int = ability_owner.stat_handler.main_stats[weapon.scale_stat]
 	var multiplier:float = 1.0 + (weapon.weapon_stats[Weapon.WeaponStat.SCALE_AMOUNT] / 100.0 * scale_stat_amount)
 	var final_damage:int = int(base_damage * multiplier)
@@ -278,7 +281,7 @@ func _weapon_attack(attack:Attack, weapon:Weapon) -> void:
 	attack.main_damage_type = weapon.damage_type
 	attack.base_crit_chance = weapon.weapon_stats[Weapon.WeaponStat.BASE_CRIT]
 	attack.base_crit_multiplier = weapon.weapon_stats[Weapon.WeaponStat.BASE_MULTIPLIER]
-	attack.calculate_crit()	
+	attack.calculate_crit()
 
 func _get_hit_position(target:GameCharacter) -> Vector3:
 	var pos:Vector3 = target.heigth_node.global_position + Vector3(0,randf_range(-0.2,0.2),0)

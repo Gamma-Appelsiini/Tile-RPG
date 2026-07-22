@@ -5,7 +5,7 @@ const ARROW_PROJECTILE := preload("uid://vyagdu7xmhu3")
 const ARROW_MODEL := preload("uid://bu2olcu1uujmx")
 
 func use_ability_on_target_character(target:GameCharacter, check_usability:bool = true) -> void:
-	var new_attack:Attack = _create_attack()
+	var new_attack:Attack = get_attack()
 	
 	if check_usability:
 		if !_can_use_ability(target):
@@ -51,16 +51,6 @@ func _handle_bow_animation(target:GameCharacter) -> void:
 	new_arrow.shoot_at_pos(target.global_position + Vector3(0,y_offset,0) )
 	await new_arrow.hit_target
 
-func _create_attack() -> Attack:
-	var new_attack:Attack = Attack.new()
-	new_attack.attacker = ability_owner
-	
-	_get_weapon_dmg_to_attack(new_attack)
-	new_attack.calculate_weapon_damage_increase()
-	new_attack.calculate_crit()
-	
-	return new_attack
-
 #Overrided
 func get_range() -> int:
 	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
@@ -69,11 +59,13 @@ func get_range() -> int:
 	return ability_range
 
 #Overrided
-func get_dmg() -> Dictionary[Stats.DmgType,int]:
+func get_attack(is_min:bool = false, is_max:bool = false) -> Attack:
 	var new_attack:Attack = Attack.new()
 	new_attack.attacker = ability_owner
 	
-	_get_weapon_dmg_to_attack(new_attack)
+	_get_weapon_dmg_to_attack(new_attack, is_min, is_max)
 	new_attack.calculate_weapon_damage_increase()
+	new_attack.apply_damage_increases()
+	new_attack.calculate_crit()
 	
-	return new_attack.damages
+	return new_attack

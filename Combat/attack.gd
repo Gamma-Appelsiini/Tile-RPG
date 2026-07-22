@@ -45,3 +45,12 @@ func calculate_weapon_damage_increase() -> void:
 		
 		for dmg_type in damages.keys():
 			damages[dmg_type] = int(damages[dmg_type] * dmg_multiplier)
+
+func apply_damage_increases() -> void:
+	for dmg_type:Stats.DmgType in damages.keys():
+		if dmg_type == Stats.DmgType.PURE: continue
+		
+		#Dmg increases keys are +50 compared to dmg types
+		if attacker.stat_handler.dmg_increases.has(dmg_type + 50):
+			var damage_multiplier:float = 1.0 + (attacker.stat_handler.dmg_increases[dmg_type + 50] / 100.0)
+			damages[dmg_type] = int(damages[dmg_type] * damage_multiplier )

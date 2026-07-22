@@ -13,7 +13,7 @@ func use_ability_on_target_tile(target:Tile) -> void:
 	_use_resources()
 
 	var tiles_in_aoe:Array[Tile] = get_tiles_in_aoe(target)
-	var hammer_attack:Attack = _create_attack()
+	var hammer_attack:Attack = get_attack()
 	
 	ability_owner.rotate_towards_point(target.global_position)
 	await ability_owner.rotation_complete
@@ -43,7 +43,9 @@ func get_tiles_in_aoe(target:Tile) -> Array[Tile]:
 	tiles_in_aoe.push_back(target)
 	return tiles_in_aoe
 
-func _create_attack() -> Attack:
+
+#Overrided
+func get_attack(_is_min:bool = false, _is_max:bool = false) -> Attack:
 	var hammer_attack:Attack = Attack.new()
 	hammer_attack.attacker = ability_owner
 	
@@ -51,7 +53,11 @@ func _create_attack() -> Attack:
 	var dmg_from_might:int = int( ability_owner.stat_handler.get_stat_amount(Stats.MainStat.MIGHT) / 2.0 )
 	hammer_attack.damages[Stats.DmgType.PHYSICAL] = 2 + dmg_from_level + dmg_from_might
 	
+	hammer_attack.apply_damage_increases()
+	hammer_attack.calculate_crit()
+	
 	return hammer_attack
+
 
 func _stun_target(target:GameCharacter) -> void:
 	await ability_owner.get_tree().create_timer(0.25).timeout
