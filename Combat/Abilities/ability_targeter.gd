@@ -25,11 +25,14 @@ var aoe_indicators:Array[Node3D] = []
 var range_indicators:Array[RangeIndicator] = []
 var hidden_indicators:Array[RangeIndicator] = []
 var range_mesh:MeshInstance3D = null
+var info_handler:AttackInfoHandler = null
 
 func _ready() -> void:	
 	set_process(false)
 	set_process_input(false)
 	_add_range_tiles(20)
+	info_handler = AttackInfoHandler.new()
+	add_child(info_handler)
 
 func _start_targeting_animation() -> void:
 	if selected_ability.targeting_animation == CharacterModelHandler.CharAnimation.NULL: return
@@ -74,10 +77,18 @@ func _hide_range_indicators() -> void:
 	range_mesh.queue_free()
 	range_mesh = null
 
+func _show_attack_info_for_aoe(tiles_in_aoe:Array[Tile]) -> void:
+	var game_chars_in_aoe:Array[GameCharacter] = []
+	for tile:Tile in tiles_in_aoe:
+		if tile.occupant: game_chars_in_aoe.push_back(tile.occupant)
+	
+	info_handler.show_info_on_characters(game_chars_in_aoe, selected_ability)
+
 func _visualize_aoe() -> void:
 	var tiles_in_aoe:Array[Tile] = selected_ability.get_tiles_in_aoe(hovered_tile)
 	if selected_ability.target_type == Ability.TARGET_TYPE.NONE: tiles_in_aoe = tile_manager.get_tiles_in_aoe(tile_manager.char_tiles[selected_ability.ability_owner], selected_ability.ability_aoe)
 	elif tiles_in_aoe == [null]: tiles_in_aoe = tile_manager.get_tiles_in_aoe(hovered_tile, selected_ability.ability_aoe)
+	_show_attack_info_for_aoe(tiles_in_aoe)
 	
 	for i:int in len(tiles_in_aoe):
 		var indicator:RangeIndicator = range_indicators[i]
@@ -100,6 +111,7 @@ func _visualize_tiles_in_range() -> void:
 	range_mesh.material_override = RANGE_MESH_MATERIAL
 
 func set_ability_to_target(new_slot:AbilitySlot) -> void:
+	#TODO HERE
 	var new_ability:Ability = new_slot.ability_in_slot
 	
 	if new_ability == null:
@@ -129,6 +141,7 @@ func set_ability_to_target(new_slot:AbilitySlot) -> void:
 func cancel_ability_targeting(enable_movement:bool = true) -> void:
 	if selected_ability == null: return
 	
+	info_handler.hide_info()
 	_stop_targeting_animation()
 	_hide_range_indicators()
 	set_process_input(false)
@@ -164,6 +177,7 @@ func _get_ability_target() -> void:
 func _set_new_target_tile(new_target:Tile) -> void:
 	if hovered_tile == new_target: return
 
+	info_handler.hide_info()
 	_hide_aoe()
 	hovered_tile = new_target
 	_visualize_aoe()
@@ -299,6 +313,16 @@ func _set_new_target_character(new_target:GameCharacter) -> void:
 	GlobalSignals.hide_outline_on_target.emit(hovered_character)
 	hovered_character = new_target
 	GlobalSignals.show_outline_on_target.emit(hovered_character)
+	
+	_show_attack_info()
+		
+func _show_attack_info() -> void:
+	if !hovered_character:
+		info_handler.hide_info()
+		return
+	if !selected_ability: return
+	
+	info_handler.show_info_on_characters([hovered_character], selected_ability)
 
 func _shoot_ray() -> Dictionary:
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()

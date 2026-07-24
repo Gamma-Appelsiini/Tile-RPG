@@ -32,7 +32,7 @@ func get_attack(is_min:bool = false, is_max:bool = false) -> Attack:
 	
 	if is_min: ice_attack.damages[Stats.DmgType.FROST] = min_dmg
 	elif is_max: ice_attack.damages[Stats.DmgType.FROST] = max_dmg
-	ice_attack.damages[Stats.DmgType.FROST] = randi_range(min_dmg, max_dmg)
+	else: ice_attack.damages[Stats.DmgType.FROST] = randi_range(min_dmg, max_dmg)
 	
 	ice_attack.apply_damage_increases()
 	ice_attack.calculate_crit()
