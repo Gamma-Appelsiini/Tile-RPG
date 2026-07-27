@@ -9,9 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://djhr5n3yki3di" path="res://Tile-RPG/Images/UI/Damage.png" id="6_k4dv7"]
 [ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="8_k4dv7"]
 
-[node name="AttackInfoPanel" type="PanelContainer" unique_id=1764166266 node_paths=PackedStringArray("accuracy_rect", "crit_rect", "dmg_rect", "accuracy_label", "crit_label", "dmg_label", "name_label")]
+[node name="AttackInfoPanel" type="PanelContainer" unique_id=1764166266 node_paths=PackedStringArray("accuracy_rect", "crit_rect", "dmg_rect", "accuracy_label", "crit_label", "dmg_label", "name_label", "left_arrow", "right_arrow")]
 self_modulate = Color(1, 1, 1, 0)
 top_level = true
+z_index = 2
 custom_minimum_size = Vector2(350, 200)
 custom_maximum_size = Vector2(350, 200)
 anchors_preset = 8
@@ -36,6 +37,8 @@ accuracy_label = NodePath("VBoxContainer/HBoxContainer/AccuracyContainer/Accurac
 crit_label = NodePath("VBoxContainer/HBoxContainer/CritContainer/CritLabel")
 dmg_label = NodePath("VBoxContainer/DmgContainer/DmgLabel")
 name_label = NodePath("VBoxContainer/NameLabel")
+left_arrow = NodePath("LeftArrow")
+right_arrow = NodePath("RightArrow")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=1934963926]
 self_modulate = Color(0.16685274, 0.16685289, 0.1668528, 1)
@@ -120,14 +123,26 @@ theme_override_fonts/font = ExtResource("4_c40ro")
 theme_override_font_sizes/font_size = 44
 text = "1-14"
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1784186655]
-custom_minimum_size = Vector2(35, 35)
-custom_maximum_size = Vector2(35, 35)
+[node name="LeftArrow" type="TextureRect" parent="." unique_id=1784186655]
+custom_minimum_size = Vector2(45, 45)
+custom_maximum_size = Vector2(45, 45)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_horizontal = 0
+size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 8)
+offset_transform_position = Vector2(-10, 0)
+texture = ExtResource("8_k4dv7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightArrow" type="TextureRect" parent="." unique_id=261249026]
+custom_minimum_size = Vector2(45, 45)
+custom_maximum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
 texture = ExtResource("8_k4dv7")
 expand_mode = 1
 stretch_mode = 5

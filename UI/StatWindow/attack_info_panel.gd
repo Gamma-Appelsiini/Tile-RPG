@@ -8,6 +8,8 @@ class_name AttackInfoPanel
 @export var crit_label: Label = null
 @export var dmg_label: Label = null
 @export var name_label: Label = null
+@export var left_arrow: TextureRect = null
+@export var right_arrow: TextureRect = null
 
 var game_char:GameCharacter = null
 
@@ -34,16 +36,29 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	_set_screen_position()
-
+	
 func _set_screen_position() -> void:
 	if !game_char:
 		hide()
 		return
+	if game_char.infobar.modulate.a == 0:
+		modulate.a = 0
+		return
 	
-	var current_camera:Camera3D =  get_viewport().get_camera_3d()
-	var screen_position:Vector2 = current_camera.unproject_position(game_char.heigth_node.global_transform.origin)
-	var offset:Vector2 = Vector2(-self.size.x/3, -self.size.y) + Vector2(0,5)
-	self.global_position = screen_position + offset
+	modulate.a = 1
+	var screen_position: Vector2 = game_char.infobar.global_position
+	var is_on_right_side := screen_position.x + size.x * 0.5 > get_viewport().get_visible_rect().size.x * 0.5
+	var offset := Vector2(game_char.infobar.size.x, 0)
+	left_arrow.show()
+	right_arrow.hide()
+	
+	if is_on_right_side:
+		offset = Vector2(-size.x / 2, 0)
+		left_arrow.hide()
+		right_arrow.show()
+	
+	var target_position := screen_position + offset
+	global_position = target_position
 
 func show_info() -> void:
 	set_physics_process(true)

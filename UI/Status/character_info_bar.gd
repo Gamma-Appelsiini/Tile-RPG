@@ -90,11 +90,40 @@ func _physics_process(_delta: float) -> void:
 func _set_screen_position() -> void:
 	if !game_char:
 		return
+
+	var current_camera: Camera3D = get_viewport().get_camera_3d()
+	if !current_camera:
+		return
+
+	var screen_position: Vector2 = current_camera.unproject_position(
+		game_char.heigth_node.global_transform.origin
+	)
+
+	var offset := Vector2(-size.x / 2.0, -size.y)
+	var final_position := screen_position + offset
+	var viewport_size := get_viewport_rect().size
 	
-	var current_camera:Camera3D =  get_viewport().get_camera_3d()
-	var screen_position:Vector2 = current_camera.unproject_position(game_char.heigth_node.global_transform.origin)
-	var offset:Vector2 = Vector2(-self.size.x / 2, -self.size.y)
-	self.global_position = screen_position + offset
+	# How far outside the viewport are we?
+	var out_left := maxf(0.0, -final_position.x)
+	var out_top := maxf(0.0, -final_position.y)
+	var out_right := maxf(0.0, final_position.x + size.x - viewport_size.x)
+	var out_bottom := maxf(0.0, final_position.y + size.y - viewport_size.y)
+
+	var max_outside := maxf(
+		maxf(out_left, out_right),
+		maxf(out_top, out_bottom)
+	)
+	const HIDE_DISTANCE:float = 200
+	if max_outside > HIDE_DISTANCE:
+		modulate.a = 0
+		return
+
+	modulate.a = 1
+
+	final_position.x = clamp(final_position.x, 0.0, viewport_size.x - size.x)
+	final_position.y = clamp(final_position.y, 0.0, viewport_size.y - size.y)
+
+	global_position = final_position
 
 func show_info() -> void:
 	if disabled: return
