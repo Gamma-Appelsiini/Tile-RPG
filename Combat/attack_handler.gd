@@ -266,6 +266,7 @@ static func _apply_armor() -> void:
 	final_damage = reduced_damage + pure_damage
 	
 static func get_hit_chance(new_receiver:GameCharacter, new_attack:Attack) -> int:
+	if new_attack.ability_tags.has(Ability.ABILITY_TAG.UNEVADEABLE): return 100
 	attack = new_attack
 	receiver = new_receiver
 	var hit_chance:int = 99

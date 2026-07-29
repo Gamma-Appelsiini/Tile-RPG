@@ -14,7 +14,6 @@ const NON_CANCELLING_ACTIONS: Array[StringName] = [
 const RANGE_MESH_MATERIAL := preload("uid://ckgonjkqks5ra")
 
 var player:Player = null
-var player_camera:Camera3D = null
 var tile_manager:TileManager = null
 
 var selected_ability:Ability = null
@@ -131,7 +130,6 @@ func set_ability_to_target(new_slot:AbilitySlot) -> void:
 	
 	if player == null:
 		player = GlobalSignals.player
-		player_camera = player.player_camera
 
 	_start_targeting_animation()
 	_visualize_tiles_in_range()

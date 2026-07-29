@@ -29,3 +29,10 @@ func get_range() -> int:
 	if ability_tags.has(ABILITY_TAG.SPELL): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.SPELL_RANGE]
 	if ability_tags.has(ABILITY_TAG.RANGED): range_increase += ability_owner.stat_handler.secondary_stats[Stats.SecondaryStat.BOW_RANGE]
 	return ability_range + int(ability_owner.stat_handler.get_stat_amount(Stats.MainStat.MYSTIC) / 5.0) + range_increase
+
+#Overrided
+func get_buff_name() -> String:
+	var evasion_status:EvasionBuff = EVASION_STATUS.instantiate()
+	var buff_name:String = evasion_status.status_name
+	evasion_status.queue_free()
+	return buff_name

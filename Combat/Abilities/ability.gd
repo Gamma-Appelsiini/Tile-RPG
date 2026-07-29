@@ -8,7 +8,7 @@ signal ability_on_cooldown
 signal cooldown_changed
 
 enum TARGET_TYPE {TILE, GAME_CHARACTER, NONE}
-enum ABILITY_TAG {SINGLE_TARGET, AOE, MELEE, RANGED, SPELL, HIT, DOT, UNEVADEABLE, UNBLOCKABLE, NO_RETALIATION, WEAPON, HEAL, BUFF, CANT_CRIT, DEFENSIVE, MOVEMENT}
+enum ABILITY_TAG {SINGLE_TARGET, AOE, MELEE, RANGED, SPELL, HIT, DOT, UNEVADEABLE, UNBLOCKABLE, NO_RETALIATION, WEAPON, HEAL, BUFF, CANT_CRIT, DEFENSIVE, MOVEMENT, DAMAGE}
 enum CHARACTER_TYPE {ALLY, ENEMY, SELF}
 enum ANIMATION_TYPE {MELEE, SPELL, RANGED}
 
@@ -91,7 +91,11 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 func use_ability_on_target_tile(target:Tile) -> void:
 	print(target.name)
 	pass
-	
+
+#Override
+func get_buff_name() -> String:
+	return "Buff Name"
+
 #Override
 func use_ability() -> void:
 	print("Use without target")

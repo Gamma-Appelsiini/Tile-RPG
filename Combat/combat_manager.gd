@@ -28,6 +28,12 @@ func _ready() -> void:
 	GlobalSignals.combat_manager = self
 	GlobalSignals.load_game.connect(_on_load)
 
+func is_on_same_team(char_a:GameCharacter, char_b:GameCharacter) -> bool:
+	if player_team.has(char_a) and player_team.has(char_b): return true
+	if enemy_team.has(char_a) and enemy_team.has(char_b): return true
+	
+	return false
+
 func start_combat(new_enemies:Array[GameCharacter]) -> void:
 	_reset()
 	tile_manager = GlobalSignals.current_level.tile_manager

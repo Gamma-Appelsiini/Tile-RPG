@@ -218,5 +218,7 @@ const DEF_PICS := {
 const COMBAT_COLORS := {
 	Stats.CombatStat.ACCURACY: "ff838c",
 	Stats.CombatStat.CRIT: "5effc0",
-	Stats.CombatStat.DAMAGE: "8093ff"
+	Stats.CombatStat.DAMAGE: "8093ff",
+	Stats.CombatStat.HEAL: "50cc5aff",
+	Stats.CombatStat.BUFF: "31c2d1ff",
 }

@@ -106,4 +106,6 @@ enum CombatStat {
 	ACCURACY = 550,
 	CRIT,
 	DAMAGE,
+	HEAL,
+	BUFF,
 }
