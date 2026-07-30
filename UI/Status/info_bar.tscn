@@ -41,6 +41,7 @@ axis_stretch_vertical = 2
 bg_color = Color(0.6674271, 0.927775, 0.70944804, 1)
 
 [node name="CharacterInfoBar" type="PanelContainer" unique_id=1859007216 node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar")]
+visible = false
 self_modulate = Color(1, 1, 1, 0.43137255)
 z_index = 2
 custom_minimum_size = Vector2(255, 0)

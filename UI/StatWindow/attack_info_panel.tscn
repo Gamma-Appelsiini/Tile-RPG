@@ -5,16 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://ctkfq28vwb3v2" path="res://Tile-RPG/Images/UI/Borders/sharp_border1.png" id="2_82wqq"]
 [ext_resource type="Texture2D" uid="uid://dhdlmalm24ha4" path="res://Tile-RPG/Images/UI/accuracy.png" id="3_cws0h"]
 [ext_resource type="FontFile" uid="uid://b1x6glvnxmaeu" path="res://Tile-RPG/Fonts/GoogleFonts/RobotoCondensed-SemiBold.ttf" id="4_c40ro"]
+[ext_resource type="FontFile" uid="uid://24hmrcin6ag5" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-SemiBold.ttf" id="4_rwebn"]
 [ext_resource type="Texture2D" uid="uid://odqg5ea3oo3m" path="res://Tile-RPG/Images/UI/Crit.png" id="5_c40ro"]
 [ext_resource type="Texture2D" uid="uid://djhr5n3yki3di" path="res://Tile-RPG/Images/UI/Damage.png" id="6_k4dv7"]
 [ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="8_k4dv7"]
 
-[node name="AttackInfoPanel" type="PanelContainer" unique_id=1764166266 node_paths=PackedStringArray("accuracy_rect", "crit_rect", "dmg_rect", "accuracy_label", "crit_label", "dmg_label", "name_label", "left_arrow", "right_arrow")]
+[node name="AttackInfoPanel" type="PanelContainer" unique_id=1764166266 node_paths=PackedStringArray("accuracy_rect", "crit_rect", "dmg_rect", "accuracy_label", "crit_label", "dmg_label", "name_label", "left_arrow", "right_arrow", "nine_patch_rect")]
 self_modulate = Color(1, 1, 1, 0)
 top_level = true
 z_index = 2
-custom_minimum_size = Vector2(350, 200)
-custom_maximum_size = Vector2(350, 200)
+custom_minimum_size = Vector2(350, 180)
+custom_maximum_size = Vector2(350, 180)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -39,19 +40,20 @@ dmg_label = NodePath("VBoxContainer/DmgContainer/DmgLabel")
 name_label = NodePath("VBoxContainer/NameLabel")
 left_arrow = NodePath("LeftArrow")
 right_arrow = NodePath("RightArrow")
+nine_patch_rect = NodePath("NinePatchRect")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=1934963926]
 self_modulate = Color(0.16685274, 0.16685289, 0.1668528, 1)
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_scale = Vector2(0.93, 0.92)
+offset_transform_scale = Vector2(0.93, 0.9)
 mouse_filter = 2
 texture = ExtResource("1_20mir")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1681459840]
-self_modulate = Color(0.30449998, 0.31435832, 0.35, 1)
+modulate = Color(0.4, 0.4, 0.4, 1)
 layout_mode = 2
 texture = ExtResource("2_82wqq")
 patch_margin_left = 25
@@ -69,6 +71,8 @@ alignment = 1
 
 [node name="NameLabel" type="Label" parent="VBoxContainer" unique_id=1769335038]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_rwebn")
+theme_override_font_sizes/font_size = 20
 text = "Ability Name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1681442789]
@@ -130,7 +134,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(-10, 0)
+offset_transform_position = Vector2(-16, 0)
 texture = ExtResource("8_k4dv7")
 expand_mode = 1
 stretch_mode = 5
@@ -142,7 +146,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(10, 0)
+offset_transform_position = Vector2(16, 0)
 texture = ExtResource("8_k4dv7")
 expand_mode = 1
 stretch_mode = 5

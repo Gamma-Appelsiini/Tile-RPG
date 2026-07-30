@@ -6,7 +6,7 @@
 [node name="CureWounds" type="Node3D" unique_id=1887230479]
 script = ExtResource("1_0p50q")
 usable_on_characters = Array[int]([0, 2])
-ability_tags = Array[int]([0, 4, 10])
+ability_tags = Array[int]([0, 4, 11, 7])
 ability_main_stat = 6
 ability_icon = ExtResource("2_nh20y")
 ability_name = "Cure Wounds"

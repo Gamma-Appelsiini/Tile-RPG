@@ -6,6 +6,7 @@
 [node name="BasicAttack" type="Node3D" unique_id=920726119]
 script = ExtResource("1_cgb73")
 usable_on_characters = Array[int]([1])
+ability_tags = Array[int]([0, 16, 5])
 ability_icon = ExtResource("2_3hlnx")
 ability_name = "Basic Attack"
 ap_cost = 2

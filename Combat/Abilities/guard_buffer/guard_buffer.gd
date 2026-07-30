@@ -18,3 +18,10 @@ func use_ability_on_target_character(target:GameCharacter) -> void:
 	
 	#TODO animate
 	ability_finished.emit()
+
+#Override
+func get_buff_name() -> String:
+	var guard_status:GuardStatus = GUARD_STATUS.instantiate()
+	var buff_name:String = guard_status.status_name
+	guard_status.queue_free()
+	return buff_name

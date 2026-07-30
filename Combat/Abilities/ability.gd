@@ -119,7 +119,11 @@ func get_aoe() -> int:
 #Override
 func get_sp_cost() -> int:
 	return spirit_cost
-	
+
+#Override
+func get_heal_range() -> Vector2i:
+	return Vector2i(0,1)
+
 #Override
 func get_cd() -> int:
 	return ability_cooldown

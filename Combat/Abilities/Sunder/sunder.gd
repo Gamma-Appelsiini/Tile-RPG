@@ -34,10 +34,10 @@ func _set_ability_weapon_range(_weapon:Weapon) -> void:
 #Overrided
 func get_range() -> int:
 	var weapon:Weapon = ability_owner.equipment_handler.equipped_items[Equipment.EquipmentSlot.MAIN_HAND]
+	if !weapon: return -1
 	var range_increase:int = weapon.weapon_stats[Weapon.WeaponStat.RANGE]
 	return ability_range + range_increase
 
-	
 func _spawn_rocks(target:GameCharacter) -> void:
 	var owner_tile:Tile = GlobalSignals.current_level.tile_manager.get_character_tile(ability_owner)
 	var enemy_tile:Tile = GlobalSignals.current_level.tile_manager.get_character_tile(target)
