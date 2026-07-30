@@ -23,12 +23,20 @@ const BUFF_COLOR:Color = Color("25c3db")
 var game_char:GameCharacter = null
 var pulse_color:Color = Color(1.0, 1.0, 1.0, 1.0)
 var pulse_tween: Tween = null
+var hide_infobar:bool = false
 
 func _ready() -> void:
 	hide()
 	accuracy_rect.modulate = EnumStrings.COMBAT_COLORS[Stats.CombatStat.ACCURACY]
 	crit_rect.modulate = EnumStrings.COMBAT_COLORS[Stats.CombatStat.CRIT]
 	dmg_rect.modulate = EnumStrings.COMBAT_COLORS[Stats.CombatStat.DAMAGE]
+	visibility_changed.connect(_on_hide)
+
+func _on_hide() -> void:
+	if visible: return
+	if hide_infobar and game_char:
+		game_char.infobar._change_show_amount(-1)
+		hide_infobar = false
 
 func _pulse_color() -> void:
 	if pulse_tween and pulse_tween.is_valid():
@@ -118,6 +126,10 @@ func _set_screen_position() -> void:
 	if game_char.infobar.modulate.a == 0:
 		modulate.a = 0
 		return
+		
+	if !game_char.infobar.visible:
+		hide_infobar = true
+		game_char.infobar._change_show_amount(1)
 	
 	modulate.a = 1
 	var screen_position: Vector2 = game_char.infobar.global_position

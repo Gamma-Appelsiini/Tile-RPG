@@ -10,8 +10,6 @@ const STATUS_PANEL := preload("uid://ckjtakb74tlm2")
 
 var game_char:GameCharacter = null
 var show_amount:int = 0
-var is_hovered:bool = false
-var show_pressed:bool = false
 var disabled:bool = false
 
 func _ready() -> void:
@@ -22,18 +20,12 @@ func disable(_parent_char:GameCharacter) -> void:
 	disabled = true
 	hide()
 	set_physics_process(false)
-	GlobalSignals.show_info_bar.disconnect(_show_pressed.bind(true))
-	GlobalSignals.hide_info_bar.disconnect(_show_pressed.bind(false))
+	GlobalSignals.show_info_bar.disconnect(_change_show_amount.bind(1))
+	GlobalSignals.hide_info_bar.disconnect(_change_show_amount.bind(-1))
 
-func _show_pressed(pressed:bool) -> void:
-	show_pressed = pressed
-	if show_pressed or is_hovered: show_info()
-	else: hide()
-	
-func _char_hovered(hovered:bool) -> void:
-	is_hovered = hovered
-	if show_pressed or is_hovered: show_info()
-	else: hide()
+func _on_window_defocus() -> void:
+	show_amount = 0
+	hide()
 
 func _change_show_amount(amount:int) -> void:
 	show_amount += amount
@@ -43,20 +35,20 @@ func _change_show_amount(amount:int) -> void:
 
 func _connect_signals() -> void:
 	game_char.died.connect(disable)
-	GlobalSignals.show_info_bar.connect(_show_pressed.bind(true))
-	GlobalSignals.hide_info_bar.connect(_show_pressed.bind(false))
+	GlobalSignals.show_info_bar.connect(_change_show_amount.bind(1))
+	GlobalSignals.hide_info_bar.connect(_change_show_amount.bind(-1))
+	get_window().focus_exited.connect(_on_window_defocus)
 
 func set_game_character(new_gc:GameCharacter):
 	game_char = new_gc
 	game_char.infobar = self
 	
 	game_char.status_handler.status_added.connect(_add_status)
-	#game_char.status_handler.status_removed.connect(_remove_status)
 	game_char.stat_handler.stats_changed.connect(_update_info)
 	_update_info()
 	
-	game_char.character_mouse_over.connect(_char_hovered.bind(true))
-	game_char.character_mouse_left.connect(_char_hovered.bind(false))
+	game_char.character_mouse_over.connect(_change_show_amount.bind(1))
+	game_char.character_mouse_left.connect(_change_show_amount.bind(-1))
 	
 func _update_info() -> void:
 	var level:String = "Lvl " + str(game_char.stat_handler.get_stat_amount(Stats.CharStat.CURRENT_LEVEL))
@@ -71,9 +63,6 @@ func _add_status(new_status:Status):
 	new_status.remove_status.connect(_remove_status_panel.bind(new_spanel))
 	status_container.add_child(new_spanel)
 	new_spanel.set_status(new_status)
-	
-func _remove_stat() -> void:
-	pass
 	
 func _remove_status_panel(status_panel:StatusPanel) -> void:
 	if status_panel.get_parent() == status_container:
