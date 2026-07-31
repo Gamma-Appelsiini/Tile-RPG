@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bnv6ct2eeonos" path="res://Tile-RPG/Images/UI/Borders/sharp_border5.png" id="3_25o3u"]
 
 [node name="CompactCharInfoPanel" type="PanelContainer" unique_id=1431369614]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(455, 255)
+top_level = true
+custom_minimum_size = Vector2(600, 355)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -43,11 +45,11 @@ axis_stretch_vertical = 2
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(35, 35)
+theme_override_constants/separation = 10
 
 [node name="MainStatContainer" type="GridContainer" parent="HBoxContainer" unique_id=539066650]
 layout_mode = 2
-theme_override_constants/h_separation = -8
-theme_override_constants/v_separation = -8
+theme_override_constants/h_separation = 0
 columns = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=2042885762]
@@ -58,4 +60,5 @@ layout_mode = 2
 
 [node name="DefContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer" unique_id=2141774535]
 layout_mode = 2
+theme_override_constants/h_separation = 0
 columns = 3

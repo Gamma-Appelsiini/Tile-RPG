@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://h7ra7cvg0rov" path="res://Tile-RPG/Fonts/GoogleFonts/AlmendraSC-Regular.ttf" id="5_bor84"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_prf3d"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_bor84"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="6_pulag"]
+[ext_resource type="Texture2D" uid="uid://cxqof2r0op2o8" path="res://Tile-RPG/Images/UI/Buttons/character.png" id="7_2v3o6"]
 [ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="7_pulag"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pulag"]
@@ -40,12 +42,11 @@ axis_stretch_vertical = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8354"]
 bg_color = Color(0.6674271, 0.927775, 0.70944804, 1)
 
-[node name="CharacterInfoBar" type="PanelContainer" unique_id=1859007216 node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar")]
+[node name="CharacterInfoBar" type="PanelContainer" unique_id=1859007216 node_paths=PackedStringArray("status_container", "name_label", "level_label", "hp_bar", "compact_info_button")]
 visible = false
-self_modulate = Color(1, 1, 1, 0.43137255)
 z_index = 2
-custom_minimum_size = Vector2(255, 0)
-custom_maximum_size = Vector2(255, -1)
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(200, -1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -66,6 +67,7 @@ status_container = NodePath("PanelContainer/VBoxContainer/StatusContainer")
 name_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/NameLabel")
 level_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/LvlLabel")
 hp_bar = NodePath("PanelContainer/VBoxContainer/PanelContainer/HpBar")
+compact_info_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/CompactInfoButton")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=120559195]
 layout_mode = 2
@@ -95,6 +97,17 @@ layout_mode = 2
 theme = ExtResource("5_prf3d")
 theme_override_font_sizes/font_size = 16
 text = "Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1326632019]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CompactInfoButton" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("6_pulag")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+button_image = ExtResource("7_2v3o6")
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1016959579]
 layout_mode = 2

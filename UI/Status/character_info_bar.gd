@@ -5,16 +5,22 @@ class_name CharacterInfoBar
 @export var name_label: Label = null
 @export var level_label: Label = null
 @export var hp_bar: ProgressBar = null
+@export var compact_info_button: ReusableButton = null
 
 const STATUS_PANEL := preload("uid://ckjtakb74tlm2")
+const COMPACT_CHAR_INFO_PANEL := preload("uid://c2i7l0opoxvsd")
 
 var game_char:GameCharacter = null
 var show_amount:int = 0
 var disabled:bool = false
+var compact_info:CompactStatsPanel = null
 
 func _ready() -> void:
 	if get_parent() is GameCharacter: set_game_character(get_parent())
 	_connect_signals()
+	compact_info = COMPACT_CHAR_INFO_PANEL.instantiate()
+	compact_info.set_character(game_char)
+	GlobalSignals.ui_handler.add_child(compact_info)
 
 func disable(_parent_char:GameCharacter) -> void:
 	disabled = true
@@ -22,6 +28,13 @@ func disable(_parent_char:GameCharacter) -> void:
 	set_physics_process(false)
 	GlobalSignals.show_info_bar.disconnect(_change_show_amount.bind(1))
 	GlobalSignals.hide_info_bar.disconnect(_change_show_amount.bind(-1))
+
+func _on_info_button_pressed() -> void:
+	if compact_info.visible:
+		compact_info.hide()
+		return
+	
+	compact_info.show()
 
 func _on_window_defocus() -> void:
 	show_amount = 0
@@ -38,6 +51,7 @@ func _connect_signals() -> void:
 	GlobalSignals.show_info_bar.connect(_change_show_amount.bind(1))
 	GlobalSignals.hide_info_bar.connect(_change_show_amount.bind(-1))
 	get_window().focus_exited.connect(_on_window_defocus)
+	compact_info_button.texture_button.pressed.connect(_on_info_button_pressed)
 
 func set_game_character(new_gc:GameCharacter):
 	game_char = new_gc
