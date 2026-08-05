@@ -1,9 +1,11 @@
 extends PanelContainer
 class_name CompactStatsPanel
 
-@onready var main_stat_container: GridContainer = $HBoxContainer/MainStatContainer
-@onready var def_container: GridContainer = $HBoxContainer/VBoxContainer/DefContainer
-@onready var skill_container: HBoxContainer = $HBoxContainer/VBoxContainer/SkillContainer
+@export var main_stat_container: GridContainer = null
+@export var def_container: GridContainer = null
+@export var skill_container: HBoxContainer = null
+@export var top_arrow: TextureRect = null
+@export var bot_arrow: TextureRect = null
 
 const STAT_AMOUNT_BOX := preload("uid://baa3wachk2q7f")
 var game_char:GameCharacter = null
@@ -45,13 +47,13 @@ func _set_screen_position() -> void:
 	var screen_position: Vector2 = game_char.infobar.global_position
 	var is_on_top_side := screen_position.y + size.y * 0.5 > get_viewport().get_visible_rect().size.y * 0.5
 	var offset := Vector2(0, game_char.infobar.size.y)
-	#left_arrow.show()
-	#right_arrow.hide()
+	top_arrow.show()
+	bot_arrow.hide()
 	
 	if is_on_top_side:
 		offset = Vector2(0, -size.y / 2)
-		#left_arrow.hide()
-		#right_arrow.show()
+		top_arrow.hide()
+		bot_arrow.show()
 	
 	var target_position := screen_position + offset
 	global_position = target_position

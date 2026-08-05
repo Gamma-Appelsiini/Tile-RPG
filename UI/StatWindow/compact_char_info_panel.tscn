@@ -3,12 +3,14 @@
 [ext_resource type="Script" uid="uid://clkor3ycjdnr" path="res://Tile-RPG/UI/StatWindow/compact_char_info_panel.gd" id="1_uqa08"]
 [ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_o7hh8"]
 [ext_resource type="Texture2D" uid="uid://bnv6ct2eeonos" path="res://Tile-RPG/Images/UI/Borders/sharp_border5.png" id="3_25o3u"]
+[ext_resource type="Texture2D" uid="uid://b5trhv1l75r62" path="res://Tile-RPG/Images/UI/Inv/line_gradient.png" id="4_o7hh8"]
+[ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="5_25o3u"]
 
-[node name="CompactCharInfoPanel" type="PanelContainer" unique_id=1431369614]
+[node name="CompactCharInfoPanel" type="PanelContainer" unique_id=1431369614 node_paths=PackedStringArray("main_stat_container", "def_container", "skill_container", "top_arrow", "bot_arrow")]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 top_level = true
-custom_minimum_size = Vector2(600, 355)
+custom_minimum_size = Vector2(650, 355)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -20,12 +22,17 @@ scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_uqa08")
+main_stat_container = NodePath("HBoxContainer/MainStatVBox/MainStatContainer")
+def_container = NodePath("HBoxContainer/VBoxContainer/DefVBox/DefContainer")
+skill_container = NodePath("HBoxContainer/VBoxContainer/SkillVBox/SkillContainer")
+top_arrow = NodePath("TopArrow")
+bot_arrow = NodePath("BotArrow")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=516893962]
-self_modulate = Color(0.4326237, 0.43262374, 0.4326237, 1)
+self_modulate = Color(0.29954728, 0.29954752, 0.29954734, 1)
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_scale = Vector2(0.85, 0.8)
+offset_transform_scale = Vector2(0.9, 0.83)
 mouse_filter = 2
 texture = ExtResource("2_o7hh8")
 expand_mode = 1
@@ -45,20 +52,110 @@ axis_stretch_vertical = 2
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(35, 35)
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
 
-[node name="MainStatContainer" type="GridContainer" parent="HBoxContainer" unique_id=539066650]
+[node name="MainStatVBox" type="VBoxContainer" parent="HBoxContainer" unique_id=202969083]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 20)
+theme_override_constants/separation = -4
+
+[node name="Label" type="Label" parent="HBoxContainer/MainStatVBox" unique_id=1568991789]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.89, 0.8702716, 0.8277, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6627451)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 22
+text = "Main Stats"
+
+[node name="MainStatContainer" type="GridContainer" parent="HBoxContainer/MainStatVBox" unique_id=539066650]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 columns = 2
 
+[node name="LineRect" type="TextureRect" parent="HBoxContainer" unique_id=2134409453]
+custom_minimum_size = Vector2(5, 7)
+custom_maximum_size = Vector2(-1, 8)
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -30)
+offset_transform_scale = Vector2(50, 1)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("4_o7hh8")
+expand_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=2042885762]
 layout_mode = 2
 
-[node name="SkillContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1258192514]
+[node name="SkillVBox" type="VBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=327096985]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/SkillVBox" unique_id=1461012932]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.89, 0.8702716, 0.8277, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6627451)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 22
+text = "Skills"
+
+[node name="SkillContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SkillVBox" unique_id=1258192514]
 layout_mode = 2
 
-[node name="DefContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer" unique_id=2141774535]
+[node name="LineRect" type="TextureRect" parent="HBoxContainer/VBoxContainer" unique_id=2035689269]
+custom_minimum_size = Vector2(300, 5)
+custom_maximum_size = Vector2(-1, 5)
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("4_o7hh8")
+expand_mode = 1
+
+[node name="DefVBox" type="VBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1744731770]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/DefVBox" unique_id=1814085549]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.89, 0.8702716, 0.8277, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6627451)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 22
+text = "Defences"
+
+[node name="DefContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/DefVBox" unique_id=2141774535]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 columns = 3
+
+[node name="TopArrow" type="TextureRect" parent="." unique_id=2083468]
+z_index = 1
+custom_minimum_size = Vector2(45, 45)
+custom_maximum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -8)
+texture = ExtResource("5_25o3u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BotArrow" type="TextureRect" parent="." unique_id=321298675]
+z_index = 1
+custom_minimum_size = Vector2(45, 45)
+custom_maximum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 8)
+texture = ExtResource("5_25o3u")
+expand_mode = 1
+stretch_mode = 5
