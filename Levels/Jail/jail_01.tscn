@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bprnqik8q22ev"]
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_c5me1"]
-[ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/MapBasics/blank_floor.tscn" id="2_urkle"]
+[ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/BuildingBlocks/blank_floor.tscn" id="2_urkle"]
 [ext_resource type="PackedScene" uid="uid://cex17x14cxnlr" path="res://Tile-RPG/Models/MapBasics/blank_wall.tscn" id="4_b3657"]
 [ext_resource type="Material" uid="uid://cf0e48ujisxhk" path="res://Tile-RPG/Materials/TextureMaterials/wall_01.tres" id="5_2ekbm"]
 [ext_resource type="PackedScene" uid="uid://dwluacsgis5a3" path="res://Tile-RPG/Levels/Walls/bars.tscn" id="6_l321t"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://wq3nuj6tmdtg" path="res://Tile-RPG/GameCharacters/Jail1/slime_rat_npc.tscn" id="26_fvjqo"]
 [ext_resource type="PackedScene" uid="uid://bhcsynreixoe4" path="res://Tile-RPG/Models/MapBasics/ramp.glb" id="28_b3ul2"]
 [ext_resource type="PackedScene" uid="uid://cjxr6uush4nq0" path="res://Tile-RPG/Combat/combat_starter.tscn" id="29_kp3o5"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbpx"]
 

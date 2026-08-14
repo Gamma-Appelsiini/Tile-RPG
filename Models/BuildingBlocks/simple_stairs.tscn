@@ -1,0 +1,46 @@
+[gd_scene format=4 uid="uid://dnobuksc1a22u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p02e6"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y84f5"]
+_surfaces = [{
+"aabb": AABB(-0.49999997, 0, -0.50000006, 0.99999994, 0.5, 1.0000001),
+"format": 34896613377,
+"index_count": 126,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAAAAAEAAEAAwAFAAQABgAEAAUABgABAAQAAgAHAAMAAQAIAAIACQACAAgACQAHAAIAAQAKAAgACgAJAAgAAQALAAoACgALAAkABgALAAEACwAMAAkADQAJAAwABwAJAA0ACwAOAAwADgANAAwACwAPAA4ADgAPAA0ACwAGAA8ADwAQAA0ADwARABAAEgANABAAEQASABAABwANABIADwATABEADwAGABMAEQATABIAFAAGAAcAEwAGABQAFAAHABUAEwAUABYAFgAUABUAEwAXABIAEwAWABcABwASABcAFgAVABcABwAXABUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAyM///AADEMzIzAAAAAMQzMjP//wAAAAAAAP//AAAAADIzAAAAAAAAAAAAAAAA//8AAAAAAAD//wAA//8AAMQzZWb//wAAw2ZlZv//AADEM2VmAAAAAMNmZWYAAAAAw2aYmf//AACZmZiZ//8AAMNmmJkAAAAAmZmYmQAAAACZmczM//8AAJmZzMwAAAAA8cvMzP//AADxy8zMAAAAAP////8AAAAA////////AADxy///AAAAAPHL/////wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_thshj"]
+resource_name = "stairs_simple_Plane_058"
+_surfaces = [{
+"aabb": AABB(-0.49999997, 0, -0.50000006, 0.99999994, 0.5, 1.0000001),
+"attribute_data": PackedByteArray("/3///zeO/383jv///3//f0/GmP//f8vyT8bL8v9/mP8SnP9/FKr//xKc//8Uqv9//3//5U/GMtlPxv/l/38y2f9/ZcxPxpi/T8ZlzP9/mL/4t/9/7sX///i3///uxf9//3/Msk/G/6VPxsyy/3//pQfW/3/b4///B9b//9vj/3//fzKZT8ZljE/GMpn/f2WMsvH/f/////+y8f//////f0/G/7//f////3//v0/G//83jmXm/3////9/ZeZPxv//OZzMzDeOzMwvqjKzOZwyswO4mZkvqpmZA7j/f0/G/38XuGXmFarMzBe4zMz/f///T8Zl5k/G//8fnDKzFaoys0uOmZkfnJmZ/3//f0uO/38="),
+"format": 34896613399,
+"index_count": 126,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAsADEAMAAvACwALwAwADIAMgAwADMALwAyADQANAAyADUALwA0ADYALwA2ADcAOAA5ADoAOwA5ADgAOwA4ADwAOwA8AD0AOQA7AD4AOQA+AD8APgA7AEAAPgBAAEEAQAA7AEIAQABCAEMA"),
+"material": SubResource("StandardMaterial3D_p02e6"),
+"primitive": 3,
+"uv_scale": Vector4(3.6408343, 2, 0, 0),
+"vertex_count": 68,
+"vertex_data": PackedByteArray("AAAyM////7/EMzIzAAD/v8QzMjP///+/AAAyMwAA/78AAAAA////vwAAMjMAAP+/AAAyM////78AAAAAAAD/v8QzZWYAAP+/w2ZlZv///7/EM2Vm////v8NmZWYAAP+/xDMyMwAA/7/EM2Vm////v8QzMjP///+/xDNlZgAA/7/DZmVmAAD/v8NmmJn///+/w2ZlZv///7/DZpiZAAD/v8NmmJkAAP+/mZmYmf///7/DZpiZ////v5mZmJkAAP+/mZmYmQAA/7+ZmczM////v5mZmJn///+/mZnMzAAA/7+ZmczMAAD/v/HLzMz///+/mZnMzP///7/xy8zMAAD/v/HLzMwAAP+/8cv//////7/xy8zM////v/HL//8AAP+/8cv//wAA/7//////////v/HL//////+//////wAA/7//////AAD/v///AAD///+//////////7///wAAAAD/v8QzMjP//wCAAAAAAP//AIAAADIz//8AgP//AAD//wCAw2ZlZv//AIDEM2Vm//8AgJmZmJn//wCAw2aYmf//AIDxy8zM//8AgJmZzMz//wCA8cv/////AID///////8AgMQzMjMAAP//w2ZlZgAA///EM2VmAAD/////AAAAAP//AAAyMwAA//8AAAAAAAD//5mZmJkAAP//w2aYmQAA///xy8zMAAD//5mZzMwAAP///////wAA///xy///AAD//////3/+//9/////f/7//3//f////3////9/////f///////f////3////9/////f/9/////f////3////9/////f////3////9/////f///////f////3////9/////f/9/////f////3////9///////9/////f////3////9//3////9/////f////3///////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3/+//9/////f////3////9/////f/7//3////9//v//f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_y84f5")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_egn8s"]
+data = PackedVector3Array(-0.5, 0, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0.5, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5)
+
+[node name="SimpleStairs" type="MeshInstance3D" unique_id=742354503]
+mesh = SubResource("ArrayMesh_thshj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1493238067]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1271829527]
+shape = SubResource("ConcavePolygonShape3D_egn8s")

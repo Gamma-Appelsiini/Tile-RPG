@@ -1,0 +1,38 @@
+[gd_scene format=4 uid="uid://cfvsu08yfbq2h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lfb3"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_82rsv"]
+_surfaces = [{
+"aabb": AABB(0.0947991, 1.908673, 0.021405017, 0.4052009, 0.49132705, 0.44859532),
+"format": 34896613377,
+"index_count": 54,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAEAAMAAgADAAUAAQAGAAQABwACAAUABwAFAAgACQACAAcACQAAAAIACgAAAAkACgALAAAADAAGAAEAAAAMAAEACwAMAAAADAANAAYACwAOAAwADgANAAwADgAPAA0A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("KMcOdQp6AACkgYa64rsAAO2ODnX6wwAADjqGuizsAAAhC/////8AANw8DXXT8QAAAHV16OK0AABUcSAmD7IAAAAAAABK+gAAULTaJK9kAAC55lEB/gQAAP//DnVnOwAA0cCGuoZtAAC6sz/nAl8AAP//hrqaOAAAueb//wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ee1hh"]
+resource_name = "wall_corner_spiderweb_Plane_060"
+_surfaces = [{
+"aabb": AABB(0.0947991, 1.908673, 0.021405017, 0.4052009, 0.49132705, 0.44859532),
+"attribute_data": PackedByteArray("2bf/41DV3dQp1ZDjd7QL1b21hcs01pjMVdUs1eqaEOTKtOPjtJoL1bSaC9UEsW7MYJFRw8+R+f8vtkDlyrMn93ubguR21S3VKP68xYrv1tTh1gTMkdQd5IHwkNWr8Hfks9Xq1GC0jPc41QDmStXw9+631eVa1z72mvCs5P////+T1Ifl"),
+"format": 34896613399,
+"index_count": 54,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAwAEAAUAAwAFAAYABwADAAgABwAJAAMACgALAAMACgAMAAsADQAOAA8ADQAQAA4AEQASABMAEQAUABIAFQAWABcAFQAYABYAGQAaABsAGQAcABoAHQAeAB8AHQAgAB4A"),
+"material": SubResource("StandardMaterial3D_3lfb3"),
+"primitive": 3,
+"uv_scale": Vector4(0.6398144, 2.2073634, 0, 0),
+"vertex_count": 33,
+"vertex_data": PackedByteArray("KMcOdQp60tqkgYa64rt13+2ODnX6wwDg0cCGuoZtwNu6sz/nAl/q2wB1dejitEjfpIGGuuK7kd///w51Zzsh3CjHDnUKetPa//+Gupo4Nt7//4a6mjis3rqzP+cCX5Xcueb//wAAEN+55lEB/gQF2ijHDnUKesfaULTaJK9kWtr//w51Zzv626SBhrriu4TfIQv/////QeQOOoa6LOzJ5QB1dejitBDf7Y4OdfrD9d8OOoa6LOz85dw8DXXT8bLmpIGGuuK7+N9QtNokr2QU2u2ODnX6w/DfVHEgJg+youAoxw51CnrE2lRxICYPskbh3DwNddPxueYAAAAASvrW5e2ODnX6wxngNoJ/95BuhfgCgWv6B2uY+khhc/fGbOH5Zm8e+uCC0fQWgo/3GWjw+alpQv26Yt/6bV5c+g+JaOV1g+b2yodl5jmGLfMBb135N3De+cpyqvuIa23304Jl+eB0EP+Ngob4HHJQ/8uJjeW8g+L4CYpM6MiDvvZDhErrkoEp+VCHouuQfa/3")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_82rsv")
+
+[node name="wall_corner_spiderweb" type="MeshInstance3D" unique_id=852838481]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ee1hh")
+skeleton = NodePath("")

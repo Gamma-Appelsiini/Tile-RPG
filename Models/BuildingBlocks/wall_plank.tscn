@@ -1,0 +1,37 @@
+[gd_scene format=4 uid="uid://ci8vt0dpp8jux"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rvva"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6rlfv"]
+_surfaces = [{
+"aabb": AABB(-0.079999894, 0, 0.50999993, 0.15999979, 2.5, 0.05000007),
+"format": 34896613377,
+"index_count": 78,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAQAFAAMAAAAGAAQAAAAHAAYAAwAGAAcAAwAFAAYACAAFAAEABAAIAAEABQAJAAYABAAGAAkACAAKAAUABQAKAAkABAALAAgABAAJAAsADAAKAAgACwAMAAgADAANAAoACwAOAAwADgANAAwACwAJAA8ACwAPAA4ACgAPAAkADgAPAA0ACgANAA8A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP//AAD//2Zm//8AAP//AAD//wAA//8AAAAAAAAAAGZm//8AAP//ZmYAAAAAAABmZgAAAAAAAAAAAAAAAP//zMz//wAAAADMzAAAAAD//8zMAAAAAAAAzMz//wAA////////AAD/////AAAAAAAA/////wAAAAD//wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wfai3"]
+resource_name = "wall_plank_Plane_034"
+_surfaces = [{
+"aabb": AABB(-0.079999894, 0, 0.50999993, 0.15999979, 2.5, 0.05000007),
+"attribute_data": PackedByteArray("ydU40Hj2/3949jjQydX/f8nVONB49v9/ePY40MnV/3/J1TjQePYcqHj2ONDJ1RyoydU40Hj2/3949jjQydX/f8nVONB49v9/ePY40MnV/3/J1TjQePYcqHj2ONDJ1RyoydXD0Xj26M149sPRydXozf7/oYAU9eAq/v/gKhT1oYD//+AqFPUAAP//AAAU9eAqbJQ40DaK/39slP9/Noo40P//AAAU9eAq///gKhT1AAD//+AqFPWhgP//oYAU9eAqQIz/f3eWONBAjDjQd5b/fw=="),
+"format": 34896613399,
+"index_count": 78,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEA"),
+"material": SubResource("StandardMaterial3D_3rvva"),
+"primitive": 3,
+"uv_scale": Vector4(1.2532728, 3.1910386, 0, 0),
+"vertex_count": 52,
+"vertex_data": PackedByteArray("AAAAAP//AID//2Zm//8AgP//AAD//wCAAABmZv//AIAAAGZm//8AgP//zMz//wCA//9mZv//AIAAAMzM//8AgAAAzMz//wCA////////AID//8zM//8AgAAA/////wCA//8AAAAA//8AAGZmAAD//wAAAAAAAP////9mZgAA/////2ZmAAD//wAAzMwAAP//AABmZgAA/////8zMAAD/////zMwAAP//AAD//wAA//8AAMzMAAD///////8AAP//AAD//////7//////AAD/v/////////+/AAD//wAA/78AAGZm////vwAAzMwAAP+/AADMzP///78AAGZmAAD/vwAAzMz///+/AAD//wAA/78AAP//////vwAAzMwAAP+/AAAAAP///78AAGZmAAD/vwAAZmb///+/AAAAAAAA/7////////8AAP//zMwAAAAA///MzP//AAD/////AAAAAP//zMz//wAA//9mZgAAAAD//2Zm//8AAP//zMwAAAAA//9mZv///7///wAAAAD/v///AAD///+///9mZgAA/7//f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9////+//9/////f////3/+//9//3/+//9//v//f/7//3/+//9//v//f/7//3////9//v//f/7//3/+//9//v//f/7//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6rlfv")
+
+[node name="WallPlank" type="MeshInstance3D" unique_id=389152074]
+mesh = SubResource("ArrayMesh_wfai3")
+skeleton = NodePath("")
