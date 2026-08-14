@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bdnyikm3cfm43"]
+
+[ext_resource type="Shader" uid="uid://dfnqfceurmlim" path="res://Tile-RPG/Shaders/wall_cutoff_shader.gdshader" id="1_n4h8u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pxjeu"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ly5g2"]
+noise = SubResource("FastNoiseLite_pxjeu")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_n4h8u")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/global_height = 2.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ly5g2")
+shader_parameter/noise_scale = 0.5
+shader_parameter/noise_amplitude = 0.05
+shader_parameter/noise_speed = Vector2(0.02, 0.02)

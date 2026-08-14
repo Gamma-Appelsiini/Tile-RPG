@@ -1,3 +1,13 @@
 [gd_scene format=3 uid="uid://b678l5dk7mofp"]
 
 [node name="JailStart" type="Node3D" unique_id=1222226390]
+
+[node name="Walls" type="Node" parent="." unique_id=1692112563]
+
+[node name="North" type="Node" parent="Walls" unique_id=204494828]
+
+[node name="East" type="Node" parent="Walls" unique_id=1830799922]
+
+[node name="South" type="Node" parent="Walls" unique_id=697467022]
+
+[node name="West" type="Node" parent="Walls" unique_id=2146363052]
