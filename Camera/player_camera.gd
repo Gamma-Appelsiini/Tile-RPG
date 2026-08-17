@@ -1,6 +1,14 @@
 extends Node3D
 class_name PlayerCamera
 
+signal rotation_changed(to_show:Array[CameraDirection], to_hide:Array[CameraDirection])
+enum CameraDirection {
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST,
+}
+
 @export var pivot:Node3D = null
 @export var camera_3d: Camera3D = null
 @export var audio_listener_3d: AudioListener3D = null
@@ -14,6 +22,17 @@ var old_zoom:float = 0
 var default_pos:Vector3
 var target_position: Vector3 = Vector3.ZERO
 var zoom_tween: Tween = null
+var camera_directions:Dictionary[int,Array] = {
+	0: [CameraDirection.SOUTH],
+	1: [CameraDirection.SOUTH,CameraDirection.EAST],
+	2: [CameraDirection.EAST],
+	3: [CameraDirection.EAST, CameraDirection.NORTH],	
+	4: [CameraDirection.NORTH],
+	5: [CameraDirection.NORTH, CameraDirection.WEST],
+	6: [ CameraDirection.WEST],
+	7: [ CameraDirection.WEST, CameraDirection.SOUTH], 
+	}
+var direction_spot:int = 0
 
 func set_as_active_camera() -> void:
 	set_process_input(true)
@@ -35,9 +54,22 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("Zoom Out"):
 		_move_camera(false)
 
+func _set_camera_direction(amount:float) -> void:
+	var old_directions:Array[CameraDirection] = camera_directions[direction_spot]
+	
+	if amount > 0: direction_spot += 1
+	else: direction_spot -= 1
+	if direction_spot == -1: direction_spot = 7
+	elif direction_spot == 8: direction_spot = 0
+	
+	var new_directions:Array[CameraDirection] = camera_directions[direction_spot]
+	
+	rotation_changed.emit(new_directions, old_directions)
+
 func _rotate_cam(amount:float) -> void:
 	if rotating: return
 	rotating = true
+	_set_camera_direction(amount)
 	
 	var rotation_time:float = 0.25
 	var tween:Tween = create_tween()

@@ -15,26 +15,26 @@ uniform sampler2D texture_emission : source_color, filter_linear_mipmap, repeat_
 uniform float emission_energy : hint_range(0.0, 100.0) = 1.0;
 
 group_uniforms IsometricCutoff;
-uniform float global_height = 2.0;
+uniform float local_height = 2.5;
 uniform sampler2D noise_texture : hint_default_black, filter_linear_mipmap, repeat_enable;
 uniform float noise_scale = 1.0;
 uniform float noise_amplitude = 0.0;
 uniform vec2 noise_speed = vec2(0.2, 0.2);
 
-varying vec3 world_pos;
+varying vec3 local_pos;
 
 void vertex() {
-    world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+    local_pos = VERTEX;
 }
 
 void fragment() {
-    vec2 noise_uv = (world_pos.xz * noise_scale) + (noise_speed * TIME);
+    vec2 noise_uv = (local_pos.xz * noise_scale) + (noise_speed * TIME);
     float noise_val = texture(noise_texture, noise_uv).r;
     
     float height_offset = (noise_val - 0.5) * noise_amplitude;
-    float current_cutoff = global_height + height_offset;
+    float current_cutoff = local_height + height_offset;
 
-    if (world_pos.y > current_cutoff) {
+    if (local_pos.y > current_cutoff) {
         discard;
     }
 

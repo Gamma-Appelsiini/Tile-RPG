@@ -1,8 +1,5 @@
 [gd_scene format=4 uid="uid://cxdsds5eg2yss"]
 
-[ext_resource type="Material" uid="uid://bdnyikm3cfm43" path="res://Tile-RPG/Materials/ShaderMaterials/wall_cutoff_material.tres" id="1_qiqk8"]
-[ext_resource type="Material" uid="uid://cf0e48ujisxhk" path="res://Tile-RPG/Materials/TextureMaterials/wall_01.tres" id="2_qiqk8"]
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_o8r2b"]
 _surfaces = [{
 "aabb": AABB(-0.49999997, 0, 0.45999998, 0.99999994, 2.5, 0.08000004),
@@ -24,7 +21,6 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 30,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEA"),
-"material": ExtResource("2_qiqk8"),
 "primitive": 3,
 "uv_scale": Vector4(2, 5.9999995, 0, 0),
 "vertex_count": 20,
@@ -37,7 +33,6 @@ shadow_mesh = SubResource("ArrayMesh_o8r2b")
 data = PackedVector3Array(-0.5, 0, 0.53999996, 0.5, 2.5, 0.53999996, 0.5, 0, 0.53999996, -0.5, 0, 0.53999996, -0.5, 2.5, 0.53999996, 0.5, 2.5, 0.53999996, 0.5, 0, 0.45999998, -0.5, 2.5, 0.45999998, -0.5, 0, 0.45999998, 0.5, 0, 0.45999998, 0.5, 2.5, 0.45999998, -0.5, 2.5, 0.45999998, -0.5, 2.5, 0.53999996, 0.5, 2.5, 0.45999998, 0.5, 2.5, 0.53999996, -0.5, 2.5, 0.53999996, -0.5, 2.5, 0.45999998, 0.5, 2.5, 0.45999998, -0.5, 0, 0.53999996, -0.5, 2.5, 0.45999998, -0.5, 2.5, 0.53999996, -0.5, 0, 0.53999996, -0.5, 0, 0.45999998, -0.5, 2.5, 0.45999998, 0.5, 2.5, 0.53999996, 0.5, 0, 0.45999998, 0.5, 0, 0.53999996, 0.5, 2.5, 0.53999996, 0.5, 2.5, 0.45999998, 0.5, 0, 0.45999998)
 
 [node name="ThickerWall" type="MeshInstance3D" unique_id=925308579]
-material_overlay = ExtResource("1_qiqk8")
 mesh = SubResource("ArrayMesh_45ja7")
 skeleton = NodePath("")
 
