@@ -4,7 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cxdsds5eg2yss" path="res://Tile-RPG/Models/BuildingBlocks/wall.tscn" id="2_ihj82"]
 [ext_resource type="Material" uid="uid://cf0e48ujisxhk" path="res://Tile-RPG/Materials/TextureMaterials/wall_01.tres" id="3_0bwt3"]
 [ext_resource type="PackedScene" uid="uid://bl8s1i4lknd1t" path="res://Tile-RPG/Models/BuildingBlocks/blank_floor.tscn" id="4_ajdy0"]
+[ext_resource type="PackedScene" uid="uid://dkke5qip6g7yt" path="res://Tile-RPG/Models/BuildingBlocks/wall_top.tscn" id="4_wdpn2"]
+[ext_resource type="Material" uid="uid://dbh76yshwefbd" path="res://Tile-RPG/Materials/TextureMaterials/rock_01.tres" id="5_27yie"]
 [ext_resource type="Material" uid="uid://dvm2wrhpq74fx" path="res://Tile-RPG/Materials/TextureMaterials/gray_wall_bricks.tres" id="5_wdpn2"]
+[ext_resource type="PackedScene" uid="uid://db4nomyblcc4" path="res://Tile-RPG/Camera/player_camera.tscn" id="6_0bwt3"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_o8r2b"]
 _surfaces = [{
@@ -36,8 +39,42 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_o8r2b")
 
-[node name="JailStartEnviroment" type="Node3D" unique_id=1222226390]
+[sub_resource type="ArrayMesh" id="ArrayMesh_cg30x"]
+_surfaces = [{
+"aabb": AABB(-0.4999996, 2.4, 0.4, 0.9999992, 0.19999981, 0.20000002),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p7u68"]
+resource_name = "wall_top_Cube_007"
+_surfaces = [{
+"aabb": AABB(-0.4999996, 2.4, 0.4, 0.9999992, 0.19999981, 0.20000002),
+"attribute_data": PackedByteArray("NGUz/9x/Zt/cfzP/NGVm3/9/3bSf6k7O/39Ozp/q3bT//0D/q+rP5f//z+Wr6kD/n+r///9/juaf6o7m/3///1ONmb/7p8yf+6eZv1ONzJ+f6rTO/38l6P9/tM6f6iXo"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": ExtResource("5_27yie"),
+"primitive": 3,
+"uv_scale": Vector4(2.4009094, 2.0125, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP+/AAD//////78AAP//AAD/v/////////+/VNVU1VTVVNVU1VTVVNVU1f///3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cg30x")
+
+[node name="JailStartEnviroment" type="Node3D" unique_id=1222226390 node_paths=PackedStringArray("north", "east", "south", "west")]
 script = ExtResource("1_dfqns")
+north = NodePath("Walls/North")
+east = NodePath("Walls/East")
+south = NodePath("Walls/South")
+west = NodePath("Walls/West")
 
 [node name="Walls" type="Node" parent="." unique_id=1692112563]
 
@@ -75,6 +112,38 @@ mesh = SubResource("ArrayMesh_27yie")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
 mesh = SubResource("ArrayMesh_27yie")
 
+[node name="WallTop" parent="Walls/North" unique_id=2044504790 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop2" parent="Walls/North" unique_id=477574990 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop3" parent="Walls/North" unique_id=1293411026 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop4" parent="Walls/North" unique_id=2003496709 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop5" parent="Walls/North" unique_id=2150108 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop6" parent="Walls/North" unique_id=1499213523 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop7" parent="Walls/North" unique_id=85030392 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop8" parent="Walls/North" unique_id=192506156 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+mesh = SubResource("ArrayMesh_p7u68")
+
 [node name="East" type="Node" parent="Walls" unique_id=1830799922]
 
 [node name="ThickerWall" parent="Walls/East" unique_id=1913310710 instance=ExtResource("2_ihj82")]
@@ -92,6 +161,22 @@ mesh = SubResource("ArrayMesh_27yie")
 [node name="ThickerWall4" parent="Walls/East" unique_id=1283027154 instance=ExtResource("2_ihj82")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, -3)
 mesh = SubResource("ArrayMesh_27yie")
+
+[node name="WallTop" parent="Walls/East" unique_id=1847658086 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop2" parent="Walls/East" unique_id=2111296247 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, -1)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop3" parent="Walls/East" unique_id=1559492551 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, -2)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop4" parent="Walls/East" unique_id=2041135048 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, -3)
+mesh = SubResource("ArrayMesh_p7u68")
 
 [node name="South" type="Node" parent="Walls" unique_id=697467022]
 
@@ -126,6 +211,37 @@ mesh = SubResource("ArrayMesh_27yie")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 mesh = SubResource("ArrayMesh_27yie")
 
+[node name="WallTop" parent="Walls/South" unique_id=1512574364 instance=ExtResource("4_wdpn2")]
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop2" parent="Walls/South" unique_id=1355560919 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop3" parent="Walls/South" unique_id=1711756651 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop4" parent="Walls/South" unique_id=567335633 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop5" parent="Walls/South" unique_id=987487696 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop6" parent="Walls/South" unique_id=358867524 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop7" parent="Walls/South" unique_id=1977520746 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop8" parent="Walls/South" unique_id=576993875 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
 [node name="West" type="Node" parent="Walls" unique_id=2146363052]
 
 [node name="ThickerWall" parent="Walls/West" unique_id=1097122939 instance=ExtResource("2_ihj82")]
@@ -143,6 +259,22 @@ mesh = SubResource("ArrayMesh_27yie")
 [node name="ThickerWall4" parent="Walls/West" unique_id=988840026 instance=ExtResource("2_ihj82")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 0, -3)
 mesh = SubResource("ArrayMesh_27yie")
+
+[node name="WallTop" parent="Walls/West" unique_id=1594936357 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 0, 0)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop2" parent="Walls/West" unique_id=1395453437 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 0, -1)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop3" parent="Walls/West" unique_id=1558526717 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 0, -2)
+mesh = SubResource("ArrayMesh_p7u68")
+
+[node name="WallTop4" parent="Walls/West" unique_id=1501743423 instance=ExtResource("4_wdpn2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 0, -3)
+mesh = SubResource("ArrayMesh_p7u68")
 
 [node name="Floors" type="Node" parent="." unique_id=505631657]
 
@@ -272,3 +404,5 @@ material_override = ExtResource("5_wdpn2")
 [node name="BlankFloor32" parent="Floors" unique_id=548069717 instance=ExtResource("4_ajdy0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
 material_override = ExtResource("5_wdpn2")
+
+[node name="PlayerCamera" parent="." unique_id=925636686 instance=ExtResource("6_0bwt3")]

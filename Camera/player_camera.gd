@@ -1,7 +1,7 @@
 extends Node3D
 class_name PlayerCamera
 
-signal rotation_changed(to_show:Array[CameraDirection], to_hide:Array[CameraDirection])
+signal rotation_changed(to_show:Array, to_hide:Array)
 enum CameraDirection {
 	NORTH,
 	EAST,
@@ -26,7 +26,7 @@ var camera_directions:Dictionary[int,Array] = {
 	0: [CameraDirection.SOUTH],
 	1: [CameraDirection.SOUTH,CameraDirection.EAST],
 	2: [CameraDirection.EAST],
-	3: [CameraDirection.EAST, CameraDirection.NORTH],	
+	3: [CameraDirection.EAST, CameraDirection.NORTH],
 	4: [CameraDirection.NORTH],
 	5: [CameraDirection.NORTH, CameraDirection.WEST],
 	6: [ CameraDirection.WEST],
@@ -55,14 +55,14 @@ func _input(event: InputEvent) -> void:
 		_move_camera(false)
 
 func _set_camera_direction(amount:float) -> void:
-	var old_directions:Array[CameraDirection] = camera_directions[direction_spot]
+	var old_directions:Array = camera_directions[direction_spot]
 	
 	if amount > 0: direction_spot += 1
 	else: direction_spot -= 1
 	if direction_spot == -1: direction_spot = 7
 	elif direction_spot == 8: direction_spot = 0
 	
-	var new_directions:Array[CameraDirection] = camera_directions[direction_spot]
+	var new_directions:Array = camera_directions[direction_spot]
 	
 	rotation_changed.emit(new_directions, old_directions)
 
