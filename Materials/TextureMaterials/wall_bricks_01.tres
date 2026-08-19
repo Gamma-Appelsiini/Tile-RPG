@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c87o2pnqcuwy0"]
+
+[ext_resource type="Texture2D" uid="uid://3uuydokf766q" path="res://Tile-RPG/Materials/Textures/wall_tiles.png" id="1_mu7c7"]
+[ext_resource type="Texture2D" uid="uid://24lklhgfcdxj" path="res://Tile-RPG/Materials/Textures/wall_tiles_height.png" id="2_qw1cm"]
+[ext_resource type="Texture2D" uid="uid://b7keki348v7wy" path="res://Tile-RPG/Materials/Textures/wall_tiles_normal.png" id="3_li44a"]
+[ext_resource type="Texture2D" uid="uid://dwceyloot4hk5" path="res://Tile-RPG/Materials/Textures/wall_tiles_roughness.png" id="4_xogrp"]
+
+[resource]
+albedo_texture = ExtResource("1_mu7c7")
+roughness_texture = ExtResource("4_xogrp")
+normal_enabled = true
+normal_texture = ExtResource("3_li44a")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_qw1cm")

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cd2o11nqecyo"]
+
+[ext_resource type="Texture2D" uid="uid://ddjxrheusfbv3" path="res://Tile-RPG/Materials/Textures/gray-stone-512x512.png" id="1_jeka1"]
+[ext_resource type="Texture2D" uid="uid://bih0hy2bi6q0l" path="res://Tile-RPG/Materials/Textures/gray-stone-normal-512x512.png" id="2_mae6l"]
+
+[resource]
+albedo_texture = ExtResource("1_jeka1")
+roughness = 0.6
+normal_enabled = true
+normal_texture = ExtResource("2_mae6l")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://7ll3hcxp8abg"]
+[gd_scene format=4 uid="uid://7ll3hcxp8abg"]
 
 [ext_resource type="Material" uid="uid://ta83u001gwow" path="res://Tile-RPG/Materials/TextureMaterials/metal_01.tres" id="1_8e8um"]
 [ext_resource type="Material" uid="uid://bxpp4vboe65we" path="res://Tile-RPG/Materials/TextureMaterials/metal_05.tres" id="2_340hk"]
@@ -112,28 +112,28 @@ height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_340hk"]
 height = 1.0585938
-radius = 0.15
+radius = 0.1
 
-[node name="LightStand" type="Node3D"]
+[node name="LightStand" type="Node3D" unique_id=173139772]
 
-[node name="Stand" type="MeshInstance3D" parent="."]
+[node name="Stand" type="MeshInstance3D" parent="." unique_id=1550181358]
 mesh = SubResource("ArrayMesh_ueejd")
 skeleton = NodePath("")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=506156518]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1417712, 0)
 layers = 524289
 light_color = Color(0.9119475, 0.7271465, 0.5129374, 1)
 
-[node name="FlameMesh" type="MeshInstance3D" parent="."]
+[node name="FlameMesh" type="MeshInstance3D" parent="." unique_id=172482927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1021113, 0)
 material_override = SubResource("ShaderMaterial_6popr")
 mesh = SubResource("SphereMesh_4ain4")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1761522330]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1292088848]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5292969, 0)
 shape = SubResource("CylinderShape3D_340hk")

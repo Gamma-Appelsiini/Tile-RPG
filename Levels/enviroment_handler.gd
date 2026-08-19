@@ -8,7 +8,7 @@ class_name EnviromentHandler
 @onready var player_camera2: PlayerCamera = $PlayerCamera
 
 const WALL_CUTOFF_MATERIAL := preload("uid://bdnyikm3cfm43")
-const CUTOFF_HEIGHT:float = 0.25
+const CUTOFF_HEIGHT:float = 0.45
 const DEFAULT_HEIGHT:float = 3
 
 @onready var wall_parents:Array[Node] = [north, east, south, west]
@@ -52,11 +52,13 @@ func _create_shaders() -> void:
 		for mesh_child:MeshInstance3D in node_parent.get_children():
 			for i:int in range(mesh_child.mesh.get_surface_count()):
 				var mesh_material:StandardMaterial3D = mesh_child.get_active_material(i)
+				
 				if !nodes_shaders[node_parent].keys().has(mesh_material):
 					var new_shader_material:ShaderMaterial = _create_new_wall_material(mesh_material)
 					nodes_shaders[node_parent][mesh_material] = new_shader_material
-					mesh_child.material_override = new_shader_material
-				else: mesh_child.material_override = nodes_shaders[node_parent][mesh_material]
+					mesh_child.set_surface_override_material(i, new_shader_material)
+					
+				else: mesh_child.set_surface_override_material(i, nodes_shaders[node_parent][mesh_material])
 					
 
 func _create_new_wall_material(wall_material:StandardMaterial3D) -> ShaderMaterial:
