@@ -5,6 +5,7 @@ class_name Level
 @export var game_characters_node:Node = null
 @export var interactables_node:Node = null
 @export var breakables_node:Node = null
+@export var hiders_node:Node = null
 @export var tile_manager:TileManager = null
 
 @export var player_spawn_positions:Dictionary[String,Node3D] = {}
@@ -25,6 +26,8 @@ func save_to_data(save_data:Dictionary) -> void:
 	save_data["levels"][unique_id] = {"interactables": {}}
 	_save_gchars(save_data)
 	_save_interactables(save_data["levels"][unique_id]["interactables"])
+	_save_hiders()
+	save_data["levels"][unique_id]["hiders"] = _save_hiders()
 
 func _save_gchars(save_data:Dictionary) -> void:
 	for gchar:GameCharacter in game_chars:
@@ -46,6 +49,19 @@ func load_from_data(save_data:Dictionary) -> void:
 	
 	_load_game_chars(save_data)
 	_load_interactables(save_data["levels"][unique_id]["interactables"])
+	_load_hiders(levels[unique_id])
+
+func _save_hiders() -> Dictionary[String, float]:
+	var hider_data:Dictionary = {}
+	for mesh:MeshInstance3D in hiders_node.get_children():
+		hider_data[mesh.name] = mesh.transparency
+		
+	return hider_data
+
+func _load_hiders(level_data:Dictionary) -> void:
+	var hider_data:Dictionary = level_data["hiders"]
+	for mesh:MeshInstance3D in hiders_node.get_children():
+		if hider_data.has(mesh.name): mesh.transparency = hider_data[mesh.name]
 
 func _load_game_chars(save_data:Dictionary) -> void:
 	#String array

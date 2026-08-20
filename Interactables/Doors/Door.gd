@@ -5,6 +5,7 @@ class_name Door
 @export var side_2:Node3D
 @export var pivot:Node3D
 @export var collision_shape_3d: CollisionShape3D = null
+@export var room_hiders_to_hide:Array[MeshInstance3D] = []
 
 const OPEN_TIME:float = 0.55
 #1.5708
@@ -50,6 +51,7 @@ func interact() -> void:
 	if used:
 		interact_text = "Close"
 		door_open = true
+		_hide_room_hiders()
 
 	else:
 		interact_text = "Open"
@@ -65,6 +67,11 @@ func interact() -> void:
 	if door_open: collision_shape_3d.disabled = true
 	interact_area.monitoring = true
 	interact_complete.emit()
+
+func _hide_room_hiders() -> void:
+	for mesh_to_hide:MeshInstance3D in room_hiders_to_hide:
+		var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(mesh_to_hide, "transparency", 1, .5)
 
 func _handle_blocked_tiles() -> void:
 	if len(blocked_tiles) != 2: return

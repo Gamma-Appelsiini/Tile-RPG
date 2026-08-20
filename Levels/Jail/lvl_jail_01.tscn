@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cwkwf8c33vgkq"]
+
+[ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_e7u5g"]
+[ext_resource type="PackedScene" uid="uid://b678l5dk7mofp" path="res://Tile-RPG/Levels/Jail/jail_start_enviroment.tscn" id="1_ld6dy"]
+[ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_r4bqj"]
+[ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="3_rm3p6"]
+[ext_resource type="Material" uid="uid://dbiyoxw5ohfy7" path="res://Tile-RPG/Materials/TextureMaterials/unshaded_black.tres" id="4_4x7po"]
+[ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="5_r4bqj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4x7po"]
+material = ExtResource("4_4x7po")
+size = Vector2(6, 5)
+
+[node name="LvlJail01" type="Node3D" unique_id=412703557 node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "hiders_node", "tile_manager")]
+script = ExtResource("1_e7u5g")
+unique_id = "jail_01"
+game_characters_node = NodePath("GameCharacters")
+interactables_node = NodePath("Interactables")
+breakables_node = NodePath("Breakables")
+hiders_node = NodePath("RoomHiders")
+tile_manager = NodePath("TileManager")
+
+[node name="JailStartEnviroment" parent="." unique_id=1222226390 instance=ExtResource("1_ld6dy")]
+
+[node name="GameCharacters" type="Node3D" parent="." unique_id=52248454]
+
+[node name="Interactables" type="Node3D" parent="." unique_id=9713369]
+
+[node name="Breakables" type="Node3D" parent="." unique_id=1785823029]
+
+[node name="SpawnPositions" type="Node" parent="." unique_id=1569158652]
+
+[node name="TileManager" type="Node3D" parent="." unique_id=941726842]
+script = ExtResource("3_rm3p6")
+metadata/_custom_type_script = "uid://chv46rdn2gkni"
+
+[node name="StartSpawn" type="Node3D" parent="TileManager" unique_id=679840548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.5)
+
+[node name="RoomHiders" type="Node" parent="." unique_id=1098767808]
+
+[node name="CupboardHider" type="MeshInstance3D" parent="RoomHiders" unique_id=1147936381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.5, 6)
+mesh = SubResource("PlaneMesh_4x7po")
+
+[node name="Doors" type="Node" parent="." unique_id=1865647162]
+
+[node name="WoodDoor" parent="Doors" unique_id=149533167 node_paths=PackedStringArray("room_hiders_to_hide") instance=ExtResource("3_r4bqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3.5)
+room_hiders_to_hide = [NodePath("../../RoomHiders/CupboardHider")]
+unique_id = "cupboard_door"
+
+[node name="BarDoor" parent="Doors" unique_id=1031400606 instance=ExtResource("5_r4bqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.5)
+unique_id = "cell_door_01"
+oneshot = true

@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://bhcsynreixoe4" path="res://Tile-RPG/Models/MapBasics/ramp.glb" id="28_b3ul2"]
 [ext_resource type="PackedScene" uid="uid://cjxr6uush4nq0" path="res://Tile-RPG/Combat/combat_starter.tscn" id="29_kp3o5"]
 
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbpx"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cx1m6"]
@@ -129,7 +128,7 @@ size = Vector3(2.956604, 0.91607666, 1.7612305)
 
 [node name="Jail_01" type="Node" unique_id=173345460 node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "tile_manager", "player_spawn_positions")]
 script = ExtResource("1_c5me1")
-unique_id = "jail_01"
+unique_id = "jail_test"
 game_characters_node = NodePath("GameCharacters")
 interactables_node = NodePath("Interactables")
 breakables_node = NodePath("Breakables")
