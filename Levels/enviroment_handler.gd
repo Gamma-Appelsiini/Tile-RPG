@@ -5,7 +5,6 @@ class_name EnviromentHandler
 @export var east: Node = null
 @export var south: Node = null
 @export var west: Node = null
-@onready var player_camera2: PlayerCamera = $PlayerCamera
 
 const WALL_CUTOFF_MATERIAL := preload("uid://bdnyikm3cfm43")
 const CUTOFF_HEIGHT:float = 0.45
@@ -27,7 +26,6 @@ var player_camera:PlayerCamera = null
 
 func _ready() -> void:
 	_create_shaders()
-	_set_player_camera(player_camera2)
 
 func _set_player_camera(new_player_camera:PlayerCamera) -> void:
 	player_camera = new_player_camera
