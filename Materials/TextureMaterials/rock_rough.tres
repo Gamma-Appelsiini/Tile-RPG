@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d75ysq6mfl1e"]
+
+[ext_resource type="Texture2D" uid="uid://cnkeub60yyw3u" path="res://Tile-RPG/Materials/Textures/rough_rock.jpg" id="1_5riaf"]
+[ext_resource type="Texture2D" uid="uid://y1aqf03boex6" path="res://Tile-RPG/Materials/Textures/rough_rock_Displacement.jpg" id="2_d83ym"]
+[ext_resource type="Texture2D" uid="uid://bx5p156qd04o7" path="res://Tile-RPG/Materials/Textures/rough_rock_Normal.jpg" id="3_malns"]
+[ext_resource type="Texture2D" uid="uid://hnqpvitkygsw" path="res://Tile-RPG/Materials/Textures/rough_rock_Roughness.jpg" id="4_t2ela"]
+
+[resource]
+albedo_texture = ExtResource("1_5riaf")
+roughness_texture = ExtResource("4_t2ela")
+normal_enabled = true
+normal_texture = ExtResource("3_malns")
+heightmap_enabled = true
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("2_d83ym")
