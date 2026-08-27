@@ -4,6 +4,10 @@
 [ext_resource type="Material" uid="uid://bnv056ef465te" path="res://Tile-RPG/Materials/TextureMaterials/gold_material.tres" id="2_45e2g"]
 [ext_resource type="Material" uid="uid://y6cenuvcmwob" path="res://Tile-RPG/Materials/ShaderMaterials/skill_orb_material.tres" id="2_mkiqm"]
 [ext_resource type="Material" uid="uid://bwddyxwskhrlj" path="res://Tile-RPG/Materials/TextureMaterials/metal_02.tres" id="4_mkiqm"]
+[ext_resource type="Material" uid="uid://b7u1887dfj1hg" path="res://Tile-RPG/Materials/ShaderMaterials/rising_smoke_material.tres" id="5_cddaf"]
+[ext_resource type="Texture2D" uid="uid://ljrro5jft13d" path="res://Tile-RPG/Images/Shaders/SharpStar.png" id="6_l8bwp"]
+[ext_resource type="Texture2D" uid="uid://crc76ag1t1tkn" path="res://Tile-RPG/Images/Shaders/Ball2.png" id="7_l8bwp"]
+[ext_resource type="Texture2D" uid="uid://d3yur3p8dqylw" path="res://Tile-RPG/Images/Shaders/Fire4.png" id="8_hxmfi"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_eaqtt"]
 radius = 0.05
@@ -82,10 +86,57 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_alw1b")
 
-[node name="SkillOrb" type="Node3D" unique_id=1056504300 node_paths=PackedStringArray("orb", "enter_area_3d")]
+[sub_resource type="CylinderMesh" id="CylinderMesh_eaqtt"]
+top_radius = 0.1
+bottom_radius = 0.06
+height = 0.3319336
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Curve" id="Curve_hxmfi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2644444, 1), 0.0, 0.0, 0, 0, Vector2(0.78222215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_l1mr3"]
+curve = SubResource("Curve_hxmfi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaqtt"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -4.9999895
+angle_max = 5.000011
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.39999998
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_l1mr3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx7wl"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1.5933161, 1.4948859, 1.1714722, 0.29411766)
+albedo_texture = ExtResource("6_l8bwp")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sqolj"]
+material = SubResource("StandardMaterial3D_hx7wl")
+size = Vector2(0.05, 0.05)
+
+[node name="SkillOrb" type="Node3D" unique_id=1056504300 node_paths=PackedStringArray("orb", "enter_area_3d", "crack_decal", "sparkles", "smoke_column")]
 script = ExtResource("1_fyjml")
 orb = NodePath("Orb")
 enter_area_3d = NodePath("EnterArea3D")
+crack_decal = NodePath("CrackDecal")
+sparkles = NodePath("Sparkles")
+smoke_column = NodePath("SmokeColumn")
 
 [node name="Orb" type="MeshInstance3D" parent="." unique_id=550411210]
 transform = Transform3D(1.3, 0, 0, 0, -5.6824803e-08, -1.3, 0, 1.3, -5.6824803e-08, 0, 0, 0)
@@ -98,6 +149,7 @@ mesh = SubResource("ArrayMesh_skdfd")
 skeleton = NodePath("")
 
 [node name="EnterArea3D" type="Area3D" parent="." unique_id=842743654]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnterArea3D" unique_id=1178642240]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, -0.010523178, 0)
@@ -107,3 +159,36 @@ shape = SubResource("ConcavePolygonShape3D_45e2g")
 material_override = ExtResource("4_mkiqm")
 mesh = SubResource("ArrayMesh_8w1l8")
 skeleton = NodePath("")
+
+[node name="SmokeColumn" type="MeshInstance3D" parent="." unique_id=2115766637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16177118, 0)
+visible = false
+material_override = ExtResource("5_cddaf")
+mesh = SubResource("CylinderMesh_eaqtt")
+
+[node name="Sparkles" type="GPUParticles3D" parent="." unique_id=1365939867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.039943695, 0)
+emitting = false
+amount = 3
+randomness = 0.56
+fixed_fps = 60
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_eaqtt")
+draw_pass_1 = SubResource("QuadMesh_sqolj")
+
+[node name="Decal" type="Decal" parent="." unique_id=188690348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013258303, 0)
+size = Vector3(0.28, 0.042, 0.28)
+texture_albedo = ExtResource("7_l8bwp")
+emission_energy = 0.0
+modulate = Color(0, 0, 0, 1)
+albedo_mix = 0.9
+
+[node name="CrackDecal" type="Decal" parent="." unique_id=1599146997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013258303, 0)
+visible = false
+size = Vector3(0.28, 0.042, 0.28)
+texture_albedo = ExtResource("8_hxmfi")
+emission_energy = 0.0
+modulate = Color(4.6817894, 1.6137267, 0, 1)
+albedo_mix = 0.88

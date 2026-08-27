@@ -5,6 +5,7 @@ const SKILL_ORB := preload("uid://beisi558iqap8")
 @onready var scene_camera: Camera3D = $Camera3D
 @export var tree_mesh: MeshInstance3D = null
 @export var hover_zoom_distance: float = 0.4
+@export var hover_sound:AudioStream = null
 
 const GEM_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.124142, 0.300618, 0.187238): Vector3(0.32532, 0.498879, 0.803297),
@@ -49,6 +50,7 @@ func _set_orbs() -> void:
 		new_orb.enter_area_3d.mouse_exited.connect(_on_orb_exited.bind(new_orb))
 
 func _on_orb_hovered(orb: SkillOrb) -> void:
+	GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	const ROTATE_AMOUNT: float = 0.65
 	var target_dir := orb.position.normalized()
 	var target_quat := Quaternion(target_dir, Vector3.BACK)

@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b7u1887dfj1hg"]
+
+[ext_resource type="Shader" uid="uid://bnj6ab6gqjr4m" path="res://Tile-RPG/Shaders/gradient_dissolve2.gdshader" id="1_dtrcq"]
+[ext_resource type="Texture2D" uid="uid://6438rwsrtub1" path="res://Tile-RPG/Images/Shaders/flames3.png" id="2_8bc0h"]
+
+[sub_resource type="Gradient" id="Gradient_djayg"]
+offsets = PackedFloat32Array(0, 0.8395349, 0.9, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cjkyr"]
+gradient = SubResource("Gradient_djayg")
+fill_from = Vector2(1, 0.15669516)
+fill_to = Vector2(1, 1)
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dtrcq")
+shader_parameter/speed = Vector2(0.2, 0.4)
+shader_parameter/aura_texture = ExtResource("2_8bc0h")
+shader_parameter/maskTexture = SubResource("GradientTexture2D_cjkyr")
+shader_parameter/ProxFade = 0.0
+shader_parameter/ColorParameter = Color(1.3991334, 1.2613009, 0, 1)

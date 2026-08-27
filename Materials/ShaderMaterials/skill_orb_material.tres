@@ -5,6 +5,8 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_iwpos"]
 noise_type = 3
+frequency = 0.0025
+fractal_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qapc5"]
 noise = SubResource("FastNoiseLite_iwpos")
@@ -21,9 +23,9 @@ shader_parameter/swirl_speed = 0.22000010545000004
 shader_parameter/swirl_distortion = 0.0370000017575
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_qapc5")
 shader_parameter/mist_speed = 0.146000006935
-shader_parameter/mist_density = 0.19600000931
-shader_parameter/fresnel_power = 1.7970000616075
-shader_parameter/fresnel_glow_intensity = 2.58000012255
-shader_parameter/icon_emission = 8.0590003828025
-shader_parameter/surface_roughness = 0.17200000817
-shader_parameter/surface_metallic = 0.662000031445
+shader_parameter/mist_density = 0.3750000178125
+shader_parameter/fresnel_power = 4.3070001808325
+shader_parameter/fresnel_glow_intensity = 1.902000090345
+shader_parameter/icon_emission = 8.81600041876
+shader_parameter/surface_roughness = 0.22800001083
+shader_parameter/surface_metallic = 0.666000031635

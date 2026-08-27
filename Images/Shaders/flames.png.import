@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dafer3mmwc2ed"
-path.s3tc="res://.godot/imported/T_cracks33_E3.jpg-69984e278ad3aae2f1ef30000ac24c9f.s3tc.ctex"
+uid="uid://da5p8tdmowkie"
+path.s3tc="res://.godot/imported/flames.png-5b121160c0f0c69e6c1b980f7c4e6652.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Shaders/T_cracks33_E3.jpg"
-dest_files=["res://.godot/imported/T_cracks33_E3.jpg-69984e278ad3aae2f1ef30000ac24c9f.s3tc.ctex"]
+source_file="res://Tile-RPG/Images/Shaders/flames.png"
+dest_files=["res://.godot/imported/flames.png-5b121160c0f0c69e6c1b980f7c4e6652.s3tc.ctex"]
 
 [params]
 

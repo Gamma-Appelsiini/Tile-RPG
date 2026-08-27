@@ -90,6 +90,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_7d5b3")
 
 [node name="Connectors" type="Node3D" parent="Sphere" unique_id=99664337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
 
 [node name="Connector1" type="MeshInstance3D" parent="Sphere/Connectors" unique_id=1275491497]
 material_override = ExtResource("2_gnu1y")
@@ -128,6 +129,50 @@ skeleton = NodePath("")
 
 [node name="Connector7" type="MeshInstance3D" parent="Sphere/Connectors" unique_id=858556868]
 transform = Transform3D(0.6211479, -0.7836934, 0, 0.7836934, 0.6211479, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connectors2" type="Node3D" parent="Sphere" unique_id=1293939915]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0.001)
+
+[node name="Connector1" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=1365322837]
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connector2" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=596946382]
+transform = Transform3D(0.62387955, -0.7815205, 0, 0.7815205, 0.62387955, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connector3" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=492920568]
+transform = Transform3D(-0.22154854, -0.97514933, 0, 0.97514933, -0.22154854, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connector4" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=1655166268]
+transform = Transform3D(-0.9003188, -0.43523103, 0, 0.43523103, -0.9003188, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connector5" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=1405008897]
+transform = Transform3D(-0.90183246, 0.4320858, 0, -0.4320858, -0.90183246, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connector6" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=1731126006]
+transform = Transform3D(-0.22495098, 0.97437, 0, -0.97437, -0.22495098, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_gnu1y")
+mesh = SubResource("ArrayMesh_3re47")
+skeleton = NodePath("")
+
+[node name="Connector7" type="MeshInstance3D" parent="Sphere/Connectors2" unique_id=1724790540]
+transform = Transform3D(0.62114775, 0.7836934, 0, -0.7836934, 0.62114775, 0, 0, 0, 1, 0, 0, 0)
 material_override = ExtResource("2_gnu1y")
 mesh = SubResource("ArrayMesh_3re47")
 skeleton = NodePath("")

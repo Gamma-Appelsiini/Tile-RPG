@@ -6,5 +6,5 @@
 render_priority = 0
 shader = ExtResource("1_flxko")
 shader_parameter/emission_color = Color(0.43, 0.45849985, 1, 0)
-shader_parameter/emission_amount = 0.0
-shader_parameter/rim_sharpness = 16.0
+shader_parameter/emission_amount = 7.2670003451825
+shader_parameter/rim_sharpness = 1.0
