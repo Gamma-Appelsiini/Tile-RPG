@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4y21aa1jefu"
-path.s3tc="res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.s3tc.ctex"
+uid="uid://cwrf6lnp2v1j1"
+path.s3tc="res://.godot/imported/eater_Eater.png-985584eb3ba7753af0765df2e144de58.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "4a133603077ec23cf3cb4f9d383a9c67"
+}
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Stats/armor.png"
-dest_files=["res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.s3tc.ctex"]
+source_file="res://Tile-RPG/Models/CharacterModels/eater/eater_Eater.png"
+dest_files=["res://.godot/imported/eater_Eater.png-985584eb3ba7753af0765df2e144de58.s3tc.ctex"]
 
 [params]
 

@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4y21aa1jefu"
-path.s3tc="res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.s3tc.ctex"
+uid="uid://ddwpgb8knxk6w"
+path.s3tc="res://.godot/imported/eater_EaterNormal.png-98ed1a7896b13b8f3d2c4955df981706.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "fceec03574ab1bf0eb5afa04ed270b65"
+}
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Stats/armor.png"
-dest_files=["res://.godot/imported/armor.png-de54b049905470689cd907a21360868e.s3tc.ctex"]
+source_file="res://Tile-RPG/Models/CharacterModels/eater/eater_EaterNormal.png"
+dest_files=["res://.godot/imported/eater_EaterNormal.png-98ed1a7896b13b8f3d2c4955df981706.s3tc.ctex"]
 
 [params]
 
@@ -22,12 +25,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://Tile-RPG/Models/CharacterModels/eater/eater_EaterNormal.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

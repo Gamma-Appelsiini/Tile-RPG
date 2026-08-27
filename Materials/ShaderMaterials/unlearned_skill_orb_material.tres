@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d1c8dwfbxkp0f"]
+
+[ext_resource type="Shader" uid="uid://cdwy2npbcy5sg" path="res://Tile-RPG/Shaders/skill_orb_shader.gdshader" id="1_pb8hv"]
+[ext_resource type="Texture2D" uid="uid://dn4y21aa1jefu" path="res://Tile-RPG/Images/Stats/armor.png" id="2_ebh3x"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xw5c2"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_77phc"]
+noise = SubResource("FastNoiseLite_xw5c2")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_pb8hv")
+shader_parameter/primary_color = Color(0.29, 0.29, 0.29, 1)
+shader_parameter/skill_texture = ExtResource("2_ebh3x")
+shader_parameter/skill_scale = 2.4450000923875
+shader_parameter/parallax_depth = -0.0509999786725
+shader_parameter/swirl_speed = -0.5129999293675
+shader_parameter/swirl_distortion = 0.04800000228
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_77phc")
+shader_parameter/mist_speed = 0.25
+shader_parameter/mist_density = 1.2
+shader_parameter/fresnel_power = 3.5
+shader_parameter/fresnel_glow_intensity = 2.5
+shader_parameter/icon_emission = 3.0
+shader_parameter/surface_roughness = 0.08
+shader_parameter/surface_metallic = 0.1

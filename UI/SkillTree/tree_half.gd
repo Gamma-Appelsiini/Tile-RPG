@@ -32,6 +32,16 @@ const SPHERE_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 var orbs:Array[SkillOrb] = []
 var _hover_tween: Tween
 var _base_mesh_pos: Vector3
+var hovered_orb:SkillOrb = null
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Left Click"):
+		_mouse_pressed()
+
+func _mouse_pressed() -> void:
+	if !hovered_orb: return
+	hovered_orb.learn_skill()
+	#TODO effect on connectors
 
 func _ready() -> void:
 	if tree_mesh:
@@ -50,6 +60,7 @@ func _set_orbs() -> void:
 		new_orb.enter_area_3d.mouse_exited.connect(_on_orb_exited.bind(new_orb))
 
 func _on_orb_hovered(orb: SkillOrb) -> void:
+	hovered_orb = orb
 	GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	const ROTATE_AMOUNT: float = 0.65
 	var target_dir := orb.position.normalized()
@@ -80,6 +91,7 @@ func _on_orb_hovered(orb: SkillOrb) -> void:
 
 
 func _on_orb_exited(_orb: SkillOrb) -> void:
+	hovered_orb = null
 	if _hover_tween and _hover_tween.is_running():
 		_hover_tween.kill()
 		
