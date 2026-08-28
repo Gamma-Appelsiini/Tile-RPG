@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://cvxnoryddxrkw"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_eeddl"]
+[ext_resource type="Texture2D" uid="uid://cxv5c2h3y0r6y" path="res://Tile-RPG/Images/Stats/agility.png" id="2_c6272"]
+
+[resource]
+script = ExtResource("1_eeddl")
+skill_name = "Flicker of Agility"
+skill_description = "+1 Agility"
+skill_picture = ExtResource("2_c6272")
+main_stat_increases = Dictionary[int, int]({
+0: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"

@@ -19,10 +19,15 @@ func _ready() -> void:
 	_tween_crack_decal()
 
 func set_skill_resource(new_skill:SkillResource) -> void:
+	if new_skill == null:
+		hide()
+		return
+	else: show()
+	
 	skill_in_orb = new_skill
 	
 	var unlearned_material:ShaderMaterial = UNLEARNED_SKILL_ORB_MATERIAL.duplicate()
-	unlearned_material.set_shader_parameter("shader_parameter/skill_texture", new_skill.skill_picture)
+	unlearned_material.set_shader_parameter("skill_texture", new_skill.skill_picture)
 	orb.material_override = unlearned_material
 
 
@@ -37,8 +42,9 @@ func learn_skill() -> void:
 	GlobalSignals.play_audio.emit(learn_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	
 	var learned_material:ShaderMaterial = LEARNED_SKILL_ORB_MATERIAL.duplicate()
-	learned_material.set_shader_parameter("shader_parameter/skill_texture", skill_in_orb.skill_picture)
-	learned_material.set_shader_parameter("shader_parameter/primary_color", EnumStrings.MAIN_STAT_COLORS[skill_in_orb.skill_stat_type])
+	learned_material.set_shader_parameter("skill_texture", skill_in_orb.skill_picture)
+	learned_material.set_shader_parameter("primary_color", Color(EnumStrings.MAIN_STAT_COLORS[skill_in_orb.skill_stat_type]))
+	print(EnumStrings.MAIN_STAT_COLORS[skill_in_orb.skill_stat_type])
 	orb.material_override = learned_material
 	
 	orb.material_overlay = OUTER_MATERIAL

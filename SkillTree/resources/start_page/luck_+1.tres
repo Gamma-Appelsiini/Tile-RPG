@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://e447xjb8fo05"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_iawg2"]
+[ext_resource type="Texture2D" uid="uid://cv3ovhx8jv3p7" path="res://Tile-RPG/Images/Stats/luck.png" id="2_iawg2"]
+
+[resource]
+script = ExtResource("1_iawg2")
+skill_name = "Crumb of Luck"
+skill_description = "+1 Luck"
+skill_stat_type = 2
+skill_picture = ExtResource("2_iawg2")
+main_stat_increases = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"

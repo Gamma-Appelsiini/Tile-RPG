@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://dx3p28occw2ws"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_3ljlg"]
+[ext_resource type="Texture2D" uid="uid://cu7xfb5p24tgm" path="res://Tile-RPG/Images/Stats/mystic.png" id="2_3ljlg"]
+
+[resource]
+script = ExtResource("1_3ljlg")
+skill_name = "Glimpse of Mystic"
+skill_description = "+1 Mystic"
+skill_stat_type = 4
+skill_picture = ExtResource("2_3ljlg")
+main_stat_increases = Dictionary[int, int]({
+4: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"

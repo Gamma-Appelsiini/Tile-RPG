@@ -6,6 +6,8 @@ const SKILL_ORB := preload("uid://beisi558iqap8")
 @export var tree_mesh: MeshInstance3D = null
 @export var hover_zoom_distance: float = 0.4
 @export var hover_sound:AudioStream = null
+@onready var front_connectors: Node3D = $Sphere/FrontConnectors
+@onready var back_connectors: Node3D = $Sphere/BackConnectors
 
 const GEM_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.124142, 0.300618, 0.187238): Vector3(0.32532, 0.498879, 0.803297),
@@ -33,6 +35,12 @@ var orbs:Array[SkillOrb] = []
 var _hover_tween: Tween
 var _base_mesh_pos: Vector3
 var hovered_orb:SkillOrb = null
+var front:bool = true
+
+func set_tree_resource(tree_resource:SkillTreeResource) -> void:
+	for spot:int in tree_resource.skills_in_tree.keys():
+		var skill_orb:SkillOrb = orbs[spot]
+		skill_orb.set_skill_resource(tree_resource.skills_in_tree[spot])
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -47,6 +55,8 @@ func _ready() -> void:
 	if tree_mesh:
 		_base_mesh_pos = tree_mesh.position
 	_set_orbs()
+	const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
+	set_tree_resource(START_PAGE_RESOURCE)
 
 func _set_orbs() -> void:
 	for spot:Vector3 in SPHERE_SKILL_SPOTS.keys():

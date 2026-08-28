@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://cn6kh48ib16j4"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_8j6cj"]
+[ext_resource type="Texture2D" uid="uid://clj4ro4dfgnxd" path="res://Tile-RPG/Images/Stats/endurance.png" id="2_8j6cj"]
+
+[resource]
+script = ExtResource("1_8j6cj")
+skill_name = "Ounce of Endurace"
+skill_description = "+1 Endurace"
+skill_stat_type = 1
+skill_picture = ExtResource("2_8j6cj")
+main_stat_increases = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"

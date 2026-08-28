@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://ddqin7cjs4sgt"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_0ijlv"]
+[ext_resource type="Texture2D" uid="uid://bd6v8wjm8do0r" path="res://Tile-RPG/Images/Stats/skill.png" id="2_0ijlv"]
+
+[resource]
+script = ExtResource("1_0ijlv")
+skill_name = "Touch of Skill"
+skill_description = "+1 Skill"
+skill_stat_type = 5
+skill_picture = ExtResource("2_0ijlv")
+main_stat_increases = Dictionary[int, int]({
+5: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"

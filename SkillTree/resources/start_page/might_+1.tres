@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://0dqy4f51ar0"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_37olf"]
+[ext_resource type="Texture2D" uid="uid://db3lydp60n7g1" path="res://Tile-RPG/Images/Stats/might.png" id="2_37olf"]
+
+[resource]
+script = ExtResource("1_37olf")
+skill_name = "Taste of Might"
+skill_description = "+1 Might"
+skill_stat_type = 3
+skill_picture = ExtResource("2_37olf")
+main_stat_increases = Dictionary[int, int]({
+3: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"

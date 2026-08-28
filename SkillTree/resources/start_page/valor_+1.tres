@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://bq7l1q2acodps"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_gofov"]
+[ext_resource type="Texture2D" uid="uid://be0p1lmgsm54b" path="res://Tile-RPG/Images/Stats/valor.png" id="2_07x84"]
+
+[resource]
+script = ExtResource("1_gofov")
+skill_name = "Seed of Valor"
+skill_description = "+1 Valor"
+skill_stat_type = 6
+skill_picture = ExtResource("2_07x84")
+main_stat_increases = Dictionary[int, int]({
+6: 1
+})
+metadata/_custom_type_script = "uid://dinabkd53nraf"
