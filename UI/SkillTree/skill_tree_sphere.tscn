@@ -75,6 +75,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cxmx2")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_eaqtt"]
+radius = 0.1
+
 [node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh")]
 script = ExtResource("1_gnu1y")
 tree_mesh = NodePath("Sphere")
@@ -178,8 +181,16 @@ mesh = SubResource("ArrayMesh_3re47")
 skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2086852681]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6560007)
-fov = 38.2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.5205026)
+fov = 15.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1492718176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Rotators" type="Node" parent="." unique_id=599143145]
+
+[node name="Rotator1" type="Area3D" parent="Rotators" unique_id=619943420]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rotators/Rotator1" unique_id=81525575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5098902, 0)
+shape = SubResource("SphereShape3D_eaqtt")

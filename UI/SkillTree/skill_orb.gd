@@ -14,9 +14,8 @@ const UNLEARNED_SKILL_ORB_MATERIAL:ShaderMaterial = preload("uid://d1c8dwfbxkp0f
 @export var rocks: GPUParticles3D = null
 
 var skill_in_orb:SkillResource = null
-
-func _ready() -> void:
-	_tween_crack_decal()
+var connectors:Array[MeshInstance3D] = []
+var learned:bool = false
 
 func set_skill_resource(new_skill:SkillResource) -> void:
 	if new_skill == null:
@@ -39,15 +38,21 @@ func _tween_crack_decal() -> void:
 	tween.tween_property(crack_decal, "albedo_mix", 0.01, 2)
 
 func learn_skill() -> void:
+	if learned: return
+	learned = true
+	
 	GlobalSignals.play_audio.emit(learn_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
+	_tween_crack_decal()
 	
 	var learned_material:ShaderMaterial = LEARNED_SKILL_ORB_MATERIAL.duplicate()
 	learned_material.set_shader_parameter("skill_texture", skill_in_orb.skill_picture)
 	learned_material.set_shader_parameter("primary_color", Color(EnumStrings.MAIN_STAT_COLORS[skill_in_orb.skill_stat_type]))
-	print(EnumStrings.MAIN_STAT_COLORS[skill_in_orb.skill_stat_type])
 	orb.material_override = learned_material
-	
 	orb.material_overlay = OUTER_MATERIAL
+	
+	for mesh in connectors:
+		mesh.material_overlay = OUTER_MATERIAL
+	
 	sparkles.emitting = true
 	rocks.emitting = true
 	smoke_column.scale = Vector3(1,0.01,1)

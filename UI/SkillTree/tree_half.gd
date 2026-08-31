@@ -8,6 +8,7 @@ const SKILL_ORB := preload("uid://beisi558iqap8")
 @export var hover_sound:AudioStream = null
 @onready var front_connectors: Node3D = $Sphere/FrontConnectors
 @onready var back_connectors: Node3D = $Sphere/BackConnectors
+@onready var rotators: Node = $Rotators
 
 const GEM_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.124142, 0.300618, 0.187238): Vector3(0.32532, 0.498879, 0.803297),
@@ -35,9 +36,15 @@ var orbs:Array[SkillOrb] = []
 var _hover_tween: Tween
 var _base_mesh_pos: Vector3
 var hovered_orb:SkillOrb = null
+var hovered_area:Area3D = null
 var front:bool = true
+var front_resource:SkillTreeResource = null
+var back_resource:SkillTreeResource = null
 
 func set_tree_resource(tree_resource:SkillTreeResource) -> void:
+	if front: front_resource = tree_resource
+	else: back_resource = tree_resource
+	
 	for spot:int in tree_resource.skills_in_tree.keys():
 		var skill_orb:SkillOrb = orbs[spot]
 		skill_orb.set_skill_resource(tree_resource.skills_in_tree[spot])
@@ -47,18 +54,19 @@ func _input(event: InputEvent) -> void:
 		_mouse_pressed()
 
 func _mouse_pressed() -> void:
-	if !hovered_orb: return
-	hovered_orb.learn_skill()
-	#TODO effect on connectors
+	if hovered_orb: hovered_orb.learn_skill()
+	elif hovered_area: _rotate_to_other_side()
 
 func _ready() -> void:
 	if tree_mesh:
 		_base_mesh_pos = tree_mesh.position
 	_set_orbs()
+	_add_rotators()
 	const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
 	set_tree_resource(START_PAGE_RESOURCE)
 
 func _set_orbs() -> void:
+	var number:int = 0
 	for spot:Vector3 in SPHERE_SKILL_SPOTS.keys():
 		var new_orb:SkillOrb = SKILL_ORB.instantiate()
 		tree_mesh.add_child(new_orb)
@@ -68,6 +76,37 @@ func _set_orbs() -> void:
 		orbs.push_back(new_orb)
 		new_orb.enter_area_3d.mouse_entered.connect(_on_orb_hovered.bind(new_orb))
 		new_orb.enter_area_3d.mouse_exited.connect(_on_orb_exited.bind(new_orb))
+		
+		if number == 7: continue
+		new_orb.connectors.push_back(front_connectors.get_children()[number])
+		new_orb.connectors.push_back(back_connectors.get_children()[number])
+		number += 1
+
+func _add_rotators() -> void:
+	for area:Area3D in rotators.get_children():
+		area.mouse_entered.connect(_on_connector_entered.bind(area))
+		area.mouse_exited.connect(_on_connector_exited.bind(area))
+
+func _on_connector_entered(area:Area3D) -> void:
+	hovered_area = area
+	
+func _on_connector_exited(_area:Area3D) -> void:
+	hovered_area = null
+
+func _rotate_to_other_side() -> void:
+	for orb in orbs:
+		orb.enter_area_3d.hide()
+	
+	if _hover_tween: _hover_tween.kill()
+	
+	var mesh_rotation:Vector3 = Vector3(0,-180, 0)
+	if !front:
+		mesh_rotation = Vector3(0,0, 0)
+	front = !front
+
+	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel()
+	_hover_tween.tween_property(tree_mesh, "rotation_degrees", mesh_rotation, 1.5)
+	_hover_tween.tween_property(tree_mesh, "position", Vector3(0, 0, 0), .5)
 
 func _on_orb_hovered(orb: SkillOrb) -> void:
 	hovered_orb = orb

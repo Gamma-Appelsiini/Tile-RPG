@@ -157,6 +157,7 @@ material = ExtResource("8_76xol")
 size = Vector3(0.02, 0.02, 0.02)
 
 [node name="SkillOrb" type="Node3D" unique_id=1056504300 node_paths=PackedStringArray("orb", "enter_area_3d", "crack_decal", "sparkles", "smoke_column", "rocks")]
+visible = false
 script = ExtResource("1_fyjml")
 orb = NodePath("Orb")
 enter_area_3d = NodePath("EnterArea3D")
