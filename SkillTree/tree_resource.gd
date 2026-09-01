@@ -11,3 +11,11 @@ class_name SkillTreeResource
 	6: null,
 	7: null,
 }
+
+func save_to_data(save_data:Dictionary) -> void:
+	for skill_resource:SkillResource in skills_in_tree.values():
+		skill_resource.save_to_data(save_data)
+	
+func load_from_data(save_data:Dictionary) -> void:
+	for skill_resource:SkillResource in skills_in_tree.values():
+		skill_resource.load_from_data(save_data)

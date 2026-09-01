@@ -40,6 +40,7 @@ var hovered_area:Area3D = null
 var front:bool = true
 var front_resource:SkillTreeResource = null
 var back_resource:SkillTreeResource = null
+var save_data:Dictionary = {}
 
 func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 	if front: front_resource = tree_resource
@@ -94,11 +95,26 @@ func _on_connector_exited(_area:Area3D) -> void:
 	hovered_area = null
 
 func _rotate_to_other_side() -> void:
+	var area_number:int = rotators.get_children().find(hovered_area)
+	var connecting_orb:SkillOrb = orbs[area_number]
+	if !connecting_orb.skill_in_orb.connected_to_tree_page: return
+	
+	if front:
+		front_resource.save_to_data(save_data)
+		back_resource.load_from_data(save_data)
+	else:
+		back_resource.save_to_data(save_data)
+		front_resource.load_from_data(save_data)
+	#TODO
+
 	for orb in orbs:
 		orb.enter_area_3d.hide()
 	
+	_animate_tree_rotation()
+
+func _animate_tree_rotation() -> void:
 	if _hover_tween: _hover_tween.kill()
-	
+
 	var mesh_rotation:Vector3 = Vector3(0,-180, 0)
 	if !front:
 		mesh_rotation = Vector3(0,0, 0)
