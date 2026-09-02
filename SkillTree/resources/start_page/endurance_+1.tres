@@ -12,4 +12,5 @@ skill_picture = ExtResource("2_8j6cj")
 main_stat_increases = Dictionary[int, int]({
 1: 1
 })
+connected_to_tree_page_path = "uid://bdelgdl86e3ts"
 metadata/_custom_type_script = "uid://dinabkd53nraf"

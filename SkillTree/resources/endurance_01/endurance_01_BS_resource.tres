@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SkillTreeResource" format=3 uid="uid://bdelgdl86e3ts"]
+
+[ext_resource type="Script" uid="uid://b036rygbmiq5e" path="res://Tile-RPG/SkillTree/tree_resource.gd" id="1_fckep"]
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="2_34pa0"]
+[ext_resource type="Resource" uid="uid://0ssryakvuydu" path="res://Tile-RPG/SkillTree/resources/endurance_01/health_+10.tres" id="3_pr0uj"]
+
+[resource]
+script = ExtResource("1_fckep")
+skills_in_tree = Dictionary[int, ExtResource("2_34pa0")]({
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: ExtResource("3_pr0uj"),
+7: null
+})
+metadata/_custom_type_script = "uid://b036rygbmiq5e"

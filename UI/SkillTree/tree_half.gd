@@ -9,17 +9,7 @@ const SKILL_ORB := preload("uid://beisi558iqap8")
 @onready var front_connectors: Node3D = $Sphere/FrontConnectors
 @onready var back_connectors: Node3D = $Sphere/BackConnectors
 @onready var rotators: Node = $Rotators
-
-const GEM_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
-	Vector3(0.124142, 0.300618, 0.187238): Vector3(0.32532, 0.498879, 0.803297),
-	Vector3(0.284796, 0.113188, 0.195747): Vector3(0.634175, 0.261225, 0.727725),
-	Vector3(0.253152, -0.131444, 0.187447): Vector3(0.591832, -0.37269, 0.714729),
-	Vector3(0.001217, -0.248283, 0.195235): Vector3(0.0, -0.632535, 0.774532),
-	Vector3(-0.238547, -0.142398, 0.193829): Vector3(-0.591832, -0.37269, 0.714729),
-	Vector3(-0.279927, 0.116839, 0.198678): Vector3(-0.634175, 0.261226, 0.727725),
-	Vector3(-0.111971, 0.300618, 0.192166): Vector3(-0.32532, 0.498879, 0.803297),
-	Vector3(0.0, 0.025, 0.3): Vector3(0.0, 0.0, 1.0),
-}
+@export var back_orbs_parent: Node3D = null
 
 const SPHERE_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.0, 0.363544, 0.342084): Vector3(0, 0.300618, 0.287238),
@@ -32,7 +22,9 @@ const SPHERE_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.0, 0.0, 0.5): Vector3(0.0, 0.0, 1.0),
 }
 
-var orbs:Array[SkillOrb] = []
+var current_orbs:Array[SkillOrb] = []
+var front_orbs:Array[SkillOrb] = []
+var back_orbs:Array[SkillOrb] = []
 var _hover_tween: Tween
 var _base_mesh_pos: Vector3
 var hovered_orb:SkillOrb = null
@@ -47,7 +39,7 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 	else: back_resource = tree_resource
 	
 	for spot:int in tree_resource.skills_in_tree.keys():
-		var skill_orb:SkillOrb = orbs[spot]
+		var skill_orb:SkillOrb = current_orbs[spot]
 		skill_orb.set_skill_resource(tree_resource.skills_in_tree[spot])
 
 func _input(event: InputEvent) -> void:
@@ -66,22 +58,42 @@ func _ready() -> void:
 	const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
 	set_tree_resource(START_PAGE_RESOURCE)
 
+func _create_orb(spot:Vector3, back:bool = false) -> SkillOrb:
+	var new_orb:SkillOrb = SKILL_ORB.instantiate()
+	
+	if back:
+		back_orbs_parent.add_child(new_orb)
+		back_orbs.push_back(new_orb)
+	else:
+		tree_mesh.add_child(new_orb)
+		front_orbs.push_back(new_orb)
+	
+	new_orb.position = spot
+	var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS[spot])
+	new_orb.transform.basis = Basis(alignment_quat)
+	new_orb.enter_area_3d.mouse_entered.connect(_on_orb_hovered.bind(new_orb))
+	new_orb.enter_area_3d.mouse_exited.connect(_on_orb_exited.bind(new_orb))
+	return new_orb
+
 func _set_orbs() -> void:
 	var number:int = 0
 	for spot:Vector3 in SPHERE_SKILL_SPOTS.keys():
-		var new_orb:SkillOrb = SKILL_ORB.instantiate()
-		tree_mesh.add_child(new_orb)
-		new_orb.position = spot
-		var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS[spot])
-		new_orb.transform.basis = Basis(alignment_quat)
-		orbs.push_back(new_orb)
-		new_orb.enter_area_3d.mouse_entered.connect(_on_orb_hovered.bind(new_orb))
-		new_orb.enter_area_3d.mouse_exited.connect(_on_orb_exited.bind(new_orb))
+		var new_orb:SkillOrb = _create_orb(spot)
+		var new_back_orb:SkillOrb = _create_orb(spot, true)
 		
 		if number == 7: continue
 		new_orb.connectors.push_back(front_connectors.get_children()[number])
 		new_orb.connectors.push_back(back_connectors.get_children()[number])
+		new_back_orb.connectors.push_back(front_connectors.get_children()[number])
+		new_back_orb.connectors.push_back(back_connectors.get_children()[number])
+		
+		new_orb.connector_area = rotators.get_children()[number]
+		new_back_orb.connector_area = rotators.get_children()[number]
+		
 		number += 1
+	
+	back_orbs_parent.rotation_degrees.y = 180
+	current_orbs = front_orbs
 
 func _add_rotators() -> void:
 	for area:Area3D in rotators.get_children():
@@ -96,19 +108,26 @@ func _on_connector_exited(_area:Area3D) -> void:
 
 func _rotate_to_other_side() -> void:
 	var area_number:int = rotators.get_children().find(hovered_area)
-	var connecting_orb:SkillOrb = orbs[area_number]
-	if !connecting_orb.skill_in_orb.connected_to_tree_page: return
+	var connecting_orb:SkillOrb = current_orbs[area_number]
+	var next_tree_resource:SkillTreeResource = connecting_orb.skill_in_orb.get_connected_tree_page()
+	if !next_tree_resource: return
+	
+	#for rotator in rotators:
+		#rotator.hide()
+	
+	for orb in current_orbs:
+		orb.enter_area_3d.hide()
 	
 	if front:
 		front_resource.save_to_data(save_data)
-		back_resource.load_from_data(save_data)
+		current_orbs = back_orbs
 	else:
-		back_resource.save_to_data(save_data)
-		front_resource.load_from_data(save_data)
-	#TODO
 
-	for orb in orbs:
-		orb.enter_area_3d.hide()
+		back_resource.save_to_data(save_data)
+		current_orbs = front_orbs
+
+	next_tree_resource.load_from_data(save_data)
+	set_tree_resource(next_tree_resource)
 	
 	_animate_tree_rotation()
 
@@ -159,11 +178,15 @@ func _on_orb_exited(_orb: SkillOrb) -> void:
 	hovered_orb = null
 	if _hover_tween and _hover_tween.is_running():
 		_hover_tween.kill()
-		
+	
+	var rest_quat := Quaternion.IDENTITY
+	if !front:
+		rest_quat = Quaternion.from_euler(Vector3(0, deg_to_rad(-180), 0))
+	
 	_hover_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_hover_tween.tween_property(tree_mesh, "quaternion", Quaternion.IDENTITY, 0.2)
+	_hover_tween.tween_property(tree_mesh, "quaternion", rest_quat, 0.2)
 	_hover_tween.tween_property(tree_mesh, "position", _base_mesh_pos, 0.2)
 
 func _process(_delta: float) -> void:
-	for orb:SkillOrb in orbs:
+	for orb:SkillOrb in current_orbs:
 		orb.orb.look_at(scene_camera.global_position)

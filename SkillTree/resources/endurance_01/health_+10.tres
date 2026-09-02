@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://0ssryakvuydu"]
+
+[ext_resource type="Script" uid="uid://dinabkd53nraf" path="res://Tile-RPG/SkillTree/skill.gd" id="1_54t2u"]
+[ext_resource type="Texture2D" uid="uid://cn74qpcdxyygl" path="res://Tile-RPG/Images/Abilities/giant_hammer.png" id="3_7s045"]
+
+[resource]
+script = ExtResource("1_54t2u")
+skill_name = "Healthy"
+skill_description = "+10 Health Points"
+skill_stat_type = 1
+skill_picture = ExtResource("3_7s045")
+connected_to_tree_page_path = "uid://etai7p3sm21x"
+requires_learning_for_traversal = false
+metadata/_custom_type_script = "uid://dinabkd53nraf"
