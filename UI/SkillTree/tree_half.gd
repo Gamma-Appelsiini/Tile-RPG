@@ -33,6 +33,7 @@ var front:bool = true
 var front_resource:SkillTreeResource = null
 var back_resource:SkillTreeResource = null
 var save_data:Dictionary = {}
+var rotating_disabled:bool = false
 
 func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 	if front: front_resource = tree_resource
@@ -41,6 +42,7 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 	for spot:int in tree_resource.skills_in_tree.keys():
 		var skill_orb:SkillOrb = current_orbs[spot]
 		skill_orb.set_skill_resource(tree_resource.skills_in_tree[spot])
+		skill_orb.enter_area_3d.show()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -107,6 +109,9 @@ func _on_connector_exited(_area:Area3D) -> void:
 	hovered_area = null
 
 func _rotate_to_other_side() -> void:
+	if rotating_disabled: return
+	
+	rotating_disabled = true
 	var area_number:int = rotators.get_children().find(hovered_area)
 	var connecting_orb:SkillOrb = current_orbs[area_number]
 	var next_tree_resource:SkillTreeResource = connecting_orb.skill_in_orb.get_connected_tree_page()
@@ -121,10 +126,11 @@ func _rotate_to_other_side() -> void:
 	if front:
 		front_resource.save_to_data(save_data)
 		current_orbs = back_orbs
+		back_resource = front_resource
 	else:
-
 		back_resource.save_to_data(save_data)
 		current_orbs = front_orbs
+		front_resource = back_resource
 
 	next_tree_resource.load_from_data(save_data)
 	set_tree_resource(next_tree_resource)
@@ -139,28 +145,44 @@ func _animate_tree_rotation() -> void:
 		mesh_rotation = Vector3(0,0, 0)
 	front = !front
 
-	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel()
-	_hover_tween.tween_property(tree_mesh, "rotation_degrees", mesh_rotation, 1.5)
+	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SPRING).set_parallel()
+	_hover_tween.tween_property(tree_mesh, "rotation_degrees", mesh_rotation, 1.0)
 	_hover_tween.tween_property(tree_mesh, "position", Vector3(0, 0, 0), .5)
+	await _hover_tween.finished
+	rotating_disabled = false
 
-func _on_orb_hovered(orb: SkillOrb) -> void:
-	hovered_orb = orb
-	GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
+func _zoom_in_on_orb(orb: SkillOrb) -> void:
+	# Determine base orientation based on current side
+	var rest_quat := Quaternion.IDENTITY
+	if !front:
+		rest_quat = Quaternion.from_euler(Vector3(0, deg_to_rad(-180), 0))
+	
+	var rest_transform := Transform3D(Basis(rest_quat), _base_mesh_pos)
+	
+	# Get orb position and camera direction in tree_mesh's resting local space
+	var local_orb_pos := rest_transform.affine_inverse() * orb.global_position
+	var local_cam_pos := rest_transform.affine_inverse() * scene_camera.global_position
+	var local_cam_dir := local_cam_pos.normalized()
+	
 	const ROTATE_AMOUNT: float = 0.65
-	var target_dir := orb.position.normalized()
-	var target_quat := Quaternion(target_dir, Vector3.BACK)
-	var final_quat := Quaternion.IDENTITY.slerp(target_quat, ROTATE_AMOUNT)
+	var target_quat := Quaternion(local_orb_pos.normalized(), local_cam_dir)
+	var tilt_quat := Quaternion.IDENTITY.slerp(target_quat, ROTATE_AMOUNT)
 	
-	var original_orb_pos := orb.position 
-	var rotated_orb_pos := final_quat * orb.position
-	var compensation_offset := original_orb_pos - rotated_orb_pos
+	# Apply local tilt on top of the base rest rotation
+	var final_quat := rest_quat * tilt_quat
 	
+	# Calculate positional compensation so the hovered orb remains anchored during rotation
+	var compensation_offset := (rest_quat * local_orb_pos) - (final_quat * local_orb_pos)
+	
+	# Calculate camera zoom vector
 	var orb_global := orb.global_position
 	var cam_global := scene_camera.global_position
 	var dir_to_cam := (cam_global - orb_global).normalized()
 	
-	var zoom_amount:float = hover_zoom_distance
-	if orb.position == Vector3(0.0, 0.0, 0.5): zoom_amount = 0.1
+	var zoom_amount: float = hover_zoom_distance
+	if orb.position == Vector3(0.0, 0.0, 0.5):
+		zoom_amount = 0.1
+		
 	var zoom_target_global := orb_global + (dir_to_cam * zoom_amount)
 	var local_zoom_offset := to_local(zoom_target_global) - to_local(orb_global)
 	
@@ -173,8 +195,14 @@ func _on_orb_hovered(orb: SkillOrb) -> void:
 	_hover_tween.tween_property(tree_mesh, "quaternion", final_quat, 0.2)
 	_hover_tween.tween_property(tree_mesh, "position", final_pos, 0.2)
 
+func _on_orb_hovered(orb: SkillOrb) -> void:
+	if rotating_disabled: return
+	hovered_orb = orb
+	GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
+	_zoom_in_on_orb(hovered_orb)
 
 func _on_orb_exited(_orb: SkillOrb) -> void:
+	if rotating_disabled or !hovered_orb: return
 	hovered_orb = null
 	if _hover_tween and _hover_tween.is_running():
 		_hover_tween.kill()

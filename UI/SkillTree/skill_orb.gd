@@ -36,6 +36,14 @@ func set_skill_resource(new_skill:SkillResource) -> void:
 	if new_skill.learned:
 		learn_skill(true)
 		learned = true
+	else:
+		_reset_learned_appearance()
+
+func _reset_learned_appearance() -> void:
+	crack_decal.hide()
+	sparkles.emitting = false
+	smoke_column.hide()
+	orb.material_overlay = null
 
 func _handle_connections(new_skill:SkillResource) -> void:
 	for connector_mesh:MeshInstance3D in connectors:
@@ -57,6 +65,7 @@ func _handle_connections(new_skill:SkillResource) -> void:
 			mesh.material_overlay = null
 
 func _tween_crack_decal() -> void:
+	crack_decal.show()
 	crack_decal.rotation_degrees.y = randf_range(0,360)
 	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
