@@ -22,6 +22,7 @@ func set_skill_resource(new_skill:SkillResource) -> void:
 	_handle_connections(new_skill)
 
 	if new_skill == null:
+		for connector in connectors: connector.hide()
 		hide()
 		return
 	else: show()
@@ -47,20 +48,19 @@ func _reset_learned_appearance() -> void:
 
 func _handle_connections(new_skill:SkillResource) -> void:
 	for connector_mesh:MeshInstance3D in connectors:
-		var transparency_amount:float = 1.0
 		
 		if new_skill == null:
-			transparency_amount = 0
+			connector_mesh.hide()
 			if connector_area: connector_area.hide()
 		elif new_skill.get_connected_tree_page():
-			if learned or !new_skill.requires_learning_for_traversal: connector_area.show()
+			for mesh:MeshInstance3D in connectors:
+				mesh.show()
+			if learned or !new_skill.requires_learning_for_traversal:
+				connector_area.show()
 		else:
-			transparency_amount = 0
+			connector_mesh.hide()
 			if connector_area: connector_area.hide()
 		
-		var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
-		tween.tween_property(connector_mesh, "transparency", transparency_amount,1.25)
-		await tween.finished
 		for mesh:MeshInstance3D in connectors:
 			mesh.material_overlay = null
 
