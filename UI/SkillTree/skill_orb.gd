@@ -49,6 +49,9 @@ func _reset_learned_appearance() -> void:
 func _handle_connections(new_skill:SkillResource) -> void:
 	for connector_mesh:MeshInstance3D in connectors:
 		
+		for mesh:MeshInstance3D in connectors:
+				mesh.material_overlay = null
+		
 		if new_skill == null:
 			connector_mesh.hide()
 			if connector_area: connector_area.hide()
@@ -57,12 +60,11 @@ func _handle_connections(new_skill:SkillResource) -> void:
 				mesh.show()
 			if learned or !new_skill.requires_learning_for_traversal:
 				connector_area.show()
+				for mesh:MeshInstance3D in connectors:
+					mesh.material_overlay = OUTER_MATERIAL
 		else:
 			connector_mesh.hide()
 			if connector_area: connector_area.hide()
-		
-		for mesh:MeshInstance3D in connectors:
-			mesh.material_overlay = null
 
 func _tween_crack_decal() -> void:
 	crack_decal.show()
