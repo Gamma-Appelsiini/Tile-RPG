@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://j8qvwulhgpwq"]
+[gd_scene format=3 uid="uid://j8qvwulhgpwq"]
 
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="1_85t3r"]
 [ext_resource type="Script" uid="uid://cmqbymykkhec" path="res://Tile-RPG/UI/StatWindow/GenericTooltip.gd" id="1_f1k8r"]
@@ -25,8 +25,7 @@ content_margin_top = 4.0
 content_margin_right = 12.0
 content_margin_bottom = 4.0
 
-[node name="MainStatTooltip" type="VBoxContainer" node_paths=PackedStringArray("stat_name", "stat_desc", "stat_flavor")]
-visible = false
+[node name="MainStatTooltip" type="VBoxContainer" unique_id=439537169 node_paths=PackedStringArray("stat_name", "stat_desc", "stat_flavor")]
 top_level = true
 z_index = 2
 anchors_preset = 8
@@ -49,14 +48,14 @@ stat_name = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatName")
 stat_desc = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatDesc")
 stat_flavor = NodePath("PanelContainer/PanelContainer/VBoxContainer/StatFlavor")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=153873380]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_chner")
 
-[node name="BgRect" type="TextureRect" parent="PanelContainer"]
+[node name="BgRect" type="TextureRect" parent="PanelContainer" unique_id=1027835197]
 material = ExtResource("2_f1k8r")
 layout_mode = 2
 mouse_filter = 2
@@ -64,16 +63,16 @@ texture = ExtResource("3_y3alq")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1725533001]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_85t3r")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=2113629157]
 layout_mode = 2
 
-[node name="StatName" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+[node name="StatName" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1739717258]
 layout_mode = 2
 theme = ExtResource("4_enjkj")
 theme_override_fonts/font = ExtResource("5_cyp4d")
@@ -82,7 +81,7 @@ text = "Might"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatDesc" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+[node name="StatDesc" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=449035216]
 layout_mode = 2
 theme = ExtResource("6_4fdmp")
 theme_override_font_sizes/font_size = 14
@@ -90,7 +89,7 @@ text = "Description"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="StatFlavor" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+[node name="StatFlavor" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=1415842400]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6764, 0.71262664, 0.76, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -103,7 +102,7 @@ text = "Status Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1678848638]
 layout_mode = 2
 texture = ExtResource("8_8nqe2")
 patch_margin_left = 10
@@ -111,7 +110,7 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=808260209]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2

@@ -1,7 +1,6 @@
 extends Node3D
 class_name TreeHalf
 
-const SKILL_ORB := preload("uid://beisi558iqap8")
 @onready var scene_camera: Camera3D = $Camera3D
 @export var tree_mesh: MeshInstance3D = null
 @export var hover_zoom_distance: float = 0.4
@@ -10,6 +9,9 @@ const SKILL_ORB := preload("uid://beisi558iqap8")
 @export var back_connectors: Node3D = null
 @export var rotators: Node3D = null
 @export var back_orbs_parent: Node3D = null
+@export var skill_tooltip: SkillTooltip = null
+
+const SKILL_ORB := preload("uid://beisi558iqap8")
 
 const SPHERE_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.0, 0.363544, 0.342084): Vector3(0, 0.300618, 0.287238),
@@ -51,9 +53,23 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
 		_mouse_pressed()
+	elif event.is_action_released("Left Click"):
+		_mouse_released()
+
+func _mouse_released() -> void:
+	skill_tooltip.set_process(false)
+	skill_tooltip.reset_bar()
+
+func _on_skill_learned() -> void:
+	if hovered_orb:
+		hovered_orb.learn_skill()
+		skill_tooltip.set_process(false)
 
 func _mouse_pressed() -> void:
-	if hovered_orb: hovered_orb.learn_skill()
+	if hovered_orb:
+		if hovered_orb.skill_in_orb.learned: return
+		skill_tooltip.set_process(true)
+		skill_tooltip.tween_load_bar()
 	elif hovered_area: _rotate_to_other_side()
 
 func _ready() -> void:
@@ -63,6 +79,7 @@ func _ready() -> void:
 	_add_rotators()
 	const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
 	set_tree_resource(START_PAGE_RESOURCE)
+	skill_tooltip.skill_learned.connect(_on_skill_learned)
 
 func _create_orb(spot:Vector3, number:int, back:bool = false) -> SkillOrb:
 	var new_orb:SkillOrb = SKILL_ORB.instantiate()
@@ -241,6 +258,7 @@ func _on_orb_exited(_orb: SkillOrb) -> void:
 	_hover_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	_hover_tween.tween_property(tree_mesh, "quaternion", _rest_quat, 0.2)
 	_hover_tween.tween_property(tree_mesh, "position", _base_mesh_pos, 0.2)
+	skill_tooltip.hide()
 
 func _on_orb_hovered(orb: SkillOrb) -> void:
 	if rotating_disabled:
@@ -251,7 +269,11 @@ func _on_orb_hovered(orb: SkillOrb) -> void:
 	hovered_orb = orb
 	GlobalSignals.play_audio.emit(hover_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 	_zoom_in_on_orb(hovered_orb)
+	skill_tooltip.set_skill(orb.skill_in_orb)
 
 func _process(_delta: float) -> void:
 	for orb:SkillOrb in current_orbs:
 		orb.orb.look_at(scene_camera.global_position)
+	
+	if skill_tooltip.visible and hovered_orb:
+		skill_tooltip.set_screen_position(hovered_orb)

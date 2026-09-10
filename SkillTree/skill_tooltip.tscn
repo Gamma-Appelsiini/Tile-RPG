@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://dqp0dyh85s51m"]
+
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="1_cl6rb"]
+[ext_resource type="Script" uid="uid://mxwxra3yq0hw" path="res://Tile-RPG/SkillTree/skill_tooltip.gd" id="2_ur7lf"]
+[ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="3_7xybe"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="4_428w6"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_biqpn"]
+[ext_resource type="FontFile" uid="uid://cceot5u65qrcq" path="res://Tile-RPG/Fonts/GoogleFonts/MedievalSharp-Regular.ttf" id="6_7mylj"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="7_tv2p6"]
+[ext_resource type="FontFile" uid="uid://dscb4lr8daqui" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-Italic-VariableFont_wght.ttf" id="8_wpymv"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="9_d5s5t"]
+[ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="10_0q5ca"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k7ac0"]
+texture = ExtResource("1_cl6rb")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.86, 0.81413335, 0.774, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ojc"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqolj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eaqtt"]
+bg_color = Color(0.42129698, 0.34865335, 0, 1)
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0)
+
+[node name="SkillTooltip" type="PanelContainer" unique_id=306152957 node_paths=PackedStringArray("skill_name", "skill_desc", "skill_flavor", "learn_label", "progress_bar", "skill_pic")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_k7ac0")
+script = ExtResource("2_ur7lf")
+skill_name = NodePath("PanelContainer/VBoxContainer/SkillName")
+skill_desc = NodePath("PanelContainer/VBoxContainer/SkillDesc")
+skill_flavor = NodePath("PanelContainer/VBoxContainer/SkillFlavor")
+learn_label = NodePath("PanelContainer/VBoxContainer/PanelContainer/LearnLabel")
+progress_bar = NodePath("PanelContainer/VBoxContainer/PanelContainer/ProgressBar")
+skill_pic = NodePath("PanelContainer/VBoxContainer/SkillPic")
+
+[node name="BgRect" type="TextureRect" parent="." unique_id=2140819564]
+material = ExtResource("3_7xybe")
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_428w6")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=739727649]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s5ojc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=329119146]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SkillName" type="Label" parent="PanelContainer/VBoxContainer" unique_id=73084269]
+layout_mode = 2
+theme = ExtResource("5_biqpn")
+theme_override_fonts/font = ExtResource("6_7mylj")
+theme_override_font_sizes/font_size = 22
+text = "Might"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillPic" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=1000470976]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkillDesc" type="Label" parent="PanelContainer/VBoxContainer" unique_id=234231198]
+layout_mode = 2
+theme = ExtResource("7_tv2p6")
+theme_override_font_sizes/font_size = 14
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SkillFlavor" type="Label" parent="PanelContainer/VBoxContainer" unique_id=439464240]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6764, 0.71262664, 0.76, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("8_wpymv")
+theme_override_font_sizes/font_size = 22
+text = "Status Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1569155812]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=872060147]
+self_modulate = Color(1, 1, 1, 0.78431374)
+custom_minimum_size = Vector2(155, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_sqolj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_eaqtt")
+show_percentage = false
+
+[node name="LearnLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=656735655]
+layout_mode = 2
+text = "Hold M1 to learn"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=853143909]
+layout_mode = 2
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1136829688]
+layout_mode = 2
+texture = ExtResource("9_d5s5t")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="BottomDiamond" type="TextureRect" parent="." unique_id=1998102652]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 25)
+mouse_filter = 2
+texture = ExtResource("10_0q5ca")
+expand_mode = 1
+stretch_mode = 5

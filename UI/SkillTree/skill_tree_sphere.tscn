@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://d75ysq6mfl1e" path="res://Tile-RPG/Materials/TextureMaterials/rock_rough.tres" id="1_5r02g"]
 [ext_resource type="Script" uid="uid://s6w5hmt5gonr" path="res://Tile-RPG/UI/SkillTree/tree_half.gd" id="1_gnu1y"]
 [ext_resource type="Material" uid="uid://bnv056ef465te" path="res://Tile-RPG/Materials/TextureMaterials/gold_material.tres" id="2_gnu1y"]
+[ext_resource type="PackedScene" uid="uid://dqp0dyh85s51m" path="res://Tile-RPG/SkillTree/skill_tooltip.tscn" id="4_7d5b3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6r0w"]
 
@@ -78,13 +79,14 @@ shadow_mesh = SubResource("ArrayMesh_cxmx2")
 [sub_resource type="SphereShape3D" id="SphereShape3D_eaqtt"]
 radius = 0.1
 
-[node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh", "front_connectors", "back_connectors", "rotators", "back_orbs_parent")]
+[node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh", "front_connectors", "back_connectors", "rotators", "back_orbs_parent", "skill_tooltip")]
 script = ExtResource("1_gnu1y")
 tree_mesh = NodePath("Sphere")
 front_connectors = NodePath("Sphere/FrontConnectors")
 back_connectors = NodePath("Sphere/BackConnectors")
 rotators = NodePath("Sphere/Rotators")
 back_orbs_parent = NodePath("Sphere/BackOrbsParent")
+skill_tooltip = NodePath("SkillTooltip")
 
 [node name="Sphere" type="MeshInstance3D" parent="." unique_id=455694220]
 material_override = ExtResource("1_5r02g")
@@ -264,3 +266,6 @@ fov = 15.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1492718176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="SkillTooltip" parent="." unique_id=306152957 instance=ExtResource("4_7d5b3")]
+visible = false
