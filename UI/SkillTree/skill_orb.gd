@@ -77,6 +77,8 @@ func _tween_crack_decal() -> void:
 func learn_skill(without_animation:bool = false) -> void:
 	if learned: return
 	learned = true
+	skill_in_orb.tree_resource.amount_learned += 1
+	GlobalSignals.ui_handler.inventory.player_skill_gems -= 1
 	
 	if !without_animation:
 		GlobalSignals.play_audio.emit(learn_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)

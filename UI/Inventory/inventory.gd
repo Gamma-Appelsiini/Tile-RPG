@@ -50,6 +50,11 @@ var player_gems:int = 0:
 		player_gems = max(0, value)
 		_update_gem_amount(player_gems)
 
+var player_skill_gems:int = 0:
+	set(value):
+		player_skill_gems = max(0, value)
+		GlobalSignals.skill_gem_amount_changed.emit()
+
 func _ready() -> void:
 	player_currency = player_currency
 	set_process(false)
@@ -140,6 +145,7 @@ func save_inv_to_data(save_data:Dictionary) -> void:
 	save_data["currency"] = player_currency
 	save_data["crafting_gems"] = player_gems
 	save_data["inventory"] = inv_data
+	save_data["player_skill_gems"] = player_skill_gems
 	_save_equipment(save_data)
 
 func load_inv_from_data(save_data:Dictionary) -> void:
@@ -171,6 +177,8 @@ func _load_currency(save_data:Dictionary) -> void:
 		player_currency = save_data["currency"]
 	if save_data.has("crafting_gems"):
 		player_gems = save_data["crafting_gems"]
+	if save_data.has("player_skill_gems"):
+		player_skill_gems = save_data["player_skill_gems"]
 
 func _process(_delta: float) -> void:
 	if selected_slot != null:

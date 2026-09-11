@@ -17,6 +17,7 @@ signal dialogue_finished
 signal enable_player_movement
 signal disable_player_movement
 signal open_crafting
+signal skill_gem_amount_changed
 
 signal play_audio(new_stream:AudioStream, pos:Vector3)
 signal change_volume(audio_type:AudioManager.AUDIO_TYPE, amount:float)

@@ -1,5 +1,5 @@
 extends Node3D
-class_name TreeHalf
+class_name SkillTreeSphere
 
 @onready var scene_camera: Camera3D = $Camera3D
 @export var tree_mesh: MeshInstance3D = null
@@ -10,8 +10,10 @@ class_name TreeHalf
 @export var rotators: Node3D = null
 @export var back_orbs_parent: Node3D = null
 @export var skill_tooltip: SkillTooltip = null
+@export var skill_tree_heart: SkillTreeHeart = null
 
 const SKILL_ORB := preload("uid://beisi558iqap8")
+const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
 
 const SPHERE_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.0, 0.363544, 0.342084): Vector3(0, 0.300618, 0.287238),
@@ -24,6 +26,7 @@ const SPHERE_SKILL_SPOTS:Dictionary[Vector3, Vector3] = {
 	Vector3(0.0, 0.0, 0.5): Vector3(0.0, 0.0, 1.0),
 }
 
+var player:Player = null
 var current_orbs:Array[SkillOrb] = []
 var front_orbs:Array[SkillOrb] = []
 var back_orbs:Array[SkillOrb] = []
@@ -41,13 +44,32 @@ var _rest_quat: Quaternion = Quaternion.IDENTITY
 var front_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
 var back_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
 
+func _set_tree_heart() -> void:
+	var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS.values().back())
+	skill_tree_heart.transform.basis = Basis(alignment_quat)
+	skill_tree_heart.position = SPHERE_SKILL_SPOTS.keys().back()
+	skill_tree_heart.show()
+
+func _set_skill_gem_amount() -> void:
+	player = GlobalSignals.player
+	if !player: return
+
 func set_tree_resource(tree_resource:SkillTreeResource) -> void:
+	if tree_resource == START_PAGE_RESOURCE:
+		skill_tree_heart.show()
+	else:
+		skill_tree_heart.hide()
+	
 	if front: front_resource = tree_resource
 	else: back_resource = tree_resource
 	
 	for spot:int in tree_resource.skills_in_tree.keys():
 		var skill_orb:SkillOrb = current_orbs[spot]
-		skill_orb.set_skill_resource(tree_resource.skills_in_tree[spot])
+		var new_skill_resource:SkillResource = tree_resource.skills_in_tree[spot]
+		if !new_skill_resource: continue
+		
+		new_skill_resource.tree_resource = tree_resource
+		skill_orb.set_skill_resource(new_skill_resource)
 		skill_orb.enter_area_3d.show()
 
 func _input(event: InputEvent) -> void:
@@ -61,9 +83,11 @@ func _mouse_released() -> void:
 	skill_tooltip.reset_bar()
 
 func _on_skill_learned() -> void:
-	if hovered_orb:
-		hovered_orb.learn_skill()
-		skill_tooltip.set_process(false)
+	if !hovered_orb: return
+	if GlobalSignals.ui_handler.inventory.player_skill_gems <= 0: return
+	
+	hovered_orb.learn_skill()
+	skill_tooltip.set_process(false)
 
 func _mouse_pressed() -> void:
 	if hovered_orb:
@@ -75,9 +99,9 @@ func _mouse_pressed() -> void:
 func _ready() -> void:
 	if tree_mesh:
 		_base_mesh_pos = tree_mesh.position
+	_set_tree_heart()
 	_set_orbs()
 	_add_rotators()
-	const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
 	set_tree_resource(START_PAGE_RESOURCE)
 	skill_tooltip.skill_learned.connect(_on_skill_learned)
 

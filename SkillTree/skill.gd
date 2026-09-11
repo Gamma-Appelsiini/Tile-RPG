@@ -12,6 +12,7 @@ class_name SkillResource
 @export var skills_in_tree_required_to_learn:int = 0
 
 var learned:bool = false
+var tree_resource:SkillTreeResource = null
 
 func get_connected_tree_page() -> SkillTreeResource:
 	if connected_to_tree_page_path.is_empty():

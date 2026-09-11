@@ -11,6 +11,10 @@ signal skill_learned
 @export var skill_pic: TextureRect = null
 
 var bar_tween:Tween = null
+var skill_tree_sphere:SkillTreeSphere = null
+
+func _ready() -> void:
+	if get_parent() is SkillTreeSphere: skill_tree_sphere = get_parent()
 
 func _process(_delta: float) -> void:
 	if progress_bar.value == 100:
@@ -35,8 +39,17 @@ func set_skill(new_skill:SkillResource) -> void:
 	learned_skill(new_skill)
 	show()
 
+func _skills_needed_to_learn(new_skill:SkillResource) -> int:
+	return new_skill.skills_in_tree_required_to_learn - new_skill.tree_resource.amount_learned
+
 func learned_skill(new_skill:SkillResource) -> void:
 	if !new_skill.learned: return
+	elif GlobalSignals.ui_handler.inventory.player_skill_gems <= 0:
+		learn_label.text = "Not enough Skill Points"
+	elif _skills_needed_to_learn(new_skill) > 0:
+		learn_label.text = str(_skills_needed_to_learn(new_skill)) + " more Skills in current tree required to learn"
+	else:
+		learn_label.text = "Hold M1 to learn"
 	
 	learn_label.text = "Learned"
 
