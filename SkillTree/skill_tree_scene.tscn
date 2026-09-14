@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bk3xhkyrhhbs"]
+
+[ext_resource type="Script" uid="uid://r2aky8r2bx8b" path="res://Tile-RPG/SkillTree/skill_tree_scene.gd" id="1_fn8vc"]
+[ext_resource type="Texture2D" uid="uid://dpesp0mw5wu3m" path="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_Color.jpg" id="1_u2gox"]
+[ext_resource type="Texture2D" uid="uid://sr8wbephdnjw" path="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_Displacement.jpg" id="2_fn8vc"]
+[ext_resource type="Texture2D" uid="uid://d4i2ri8yolltg" path="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_NormalGL.jpg" id="3_iyh23"]
+[ext_resource type="Texture2D" uid="uid://cp5fn1xt28xmh" path="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_Roughness.jpg" id="4_top8e"]
+[ext_resource type="PackedScene" uid="uid://bx5p3tiyu3lhj" path="res://Tile-RPG/Models/CharacterModels/eater/eater_model.tscn" id="5_h3wmw"]
+[ext_resource type="PackedScene" uid="uid://ihcptrd4clq8" path="res://Tile-RPG/SkillTree/feeding_gem.tscn" id="7_iyh23"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqolj"]
+albedo_texture = ExtResource("1_u2gox")
+roughness_texture = ExtResource("4_top8e")
+normal_enabled = true
+normal_texture = ExtResource("3_iyh23")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("2_fn8vc")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eaqtt"]
+size = Vector2(25, 25)
+
+[node name="SkillTreeScene" type="Node3D" unique_id=1659237032]
+script = ExtResource("1_fn8vc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=570033153]
+material_override = SubResource("StandardMaterial3D_sqolj")
+mesh = SubResource("PlaneMesh_eaqtt")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1470747352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7403564, 0)
+light_energy = 4.536
+omni_range = 11.895
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1803652881]
+transform = Transform3D(0.43260196, -0.75554085, 0.49194866, 1.9760062e-08, 0.5456487, 0.83801407, -0.901585, -0.36252648, 0.2360487, 6.416458, 1, 1.9885559)
+fov = 50.0
+
+[node name="EaterModel" parent="." unique_id=1854922571 instance=ExtResource("5_h3wmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8755188)
+
+[node name="FeedingGem" parent="." unique_id=1356046792 instance=ExtResource("7_iyh23")]
+visible = false

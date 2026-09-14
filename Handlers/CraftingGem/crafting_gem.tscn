@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://drwatcaca7w0c" path="res://Tile-RPG/Handlers/CraftingGem/crafting_gem_orb.gd" id="1_22xlh"]
 [ext_resource type="AudioStream" uid="uid://wv4yxw8e1e73" path="res://Tile-RPG/Sounds/Effects/gem_pickup.ogg" id="2_pl3og"]
 [ext_resource type="AudioStream" uid="uid://cpfhmgb2i4sfy" path="res://Tile-RPG/Sounds/Drops/drop_gem.wav" id="3_3ahjl"]
-[ext_resource type="Material" uid="uid://c4kiu6i1nes4s" path="res://Tile-RPG/Materials/ShaderMaterials/iridescent_material.tres" id="3_fsasr"]
 [ext_resource type="Texture2D" uid="uid://dl1if4cb3s0rk" path="res://Tile-RPG/Images/Shaders/trail.png" id="4_voa8i"]
 [ext_resource type="Material" uid="uid://kfh6ohl7t45a" path="res://Tile-RPG/Materials/ShaderMaterials/rainbow_gem_material.tres" id="5_178r7"]
 [ext_resource type="Script" uid="uid://cb3y5f7tugb66" path="res://Tile-RPG/Handlers/curve_mover.gd" id="6_ykjjh"]
@@ -66,18 +65,12 @@ collision_layer = 16
 collision_mask = 31
 mass = 2.0
 script = ExtResource("1_22xlh")
-gem_mesh = NodePath("GemMesh")
+gem_mesh = NodePath("")
 gem_pickup_sound = ExtResource("2_pl3og")
 gem_drop_sound = ExtResource("3_3ahjl")
 particles = NodePath("CPUParticles3D")
 collision_shape_3d = NodePath("CollisionShape3D")
 curve_mover = NodePath("CurveMover")
-
-[node name="GemMesh" type="MeshInstance3D" parent="." unique_id=1735431954]
-visible = false
-material_override = ExtResource("3_fsasr")
-mesh = SubResource("ArrayMesh_kfp8i")
-skeleton = NodePath("")
 
 [node name="GemMesh2" type="MeshInstance3D" parent="." unique_id=1498574154]
 material_override = ExtResource("5_178r7")

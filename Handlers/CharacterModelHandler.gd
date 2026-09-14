@@ -5,7 +5,7 @@ enum CharAnimation {
 	ATTACK_1H, ATTACK_2H, ATTACK_BOW, ATTACK_PUNCH, BLOCK, CAST_SPELL, CASTING, COMBAT_IDLE_1,
 	DIE_1, DIE_2, DODGE, DRAW_WEAPON, DRINK_POTION, FROZEN, IDLE, IDLE_ACTION_2, IDLE_ACTION_3,
 	IDLE_ACTION_4, INTERACT, MINE, OPEN_DOOR_1, PICKUP, RUN, STUNNED, TAKE_DAMAGE_FROM_BACK,
-	TAKE_DAMAGE_FROM_FRONT, TAKE_DAMAGE_FROM_LEFT, TAKE_DAMAGE_FROM_RIGHT, TAKE_DAMAGE, NULL}
+	TAKE_DAMAGE_FROM_FRONT, TAKE_DAMAGE_FROM_LEFT, TAKE_DAMAGE_FROM_RIGHT, TAKE_DAMAGE, WALK, NULL}
 
 @export var character_mesh:MeshInstance3D = null
 @export var animation_player: AnimationPlayer = null
@@ -18,6 +18,7 @@ enum CharAnimation {
 @export var head_node: Node3D = null
 @export var animation_overrides:AnimationOverrides = null
 @export var unique_animations:bool = false
+@export var look_at_modifier_3d: LookAtModifier3D = null
 
 const PLAYER_PREFIX:String = "animations/"
 const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
@@ -49,7 +50,8 @@ const ANIMATION_ENUM_TO_STRING:Dictionary[CharAnimation, String] = {
 	CharAnimation.TAKE_DAMAGE_FROM_FRONT: "take_damage_from_front",
 	CharAnimation.TAKE_DAMAGE_FROM_LEFT: "take_damage_from_left",
 	CharAnimation.TAKE_DAMAGE_FROM_RIGHT: "take_damage_from_right",
-	CharAnimation.TAKE_DAMAGE: "take_damage"
+	CharAnimation.TAKE_DAMAGE: "take_damage",
+	CharAnimation.WALK: "walk",
 }
 const BLEND_TIME:float = 0.1
 const DEATH_ANIMATIONS:Array[CharAnimation] = [CharAnimation.DIE_1,CharAnimation.DIE_2]
@@ -63,7 +65,27 @@ const GROUND_CASTING_EFFECT := preload("uid://2u1utrq13bbp")
 
 var casting_hand_effect:Effect = null
 var casting_ground_effect:Effect = null
+var look_at_tween:Tween = null
 
+func set_target_to_look_at(target:Node3D, influence = 0.3) -> void:
+	if target == null:
+		print_debug("NO TARGET TO LOOK AT")
+		return
+	
+	look_at_modifier_3d.target_node = target.get_path()
+	look_at_modifier_3d.active = true
+	
+	if look_at_tween: look_at_tween.kill()
+	look_at_tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+	look_at_tween.tween_property(look_at_modifier_3d, "influence", influence, 0.25)
+
+func stop_looking_at_target() -> void:
+	if look_at_tween: look_at_tween.kill()
+	var tween:Tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(look_at_modifier_3d, "influence", 0, 0.5)
+	
+	await tween.finished
+	look_at_modifier_3d.active = false
 
 func die() -> void:
 	play_animation(DEATH_ANIMATIONS.pick_random(), false)
@@ -113,8 +135,18 @@ func _play_animation_override(animation:CharAnimation) -> bool:
 			return true
 	return false
 
+func play_unique_animation(animation_name:String, return_to_idle:bool = true, play_backwards:bool = false, blend_time:float = BLEND_TIME) -> void:
+	if play_backwards: animation_player.play_backwards(animation_name, blend_time)
+	else: animation_player.play(animation_name, blend_time)
+	
+	if !return_to_idle: return
+	
+	await animation_player.animation_finished
+	play_idle_animation() 
+
 func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_backwards:bool = false) -> void:
-	if game_character.character_state == game_character.CharacterState.STUNNED or game_character.character_state == game_character.CharacterState.FROZEN: return
+	if game_character:
+		if game_character.character_state == game_character.CharacterState.STUNNED or game_character.character_state == game_character.CharacterState.FROZEN: return
 	
 	if _play_animation_override(animation):
 		if !return_to_idle: return
@@ -139,19 +171,16 @@ func play_animation(animation:CharAnimation, return_to_idle:bool = true, play_ba
 	play_idle_animation() 
 
 func play_idle_animation() -> void:
-	if !game_character:
-		print_debug("No game character. Mesh; ", character_mesh)
-		return
-	
 	var char_animation:CharAnimation = CharAnimation.IDLE
 	var animation_to_play:String = ""
 	
-	if game_character.character_state == game_character.CharacterState.OUT_OF_COMBAT:
-		char_animation = CharAnimation.IDLE
-	elif game_character.character_state == game_character.CharacterState.IN_COMBAT:
-		char_animation = CharAnimation.COMBAT_IDLE_1
-	elif game_character.character_state == game_character.CharacterState.STUNNED:
-		char_animation = CharAnimation.STUNNED
+	if game_character:
+		if game_character.character_state == game_character.CharacterState.OUT_OF_COMBAT:
+			char_animation = CharAnimation.IDLE
+		elif game_character.character_state == game_character.CharacterState.IN_COMBAT:
+			char_animation = CharAnimation.COMBAT_IDLE_1
+		elif game_character.character_state == game_character.CharacterState.STUNNED:
+			char_animation = CharAnimation.STUNNED
 	
 	if _play_animation_override(char_animation): return
 	animation_to_play = ANIMATION_ENUM_TO_STRING[char_animation]

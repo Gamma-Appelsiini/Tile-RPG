@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u7vou47wdxtf"
-path.s3tc="res://.godot/imported/eater_texture_normal.png-e6871400032c6ba850352582852860a0.s3tc.ctex"
+uid="uid://d4i2ri8yolltg"
+path.s3tc="res://.godot/imported/Ground046_1K-JPG_NormalGL.jpg-28baa2d49e69c7089d339ade01b4b5cc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "fceec03574ab1bf0eb5afa04ed270b65"
-}
 
 [deps]
 
-source_file="res://Tile-RPG/Models/CharacterModels/eater/eater_texture_normal.png"
-dest_files=["res://.godot/imported/eater_texture_normal.png-e6871400032c6ba850352582852860a0.s3tc.ctex"]
+source_file="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_NormalGL.jpg"
+dest_files=["res://.godot/imported/Ground046_1K-JPG_NormalGL.jpg-28baa2d49e69c7089d339ade01b4b5cc.s3tc.ctex"]
 
 [params]
 
@@ -30,7 +27,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://Tile-RPG/Models/CharacterModels/eater/eater_EaterNormal.png"
+roughness/src_normal="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_NormalGL.jpg"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg3xw2lkk0chw"
-path.s3tc="res://.godot/imported/eater_texture.png-6bce5f5ff13094e279b78149cf375fe7.s3tc.ctex"
+uid="uid://sr8wbephdnjw"
+path.s3tc="res://.godot/imported/Ground046_1K-JPG_Displacement.jpg-45d75038a190ec710f1ac077afb2ea20.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "4a133603077ec23cf3cb4f9d383a9c67"
-}
 
 [deps]
 
-source_file="res://Tile-RPG/Models/CharacterModels/eater/eater_texture.png"
-dest_files=["res://.godot/imported/eater_texture.png-6bce5f5ff13094e279b78149cf375fe7.s3tc.ctex"]
+source_file="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/Ground046_1K-JPG_Displacement.jpg-45d75038a190ec710f1ac077afb2ea20.s3tc.ctex"]
 
 [params]
 
