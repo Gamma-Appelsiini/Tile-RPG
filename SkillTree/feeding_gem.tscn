@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://ihcptrd4clq8"]
 
 [ext_resource type="Material" uid="uid://b0umj4yqby8an" path="res://Tile-RPG/Materials/ShaderMaterials/enemy_circle_material.tres" id="1_unj5k"]
-[ext_resource type="Material" uid="uid://kqhg8g1etiif" path="res://Tile-RPG/Materials/ShaderMaterials/ghost_shield_material.tres" id="2_l3bho"]
+[ext_resource type="Material" uid="uid://dwsbukwx63ixh" path="res://Tile-RPG/Materials/ShaderMaterials/skill_gem_material.tres" id="3_l3bho"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7prqf"]
 
@@ -38,8 +38,8 @@ shadow_mesh = SubResource("ArrayMesh_p7k54")
 [node name="FeedingGem" type="Node3D" unique_id=1356046792]
 
 [node name="Plane" type="MeshInstance3D" parent="." unique_id=973760707]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.07424927, 0)
 material_override = ExtResource("1_unj5k")
-material_overlay = ExtResource("2_l3bho")
+material_overlay = ExtResource("3_l3bho")
 mesh = SubResource("ArrayMesh_u6fbc")
 skeleton = NodePath("")

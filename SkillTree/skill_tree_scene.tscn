@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cp5fn1xt28xmh" path="res://Tile-RPG/Materials/Textures/Ground046_1K-JPG_Roughness.jpg" id="4_top8e"]
 [ext_resource type="PackedScene" uid="uid://bx5p3tiyu3lhj" path="res://Tile-RPG/Models/CharacterModels/eater/eater_model.tscn" id="5_h3wmw"]
 [ext_resource type="PackedScene" uid="uid://ihcptrd4clq8" path="res://Tile-RPG/SkillTree/feeding_gem.tscn" id="7_iyh23"]
+[ext_resource type="Texture2D" uid="uid://bywajqqqlk8ur" path="res://Tile-RPG/Images/Shaders/cracks1.png" id="8_top8e"]
+[ext_resource type="Texture2D" uid="uid://byf23emp8s4h4" path="res://Tile-RPG/Images/Shaders/smoke1.png" id="9_2bqsq"]
+[ext_resource type="Texture2D" uid="uid://bmen56vrj2hkk" path="res://Tile-RPG/Materials/Textures/rough-stone-rock-512x512.png" id="10_kwhhi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqolj"]
 albedo_texture = ExtResource("1_u2gox")
@@ -24,6 +27,76 @@ uv1_scale = Vector3(4, 4, 4)
 [sub_resource type="PlaneMesh" id="PlaneMesh_eaqtt"]
 size = Vector2(25, 25)
 
+[sub_resource type="Curve" id="Curve_i817q"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.11333333, 1), 0.0, 0.0, 0, 0, Vector2(0.78666663, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_h73r5"]
+curve = SubResource("Curve_i817q")
+
+[sub_resource type="Gradient" id="Gradient_r4iyo"]
+colors = PackedColorArray(1, 1, 1, 1, 0.63375676, 0.6337568, 0.63375676, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5fhwm"]
+gradient = SubResource("Gradient_r4iyo")
+
+[sub_resource type="Curve" id="Curve_3ocjw"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.055555552, 1), 0.0, 0.0, 0, 0, Vector2(0.66222215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_48f5d"]
+curve = SubResource("Curve_3ocjw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ng4d"]
+particle_flag_rotate_y = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.19999999
+initial_velocity_max = 2.0
+gravity = Vector3(0, 2, 0)
+scale_min = 0.59999996
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_48f5d")
+color_ramp = SubResource("GradientTexture1D_5fhwm")
+alpha_curve = SubResource("CurveTexture_h73r5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eavyo"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("9_2bqsq")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_cc4dl"]
+material = SubResource("StandardMaterial3D_eavyo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ubs0o"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = -129.06001
+angular_velocity_max = 115.46998
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx7wl"]
+albedo_color = Color(0.40960324, 0.40960327, 0.40960324, 1)
+albedo_texture = ExtResource("10_kwhhi")
+uv1_scale = Vector3(5, 5, 5)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_xhyyp"]
+material = SubResource("StandardMaterial3D_hx7wl")
+size = Vector2(0.03, 0.03)
+
 [node name="SkillTreeScene" type="Node3D" unique_id=1659237032]
 script = ExtResource("1_fn8vc")
 
@@ -34,7 +107,9 @@ mesh = SubResource("PlaneMesh_eaqtt")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1470747352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7403564, 0)
 light_energy = 4.536
-omni_range = 11.895
+light_size = 1.0
+shadow_enabled = true
+omni_range = 4.964
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1803652881]
 transform = Transform3D(0.43260196, -0.75554085, 0.49194866, 1.9760062e-08, 0.5456487, 0.83801407, -0.901585, -0.36252648, 0.2360487, 6.416458, 1, 1.9885559)
@@ -45,3 +120,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8755188)
 
 [node name="FeedingGem" parent="." unique_id=1356046792 instance=ExtResource("7_iyh23")]
 visible = false
+
+[node name="CrackDecal" type="Decal" parent="." unique_id=1160890191]
+size = Vector3(1, 0.1, 1)
+texture_albedo = ExtResource("8_top8e")
+modulate = Color(0, 0, 0, 1)
+albedo_mix = 0.0
+
+[node name="CrackDecal2" type="Decal" parent="." unique_id=369130165]
+transform = Transform3D(0.6945658, 0, 0.7194292, 0, 1, 0, -0.7194292, 0, 0.6945658, 0, 0, 0)
+size = Vector3(1.5, 0.1, 1.5)
+texture_albedo = ExtResource("8_top8e")
+modulate = Color(0.12760955, 0.07859681, 0, 1)
+albedo_mix = 0.0
+
+[node name="Smoke" type="GPUParticles3D" parent="." unique_id=1730181087]
+emitting = false
+amount = 3
+lifetime = 0.8200000000000001
+one_shot = true
+explosiveness = 0.9
+randomness = 0.25
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_3ng4d")
+draw_pass_1 = SubResource("QuadMesh_cc4dl")
+
+[node name="Dirt" type="GPUParticles3D" parent="." unique_id=1955329085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.119140625, 0)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+randomness = 0.6
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ubs0o")
+draw_pass_1 = SubResource("QuadMesh_xhyyp")

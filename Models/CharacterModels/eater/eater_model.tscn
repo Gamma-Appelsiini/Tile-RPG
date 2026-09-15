@@ -9,10 +9,16 @@ resource_name = "Body"
 cull_mode = 2
 albedo_texture = ExtResource("2_f4xar")
 metallic = 0.672236
-roughness = 0.6413082
+roughness = 0.49
+roughness_texture_channel = 2
 normal_enabled = true
+normal_scale = -1.0
 normal_texture = ExtResource("3_5e7wl")
-texture_filter = 2
+rim_enabled = true
+rim_tint = 1.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+texture_filter = 1
 metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mk1cn"]
@@ -137,6 +143,9 @@ resource_name = "Teeth"
 cull_mode = 2
 albedo_texture = ExtResource("2_f4xar")
 roughness = 0.5
+rim_enabled = true
+rim = 0.44
+rim_tint = 1.0
 texture_filter = 2
 metadata/_gltf_primary_texture_coord = 0
 
@@ -160,11 +169,61 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5e7wl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f4xar"]
+noise = SubResource("FastNoiseLite_5e7wl")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ngiad"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1ikr4"]
+noise = SubResource("FastNoiseLite_ngiad")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aglxi"]
+noise_type = 3
+frequency = 0.0592
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1ibsr"]
+noise = SubResource("FastNoiseLite_aglxi")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r2j1y"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kvo7p"]
+noise = SubResource("FastNoiseLite_r2j1y")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ga78i"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mk1cn"]
+noise = SubResource("FastNoiseLite_ga78i")
+seamless = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdvdv"]
 resource_name = "Tongue"
 cull_mode = 2
 albedo_texture = ExtResource("2_f4xar")
-roughness = 0.74482757
+metallic = 0.03
+roughness = 0.53
+normal_scale = 0.09
+normal_texture = SubResource("NoiseTexture2D_1ibsr")
+rim_tint = 1.0
+rim_texture = SubResource("NoiseTexture2D_kvo7p")
+clearcoat_enabled = true
+clearcoat = 0.12
+clearcoat_roughness = 0.8
+clearcoat_texture = SubResource("NoiseTexture2D_1ikr4")
+anisotropy = 1.0
+anisotropy_flowmap = SubResource("NoiseTexture2D_f4xar")
+subsurf_scatter_strength = 0.43
+subsurf_scatter_skin_mode = true
+subsurf_scatter_texture = SubResource("NoiseTexture2D_mk1cn")
 texture_filter = 2
 metadata/_gltf_primary_texture_coord = 0
 
@@ -1270,9 +1329,8 @@ _data = {
 &"walk": SubResource("Animation_38l0w")
 }
 
-[node name="EaterModel" type="Node3D" unique_id=1854922571 node_paths=PackedStringArray("character_mesh", "animation_player", "head_node", "look_at_modifier_3d")]
+[node name="EaterModel" type="Node3D" unique_id=1854922571 node_paths=PackedStringArray("animation_player", "head_node", "look_at_modifier_3d")]
 script = ExtResource("1_f4xar")
-character_mesh = NodePath("")
 animation_player = NodePath("AnimationPlayer")
 head_node = NodePath("Armature/Skeleton3D/BoneAttachment3D/HeadNode")
 unique_animations = true

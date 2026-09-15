@@ -1,0 +1,78 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dwsbukwx63ixh"]
+
+[ext_resource type="Shader" uid="uid://bj4in8owup4i2" path="res://Tile-RPG/Shaders/skill_gem_shader.gdshader" id="1_wc0e3"]
+[ext_resource type="Texture2D" uid="uid://bywajqqqlk8ur" path="res://Tile-RPG/Images/Shaders/cracks1.png" id="2_tymy2"]
+[ext_resource type="Texture2D" uid="uid://dht4y2trb6n15" path="res://Tile-RPG/Images/Shaders/casting_circle.png" id="3_26qur"]
+
+[sub_resource type="Gradient" id="Gradient_prmdy"]
+offsets = PackedFloat32Array(0.023255814, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xlr1g"]
+noise_type = 3
+frequency = 0.0294
+fractal_type = 2
+fractal_octaves = 6
+fractal_lacunarity = 3.0
+fractal_gain = 0.8
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_6hjxn"]
+noise = SubResource("FastNoiseLite_xlr1g")
+color_ramp = SubResource("Gradient_prmdy")
+seamless = true
+seamless_blend_skirt = 0.147
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wc0e3")
+shader_parameter/shell_tint = Color(0.07200001, 0.12870003, 0.45, 0)
+shader_parameter/shell_opacity = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/specular_power = 0.94800004503
+shader_parameter/normal_map = ExtResource("3_26qur")
+shader_parameter/normal_strength = 0.2110000100225
+shader_parameter/flaw_map = ExtResource("2_tymy2")
+shader_parameter/flaw_strength = 0.8050000382375
+shader_parameter/flaw_color = Color(1, 0, 0.016666412, 1)
+shader_parameter/refraction_strength = 0.0
+shader_parameter/chromatic_aberration = 0.398000018905
+shader_parameter/refraction_blur = 0.3290000156275
+shader_parameter/ior = 2.1010000522975
+shader_parameter/soul_noise = SubResource("NoiseTexture3D_6hjxn")
+shader_parameter/use_noise_texture = true
+shader_parameter/march_steps = 28
+shader_parameter/interior_radius = 1.46000006772006
+shader_parameter/soul_color_cold = Color(0.5713938, 0.16940793, 0.25617084, 1)
+shader_parameter/soul_color_hot = Color(0.9217512, 0, 0.04411877, 1)
+shader_parameter/core_color = Color(1.9754877, 0.35879612, 0.38574052, 1)
+shader_parameter/density = 0.6190000294025
+shader_parameter/density_threshold = 0.53200002527
+shader_parameter/wisp_scale = 7.14900033305773
+shader_parameter/wisp_speed = 0.0050000002375
+shader_parameter/swirl_amount = 5.08400024149
+shader_parameter/swirl_speed = 0.54800002603
+shader_parameter/core_intensity = 0.7470000354825
+shader_parameter/core_tightness = 19.6290008848775
+shader_parameter/interior_energy = 2.09600009956
+shader_parameter/pulse_speed = 2.8690001362775
+shader_parameter/pulse_amount = 0.434000020615
+shader_parameter/heartbeat_sharpness = 3.7250001294375
+shader_parameter/charge = 0.10000000475
+shader_parameter/rim_color = Color(1, 0.55, 0, 1)
+shader_parameter/fresnel_power = 6.2970002753575
+shader_parameter/fresnel_strength = 1.122000053295
+shader_parameter/iridescence_strength = 0.0
+shader_parameter/iridescence_bands = 0.5
+shader_parameter/iridescence_phase = Vector3(0, 0.33, 0.67)
+shader_parameter/use_iridescence_ramp = false
+shader_parameter/sparkle_strength = 0.0800000038
+shader_parameter/sparkle_scale = 120.0
+shader_parameter/sparkle_threshold = 0.934000020615
+shader_parameter/sparkle_speed = 3.7390001776025
+shader_parameter/sigil_texture = ExtResource("3_26qur")
+shader_parameter/sigil_color = Color(1, 0.15, 0.1, 1)
+shader_parameter/sigil_strength = 3.23200015352
+shader_parameter/sigil_size = 0.58800002467012
+shader_parameter/sigil_spin = 0.17400015076499997
+shader_parameter/sigil_view_bias = 0.8370000397575
