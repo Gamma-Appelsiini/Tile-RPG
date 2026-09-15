@@ -1,7 +1,6 @@
 extends Node3D
 class_name SkillTreeSphere
 
-@onready var scene_camera: Camera3D = $Camera3D
 @export var tree_mesh: MeshInstance3D = null
 @export var hover_zoom_distance: float = 0.4
 @export var hover_sound:AudioStream = null
@@ -43,6 +42,7 @@ var orb_in_hover_reserve:SkillOrb = null
 var _rest_quat: Quaternion = Quaternion.IDENTITY
 var front_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
 var back_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
+var scene_camera: Camera3D = null
 
 func _set_tree_heart() -> void:
 	var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS.values().back())
@@ -70,7 +70,7 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 		
 		new_skill_resource.tree_resource = tree_resource
 		skill_orb.set_skill_resource(new_skill_resource)
-		skill_orb.enter_area_3d.show()
+		#skill_orb.enter_area_3d.show()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -97,6 +97,7 @@ func _mouse_pressed() -> void:
 	elif hovered_area: _rotate_to_other_side()
 
 func _ready() -> void:
+	set_process(false)
 	if tree_mesh:
 		_base_mesh_pos = tree_mesh.position
 	_set_tree_heart()
@@ -122,6 +123,7 @@ func _create_orb(spot:Vector3, number:int, back:bool = false) -> SkillOrb:
 	new_orb.transform.basis = Basis(alignment_quat)
 	new_orb.enter_area_3d.mouse_entered.connect(_on_orb_hovered.bind(new_orb))
 	new_orb.enter_area_3d.mouse_exited.connect(_on_orb_exited.bind(new_orb))
+	new_orb.enter_area_3d.hide()
 	return new_orb
 
 func _set_orbs() -> void:

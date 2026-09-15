@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bywajqqqlk8ur" path="res://Tile-RPG/Images/Shaders/cracks1.png" id="8_top8e"]
 [ext_resource type="Texture2D" uid="uid://byf23emp8s4h4" path="res://Tile-RPG/Images/Shaders/smoke1.png" id="9_2bqsq"]
 [ext_resource type="Texture2D" uid="uid://bmen56vrj2hkk" path="res://Tile-RPG/Materials/Textures/rough-stone-rock-512x512.png" id="10_kwhhi"]
+[ext_resource type="PackedScene" uid="uid://ckuh6fdrmhma" path="res://Tile-RPG/UI/SkillTree/skill_tree_sphere.tscn" id="11_kwhhi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqolj"]
 albedo_texture = ExtResource("1_u2gox")
@@ -97,6 +98,14 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_hx7wl")
 size = Vector2(0.03, 0.03)
 
+[sub_resource type="Environment" id="Environment_2bqsq"]
+background_mode = 1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_eaqtt"]
+density = 0.8
+
 [node name="SkillTreeScene" type="Node3D" unique_id=1659237032]
 script = ExtResource("1_fn8vc")
 
@@ -106,14 +115,20 @@ mesh = SubResource("PlaneMesh_eaqtt")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1470747352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7403564, 0)
-light_energy = 4.536
-light_size = 1.0
+light_color = Color(1, 0.968, 0.94, 1)
+light_energy = 0.927
+light_size = 0.305
 shadow_enabled = true
 omni_range = 4.964
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1803652881]
 transform = Transform3D(0.43260196, -0.75554085, 0.49194866, 1.9760062e-08, 0.5456487, 0.83801407, -0.901585, -0.36252648, 0.2360487, 6.416458, 1, 1.9885559)
 fov = 50.0
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Camera3D" unique_id=1352133828]
+light_color = Color(0.9484076, 0.9629324, 0.9948948, 1)
+light_energy = 0.8
+light_cull_mask = 4294950911
 
 [node name="EaterModel" parent="." unique_id=1854922571 instance=ExtResource("5_h3wmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8755188)
@@ -155,3 +170,19 @@ randomness = 0.6
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ubs0o")
 draw_pass_1 = SubResource("QuadMesh_xhyyp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1244911080]
+environment = SubResource("Environment_2bqsq")
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=135332350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16647792, 0)
+size = Vector3(11, 0.3, 11)
+material = SubResource("FogMaterial_eaqtt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=406066322]
+light_energy = 0.158
+sky_mode = 1
+
+[node name="SkillTreeSphere" parent="." unique_id=869234759 instance=ExtResource("11_kwhhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.993225, 0)
+visible = false

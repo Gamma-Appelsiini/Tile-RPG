@@ -8,6 +8,7 @@ class_name SkillTreeScene
 @onready var crack_decal_2: Decal = $CrackDecal2
 @onready var smoke: GPUParticles3D = $Smoke
 @onready var dirt: GPUParticles3D = $Dirt
+@onready var skill_tree_sphere: SkillTreeSphere = $SkillTreeSphere
 
 var held_gem:Node3D = null
 var look_at_helper:Node3D = null
@@ -44,6 +45,7 @@ func _cam_follow_mouse() -> void:
 	camera_3d.rotation_degrees = camera_3d.rotation_degrees.lerp(target_rotation, FOLLOW_AMOUNT)
 
 func _ready() -> void:
+	skill_tree_sphere.scene_camera = camera_3d
 	set_process_input(false)
 	_zoom_camera_in()
 	_move_eater_to_place()
@@ -152,7 +154,12 @@ func _remove_eater() -> void:
 	tween.tween_property(crack_decal_2, "albedo_mix", 1, 0.2)
 	smoke.emitting = true
 	dirt.emitting = true
+	
+	await get_tree().create_timer(1).timeout
 	_spawn_skill_sphere()
 
 func _spawn_skill_sphere() -> void:
-	pass
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel().set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(skill_tree_sphere, "position", Vector3(0,.95,0), 2)
+	tween.tween_property(camera_3d, "rotation_degrees", Vector3(0,0,0), 1.7)
+	skill_tree_sphere.show()

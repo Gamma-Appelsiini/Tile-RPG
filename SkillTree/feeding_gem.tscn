@@ -35,11 +35,52 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_p7k54")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0tfdk"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8fc2m"]
+_surfaces = [{
+"aabb": AABB(-0.100000024, -0.20000005, -0.100000024, 0.20000005, 0.4000001, 0.20000005),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAQAEAAMABQAAAAIABQAEAAAABgAFAAIABgAEAAUAAwAHAAIAAwAEAAcACAAGAAIACAAEAAYACQAIAAIACQAEAAgABwAJAAIABwAEAAkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("/3//fwAAAACB2v9/fSUAAP9/////fwAA////f/9/AAD/fwAA/38AAH0l/399JQAAAAD/f/9/AACB2v9/gdoAAH0l/3+B2gAA/3//f///AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_unj5k"]
+resource_name = "gem_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.100000024, -0.20000005, -0.100000024, 0.20000005, 0.4000001, 0.20000005),
+"attribute_data": PackedByteArray("///////f////3wAA/9////+/////vwAA/7////+f////nwAA/5////9/////fwAA/3////9f////XwAA/1////8/////PwAA/z////8f////HwAA/x///wAA//8AAAAA///////fAAD/3////9////+/AAD/v////7////+fAAD/n////5////9/AAD/f////3////9fAAD/X////1////8/AAD/P////z////8fAAD/H////x///wAAAAAAAP//"),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8A"),
+"material": SubResource("StandardMaterial3D_0tfdk"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("/3//fwAAX/CB2v9/fSVf8P9/////f1/wgdr/f30lQtH///9//39C0f9/////f0LR////f/9/xbKB2v9/gdrFsv9/////f8Wygdr/f4HauZf/f/9///+5l/9/////f7mX/3//f///uZd9Jf9/gdq5l/9/////f7mXfSX/f4HaxbIAAP9//3/Fsv9/////f8WyAAD/f/9/QtF9Jf9/fSVC0f9/////f0LRfSX/f30lX/D/f/9/AABf8P9/////f1/w/3//fwAAnw//fwAA/3+fD4Ha/399JZ8Pgdr/f30lvC7/fwAA/3+8Lv///3//f7wu////f/9/OU3/fwAA/385TYHa/3+B2jlNgdr/f4HaRWj/fwAA/39FaP9//3///0Vo/3//f///RWj/fwAA/39FaH0l/3+B2kVofSX/f4HaOU3/fwAA/385TQAA/3//fzlNAAD/f/9/vC7/fwAA/3+8Ln0l/399JbwufSX/f30lnw//fwAA/3+fD/9//38AAJ8PspptBLKabQSymm0EV6LBDVeiwQ1XosENWq0wG1qtMBtarTAb8cjXPPHI1zzxyNc817wMt9e8DLfXvAy3L5uj0i+bo9Ivm6PSwY2m3cGNpt3BjabdbYRM5W2ETOVthEzlkXuyGpF7shqRe7IaPXJYIj1yWCI9clgiz2RbLc9kWy3PZFstJ0PySCdD8kgnQ/JIDTcnww03J8MNNyfDpFLO5KRSzuSkUs7kp1098qddPfKnXT3yTGWR+0xlkftMZZH7")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8fc2m")
+
 [node name="FeedingGem" type="Node3D" unique_id=1356046792]
 
 [node name="Plane" type="MeshInstance3D" parent="." unique_id=973760707]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.07424927, 0)
+visible = false
 material_override = ExtResource("1_unj5k")
 material_overlay = ExtResource("3_l3bho")
 mesh = SubResource("ArrayMesh_u6fbc")
+skeleton = NodePath("")
+
+[node name="Cylinder" type="MeshInstance3D" parent="." unique_id=153071046]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, -0.03540039, 0)
+layers = 16384
+material_override = ExtResource("1_unj5k")
+material_overlay = ExtResource("3_l3bho")
+mesh = SubResource("ArrayMesh_unj5k")
 skeleton = NodePath("")
