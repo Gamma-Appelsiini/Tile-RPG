@@ -27,5 +27,5 @@ shader_parameter/mist_density = 0.3750000178125
 shader_parameter/fresnel_power = 4.3070001808325
 shader_parameter/fresnel_glow_intensity = 1.902000090345
 shader_parameter/icon_emission = 8.81600041876
-shader_parameter/surface_roughness = 0.22800001083
+shader_parameter/surface_roughness = 0.3650000173375
 shader_parameter/surface_metallic = 0.666000031635

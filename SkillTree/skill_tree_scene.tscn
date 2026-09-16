@@ -102,6 +102,7 @@ size = Vector2(0.03, 0.03)
 background_mode = 1
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.006466695, 0.0064666974, 0.0064666965, 1)
 
 [sub_resource type="FogMaterial" id="FogMaterial_eaqtt"]
 density = 0.8
@@ -109,7 +110,7 @@ density = 0.8
 [node name="SkillTreeScene" type="Node3D" unique_id=1659237032]
 script = ExtResource("1_fn8vc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=570033153]
+[node name="GroundPlane" type="MeshInstance3D" parent="." unique_id=570033153]
 material_override = SubResource("StandardMaterial3D_sqolj")
 mesh = SubResource("PlaneMesh_eaqtt")
 
@@ -119,10 +120,10 @@ light_color = Color(1, 0.968, 0.94, 1)
 light_energy = 0.927
 light_size = 0.305
 shadow_enabled = true
-omni_range = 4.964
+omni_range = 4.5
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1803652881]
-transform = Transform3D(0.43260196, -0.75554085, 0.49194866, 1.9760062e-08, 0.5456487, 0.83801407, -0.901585, -0.36252648, 0.2360487, 6.416458, 1, 1.9885559)
+transform = Transform3D(0.4226182, -0.74240386, 0.51983684, 0, 0.5735764, 0.81915206, -0.90630776, -0.34618858, 0.24240386, 6.5, 1, 2)
 fov = 50.0
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Camera3D" unique_id=1352133828]
@@ -131,7 +132,7 @@ light_energy = 0.8
 light_cull_mask = 4294950911
 
 [node name="EaterModel" parent="." unique_id=1854922571 instance=ExtResource("5_h3wmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8755188)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.9)
 
 [node name="FeedingGem" parent="." unique_id=1356046792 instance=ExtResource("7_iyh23")]
 visible = false
@@ -180,9 +181,9 @@ size = Vector3(11, 0.3, 11)
 material = SubResource("FogMaterial_eaqtt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=406066322]
-light_energy = 0.158
+light_energy = 0.13
 sky_mode = 1
 
 [node name="SkillTreeSphere" parent="." unique_id=869234759 instance=ExtResource("11_kwhhi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.993225, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 visible = false

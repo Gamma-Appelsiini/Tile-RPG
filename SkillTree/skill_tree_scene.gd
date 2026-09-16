@@ -13,8 +13,12 @@ class_name SkillTreeScene
 var held_gem:Node3D = null
 var look_at_helper:Node3D = null
 var last_gem_pos:Vector3 = Vector3.ZERO
+var cam_base_rotation: Vector3 = Vector3(-30.0, 0.0, 0.0)
+var feeding_disabled:bool = true
+var exiting_disabled:bool = false
 
 func _input(event: InputEvent) -> void:
+	if feeding_disabled: return
 	if event.is_action_pressed("Left Click"):
 		_grab_gem()
 	elif event.is_action_released("Left Click"):
@@ -27,7 +31,6 @@ func _process(_delta: float) -> void:
 func _cam_follow_mouse() -> void:
 	const FOLLOW_AMOUNT: float = 0.1
 	const MAX_TILT_DEGREES: float = 5.0
-	const BASE_ROTATION: Vector3 = Vector3(-30.0, 0.0, 0.0)
 	
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	if viewport_size == Vector2.ZERO:
@@ -37,8 +40,8 @@ func _cam_follow_mouse() -> void:
 	var center_offset: Vector2 = (mouse_pos / viewport_size) - Vector2(0.5, 0.5)
 	
 	var target_rotation: Vector3 = Vector3(
-		BASE_ROTATION.x - (center_offset.y * MAX_TILT_DEGREES),
-		BASE_ROTATION.y - (center_offset.x * MAX_TILT_DEGREES),
+		cam_base_rotation.x - (center_offset.y * MAX_TILT_DEGREES),
+		cam_base_rotation.y - (center_offset.x * MAX_TILT_DEGREES),
 		0.0
 	)
 	
@@ -47,10 +50,37 @@ func _cam_follow_mouse() -> void:
 func _ready() -> void:
 	skill_tree_sphere.scene_camera = camera_3d
 	set_process_input(false)
-	_zoom_camera_in()
-	_move_eater_to_place()
 	look_at_helper = Node3D.new()
 	add_child(look_at_helper)
+
+func open_scene() -> void:
+	_zoom_camera_in()
+	_move_eater_to_place()
+
+func _reset_scene() -> void:
+	const EATER_START_POS:Vector3 = Vector3(0,0,-2.9)
+	const SPHERE_START_POS:Vector3 = Vector3(0,5,0)
+	const CAM_START_POS:Vector3 = Vector3(6.5,1,2)
+	const CAM_START_ROT:Vector3 = Vector3(-55,65,0)
+	const CAM_START_FOV:float = 50
+	
+	eater_model.show()
+	eater_model.position = EATER_START_POS
+	
+	skill_tree_sphere.hide()
+	skill_tree_sphere.position = SPHERE_START_POS
+	
+	camera_3d.fov = CAM_START_FOV
+	camera_3d.position = CAM_START_POS
+	camera_3d.rotation_degrees = CAM_START_ROT
+	
+	crack_decal.albedo_mix = 0
+	crack_decal_2.albedo_mix = 0
+
+func _handle_start_without_gems() -> void:
+	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
+		feeding_disabled = false
+		return
 
 func _position_gem_at_mouse() -> void:
 	if !held_gem: return
@@ -102,6 +132,9 @@ func _look_at_helper(wait_time:float, gem:Node3D) -> void:
 	eater_model.set_target_to_look_at(look_at_helper)
 
 func _throw_gem() -> void:
+	if feeding_disabled: return
+	feeding_disabled = true
+	
 	var thrown_gem:Node3D = held_gem
 	held_gem = null
 	
@@ -133,6 +166,15 @@ func _eat_gem(thrown_gem:Node3D) -> void:
 	thrown_gem.queue_free()
 	
 	await eater_model.animation_player.animation_finished
+	_is_out_of_gems()
+
+func _is_out_of_gems() -> void:
+	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
+		feeding_disabled = false
+		return
+	
+	set_process_input(false)
+	feeding_disabled = true
 	_remove_eater()
 
 func _move_eater_to_place() -> void:
@@ -144,6 +186,7 @@ func _move_eater_to_place() -> void:
 	await tween.finished
 	eater_model.play_idle_animation()
 	set_process_input(true)
+	feeding_disabled = false
 
 func _remove_eater() -> void:
 	eater_model.play_unique_animation("burrow", false)
@@ -160,6 +203,9 @@ func _remove_eater() -> void:
 
 func _spawn_skill_sphere() -> void:
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel().set_trans(Tween.TRANS_ELASTIC)
+	cam_base_rotation = Vector3(0,0,0)
 	tween.tween_property(skill_tree_sphere, "position", Vector3(0,.95,0), 2)
 	tween.tween_property(camera_3d, "rotation_degrees", Vector3(0,0,0), 1.7)
+	tween.tween_property(camera_3d, "fov", 40, 1)
+	
 	skill_tree_sphere.show()
