@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bfusslnvanxw2" path="res://Tile-RPG/Levels/LevelLoader.gd" id="1_t2t4i"]
 [ext_resource type="Script" uid="uid://c4r45ochi8y3f" path="res://Tile-RPG/Handlers/mouse_handler.gd" id="6_nqssf"]
 [ext_resource type="PackedScene" uid="uid://crx7qfs63jr85" path="res://Tile-RPG/UI/Menus/start_menu.tscn" id="7_efb4g"]
+[ext_resource type="PackedScene" uid="uid://bk3xhkyrhhbs" path="res://Tile-RPG/SkillTree/skill_tree_scene.tscn" id="8_ivirr"]
 [ext_resource type="Script" uid="uid://dg2l3uhho1dlk" path="res://Tile-RPG/Sounds/audio_manager.gd" id="8_pu26t"]
 [ext_resource type="Script" uid="uid://duq8yqsolme5u" path="res://Tile-RPG/Combat/Abilities/ability_targeter.gd" id="10_8wimm"]
 [ext_resource type="Script" uid="uid://dwdy8svwx3gnc" path="res://Tile-RPG/Combat/combat_manager.gd" id="13_t6tkx"]
@@ -39,3 +40,6 @@ metadata/_custom_type_script = "uid://c4r45ochi8y3f"
 [node name="UINode" type="Node" parent="." unique_id=2107693019]
 
 [node name="StartMenu" parent="." unique_id=846789017 instance=ExtResource("7_efb4g")]
+
+[node name="SkillTreeScene" parent="." unique_id=1659237032 instance=ExtResource("8_ivirr")]
+visible = false

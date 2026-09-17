@@ -15,6 +15,7 @@ class_name UIHandler
 @export var start_menu: StartMenu = null
 @export var loot_window: LootWindow = null
 @export var crafting_window: CraftingWindow = null
+@export var black_screen: ColorRect = null
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 const DAMAGE_NUMBER = preload("uid://dac2s2r20qif4")
@@ -28,6 +29,7 @@ func _ready() -> void:
 	GlobalSignals.combat_start.connect(func(): in_combat = true)
 	GlobalSignals.combat_end.connect(func(): in_combat = false)
 	GlobalSignals.show_floating_text.connect(show_text_at_pos)
+	GlobalSignals.close_skill_tree.connect(close_skill_tree)
 	
 	_connect_menu_buttons()
 	_generate_dmg_numbers()
@@ -47,6 +49,8 @@ func _input(event: InputEvent) -> void:
 		_toggle_abilities()
 	elif event.is_action_pressed("Esc"):
 		_handle_esc()
+	elif event.is_action_pressed("Skill Tree"):
+		_open_skill_tree()
 
 func _handle_esc() -> void:
 	if main_menu.visible: _toggle_menu()
@@ -61,6 +65,8 @@ func _handle_esc() -> void:
 		
 
 func _toggle_menu() -> void:
+	if black_screen.self_modulate.a != 0: return
+	
 	stat_window.hide()
 	inventory.hide()
 	shop_window.hide()
@@ -70,11 +76,11 @@ func _toggle_menu() -> void:
 	else: main_menu.visible = !main_menu.visible
 
 func _toggle_character() -> void:
-	if main_menu.visible: return
+	if main_menu.visible or black_screen.self_modulate.a != 0: return
 	stat_window.visible = !stat_window.visible
 
 func toggle_inv() -> void:
-	if main_menu.visible: return
+	if main_menu.visible or black_screen.self_modulate.a != 0: return
 	
 	inventory.visible = !inventory.visible
 	if abilities_container.visible and inventory.visible: abilities_container.hide()
@@ -82,7 +88,7 @@ func toggle_inv() -> void:
 		shop_window.hide()
 
 func _toggle_abilities() -> void:
-	if main_menu.visible or shop_window.visible: return
+	if main_menu.visible or shop_window.visible or black_screen.self_modulate.a != 0: return
 	if in_combat: return
 
 	if !abilities_container.visible:
@@ -97,6 +103,41 @@ func _connect_menu_buttons() -> void:
 	menu_buttons.open_inv.connect(toggle_inv)
 	menu_buttons.open_char.connect(_toggle_character)
 	menu_buttons.open_settings.connect(_toggle_menu)
+	menu_buttons.open_skill_tree.connect(_open_skill_tree)
+
+func _open_skill_tree() -> void:
+	set_process_input(false)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(black_screen, "self_modulate:a", 1, 0.25)
+	
+	await tween.finished
+	GlobalSignals.current_level.hide()
+	GlobalSignals.player.disable_movement()
+	GlobalSignals.open_skill_tree.emit()
+	
+	for child:Control in get_children():
+		if child == black_screen: continue
+		child.hide()
+	
+	await get_tree().create_timer(0.2).timeout
+	tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(black_screen, "self_modulate:a", 0, 0.25)
+
+func close_skill_tree() -> void:
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(black_screen, "self_modulate:a", 1, 0.25)
+	
+	await tween.finished
+	GlobalSignals.current_level.show()
+	GlobalSignals.player.enable_movement()
+	GlobalSignals.player.player_camera.make_current()
+	globe_ui.show()
+	ability_bar.show()
+	menu_buttons.show()
+	
+	await get_tree().create_timer(0.2).timeout
+	tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(black_screen, "self_modulate:a", 0, 0.25)
 
 func set_player(player:Player) -> void:
 	ability_bar.set_player(player)

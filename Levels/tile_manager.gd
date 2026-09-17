@@ -3,7 +3,7 @@ class_name TileManager
 
 signal character_moved
 
-@export var door_node:Node = null
+@export var door_node:Node3D = null
 
 const PATH_VISUAL_SCENE:PackedScene = preload("uid://b0o02dka0wxp2")
 const OFFSETS:Array[Vector3] = [Vector3(0,0,-1),Vector3(0,0,1),Vector3(-1,0,0),Vector3(1,0,0)]

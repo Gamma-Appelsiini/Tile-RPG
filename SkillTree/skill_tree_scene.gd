@@ -23,6 +23,8 @@ func _input(event: InputEvent) -> void:
 		_grab_gem()
 	elif event.is_action_released("Left Click"):
 		_throw_gem()
+	elif event.is_action_released("Esc"):
+		_exit_scene()
 
 func _process(_delta: float) -> void:
 	_cam_follow_mouse()
@@ -48,14 +50,29 @@ func _cam_follow_mouse() -> void:
 	camera_3d.rotation_degrees = camera_3d.rotation_degrees.lerp(target_rotation, FOLLOW_AMOUNT)
 
 func _ready() -> void:
+	GlobalSignals.open_skill_tree.connect(open_scene)
 	skill_tree_sphere.scene_camera = camera_3d
 	set_process_input(false)
+	set_process(false)
 	look_at_helper = Node3D.new()
 	add_child(look_at_helper)
 
 func open_scene() -> void:
+	_reset_scene()
+	camera_3d.make_current()
+	show()
+	
+	#TODO Start with sphere if nothing to feed
 	_zoom_camera_in()
 	_move_eater_to_place()
+
+func _exit_scene() -> void:
+	set_process_input(false)
+	set_process(false)
+	GlobalSignals.close_skill_tree.emit()
+	await get_tree().create_timer(0.25).timeout
+	hide()
+
 
 func _reset_scene() -> void:
 	const EATER_START_POS:Vector3 = Vector3(0,0,-2.9)

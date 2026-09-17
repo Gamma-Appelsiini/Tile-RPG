@@ -19,6 +19,8 @@ func _ready() -> void:
 	GlobalSignals.combat_start.connect(_disable_interacting)
 	GlobalSignals.combat_end.connect(_enable_interacting)
 	_add_indicators()
+	GlobalSignals.open_skill_tree.connect(_disable_interacting)
+	GlobalSignals.close_skill_tree.connect(_enable_interacting)
 
 func _add_indicators() -> void:
 	indicators = [indicator]

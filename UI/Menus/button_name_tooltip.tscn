@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://mt0pu4wufb2e"]
+
+[ext_resource type="Script" uid="uid://dr5al2cytvlyf" path="res://Tile-RPG/UI/Menus/button_name_tooltip.gd" id="1_r5mdw"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_o54hm"]
+[ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="3_c0ya6"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="4_pbwgd"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="5_1pfsc"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_0flt5"]
+[ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="7_nweaw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vxxpn"]
+texture = ExtResource("2_o54hm")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.86, 0.81413335, 0.774, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6258c"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+
+[node name="ButtonNameToolTip" type="VBoxContainer" unique_id=114877824]
+visible = false
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -37.5
+offset_right = 66.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_r5mdw")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=280822527]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_vxxpn")
+
+[node name="BgRect" type="TextureRect" parent="PanelContainer" unique_id=1641910094]
+material = ExtResource("3_c0ya6")
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_pbwgd")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1925148996]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6258c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=170601244]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="UIDesc" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=719032277]
+layout_mode = 2
+theme = ExtResource("5_1pfsc")
+theme_override_font_sizes/font_size = 14
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=750866336]
+layout_mode = 2
+texture = ExtResource("6_0flt5")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=374390609]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -10)
+mouse_filter = 2
+texture = ExtResource("7_nweaw")
+expand_mode = 1
+stretch_mode = 5

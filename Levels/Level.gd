@@ -1,11 +1,11 @@
-extends Node
+extends Node3D
 class_name Level
 
 @export var unique_id:String = ""
-@export var game_characters_node:Node = null
-@export var interactables_node:Node = null
-@export var breakables_node:Node = null
-@export var hiders_node:Node = null
+@export var game_characters_node:Node3D = null
+@export var interactables_node:Node3D = null
+@export var breakables_node:Node3D = null
+@export var hiders_node:Node3D = null
 @export var tile_manager:TileManager = null
 
 @export var player_spawn_positions:Dictionary[String,Node3D] = {}
