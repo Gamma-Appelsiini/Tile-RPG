@@ -9,6 +9,10 @@ class_name SkillTreeScene
 @onready var smoke: GPUParticles3D = $Smoke
 @onready var dirt: GPUParticles3D = $Dirt
 @onready var skill_tree_sphere: SkillTreeSphere = $SkillTreeSphere
+@onready var directional_light_3d: DirectionalLight3D = $DirectionalLight3D
+
+const CAM_FINAL_POS:Vector3 = Vector3(0,1,2)
+const CAM_FINAL_ROTATION:Vector3 = Vector3(-30,0,0)
 
 var held_gem:Node3D = null
 var look_at_helper:Node3D = null
@@ -18,13 +22,14 @@ var feeding_disabled:bool = true
 var exiting_disabled:bool = false
 
 func _input(event: InputEvent) -> void:
-	if feeding_disabled: return
+	if event.is_action_pressed("Esc"):
+		_exit_scene()
+	elif feeding_disabled: return
+	
 	if event.is_action_pressed("Left Click"):
 		_grab_gem()
 	elif event.is_action_released("Left Click"):
 		_throw_gem()
-	elif event.is_action_released("Esc"):
-		_exit_scene()
 
 func _process(_delta: float) -> void:
 	_cam_follow_mouse()
@@ -63,6 +68,7 @@ func open_scene() -> void:
 	show()
 	
 	#TODO Start with sphere if nothing to feed
+	if _handle_start_without_gems(): return
 	_zoom_camera_in()
 	_move_eater_to_place()
 
@@ -72,7 +78,6 @@ func _exit_scene() -> void:
 	GlobalSignals.close_skill_tree.emit()
 	await get_tree().create_timer(0.25).timeout
 	hide()
-
 
 func _reset_scene() -> void:
 	const EATER_START_POS:Vector3 = Vector3(0,0,-2.9)
@@ -93,12 +98,22 @@ func _reset_scene() -> void:
 	
 	crack_decal.albedo_mix = 0
 	crack_decal_2.albedo_mix = 0
+	directional_light_3d.light_energy = 0.13
+	skill_tree_sphere.reset_sphere()
 
-func _handle_start_without_gems() -> void:
+func _handle_start_without_gems() -> bool:
 	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
-		feeding_disabled = false
-		return
+		return false
 
+	eater_model.hide()
+	camera_3d.position = CAM_FINAL_POS
+	camera_3d.rotation_degrees = CAM_FINAL_ROTATION
+	
+	_spawn_skill_sphere()
+	set_process_input(true)
+	
+	return true
+	
 func _position_gem_at_mouse() -> void:
 	if !held_gem: return
 	
@@ -126,9 +141,6 @@ func _rotate_gem() -> void:
 	last_gem_pos = held_gem.global_position
 
 func _zoom_camera_in() -> void:
-	const CAM_FINAL_POS:Vector3 = Vector3(0,1,2)
-	const CAM_FINAL_ROTATION:Vector3 = Vector3(-30,0,0)
-	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE).set_parallel(true)
 	tween.tween_property(camera_3d, "position", CAM_FINAL_POS, 2)
 	tween.tween_property(camera_3d, "rotation_degrees", CAM_FINAL_ROTATION, 1.5)
@@ -219,10 +231,15 @@ func _remove_eater() -> void:
 	_spawn_skill_sphere()
 
 func _spawn_skill_sphere() -> void:
+	skill_tree_sphere.show()
+	skill_tree_sphere.set_process(true)
+	
 	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel().set_trans(Tween.TRANS_ELASTIC)
 	cam_base_rotation = Vector3(0,0,0)
 	tween.tween_property(skill_tree_sphere, "position", Vector3(0,.95,0), 2)
 	tween.tween_property(camera_3d, "rotation_degrees", Vector3(0,0,0), 1.7)
 	tween.tween_property(camera_3d, "fov", 40, 1)
+	tween.tween_property(directional_light_3d, "light_energy", 0.04,1)
 	
-	skill_tree_sphere.show()
+	await tween.finished
+	skill_tree_sphere.enable_sphere_actions()

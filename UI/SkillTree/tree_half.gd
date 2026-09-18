@@ -70,7 +70,36 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 		
 		new_skill_resource.tree_resource = tree_resource
 		skill_orb.set_skill_resource(new_skill_resource)
-		#skill_orb.enter_area_3d.show()
+
+func reset_sphere() -> void:
+	if _hover_tween:
+		_hover_tween.kill()
+
+	front = true
+	current_orbs = front_orbs
+	_rest_quat = Quaternion.IDENTITY
+	rotating_disabled = false
+
+	hovered_orb = null
+	hovered_area = null
+	orb_in_hover_reserve = null
+
+	if tree_mesh:
+		tree_mesh.quaternion = Quaternion.IDENTITY
+		tree_mesh.position = _base_mesh_pos
+
+	if skill_tooltip:
+		skill_tooltip.hide()
+		skill_tooltip.set_process(false)
+		skill_tooltip.reset_bar()
+
+	set_tree_resource(START_PAGE_RESOURCE)
+
+func enable_sphere_actions() -> void:
+	set_process(true)
+	set_process_input(true)
+	for orb:SkillOrb in current_orbs:
+		orb.enter_area_3d.show()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -98,8 +127,7 @@ func _mouse_pressed() -> void:
 
 func _ready() -> void:
 	set_process(false)
-	if tree_mesh:
-		_base_mesh_pos = tree_mesh.position
+	if tree_mesh: _base_mesh_pos = tree_mesh.position
 	_set_tree_heart()
 	_set_orbs()
 	_add_rotators()

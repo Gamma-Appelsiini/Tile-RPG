@@ -265,8 +265,5 @@ shape = SubResource("SphereShape3D_eaqtt")
 [node name="SkillTreeHeart" parent="Sphere" unique_id=1129966235 instance=ExtResource("5_3re47")]
 visible = false
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1492718176]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
 [node name="SkillTooltip" parent="." unique_id=306152957 instance=ExtResource("4_7d5b3")]
 visible = false
