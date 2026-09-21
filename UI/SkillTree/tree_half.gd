@@ -50,10 +50,6 @@ func _set_tree_heart() -> void:
 	skill_tree_heart.position = SPHERE_SKILL_SPOTS.keys().back()
 	skill_tree_heart.show()
 
-func _set_skill_gem_amount() -> void:
-	player = GlobalSignals.player
-	if !player: return
-
 func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 	if tree_resource == START_PAGE_RESOURCE:
 		skill_tree_heart.show()
@@ -113,7 +109,7 @@ func _mouse_released() -> void:
 
 func _on_skill_learned() -> void:
 	if !hovered_orb: return
-	if GlobalSignals.ui_handler.inventory.player_skill_gems <= 0: return
+	if GlobalSignals.ui_handler.inventory.player_skill_points <= 0: return
 	
 	hovered_orb.learn_skill()
 	skill_tooltip.set_process(false)
@@ -124,7 +120,7 @@ func _mouse_pressed() -> void:
 		skill_tooltip.set_process(true)
 		skill_tooltip.tween_load_bar()
 	elif hovered_area: _rotate_to_other_side()
-
+	
 func _ready() -> void:
 	set_process(false)
 	if tree_mesh: _base_mesh_pos = tree_mesh.position
@@ -266,8 +262,11 @@ func _zoom_in_on_orb(orb: SkillOrb) -> void:
 	var rest_quat := _rest_quat
 	var rest_transform := Transform3D(Basis(rest_quat), _base_mesh_pos)
 
-	var local_orb_pos := rest_transform.affine_inverse() * orb.global_position
-	var local_cam_pos := rest_transform.affine_inverse() * scene_camera.global_position
+	var orb_local := to_local(orb.global_position)
+	var cam_local := to_local(scene_camera.global_position)
+
+	var local_orb_pos := rest_transform.affine_inverse() * orb_local
+	var local_cam_pos := rest_transform.affine_inverse() * cam_local
 	var local_cam_dir := local_cam_pos.normalized()
 
 	const ROTATE_AMOUNT: float = 0.65
@@ -277,18 +276,13 @@ func _zoom_in_on_orb(orb: SkillOrb) -> void:
 	var final_quat := rest_quat * tilt_quat
 
 	var compensation_offset := (rest_quat * local_orb_pos) - (final_quat * local_orb_pos)
-
-	var orb_global := orb.global_position
-	var cam_global := scene_camera.global_position
-	var dir_to_cam := (cam_global - orb_global).normalized()
+	var dir_to_cam := (cam_local - orb_local).normalized()
 
 	var zoom_amount: float = hover_zoom_distance
 	if orb.position == Vector3(0.0, 0.0, 0.5):
 		zoom_amount = 0.1
 
-	var zoom_target_global := orb_global + (dir_to_cam * zoom_amount)
-	var local_zoom_offset := to_local(zoom_target_global) - to_local(orb_global)
-
+	var local_zoom_offset := dir_to_cam * zoom_amount
 	var final_pos := _base_mesh_pos + compensation_offset + local_zoom_offset
 
 	if _hover_tween and _hover_tween.is_running():

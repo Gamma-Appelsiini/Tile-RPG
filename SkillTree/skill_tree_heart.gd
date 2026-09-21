@@ -7,4 +7,4 @@ func _ready() -> void:
 	GlobalSignals.skill_gem_amount_changed.connect(set_skill_gem_amount)
 
 func set_skill_gem_amount() -> void:
-	skill_gem_amount_label_3d.text = str(GlobalSignals.ui_handler.inventory.player_skill_gems)
+	skill_gem_amount_label_3d.text = str(GlobalSignals.ui_handler.inventory.player_skill_points)

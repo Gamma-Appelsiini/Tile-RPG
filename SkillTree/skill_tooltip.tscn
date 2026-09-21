@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dscb4lr8daqui" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-Italic-VariableFont_wght.ttf" id="8_wpymv"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="9_d5s5t"]
 [ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="10_0q5ca"]
+[ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="11_ur7lf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k7ac0"]
 texture = ExtResource("1_cl6rb")
@@ -35,7 +36,31 @@ bg_color = Color(0.42129698, 0.34865335, 0, 1)
 corner_detail = 1
 shadow_color = Color(0, 0, 0, 0)
 
-[node name="SkillTooltip" type="PanelContainer" unique_id=306152957 node_paths=PackedStringArray("skill_name", "skill_desc", "skill_flavor", "learn_label", "progress_bar", "skill_pic")]
+[sub_resource type="Curve" id="Curve_cl6rb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.07777777, 1), 0.0, 0.0, 0, 0, Vector2(0.73111105, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_sqolj"]
+curve = SubResource("Curve_cl6rb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaqtt"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(0.2, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, -1, 0)
+spread = 30.0
+initial_velocity_min = 44.0
+initial_velocity_max = 75.0
+angular_velocity_min = -54.340015
+angular_velocity_max = 74.719986
+gravity = Vector3(0, 98, 0)
+scale_min = 0.01
+scale_max = 0.01
+scale_curve = SubResource("CurveTexture_sqolj")
+
+[node name="SkillTooltip" type="PanelContainer" unique_id=306152957 node_paths=PackedStringArray("skill_name", "skill_desc", "skill_flavor", "learn_label", "progress_bar", "skill_pic", "gpu_particles_2d")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -58,6 +83,7 @@ skill_flavor = NodePath("PanelContainer/VBoxContainer/SkillFlavor")
 learn_label = NodePath("PanelContainer/VBoxContainer/PanelContainer/LearnLabel")
 progress_bar = NodePath("PanelContainer/VBoxContainer/PanelContainer/ProgressBar")
 skill_pic = NodePath("PanelContainer/VBoxContainer/SkillPic")
+gpu_particles_2d = NodePath("GPUParticles2D")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=2140819564]
 material = ExtResource("3_7xybe")
@@ -91,6 +117,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -124,6 +151,7 @@ mouse_filter = 2
 self_modulate = Color(1, 1, 1, 0.78431374)
 custom_minimum_size = Vector2(155, 25)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_sqolj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_eaqtt")
 show_percentage = false
@@ -133,9 +161,6 @@ layout_mode = 2
 text = "Hold M1 to learn"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=853143909]
-layout_mode = 2
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1136829688]
 layout_mode = 2
@@ -157,3 +182,13 @@ mouse_filter = 2
 texture = ExtResource("10_0q5ca")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=178495664]
+visible = false
+top_level = true
+emitting = false
+amount = 12
+texture = ExtResource("11_ur7lf")
+explosiveness = 0.05
+randomness = 0.7
+process_material = SubResource("ParticleProcessMaterial_eaqtt")

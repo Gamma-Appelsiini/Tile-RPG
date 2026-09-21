@@ -138,6 +138,7 @@ func close_skill_tree() -> void:
 	await get_tree().create_timer(0.2).timeout
 	tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(black_screen, "self_modulate:a", 0, 0.25)
+	set_process_input(true)
 
 func set_player(player:Player) -> void:
 	ability_bar.set_player(player)

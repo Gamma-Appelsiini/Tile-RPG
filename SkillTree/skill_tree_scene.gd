@@ -189,6 +189,9 @@ func _throw_gem() -> void:
 	_eat_gem(thrown_gem)
 
 func _eat_gem(thrown_gem:Node3D) -> void:
+	GlobalSignals.ui_handler.inventory.player_skill_gems -= 1
+	GlobalSignals.ui_handler.inventory.player_skill_points += 1
+	
 	eater_model.play_unique_animation("eat")
 	eater_model.stop_looking_at_target()
 	await get_tree().create_timer(0.15).timeout
@@ -198,6 +201,7 @@ func _eat_gem(thrown_gem:Node3D) -> void:
 	_is_out_of_gems()
 
 func _is_out_of_gems() -> void:
+	print("Skill gem amount: ", GlobalSignals.ui_handler.inventory.player_skill_gems)
 	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
 		feeding_disabled = false
 		return
