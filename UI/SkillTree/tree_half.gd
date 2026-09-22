@@ -10,6 +10,7 @@ class_name SkillTreeSphere
 @export var back_orbs_parent: Node3D = null
 @export var skill_tooltip: SkillTooltip = null
 @export var skill_tree_heart: SkillTreeHeart = null
+@onready var arrows_parent: Node3D = $Sphere/ArrowsParent
 
 const SKILL_ORB := preload("uid://beisi558iqap8")
 const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
@@ -43,6 +44,7 @@ var _rest_quat: Quaternion = Quaternion.IDENTITY
 var front_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
 var back_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
 var scene_camera: Camera3D = null
+var arrows:Array[Node3D] = []
 
 func _set_tree_heart() -> void:
 	var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS.values().back())
@@ -59,6 +61,8 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 	if front: front_resource = tree_resource
 	else: back_resource = tree_resource
 	
+	tree_resource.load_from_data(save_data)
+	
 	for spot:int in tree_resource.skills_in_tree.keys():
 		var skill_orb:SkillOrb = current_orbs[spot]
 		var new_skill_resource:SkillResource = tree_resource.skills_in_tree[spot]
@@ -66,10 +70,43 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 		
 		new_skill_resource.tree_resource = tree_resource
 		skill_orb.set_skill_resource(new_skill_resource)
+		_show_rotator(skill_orb)
+
+func _show_rotator(skill_orb:SkillOrb) -> void:
+	var spot:int = current_orbs.find(skill_orb)
+	
+	if skill_orb.skill_in_orb.connected_to_tree_page_path == "":
+		_hide_arrow(spot)
+		return
+	if !skill_orb.skill_in_orb.learned and skill_orb.skill_in_orb.requires_learning_for_traversal:
+		_hide_arrow(spot)
+		return
+	
+	rotators.get_children()[spot].show()
+	var arrow:Node3D = arrows[spot]
+	if arrow.visible: return
+	
+	arrow.scale = Vector3(0.001,0.001,0.001)
+	arrow.show()
+	
+	var arrow_tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
+	arrow_tween.tween_property(arrow,"scale", Vector3(1,1,1), 0.25)
+
+func _hide_arrow(spot:int) -> void:
+	var arrow:Node3D = arrows[spot]
+	if !arrow.visible: return
+	
+	var arrow_tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
+	arrow_tween.tween_property(arrow,"scale", Vector3(0.001,0.001,0.001), 0.25)
+	await arrow_tween.finished
+	arrow.hide()
 
 func reset_sphere() -> void:
 	if _hover_tween:
 		_hover_tween.kill()
+		
+	for area:Area3D in rotators.get_children(): area.hide()
+	for arrow:Node3D in arrows: arrow.hide()
 
 	front = true
 	current_orbs = front_orbs
@@ -183,15 +220,33 @@ func _set_orbs() -> void:
 	current_orbs = front_orbs
 
 func _add_rotators() -> void:
+	const CONNECTION_ARROW := preload("uid://cpxysailmhusk")
+	var spot:int = 0
+	
 	for area:Area3D in rotators.get_children():
 		area.mouse_entered.connect(_on_connector_entered.bind(area))
 		area.mouse_exited.connect(_on_connector_exited.bind(area))
+		area.hide()
+		
+		var new_arrow:Node3D = CONNECTION_ARROW.instantiate()
+		new_arrow.hide()
+		arrows_parent.add_child(new_arrow)
+		new_arrow.global_position = area.global_position
+		arrows.push_back(new_arrow)
+		new_arrow.rotation_degrees.z -= (45.4 * spot)
+		spot += 1
 
 func _on_connector_entered(area:Area3D) -> void:
-	hovered_area = area
+	const GHOST_SHIELD_MATERIAL := preload("uid://kqhg8g1etiif")
 	
-func _on_connector_exited(_area:Area3D) -> void:
+	hovered_area = area
+	var spot:int = rotators.get_children().find(area)
+	arrows[spot].get_children()[0].material_overlay = GHOST_SHIELD_MATERIAL
+	
+func _on_connector_exited(area:Area3D) -> void:
 	hovered_area = null
+	var spot:int = rotators.get_children().find(area)
+	arrows[spot].get_children()[0].material_overlay = null
 
 func _rotate_to_other_side() -> void:
 	if rotating_disabled: return
@@ -223,7 +278,7 @@ func _rotate_to_other_side() -> void:
 		current_orbs = front_orbs
 		front_resource = back_resource
 
-	next_tree_resource.load_from_data(save_data)
+	#next_tree_resource.load_from_data(save_data)
 	set_tree_resource(next_tree_resource)
 	
 	_animate_tree_rotation(connecting_orb)

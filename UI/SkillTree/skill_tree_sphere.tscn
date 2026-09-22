@@ -265,5 +265,7 @@ shape = SubResource("SphereShape3D_eaqtt")
 [node name="SkillTreeHeart" parent="Sphere" unique_id=1129966235 instance=ExtResource("5_3re47")]
 visible = false
 
+[node name="ArrowsParent" type="Node3D" parent="Sphere" unique_id=1717998004]
+
 [node name="SkillTooltip" parent="." unique_id=306152957 instance=ExtResource("4_7d5b3")]
 visible = false

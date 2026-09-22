@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dscb4lr8daqui" path="res://Tile-RPG/Fonts/GoogleFonts/Alegreya-Italic-VariableFont_wght.ttf" id="8_wpymv"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="9_d5s5t"]
 [ext_resource type="Texture2D" uid="uid://dayqh0v7qil40" path="res://Tile-RPG/Images/UI/Borders/diamond_button.png" id="10_0q5ca"]
+[ext_resource type="Texture2D" uid="uid://b5trhv1l75r62" path="res://Tile-RPG/Images/UI/Inv/line_gradient.png" id="10_7xybe"]
 [ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="11_ur7lf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k7ac0"]
@@ -19,6 +20,14 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 modulate_color = Color(0.86, 0.81413335, 0.774, 1)
+
+[sub_resource type="Gradient" id="Gradient_mgeyu"]
+colors = PackedColorArray(0.98, 0.98, 0.98, 0, 1.6364455e-06, 0.72342265, 0.6598565, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_428w6"]
+gradient = SubResource("Gradient_mgeyu")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ojc"]
 content_margin_left = 12.0
@@ -60,7 +69,7 @@ scale_min = 0.01
 scale_max = 0.01
 scale_curve = SubResource("CurveTexture_sqolj")
 
-[node name="SkillTooltip" type="PanelContainer" unique_id=306152957 node_paths=PackedStringArray("skill_name", "skill_desc", "skill_flavor", "learn_label", "progress_bar", "skill_pic", "gpu_particles_2d")]
+[node name="SkillTooltip" type="PanelContainer" unique_id=306152957 node_paths=PackedStringArray("skill_name", "skill_desc", "skill_flavor", "learn_label", "progress_bar", "skill_pic", "gpu_particles_2d", "gradient_rect")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -84,6 +93,7 @@ learn_label = NodePath("PanelContainer/VBoxContainer/PanelContainer/LearnLabel")
 progress_bar = NodePath("PanelContainer/VBoxContainer/PanelContainer/ProgressBar")
 skill_pic = NodePath("PanelContainer/VBoxContainer/SkillPic")
 gpu_particles_2d = NodePath("GPUParticles2D")
+gradient_rect = NodePath("GradientRect")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=2140819564]
 material = ExtResource("3_7xybe")
@@ -92,6 +102,25 @@ mouse_filter = 2
 texture = ExtResource("4_428w6")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="GradientRect" type="TextureRect" parent="." unique_id=2052353399]
+self_modulate = Color(1, 1, 1, 0.29803923)
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+size_flags_vertical = 0
+offset_transform_position = Vector2(0, 5)
+offset_transform_scale = Vector2(1.017, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_428w6")
+expand_mode = 1
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1136829688]
+layout_mode = 2
+texture = ExtResource("9_d5s5t")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=739727649]
 self_modulate = Color(1, 1, 1, 0)
@@ -142,6 +171,14 @@ text = "Status Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AffixSeparator" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=619952437]
+self_modulate = Color(0.49692965, 0.48452556, 0.48763776, 1)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("10_7xybe")
+expand_mode = 1
+
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1569155812]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -161,14 +198,6 @@ layout_mode = 2
 text = "Hold M1 to learn"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1136829688]
-layout_mode = 2
-texture = ExtResource("9_d5s5t")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
 
 [node name="BottomDiamond" type="TextureRect" parent="." unique_id=1998102652]
 custom_minimum_size = Vector2(24, 24)

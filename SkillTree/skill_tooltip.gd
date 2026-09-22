@@ -10,6 +10,7 @@ signal skill_learned
 @export var progress_bar: ProgressBar = null
 @export var skill_pic: TextureRect = null
 @export var gpu_particles_2d: GPUParticles2D = null
+@export var gradient_rect: TextureRect = null
 
 var bar_tween:Tween = null
 var skill_tree_sphere:SkillTreeSphere = null
@@ -27,6 +28,12 @@ func _process(_delta: float) -> void:
 		gpu_particles_2d.global_position = progress_bar.global_position
 		gpu_particles_2d.global_position.x += progress_bar.size.x * (progress_bar.value / 100)
 
+func _set_gradient_color(color:Color) -> void:
+	gradient_rect.texture.gradient.set_color(1, color)
+	var gradient_color2:Color = color
+	gradient_color2.a = 0
+	gradient_rect.texture.gradient.set_color(0, gradient_color2)
+
 func set_skill(new_skill:SkillResource) -> void:
 	skill_desc.text = new_skill.skill_description
 	skill_name.text = new_skill.skill_name
@@ -41,6 +48,7 @@ func set_skill(new_skill:SkillResource) -> void:
 	var style_box = progress_bar.get_theme_stylebox("fill").duplicate()
 	style_box.bg_color = color
 	progress_bar.add_theme_stylebox_override("fill", style_box)
+	_set_gradient_color(color)
 	
 	_set_learn_label_text(new_skill)
 	show()
