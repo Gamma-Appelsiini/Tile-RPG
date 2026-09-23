@@ -201,12 +201,10 @@ func _eat_gem(thrown_gem:Node3D) -> void:
 	_is_out_of_gems()
 
 func _is_out_of_gems() -> void:
-	print("Skill gem amount: ", GlobalSignals.ui_handler.inventory.player_skill_gems)
 	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
 		feeding_disabled = false
 		return
 	
-	set_process_input(false)
 	feeding_disabled = true
 	_remove_eater()
 

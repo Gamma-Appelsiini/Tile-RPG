@@ -52,13 +52,13 @@ func _set_tree_heart() -> void:
 	skill_tree_heart.position = SPHERE_SKILL_SPOTS.keys().back()
 	skill_tree_heart.show()
 
-func set_tree_resource(tree_resource:SkillTreeResource) -> void:
+func set_tree_resource(tree_resource:SkillTreeResource, was_front:bool) -> void:
 	if tree_resource == START_PAGE_RESOURCE:
 		skill_tree_heart.show()
 	else:
 		skill_tree_heart.hide()
 	
-	if front: front_resource = tree_resource
+	if was_front: front_resource = tree_resource
 	else: back_resource = tree_resource
 	
 	tree_resource.load_from_data(save_data)
@@ -74,6 +74,7 @@ func set_tree_resource(tree_resource:SkillTreeResource) -> void:
 
 func _show_rotator(skill_orb:SkillOrb) -> void:
 	var spot:int = current_orbs.find(skill_orb)
+	if !front: spot = len(current_orbs) - 1 - spot 
 	
 	if skill_orb.skill_in_orb.connected_to_tree_page_path == "":
 		_hide_arrow(spot)
@@ -83,6 +84,13 @@ func _show_rotator(skill_orb:SkillOrb) -> void:
 		return
 	
 	rotators.get_children()[spot].show()
+	_show_arrow(spot)
+
+func _show_arrow(spot:int) -> void:
+	if spot >= len(arrows): return
+	
+	print_debug("Show arrow on spot ", spot)
+	
 	var arrow:Node3D = arrows[spot]
 	if arrow.visible: return
 	
@@ -93,6 +101,8 @@ func _show_rotator(skill_orb:SkillOrb) -> void:
 	arrow_tween.tween_property(arrow,"scale", Vector3(1,1,1), 0.25)
 
 func _hide_arrow(spot:int) -> void:
+	if spot >= len(arrows): return
+	
 	var arrow:Node3D = arrows[spot]
 	if !arrow.visible: return
 	
@@ -126,7 +136,7 @@ func reset_sphere() -> void:
 		skill_tooltip.set_process(false)
 		skill_tooltip.reset_bar()
 
-	set_tree_resource(START_PAGE_RESOURCE)
+	set_tree_resource(START_PAGE_RESOURCE, front)
 
 func enable_sphere_actions() -> void:
 	set_process(true)
@@ -151,6 +161,10 @@ func _on_skill_learned() -> void:
 	hovered_orb.learn_skill()
 	skill_tooltip.set_process(false)
 
+	var spot:int = current_orbs.find(hovered_orb)
+	if !front: spot = len(current_orbs) - 1 - spot 
+	_show_arrow(spot)
+
 func _mouse_pressed() -> void:
 	if hovered_orb:
 		if hovered_orb.skill_in_orb.learned: return
@@ -164,7 +178,7 @@ func _ready() -> void:
 	_set_tree_heart()
 	_set_orbs()
 	_add_rotators()
-	set_tree_resource(START_PAGE_RESOURCE)
+	set_tree_resource(START_PAGE_RESOURCE, front)
 	skill_tooltip.skill_learned.connect(_on_skill_learned)
 
 func _create_orb(spot:Vector3, number:int, back:bool = false) -> SkillOrb:
@@ -278,18 +292,20 @@ func _rotate_to_other_side() -> void:
 		current_orbs = front_orbs
 		front_resource = back_resource
 
-	#next_tree_resource.load_from_data(save_data)
-	set_tree_resource(next_tree_resource)
 	
-	_animate_tree_rotation(connecting_orb)
+	var was_front:bool = front
+	front = !front
+	set_tree_resource(next_tree_resource, was_front)
+	
+	_animate_tree_rotation(connecting_orb, was_front)
 
-func _animate_tree_rotation(connecting_orb: SkillOrb) -> void:
+func _animate_tree_rotation(connecting_orb: SkillOrb, was_front:bool) -> void:
 	if _hover_tween: 
 		_hover_tween.kill()
 
 	var target_quat := Quaternion.IDENTITY
 
-	if front:
+	if was_front:
 		var dir := Vector2(connecting_orb.position.x, connecting_orb.position.y)
 
 		if dir.length_squared() > 0.001:
@@ -299,7 +315,6 @@ func _animate_tree_rotation(connecting_orb: SkillOrb) -> void:
 		else:
 			target_quat = Quaternion(Vector3.DOWN, deg_to_rad(179.99))
 
-	front = !front
 	_rest_quat = target_quat
 
 	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SPRING).set_parallel()
@@ -308,7 +323,10 @@ func _animate_tree_rotation(connecting_orb: SkillOrb) -> void:
 
 	await _hover_tween.finished
 	rotating_disabled = false
-
+	
+	for orb in current_orbs:
+		orb.enter_area_3d.show()
+	
 	if orb_in_hover_reserve: 
 		_on_orb_hovered(orb_in_hover_reserve)
 
