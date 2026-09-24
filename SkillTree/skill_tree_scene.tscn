@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://byf23emp8s4h4" path="res://Tile-RPG/Images/Shaders/smoke1.png" id="9_2bqsq"]
 [ext_resource type="Texture2D" uid="uid://bmen56vrj2hkk" path="res://Tile-RPG/Materials/Textures/rough-stone-rock-512x512.png" id="10_kwhhi"]
 [ext_resource type="PackedScene" uid="uid://ckuh6fdrmhma" path="res://Tile-RPG/UI/SkillTree/skill_tree_sphere.tscn" id="11_kwhhi"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="12_r4iyo"]
+[ext_resource type="Texture2D" uid="uid://daovsvggokbxv" path="res://Tile-RPG/Images/UI/cross.png" id="13_3ocjw"]
+[ext_resource type="FontFile" uid="uid://ci0sovox5ufo" path="res://Tile-RPG/Fonts/GoogleFonts/SpectralSC-Bold.ttf" id="14_3ocjw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqolj"]
 albedo_texture = ExtResource("1_u2gox")
@@ -187,3 +190,19 @@ sky_mode = 1
 [node name="SkillTreeSphere" parent="." unique_id=869234759 instance=ExtResource("11_kwhhi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 visible = false
+
+[node name="ReusableButton" parent="." unique_id=1928547599 instance=ExtResource("12_r4iyo")]
+visible = false
+custom_maximum_size = Vector2(75, 75)
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.05
+anchor_bottom = 0.05
+button_image = ExtResource("13_3ocjw")
+button_text = "Esc"
+button_font = ExtResource("14_3ocjw")
+button_shadow = Vector2i(2, 2)
+text_size = 25
+text_color = Color(0.7, 0.7, 0.7, 1)
+image_size = Vector2(45, 45)

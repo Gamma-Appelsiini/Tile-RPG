@@ -10,6 +10,7 @@ class_name SkillTreeScene
 @onready var dirt: GPUParticles3D = $Dirt
 @onready var skill_tree_sphere: SkillTreeSphere = $SkillTreeSphere
 @onready var directional_light_3d: DirectionalLight3D = $DirectionalLight3D
+@onready var reusable_button: ReusableButton = $ReusableButton
 
 const CAM_FINAL_POS:Vector3 = Vector3(0,1,2)
 const CAM_FINAL_ROTATION:Vector3 = Vector3(-30,0,0)
@@ -61,18 +62,22 @@ func _ready() -> void:
 	set_process(false)
 	look_at_helper = Node3D.new()
 	add_child(look_at_helper)
+	reusable_button.texture_button.pressed.connect(_exit_scene)
 
 func open_scene() -> void:
 	_reset_scene()
 	camera_3d.make_current()
+	_show_exit_button()
 	show()
 	
-	#TODO Start with sphere if nothing to feed
 	if _handle_start_without_gems(): return
+	
+	reusable_button.hide()
 	_zoom_camera_in()
 	_move_eater_to_place()
 
 func _exit_scene() -> void:
+	reusable_button.hide()
 	set_process_input(false)
 	set_process(false)
 	GlobalSignals.close_skill_tree.emit()
@@ -206,7 +211,14 @@ func _is_out_of_gems() -> void:
 		return
 	
 	feeding_disabled = true
+	_show_exit_button()
 	_remove_eater()
+
+func _show_exit_button() -> void:
+	reusable_button.modulate.a = 0
+	reusable_button.show()
+	var tween:Tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(reusable_button, "modulate:a", 1, .45)
 
 func _move_eater_to_place() -> void:
 	eater_model.play_animation(CharacterModelHandler.CharAnimation.WALK, false)

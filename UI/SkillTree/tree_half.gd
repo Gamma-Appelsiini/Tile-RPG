@@ -6,7 +6,6 @@ class_name SkillTreeSphere
 @export var hover_sound:AudioStream = null
 @export var front_connectors: Node3D = null
 @export var back_connectors: Node3D = null
-@export var rotators: Node3D = null
 @export var back_orbs_parent: Node3D = null
 @export var skill_tooltip: SkillTooltip = null
 @export var skill_tree_heart: SkillTreeHeart = null
@@ -33,7 +32,6 @@ var back_orbs:Array[SkillOrb] = []
 var _hover_tween: Tween
 var _base_mesh_pos: Vector3
 var hovered_orb:SkillOrb = null
-var hovered_area:Area3D = null
 var front:bool = true
 var front_resource:SkillTreeResource = null
 var back_resource:SkillTreeResource = null
@@ -41,10 +39,12 @@ var save_data:Dictionary = {}
 var rotating_disabled:bool = false
 var orb_in_hover_reserve:SkillOrb = null
 var _rest_quat: Quaternion = Quaternion.IDENTITY
-var front_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
-var back_rotator_area_dict:Dictionary[Area3D, SkillOrb] = {}
 var scene_camera: Camera3D = null
-var arrows:Array[Node3D] = []
+
+var connection_arrows:Array[ConnectionArrow] = []
+var hovered_connector:ConnectionArrow = null
+var front_connection_arrow_dict:Dictionary[ConnectionArrow, SkillOrb] = {}
+var back_connecttion_arrow_dict:Dictionary[ConnectionArrow, SkillOrb] = {}
 
 func _set_tree_heart() -> void:
 	var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS.values().back())
@@ -70,53 +70,26 @@ func set_tree_resource(tree_resource:SkillTreeResource, was_front:bool) -> void:
 		
 		new_skill_resource.tree_resource = tree_resource
 		skill_orb.set_skill_resource(new_skill_resource)
-		_show_rotator(skill_orb)
+		_show_connection_arrow(skill_orb)
 
-func _show_rotator(skill_orb:SkillOrb) -> void:
+func _show_connection_arrow(skill_orb:SkillOrb) -> void:
 	var spot:int = current_orbs.find(skill_orb)
-	if !front: spot = len(current_orbs) - 1 - spot 
+	if !front: spot = len(current_orbs) - 1 - spot
 	
 	if skill_orb.skill_in_orb.connected_to_tree_page_path == "":
-		_hide_arrow(spot)
+		connection_arrows[spot].disable_connection()
 		return
 	if !skill_orb.skill_in_orb.learned and skill_orb.skill_in_orb.requires_learning_for_traversal:
-		_hide_arrow(spot)
+		connection_arrows[spot].disable_connection()
 		return
-	
-	rotators.get_children()[spot].show()
-	_show_arrow(spot)
-
-func _show_arrow(spot:int) -> void:
-	if spot >= len(arrows): return
-	
-	print_debug("Show arrow on spot ", spot)
-	
-	var arrow:Node3D = arrows[spot]
-	if arrow.visible: return
-	
-	arrow.scale = Vector3(0.001,0.001,0.001)
-	arrow.show()
-	
-	var arrow_tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
-	arrow_tween.tween_property(arrow,"scale", Vector3(1,1,1), 0.25)
-
-func _hide_arrow(spot:int) -> void:
-	if spot >= len(arrows): return
-	
-	var arrow:Node3D = arrows[spot]
-	if !arrow.visible: return
-	
-	var arrow_tween:Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
-	arrow_tween.tween_property(arrow,"scale", Vector3(0.001,0.001,0.001), 0.25)
-	await arrow_tween.finished
-	arrow.hide()
+		
+	connection_arrows[spot].enable_connection()
 
 func reset_sphere() -> void:
 	if _hover_tween:
 		_hover_tween.kill()
-		
-	for area:Area3D in rotators.get_children(): area.hide()
-	for arrow:Node3D in arrows: arrow.hide()
+
+	for connection_arrow:ConnectionArrow in connection_arrows: connection_arrow.disable_connection()
 
 	front = true
 	current_orbs = front_orbs
@@ -124,7 +97,7 @@ func reset_sphere() -> void:
 	rotating_disabled = false
 
 	hovered_orb = null
-	hovered_area = null
+	hovered_connector = null
 	orb_in_hover_reserve = null
 
 	if tree_mesh:
@@ -163,21 +136,21 @@ func _on_skill_learned() -> void:
 
 	var spot:int = current_orbs.find(hovered_orb)
 	if !front: spot = len(current_orbs) - 1 - spot 
-	_show_arrow(spot)
+	connection_arrows[spot].enable_connection()
 
 func _mouse_pressed() -> void:
 	if hovered_orb:
 		if hovered_orb.skill_in_orb.learned: return
 		skill_tooltip.set_process(true)
 		skill_tooltip.tween_load_bar()
-	elif hovered_area: _rotate_to_other_side()
+	elif hovered_connector: _rotate_to_other_side()
 	
 func _ready() -> void:
 	set_process(false)
 	if tree_mesh: _base_mesh_pos = tree_mesh.position
 	_set_tree_heart()
+	_add_connection_arrows()
 	_set_orbs()
-	_add_rotators()
 	set_tree_resource(START_PAGE_RESOURCE, front)
 	skill_tooltip.skill_learned.connect(_on_skill_learned)
 
@@ -218,49 +191,36 @@ func _set_orbs() -> void:
 		new_back_orb.connectors.push_back(front_connectors.get_children()[back_spot])
 		new_back_orb.connectors.push_back(back_connectors.get_children()[back_spot])
 		
-		var linked_area:Area3D = rotators.get_children()[number] as Area3D
-		front_rotator_area_dict[linked_area] = new_orb
-		new_orb.connector_area = linked_area
+		var linked_connector:ConnectionArrow = connection_arrows[number]
+		front_connection_arrow_dict[linked_connector] = new_orb
+		new_orb.connection_arrow = linked_connector
 		
 		#0=0, 1=6, 2=5, 3=4,4=3,5=2, 6=1
 		back_spot = number
-		if back_spot != 0: back_spot = len(rotators.get_children()) - (number)
-		new_back_orb.connector_area = rotators.get_children()[back_spot]
-		back_rotator_area_dict[new_back_orb.connector_area] = new_back_orb
+		if back_spot != 0: back_spot = len(connection_arrows) - (number)
+		
+		linked_connector = connection_arrows[back_spot]
+		back_connecttion_arrow_dict[linked_connector] = new_back_orb
+		new_back_orb.connection_arrow = linked_connector
 		
 		number += 1
 	
 	back_orbs_parent.rotation_degrees.y = 180
 	current_orbs = front_orbs
 
-func _add_rotators() -> void:
+func _add_connection_arrows() -> void:
 	const CONNECTION_ARROW := preload("uid://cpxysailmhusk")
+	const ROTATION_AMOUNT:float = -51
 	var spot:int = 0
 	
-	for area:Area3D in rotators.get_children():
-		area.mouse_entered.connect(_on_connector_entered.bind(area))
-		area.mouse_exited.connect(_on_connector_exited.bind(area))
-		area.hide()
-		
-		var new_arrow:Node3D = CONNECTION_ARROW.instantiate()
-		new_arrow.hide()
-		arrows_parent.add_child(new_arrow)
-		new_arrow.global_position = area.global_position
-		arrows.push_back(new_arrow)
-		new_arrow.rotation_degrees.z -= (45.4 * spot)
+	while spot < 7:
+		var new_connector:ConnectionArrow = CONNECTION_ARROW.instantiate()
+		tree_mesh.add_child(new_connector)
+		new_connector.area_3d.mouse_entered.connect(func(): hovered_connector = new_connector)
+		new_connector.area_3d.mouse_exited.connect(func(): hovered_connector = null)
+		connection_arrows.push_back(new_connector)
+		new_connector.rotation_degrees.z += (ROTATION_AMOUNT * spot)
 		spot += 1
-
-func _on_connector_entered(area:Area3D) -> void:
-	const GHOST_SHIELD_MATERIAL := preload("uid://kqhg8g1etiif")
-	
-	hovered_area = area
-	var spot:int = rotators.get_children().find(area)
-	arrows[spot].get_children()[0].material_overlay = GHOST_SHIELD_MATERIAL
-	
-func _on_connector_exited(area:Area3D) -> void:
-	hovered_area = null
-	var spot:int = rotators.get_children().find(area)
-	arrows[spot].get_children()[0].material_overlay = null
 
 func _rotate_to_other_side() -> void:
 	if rotating_disabled: return
@@ -268,9 +228,9 @@ func _rotate_to_other_side() -> void:
 	
 	var connecting_orb:SkillOrb = null
 	if front:
-		connecting_orb = front_rotator_area_dict[hovered_area]
+		connecting_orb = front_connection_arrow_dict[hovered_connector]
 	else:
-		connecting_orb = back_rotator_area_dict[hovered_area]
+		connecting_orb = back_connecttion_arrow_dict[hovered_connector]
 	
 	if !connecting_orb.skill_in_orb:
 		print_debug("NO SKILL IN ORB: ", connecting_orb)
@@ -292,11 +252,10 @@ func _rotate_to_other_side() -> void:
 		current_orbs = front_orbs
 		front_resource = back_resource
 
-	
 	var was_front:bool = front
 	front = !front
-	set_tree_resource(next_tree_resource, was_front)
 	
+	set_tree_resource(next_tree_resource, was_front)
 	_animate_tree_rotation(connecting_orb, was_front)
 
 func _animate_tree_rotation(connecting_orb: SkillOrb, was_front:bool) -> void:

@@ -77,15 +77,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cxmx2")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_eaqtt"]
-radius = 0.1
-
-[node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh", "front_connectors", "back_connectors", "rotators", "back_orbs_parent", "skill_tooltip", "skill_tree_heart")]
+[node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh", "front_connectors", "back_connectors", "back_orbs_parent", "skill_tooltip", "skill_tree_heart")]
 script = ExtResource("1_gnu1y")
 tree_mesh = NodePath("Sphere")
 front_connectors = NodePath("Sphere/FrontConnectors")
 back_connectors = NodePath("Sphere/BackConnectors")
-rotators = NodePath("Sphere/Rotators")
 back_orbs_parent = NodePath("Sphere/BackOrbsParent")
 skill_tooltip = NodePath("SkillTooltip")
 skill_tree_heart = NodePath("Sphere/SkillTreeHeart")
@@ -218,54 +214,12 @@ skeleton = NodePath("")
 
 [node name="BackOrbsParent" type="Node3D" parent="Sphere" unique_id=1982689743]
 
-[node name="Rotators" type="Node3D" parent="Sphere" unique_id=642203190]
-
-[node name="Rotator1" type="Area3D" parent="Sphere/Rotators" unique_id=619943420]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5098902, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator1" unique_id=81525575]
-shape = SubResource("SphereShape3D_eaqtt")
-
-[node name="Rotator2" type="Area3D" parent="Sphere/Rotators" unique_id=809527762]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39010775, 0.312603, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator2" unique_id=486730205]
-shape = SubResource("SphereShape3D_eaqtt")
-
-[node name="Rotator3" type="Area3D" parent="Sphere/Rotators" unique_id=1733239829]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48698863, -0.10721502, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator3" unique_id=667261573]
-shape = SubResource("SphereShape3D_eaqtt")
-
-[node name="Rotator4" type="Area3D" parent="Sphere/Rotators" unique_id=870209435]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2195971, -0.45340335, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator4" unique_id=1547828114]
-shape = SubResource("SphereShape3D_eaqtt")
-
-[node name="Rotator5" type="Area3D" parent="Sphere/Rotators" unique_id=79020621]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21572196, -0.45340335, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator5" unique_id=1388161196]
-shape = SubResource("SphereShape3D_eaqtt")
-
-[node name="Rotator6" type="Area3D" parent="Sphere/Rotators" unique_id=423101761]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4921559, -0.11754906, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator6" unique_id=1835177823]
-shape = SubResource("SphereShape3D_eaqtt")
-
-[node name="Rotator7" type="Area3D" parent="Sphere/Rotators" unique_id=1553301461]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39139962, 0.3100195, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/Rotators/Rotator7" unique_id=746508120]
-shape = SubResource("SphereShape3D_eaqtt")
-
 [node name="SkillTreeHeart" parent="Sphere" unique_id=1129966235 instance=ExtResource("5_3re47")]
 visible = false
 
 [node name="ArrowsParent" type="Node3D" parent="Sphere" unique_id=1717998004]
+
+[node name="ConnectionArrows" type="Node3D" parent="Sphere" unique_id=850321813]
 
 [node name="SkillTooltip" parent="." unique_id=306152957 instance=ExtResource("4_7d5b3")]
 visible = false

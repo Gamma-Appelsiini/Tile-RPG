@@ -1,7 +1,7 @@
 extends Node3D
 class_name SkillOrb
 
-const OUTER_MATERIAL:ShaderMaterial = preload("uid://kqhg8g1etiif")
+const OUTER_MATERIAL:ShaderMaterial = preload("uid://cffun3ui4av2t")
 const LEARNED_SKILL_ORB_MATERIAL:ShaderMaterial = preload("uid://y6cenuvcmwob")
 const UNLEARNED_SKILL_ORB_MATERIAL:ShaderMaterial = preload("uid://d1c8dwfbxkp0f")
 
@@ -15,7 +15,7 @@ const UNLEARNED_SKILL_ORB_MATERIAL:ShaderMaterial = preload("uid://d1c8dwfbxkp0f
 
 var skill_in_orb:SkillResource = null
 var connectors:Array[MeshInstance3D] = []
-var connector_area:Area3D = null
+var connection_arrow:ConnectionArrow = null
 var learned:bool = false
 
 func set_skill_resource(new_skill:SkillResource) -> void:
@@ -54,17 +54,17 @@ func _handle_connections(new_skill:SkillResource) -> void:
 		
 		if new_skill == null:
 			connector_mesh.hide()
-			if connector_area: connector_area.hide()
+			if connection_arrow: connection_arrow.disable_connection()
 		elif new_skill.get_connected_tree_page():
 			for mesh:MeshInstance3D in connectors:
 				mesh.show()
 			if learned or !new_skill.requires_learning_for_traversal:
-				connector_area.show()
+				connection_arrow.enable_connection()
 				for mesh:MeshInstance3D in connectors:
 					mesh.material_overlay = OUTER_MATERIAL
 		else:
 			connector_mesh.hide()
-			if connector_area: connector_area.hide()
+			if connection_arrow: connection_arrow.disable_connection()
 
 func _tween_crack_decal() -> void:
 	crack_decal.show()
@@ -106,4 +106,4 @@ func learn_skill(without_animation:bool = false) -> void:
 	crack_decal.show()
 	
 	if skill_in_orb.get_connected_tree_page():
-		if connector_area: connector_area.show()
+		if connection_arrow: connection_arrow.enable_connection()

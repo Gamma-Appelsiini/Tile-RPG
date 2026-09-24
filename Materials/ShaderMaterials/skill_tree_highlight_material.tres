@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cffun3ui4av2t"]
+
+[ext_resource type="Shader" uid="uid://b2amfo77yd611" path="res://Tile-RPG/Shaders/general_highlight_shader.gdshader" id="1_6vha1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ba1co"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_twv02"]
+noise = SubResource("FastNoiseLite_ba1co")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6vha1")
+shader_parameter/use_fresnel = true
+shader_parameter/use_pattern = true
+shader_parameter/use_hard_outline = false
+shader_parameter/use_pulsing = false
+shader_parameter/fresnel_color = Color(1, 0.5625, 0.25, 1)
+shader_parameter/fresnel_power = 9.76100046038762
+shader_parameter/fresnel_intensity = 2.0
+shader_parameter/fresnel_stepped = false
+shader_parameter/fresnel_steps = 3.0
+shader_parameter/pattern_texture = SubResource("NoiseTexture2D_twv02")
+shader_parameter/pattern_color = Color(0.9, 0.7131, 0.09900001, 0.12941177)
+shader_parameter/pattern_uv_scale = Vector2(0.5, 1)
+shader_parameter/pattern_scroll_speed = Vector2(0.1, -0.15)
+shader_parameter/pattern_intensity = 2.2850001085375
+shader_parameter/pattern_mask_by_fresnel = false
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 0.1
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_min = 0.2
+shader_parameter/pulse_max = 1.0
+shader_parameter/global_opacity = 1.0
