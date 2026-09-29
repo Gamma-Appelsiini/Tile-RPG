@@ -13,6 +13,7 @@ class_name SkillResource
 
 var learned:bool = false
 var tree_resource:SkillTreeResource = null
+var owner_character:GameCharacter = null
 
 func get_connected_tree_page() -> SkillTreeResource:
 	if connected_to_tree_page_path.is_empty():

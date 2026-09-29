@@ -81,6 +81,7 @@ func learn_skill(without_animation:bool = false) -> void:
 	
 	skill_in_orb.tree_resource.amount_learned += 1
 	GlobalSignals.ui_handler.inventory.player_skill_points -= 1
+	GlobalSignals.player.skill_handler.add_skill(skill_in_orb)
 	
 	if !without_animation:
 		GlobalSignals.play_audio.emit(learn_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)

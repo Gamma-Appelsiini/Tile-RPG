@@ -35,6 +35,7 @@ var stat_handler:StatHandler = null
 
 var status_handler:StatusHandler = null
 var character_state:CharacterState = CharacterState.OUT_OF_COMBAT
+var skill_handler:SkillHandler = null
 
 #TODO mouseover fails from behind transparent walls
 func _connect_mouse_over_outlining() -> void:
@@ -134,7 +135,7 @@ func load_from_data(save_data:Dictionary) -> void:
 	if !characters.has(unique_id):
 		print_debug(unique_id, " not in save data")
 		return
-		
+	
 	var gpos:Vector3 = save_data["game_characters"][unique_id]["global_position"]
 	stat_handler.load_from_data(save_data,unique_id)
 	if is_inside_tree(): self.global_position = gpos

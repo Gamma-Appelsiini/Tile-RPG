@@ -19,6 +19,30 @@ var player_camera:Camera3D = null
 func _ready() -> void:
 	_connect_signals()
 	player_camera = camera_handler.player_camera.camera_3d
+	skill_handler = SkillHandler.new()
+
+#Overided
+func load_from_data(save_data:Dictionary) -> void:
+	var characters:Dictionary = save_data["game_characters"]
+	if !characters.has(unique_id):
+		print_debug(unique_id, " not in save data")
+		return
+	
+	if skill_handler: skill_handler.load_from_data(save_data)
+	
+	var gpos:Vector3 = save_data["game_characters"][unique_id]["global_position"]
+	stat_handler.load_from_data(save_data,unique_id)
+	if is_inside_tree(): self.global_position = gpos
+
+#Overided
+func save_to_data(save_data:Dictionary) -> void:
+	if !save_data["game_characters"].has(unique_id):
+		save_data["game_characters"][unique_id] = {}
+	
+	#TODO add other things characters need saving
+	if skill_handler: skill_handler.save_to_data(save_data)
+	save_data["game_characters"][unique_id]["global_position"] = self.global_position
+	stat_handler.save_to_data(save_data,self.unique_id)
 
 func _connect_signals() -> void:
 	GlobalSignals.enable_player_movement.connect(enable_movement)
