@@ -9,7 +9,7 @@ class_name SkillTreeSphere
 @export var back_orbs_parent: Node3D = null
 @export var skill_tooltip: SkillTooltip = null
 @export var skill_tree_heart: SkillTreeHeart = null
-@onready var arrows_parent: Node3D = $Sphere/ArrowsParent
+@export var arrows_parent: Node3D = null
 
 const SKILL_ORB := preload("uid://beisi558iqap8")
 const START_PAGE_RESOURCE := preload("uid://etai7p3sm21x")
@@ -46,6 +46,9 @@ var hovered_connector:ConnectionArrow = null
 var front_connection_arrow_dict:Dictionary[ConnectionArrow, SkillOrb] = {}
 var back_connecttion_arrow_dict:Dictionary[ConnectionArrow, SkillOrb] = {}
 
+func set_save_data(new_data:Dictionary) -> void:
+	save_data = new_data
+
 func _set_tree_heart() -> void:
 	var alignment_quat:Quaternion = Quaternion(Vector3.UP, SPHERE_SKILL_SPOTS.values().back())
 	skill_tree_heart.transform.basis = Basis(alignment_quat)
@@ -54,9 +57,9 @@ func _set_tree_heart() -> void:
 
 func set_tree_resource(tree_resource:SkillTreeResource, was_front:bool) -> void:
 	if tree_resource == START_PAGE_RESOURCE:
+		if GlobalSignals.player: skill_tree_heart.set_skill_gem_amount()
 		skill_tree_heart.show()
-	else:
-		skill_tree_heart.hide()
+	else: skill_tree_heart.hide()
 	
 	if was_front: front_resource = tree_resource
 	else: back_resource = tree_resource
@@ -82,14 +85,14 @@ func _show_connection_arrow(skill_orb:SkillOrb) -> void:
 	if !skill_orb.skill_in_orb.learned and skill_orb.skill_in_orb.requires_learning_for_traversal:
 		connection_arrows[spot].disable_connection()
 		return
-		
+	
 	connection_arrows[spot].enable_connection()
 
 func reset_sphere() -> void:
 	if _hover_tween:
 		_hover_tween.kill()
 
-	for connection_arrow:ConnectionArrow in connection_arrows: connection_arrow.disable_connection()
+	#for connection_arrow:ConnectionArrow in connection_arrows: connection_arrow.disable_connection()
 
 	front = true
 	current_orbs = front_orbs
@@ -135,8 +138,10 @@ func _on_skill_learned() -> void:
 	skill_tooltip.set_process(false)
 
 	var spot:int = current_orbs.find(hovered_orb)
-	if !front: spot = len(current_orbs) - 1 - spot 
-	connection_arrows[spot].enable_connection()
+	if !front: spot = len(current_orbs) - 1 - spot
+	
+	if hovered_orb.skill_in_orb.get_connected_tree_page():
+		connection_arrows[spot].enable_connection()
 
 func _mouse_pressed() -> void:
 	if hovered_orb:
@@ -193,7 +198,6 @@ func _set_orbs() -> void:
 		
 		var linked_connector:ConnectionArrow = connection_arrows[number]
 		front_connection_arrow_dict[linked_connector] = new_orb
-		new_orb.connection_arrow = linked_connector
 		
 		#0=0, 1=6, 2=5, 3=4,4=3,5=2, 6=1
 		back_spot = number
@@ -201,7 +205,6 @@ func _set_orbs() -> void:
 		
 		linked_connector = connection_arrows[back_spot]
 		back_connecttion_arrow_dict[linked_connector] = new_back_orb
-		new_back_orb.connection_arrow = linked_connector
 		
 		number += 1
 	

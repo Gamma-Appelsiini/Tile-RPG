@@ -19,7 +19,6 @@ var player_camera:Camera3D = null
 func _ready() -> void:
 	_connect_signals()
 	player_camera = camera_handler.player_camera.camera_3d
-	skill_handler = SkillHandler.new()
 
 #Overided
 func load_from_data(save_data:Dictionary) -> void:

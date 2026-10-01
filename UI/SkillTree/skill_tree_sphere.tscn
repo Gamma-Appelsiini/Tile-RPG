@@ -77,7 +77,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cxmx2")
 
-[node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh", "front_connectors", "back_connectors", "back_orbs_parent", "skill_tooltip", "skill_tree_heart")]
+[node name="SkillTreeSphere" type="Node3D" unique_id=869234759 node_paths=PackedStringArray("tree_mesh", "front_connectors", "back_connectors", "back_orbs_parent", "skill_tooltip", "skill_tree_heart", "arrows_parent")]
 script = ExtResource("1_gnu1y")
 tree_mesh = NodePath("Sphere")
 front_connectors = NodePath("Sphere/FrontConnectors")
@@ -85,6 +85,7 @@ back_connectors = NodePath("Sphere/BackConnectors")
 back_orbs_parent = NodePath("Sphere/BackOrbsParent")
 skill_tooltip = NodePath("SkillTooltip")
 skill_tree_heart = NodePath("Sphere/SkillTreeHeart")
+arrows_parent = NodePath("Sphere/ConnectionArrows")
 
 [node name="Sphere" type="MeshInstance3D" parent="." unique_id=455694220]
 material_override = ExtResource("1_5r02g")

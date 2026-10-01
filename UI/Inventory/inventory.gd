@@ -50,11 +50,11 @@ var player_gems:int = 0:
 		player_gems = max(0, value)
 		_update_gem_amount(player_gems)
 
-var player_skill_gems:int = 1:
+var player_skill_gems:int = 0:
 	set(value):
 		player_skill_gems = max(0, value)
 
-var player_skill_points:int = 0:
+var player_skill_points:int = 10:
 	set(value):
 		player_skill_points = max(0, value)
 		GlobalSignals.skill_gem_amount_changed.emit()

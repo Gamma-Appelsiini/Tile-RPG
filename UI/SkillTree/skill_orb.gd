@@ -15,7 +15,6 @@ const UNLEARNED_SKILL_ORB_MATERIAL:ShaderMaterial = preload("uid://d1c8dwfbxkp0f
 
 var skill_in_orb:SkillResource = null
 var connectors:Array[MeshInstance3D] = []
-var connection_arrow:ConnectionArrow = null
 var learned:bool = false
 
 func set_skill_resource(new_skill:SkillResource) -> void:
@@ -54,17 +53,14 @@ func _handle_connections(new_skill:SkillResource) -> void:
 		
 		if new_skill == null:
 			connector_mesh.hide()
-			if connection_arrow: connection_arrow.disable_connection()
 		elif new_skill.get_connected_tree_page():
 			for mesh:MeshInstance3D in connectors:
 				mesh.show()
 			if learned or !new_skill.requires_learning_for_traversal:
-				connection_arrow.enable_connection()
 				for mesh:MeshInstance3D in connectors:
 					mesh.material_overlay = OUTER_MATERIAL
 		else:
 			connector_mesh.hide()
-			if connection_arrow: connection_arrow.disable_connection()
 
 func _tween_crack_decal() -> void:
 	crack_decal.show()
@@ -79,11 +75,11 @@ func learn_skill(without_animation:bool = false) -> void:
 	learned = true
 	skill_in_orb.learned = true
 	
-	skill_in_orb.tree_resource.amount_learned += 1
-	GlobalSignals.ui_handler.inventory.player_skill_points -= 1
-	GlobalSignals.player.skill_handler.add_skill(skill_in_orb)
-	
 	if !without_animation:
+		skill_in_orb.tree_resource.amount_learned += 1
+		GlobalSignals.ui_handler.inventory.player_skill_points -= 1
+		GlobalSignals.player.skill_handler.add_skill(skill_in_orb)
+		
 		GlobalSignals.play_audio.emit(learn_sound, AudioManager.AUDIO_TYPE.SOUND_EFFECT, self.global_position)
 		smoke_column.scale = Vector3(1,0.01,1)
 		smoke_column.show()
@@ -105,6 +101,3 @@ func learn_skill(without_animation:bool = false) -> void:
 	sparkles.emitting = true
 	smoke_column.show()
 	crack_decal.show()
-	
-	if skill_in_orb.get_connected_tree_page():
-		if connection_arrow: connection_arrow.enable_connection()

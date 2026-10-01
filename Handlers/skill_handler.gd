@@ -7,6 +7,7 @@ var owner_character:GameCharacter = null
 func _ready() -> void:
 	if get_parent() is GameCharacter:
 		owner_character = get_parent()
+		owner_character.skill_handler = self
 
 func add_skill(new_skill:SkillResource, loading:bool = false) -> void:
 	learned_skills.push_back(new_skill)

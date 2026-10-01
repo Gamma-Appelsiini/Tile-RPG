@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cvi3liudalayl" path="res://Tile-RPG/UI/Status/info_bar.tscn" id="9_udvo0"]
 [ext_resource type="Script" uid="uid://c4xywaxpmfcw0" path="res://Tile-RPG/GameCharacters/equipment_handler.gd" id="10_5ci2u"]
 [ext_resource type="PackedScene" uid="uid://x88bj8wie6u3" path="res://Tile-RPG/Camera/camera_handler.tscn" id="10_p2cip"]
+[ext_resource type="Script" uid="uid://wu4tibhcerwb" path="res://Tile-RPG/Handlers/skill_handler.gd" id="11_p2cip"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42kgy"]
 radius = 0.3
@@ -68,3 +69,7 @@ script = ExtResource("10_5ci2u")
 metadata/_custom_type_script = "uid://c4xywaxpmfcw0"
 
 [node name="CameraHandler" parent="." unique_id=1118739667 instance=ExtResource("10_p2cip")]
+
+[node name="SkillHandler" type="Node" parent="." unique_id=1743672891]
+script = ExtResource("11_p2cip")
+metadata/_custom_type_script = "uid://wu4tibhcerwb"

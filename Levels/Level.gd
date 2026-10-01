@@ -33,7 +33,7 @@ func _save_gchars(save_data:Dictionary) -> void:
 	for gchar:GameCharacter in game_chars:
 		gchar.save_to_data(save_data)
 		
-func _save_interactables(interactables_data:Dictionary) -> void:	
+func _save_interactables(interactables_data:Dictionary) -> void:
 	for inter:Interactable in interactables_node.get_children():
 		inter.save_to_data(interactables_data)
 

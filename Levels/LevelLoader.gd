@@ -15,6 +15,7 @@ const UI_HANDLER := preload("uid://c3phcvjwwddwt")
 @export var combat_manager: CombatManager = null
 @export var ui_node: Node = null
 @export var start_menu: StartMenu = null
+@export var skill_tree_scene: SkillTreeScene = null
 
 var save_file_folder_path:String = "user://Tile-RPG/SaveData/slot1/"
 var save_file:JSON = null
@@ -88,6 +89,8 @@ func new_game() -> void:
 	"quest_handler": {},
 	"shops": [],
 	"save_date": "",
+	"skills": {},
+	"learned_skills": [],
 	}
 	
 	load_game(false)
@@ -106,6 +109,7 @@ func load_game_from_path(path:String) -> void:
 
 func load_game(loading:bool = true) -> void:
 	_set_ui_handler()
+	skill_tree_scene.skill_tree_sphere.set_save_data(save_data)
 	
 	var last_level_id:String = save_data["last_level_id"]
 	_load_quest_handler()

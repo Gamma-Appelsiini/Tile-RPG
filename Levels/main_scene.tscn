@@ -11,12 +11,13 @@
 
 [node name="MainScene" type="Node3D" unique_id=756759122]
 
-[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("ability_targeter", "combat_manager", "ui_node", "start_menu")]
+[node name="LevelLoader" type="Node" parent="." unique_id=1901835802 node_paths=PackedStringArray("ability_targeter", "combat_manager", "ui_node", "start_menu", "skill_tree_scene")]
 script = ExtResource("1_t2t4i")
 ability_targeter = NodePath("../AbilityTargeter")
 combat_manager = NodePath("../CombatManager")
 ui_node = NodePath("../UINode")
 start_menu = NodePath("../StartMenu")
+skill_tree_scene = NodePath("../SkillTreeScene")
 metadata/_custom_type_script = "uid://bfusslnvanxw2"
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=2050587167]
