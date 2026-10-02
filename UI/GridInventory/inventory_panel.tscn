@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bv3gawru3wf3h"]
+
+[ext_resource type="Script" uid="uid://bw3merrpqlthj" path="res://Tile-RPG/UI/GridInventory/inventory_panel.gd" id="1_myc3p"]
+
+[node name="InventoryPanel" type="PanelContainer" unique_id=812575845 node_paths=PackedStringArray("inv_square_container")]
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_myc3p")
+inv_square_container = NodePath("VBoxContainer/InvSquareContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=569845240]
+layout_mode = 2
+alignment = 1
+
+[node name="InvSquareContainer" type="GridContainer" parent="VBoxContainer" unique_id=1234750634]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 10

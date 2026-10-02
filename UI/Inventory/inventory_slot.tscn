@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8lvxyflk4ru8"]
+[gd_scene format=3 uid="uid://c8lvxyflk4ru8"]
 
 [ext_resource type="Script" uid="uid://b8d37aath4s2a" path="res://Tile-RPG/UI/Inventory/inventory_slot.gd" id="2_53uw5"]
 [ext_resource type="Texture2D" uid="uid://bw3rvpcn2rlgp" path="res://Tile-RPG/Images/UI/SlotBG.png" id="2_o5b74"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="3_o5b74"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_6gk5b"]
 
-[node name="InventorySlot" type="PanelContainer" node_paths=PackedStringArray("item_image", "hover_image", "bg_image", "corner_image")]
+[node name="InventorySlot" type="PanelContainer" unique_id=1404420799 node_paths=PackedStringArray("item_image", "hover_image", "bg_image", "corner_image")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,7 +26,7 @@ hover_image = NodePath("HoverImage")
 bg_image = NodePath("BGImage")
 corner_image = NodePath("CornerImage")
 
-[node name="BGImage" type="TextureRect" parent="."]
+[node name="BGImage" type="TextureRect" parent="." unique_id=1921298017]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -35,14 +35,14 @@ texture = ExtResource("2_o5b74")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="ItemImage" type="TextureRect" parent="."]
+[node name="ItemImage" type="TextureRect" parent="." unique_id=1735980701]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 expand_mode = 5
 stretch_mode = 5
 
-[node name="HoverImage" type="TextureRect" parent="."]
+[node name="HoverImage" type="TextureRect" parent="." unique_id=212648887]
 unique_name_in_owner = true
 modulate = Color(0.63, 0.61173, 0.4473, 1)
 self_modulate = Color(1, 1, 1, 0)
@@ -52,7 +52,7 @@ texture = ExtResource("3_o5b74")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="."]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=2114250807]
 layout_mode = 2
 texture = ExtResource("5_6gk5b")
 patch_margin_left = 10
@@ -60,7 +60,7 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="CornerImage" type="TextureRect" parent="."]
+[node name="CornerImage" type="TextureRect" parent="." unique_id=1776676484]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
