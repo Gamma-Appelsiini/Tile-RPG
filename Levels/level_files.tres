@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="LevelFiles" load_steps=2 format=3 uid="uid://2jegi3yn21gl"]
+[gd_resource type="Resource" script_class="LevelFiles" format=3 uid="uid://2jegi3yn21gl"]
 
 [ext_resource type="Script" uid="uid://1i8tbje8x55i" path="res://Tile-RPG/Levels/LevelFiles.gd" id="1_3ansq"]
 
 [resource]
 script = ExtResource("1_3ansq")
 levels = Dictionary[String, String]({
-"jail_01": "res://Tile-RPG/Levels/Jail/jail_01.tscn",
-"test_level_1": "res://Tile-RPG/Levels/test_level.tscn",
-"test_level_2": "res://Tile-RPG/Levels/test_level_2.tscn"
+"jail_01": "uid://cwkwf8c33vgkq",
+"jail_test": "res://Tile-RPG/Levels/Jail/jail_01.tscn"
 })
 metadata/_custom_type_script = "uid://1i8tbje8x55i"

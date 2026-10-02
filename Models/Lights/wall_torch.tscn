@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c5fei2gxts7pm"]
+[gd_scene format=4 uid="uid://c5fei2gxts7pm"]
 
 [ext_resource type="Material" uid="uid://ta83u001gwow" path="res://Tile-RPG/Materials/TextureMaterials/metal_01.tres" id="1_c0234"]
 [ext_resource type="Material" uid="uid://cyynyot8c60g2" path="res://Tile-RPG/Materials/TextureMaterials/wood_02.tres" id="2_sp5er"]
@@ -110,17 +110,18 @@ shader_parameter/bottom_color_fade_y_start = 0.6
 radius = 0.09
 height = 0.5
 
-[node name="WallTorch" type="Node3D"]
+[node name="WallTorch" type="Node3D" unique_id=168297836]
 
-[node name="Torch" type="MeshInstance3D" parent="."]
+[node name="Torch" type="MeshInstance3D" parent="." unique_id=174011722]
 mesh = SubResource("ArrayMesh_qry1p")
 skeleton = NodePath("")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=17012502]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7777787, 0.16011381)
 light_color = Color(0.9119475, 0.7271465, 0.5129374, 1)
+shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1102650730]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7339745, 0.14039025)
 material_override = SubResource("ShaderMaterial_jwgyt")
 mesh = SubResource("SphereMesh_sp5er")

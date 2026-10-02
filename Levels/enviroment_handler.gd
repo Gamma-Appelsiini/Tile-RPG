@@ -27,7 +27,7 @@ var player_camera:PlayerCamera = null
 func _ready() -> void:
 	_create_shaders()
 
-func _set_player_camera(new_player_camera:PlayerCamera) -> void:
+func set_player_camera(new_player_camera:PlayerCamera) -> void:
 	player_camera = new_player_camera
 	player_camera.rotation_changed.connect(_rotation_changed)
 	_animate_shaders(direction_shaders[PlayerCamera.CameraDirection.SOUTH].values(), CUTOFF_HEIGHT)

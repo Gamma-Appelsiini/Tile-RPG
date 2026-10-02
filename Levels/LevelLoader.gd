@@ -202,6 +202,7 @@ func _close_current_level() -> void:
 	current_level.queue_free()
 
 func _open_new_level(new_level:Level, loading:bool = false) -> void:
+	if !new_level: print_debug("NULL LEVEL")
 	current_level = new_level
 	current_level.load_from_data(save_data)
 	current_level.tile_manager.set_player(player)
@@ -217,6 +218,7 @@ func _open_new_level(new_level:Level, loading:bool = false) -> void:
 	if !loading: player.global_position = current_level.player_spawn_positions[player.came_from_id].global_position
 	else: player.global_position = save_data["game_characters"][player.unique_id]["global_position"]
 	
+	new_level.enviroment_handler.set_player_camera(player.camera_handler.player_camera)
 	player.player_camera.make_current()
 
 func save_player() -> void:

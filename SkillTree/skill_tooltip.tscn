@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="1_cl6rb"]
 [ext_resource type="Script" uid="uid://mxwxra3yq0hw" path="res://Tile-RPG/SkillTree/skill_tooltip.gd" id="2_ur7lf"]
-[ext_resource type="Material" uid="uid://cm43sfqma4c3s" path="res://Tile-RPG/UI/Dialogue/dissolve_material.tres" id="3_7xybe"]
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="4_428w6"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_biqpn"]
 [ext_resource type="FontFile" uid="uid://cceot5u65qrcq" path="res://Tile-RPG/Fonts/GoogleFonts/MedievalSharp-Regular.ttf" id="6_7mylj"]
@@ -96,7 +95,6 @@ gpu_particles_2d = NodePath("GPUParticles2D")
 gradient_rect = NodePath("GradientRect")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=2140819564]
-material = ExtResource("3_7xybe")
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_428w6")

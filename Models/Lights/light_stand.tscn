@@ -124,6 +124,7 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1417712, 0)
 layers = 524289
 light_color = Color(0.9119475, 0.7271465, 0.5129374, 1)
+shadow_enabled = true
 
 [node name="FlameMesh" type="MeshInstance3D" parent="." unique_id=172482927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1021113, 0)

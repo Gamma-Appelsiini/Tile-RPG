@@ -7,8 +7,8 @@ class_name Level
 @export var breakables_node:Node3D = null
 @export var hiders_node:Node3D = null
 @export var tile_manager:TileManager = null
-
 @export var player_spawn_positions:Dictionary[String,Node3D] = {}
+@export var enviroment_handler: EnviromentHandler = null
 
 var game_chars:Array[GameCharacter] = []
 #TODO add other types of loadable things in level
@@ -52,13 +52,18 @@ func load_from_data(save_data:Dictionary) -> void:
 	_load_hiders(levels[unique_id])
 
 func _save_hiders() -> Dictionary[String, float]:
+	if !hiders_node: return {}
+	
 	var hider_data:Dictionary = {}
+	
 	for mesh:MeshInstance3D in hiders_node.get_children():
 		hider_data[mesh.name] = mesh.transparency
 		
 	return hider_data
 
 func _load_hiders(level_data:Dictionary) -> void:
+	if !hiders_node: return
+	
 	var hider_data:Dictionary = level_data["hiders"]
 	for mesh:MeshInstance3D in hiders_node.get_children():
 		if hider_data.has(mesh.name): mesh.transparency = hider_data[mesh.name]

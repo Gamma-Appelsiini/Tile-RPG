@@ -5,13 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_r4bqj"]
 [ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="3_rm3p6"]
 [ext_resource type="Material" uid="uid://dbiyoxw5ohfy7" path="res://Tile-RPG/Materials/TextureMaterials/unshaded_black.tres" id="4_4x7po"]
+[ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="4_r2niu"]
 [ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="5_r4bqj"]
+[ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="7_l0bih"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4x7po"]
 material = ExtResource("4_4x7po")
 size = Vector2(6, 5)
 
-[node name="LvlJail01" type="Node3D" unique_id=412703557 node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "hiders_node", "tile_manager")]
+[node name="LvlJail01" type="Node3D" unique_id=412703557 node_paths=PackedStringArray("game_characters_node", "interactables_node", "breakables_node", "hiders_node", "tile_manager", "player_spawn_positions", "enviroment_handler")]
 script = ExtResource("1_e7u5g")
 unique_id = "jail_01"
 game_characters_node = NodePath("GameCharacters")
@@ -19,6 +21,10 @@ interactables_node = NodePath("Interactables")
 breakables_node = NodePath("Breakables")
 hiders_node = NodePath("RoomHiders")
 tile_manager = NodePath("TileManager")
+player_spawn_positions = {
+"menu": NodePath("Spawns/StartSpawn")
+}
+enviroment_handler = NodePath("JailStartEnviroment")
 
 [node name="JailStartEnviroment" parent="." unique_id=1222226390 instance=ExtResource("1_ld6dy")]
 
@@ -28,22 +34,546 @@ tile_manager = NodePath("TileManager")
 
 [node name="Breakables" type="Node3D" parent="." unique_id=1785823029]
 
-[node name="SpawnPositions" type="Node" parent="." unique_id=1569158652]
-
-[node name="TileManager" type="Node3D" parent="." unique_id=941726842]
+[node name="TileManager" type="Node3D" parent="." unique_id=941726842 node_paths=PackedStringArray("door_node")]
 script = ExtResource("3_rm3p6")
+door_node = NodePath("../Doors")
 metadata/_custom_type_script = "uid://chv46rdn2gkni"
 
-[node name="StartSpawn" type="Node3D" parent="TileManager" unique_id=679840548]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.5)
+[node name="@Node@75697" type="Node" parent="TileManager" unique_id=104794987]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, -3)
 
-[node name="RoomHiders" type="Node" parent="." unique_id=1098767808]
+[node name="@Node@75698" type="Node" parent="TileManager" unique_id=2023426691]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, -2)
+
+[node name="@Node@75699" type="Node" parent="TileManager" unique_id=1010946710]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, -1)
+
+[node name="@Node@75700" type="Node" parent="TileManager" unique_id=206036219]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 0)
+
+[node name="@Node@75701" type="Node" parent="TileManager" unique_id=875719974]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 1)
+
+[node name="@Node@75702" type="Node" parent="TileManager" unique_id=1423921517]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 2)
+
+[node name="@Node@75703" type="Node" parent="TileManager" unique_id=281704801]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 3)
+
+[node name="@Node@75704" type="Node" parent="TileManager" unique_id=757889400]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 4)
+
+[node name="@Node@75705" type="Node" parent="TileManager" unique_id=774192093]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 5)
+
+[node name="@Node@75706" type="Node" parent="TileManager" unique_id=833007638]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 6)
+
+[node name="@Node@75707" type="Node" parent="TileManager" unique_id=1579604188]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 7)
+
+[node name="@Node@75708" type="Node" parent="TileManager" unique_id=1979266179]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-4, 4.7683716e-07, 8)
+
+[node name="@Node@75709" type="Node" parent="TileManager" unique_id=707762377]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, -3)
+
+[node name="@Node@75710" type="Node" parent="TileManager" unique_id=979318527]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, -2)
+
+[node name="@Node@75711" type="Node" parent="TileManager" unique_id=1194443623]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, -1)
+
+[node name="@Node@75712" type="Node" parent="TileManager" unique_id=130738860]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 0)
+
+[node name="@Node@75713" type="Node" parent="TileManager" unique_id=319506979]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 1)
+
+[node name="@Node@75714" type="Node" parent="TileManager" unique_id=1861415463]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 2)
+
+[node name="@Node@75715" type="Node" parent="TileManager" unique_id=477156920]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 3)
+
+[node name="@Node@75716" type="Node" parent="TileManager" unique_id=675532579]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 4)
+
+[node name="@Node@75717" type="Node" parent="TileManager" unique_id=387557557]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 5)
+
+[node name="@Node@75718" type="Node" parent="TileManager" unique_id=472711105]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 6)
+
+[node name="@Node@75719" type="Node" parent="TileManager" unique_id=1059977910]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 7)
+
+[node name="@Node@75720" type="Node" parent="TileManager" unique_id=373279651]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-3, 4.7683716e-07, 8)
+
+[node name="@Node@75721" type="Node" parent="TileManager" unique_id=2070118669]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, -3)
+
+[node name="@Node@75722" type="Node" parent="TileManager" unique_id=665759831]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, -2)
+
+[node name="@Node@75723" type="Node" parent="TileManager" unique_id=117324816]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, -1)
+
+[node name="@Node@75724" type="Node" parent="TileManager" unique_id=807998210]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 0)
+
+[node name="@Node@75725" type="Node" parent="TileManager" unique_id=1682151625]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 1)
+
+[node name="@Node@75726" type="Node" parent="TileManager" unique_id=707268549]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 2)
+
+[node name="@Node@75727" type="Node" parent="TileManager" unique_id=1251062511]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 3)
+
+[node name="@Node@75728" type="Node" parent="TileManager" unique_id=860916513]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 4)
+
+[node name="@Node@75729" type="Node" parent="TileManager" unique_id=1901868920]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 5)
+
+[node name="@Node@75730" type="Node" parent="TileManager" unique_id=1935127879]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 6)
+
+[node name="@Node@75731" type="Node" parent="TileManager" unique_id=1895519097]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 7)
+
+[node name="@Node@75732" type="Node" parent="TileManager" unique_id=2125335192]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-2, 4.7683716e-07, 8)
+
+[node name="@Node@75733" type="Node" parent="TileManager" unique_id=757652107]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, -3)
+
+[node name="@Node@75734" type="Node" parent="TileManager" unique_id=2085443350]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, -2)
+
+[node name="@Node@75735" type="Node" parent="TileManager" unique_id=2067994598]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, -1)
+
+[node name="@Node@75736" type="Node" parent="TileManager" unique_id=340619149]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 0)
+
+[node name="@Node@75737" type="Node" parent="TileManager" unique_id=1049673619]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 1)
+
+[node name="@Node@75738" type="Node" parent="TileManager" unique_id=198464574]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 2)
+
+[node name="@Node@75739" type="Node" parent="TileManager" unique_id=1687415843]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 3)
+
+[node name="@Node@75740" type="Node" parent="TileManager" unique_id=1437681734]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 4)
+
+[node name="@Node@75741" type="Node" parent="TileManager" unique_id=746116633]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 5)
+
+[node name="@Node@75742" type="Node" parent="TileManager" unique_id=1368201701]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 6)
+
+[node name="@Node@75743" type="Node" parent="TileManager" unique_id=826363597]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 7)
+
+[node name="@Node@75744" type="Node" parent="TileManager" unique_id=28230787]
+script = ExtResource("4_r2niu")
+global_position = Vector3(-1, 4.7683716e-07, 8)
+
+[node name="@Node@75745" type="Node" parent="TileManager" unique_id=2004212011]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, -3)
+
+[node name="@Node@75746" type="Node" parent="TileManager" unique_id=73062663]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, -2)
+
+[node name="@Node@75747" type="Node" parent="TileManager" unique_id=1155269061]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, -1)
+
+[node name="@Node@75748" type="Node" parent="TileManager" unique_id=1101649877]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 0)
+
+[node name="@Node@75749" type="Node" parent="TileManager" unique_id=353137015]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 1)
+
+[node name="@Node@75750" type="Node" parent="TileManager" unique_id=1317583766]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 2)
+
+[node name="@Node@75751" type="Node" parent="TileManager" unique_id=1569315871]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 3)
+
+[node name="@Node@75752" type="Node" parent="TileManager" unique_id=183762211]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 4)
+
+[node name="@Node@75753" type="Node" parent="TileManager" unique_id=483393857]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 5)
+
+[node name="@Node@75754" type="Node" parent="TileManager" unique_id=149979833]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 6)
+
+[node name="@Node@75755" type="Node" parent="TileManager" unique_id=472635774]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 7)
+
+[node name="@Node@75756" type="Node" parent="TileManager" unique_id=338066126]
+script = ExtResource("4_r2niu")
+global_position = Vector3(0, 4.7683716e-07, 8)
+
+[node name="@Node@75757" type="Node" parent="TileManager" unique_id=813175096]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, -3)
+
+[node name="@Node@75758" type="Node" parent="TileManager" unique_id=829260436]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, -2)
+
+[node name="@Node@75759" type="Node" parent="TileManager" unique_id=1041236879]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, -1)
+
+[node name="@Node@75760" type="Node" parent="TileManager" unique_id=1225045085]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 0)
+
+[node name="@Node@75761" type="Node" parent="TileManager" unique_id=14179024]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 1)
+
+[node name="@Node@75762" type="Node" parent="TileManager" unique_id=131420950]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 2)
+
+[node name="@Node@75763" type="Node" parent="TileManager" unique_id=1596801455]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 3)
+
+[node name="@Node@75764" type="Node" parent="TileManager" unique_id=1344391818]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 4)
+
+[node name="@Node@75765" type="Node" parent="TileManager" unique_id=1489980250]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 5)
+
+[node name="@Node@75766" type="Node" parent="TileManager" unique_id=1304159504]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 6)
+
+[node name="@Node@75767" type="Node" parent="TileManager" unique_id=1827245927]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 7)
+
+[node name="@Node@75768" type="Node" parent="TileManager" unique_id=1449747256]
+script = ExtResource("4_r2niu")
+global_position = Vector3(1, 4.7683716e-07, 8)
+
+[node name="@Node@75769" type="Node" parent="TileManager" unique_id=1860687452]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, -3)
+
+[node name="@Node@75770" type="Node" parent="TileManager" unique_id=1926559366]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, -2)
+
+[node name="@Node@75771" type="Node" parent="TileManager" unique_id=1914381444]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, -1)
+
+[node name="@Node@75772" type="Node" parent="TileManager" unique_id=1633817319]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 0)
+
+[node name="@Node@75773" type="Node" parent="TileManager" unique_id=1097339775]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 1)
+
+[node name="@Node@75774" type="Node" parent="TileManager" unique_id=1605171678]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 2)
+
+[node name="@Node@75775" type="Node" parent="TileManager" unique_id=275421350]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 3)
+
+[node name="@Node@75776" type="Node" parent="TileManager" unique_id=1810858245]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 4)
+
+[node name="@Node@75777" type="Node" parent="TileManager" unique_id=1246253615]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 5)
+
+[node name="@Node@75778" type="Node" parent="TileManager" unique_id=1664859281]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 6)
+
+[node name="@Node@75779" type="Node" parent="TileManager" unique_id=135899143]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 7)
+
+[node name="@Node@75780" type="Node" parent="TileManager" unique_id=1477352973]
+script = ExtResource("4_r2niu")
+global_position = Vector3(2, 4.7683716e-07, 8)
+
+[node name="@Node@75781" type="Node" parent="TileManager" unique_id=307745048]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, -3)
+
+[node name="@Node@75782" type="Node" parent="TileManager" unique_id=1703165665]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, -2)
+
+[node name="@Node@75783" type="Node" parent="TileManager" unique_id=2120162543]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, -1)
+
+[node name="@Node@75784" type="Node" parent="TileManager" unique_id=1555968461]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 0)
+
+[node name="@Node@75785" type="Node" parent="TileManager" unique_id=572559534]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 1)
+
+[node name="@Node@75786" type="Node" parent="TileManager" unique_id=1384372997]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 2)
+
+[node name="@Node@75787" type="Node" parent="TileManager" unique_id=1994666806]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 3)
+
+[node name="@Node@75788" type="Node" parent="TileManager" unique_id=937310497]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 4)
+
+[node name="@Node@75789" type="Node" parent="TileManager" unique_id=1686356385]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 5)
+
+[node name="@Node@75790" type="Node" parent="TileManager" unique_id=987490246]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 6)
+
+[node name="@Node@75791" type="Node" parent="TileManager" unique_id=1948638146]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 7)
+
+[node name="@Node@75792" type="Node" parent="TileManager" unique_id=1660888908]
+script = ExtResource("4_r2niu")
+global_position = Vector3(3, 4.7683716e-07, 8)
+
+[node name="@Node@75793" type="Node" parent="TileManager" unique_id=946951464]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, -3)
+
+[node name="@Node@75794" type="Node" parent="TileManager" unique_id=84953672]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, -2)
+
+[node name="@Node@75795" type="Node" parent="TileManager" unique_id=720057031]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, -1)
+
+[node name="@Node@75796" type="Node" parent="TileManager" unique_id=688109875]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 0)
+
+[node name="@Node@75797" type="Node" parent="TileManager" unique_id=500933767]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 1)
+
+[node name="@Node@75798" type="Node" parent="TileManager" unique_id=292831261]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 2)
+
+[node name="@Node@75799" type="Node" parent="TileManager" unique_id=1673962590]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 3)
+
+[node name="@Node@75800" type="Node" parent="TileManager" unique_id=1186699011]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 4)
+
+[node name="@Node@75801" type="Node" parent="TileManager" unique_id=352196500]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 5)
+
+[node name="@Node@75802" type="Node" parent="TileManager" unique_id=1472391893]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 6)
+
+[node name="@Node@75803" type="Node" parent="TileManager" unique_id=252896421]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 7)
+
+[node name="@Node@75804" type="Node" parent="TileManager" unique_id=65092210]
+script = ExtResource("4_r2niu")
+global_position = Vector3(4, 4.7683716e-07, 8)
+
+[node name="@Node@75805" type="Node" parent="TileManager" unique_id=489963867]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, -3)
+
+[node name="@Node@75806" type="Node" parent="TileManager" unique_id=1746877312]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, -2)
+
+[node name="@Node@75807" type="Node" parent="TileManager" unique_id=1138709070]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, -1)
+
+[node name="@Node@75808" type="Node" parent="TileManager" unique_id=1960905966]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 0)
+
+[node name="@Node@75809" type="Node" parent="TileManager" unique_id=1672555127]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 1)
+
+[node name="@Node@75810" type="Node" parent="TileManager" unique_id=726941377]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 2)
+
+[node name="@Node@75811" type="Node" parent="TileManager" unique_id=256326518]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 3)
+
+[node name="@Node@75812" type="Node" parent="TileManager" unique_id=871774562]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 4)
+
+[node name="@Node@75813" type="Node" parent="TileManager" unique_id=618092892]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 5)
+
+[node name="@Node@75814" type="Node" parent="TileManager" unique_id=1461206063]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 6)
+
+[node name="@Node@75815" type="Node" parent="TileManager" unique_id=1721354496]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 7)
+
+[node name="@Node@75816" type="Node" parent="TileManager" unique_id=1810969204]
+script = ExtResource("4_r2niu")
+global_position = Vector3(5, 4.7683716e-07, 8)
+
+[node name="@Node@75817" type="Node" parent="TileManager" unique_id=1251415325]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, -3)
+
+[node name="@Node@75818" type="Node" parent="TileManager" unique_id=1511939802]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, -2)
+
+[node name="@Node@75819" type="Node" parent="TileManager" unique_id=1297289042]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, -1)
+
+[node name="@Node@75820" type="Node" parent="TileManager" unique_id=477124729]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 0)
+
+[node name="@Node@75821" type="Node" parent="TileManager" unique_id=354491190]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 1)
+
+[node name="@Node@75822" type="Node" parent="TileManager" unique_id=1456191161]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 2)
+
+[node name="@Node@75823" type="Node" parent="TileManager" unique_id=1725346231]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 3)
+
+[node name="@Node@75824" type="Node" parent="TileManager" unique_id=1664585783]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 4)
+
+[node name="@Node@75825" type="Node" parent="TileManager" unique_id=1102253011]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 5)
+
+[node name="@Node@75826" type="Node" parent="TileManager" unique_id=1367281355]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 6)
+
+[node name="@Node@75827" type="Node" parent="TileManager" unique_id=1624851026]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 7)
+
+[node name="@Node@75828" type="Node" parent="TileManager" unique_id=1237952659]
+script = ExtResource("4_r2niu")
+global_position = Vector3(6, 4.7683716e-07, 8)
+
+[node name="RoomHiders" type="Node3D" parent="." unique_id=1610564810]
 
 [node name="CupboardHider" type="MeshInstance3D" parent="RoomHiders" unique_id=1147936381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.5, 6)
 mesh = SubResource("PlaneMesh_4x7po")
 
-[node name="Doors" type="Node" parent="." unique_id=1865647162]
+[node name="Doors" type="Node3D" parent="." unique_id=19912800]
 
 [node name="WoodDoor" parent="Doors" unique_id=149533167 node_paths=PackedStringArray("room_hiders_to_hide") instance=ExtResource("3_r4bqj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3.5)
@@ -54,3 +584,21 @@ unique_id = "cupboard_door"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.5)
 unique_id = "cell_door_01"
 oneshot = true
+
+[node name="Start" type="Node3D" parent="." unique_id=1031563664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
+
+[node name="End" type="Node3D" parent="." unique_id=2009326136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+
+[node name="Spawns" type="Node" parent="." unique_id=752814646]
+
+[node name="StartSpawn" type="Node3D" parent="Spawns" unique_id=679840548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.5)
+
+[node name="TileCreator" type="Node" parent="." unique_id=1068621211 node_paths=PackedStringArray("tile_manager", "start_node", "end_node")]
+script = ExtResource("7_l0bih")
+tile_manager = NodePath("../TileManager")
+start_node = NodePath("../Start")
+end_node = NodePath("../End")
+metadata/_custom_type_script = "uid://bp36ikilmc15g"

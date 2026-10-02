@@ -34,7 +34,7 @@ func _load_player() -> void:
 
 func _load_level(level_id:String) -> void:
 	if level_id not in LEVEL_FILES.levels.keys():
-		print("ERROR: Level ID not in LEVEL_FILES. ID: ", level_id)
+		print_debug("ERROR: Level ID not in LEVEL_FILES. ID: ", level_id)
 		return
 		
 	next_level_path = LEVEL_FILES.levels[level_id]

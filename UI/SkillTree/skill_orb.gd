@@ -35,7 +35,6 @@ func set_skill_resource(new_skill:SkillResource) -> void:
 
 	if new_skill.learned:
 		learn_skill(true)
-		learned = true
 	else:
 		_reset_learned_appearance()
 
