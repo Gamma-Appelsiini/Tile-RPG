@@ -1,15 +1,38 @@
 [gd_scene format=3 uid="uid://cvit4tuvaxa2t"]
 
 [ext_resource type="Script" uid="uid://ceivxj0dkbp34" path="res://Tile-RPG/UI/GridInventory/inventory_item.gd" id="1_0csbc"]
+[ext_resource type="Texture2D" uid="uid://cgaf3nlam8i54" path="res://Tile-RPG/Images/Borders/corner_gradient_3.png" id="2_7yuub"]
 
-[node name="InventoryItem" type="PanelContainer" unique_id=1088204466 node_paths=PackedStringArray("item_image_rect")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="InventoryItem" type="PanelContainer" unique_id=561019162 node_paths=PackedStringArray("item_image_rect", "hover_image_rect")]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
 script = ExtResource("1_0csbc")
 item_image_rect = NodePath("ItemImageRect")
+hover_image_rect = NodePath("NinePatchRect")
 
 [node name="ItemImageRect" type="TextureRect" parent="." unique_id=1455122467]
 layout_mode = 2
+mouse_filter = 2
+expand_mode = 5
+
+[node name="HoverImageRect" type="TextureRect" parent="." unique_id=327992089]
+visible = false
+self_modulate = Color(1, 0.916, 0.86, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_7yuub")
+expand_mode = 5
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=806856780]
+visible = false
+self_modulate = Color(0.99999994, 0.8254475, 0.580955, 0.63529414)
+layout_mode = 2
+texture = ExtResource("2_7yuub")
+draw_center = false
+region_rect = Rect2(12, 8.3333435, 233.33331, 236.66666)
+patch_margin_left = 25
+patch_margin_top = 22
+patch_margin_right = 25
+patch_margin_bottom = 25
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

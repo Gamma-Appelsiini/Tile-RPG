@@ -21,4 +21,6 @@ item_name = "Paladin Sword"
 inventory_image = ExtResource("1_ixk7k")
 item_value = 30
 item_model_path = "res://Tile-RPG/Items/ItemScenes/sword_2H_model.tscn"
+inventory_width = 2
+inventory_height = 3
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

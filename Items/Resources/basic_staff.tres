@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://by1vgwvfotvb6"]
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://by1vgwvfotvb6"]
 
 [ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_ovpss"]
 [ext_resource type="Texture2D" uid="uid://dukrs02v5y5sq" path="res://Tile-RPG/Images/Items/Staff.png" id="1_uge0p"]
@@ -21,4 +21,6 @@ item_name = "Wooden Staff"
 inventory_image = ExtResource("1_uge0p")
 item_value = 8
 item_model_path = "res://Tile-RPG/Items/ItemScenes/staff_model.tscn"
+inventory_width = 2
+inventory_height = 4
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bro3scd6p18hg"]
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://bro3scd6p18hg"]
 
 [ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_5wh8x"]
 [ext_resource type="Texture2D" uid="uid://cfbbl1hdvuu18" path="res://Tile-RPG/Images/Items/Axe.png" id="1_sgeew"]
@@ -18,4 +18,6 @@ item_name = "Hand Axe"
 inventory_image = ExtResource("1_sgeew")
 item_value = 4
 item_model_path = "res://Tile-RPG/Items/ItemScenes/axe_model.tscn"
+inventory_width = 2
+inventory_height = 3
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

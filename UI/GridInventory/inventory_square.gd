@@ -3,11 +3,13 @@ class_name InventorySquare
 
 @export var hover_image: TextureRect = null
 @export var occupied_rect: TextureRect
+@export var cant_place_rect: TextureRect
 
 const SQUARE_SIZE:int = 50
 
 var pos_x:int = 0
 var pos_y:int = 0
+var inv_item_in_square:InventoryItem = null
 
 var occupied:bool = false:
 	set(value):

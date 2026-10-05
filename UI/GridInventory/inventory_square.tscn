@@ -7,12 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="5_xfo5i"]
 
 [sub_resource type="Gradient" id="Gradient_sv18l"]
-colors = PackedColorArray(0, 0.11466656, 0.43, 0.07058824, 0.027600002, 0.042013332, 0.46, 0.32156864)
+colors = PackedColorArray(0, 0.11466656, 0.43, 0.23529412, 0.027600002, 0.042013332, 0.46, 0.49411765)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_eaqtt"]
 gradient = SubResource("Gradient_sv18l")
 
-[node name="InventorySquare" type="PanelContainer" unique_id=1563939885 node_paths=PackedStringArray("hover_image", "occupied_rect")]
+[sub_resource type="Gradient" id="Gradient_8ex81"]
+colors = PackedColorArray(0.62, 0.16533333, 0, 0.22745098, 1, 0, 0, 0.41568628)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sqolj"]
+gradient = SubResource("Gradient_8ex81")
+
+[node name="InventorySquare" type="PanelContainer" unique_id=1563939885 node_paths=PackedStringArray("hover_image", "occupied_rect", "cant_place_rect")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,6 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_sv18l")
 hover_image = NodePath("HoverImage")
 occupied_rect = NodePath("OccupiedRect")
+cant_place_rect = NodePath("CantPlaceRect")
 
 [node name="BGImage" type="TextureRect" parent="." unique_id=1711357277]
 unique_name_in_owner = true
@@ -33,10 +40,18 @@ stretch_mode = 5
 
 [node name="OccupiedRect" type="TextureRect" parent="." unique_id=166010729]
 visible = false
+self_modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_rotation = -1.5707964
 texture = SubResource("GradientTexture1D_eaqtt")
+
+[node name="CantPlaceRect" type="TextureRect" parent="." unique_id=1124291427]
+visible = false
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -1.5707964
+texture = SubResource("GradientTexture1D_sqolj")
 
 [node name="ItemImage" type="TextureRect" parent="." unique_id=1043432538]
 unique_name_in_owner = true

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://1tk4hej1wiph"]
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://1tk4hej1wiph"]
 
 [ext_resource type="Script" uid="uid://bxetlkpyl4o0q" path="res://Tile-RPG/Items/weapon.gd" id="1_kbsax"]
 [ext_resource type="Texture2D" uid="uid://cp4qrdl4k4hq" path="res://Tile-RPG/Images/Items/Dagger.png" id="1_sjapk"]
@@ -20,4 +20,5 @@ item_name = "Iron Dagger"
 inventory_image = ExtResource("1_sjapk")
 item_value = 4
 item_model_path = "res://Tile-RPG/Items/ItemScenes/dagger_model.tscn"
+inventory_height = 2
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

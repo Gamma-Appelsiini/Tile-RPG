@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Helmet" load_steps=3 format=3 uid="uid://q4iaccug7ule"]
+[gd_resource type="Resource" script_class="Helmet" format=3 uid="uid://q4iaccug7ule"]
 
 [ext_resource type="Script" uid="uid://dkybt488k50is" path="res://Tile-RPG/Items/helmet.gd" id="1_kq1qb"]
 [ext_resource type="Texture2D" uid="uid://bmtxfiuwniily" path="res://Tile-RPG/Images/Items/ArmorHelmet.png" id="1_m38yr"]
@@ -11,4 +11,6 @@ item_name = "Iron Pot"
 inventory_image = ExtResource("1_m38yr")
 item_value = 2
 item_model_path = "res://Tile-RPG/Items/ItemScenes/helmet_armor_model.tscn"
+inventory_width = 2
+inventory_height = 2
 metadata/_custom_type_script = "uid://dkybt488k50is"
