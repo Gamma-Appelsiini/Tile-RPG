@@ -69,6 +69,8 @@ scale_max = 0.01
 scale_curve = SubResource("CurveTexture_sqolj")
 
 [node name="SkillTooltip" type="PanelContainer" unique_id=306152957 node_paths=PackedStringArray("skill_name", "skill_desc", "skill_flavor", "learn_label", "progress_bar", "skill_pic", "gpu_particles_2d", "gradient_rect")]
+visible = false
+top_level = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

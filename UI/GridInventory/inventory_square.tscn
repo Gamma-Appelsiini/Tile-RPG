@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="5_xfo5i"]
 
 [sub_resource type="Gradient" id="Gradient_sv18l"]
-colors = PackedColorArray(0, 0.11466656, 0.43, 0.23529412, 0.027600002, 0.042013332, 0.46, 0.49411765)
+colors = PackedColorArray(0, 0.11466656, 0.43, 0.41568628, 0.027600002, 0.042013332, 0.46, 0.49411765)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_eaqtt"]
 gradient = SubResource("Gradient_sv18l")
 
 [sub_resource type="Gradient" id="Gradient_8ex81"]
-colors = PackedColorArray(0.62, 0.16533333, 0, 0.22745098, 1, 0, 0, 0.41568628)
+colors = PackedColorArray(0, 0.45499986, 0.65, 0.22745098, 0, 0.6833334, 1, 0.57254905)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_sqolj"]
 gradient = SubResource("Gradient_8ex81")

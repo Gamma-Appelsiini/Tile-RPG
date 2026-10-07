@@ -18,6 +18,8 @@ fill_from = Vector2(1, 0)
 fill_to = Vector2(1, 1)
 
 [node name="ItemTooltip" type="Control" unique_id=1864536680 node_paths=PackedStringArray("v_box_container", "name_label", "ilvl_label", "affix_container", "aff_label_template", "implicit_label", "weapon_stats", "price_label", "price_container", "price_separator", "affix_separator", "tt_container", "ability_rect", "gradient_rect")]
+visible = false
+top_level = true
 z_index = 3
 layout_mode = 3
 anchors_preset = 8
