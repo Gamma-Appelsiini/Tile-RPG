@@ -12,13 +12,19 @@ colors = PackedColorArray(0, 0.11466656, 0.43, 0.41568628, 0.027600002, 0.042013
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_eaqtt"]
 gradient = SubResource("Gradient_sv18l")
 
+[sub_resource type="Gradient" id="Gradient_nos1y"]
+colors = PackedColorArray(0.15766667, 0.43, 0, 0.41568628, 0.027600002, 0.46, 0.0636333, 0.49411765)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xysk3"]
+gradient = SubResource("Gradient_nos1y")
+
 [sub_resource type="Gradient" id="Gradient_8ex81"]
 colors = PackedColorArray(0, 0.45499986, 0.65, 0.22745098, 0, 0.6833334, 1, 0.57254905)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_sqolj"]
 gradient = SubResource("Gradient_8ex81")
 
-[node name="InventorySquare" type="PanelContainer" unique_id=1563939885 node_paths=PackedStringArray("hover_image", "occupied_rect", "cant_place_rect")]
+[node name="InventorySquare" type="PanelContainer" unique_id=1563939885 node_paths=PackedStringArray("hover_image", "occupied_rect", "cant_place_rect", "placement_rect")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,6 +34,7 @@ script = ExtResource("1_sv18l")
 hover_image = NodePath("HoverImage")
 occupied_rect = NodePath("OccupiedRect")
 cant_place_rect = NodePath("CantPlaceRect")
+placement_rect = NodePath("PlacementRect")
 
 [node name="BGImage" type="TextureRect" parent="." unique_id=1711357277]
 unique_name_in_owner = true
@@ -46,19 +53,20 @@ offset_transform_enabled = true
 offset_transform_rotation = -1.5707964
 texture = SubResource("GradientTexture1D_eaqtt")
 
+[node name="PlacementRect" type="TextureRect" parent="." unique_id=218731613]
+visible = false
+self_modulate = Color(1, 1, 1, 0.6666667)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -1.5707964
+texture = SubResource("GradientTexture1D_xysk3")
+
 [node name="CantPlaceRect" type="TextureRect" parent="." unique_id=1124291427]
 visible = false
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_rotation = -1.5707964
 texture = SubResource("GradientTexture1D_sqolj")
-
-[node name="ItemImage" type="TextureRect" parent="." unique_id=1043432538]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-expand_mode = 5
-stretch_mode = 5
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=636427048]
 self_modulate = Color(1, 1, 1, 0.7254902)

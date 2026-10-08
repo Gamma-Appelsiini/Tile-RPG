@@ -2,6 +2,7 @@ extends PanelContainer
 class_name InventoryPanel
 
 @export var inv_square_container: GridContainer
+@export var equipment_panel: EquipmentPanel
 
 const ITEM_TOOLTIP := preload("uid://cnufbt7pmxsc2")
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
@@ -62,9 +63,13 @@ func _show_tooltip(inv_item:InventoryItem) -> void:
 
 	if inv_item.global_position.x > screen_width / 2.0:
 		offset.x = -shared_tooltip.get_tt_size().x - 15
+		shared_tooltip.right_diamond.show()
+		shared_tooltip.left_diamond.hide()
+	else:
+		shared_tooltip.right_diamond.hide()
+		shared_tooltip.left_diamond.show()
 		
 	offset.y = inv_item.size.y / 2 - shared_tooltip.get_tt_size().y / 2
-	#TODO add arrow to sides of tooltip
 	
 	shared_tooltip.global_position = inv_item.global_position + offset
 	shared_tooltip.show()
@@ -83,17 +88,38 @@ func _set_lifting_item_square() -> void:
 	lifted_item_squares_to_occupy = _get_squares_for_item_placement(new_placement_square, lifted_inv_item.item)
 	for new_square:InventorySquare in lifted_item_squares_to_occupy:
 		if new_square.occupied: new_square.cant_place_rect.show()
-		else: new_square.occupied_rect.show()
+		else: new_square.placement_rect.show()
 
 func _clear_lifted_item_indicators() -> void:
 	for old_square:InventorySquare in lifted_item_squares_to_occupy:
 		if old_square.occupied:
 			old_square.cant_place_rect.hide()
 		else:
-			old_square.occupied_rect.hide()
+			old_square.placement_rect.hide()
 
 	lifted_item_squares_to_occupy.clear()
 	lifting_item_square = null
+
+#TODO
+func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
+	if dropped_inv_item.item is not Equipment:
+		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
+		lifted_inv_item = null
+		old_square_before_lifting = null
+		return
+	if dropped_inv_item.item.equipment_slot != equipment_panel.hovered_equipment_square.equipment_slot:
+		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
+		lifted_inv_item = null
+		old_square_before_lifting = null
+		return
+	
+	dropped_inv_item.global_position = equipment_panel.hovered_equipment_square.global_position
+	if equipment_panel.hovered_equipment_square.size.x > dropped_inv_item.size.x or equipment_panel.hovered_equipment_square.size.y > dropped_inv_item.size.y:
+		dropped_inv_item.global_position += Vector2((equipment_panel.hovered_equipment_square.size.x - dropped_inv_item.size.x) / 2,
+		(equipment_panel.hovered_equipment_square.size.y - dropped_inv_item.size.y) / 2)
+	
+	lifted_inv_item = null
+	old_square_before_lifting = null
 
 func _drop_item() -> void:
 	if !lifted_inv_item: return
@@ -108,6 +134,10 @@ func _drop_item() -> void:
 		inv_item.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	var dropped_inv_item:InventoryItem = lifted_inv_item
+	if equipment_panel.hovered_equipment_square:
+		_drop_item_on_equipment_slot(dropped_inv_item)
+		return
+	
 	var target_square:InventorySquare = hovered_square
 
 	if target_square:
@@ -159,8 +189,15 @@ func _try_to_place_inventory_item_on_square(starting_square:InventorySquare, new
 	
 	return true
 
+#TODO
+func _lift_up_equipped_item() -> void:
+	pass
+
 func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
-	if lifted_inv_item and !override_inv_item: return  # already holding something
+	if equipment_panel.hovered_equipment_square:
+		_lift_up_equipped_item()
+		return
+	if lifted_inv_item and !override_inv_item: return
 	if !hovered_inv_item and !override_inv_item: return
 
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item

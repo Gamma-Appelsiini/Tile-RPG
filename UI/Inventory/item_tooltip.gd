@@ -15,7 +15,9 @@ class_name ItemTooltip
 @export var tt_container: PanelContainer
 @export var ability_rect: TextureRect = null
 @export var gradient_rect: TextureRect = null
-@onready var bux_rect: TextureRect = $TTContainer/VBoxContainer/PriceContainer/CenterContainer/BuxRect
+@export var bux_rect: TextureRect = null
+@export var right_diamond: TextureProgressBar
+@export var left_diamond: TextureProgressBar
 
 const WL_PATH:String = "res://Tile-RPG/UI/Inventory/weapon_line.tscn"
 

@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cetj0cajkm53b"]
+
+[ext_resource type="Script" uid="uid://xyi51j7vmobq" path="res://Tile-RPG/UI/GridInventory/equipment_square.gd" id="1_ch42j"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_4q8me"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="2_ch42j"]
+[ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="3_4q8me"]
+[ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="4_4uy8q"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_4q8me"]
+
+[sub_resource type="Gradient" id="Gradient_4uy8q"]
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
+gradient = SubResource("Gradient_4uy8q")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ch42j"]
+colors = PackedColorArray(1, 0, 0.016666412, 0.32941177, 1, 0, 0.016666412, 0.34901962)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4q8me"]
+gradient = SubResource("Gradient_ch42j")
+
+[sub_resource type="Gradient" id="Gradient_4q8me"]
+colors = PackedColorArray(0, 0.6391719, 0.35725197, 0.32941177, 0, 0.57521236, 0.15400475, 0.34901962)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4uy8q"]
+gradient = SubResource("Gradient_4q8me")
+
+[node name="EquipmentSquare" type="PanelContainer" unique_id=432069512 node_paths=PackedStringArray("hover_image", "cant_place_rect", "can_place_rect", "nine_patch_rect", "bg_image")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ch42j")
+hover_image = NodePath("HoverImage")
+cant_place_rect = NodePath("CantPlaceRect")
+can_place_rect = NodePath("CanPlaceRect")
+nine_patch_rect = NodePath("NinePatchRect")
+bg_image = NodePath("BGImage")
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=1817190620]
+self_modulate = Color(1, 1, 1, 0.4862745)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+offset_transform_scale = Vector2(1.01, 1)
+texture = SubResource("GradientTexture2D_eaqtt")
+expand_mode = 1
+
+[node name="BGImage" type="TextureRect" parent="." unique_id=766327109]
+unique_name_in_owner = true
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_4q8me")
+expand_mode = 4
+stretch_mode = 1
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=1039515588]
+self_modulate = Color(1, 1, 1, 0.7254902)
+layout_mode = 2
+texture = ExtResource("2_ch42j")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CantPlaceRect" type="TextureRect" parent="." unique_id=880869959]
+visible = false
+layout_mode = 2
+offset_transform_rotation = -1.5707964
+texture = SubResource("GradientTexture1D_4q8me")
+expand_mode = 1
+
+[node name="CanPlaceRect" type="TextureRect" parent="." unique_id=1398462910]
+visible = false
+layout_mode = 2
+offset_transform_rotation = -1.5707964
+texture = SubResource("GradientTexture1D_4uy8q")
+expand_mode = 1
+
+[node name="HoverImage" type="TextureRect" parent="." unique_id=554662751]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.83, 0.81588995, 0.6889, 0.59607846)
+layout_mode = 2
+texture = ExtResource("3_4q8me")
+expand_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=749488438]
+layout_mode = 2
+offset_transform_scale = Vector2(0.996, 0.996)
+offset_transform_visual_only = false
+texture = ExtResource("4_4uy8q")
+draw_center = false
+region_rect = Rect2(2, 2, 252, 252)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=926555516]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("6_4q8me")
+region_rect = Rect2(8, 8, 496, 496)
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
