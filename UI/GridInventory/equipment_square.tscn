@@ -26,7 +26,7 @@ colors = PackedColorArray(0, 0.6391719, 0.35725197, 0.32941177, 0, 0.57521236, 0
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4uy8q"]
 gradient = SubResource("Gradient_4q8me")
 
-[node name="EquipmentSquare" type="PanelContainer" unique_id=432069512 node_paths=PackedStringArray("hover_image", "cant_place_rect", "can_place_rect", "nine_patch_rect", "bg_image")]
+[node name="EquipmentSquare" type="PanelContainer" unique_id=432069512 node_paths=PackedStringArray("hover_image", "cant_place_rect", "can_place_rect", "nine_patch_rect", "bg_image", "nine_patch_rect_2")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,6 +38,7 @@ cant_place_rect = NodePath("CantPlaceRect")
 can_place_rect = NodePath("CanPlaceRect")
 nine_patch_rect = NodePath("NinePatchRect")
 bg_image = NodePath("BGImage")
+nine_patch_rect_2 = NodePath("NinePatchRect2")
 
 [node name="Shadow" type="TextureRect" parent="." unique_id=1817190620]
 self_modulate = Color(1, 1, 1, 0.4862745)

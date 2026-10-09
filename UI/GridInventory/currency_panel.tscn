@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://co5wvjxsb6eja"]
+
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="1_ohsrt"]
+[ext_resource type="Texture2D" uid="uid://ctkfq28vwb3v2" path="res://Tile-RPG/Images/UI/Borders/sharp_border1.png" id="3_aqgfp"]
+[ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="4_xggts"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_qp8kv"]
+[ext_resource type="Texture2D" uid="uid://ce2p73o8e0pgq" path="res://Tile-RPG/Images/UI/soul_gem.png" id="6_an0hb"]
+[ext_resource type="Texture2D" uid="uid://3all0oyy2f5n" path="res://Tile-RPG/Images/UI/crafting_bar.png" id="6_aqgfp"]
+
+[node name="CurrencyPanel" type="PanelContainer" unique_id=861710248]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(125, 55)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=582737785]
+self_modulate = Color(0, 0, 0, 0.3137255)
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+texture = ExtResource("3_aqgfp")
+patch_margin_left = 20
+patch_margin_top = 35
+patch_margin_right = 20
+patch_margin_bottom = 35
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=952575992]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1080086892]
+self_modulate = Color(1, 1, 1, 0)
+custom_maximum_size = Vector2(-1, 34)
+layout_mode = 2
+
+[node name="BGImage2" type="TextureRect" parent="MarginContainer/PanelContainer" unique_id=1444608968]
+unique_name_in_owner = true
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+offset_transform_position = Vector2(0, 7)
+mouse_filter = 2
+texture = ExtResource("1_ohsrt")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer" unique_id=385565538]
+custom_minimum_size = Vector2(255, 55)
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer" unique_id=1397573750]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="GoldTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer" unique_id=745345672]
+self_modulate = Color(1.15968, 1.0061659, 0.69913787, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("4_xggts")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CurrencyAmountLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer" unique_id=465638794]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -2)
+theme = ExtResource("5_qp8kv")
+theme_override_colors/font_color = Color(0.9, 0.7125, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer" unique_id=1922843839]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="GemTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer2" unique_id=1053987514]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_an0hb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SoulGemAmountLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer2" unique_id=1078514012]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -2)
+theme = ExtResource("5_qp8kv")
+theme_override_colors/font_color = Color(0.84, 0.13440003, 0.13440003, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer" unique_id=1469954928]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="GemTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3" unique_id=1232933993]
+self_modulate = Color(0, 1.3622323, 1.1831194, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_aqgfp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CraftingOreAmountLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3" unique_id=1573030963]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -2)
+theme = ExtResource("5_qp8kv")
+theme_override_colors/font_color = Color(0.2754, 0.54, 0.35919, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1394537129]
+self_modulate = Color(0.68, 0.6437333, 0.612, 1)
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+texture = ExtResource("3_aqgfp")
+patch_margin_left = 20
+patch_margin_top = 35
+patch_margin_right = 20
+patch_margin_bottom = 35
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bw3merrpqlthj" path="res://Tile-RPG/UI/GridInventory/inventory_panel.gd" id="1_myc3p"]
 [ext_resource type="PackedScene" uid="uid://bvyifwuvxxkui" path="res://Tile-RPG/UI/GridInventory/equipment_panel.tscn" id="2_33j28"]
+[ext_resource type="PackedScene" uid="uid://co5wvjxsb6eja" path="res://Tile-RPG/UI/GridInventory/currency_panel.tscn" id="3_n5pry"]
 
-[node name="InventoryPanel" type="PanelContainer" unique_id=812575845 node_paths=PackedStringArray("inv_square_container", "equipment_panel")]
+[sub_resource type="Gradient" id="Gradient_33j28"]
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n5pry"]
+gradient = SubResource("Gradient_33j28")
+fill_from = Vector2(1, 1)
+
+[node name="InventoryPanel" type="PanelContainer" unique_id=812575845 node_paths=PackedStringArray("inv_square_container", "equipment_panel", "currency_amount_label", "crafting_ore_amount_label")]
 anchors_preset = -1
 anchor_left = 0.6
 anchor_top = 0.1
@@ -12,8 +20,10 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_myc3p")
-inv_square_container = NodePath("VBoxContainer/InvSquareContainer")
+inv_square_container = NodePath("VBoxContainer/PanelContainer/InvSquareContainer")
 equipment_panel = NodePath("VBoxContainer/EquipmentPanel")
+currency_amount_label = NodePath("VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer/CurrencyAmountLabel")
+crafting_ore_amount_label = NodePath("VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3/CraftingOreAmountLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=569845240]
 layout_mode = 2
@@ -25,8 +35,26 @@ alignment = 1
 layout_mode = 2
 inventory_panel = NodePath("../..")
 
-[node name="InvSquareContainer" type="GridContainer" parent="VBoxContainer" unique_id=1234750634]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=999601887]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/PanelContainer" unique_id=1433822094]
+self_modulate = Color(1, 1, 1, 0.4862745)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1.25, 3)
+offset_transform_scale = Vector2(1.007, 1)
+texture = SubResource("GradientTexture2D_n5pry")
+expand_mode = 1
+
+[node name="InvSquareContainer" type="GridContainer" parent="VBoxContainer/PanelContainer" unique_id=1234750634]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 10
+
+[node name="CurrencyPanel" parent="VBoxContainer" unique_id=861710248 instance=ExtResource("3_n5pry")]
+layout_mode = 2
+
+[editable path="VBoxContainer/CurrencyPanel"]

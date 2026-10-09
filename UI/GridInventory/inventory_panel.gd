@@ -3,6 +3,9 @@ class_name InventoryPanel
 
 @export var inv_square_container: GridContainer
 @export var equipment_panel: EquipmentPanel
+@export var currency_amount_label: Label
+@export var skill_gem_amount_label: Label
+@export var crafting_ore_amount_label: Label
 
 const ITEM_TOOLTIP := preload("uid://cnufbt7pmxsc2")
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
@@ -19,13 +22,36 @@ var hovered_inv_item:InventoryItem = null:
 var inventory_items:Array[InventoryItem] = []
 var squares_dict:Dictionary[Vector2i, InventorySquare] = {}
 var items_in_inventory:Dictionary[InventoryItem, InventorySquare] = {}
+var items_equipped:Dictionary[InventoryItem, EquipmentSquare] = {}
 
 var lifted_inv_item:InventoryItem = null
 var old_square_before_lifting:InventorySquare = null
+var old_equipment_square_before_lifting:EquipmentSquare = null
 var lifting_item_square:InventorySquare = null
 var lifted_item_squares_to_occupy:Array[InventorySquare] = []
 
 var shared_tooltip:ItemTooltip = null
+
+#Currencies
+var player_currency:int = 0:
+	set(value):
+		player_currency = max(0, value)
+		currency_amount_label.text = str(player_currency)
+		
+var player_skill_gems:int = 0:
+	set(value):
+		player_skill_gems = max(0, value)
+		skill_gem_amount_label.text = str(player_skill_gems)
+
+var player_crafting_ore:int = 0:
+	set(value):
+		player_crafting_ore = max(0, value)
+		crafting_ore_amount_label.text = str(player_crafting_ore)
+
+var player_skill_points:int = 10:
+	set(value):
+		player_skill_points = max(0, value)
+		GlobalSignals.skill_gem_amount_changed.emit()
 
 func _ready() -> void:
 	set_process(false)
@@ -34,14 +60,11 @@ func _ready() -> void:
 	_add_inv_squares()
 	
 	await get_tree().process_frame
-	var rand_eq:Equipment = ItemGenerator.get_equipment()
-	add_item_to_inv(rand_eq)
-	rand_eq = ItemGenerator.get_equipment()
-	add_item_to_inv(rand_eq)
-	rand_eq = ItemGenerator.get_equipment()
-	add_item_to_inv(rand_eq)
-	rand_eq = ItemGenerator.get_equipment()
-	add_item_to_inv(rand_eq)
+	add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.STAFF))
+	add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.SHIELD))
+	add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.SWORD))
+	while add_item_to_inv(ItemGenerator.get_equipment()):
+		pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"): _lift_up_item()
@@ -79,11 +102,14 @@ func _set_lifting_item_square() -> void:
 	lifted_inv_item.global_position = mouse_pos + Vector2(-lifted_inv_item.size.x/2,-lifted_inv_item.size.y/2)
 	
 	var new_placement_square:InventorySquare = hovered_square
-	if new_placement_square == lifting_item_square: return
+	if new_placement_square == lifting_item_square:
+		if !new_placement_square: _clear_lifted_item_indicators()
+		return
 	
 	lifting_item_square = new_placement_square
 	_clear_lifted_item_indicators()
-	if !new_placement_square: return
+	if !new_placement_square:
+		return
 	
 	lifted_item_squares_to_occupy = _get_squares_for_item_placement(new_placement_square, lifted_inv_item.item)
 	for new_square:InventorySquare in lifted_item_squares_to_occupy:
@@ -102,24 +128,64 @@ func _clear_lifted_item_indicators() -> void:
 
 #TODO
 func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
+	var switched_inv_item:InventoryItem = null
+	#Not equipment
 	if dropped_inv_item.item is not Equipment:
 		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
 		lifted_inv_item = null
 		old_square_before_lifting = null
 		return
+	
+	var dropped_equipment:Equipment = dropped_inv_item.item as Equipment
+	var main_hand_equipment:Equipment = null
+	if equipment_panel.equipment_squares[Equipment.EquipmentSlot.MAIN_HAND].inventory_item_in_square:
+		main_hand_equipment = equipment_panel.equipment_squares[Equipment.EquipmentSlot.MAIN_HAND].inventory_item_in_square.item as Equipment
+	var off_hand_equipment:Equipment = null
+	if equipment_panel.equipment_squares[Equipment.EquipmentSlot.OFF_HAND].inventory_item_in_square:
+		off_hand_equipment = equipment_panel.equipment_squares[Equipment.EquipmentSlot.OFF_HAND].inventory_item_in_square.item as Equipment
+
+	#Wrong slot
 	if dropped_inv_item.item.equipment_slot != equipment_panel.hovered_equipment_square.equipment_slot:
 		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
 		lifted_inv_item = null
 		old_square_before_lifting = null
 		return
+	#is it wep
+	if dropped_equipment is Weapon:
+		if dropped_equipment.hand_type == Weapon.HandType.TWO_HANDED:
+			#Equipping 2 handed while off hand taken and main hand free = switch off hand
+			if !main_hand_equipment and off_hand_equipment:
+				switched_inv_item = equipment_panel.equipment_squares[Equipment.EquipmentSlot.OFF_HAND].inventory_item_in_square
+			#2 handed while both taken, don't equip
+			elif off_hand_equipment and main_hand_equipment:
+				if !old_square_before_lifting or !_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item):
+					_place_in_first_free_spot(dropped_inv_item)
+					lifted_inv_item = null
+					old_square_before_lifting = null
+					return
+	#If equipping shield while having 2 handed
+	elif dropped_equipment.equipment_slot == Equipment.EquipmentSlot.OFF_HAND:
+		if main_hand_equipment:
+			if main_hand_equipment is Weapon:
+				if main_hand_equipment.hand_type == Weapon.HandType.TWO_HANDED:
+					switched_inv_item = equipment_panel.equipment_squares[Equipment.EquipmentSlot.MAIN_HAND].inventory_item_in_square
 	
+	if equipment_panel.hovered_equipment_square.inventory_item_in_square or switched_inv_item:
+		#Switch same slot item
+		if !switched_inv_item: switched_inv_item = equipment_panel.hovered_equipment_square.inventory_item_in_square
+		_lift_up_item(switched_inv_item)
+
+	#TODO equip on equipment handler
+	items_equipped[dropped_inv_item] = equipment_panel.hovered_equipment_square
+	equipment_panel.hovered_equipment_square.inventory_item_in_square = dropped_inv_item
 	dropped_inv_item.global_position = equipment_panel.hovered_equipment_square.global_position
 	if equipment_panel.hovered_equipment_square.size.x > dropped_inv_item.size.x or equipment_panel.hovered_equipment_square.size.y > dropped_inv_item.size.y:
 		dropped_inv_item.global_position += Vector2((equipment_panel.hovered_equipment_square.size.x - dropped_inv_item.size.x) / 2,
 		(equipment_panel.hovered_equipment_square.size.y - dropped_inv_item.size.y) / 2)
 	
-	lifted_inv_item = null
-	old_square_before_lifting = null
+	if !switched_inv_item:
+		lifted_inv_item = null
+		old_square_before_lifting = null
 
 func _drop_item() -> void:
 	if !lifted_inv_item: return
@@ -189,25 +255,22 @@ func _try_to_place_inventory_item_on_square(starting_square:InventorySquare, new
 	
 	return true
 
-#TODO
-func _lift_up_equipped_item() -> void:
-	pass
-
 func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
-	if equipment_panel.hovered_equipment_square:
-		_lift_up_equipped_item()
-		return
 	if lifted_inv_item and !override_inv_item: return
 	if !hovered_inv_item and !override_inv_item: return
 
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item
 
-	lifted_inv_item.modulate.a = 0.5
+	lifted_inv_item.modulate.a = 0.65
 	lifted_inv_item.z_index = 2
 	old_square_before_lifting = items_in_inventory[lifted_inv_item]
 
 	# Swapped items were already removed from the grid in _drop_item()
-	if !override_inv_item:
+	if items_equipped.keys().has(lifted_inv_item):
+		items_equipped[lifted_inv_item].inventory_item_in_square = null
+		items_equipped.erase(lifted_inv_item)
+		#TODO unequip from equipment handler
+	elif !override_inv_item:
 		_remove_item_from_square(items_in_inventory[lifted_inv_item])
 
 	for inv_item:InventoryItem in items_in_inventory.keys():
