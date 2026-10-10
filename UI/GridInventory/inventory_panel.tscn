@@ -2,7 +2,20 @@
 
 [ext_resource type="Script" uid="uid://bw3merrpqlthj" path="res://Tile-RPG/UI/GridInventory/inventory_panel.gd" id="1_myc3p"]
 [ext_resource type="PackedScene" uid="uid://bvyifwuvxxkui" path="res://Tile-RPG/UI/GridInventory/equipment_panel.tscn" id="2_33j28"]
+[ext_resource type="Shader" uid="uid://btrvf67l50axd" path="res://Tile-RPG/Shaders/texture_scale_shader.gdshader" id="2_t1mmn"]
+[ext_resource type="Texture2D" uid="uid://bfuju3hk2xr0b" path="res://Tile-RPG/Images/texture_images/limestone.png" id="3_7v58p"]
+[ext_resource type="Texture2D" uid="uid://ddjxrheusfbv3" path="res://Tile-RPG/Materials/Textures/gray-stone-512x512.png" id="3_n5emr"]
 [ext_resource type="PackedScene" uid="uid://co5wvjxsb6eja" path="res://Tile-RPG/UI/GridInventory/currency_panel.tscn" id="3_n5pry"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_l6c2c"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_uq11h"]
+[ext_resource type="Texture2D" uid="uid://bnv6ct2eeonos" path="res://Tile-RPG/Images/UI/Borders/sharp_border5.png" id="7_l6c2c"]
+[ext_resource type="Texture2D" uid="uid://bwdgi83h7xku2" path="res://Tile-RPG/Images/UI/Borders/detail_border1.png" id="8_7v58p"]
+[ext_resource type="Texture2D" uid="uid://pn56hlyiv6wu" path="res://Tile-RPG/Images/UI/Borders/diamond_button2.png" id="11_ugkgh"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="12_j1tjm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqgfp"]
+shader = ExtResource("2_t1mmn")
+shader_parameter/tiling_scale = 2.0
 
 [sub_resource type="Gradient" id="Gradient_33j28"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -11,50 +24,203 @@ colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 gradient = SubResource("Gradient_33j28")
 fill_from = Vector2(1, 1)
 
+[sub_resource type="Gradient" id="Gradient_n5emr"]
+offsets = PackedFloat32Array(0, 0.99789476)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
+gradient = SubResource("Gradient_n5emr")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.46438748)
+
 [node name="InventoryPanel" type="PanelContainer" unique_id=812575845 node_paths=PackedStringArray("inv_square_container", "equipment_panel", "currency_amount_label", "crafting_ore_amount_label")]
 anchors_preset = -1
-anchor_left = 0.6
+anchor_left = 0.635
 anchor_top = 0.1
-anchor_right = 1.0
+anchor_right = 0.985
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_myc3p")
-inv_square_container = NodePath("VBoxContainer/PanelContainer/InvSquareContainer")
-equipment_panel = NodePath("VBoxContainer/EquipmentPanel")
-currency_amount_label = NodePath("VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer/CurrencyAmountLabel")
-crafting_ore_amount_label = NodePath("VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3/CraftingOreAmountLabel")
+inv_square_container = NodePath("PanelContainer/VBoxContainer/PanelContainer/InvSquareContainer")
+equipment_panel = NodePath("PanelContainer/VBoxContainer/EquipmentPanel")
+currency_amount_label = NodePath("PanelContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer/CurrencyAmountLabel")
+crafting_ore_amount_label = NodePath("PanelContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3/CraftingOreAmountLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=569845240]
+[node name="BgImage" type="TextureRect" parent="." unique_id=284036582]
+self_modulate = Color(0.49819997, 0.51039, 0.53, 1)
+material = SubResource("ShaderMaterial_aqgfp")
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.99, 0.99)
+texture = ExtResource("3_7v58p")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="." unique_id=1153640009]
+self_modulate = Color(0.58932716, 0.59685564, 0.64579093, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.955, 0.983)
+texture = ExtResource("8_7v58p")
+patch_margin_left = 45
+patch_margin_top = 45
+patch_margin_right = 45
+patch_margin_bottom = 45
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=794896025]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(545, 745)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 8
+size_flags_vertical = 4
+
+[node name="BgImage" type="TextureRect" parent="PanelContainer" unique_id=1431823406]
+self_modulate = Color(0.56885004, 0.5642, 0.62, 1)
+layout_mode = 2
+texture = ExtResource("3_n5emr")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=569845240]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="EquipmentPanel" parent="VBoxContainer" unique_id=1712706713 node_paths=PackedStringArray("inventory_panel") instance=ExtResource("2_33j28")]
+[node name="EquipmentPanel" parent="PanelContainer/VBoxContainer" unique_id=1712706713 node_paths=PackedStringArray("inventory_panel") instance=ExtResource("2_33j28")]
 layout_mode = 2
-inventory_panel = NodePath("../..")
+inventory_panel = NodePath("../../..")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=999601887]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=999601887]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Shadow" type="TextureRect" parent="VBoxContainer/PanelContainer" unique_id=1433822094]
-self_modulate = Color(1, 1, 1, 0.4862745)
+[node name="Shadow" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1433822094]
+self_modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(1.25, 3)
+offset_transform_position = Vector2(3, 4)
 offset_transform_scale = Vector2(1.007, 1)
 texture = SubResource("GradientTexture2D_n5pry")
 expand_mode = 1
 
-[node name="InvSquareContainer" type="GridContainer" parent="VBoxContainer/PanelContainer" unique_id=1234750634]
+[node name="InvSquareContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1234750634]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 10
 
-[node name="CurrencyPanel" parent="VBoxContainer" unique_id=861710248 instance=ExtResource("3_n5pry")]
+[node name="InvGridCornerRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1163464751]
+self_modulate = Color(3.7045925, 3.7045925, 3.7045925, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.008, 1.01)
+texture = ExtResource("6_l6c2c")
+region_rect = Rect2(7, 7, 498, 498)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="CurrencyPanel" parent="PanelContainer/VBoxContainer" unique_id=861710248 instance=ExtResource("3_n5pry")]
 layout_mode = 2
 
-[editable path="VBoxContainer/CurrencyPanel"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1704472620]
+self_modulate = Color(1, 1, 1, 0.7254902)
+layout_mode = 2
+offset_transform_scale = Vector2(0.98, 0.99)
+texture = ExtResource("6_uq11h")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="PanelContainer" unique_id=636197696]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("6_l6c2c")
+region_rect = Rect2(6, 6, 501, 501)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="DarkenRect" type="TextureRect" parent="." unique_id=1689748538]
+self_modulate = Color(1, 1, 1, 0.42745098)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_eaqtt")
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=132522215]
+self_modulate = Color(1, 1, 1, 0.7254902)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.98, 0.99)
+texture = ExtResource("6_uq11h")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CornerRect" type="NinePatchRect" parent="." unique_id=1830349662]
+self_modulate = Color(1.2064236, 1.2749454, 1.353256, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+texture = ExtResource("7_l6c2c")
+draw_center = false
+patch_margin_left = 28
+patch_margin_top = 25
+patch_margin_right = 28
+patch_margin_bottom = 25
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="RightDiamond" type="TextureProgressBar" parent="." unique_id=949265058]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(11, 0)
+offset_transform_scale = Vector2(2, 2)
+mouse_filter = 2
+value = 50.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_progress = ExtResource("11_ugkgh")
+
+[node name="LeftDiamond" type="TextureProgressBar" parent="." unique_id=1867738977]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-11, 0)
+offset_transform_scale = Vector2(2, 2)
+mouse_filter = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("11_ugkgh")
+
+[node name="Label" type="Label" parent="." unique_id=921468418]
+layout_mode = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 29)
+theme = ExtResource("12_j1tjm")
+theme_override_font_sizes/font_size = 26
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="PanelContainer/VBoxContainer/CurrencyPanel"]

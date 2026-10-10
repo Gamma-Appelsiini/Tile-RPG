@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cedwte0bxw26f"
-path="res://.godot/imported/TIERNaturalStone-3D_MyraLimestone.webp-5c719142322b913186db16dd000b2baf.ctex"
+uid="uid://bkajfterf2ilt"
+path="res://.godot/imported/Rock022_color.jpg-557b66cb21fe3787fbb91b90890766fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Images/Textures/TIERNaturalStone-3D_MyraLimestone.webp"
-dest_files=["res://.godot/imported/TIERNaturalStone-3D_MyraLimestone.webp-5c719142322b913186db16dd000b2baf.ctex"]
+source_file="res://Tile-RPG/Images/texture_images/Rock022_color.jpg"
+dest_files=["res://.godot/imported/Rock022_color.jpg-557b66cb21fe3787fbb91b90890766fc.ctex"]
 
 [params]
 

@@ -89,6 +89,7 @@ stretch_mode = 5
 
 [node name="CornerImage" type="TextureRect" parent="." unique_id=2038560379]
 unique_name_in_owner = true
+self_modulate = Color(1.3266667, 1.3266667, 1.3266667, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("4_8ex81")

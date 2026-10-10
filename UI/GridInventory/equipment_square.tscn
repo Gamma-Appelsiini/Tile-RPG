@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_4q8me"]
 
 [sub_resource type="Gradient" id="Gradient_4uy8q"]
-colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0.67058825)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_eaqtt"]
 gradient = SubResource("Gradient_4uy8q")
@@ -41,11 +41,10 @@ bg_image = NodePath("BGImage")
 nine_patch_rect_2 = NodePath("NinePatchRect2")
 
 [node name="Shadow" type="TextureRect" parent="." unique_id=1817190620]
-self_modulate = Color(1, 1, 1, 0.4862745)
+self_modulate = Color(1, 1, 1, 0.50980395)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(2, 2)
-offset_transform_scale = Vector2(1.01, 1)
 texture = SubResource("GradientTexture2D_eaqtt")
 expand_mode = 1
 
@@ -104,6 +103,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=926555516]
+self_modulate = Color(1.598561, 1.598561, 1.598561, 1)
 layout_mode = 2
 offset_transform_visual_only = false
 texture = ExtResource("6_4q8me")
