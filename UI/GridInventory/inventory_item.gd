@@ -9,8 +9,8 @@ const SQUARE_SIZE:int = 50
 var item:Item = null
 
 func _ready() -> void:
-	mouse_entered.connect(func(): hover_image_rect.show())
-	mouse_exited.connect(func(): hover_image_rect.hide())
+	mouse_entered.connect(hover_image_rect.show)
+	mouse_exited.connect(hover_image_rect.hide)
 
 func set_item(new_item:Item) -> void:
 	item = new_item

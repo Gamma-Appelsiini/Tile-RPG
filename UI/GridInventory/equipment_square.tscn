@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://xyi51j7vmobq" path="res://Tile-RPG/UI/GridInventory/equipment_square.gd" id="1_ch42j"]
 [ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_4q8me"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="2_ch42j"]
-[ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="3_4q8me"]
 [ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="4_4uy8q"]
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_4q8me"]
 
@@ -26,7 +25,14 @@ colors = PackedColorArray(0, 0.6391719, 0.35725197, 0.32941177, 0, 0.57521236, 0
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4uy8q"]
 gradient = SubResource("Gradient_4q8me")
 
-[node name="EquipmentSquare" type="PanelContainer" unique_id=432069512 node_paths=PackedStringArray("hover_image", "cant_place_rect", "can_place_rect", "nine_patch_rect", "bg_image", "nine_patch_rect_2")]
+[sub_resource type="Gradient" id="Gradient_16t33"]
+offsets = PackedFloat32Array(0, 0.43578947, 0.58105266, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4q8me"]
+gradient = SubResource("Gradient_16t33")
+
+[node name="EquipmentSquare" type="PanelContainer" unique_id=432069512 node_paths=PackedStringArray("hover_image", "cant_place_rect", "can_place_rect", "nine_patch_rect", "bg_image", "nine_patch_rect_2", "equipment_shadow")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,6 +45,7 @@ can_place_rect = NodePath("CanPlaceRect")
 nine_patch_rect = NodePath("NinePatchRect")
 bg_image = NodePath("BGImage")
 nine_patch_rect_2 = NodePath("NinePatchRect2")
+equipment_shadow = NodePath("EquipmentShadow")
 
 [node name="Shadow" type="TextureRect" parent="." unique_id=1817190620]
 self_modulate = Color(1, 1, 1, 0.50980395)
@@ -83,9 +90,9 @@ expand_mode = 1
 [node name="HoverImage" type="TextureRect" parent="." unique_id=554662751]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0.83, 0.81588995, 0.6889, 0.59607846)
+modulate = Color(0.83, 0.81588995, 0.6889, 0.25490198)
 layout_mode = 2
-texture = ExtResource("3_4q8me")
+texture = SubResource("GradientTexture2D_4q8me")
 expand_mode = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=749488438]
@@ -112,3 +119,10 @@ patch_margin_left = 25
 patch_margin_top = 25
 patch_margin_right = 25
 patch_margin_bottom = 25
+
+[node name="EquipmentShadow" type="TextureRect" parent="." unique_id=2096736368]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.7, 0.7)
+mouse_filter = 2
+expand_mode = 1

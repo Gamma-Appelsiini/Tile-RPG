@@ -11,6 +11,7 @@ item_image_rect = NodePath("ItemImageRect")
 hover_image_rect = NodePath("NinePatchRect")
 
 [node name="ItemImageRect" type="TextureRect" parent="." unique_id=1455122467]
+self_modulate = Color(0.82, 0.82, 0.82, 1)
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 5

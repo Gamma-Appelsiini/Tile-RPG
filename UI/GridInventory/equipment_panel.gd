@@ -8,7 +8,6 @@ var hovered_equipment_square:EquipmentSquare = null
 
 func _ready() -> void:
 	_add_equipment_squares(self)
-	print(len(equipment_squares.keys()))
 	
 func _add_equipment_squares(ui_node:Control) -> void:
 	for child:Control in ui_node.get_children():

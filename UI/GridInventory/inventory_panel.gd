@@ -1,11 +1,17 @@
 extends PanelContainer
 class_name InventoryPanel
 
+@export_category("Sounds")
+@export var item_place_sound:AudioStream = null
+@export var item_lift_sound:AudioStream = null
+
+@export_category("UI")
 @export var inv_square_container: GridContainer
 @export var equipment_panel: EquipmentPanel
 @export var currency_amount_label: Label
 @export var skill_gem_amount_label: Label
 @export var crafting_ore_amount_label: Label
+@export var close_red_button: CloseButton
 
 const ITEM_TOOLTIP := preload("uid://cnufbt7pmxsc2")
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
@@ -55,6 +61,7 @@ var player_skill_points:int = 10:
 
 func _ready() -> void:
 	set_process(false)
+	close_red_button.button.pressed.connect(hide)
 	shared_tooltip = ITEM_TOOLTIP.instantiate()
 	add_child(shared_tooltip)
 	_add_inv_squares()
@@ -158,11 +165,10 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 				switched_inv_item = equipment_panel.equipment_squares[Equipment.EquipmentSlot.OFF_HAND].inventory_item_in_square
 			#2 handed while both taken, don't equip
 			elif off_hand_equipment and main_hand_equipment:
-				if !old_square_before_lifting or !_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item):
-					_place_in_first_free_spot(dropped_inv_item)
-					lifted_inv_item = null
-					old_square_before_lifting = null
-					return
+				_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
+				lifted_inv_item = null
+				old_square_before_lifting = null
+				return
 	#If equipping shield while having 2 handed
 	elif dropped_equipment.equipment_slot == Equipment.EquipmentSlot.OFF_HAND:
 		if main_hand_equipment:
@@ -190,6 +196,7 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 func _drop_item() -> void:
 	if !lifted_inv_item: return
 
+	GlobalSignals.play_audio.emit(item_lift_sound, AudioManager.AUDIO_TYPE.UI)
 	set_process(false)
 	_clear_lifted_item_indicators()
 	lifted_inv_item.modulate.a = 1
@@ -258,7 +265,8 @@ func _try_to_place_inventory_item_on_square(starting_square:InventorySquare, new
 func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	if lifted_inv_item and !override_inv_item: return
 	if !hovered_inv_item and !override_inv_item: return
-
+	
+	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item
 
 	lifted_inv_item.modulate.a = 0.65

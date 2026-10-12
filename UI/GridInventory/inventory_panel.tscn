@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bwdgi83h7xku2" path="res://Tile-RPG/Images/UI/Borders/detail_border1.png" id="8_7v58p"]
 [ext_resource type="Texture2D" uid="uid://pn56hlyiv6wu" path="res://Tile-RPG/Images/UI/Borders/diamond_button2.png" id="11_ugkgh"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="12_j1tjm"]
+[ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="13_j1tjm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aqgfp"]
 shader = ExtResource("2_t1mmn")
@@ -33,11 +34,12 @@ gradient = SubResource("Gradient_n5emr")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(1, 0.46438748)
 
-[node name="InventoryPanel" type="PanelContainer" unique_id=812575845 node_paths=PackedStringArray("inv_square_container", "equipment_panel", "currency_amount_label", "crafting_ore_amount_label")]
+[node name="InventoryPanel" type="PanelContainer" unique_id=812575845 node_paths=PackedStringArray("inv_square_container", "equipment_panel", "currency_amount_label", "skill_gem_amount_label", "crafting_ore_amount_label", "close_red_button")]
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
-anchor_left = 0.635
-anchor_top = 0.1
-anchor_right = 0.985
+anchor_left = 0.63
+anchor_top = 0.08
+anchor_right = 0.99
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
@@ -45,7 +47,9 @@ script = ExtResource("1_myc3p")
 inv_square_container = NodePath("PanelContainer/VBoxContainer/PanelContainer/InvSquareContainer")
 equipment_panel = NodePath("PanelContainer/VBoxContainer/EquipmentPanel")
 currency_amount_label = NodePath("PanelContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer/CurrencyAmountLabel")
+skill_gem_amount_label = NodePath("PanelContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer2/SoulGemAmountLabel")
 crafting_ore_amount_label = NodePath("PanelContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3/CraftingOreAmountLabel")
+close_red_button = NodePath("CloseRedButton")
 
 [node name="BgImage" type="TextureRect" parent="." unique_id=284036582]
 self_modulate = Color(0.49819997, 0.51039, 0.53, 1)
@@ -93,6 +97,10 @@ alignment = 1
 [node name="EquipmentPanel" parent="PanelContainer/VBoxContainer" unique_id=1712706713 node_paths=PackedStringArray("inventory_panel") instance=ExtResource("2_33j28")]
 layout_mode = 2
 inventory_panel = NodePath("../../..")
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1274013987]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=999601887]
 self_modulate = Color(1, 1, 1, 0)
@@ -212,15 +220,23 @@ value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("11_ugkgh")
 
-[node name="Label" type="Label" parent="." unique_id=921468418]
+[node name="InventoryLabel" type="Label" parent="." unique_id=921468418]
 layout_mode = 2
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 29)
+offset_transform_position = Vector2(0, 34)
 theme = ExtResource("12_j1tjm")
 theme_override_font_sizes/font_size = 26
 text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CloseRedButton" parent="." unique_id=723060951 instance=ExtResource("13_j1tjm")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-15, 8)
+offset_transform_visual_only = false
 
 [editable path="PanelContainer/VBoxContainer/CurrencyPanel"]

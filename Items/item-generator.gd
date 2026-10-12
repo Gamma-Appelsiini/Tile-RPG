@@ -72,7 +72,7 @@ const WEIGHTED_RARITIES:Dictionary[Item.ItemRarity,int] = {Item.ItemRarity.POOR 
 	Item.ItemRarity.LEGENDARY : 100,
 	Item.ItemRarity.GOD_ROLL : 10}
 
-static func get_equipment(loot_type:LOOT_TYPE = LOOT_TYPE.RANDOM, ilvl:int = 1, max_tier:int = 0, item_rarity:Item.ItemRarity = Item.ItemRarity.POOR) -> Equipment:
+static func get_equipment(loot_type:LOOT_TYPE = LOOT_TYPE.RANDOM, ilvl:int = 1, max_tier:int = 1, item_rarity:Item.ItemRarity = Item.ItemRarity.POOR) -> Equipment:
 	var new_equipment:Equipment = null
 	if item_rarity == Item.ItemRarity.RANDOM: item_rarity = _get_random_rarity()
 	
