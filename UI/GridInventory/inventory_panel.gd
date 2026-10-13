@@ -17,6 +17,7 @@ const ITEM_TOOLTIP := preload("uid://cnufbt7pmxsc2")
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
 const INVENTORY_SQUARE := preload("uid://6sfv2oiat16b")
 const INVENTORY_SIZE:int = 50
+const GROUND_DROP := preload("uid://cuocgxmrrsjwt")
 
 var hovered_square:InventorySquare = null
 var hovered_inv_item:InventoryItem = null:
@@ -62,6 +63,8 @@ var player_skill_points:int = 10:
 func _ready() -> void:
 	set_process(false)
 	close_red_button.button.pressed.connect(hide)
+	visibility_changed.connect(_on_vis_changed)
+	
 	shared_tooltip = ITEM_TOOLTIP.instantiate()
 	add_child(shared_tooltip)
 	_add_inv_squares()
@@ -81,8 +84,33 @@ func _process(_delta: float) -> void:
 	if !lifted_inv_item:
 		print_debug("No item being lifted")
 		return
-
 	_set_lifting_item_square()
+
+func _on_vis_changed() -> void:
+	if visible:
+		set_process_input(true)
+		return
+	
+	_drop_item_on_ground(lifted_inv_item)
+	set_process(false)
+	set_process_input(false)
+
+func _drop_item_on_ground(inv_item_to_drop:InventoryItem) -> bool:
+	var selected_item:Item = inv_item_to_drop.item
+	if selected_item == null: return false
+	
+	var new_ground_drop:GroundDrop = GROUND_DROP.instantiate()
+	new_ground_drop.set_item(selected_item)
+	GlobalSignals.current_level.add_child(new_ground_drop)
+	new_ground_drop.global_position = GlobalSignals.player.global_position + Vector3(0,0.5,0)
+	new_ground_drop.shoot_rigidbody()
+	
+	lifted_inv_item = null
+	old_square_before_lifting = null
+	inv_item_to_drop.hide()
+	inv_item_to_drop.item = null
+	
+	return true
 
 func _show_tooltip(inv_item:InventoryItem) -> void:
 	if !inv_item: return
@@ -133,7 +161,6 @@ func _clear_lifted_item_indicators() -> void:
 	lifted_item_squares_to_occupy.clear()
 	lifting_item_square = null
 
-#TODO
 func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 	var switched_inv_item:InventoryItem = null
 	#Not equipment
@@ -181,22 +208,25 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 		if !switched_inv_item: switched_inv_item = equipment_panel.hovered_equipment_square.inventory_item_in_square
 		_lift_up_item(switched_inv_item)
 
-	#TODO equip on equipment handler
-	items_equipped[dropped_inv_item] = equipment_panel.hovered_equipment_square
-	equipment_panel.hovered_equipment_square.inventory_item_in_square = dropped_inv_item
-	dropped_inv_item.global_position = equipment_panel.hovered_equipment_square.global_position
-	if equipment_panel.hovered_equipment_square.size.x > dropped_inv_item.size.x or equipment_panel.hovered_equipment_square.size.y > dropped_inv_item.size.y:
-		dropped_inv_item.global_position += Vector2((equipment_panel.hovered_equipment_square.size.x - dropped_inv_item.size.x) / 2,
-		(equipment_panel.hovered_equipment_square.size.y - dropped_inv_item.size.y) / 2)
+	GlobalSignals.player.equipment_handler.equip_item(dropped_equipment)
+	_set_inv_item_on_equipment_square(dropped_inv_item, equipment_panel.hovered_equipment_square)
 	
 	if !switched_inv_item:
 		lifted_inv_item = null
 		old_square_before_lifting = null
 
+func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipment_square:EquipmentSquare) -> void:
+	items_equipped[inv_item_to_equip] = equipment_square
+	equipment_square.inventory_item_in_square = inv_item_to_equip
+	inv_item_to_equip.global_position = equipment_square.global_position
+	
+	if equipment_square.size.x > inv_item_to_equip.size.x or equipment_square.size.y > inv_item_to_equip.size.y:
+		inv_item_to_equip.global_position += Vector2((equipment_square.x - inv_item_to_equip.size.x) / 2,
+		(equipment_square.size.y - inv_item_to_equip.size.y) / 2)
+
 func _drop_item() -> void:
 	if !lifted_inv_item: return
 
-	GlobalSignals.play_audio.emit(item_lift_sound, AudioManager.AUDIO_TYPE.UI)
 	set_process(false)
 	_clear_lifted_item_indicators()
 	lifted_inv_item.modulate.a = 1
@@ -207,6 +237,10 @@ func _drop_item() -> void:
 		inv_item.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	var dropped_inv_item:InventoryItem = lifted_inv_item
+	if _is_mouse_in_drop_position():
+		if _drop_item_on_ground(dropped_inv_item): return
+	GlobalSignals.play_audio.emit(item_lift_sound, AudioManager.AUDIO_TYPE.UI)
+	
 	if equipment_panel.hovered_equipment_square:
 		_drop_item_on_equipment_slot(dropped_inv_item)
 		return
@@ -277,7 +311,7 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	if items_equipped.keys().has(lifted_inv_item):
 		items_equipped[lifted_inv_item].inventory_item_in_square = null
 		items_equipped.erase(lifted_inv_item)
-		#TODO unequip from equipment handler
+		GlobalSignals.player.equipment_handler.unequip_item(items_equipped[lifted_inv_item].equipment_slot)
 	elif !override_inv_item:
 		_remove_item_from_square(items_in_inventory[lifted_inv_item])
 
@@ -286,6 +320,7 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	set_process(true)
 
 func _is_mouse_in_drop_position() -> bool:
+	#TODO Placing on crafting window
 	#if crafting_window_open: return false
 	const FROM_LEFT:float = 0.65
 	var viewport:Viewport = get_viewport()
@@ -328,9 +363,10 @@ func _get_inventory_item(new_item:Item) -> InventoryItem:
 	free_inventory_item.set_item(new_item)
 	return free_inventory_item
 
-func add_item_to_inv(new_item:Item) -> bool:
+func add_item_to_inv(new_item:Item, override_pos:Vector2i = Vector2i(-1,-1)) -> bool:
 	var added_to_inv:bool = false
 	
+	if override_pos != Vector2i(-1,-1): return _try_to_place_item_on_square(squares_dict[override_pos], new_item)
 	for square:InventorySquare in squares_dict.values():
 		added_to_inv = _try_to_place_item_on_square(square, new_item)
 		if added_to_inv: return true
@@ -384,3 +420,44 @@ func remove_item_from_inventory(item:Item) -> void:
 		_remove_item_from_square(starting_square)
 		inv_item.remove_item()
 		items_in_inventory.erase(inv_item)
+
+func save_inv_to_data(save_data:Dictionary) -> void:
+	var inv_data:Dictionary[Vector2i, Dictionary] = {}
+	for inv_item:InventoryItem in items_in_inventory.keys():
+		if inv_item.item == null: continue
+		var inv_square_pos:Vector2i = Vector2(items_in_inventory[inv_item].pos_x, items_in_inventory[inv_item].pos_y) 
+		inv_data[inv_square_pos] = inv_item.item.save_to_data()
+
+	save_data["currency"] = player_currency
+	save_data["player_crafting_ore"] = player_crafting_ore
+	save_data["inventory"] = inv_data
+	save_data["player_skill_gems"] = player_skill_gems
+	save_data["player_skill_points"] = player_skill_points
+	equipment_panel.save_equipment(save_data)
+
+func _load_currency(save_data:Dictionary) -> void:
+	if save_data.has("currency"):
+		player_currency = save_data["currency"]
+	if save_data.has("player_crafting_ore"):
+		player_crafting_ore = save_data["player_crafting_ore"]
+	if save_data.has("player_skill_gems"):
+		player_skill_gems = save_data["player_skill_gems"]
+	if save_data.has("player_skill_points"):
+		player_skill_points = save_data["player_skill_points"]
+
+func load_inv_from_data(save_data:Dictionary) -> void:
+	if !save_data.has("inventory"):
+		print_debug("No inventory data in save")
+		return
+
+	_load_currency(save_data)
+
+	for pos:Vector2i in save_data["inventory"].keys():
+		var script: Script = load(save_data["inventory"][pos]["item_type"])
+		var loaded_item:Item = script.new()
+
+		loaded_item.load_from_data(save_data["inventory"][pos])
+		var added:bool = add_item_to_inv(loaded_item, pos)
+		if !added: print_debug("Couldn't add loaded item to inv")
+	
+	equipment_panel.load_equ_from_data(save_data)
