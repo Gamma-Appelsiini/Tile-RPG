@@ -18,7 +18,7 @@ const DROP_SOUNDS:Dictionary[Item.ItemRarity, AudioStream] = {
 	Item.ItemRarity.FABLED: preload("uid://buuse0rc2cyh2"),
 }
 
-var player_inventory:Inventory = null
+var player_inventory:InventoryPanel = null
 var model_path:String = ""
 var item_drop:Item = null
 var item_model:ItemModel = null
@@ -33,13 +33,22 @@ func _process(_delta: float) -> void:
 	parent_node.global_position = item_model.global_position
 
 func _set_inventory_ref() -> void:
-	player_inventory = GlobalSignals.ui_handler.inventory
+	player_inventory = GlobalSignals.ui_handler.inventory_panel
+
+func _bounce_item() -> void:
+	var force:float = randf_range(0.5,2.5)
+	var direction := (Vector3.UP).normalized()
+	
+	item_model.apply_impulse(direction * force)
+	await get_tree().create_timer(1).timeout
+	interact_area.monitoring = true
 
 func interact() -> void:
 	var added:bool = player_inventory.add_item_to_inv(item_drop)
 	if !added:
 		GlobalSignals.play_audio.emit(loot_failed_sound, AudioManager.AUDIO_TYPE.UI, global_position)
 		interact_complete.emit()
+		_bounce_item()
 		return
 	
 	GlobalSignals.play_audio.emit(loot_successful_sound, AudioManager.AUDIO_TYPE.UI,global_position)

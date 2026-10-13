@@ -31,7 +31,7 @@ var save_data:Dictionary = {
 	"shops": [],
 }
 
-var inventory: Inventory = null
+var inventory_panel:InventoryPanel = null
 var globe_ui:GlobeUI = null
 var ui_handler: UIHandler = null
 var player:Player = null
@@ -47,7 +47,7 @@ func _set_ui_handler() -> void:
 	ui_node.add_child.call_deferred(ui_handler)
 	GlobalSignals.ui_handler = ui_handler
 	
-	self.inventory = ui_handler.inventory
+	self.inventory_panel = ui_handler.inventory_panel
 	self.globe_ui = ui_handler.globe_ui
 	self.loading_screen = ui_handler.loading_screen
 	combat_manager.combat_ui = ui_handler.combat_ui

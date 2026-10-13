@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dieqouuwnnyea" path="res://Tile-RPG/Levels/Level.gd" id="1_e7u5g"]
 [ext_resource type="PackedScene" uid="uid://b678l5dk7mofp" path="res://Tile-RPG/Levels/Jail/jail_start_enviroment.tscn" id="1_ld6dy"]
+[ext_resource type="PackedScene" uid="uid://dcgfw3cs3rfuw" path="res://Tile-RPG/Breakables/wooden_barrel.tscn" id="3_n2ato"]
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_r4bqj"]
 [ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="3_rm3p6"]
 [ext_resource type="Material" uid="uid://dbiyoxw5ohfy7" path="res://Tile-RPG/Materials/TextureMaterials/unshaded_black.tres" id="4_4x7po"]
@@ -33,6 +34,24 @@ enviroment_handler = NodePath("JailStartEnviroment")
 [node name="Interactables" type="Node3D" parent="." unique_id=9713369]
 
 [node name="Breakables" type="Node3D" parent="." unique_id=1785823029]
+
+[node name="WoodenBarrel" parent="Breakables" unique_id=498782213 instance=ExtResource("3_n2ato")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="WoodenBarrel2" parent="Breakables" unique_id=2052243000 instance=ExtResource("3_n2ato")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+
+[node name="WoodenBarrel3" parent="Breakables" unique_id=702358283 instance=ExtResource("3_n2ato")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="WoodenBarrel4" parent="Breakables" unique_id=852115766 instance=ExtResource("3_n2ato")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
+
+[node name="WoodenBarrel5" parent="Breakables" unique_id=2029949797 instance=ExtResource("3_n2ato")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+
+[node name="WoodenBarrel6" parent="Breakables" unique_id=854210295 instance=ExtResource("3_n2ato")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 
 [node name="TileManager" type="Node3D" parent="." unique_id=941726842 node_paths=PackedStringArray("door_node")]
 script = ExtResource("3_rm3p6")

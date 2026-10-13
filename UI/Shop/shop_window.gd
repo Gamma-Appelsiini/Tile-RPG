@@ -15,6 +15,7 @@ const FLAVOR_TEXT_WELCOME:Array[String] = ["Welcome to my shop.", "Good deals ca
 @export var shop_items_container: GridContainer = null
 @export var purchase_sound:AudioStream = null
 @export var sell_sound:AudioStream = null
+@export var inventory_panel:InventoryPanel = null
 @export var player_inventory:Inventory = null
 @export var sell_label: Label = null
 @export var viewport_rect: TextureRect = null
@@ -39,7 +40,7 @@ func _show_goodbye_text() -> void:
 	opened_shop = null
 
 func _on_inv_visibility_changed() -> void:
-	if !player_inventory.visible: self.visible = false
+	if !inventory_panel.visible: self.visible = false
 	if opened_shop:
 		_show_goodbye_text()
 
@@ -47,8 +48,9 @@ func _ready() -> void:
 	_add_slots()
 	sell_container.mouse_entered.connect(_on_mouse_enter_sell_area)
 	sell_container.mouse_exited.connect(_on_mouse_leave_sell_area)
-	player_inventory.sell_item.connect(sell_item)
-	player_inventory.visibility_changed.connect(_on_inv_visibility_changed)
+	#TODO
+	#player_inventory.sell_item.connect(sell_item)
+	#player_inventory.visibility_changed.connect(_on_inv_visibility_changed)
 	viewport_texture = ViewportTexture.new()
 	
 	flavor_text_panel.show_continue_rect = false
@@ -82,7 +84,7 @@ func _add_slots() -> void:
 		var new_slot:InventorySlot = new_item_panel.inventory_slot
 		new_slot.dragging_disabled = true
 		new_slot.array_pos = pos + i
-		player_inventory.connect_slot(new_slot)
+		#player_inventory.connect_slot(new_slot)
 		
 		new_slot.mouse_entered.connect(_show_item_model.bind(new_slot))
 		new_slot.mouse_exited.connect(_hide_item_model)

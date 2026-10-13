@@ -79,9 +79,17 @@ func _add_char_circle() -> void:
 	GlobalSignals.combat_end.connect(func(): character_circle.hide())
 
 func _show_outline() -> void:
+	if !mesh_to_outline:
+		print_debug("NO MESH TO OUTLINE")
+		return
+	
 	if disabled: return
 	var outline_material:ShaderMaterial = OUTLINES[outline_type]
 	mesh_to_outline.material_overlay = outline_material
 
 func _hide_outline() -> void:
+	if !mesh_to_outline:
+		print_debug("NO MESH TO OUTLINE")
+		return
+	
 	mesh_to_outline.material_overlay = null

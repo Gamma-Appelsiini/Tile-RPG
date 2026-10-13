@@ -18,6 +18,5 @@ item_name = "Hand Axe"
 inventory_image = ExtResource("1_sgeew")
 item_value = 4
 item_model_path = "res://Tile-RPG/Items/ItemScenes/axe_model.tscn"
-inventory_width = 2
 inventory_height = 3
 metadata/_custom_type_script = "uid://bxetlkpyl4o0q"

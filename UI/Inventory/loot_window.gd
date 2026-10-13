@@ -38,7 +38,7 @@ func _add_slots() -> void:
 		new_slot.array_pos = pos + i
 		
 		grid_container.add_child(new_slot)
-		player_inventory.connect_slot(new_slot)
+		#player_inventory.connect_slot(new_slot)
 		loot_window_slots.push_back(new_slot)
 
 func _item_added_to_inv(new_item:Item) -> void:

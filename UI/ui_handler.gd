@@ -1,7 +1,7 @@
 extends Control
 class_name UIHandler
 
-@export var inventory: Inventory = null
+@export var inventory_panel: InventoryPanel
 @export var globe_ui: GlobeUI = null
 @export var stat_window: StatWindow = null
 @export var dialogue_window: DialogueWindow = null
@@ -54,10 +54,10 @@ func _input(event: InputEvent) -> void:
 
 func _handle_esc() -> void:
 	if main_menu.visible: _toggle_menu()
-	elif stat_window.visible or inventory.visible or shop_window.visible or abilities_container.visible or loot_window.visible or crafting_window.visible:
+	elif stat_window.visible or inventory_panel.visible or shop_window.visible or abilities_container.visible or loot_window.visible or crafting_window.visible:
 		if crafting_window.visible: crafting_window._close_crafting()
 		stat_window.hide()
-		inventory.hide()
+		inventory_panel.hide()
 		shop_window.hide()
 		abilities_container.hide_container()
 		loot_window.hide()
@@ -68,7 +68,7 @@ func _toggle_menu() -> void:
 	if black_screen.self_modulate.a != 0: return
 	
 	stat_window.hide()
-	inventory.hide()
+	inventory_panel.hide()
 	shop_window.hide()
 	abilities_container.hide_container()
 	
@@ -82,9 +82,9 @@ func _toggle_character() -> void:
 func toggle_inv() -> void:
 	if main_menu.visible or black_screen.self_modulate.a != 0: return
 	
-	inventory.visible = !inventory.visible
-	if abilities_container.visible and inventory.visible: abilities_container.hide()
-	if shop_window.visible and !inventory.visible:
+	inventory_panel.visible = !inventory_panel.visible
+	if abilities_container.visible and inventory_panel.visible: abilities_container.hide()
+	if shop_window.visible and !inventory_panel.visible:
 		shop_window.hide()
 
 func _toggle_abilities() -> void:
@@ -92,7 +92,7 @@ func _toggle_abilities() -> void:
 	if in_combat: return
 
 	if !abilities_container.visible:
-		inventory.hide()
+		inventory_panel.hide()
 		stat_window.hide()
 		abilities_container.show_container()
 	else: abilities_container.hide_container()
@@ -142,13 +142,13 @@ func close_skill_tree() -> void:
 
 func set_player(player:Player) -> void:
 	ability_bar.set_player(player)
-	inventory.set_player(player)
+	#inventory.set_player(player)
 	dialogue_window.set_player(player)
 	stat_window.set_game_character(player)
 	abilities_container.set_player(player)
 
 func load_from_data(save_data:Dictionary) -> void:
-	inventory.load_inv_from_data(save_data)
+	inventory_panel.load_inv_from_data(save_data)
 	
 	abilities_container.load_from_data(save_data)
 	
@@ -156,7 +156,7 @@ func load_from_data(save_data:Dictionary) -> void:
 	ability_bar.load_from_array(ability_bar_array)
 
 func save_to_data(save_data:Dictionary) -> void:
-	inventory.save_inv_to_data(save_data)
+	inventory_panel.save_inv_to_data(save_data)
 	abilities_container.save_to_data(save_data)
 	save_data["ability_bar"] = ability_bar.save_to_data()
 

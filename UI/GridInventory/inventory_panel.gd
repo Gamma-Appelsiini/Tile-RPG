@@ -61,6 +61,10 @@ var player_skill_points:int = 10:
 		GlobalSignals.skill_gem_amount_changed.emit()
 
 func _ready() -> void:
+	show()
+	await get_tree().process_frame
+	hide()
+	
 	set_process(false)
 	close_red_button.button.pressed.connect(hide)
 	visibility_changed.connect(_on_vis_changed)
@@ -69,12 +73,7 @@ func _ready() -> void:
 	add_child(shared_tooltip)
 	_add_inv_squares()
 	
-	await get_tree().process_frame
-	add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.STAFF))
-	add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.SHIELD))
-	add_item_to_inv(ItemGenerator.get_equipment(ItemGenerator.LOOT_TYPE.SWORD))
-	while add_item_to_inv(ItemGenerator.get_equipment()):
-		pass
+	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"): _lift_up_item()
@@ -89,9 +88,12 @@ func _process(_delta: float) -> void:
 func _on_vis_changed() -> void:
 	if visible:
 		set_process_input(true)
+		for inv_item:InventoryItem in items_in_inventory.keys():
+			inv_item.global_position = items_in_inventory[inv_item].global_position
+		
 		return
 	
-	_drop_item_on_ground(lifted_inv_item)
+	if lifted_inv_item: _drop_item_on_ground(lifted_inv_item)
 	set_process(false)
 	set_process_input(false)
 
@@ -216,12 +218,14 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 		old_square_before_lifting = null
 
 func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipment_square:EquipmentSquare) -> void:
+	items_in_inventory.erase(inv_item_to_equip)
+	
 	items_equipped[inv_item_to_equip] = equipment_square
 	equipment_square.inventory_item_in_square = inv_item_to_equip
 	inv_item_to_equip.global_position = equipment_square.global_position
 	
 	if equipment_square.size.x > inv_item_to_equip.size.x or equipment_square.size.y > inv_item_to_equip.size.y:
-		inv_item_to_equip.global_position += Vector2((equipment_square.x - inv_item_to_equip.size.x) / 2,
+		inv_item_to_equip.global_position += Vector2((equipment_square.size.x - inv_item_to_equip.size.x) / 2,
 		(equipment_square.size.y - inv_item_to_equip.size.y) / 2)
 
 func _drop_item() -> void:
@@ -299,19 +303,21 @@ func _try_to_place_inventory_item_on_square(starting_square:InventorySquare, new
 func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	if lifted_inv_item and !override_inv_item: return
 	if !hovered_inv_item and !override_inv_item: return
+	shared_tooltip.hide()
 	
 	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item
 
 	lifted_inv_item.modulate.a = 0.65
 	lifted_inv_item.z_index = 2
-	old_square_before_lifting = items_in_inventory[lifted_inv_item]
+	if items_in_inventory.has(lifted_inv_item):
+		old_square_before_lifting = items_in_inventory[lifted_inv_item]
 
 	# Swapped items were already removed from the grid in _drop_item()
 	if items_equipped.keys().has(lifted_inv_item):
+		GlobalSignals.player.equipment_handler.unequip_item(items_equipped[lifted_inv_item].equipment_slot)
 		items_equipped[lifted_inv_item].inventory_item_in_square = null
 		items_equipped.erase(lifted_inv_item)
-		GlobalSignals.player.equipment_handler.unequip_item(items_equipped[lifted_inv_item].equipment_slot)
 	elif !override_inv_item:
 		_remove_item_from_square(items_in_inventory[lifted_inv_item])
 
@@ -364,6 +370,10 @@ func _get_inventory_item(new_item:Item) -> InventoryItem:
 	return free_inventory_item
 
 func add_item_to_inv(new_item:Item, override_pos:Vector2i = Vector2i(-1,-1)) -> bool:
+	if new_item is GoldItem:
+		player_currency += new_item.item_value
+		return true
+	
 	var added_to_inv:bool = false
 	
 	if override_pos != Vector2i(-1,-1): return _try_to_place_item_on_square(squares_dict[override_pos], new_item)
