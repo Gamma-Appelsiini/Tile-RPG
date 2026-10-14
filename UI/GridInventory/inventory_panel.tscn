@@ -3,26 +3,40 @@
 [ext_resource type="Script" uid="uid://bw3merrpqlthj" path="res://Tile-RPG/UI/GridInventory/inventory_panel.gd" id="1_myc3p"]
 [ext_resource type="PackedScene" uid="uid://bvyifwuvxxkui" path="res://Tile-RPG/UI/GridInventory/equipment_panel.tscn" id="2_33j28"]
 [ext_resource type="Shader" uid="uid://btrvf67l50axd" path="res://Tile-RPG/Shaders/texture_scale_shader.gdshader" id="2_t1mmn"]
-[ext_resource type="Texture2D" uid="uid://bfuju3hk2xr0b" path="res://Tile-RPG/Images/texture_images/limestone.png" id="3_7v58p"]
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="3_j1tjm"]
 [ext_resource type="Texture2D" uid="uid://ddjxrheusfbv3" path="res://Tile-RPG/Materials/Textures/gray-stone-512x512.png" id="3_n5emr"]
 [ext_resource type="PackedScene" uid="uid://co5wvjxsb6eja" path="res://Tile-RPG/UI/GridInventory/currency_panel.tscn" id="3_n5pry"]
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_l6c2c"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="6_uq11h"]
 [ext_resource type="Texture2D" uid="uid://bnv6ct2eeonos" path="res://Tile-RPG/Images/UI/Borders/sharp_border5.png" id="7_l6c2c"]
 [ext_resource type="Texture2D" uid="uid://bwdgi83h7xku2" path="res://Tile-RPG/Images/UI/Borders/detail_border1.png" id="8_7v58p"]
+[ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="10_ua4u6"]
 [ext_resource type="Texture2D" uid="uid://pn56hlyiv6wu" path="res://Tile-RPG/Images/UI/Borders/diamond_button2.png" id="11_ugkgh"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="12_j1tjm"]
 [ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="13_j1tjm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aqgfp"]
+resource_local_to_scene = true
 shader = ExtResource("2_t1mmn")
-shader_parameter/tiling_scale = 2.0
+shader_parameter/tiling_scale = 3.0000001392401203
 
-[sub_resource type="Gradient" id="Gradient_33j28"]
+[sub_resource type="Gradient" id="Gradient_ua4u6"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v8tr"]
+gradient = SubResource("Gradient_ua4u6")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1tjm"]
+resource_local_to_scene = true
+shader = ExtResource("2_t1mmn")
+shader_parameter/tiling_scale = 3.0000001392401203
+
+[sub_resource type="Gradient" id="Gradient_3v8tr"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_n5pry"]
-gradient = SubResource("Gradient_33j28")
+gradient = SubResource("Gradient_3v8tr")
 fill_from = Vector2(1, 1)
 
 [sub_resource type="Gradient" id="Gradient_n5emr"]
@@ -40,7 +54,7 @@ anchors_preset = -1
 anchor_left = 0.63
 anchor_top = 0.08
 anchor_right = 0.99
-anchor_bottom = 0.9
+anchor_bottom = 0.92
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_myc3p")
@@ -57,9 +71,44 @@ material = SubResource("ShaderMaterial_aqgfp")
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.99, 0.99)
-texture = ExtResource("3_7v58p")
+texture = ExtResource("3_j1tjm")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="InventoryLabel" type="Label" parent="." unique_id=921468418]
+layout_mode = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 43)
+theme = ExtResource("12_j1tjm")
+theme_override_font_sizes/font_size = 26
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DarkenNinePatchRect2" type="NinePatchRect" parent="." unique_id=1138075232]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.867, 0.911)
+texture = ExtResource("6_uq11h")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="InnerCornerDarkRect" type="NinePatchRect" parent="." unique_id=1988929799]
+self_modulate = Color(1.1291975, 1.1291975, 1.1291975, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.885, 0.926)
+texture = ExtResource("10_ua4u6")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="InnerCornerRect" type="NinePatchRect" parent="." unique_id=1153640009]
 self_modulate = Color(0.58932716, 0.59685564, 0.64579093, 1)
@@ -81,8 +130,17 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="Shadow" type="TextureRect" parent="PanelContainer" unique_id=66758386]
+self_modulate = Color(1, 1, 1, 0.35686275)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.013, 1.01)
+texture = SubResource("GradientTexture2D_3v8tr")
+expand_mode = 1
+
 [node name="BgImage" type="TextureRect" parent="PanelContainer" unique_id=1431823406]
-self_modulate = Color(0.56885004, 0.5642, 0.62, 1)
+self_modulate = Color(0.449575, 0.4459, 0.49, 1)
+material = SubResource("ShaderMaterial_j1tjm")
 layout_mode = 2
 texture = ExtResource("3_n5emr")
 expand_mode = 1
@@ -139,9 +197,10 @@ axis_stretch_vertical = 2
 layout_mode = 2
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1704472620]
-self_modulate = Color(1, 1, 1, 0.7254902)
+self_modulate = Color(1, 1, 1, 0.14509805)
 layout_mode = 2
-offset_transform_scale = Vector2(0.98, 0.99)
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.966, 0.976)
 texture = ExtResource("6_uq11h")
 patch_margin_left = 10
 patch_margin_top = 10
@@ -153,6 +212,20 @@ layout_mode = 2
 offset_transform_enabled = true
 texture = ExtResource("6_l6c2c")
 region_rect = Rect2(6, 6, 501, 501)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="InnerCornerDarkRect" type="NinePatchRect" parent="PanelContainer" unique_id=1992155322]
+self_modulate = Color(1.1291975, 1.1291975, 1.1291975, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.993, 0.995)
+texture = ExtResource("10_ua4u6")
+draw_center = false
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
@@ -219,17 +292,6 @@ mouse_filter = 2
 value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("11_ugkgh")
-
-[node name="InventoryLabel" type="Label" parent="." unique_id=921468418]
-layout_mode = 2
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 34)
-theme = ExtResource("12_j1tjm")
-theme_override_font_sizes/font_size = 26
-text = "Inventory"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CloseRedButton" parent="." unique_id=723060951 instance=ExtResource("13_j1tjm")]
 layout_mode = 2

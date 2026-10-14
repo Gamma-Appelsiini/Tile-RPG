@@ -62,9 +62,6 @@ var player_skill_points:int = 10:
 
 func _ready() -> void:
 	show()
-	await get_tree().process_frame
-	hide()
-	
 	set_process(false)
 	close_red_button.button.pressed.connect(hide)
 	visibility_changed.connect(_on_vis_changed)
@@ -72,7 +69,12 @@ func _ready() -> void:
 	shared_tooltip = ITEM_TOOLTIP.instantiate()
 	add_child(shared_tooltip)
 	_add_inv_squares()
+	await get_tree().process_frame
+	hide()
 	
+	add_item_to_inv(ItemGenerator.get_equipment(0,4,2,Item.ItemRarity.EPIC))
+	while add_item_to_inv(ItemGenerator.get_equipment()):
+		pass
 	
 
 func _input(event: InputEvent) -> void:
@@ -88,9 +90,6 @@ func _process(_delta: float) -> void:
 func _on_vis_changed() -> void:
 	if visible:
 		set_process_input(true)
-		for inv_item:InventoryItem in items_in_inventory.keys():
-			inv_item.global_position = items_in_inventory[inv_item].global_position
-		
 		return
 	
 	if lifted_inv_item: _drop_item_on_ground(lifted_inv_item)
@@ -182,7 +181,13 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 
 	#Wrong slot
 	if dropped_inv_item.item.equipment_slot != equipment_panel.hovered_equipment_square.equipment_slot:
-		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
+		if old_square_before_lifting:
+			_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
+		elif old_equipment_square_before_lifting:
+			_set_inv_item_on_equipment_square(dropped_inv_item, old_equipment_square_before_lifting)
+			GlobalSignals.player.equipment_handler.equip_item(dropped_equipment)
+		else:
+			print_debug("NO OLD INV OR EQU SQUARE")
 		lifted_inv_item = null
 		old_square_before_lifting = null
 		return
@@ -228,6 +233,15 @@ func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipmen
 		inv_item_to_equip.global_position += Vector2((equipment_square.size.x - inv_item_to_equip.size.x) / 2,
 		(equipment_square.size.y - inv_item_to_equip.size.y) / 2)
 
+func _change_inv_item_mousing(new_mouse_filter:MouseFilter) -> void:
+	for inv_item:InventoryItem in items_in_inventory.keys():
+		inv_item.mouse_filter = new_mouse_filter
+		
+	for equipped_inv_item:InventoryItem in items_equipped.keys():
+		equipped_inv_item.mouse_filter = new_mouse_filter
+		
+	if lifted_inv_item: lifted_inv_item.mouse_filter = new_mouse_filter
+
 func _drop_item() -> void:
 	if !lifted_inv_item: return
 
@@ -237,13 +251,12 @@ func _drop_item() -> void:
 	lifted_inv_item.z_index = 0
 	
 	#Can mouse over items again
-	for inv_item:InventoryItem in items_in_inventory.keys():
-		inv_item.mouse_filter = Control.MOUSE_FILTER_STOP
+	_change_inv_item_mousing(Control.MOUSE_FILTER_STOP)
 
 	var dropped_inv_item:InventoryItem = lifted_inv_item
 	if _is_mouse_in_drop_position():
 		if _drop_item_on_ground(dropped_inv_item): return
-	GlobalSignals.play_audio.emit(item_lift_sound, AudioManager.AUDIO_TYPE.UI)
+	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	
 	if equipment_panel.hovered_equipment_square:
 		_drop_item_on_equipment_slot(dropped_inv_item)
@@ -303,15 +316,19 @@ func _try_to_place_inventory_item_on_square(starting_square:InventorySquare, new
 func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	if lifted_inv_item and !override_inv_item: return
 	if !hovered_inv_item and !override_inv_item: return
-	shared_tooltip.hide()
 	
 	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item
+	
+	_change_inv_item_mousing(Control.MOUSE_FILTER_IGNORE)
 
 	lifted_inv_item.modulate.a = 0.65
 	lifted_inv_item.z_index = 2
+	
 	if items_in_inventory.has(lifted_inv_item):
 		old_square_before_lifting = items_in_inventory[lifted_inv_item]
+	elif items_equipped.keys().has(lifted_inv_item):
+		old_equipment_square_before_lifting = items_equipped[lifted_inv_item]
 
 	# Swapped items were already removed from the grid in _drop_item()
 	if items_equipped.keys().has(lifted_inv_item):
@@ -321,8 +338,6 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	elif !override_inv_item:
 		_remove_item_from_square(items_in_inventory[lifted_inv_item])
 
-	for inv_item:InventoryItem in items_in_inventory.keys():
-		inv_item.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_process(true)
 
 func _is_mouse_in_drop_position() -> bool:

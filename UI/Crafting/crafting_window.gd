@@ -9,7 +9,6 @@ enum CraftAction {REMOVE_RAND_AFF,REMOVE_SPEF_AFF, ADD_AFF, ADD_ILVL, ADD_MAX_AF
 @export var inventory_slot: InventorySlot = null
 @export var cpu_particles_2d: CPUParticles2D = null
 @export var button_container: HBoxContainer = null
-@export var x_button: XButton = null
 @export var disable_rect: ColorRect = null
 
 @export_category("Buttons")
@@ -135,7 +134,6 @@ func _connect_buttons() -> void:
 	inventory_slot.mouse_entered.connect(_equ_slot_hovered)
 	inventory_slot.mouse_exited.connect(_equ_slot_exited)
 	
-	x_button.x_pressed.connect(_close_crafting)
 	inventory_slot.item_placed.connect(set_equ)
 	inventory_slot.item_removed.connect(clear_equ)
 

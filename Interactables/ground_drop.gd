@@ -47,6 +47,7 @@ func interact() -> void:
 	var added:bool = player_inventory.add_item_to_inv(item_drop)
 	if !added:
 		GlobalSignals.play_audio.emit(loot_failed_sound, AudioManager.AUDIO_TYPE.UI, global_position)
+		await get_tree().create_timer(0.01).timeout
 		interact_complete.emit()
 		_bounce_item()
 		return

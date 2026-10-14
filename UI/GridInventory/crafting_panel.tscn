@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://cb54b7ildoebk"]
+
+[ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="1_0k1u6"]
+[ext_resource type="Script" uid="uid://bxx4qvol22jt3" path="res://Tile-RPG/UI/GridInventory/crafting_panel.gd" id="1_jsug2"]
+[ext_resource type="Shader" uid="uid://btrvf67l50axd" path="res://Tile-RPG/Shaders/texture_scale_shader.gdshader" id="2_1blo8"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_omb8f"]
+[ext_resource type="PackedScene" uid="uid://cetj0cajkm53b" path="res://Tile-RPG/UI/GridInventory/equipment_square.tscn" id="3_8lynh"]
+[ext_resource type="Texture2D" uid="uid://ca43mwb20mx0g" path="res://Tile-RPG/Images/UI/Borders/sharp_border3.png" id="4_htc0h"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="5_gctln"]
+[ext_resource type="Texture2D" uid="uid://ddjxrheusfbv3" path="res://Tile-RPG/Materials/Textures/gray-stone-512x512.png" id="6_lyqlw"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_1blo8"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="8_lyqlw"]
+[ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="9_b7aj3"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="9_nnx66"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="10_b7aj3"]
+[ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="11_3u46h"]
+[ext_resource type="Texture2D" uid="uid://dk44tml1036ue" path="res://Tile-RPG/Images/UI/Craft2.png" id="12_5iuvs"]
+[ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="13_5fv6l"]
+[ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="14_6yc5g"]
+[ext_resource type="Texture2D" uid="uid://tlfhj0clcf0o" path="res://Tile-RPG/Images/UI/Borders/detail_border2.png" id="18_3u46h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iuvs"]
+resource_local_to_scene = true
+shader = ExtResource("2_1blo8")
+shader_parameter/tiling_scale = 3.0000001392401203
+
+[sub_resource type="Gradient" id="Gradient_ua4u6"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fv6l"]
+gradient = SubResource("Gradient_ua4u6")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yc5g"]
+resource_local_to_scene = true
+shader = ExtResource("2_1blo8")
+shader_parameter/tiling_scale = 3.0000001392401203
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yai0h"]
+texture = ExtResource("8_lyqlw")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_udadm"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+
+[node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square")]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(425, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_jsug2")
+crafting_equipment_square = NodePath("VBoxContainer/CraftingEquipmentSquare")
+
+[node name="BgRect2" type="TextureRect" parent="." unique_id=1764796016]
+self_modulate = Color(0.49803922, 0.50980395, 0.5294118, 1)
+material = SubResource("ShaderMaterial_5iuvs")
+layout_mode = 2
+texture = ExtResource("1_0k1u6")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1926873058]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CraftingLabel" type="Label" parent="VBoxContainer" unique_id=313157009]
+layout_mode = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
+theme = ExtResource("2_omb8f")
+theme_override_font_sizes/font_size = 26
+text = "Crafting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CraftingEquipmentSquare" parent="VBoxContainer" unique_id=432069512 instance=ExtResource("3_8lynh")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+accepts_all_equipment = true
+equipment_slot = 1
+
+[node name="AffixPanel" type="PanelContainer" parent="VBoxContainer" unique_id=753532286]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(325, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/AffixPanel" unique_id=758820498]
+self_modulate = Color(1, 1, 1, 0.35686275)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.013, 1.01)
+texture = SubResource("GradientTexture2D_5fv6l")
+expand_mode = 1
+
+[node name="BgImage" type="TextureRect" parent="VBoxContainer/AffixPanel" unique_id=1216649001]
+self_modulate = Color(0.449575, 0.4459, 0.49, 1)
+material = SubResource("ShaderMaterial_6yc5g")
+layout_mode = 2
+texture = ExtResource("6_lyqlw")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AffixPanel" unique_id=1093067581]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/AffixPanel" unique_id=1970285573]
+self_modulate = Color(1, 1, 1, 0.14509805)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.966, 0.976)
+texture = ExtResource("7_1blo8")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="VBoxContainer/AffixPanel" unique_id=1039668881]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("5_gctln")
+region_rect = Rect2(6, 6, 501, 501)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="InnerCornerDarkRect" type="NinePatchRect" parent="VBoxContainer/AffixPanel" unique_id=1685623846]
+self_modulate = Color(1.1291975, 1.1291975, 1.1291975, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.993, 0.995)
+texture = ExtResource("9_b7aj3")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="ButtonsPanel" type="PanelContainer" parent="VBoxContainer" unique_id=1053261318]
+self_modulate = Color(1.0698581, 1.0698581, 1.0698581, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_yai0h")
+
+[node name="BgRect" type="TextureRect" parent="VBoxContainer/ButtonsPanel" unique_id=1541920932]
+self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+layout_mode = 2
+texture = ExtResource("9_nnx66")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ButtonsPanel" unique_id=1738380973]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_udadm")
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/ButtonsPanel/PanelContainer" unique_id=1447291403]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="RemButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1928547599 instance=ExtResource("10_b7aj3")]
+custom_minimum_size = Vector2(55, 55)
+layout_mode = 2
+button_image = ExtResource("11_3u46h")
+image_size = Vector2(40, 40)
+
+[node name="AddAButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=2087571673 instance=ExtResource("10_b7aj3")]
+custom_minimum_size = Vector2(55, 55)
+layout_mode = 2
+button_image = ExtResource("12_5iuvs")
+image_size = Vector2(40, 40)
+
+[node name="AddIButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1489669812 instance=ExtResource("10_b7aj3")]
+custom_minimum_size = Vector2(55, 55)
+layout_mode = 2
+button_image = ExtResource("13_5fv6l")
+image_size = Vector2(40, 40)
+
+[node name="AddMAButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1869712785 instance=ExtResource("10_b7aj3")]
+custom_minimum_size = Vector2(55, 55)
+layout_mode = 2
+button_image = ExtResource("14_6yc5g")
+image_size = Vector2(40, 40)
+
+[node name="DisableRect" type="ColorRect" parent="VBoxContainer/ButtonsPanel/PanelContainer" unique_id=1292039980]
+layout_mode = 2
+color = Color(0, 0, 0, 0.5254902)
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/ButtonsPanel" unique_id=1479796230]
+layout_mode = 2
+texture = ExtResource("7_1blo8")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CornerRect" type="NinePatchRect" parent="." unique_id=1043114166]
+self_modulate = Color(1.2064236, 1.2749454, 1.353256, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.2, 1.18)
+texture = ExtResource("4_htc0h")
+draw_center = false
+patch_margin_left = 45
+patch_margin_top = 55
+patch_margin_right = 45
+patch_margin_bottom = 55
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="." unique_id=742565874]
+self_modulate = Color(0.58932716, 0.59685564, 0.64579093, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.03, 1.07)
+texture = ExtResource("18_3u46h")
+patch_margin_left = 45
+patch_margin_top = 45
+patch_margin_right = 45
+patch_margin_bottom = 45
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

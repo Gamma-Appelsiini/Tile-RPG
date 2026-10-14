@@ -1,15 +1,17 @@
 extends PanelContainer
 class_name EquipmentSquare
 
+@export var accepts_all_equipment:bool = false
 @export var inventory_panel:InventoryPanel = null
 @export var equipment_slot:Equipment.EquipmentSlot = Equipment.EquipmentSlot.NECK
-@export var hover_image: TextureRect
+@export var hover_image: NinePatchRect
 @export var cant_place_rect: TextureRect
 @export var can_place_rect: TextureRect
 @export var nine_patch_rect: NinePatchRect
 @export var bg_image: TextureRect
 @export var nine_patch_rect_2: NinePatchRect
 @export var equipment_shadow: TextureRect
+@export var gradient_rect: TextureRect
 
 const SIZES_DICT:Dictionary[Equipment.EquipmentSlot, Vector2i] = {
 	Equipment.EquipmentSlot.MAIN_HAND: Vector2i(2,4),
@@ -54,11 +56,13 @@ var inventory_item_in_square:InventoryItem = null:
 		if !value:
 			nine_patch_rect.z_index = 0
 			nine_patch_rect_2.z_index = 0
+			gradient_rect.hide()
 			equipment_shadow.show()
 		else:
 			nine_patch_rect.z_index = 1
 			nine_patch_rect_2.z_index = 1
 			equipment_shadow.hide()
+			_set_gradient_color()
 			
 			if inventory_item_in_square.hover_image_rect: inventory_item_in_square.hover_image_rect.modulate.a = 0
 				
@@ -70,7 +74,7 @@ func _ready() -> void:
 	self.mouse_entered.connect(func():
 		if inventory_panel.lifted_inv_item:
 			if inventory_panel.lifted_inv_item.item is Equipment:
-				if inventory_panel.lifted_inv_item.item.equipment_slot != equipment_slot:
+				if !accepts_all_equipment and inventory_panel.lifted_inv_item.item.equipment_slot != equipment_slot:
 					cant_place_rect.show()
 				else: can_place_rect.show()
 			else: cant_place_rect.show()
@@ -83,10 +87,22 @@ func _ready() -> void:
 		)
 	_set_slot_size()
 
+func _set_gradient_color() -> void:
+	var color:Color = EnumStrings.RARITY_COLORS[inventory_item_in_square.item.item_rarity]
+	gradient_rect.texture.gradient.set_color(1, color)
+	var gradient_color2:Color = color
+	gradient_color2.a = 0
+	gradient_rect.texture.gradient.set_color(0, gradient_color2)
+	gradient_rect.show()
+
 func _set_slot_size() -> void:
 	var square_size:Vector2i = Vector2i(InventorySquare.SQUARE_SIZE * SIZES_DICT[equipment_slot].x, InventorySquare.SQUARE_SIZE * SIZES_DICT[equipment_slot].y)
 	bg_image.custom_maximum_size = square_size
 	bg_image.custom_minimum_size = square_size
+	hover_image.custom_maximum_size = Vector2(square_size.x - 2, square_size.y - 2)
+	hover_image.custom_minimum_size = Vector2(square_size.x - 2, square_size.y - 2)
 	
 	equipment_shadow.texture = IMAGES_DICT[equipment_slot]
 	equipment_shadow.material = EQUIPMENT_SHADOW_MATERIAL
+	gradient_rect.texture = gradient_rect.texture.duplicate(true)
+	gradient_rect.custom_minimum_size.y = square_size.y - (square_size.y / 2.0)
