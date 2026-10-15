@@ -69,7 +69,6 @@ var inventory_item_in_square:InventoryItem = null:
 			if not inventory_item_in_square.mouse_entered.is_connected(hover_image.show): inventory_item_in_square.mouse_entered.connect(hover_image.show)
 			if not inventory_item_in_square.mouse_exited.is_connected(hover_image.hide): inventory_item_in_square.mouse_exited.connect(hover_image.hide)
 
-
 func _ready() -> void:
 	self.mouse_entered.connect(func():
 		if inventory_panel.lifted_inv_item:

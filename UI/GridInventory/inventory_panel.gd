@@ -12,6 +12,7 @@ class_name InventoryPanel
 @export var skill_gem_amount_label: Label
 @export var crafting_ore_amount_label: Label
 @export var close_red_button: CloseButton
+@export var crafting_panel: CraftingPanel
 
 const ITEM_TOOLTIP := preload("uid://cnufbt7pmxsc2")
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
@@ -70,7 +71,7 @@ func _ready() -> void:
 	add_child(shared_tooltip)
 	_add_inv_squares()
 	await get_tree().process_frame
-	hide()
+	#hide()
 	
 	add_item_to_inv(ItemGenerator.get_equipment(0,4,2,Item.ItemRarity.EPIC))
 	while add_item_to_inv(ItemGenerator.get_equipment()):
@@ -185,7 +186,6 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 			_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
 		elif old_equipment_square_before_lifting:
 			_set_inv_item_on_equipment_square(dropped_inv_item, old_equipment_square_before_lifting)
-			GlobalSignals.player.equipment_handler.equip_item(dropped_equipment)
 		else:
 			print_debug("NO OLD INV OR EQU SQUARE")
 		lifted_inv_item = null
@@ -215,7 +215,6 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 		if !switched_inv_item: switched_inv_item = equipment_panel.hovered_equipment_square.inventory_item_in_square
 		_lift_up_item(switched_inv_item)
 
-	GlobalSignals.player.equipment_handler.equip_item(dropped_equipment)
 	_set_inv_item_on_equipment_square(dropped_inv_item, equipment_panel.hovered_equipment_square)
 	
 	if !switched_inv_item:
@@ -223,6 +222,11 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 		old_square_before_lifting = null
 
 func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipment_square:EquipmentSquare) -> void:
+	if crafting_panel:
+		if equipment_square == crafting_panel.crafting_equipment_square:
+			crafting_panel.set_inv_item_on_crafting_square(inv_item_to_equip)
+			return
+	
 	items_in_inventory.erase(inv_item_to_equip)
 	
 	items_equipped[inv_item_to_equip] = equipment_square
@@ -232,8 +236,14 @@ func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipmen
 	if equipment_square.size.x > inv_item_to_equip.size.x or equipment_square.size.y > inv_item_to_equip.size.y:
 		inv_item_to_equip.global_position += Vector2((equipment_square.size.x - inv_item_to_equip.size.x) / 2,
 		(equipment_square.size.y - inv_item_to_equip.size.y) / 2)
+		
+	GlobalSignals.player.equipment_handler.equip_item(inv_item_to_equip.item)
 
 func _change_inv_item_mousing(new_mouse_filter:MouseFilter) -> void:
+	for inv_item:InventoryItem in inventory_items:
+		inv_item.mouse_filter = new_mouse_filter
+	
+	return
 	for inv_item:InventoryItem in items_in_inventory.keys():
 		inv_item.mouse_filter = new_mouse_filter
 		
@@ -254,6 +264,15 @@ func _drop_item() -> void:
 	_change_inv_item_mousing(Control.MOUSE_FILTER_STOP)
 
 	var dropped_inv_item:InventoryItem = lifted_inv_item
+	
+	#Placing on crafting panel
+	if crafting_panel:
+		if crafting_panel.setting_on_crafting_square:
+			crafting_panel.set_inv_item_on_crafting_square(dropped_inv_item)
+			lifted_inv_item = null
+			old_square_before_lifting = null
+			return
+	
 	if _is_mouse_in_drop_position():
 		if _drop_item_on_ground(dropped_inv_item): return
 	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
@@ -284,8 +303,10 @@ func _drop_item() -> void:
 			_lift_up_item(switched_inv_item)
 			return
 
+	if old_equipment_square_before_lifting:
+		_set_inv_item_on_equipment_square(dropped_inv_item, old_equipment_square_before_lifting)
 	# No target, out of bounds, or multiple items in the way: place back on original spot
-	if !old_square_before_lifting or !_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item):
+	elif !old_square_before_lifting or !_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item):
 		_place_in_first_free_spot(dropped_inv_item)
 	
 	lifted_inv_item = null
@@ -331,7 +352,11 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 		old_equipment_square_before_lifting = items_equipped[lifted_inv_item]
 
 	# Swapped items were already removed from the grid in _drop_item()
-	if items_equipped.keys().has(lifted_inv_item):
+
+	#Try to lift from crafting panel first
+	if crafting_panel and crafting_panel.crafting_equipment_square.inventory_item_in_square == lifted_inv_item:
+		crafting_panel.remove_inv_item_on_crafting_square()
+	elif items_equipped.keys().has(lifted_inv_item):
 		GlobalSignals.player.equipment_handler.unequip_item(items_equipped[lifted_inv_item].equipment_slot)
 		items_equipped[lifted_inv_item].inventory_item_in_square = null
 		items_equipped.erase(lifted_inv_item)
@@ -341,8 +366,8 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	set_process(true)
 
 func _is_mouse_in_drop_position() -> bool:
-	#TODO Placing on crafting window
-	#if crafting_window_open: return false
+	if crafting_panel: if crafting_panel.visible: return false
+
 	const FROM_LEFT:float = 0.65
 	var viewport:Viewport = get_viewport()
 	var mouse_x:float = viewport.get_mouse_position().x
