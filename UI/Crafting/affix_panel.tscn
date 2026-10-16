@@ -1,33 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://du6la0lmqbrtj"]
+[gd_scene format=3 uid="uid://du6la0lmqbrtj"]
 
 [ext_resource type="Script" uid="uid://bvfjxupsc30vr" path="res://Tile-RPG/UI/Crafting/affix_panel.gd" id="1_p7pj2"]
+[ext_resource type="Shader" uid="uid://btrvf67l50axd" path="res://Tile-RPG/Shaders/texture_scale_shader.gdshader" id="2_f282e"]
 [ext_resource type="Texture2D" uid="uid://bg1c1s4alndjb" path="res://Tile-RPG/Images/UI/border_glow.png" id="2_pfas3"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_f282e"]
+[ext_resource type="FontFile" uid="uid://jcmjtwk2jmkr" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-Regular.ttf" id="5_juxj7"]
+[ext_resource type="Texture2D" uid="uid://b5iyc3tre021v" path="res://Tile-RPG/Images/UI/Borders/detail_border3.png" id="5_r0qji"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpfk5"]
-bg_color = Color(0.18359, 0.18359, 0.18359, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.605, 0.47308, 0.200005, 1)
+[sub_resource type="Gradient" id="Gradient_4uy8q"]
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0.67058825)
 
-[node name="AffixPanel" type="PanelContainer" node_paths=PackedStringArray("affix_text", "affix_name")]
-custom_minimum_size = Vector2(0, 60)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_juxj7"]
+gradient = SubResource("Gradient_4uy8q")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6mty"]
+shader = ExtResource("2_f282e")
+shader_parameter/tiling_scale = 2.0
+
+[node name="AffixPanel" type="PanelContainer" unique_id=600410156 node_paths=PackedStringArray("affix_text", "affix_name", "glow_effect", "corner_shadow")]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wpfk5")
 script = ExtResource("1_p7pj2")
-affix_text = NodePath("VBoxContainer/AffixText")
-affix_name = NodePath("VBoxContainer/AffixName")
+affix_text = NodePath("MarginContainer/VBoxContainer/AffixText")
+affix_name = NodePath("MarginContainer/VBoxContainer/AffixName")
+glow_effect = NodePath("GlowEffect")
+corner_shadow = NodePath("CornerShadow")
 
-[node name="GlowEffect" type="NinePatchRect" parent="."]
+[node name="Shadow" type="TextureRect" parent="." unique_id=1732518085]
+self_modulate = Color(1, 1, 1, 0.50980395)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+offset_transform_scale = Vector2(1.005, 1.05)
+texture = SubResource("GradientTexture2D_juxj7")
+expand_mode = 1
+
+[node name="BG" type="TextureRect" parent="." unique_id=776812155]
+material = SubResource("ShaderMaterial_p6mty")
+layout_mode = 2
+texture = ExtResource("3_f282e")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GlowEffect" type="NinePatchRect" parent="." unique_id=1176211273]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.99, 0.96)
 texture = ExtResource("2_pfas3")
 patch_margin_left = 18
 patch_margin_top = 18
@@ -36,34 +63,75 @@ patch_margin_bottom = 18
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1311700698]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=546430617]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 0
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1857733294]
 self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="AffixName" type="Label" parent="VBoxContainer"]
+[node name="AffixName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=282776624]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.955633, 0.378226, 0.248779, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.829125, 0.2475, 0.99, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.34117648)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("5_juxj7")
+theme_override_font_sizes/font_size = 8
 text = "Pyromaniacs"
 horizontal_alignment = 1
 vertical_alignment = 2
+uppercase = true
 
-[node name="AffixText" type="Label" parent="VBoxContainer"]
+[node name="AffixText" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1916754783]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.24313726, 1, 0.5803922, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Default Affix Text"
 horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=649874427]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="CornerShadow" type="NinePatchRect" parent="." unique_id=813194814]
+self_modulate = Color(0.13, 0.13, 0.13, 0.44705883)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.985, 0.9)
+texture = ExtResource("5_r0qji")
+draw_center = false
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CornerRect" type="NinePatchRect" parent="." unique_id=367410755]
+layout_mode = 2
+texture = ExtResource("5_r0qji")
+draw_center = false
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

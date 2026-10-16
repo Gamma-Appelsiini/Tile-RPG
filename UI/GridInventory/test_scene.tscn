@@ -26,11 +26,8 @@ crafting_panel = NodePath("../CraftingPanel")
 
 [node name="CraftingPanel" parent="." unique_id=1615179823 node_paths=PackedStringArray("inventory_panel") instance=ExtResource("2_i3n5w")]
 layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
+offset_left = -212.5
 offset_top = -314.5
-offset_right = 425.0
+offset_right = 212.5
 offset_bottom = 314.5
-grow_horizontal = 1
 inventory_panel = NodePath("../InventoryPanel")

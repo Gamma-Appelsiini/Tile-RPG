@@ -107,8 +107,7 @@ func _drop_item_on_ground(inv_item_to_drop:InventoryItem) -> bool:
 	new_ground_drop.global_position = GlobalSignals.player.global_position + Vector3(0,0.5,0)
 	new_ground_drop.shoot_rigidbody()
 	
-	lifted_inv_item = null
-	old_square_before_lifting = null
+	_clear_lifted_inv_item()
 	inv_item_to_drop.hide()
 	inv_item_to_drop.item = null
 	
@@ -168,8 +167,7 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 	#Not equipment
 	if dropped_inv_item.item is not Equipment:
 		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
-		lifted_inv_item = null
-		old_square_before_lifting = null
+		_clear_lifted_inv_item()
 		return
 	
 	var dropped_equipment:Equipment = dropped_inv_item.item as Equipment
@@ -188,8 +186,7 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 			_set_inv_item_on_equipment_square(dropped_inv_item, old_equipment_square_before_lifting)
 		else:
 			print_debug("NO OLD INV OR EQU SQUARE")
-		lifted_inv_item = null
-		old_square_before_lifting = null
+		_clear_lifted_inv_item()
 		return
 	#is it wep
 	if dropped_equipment is Weapon:
@@ -200,8 +197,7 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 			#2 handed while both taken, don't equip
 			elif off_hand_equipment and main_hand_equipment:
 				_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
-				lifted_inv_item = null
-				old_square_before_lifting = null
+				_clear_lifted_inv_item()
 				return
 	#If equipping shield while having 2 handed
 	elif dropped_equipment.equipment_slot == Equipment.EquipmentSlot.OFF_HAND:
@@ -217,9 +213,7 @@ func _drop_item_on_equipment_slot(dropped_inv_item:InventoryItem) -> void:
 
 	_set_inv_item_on_equipment_square(dropped_inv_item, equipment_panel.hovered_equipment_square)
 	
-	if !switched_inv_item:
-		lifted_inv_item = null
-		old_square_before_lifting = null
+	if !switched_inv_item: _clear_lifted_inv_item()
 
 func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipment_square:EquipmentSquare) -> void:
 	if crafting_panel:
@@ -242,15 +236,21 @@ func _set_inv_item_on_equipment_square(inv_item_to_equip:InventoryItem, equipmen
 func _change_inv_item_mousing(new_mouse_filter:MouseFilter) -> void:
 	for inv_item:InventoryItem in inventory_items:
 		inv_item.mouse_filter = new_mouse_filter
+
+func _drop_item_on_crafting_square(dropped_inv_item:InventoryItem) -> void:
+	if dropped_inv_item.item is not Equipment:
+		_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item)
+		_clear_lifted_inv_item()
+		return
 	
-	return
-	for inv_item:InventoryItem in items_in_inventory.keys():
-		inv_item.mouse_filter = new_mouse_filter
-		
-	for equipped_inv_item:InventoryItem in items_equipped.keys():
-		equipped_inv_item.mouse_filter = new_mouse_filter
-		
-	if lifted_inv_item: lifted_inv_item.mouse_filter = new_mouse_filter
+	var switched_inv_item:InventoryItem = crafting_panel.crafting_equipment_square.inventory_item_in_square
+	crafting_panel.set_inv_item_on_crafting_square(dropped_inv_item)
+	
+	if switched_inv_item:
+		_lift_up_item(switched_inv_item)
+		return
+	
+	_clear_lifted_inv_item()
 
 func _drop_item() -> void:
 	if !lifted_inv_item: return
@@ -262,31 +262,30 @@ func _drop_item() -> void:
 	
 	#Can mouse over items again
 	_change_inv_item_mousing(Control.MOUSE_FILTER_STOP)
-
 	var dropped_inv_item:InventoryItem = lifted_inv_item
 	
 	#Placing on crafting panel
 	if crafting_panel:
 		if crafting_panel.setting_on_crafting_square:
-			crafting_panel.set_inv_item_on_crafting_square(dropped_inv_item)
-			lifted_inv_item = null
-			old_square_before_lifting = null
+			_drop_item_on_crafting_square(dropped_inv_item)
 			return
 	
+	#Dropping out of inventory
 	if _is_mouse_in_drop_position():
 		if _drop_item_on_ground(dropped_inv_item): return
 	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	
+	#Placing on equipment slot
 	if equipment_panel.hovered_equipment_square:
 		_drop_item_on_equipment_slot(dropped_inv_item)
 		return
 	
 	var target_square:InventorySquare = hovered_square
 
+	#Placing on inventory square
 	if target_square:
 		if _try_to_place_inventory_item_on_square(target_square, dropped_inv_item):
-			lifted_inv_item = null
-			old_square_before_lifting = null
+			_clear_lifted_inv_item()
 			return
 
 		var items_in_squares:Array[InventoryItem] = []
@@ -303,14 +302,20 @@ func _drop_item() -> void:
 			_lift_up_item(switched_inv_item)
 			return
 
-	if old_equipment_square_before_lifting:
+	#Return back to where lifted
+	if old_equipment_square_before_lifting and !old_equipment_square_before_lifting.inventory_item_in_square:
 		_set_inv_item_on_equipment_square(dropped_inv_item, old_equipment_square_before_lifting)
 	# No target, out of bounds, or multiple items in the way: place back on original spot
 	elif !old_square_before_lifting or !_try_to_place_inventory_item_on_square(old_square_before_lifting, dropped_inv_item):
-		_place_in_first_free_spot(dropped_inv_item)
+		if !_place_in_first_free_spot(dropped_inv_item):
+			_drop_item_on_ground(dropped_inv_item)
 	
+	_clear_lifted_inv_item()
+
+func _clear_lifted_inv_item() -> void:
 	lifted_inv_item = null
 	old_square_before_lifting = null
+	old_equipment_square_before_lifting = null
 
 func _place_in_first_free_spot(inv_item:InventoryItem) -> bool:
 	for square:InventorySquare in squares_dict.values():

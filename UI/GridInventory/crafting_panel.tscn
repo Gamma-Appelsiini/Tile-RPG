@@ -64,7 +64,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_jsug2")
 crafting_equipment_square = NodePath("VBoxContainer/CraftingEquipmentSquare")
-affix_container = NodePath("VBoxContainer/AffixPanel/AffixContainer")
+affix_container = NodePath("VBoxContainer/AffixPanel/MarginContainer/AffixContainer")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=1764796016]
 self_modulate = Color(0.49803922, 0.50980395, 0.5294118, 1)
@@ -101,7 +101,8 @@ equipment_slot = 1
 
 [node name="AffixPanel" type="PanelContainer" parent="VBoxContainer" unique_id=753532286]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(325, 400)
+custom_minimum_size = Vector2(250, 400)
+custom_maximum_size = Vector2(250, 390)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -122,11 +123,16 @@ texture = ExtResource("6_lyqlw")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="AffixContainer" type="VBoxContainer" parent="VBoxContainer/AffixPanel" unique_id=1093067581]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/AffixPanel" unique_id=1481370183]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AffixContainer" type="VBoxContainer" parent="VBoxContainer/AffixPanel/MarginContainer" unique_id=1093067581]
+propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 20
-alignment = 1
+theme_override_constants/separation = 8
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/AffixPanel" unique_id=1970285573]
 self_modulate = Color(1, 1, 1, 0.14509805)
