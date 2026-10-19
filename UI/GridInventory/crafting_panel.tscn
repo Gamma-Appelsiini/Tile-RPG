@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_1blo8"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="8_lyqlw"]
 [ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="9_b7aj3"]
-[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="9_nnx66"]
 [ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="10_b7aj3"]
 [ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="11_3u46h"]
 [ext_resource type="Texture2D" uid="uid://dk44tml1036ue" path="res://Tile-RPG/Images/UI/Craft2.png" id="12_5iuvs"]
@@ -19,11 +18,22 @@
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="14_6yc5g"]
 [ext_resource type="Texture2D" uid="uid://tlfhj0clcf0o" path="res://Tile-RPG/Images/UI/Borders/detail_border2.png" id="18_3u46h"]
 [ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="19_lyqlw"]
+[ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="20_b7aj3"]
+[ext_resource type="PackedScene" uid="uid://mt0pu4wufb2e" path="res://Tile-RPG/UI/Menus/button_name_tooltip.tscn" id="20_nnx66"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5iuvs"]
 resource_local_to_scene = true
 shader = ExtResource("2_1blo8")
 shader_parameter/tiling_scale = 3.0000001392401203
+
+[sub_resource type="Gradient" id="Gradient_n5emr"]
+offsets = PackedFloat32Array(0, 0.99789476)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lyqlw"]
+gradient = SubResource("Gradient_n5emr")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.46438748)
 
 [sub_resource type="Gradient" id="Gradient_ua4u6"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -46,13 +56,19 @@ texture_margin_bottom = 7.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_udadm"]
-content_margin_top = 5.0
-content_margin_bottom = 5.0
+[sub_resource type="Curve" id="Curve_3u46h"]
+_limits = [0.0, 0.2, 0.0, 0.944664]
+_data = [Vector2(0, 0), 0.0, 0.30068958, 0, 0, Vector2(0.1549249, 0), 2.43687, 2.43687, 0, 0, Vector2(0.2852885, 0.02995263), 0.27854544, 0.27854544, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square", "affix_container")]
+[sub_resource type="Gradient" id="Gradient_5iuvs"]
+offsets = PackedFloat32Array(0, 0.20562771, 1)
+colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000001, 0, 0)
+
+[node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square", "affix_container", "disable_rect", "button_name_tool_tip", "cpu_particles_2d", "rem_button", "add_a_button", "add_i_button", "add_ma_button")]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(425, 500)
+custom_minimum_size = Vector2(425, 680)
+custom_maximum_size = Vector2(-1, 680)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -65,6 +81,13 @@ size_flags_vertical = 4
 script = ExtResource("1_jsug2")
 crafting_equipment_square = NodePath("VBoxContainer/CraftingEquipmentSquare")
 affix_container = NodePath("VBoxContainer/AffixPanel/MarginContainer/AffixContainer")
+disable_rect = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/DisableRect")
+button_name_tool_tip = NodePath("ButtonNameToolTip")
+cpu_particles_2d = NodePath("CPUParticles2D")
+rem_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/RemButton")
+add_a_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddAButton")
+add_i_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddIButton")
+add_ma_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddMAButton")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=1764796016]
 self_modulate = Color(0.49803922, 0.50980395, 0.5294118, 1)
@@ -74,13 +97,15 @@ texture = ExtResource("1_0k1u6")
 expand_mode = 1
 stretch_mode = 1
 
+[node name="DarkenRect" type="TextureRect" parent="." unique_id=1979677565]
+self_modulate = Color(1, 1, 1, 0.42745098)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lyqlw")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1926873058]
 layout_mode = 2
 theme_override_constants/separation = 12
-
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=2078087102]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
 
 [node name="CraftingLabel" type="Label" parent="VBoxContainer" unique_id=313157009]
 layout_mode = 2
@@ -101,8 +126,8 @@ equipment_slot = 1
 
 [node name="AffixPanel" type="PanelContainer" parent="VBoxContainer" unique_id=753532286]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(250, 400)
-custom_maximum_size = Vector2(250, 390)
+custom_minimum_size = Vector2(250, 315)
+custom_maximum_size = Vector2(250, 315)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -178,53 +203,68 @@ size_flags_horizontal = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_yai0h")
 
-[node name="BgRect" type="TextureRect" parent="VBoxContainer/ButtonsPanel" unique_id=1541920932]
-self_modulate = Color(0.735, 0.8697501, 0.98, 1)
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/ButtonsPanel" unique_id=1587373048]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
 layout_mode = 2
-texture = ExtResource("9_nnx66")
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 1)
+offset_transform_scale = Vector2(1.06, 1.3)
+texture = SubResource("GradientTexture2D_5fv6l")
+expand_mode = 1
+
+[node name="BgRect" type="TextureRect" parent="VBoxContainer/ButtonsPanel" unique_id=1541920932]
+self_modulate = Color(0.4509804, 0.44705883, 0.49019608, 1)
+layout_mode = 2
+texture = ExtResource("6_lyqlw")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ButtonsPanel" unique_id=1738380973]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxEmpty_udadm")
 
-[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/ButtonsPanel/PanelContainer" unique_id=1447291403]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ButtonsPanel/PanelContainer" unique_id=2052310864]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer" unique_id=1447291403]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1863051732]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1863051732]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="RemButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1928547599 instance=ExtResource("10_b7aj3")]
+[node name="RemButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1928547599 instance=ExtResource("10_b7aj3")]
 custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
 button_image = ExtResource("11_3u46h")
 image_size = Vector2(40, 40)
 
-[node name="AddAButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=2087571673 instance=ExtResource("10_b7aj3")]
+[node name="AddAButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=2087571673 instance=ExtResource("10_b7aj3")]
 custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
 button_image = ExtResource("12_5iuvs")
 image_size = Vector2(40, 40)
 
-[node name="AddIButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1489669812 instance=ExtResource("10_b7aj3")]
+[node name="AddIButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1489669812 instance=ExtResource("10_b7aj3")]
 custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
 button_image = ExtResource("13_5fv6l")
 image_size = Vector2(40, 40)
 
-[node name="AddMAButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1869712785 instance=ExtResource("10_b7aj3")]
+[node name="AddMAButton" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1869712785 instance=ExtResource("10_b7aj3")]
 custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
 button_image = ExtResource("14_6yc5g")
 image_size = Vector2(40, 40)
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ButtonsPanel/PanelContainer/ButtonContainer" unique_id=1277144015]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1277144015]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
@@ -233,6 +273,7 @@ layout_mode = 2
 color = Color(0, 0, 0, 0.5254902)
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/ButtonsPanel" unique_id=1479796230]
+self_modulate = Color(1, 1, 1, 0.54901963)
 layout_mode = 2
 texture = ExtResource("7_1blo8")
 patch_margin_left = 10
@@ -262,7 +303,7 @@ axis_stretch_vertical = 1
 self_modulate = Color(0, 0, 0, 0.31764707)
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_scale = Vector2(1.035, 1.065)
+offset_transform_scale = Vector2(1.035, 1.08)
 texture = ExtResource("18_3u46h")
 patch_margin_left = 45
 patch_margin_top = 45
@@ -275,7 +316,7 @@ axis_stretch_vertical = 2
 self_modulate = Color(0.58932716, 0.59685564, 0.64579093, 1)
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_scale = Vector2(1.048, 1.077)
+offset_transform_scale = Vector2(1.049, 1.088)
 texture = ExtResource("18_3u46h")
 patch_margin_left = 45
 patch_margin_top = 45
@@ -288,3 +329,41 @@ axis_stretch_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(10.5, -30)
+offset_transform_visual_only = false
+
+[node name="ButtonNameToolTip" parent="." unique_id=114877824 instance=ExtResource("20_nnx66")]
+layout_mode = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=450448604]
+top_level = true
+z_index = 4
+position = Vector2(204, 118)
+scale = Vector2(0.2, 0.2)
+emitting = false
+amount = 16
+texture = ExtResource("20_b7aj3")
+lifetime = 0.46
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+emission_shape = 3
+emission_rect_extents = Vector2(300, 300)
+direction = Vector2(0, 1)
+spread = 122.95
+initial_velocity_min = 296.53
+initial_velocity_max = 296.53
+angular_velocity_min = -229.33
+angular_velocity_max = 101.33
+radial_accel_min = -23.22
+radial_accel_max = 38.95
+angle_min = -323.6
+angle_max = 404.5
+scale_amount_min = 0.5
+scale_amount_max = 1.2
+scale_amount_curve = SubResource("Curve_3u46h")
+color_ramp = SubResource("Gradient_5iuvs")
+hue_variation_min = -0.58
+hue_variation_max = 0.55

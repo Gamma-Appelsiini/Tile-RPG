@@ -1,7 +1,12 @@
 extends VBoxContainer
 class_name ButtonNameTooltip
 
-@onready var ui_desc: Label = $PanelContainer/PanelContainer/VBoxContainer/UIDesc
+@export var ui_desc: Label
+@export var cost_container: HBoxContainer
+@export var cost_label: Label
+
+func _ready() -> void:
+	hidden.connect(cost_container.hide)
 
 func show_tooltip(text:String, ui_node:Control) -> void:
 	ui_desc.text = text

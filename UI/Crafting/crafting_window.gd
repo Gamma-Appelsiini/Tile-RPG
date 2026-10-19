@@ -26,6 +26,13 @@ var equ_tt:ItemTooltip = null
 var hovered_ap:AffixPanel = null
 var action:CraftAction = CraftAction.NOTHING
 
+var crafting_costs:Dictionary[CraftAction, int] = {
+	CraftAction.ADD_AFF: 1,
+	CraftAction.REMOVE_SPEF_AFF: 1,
+	CraftAction.ADD_ILVL: 1,
+	CraftAction.ADD_MAX_AFF: 1,
+}
+
 func _ready() -> void:
 	inventory_slot.item_image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	inventory_slot.array_pos = -2

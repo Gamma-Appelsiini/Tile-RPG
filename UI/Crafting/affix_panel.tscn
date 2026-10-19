@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="3_f282e"]
 [ext_resource type="FontFile" uid="uid://jcmjtwk2jmkr" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-Regular.ttf" id="5_juxj7"]
 [ext_resource type="Texture2D" uid="uid://b5iyc3tre021v" path="res://Tile-RPG/Images/UI/Borders/detail_border3.png" id="5_r0qji"]
+[ext_resource type="Texture2D" uid="uid://pn56hlyiv6wu" path="res://Tile-RPG/Images/UI/Borders/diamond_button2.png" id="7_r0qji"]
 
 [sub_resource type="Gradient" id="Gradient_4uy8q"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0.67058825)
@@ -18,20 +19,27 @@ fill_from = Vector2(1, 1)
 shader = ExtResource("2_f282e")
 shader_parameter/tiling_scale = 2.0
 
-[node name="AffixPanel" type="PanelContainer" unique_id=600410156 node_paths=PackedStringArray("affix_text", "affix_name", "glow_effect", "corner_shadow")]
+[node name="AffixPanel" type="PanelContainer" unique_id=600410156 node_paths=PackedStringArray("affix_text", "affix_name", "glow_effect", "corner_shadow", "right_diamond", "left_diamond")]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
+custom_minimum_size = Vector2(185, 0)
+custom_maximum_size = Vector2(-1, 185)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.5
+offset_right = 92.5
+offset_bottom = 40.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_visual_only = false
 script = ExtResource("1_p7pj2")
 affix_text = NodePath("MarginContainer/VBoxContainer/AffixText")
 affix_name = NodePath("MarginContainer/VBoxContainer/AffixName")
 glow_effect = NodePath("GlowEffect")
 corner_shadow = NodePath("CornerShadow")
+right_diamond = NodePath("RightDiamond")
+left_diamond = NodePath("LeftDiamond")
 
 [node name="Shadow" type="TextureRect" parent="." unique_id=1732518085]
 self_modulate = Color(1, 1, 1, 0.50980395)
@@ -39,12 +47,14 @@ layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(2, 2)
 offset_transform_scale = Vector2(1.005, 1.05)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_juxj7")
 expand_mode = 1
 
 [node name="BG" type="TextureRect" parent="." unique_id=776812155]
 material = SubResource("ShaderMaterial_p6mty")
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_f282e")
 expand_mode = 1
 stretch_mode = 1
@@ -52,9 +62,11 @@ stretch_mode = 1
 [node name="GlowEffect" type="NinePatchRect" parent="." unique_id=1176211273]
 unique_name_in_owner = true
 visible = false
+self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_scale = Vector2(0.99, 0.96)
+offset_transform_position = Vector2(0, 1)
+offset_transform_scale = Vector2(0.99, 0.95)
 texture = ExtResource("2_pfas3")
 patch_margin_left = 18
 patch_margin_top = 18
@@ -65,6 +77,7 @@ axis_stretch_vertical = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1311700698]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 25
@@ -76,14 +89,16 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1857733294]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AffixName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=282776624]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.829125, 0.2475, 0.99, 1)
+theme_override_colors/font_color = Color(1, 0.916, 0.27999997, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.34117648)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
@@ -107,9 +122,11 @@ text = "Default Affix Text"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=649874427]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CornerShadow" type="NinePatchRect" parent="." unique_id=813194814]
 self_modulate = Color(0.13, 0.13, 0.13, 0.44705883)
@@ -132,6 +149,35 @@ draw_center = false
 patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
-patch_margin_bottom = 5
+patch_margin_bottom = 3
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="RightDiamond" type="TextureProgressBar" parent="." unique_id=1163814906]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(12, 0)
+mouse_filter = 2
+value = 50.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_progress = ExtResource("7_r0qji")
+
+[node name="LeftDiamond" type="TextureProgressBar" parent="." unique_id=1777743703]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-12, 0)
+mouse_filter = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("7_r0qji")

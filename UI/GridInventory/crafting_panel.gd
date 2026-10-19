@@ -6,6 +6,21 @@ enum CraftAction {REMOVE_RAND_AFF,REMOVE_SPEF_AFF, ADD_AFF, ADD_ILVL, ADD_MAX_AF
 @export var inventory_panel:InventoryPanel = null
 @export var crafting_equipment_square: EquipmentSquare
 @export var affix_container: VBoxContainer
+@export var disable_rect: ColorRect
+@export var button_name_tool_tip: ButtonNameTooltip
+@export var cpu_particles_2d: CPUParticles2D
+
+@export_category("Buttons")
+@export var rem_button: ReusableButton
+@export var add_a_button: ReusableButton
+@export var add_i_button: ReusableButton
+@export var add_ma_button: ReusableButton
+
+@export_category("Sounds")
+@export var crafting_sound:AudioStream = null
+@export var remove_sound:AudioStream = null
+@export var error_sound:AudioStream = null
+
 
 const AFF_PAN_SCENE:PackedScene = preload("res://Tile-RPG/UI/Crafting/affix_panel.tscn")
 const AFFIX_PANEL := preload("uid://du6la0lmqbrtj")
@@ -17,16 +32,124 @@ var action:CraftAction = CraftAction.NOTHING
 var free_affix_panels:Array[AffixPanel] = []
 
 var setting_on_crafting_square:bool = false
+var crafting_costs:Dictionary[CraftAction, int] = {
+	CraftAction.ADD_AFF: 1,
+	CraftAction.REMOVE_SPEF_AFF: 1,
+	CraftAction.ADD_ILVL: 1,
+	CraftAction.ADD_MAX_AFF: 1,
+}
 
 func _ready() -> void:
+	set_process_input(false)
 	crafting_equipment_square.inventory_panel = inventory_panel
 	crafting_equipment_square.mouse_entered.connect(func(): setting_on_crafting_square = true)
 	crafting_equipment_square.mouse_exited.connect(func(): setting_on_crafting_square = false)
 	inventory_panel.hidden.connect(hide)
+	_connect_buttons()
 	
 	_add_affix_panels()
 	await get_tree().process_frame
+	cpu_particles_2d.global_position = crafting_equipment_square.global_position + Vector2(crafting_equipment_square.size.x/2, crafting_equipment_square.size.y/2)
 	#hide()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Left Click"):
+		_remove_affix()
+		set_process_input(false)
+	elif event.is_action_pressed("Right Click") or event.is_action_pressed("Esc"):
+		set_process_input(false)
+
+func _set_crafting_costs() -> void:
+	#TODO set cost values
+	button_name_tool_tip.cost_label.text = str(crafting_costs[action])
+	button_name_tool_tip.cost_container.show()
+
+func _add_affix() -> void:
+	if crafting_equipment == null: return
+	var cost:int = crafting_costs[action]
+	
+	#if GlobalSignals.ui_handler.inventory_panel.player_crafting_ore < cost:
+		##TODO error message
+		#GlobalSignals.play_audio.emit(error_sound, AudioManager.AUDIO_TYPE.UI)
+		#return
+	
+	var new_aff:Affix = crafting_equipment.add_affix()
+	if new_aff == null:
+		#TODO error message
+		GlobalSignals.play_audio.emit(error_sound, AudioManager.AUDIO_TYPE.UI)
+		return
+	
+	#GlobalSignals.ui_handler.inventory_panel.player_crafting_ore -= cost
+	GlobalSignals.play_audio.emit(crafting_sound, AudioManager.AUDIO_TYPE.UI)
+	cpu_particles_2d.emitting = true
+	crafting_equipment_square._set_gradient_color()
+	
+	_hide_affix_panels()
+	_add_equipment_affixes(crafting_equipment.prefixes)
+	_add_equipment_affixes(crafting_equipment.suffixes)
+
+func _remove_affix() -> void:
+	for ap:AffixPanel in affix_container.get_children():
+		ap.glow_effect.self_modulate = Color(1.0, 1.0, 1.0, 0.686)
+	
+	if crafting_equipment == null: return
+	if hovered_ap == null:
+		GlobalSignals.play_audio.emit(error_sound, AudioManager.AUDIO_TYPE.UI)
+		return
+		
+	var affix_panel_to_remove:AffixPanel = hovered_ap
+	hovered_ap = null
+	
+	var cost:int = crafting_costs[action]
+	GlobalSignals.play_audio.emit(remove_sound, AudioManager.AUDIO_TYPE.UI)
+	crafting_equipment.remove_affix(affix_panel_to_remove.affix)
+	crafting_equipment_square._set_gradient_color()
+	#GlobalSignals.ui_handler.inventory_panel.player_crafting_ore -= cost
+	
+	_animate_panels_under_removed(affix_panel_to_remove)
+	var tween:Tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(affix_panel_to_remove, "scale:y", 0.01, 0.3)
+	await tween.finished
+	
+	affix_panel_to_remove.hide()
+	affix_panel_to_remove.scale.y = 1
+	free_affix_panels.push_back(affix_panel_to_remove)
+	for ap:AffixPanel in affix_container.get_children(): ap.offset_transform_position.y = 0
+
+func _animate_panels_under_removed(removed_ap:AffixPanel) -> void:
+	var animate:bool = false
+	for ap:AffixPanel in affix_container.get_children():
+		if ap == removed_ap:
+			animate = true
+		elif animate:
+			var tween:Tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+			tween.tween_property(ap, "offset_transform_position:y", -ap.size.y + 8, 0.3)
+
+func _connect_buttons() -> void:
+	rem_button.texture_button.mouse_entered.connect(func():
+		action = CraftAction.REMOVE_SPEF_AFF
+		_set_crafting_costs()
+		button_name_tool_tip.show_tooltip("Remove Affix", rem_button)
+		)
+	rem_button.texture_button.mouse_exited.connect(button_name_tool_tip.hide)
+	rem_button.texture_button.pressed.connect(func():
+		for ap:AffixPanel in affix_container.get_children():
+			ap.glow_effect.self_modulate = Color(1.0, 0.01, 0.01, 1.0)
+		set_process_input(true)
+		)
+	
+	add_a_button.texture_button.mouse_entered.connect(func():
+		action = CraftAction.ADD_AFF
+		_set_crafting_costs()
+		button_name_tool_tip.show_tooltip("Add Affix", add_a_button))
+	add_a_button.texture_button.mouse_exited.connect(button_name_tool_tip.hide)
+	add_a_button.texture_button.pressed.connect(_add_affix)
+	
+	add_i_button.texture_button.mouse_entered.connect(button_name_tool_tip.show_tooltip.bind("Raise Item Lvl", add_i_button))
+	add_i_button.texture_button.mouse_exited.connect(button_name_tool_tip.hide)
+	
+	add_ma_button.texture_button.mouse_entered.connect(button_name_tool_tip.show_tooltip.bind("Raise Max Affix Count", add_ma_button))
+	add_ma_button.texture_button.mouse_exited.connect(button_name_tool_tip.hide)
 
 func _on_vis_changed() -> void:
 	if visible: return
@@ -38,13 +161,17 @@ func _on_vis_changed() -> void:
 	
 	remove_inv_item_on_crafting_square()
 
-func remove_inv_item_on_crafting_square() -> void:
-	crafting_equipment_square.inventory_item_in_square = null
-	crafting_equipment = null
-	
+func _hide_affix_panels() -> void:
 	for affix_panel:AffixPanel in affix_container.get_children():
 		affix_panel.hide()
 		free_affix_panels.push_back(affix_panel)
+
+func remove_inv_item_on_crafting_square() -> void:
+	crafting_equipment_square.inventory_item_in_square = null
+	crafting_equipment = null
+	disable_rect.show()
+	
+	_hide_affix_panels()
 
 func set_inv_item_on_crafting_square(inv_item_to_craft:InventoryItem) -> bool:
 	if inv_item_to_craft.item is not Equipment: return false
@@ -64,10 +191,11 @@ func set_inv_item_on_crafting_square(inv_item_to_craft:InventoryItem) -> bool:
 	inventory_panel.old_equipment_square_before_lifting = crafting_equipment_square
 	crafting_equipment = inv_item_to_craft.item as Equipment
 	
-	_add_equipment_affixes(crafting_equipment.prefixes)
-	_add_equipment_affixes(crafting_equipment.prefixes)
-	_add_equipment_affixes(crafting_equipment.suffixes)
-	_add_equipment_affixes(crafting_equipment.suffixes)
+	if crafting_equipment.item_rarity != Item.ItemRarity.FABLED:
+		_add_equipment_affixes(crafting_equipment.prefixes)
+		_add_equipment_affixes(crafting_equipment.suffixes)
+		disable_rect.hide()
+		
 	return true
 
 func _add_affix_panels() -> void:
@@ -76,6 +204,8 @@ func _add_affix_panels() -> void:
 		free_affix_panels.push_back(new_affix_panel)
 		new_affix_panel.hide()
 		affix_container.add_child(new_affix_panel)
+		new_affix_panel.mouse_entered.connect(func(): hovered_ap = new_affix_panel)
+		new_affix_panel.mouse_exited.connect(func(): hovered_ap = null)
 
 func _add_equipment_affixes(affixes:Array[Affix]) -> void:
 	for affix:Affix in affixes:
