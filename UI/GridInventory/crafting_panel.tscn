@@ -65,7 +65,7 @@ point_count = 4
 offsets = PackedFloat32Array(0, 0.20562771, 1)
 colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000001, 0, 0)
 
-[node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square", "affix_container", "disable_rect", "button_name_tool_tip", "cpu_particles_2d", "rem_button", "add_a_button", "add_i_button", "add_ma_button")]
+[node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square", "affix_container", "disable_rect", "button_name_tool_tip", "cpu_particles_2d", "rem_button", "add_a_button", "add_i_button", "add_ma_button", "close_red_button")]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(425, 680)
 custom_maximum_size = Vector2(-1, 680)
@@ -88,6 +88,7 @@ rem_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer
 add_a_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddAButton")
 add_i_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddIButton")
 add_ma_button = NodePath("VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddMAButton")
+close_red_button = NodePath("CloseRedButton")
 
 [node name="BgRect2" type="TextureRect" parent="." unique_id=1764796016]
 self_modulate = Color(0.49803922, 0.50980395, 0.5294118, 1)

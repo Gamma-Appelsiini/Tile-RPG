@@ -4,6 +4,7 @@ class_name ButtonNameTooltip
 @export var ui_desc: Label
 @export var cost_container: HBoxContainer
 @export var cost_label: Label
+@export var ore_pic_container: PanelContainer
 
 func _ready() -> void:
 	hidden.connect(cost_container.hide)

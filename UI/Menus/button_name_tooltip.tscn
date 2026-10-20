@@ -23,7 +23,7 @@ content_margin_top = 4.0
 content_margin_right = 12.0
 content_margin_bottom = 4.0
 
-[node name="ButtonNameToolTip" type="VBoxContainer" unique_id=114877824 node_paths=PackedStringArray("ui_desc", "cost_container", "cost_label")]
+[node name="ButtonNameToolTip" type="VBoxContainer" unique_id=114877824 node_paths=PackedStringArray("ui_desc", "cost_container", "cost_label", "ore_pic_container")]
 visible = false
 top_level = true
 anchors_preset = 8
@@ -44,6 +44,7 @@ script = ExtResource("1_r5mdw")
 ui_desc = NodePath("PanelContainer/MarginContainer/PanelContainer/VBoxContainer/UIDesc")
 cost_container = NodePath("PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer")
 cost_label = NodePath("PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer/CostLabel")
+ore_pic_container = NodePath("PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer/OrePicContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=280822527]
 layout_mode = 2
@@ -102,13 +103,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer" unique_id=1237388911]
+[node name="OrePicContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer" unique_id=1237388911]
 self_modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Shadow" type="TextureRect" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer/PanelContainer" unique_id=287709473]
+[node name="Shadow" type="TextureRect" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer/OrePicContainer" unique_id=287709473]
 self_modulate = Color(0, 0.39489168, 0.34475458, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
@@ -121,7 +122,7 @@ texture = ExtResource("5_o54hm")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="GemTextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer/PanelContainer" unique_id=1923998533]
+[node name="OreTextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer/OrePicContainer" unique_id=1923998533]
 self_modulate = Color(0, 1.362, 1.183, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
@@ -134,7 +135,7 @@ stretch_mode = 5
 [node name="CostLabel" type="Label" parent="PanelContainer/MarginContainer/PanelContainer/VBoxContainer/CostContainer" unique_id=123886623]
 layout_mode = 2
 theme = ExtResource("5_1pfsc")
-theme_override_colors/font_color = Color(0, 0.919, 0.799, 1)
+theme_override_colors/font_color = Color(0, 0.918, 0.8, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_c0ya6")
 theme_override_font_sizes/font_size = 14

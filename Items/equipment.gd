@@ -62,7 +62,7 @@ func increase_max_affixes() -> bool:
 	return true
 
 func increase_item_level() -> bool:
-	if item_level > original_item_level +1: return false
+	if item_level > original_item_level +3: return false
 	
 	item_level += 1
 	item_stats_changed.emit()
