@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://co5wvjxsb6eja"]
 
 [ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="1_ohsrt"]
-[ext_resource type="Texture2D" uid="uid://ctkfq28vwb3v2" path="res://Tile-RPG/Images/UI/Borders/sharp_border1.png" id="3_aqgfp"]
+[ext_resource type="Texture2D" uid="uid://3r7vb5mdvp0l" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim256.png" id="2_aqgfp"]
 [ext_resource type="Texture2D" uid="uid://ckinxcwmg4vsd" path="res://Tile-RPG/Images/UI/bux.png" id="4_xggts"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_qp8kv"]
 [ext_resource type="Texture2D" uid="uid://ce2p73o8e0pgq" path="res://Tile-RPG/Images/UI/soul_gem.png" id="6_an0hb"]
 [ext_resource type="Texture2D" uid="uid://3all0oyy2f5n" path="res://Tile-RPG/Images/UI/crafting_bar.png" id="6_aqgfp"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="7_an0hb"]
 
 [node name="CurrencyPanel" type="PanelContainer" unique_id=861710248]
 self_modulate = Color(1, 1, 1, 0)
@@ -21,14 +22,22 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="BGImage2" type="TextureRect" parent="." unique_id=1444608968]
+unique_name_in_owner = true
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+offset_transform_position = Vector2(0, 7)
+mouse_filter = 2
+texture = ExtResource("1_ohsrt")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="Shadow" type="NinePatchRect" parent="." unique_id=582737785]
 self_modulate = Color(0, 0, 0, 0.50980395)
-custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(2, 2)
-texture = ExtResource("3_aqgfp")
+offset_transform_scale = Vector2(1.015, 1.05)
+texture = ExtResource("2_aqgfp")
 patch_margin_left = 20
 patch_margin_top = 35
 patch_margin_right = 20
@@ -48,16 +57,6 @@ theme_override_constants/margin_bottom = 10
 self_modulate = Color(1, 1, 1, 0)
 custom_maximum_size = Vector2(-1, 34)
 layout_mode = 2
-
-[node name="BGImage2" type="TextureRect" parent="MarginContainer/PanelContainer" unique_id=1444608968]
-unique_name_in_owner = true
-self_modulate = Color(0.12, 0.12, 0.12, 1)
-layout_mode = 2
-offset_transform_position = Vector2(0, 7)
-mouse_filter = 2
-texture = ExtResource("1_ohsrt")
-expand_mode = 1
-stretch_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer" unique_id=385565538]
 custom_minimum_size = Vector2(255, 55)
@@ -145,15 +144,14 @@ text = "0"
 vertical_alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1394537129]
-self_modulate = Color(0.78, 0.7384, 0.70199996, 1)
-custom_minimum_size = Vector2(0, 70)
+self_modulate = Color(1, 0.99300003, 0.97, 1)
 layout_mode = 2
-size_flags_vertical = 4
-offset_transform_enabled = true
-texture = ExtResource("3_aqgfp")
-patch_margin_left = 20
-patch_margin_top = 35
-patch_margin_right = 20
-patch_margin_bottom = 35
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_an0hb")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2

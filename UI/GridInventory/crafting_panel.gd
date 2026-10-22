@@ -35,6 +35,7 @@ var action:CraftAction = CraftAction.NOTHING
 var free_affix_panels:Array[AffixPanel] = []
 var error:bool = false
 var not_enough_ore:bool = false
+var anvil:Anvil = null
 
 var setting_on_crafting_square:bool = false
 var crafting_costs:Dictionary[CraftAction, int] = {
@@ -52,11 +53,12 @@ func _ready() -> void:
 	inventory_panel.hidden.connect(hide)
 	visibility_changed.connect(_on_vis_changed)
 	_connect_buttons()
+	GlobalSignals.open_crafting.connect(show)
 	
 	_add_affix_panels()
 	await get_tree().process_frame
 	cpu_particles_2d.global_position = crafting_equipment_square.global_position + Vector2(crafting_equipment_square.size.x/2, crafting_equipment_square.size.y/2)
-	#hide()
+	hide()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"):
@@ -254,8 +256,14 @@ func _connect_buttons() -> void:
 	add_ma_button.texture_button.pressed.connect(_add_max_affix_count)
 
 func _on_vis_changed() -> void:
-	if visible: return
+	if visible:
+		inventory_panel.show()
+		return
 	
+	if anvil:
+		anvil.interact_complete.emit()
+		anvil = null
+
 	#Add item back to inv on close
 	if crafting_equipment_square.inventory_item_in_square:
 		if !inventory_panel._place_in_first_free_spot(crafting_equipment_square.inventory_item_in_square):

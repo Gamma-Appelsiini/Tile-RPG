@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8lvxyflk4ru8" path="res://Tile-RPG/UI/Inventory/inventory_slot.tscn" id="3_1iunn"]
 [ext_resource type="Texture2D" uid="uid://ca43mwb20mx0g" path="res://Tile-RPG/Images/UI/Borders/sharp_border3.png" id="3_10wou"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_ckoyc"]
+[ext_resource type="PackedScene" uid="uid://d227kb7bii1ko" path="res://Tile-RPG/UI/GridInventory/title_container.tscn" id="5_10wou"]
 [ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="5_fdih8"]
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_0md6y"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="6_d0je4"]
@@ -119,11 +120,11 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_dssmb")
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1001005783]
+[node name="TitleContainer" parent="PanelContainer/VBoxContainer" unique_id=66253800 instance=ExtResource("5_10wou")]
 layout_mode = 2
-theme = ExtResource("4_ckoyc")
+
+[node name="Label" parent="PanelContainer/VBoxContainer/TitleContainer/MarginContainer" parent_id_path=PackedInt32Array(66253800, 56589979) index="0" unique_id=1008513108]
 text = "Crafting"
-horizontal_alignment = 1
 
 [node name="InventorySlot" parent="PanelContainer/VBoxContainer" unique_id=835777164 instance=ExtResource("3_1iunn")]
 unique_name_in_owner = true
@@ -254,3 +255,5 @@ scale_amount_curve = SubResource("Curve_m03l5")
 color_ramp = SubResource("Gradient_ysrgi")
 hue_variation_min = -0.58
 hue_variation_max = 0.55
+
+[editable path="PanelContainer/VBoxContainer/TitleContainer"]

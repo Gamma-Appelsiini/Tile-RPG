@@ -71,7 +71,7 @@ func _ready() -> void:
 	add_child(shared_tooltip)
 	_add_inv_squares()
 	await get_tree().process_frame
-	#hide()
+	hide()
 	
 	add_item_to_inv(ItemGenerator.get_equipment(0,4,2,Item.ItemRarity.EPIC))
 	while add_item_to_inv(ItemGenerator.get_equipment()):
@@ -93,6 +93,9 @@ func _on_vis_changed() -> void:
 		set_process_input(true)
 		return
 	
+	if crafting_panel.visible:
+		crafting_panel.hide()
+		
 	if lifted_inv_item: _drop_item_on_ground(lifted_inv_item)
 	set_process(false)
 	set_process_input(false)
@@ -258,7 +261,7 @@ func _drop_item() -> void:
 	set_process(false)
 	_clear_lifted_item_indicators()
 	lifted_inv_item.modulate.a = 1
-	lifted_inv_item.z_index = 0
+	lifted_inv_item.z_index = 1
 	
 	#Can mouse over items again
 	_change_inv_item_mousing(Control.MOUSE_FILTER_STOP)

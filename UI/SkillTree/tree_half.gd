@@ -132,7 +132,7 @@ func _mouse_released() -> void:
 
 func _on_skill_learned() -> void:
 	if !hovered_orb: return
-	if GlobalSignals.ui_handler.inventory.player_skill_points <= 0: return
+	if GlobalSignals.ui_handler.inventory_panel.player_skill_points <= 0: return
 	
 	hovered_orb.learn_skill()
 	skill_tooltip.set_process(false)

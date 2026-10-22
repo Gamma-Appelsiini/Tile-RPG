@@ -61,7 +61,7 @@ func _set_learn_label_text(new_skill:SkillResource) -> void:
 	
 	if new_skill.learned:
 		learn_label.text = "Learned"
-	elif GlobalSignals.ui_handler.inventory.player_skill_points <= 0:
+	elif GlobalSignals.ui_handler.inventory_panel.player_skill_points <= 0:
 		learn_label.text = "Not enough Skill Points"
 	elif _skills_needed_to_learn(new_skill) > 0:
 		learn_label.text = str(_skills_needed_to_learn(new_skill)) + " more Skills in current tree required to learn"

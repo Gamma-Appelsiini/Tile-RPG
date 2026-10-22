@@ -107,7 +107,7 @@ func _reset_scene() -> void:
 	skill_tree_sphere.reset_sphere()
 
 func _handle_start_without_gems() -> bool:
-	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
+	if GlobalSignals.ui_handler.inventory_panel.player_skill_gems > 0:
 		return false
 
 	eater_model.hide()
@@ -194,8 +194,8 @@ func _throw_gem() -> void:
 	_eat_gem(thrown_gem)
 
 func _eat_gem(thrown_gem:Node3D) -> void:
-	GlobalSignals.ui_handler.inventory.player_skill_gems -= 1
-	GlobalSignals.ui_handler.inventory.player_skill_points += 1
+	GlobalSignals.ui_handler.inventory_panel.player_skill_gems -= 1
+	GlobalSignals.ui_handler.inventory_panel.player_skill_points += 1
 	
 	eater_model.play_unique_animation("eat")
 	eater_model.stop_looking_at_target()
@@ -206,7 +206,7 @@ func _eat_gem(thrown_gem:Node3D) -> void:
 	_is_out_of_gems()
 
 func _is_out_of_gems() -> void:
-	if GlobalSignals.ui_handler.inventory.player_skill_gems > 0:
+	if GlobalSignals.ui_handler.inventory_panel.player_skill_gems > 0:
 		feeding_disabled = false
 		return
 	

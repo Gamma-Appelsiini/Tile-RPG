@@ -14,8 +14,8 @@ class_name UIHandler
 @export var loading_screen: LoadingScreen = null
 @export var start_menu: StartMenu = null
 @export var loot_window: LootWindow = null
-@export var crafting_window: CraftingWindow = null
 @export var black_screen: ColorRect = null
+@export var crafting_panel: CraftingPanel
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 const DAMAGE_NUMBER = preload("uid://dac2s2r20qif4")
@@ -54,8 +54,8 @@ func _input(event: InputEvent) -> void:
 
 func _handle_esc() -> void:
 	if main_menu.visible: _toggle_menu()
-	elif stat_window.visible or inventory_panel.visible or shop_window.visible or abilities_container.visible or loot_window.visible or crafting_window.visible:
-		if crafting_window.visible: crafting_window._close_crafting()
+	elif stat_window.visible or inventory_panel.visible or shop_window.visible or abilities_container.visible or loot_window.visible or crafting_panel.visible:
+		if crafting_panel.visible: crafting_panel.hide()
 		stat_window.hide()
 		inventory_panel.hide()
 		shop_window.hide()

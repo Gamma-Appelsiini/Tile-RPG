@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfxc2i7p6w3ay"
-path="res://.godot/imported/BorderWood2.png-0e71c840233e540d75a9e4b4a81e3001.ctex"
+uid="uid://drcedgqjk6ocq"
+path="res://.godot/imported/blank_borders.png-c47653eafa24e344bad473d7ccb930e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile-RPG/Images/UI/Borders/BorderWood2.png"
-dest_files=["res://.godot/imported/BorderWood2.png-0e71c840233e540d75a9e4b4a81e3001.ctex"]
+source_file="res://Tile-RPG/Images/UI/Borders/blank_borders.png"
+dest_files=["res://.godot/imported/blank_borders.png-c47653eafa24e344bad473d7ccb930e0.ctex"]
 
 [params]
 

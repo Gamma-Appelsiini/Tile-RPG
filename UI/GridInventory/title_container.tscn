@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://d227kb7bii1ko"]
+
+[ext_resource type="Shader" uid="uid://btrvf67l50axd" path="res://Tile-RPG/Shaders/texture_scale_shader.gdshader" id="1_ey8b8"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_ercek"]
+[ext_resource type="Texture2D" uid="uid://is2yer6sibrj" path="res://Tile-RPG/Images/UI/SlotBG2.png" id="2_ey8b8"]
+[ext_resource type="Texture2D" uid="uid://hscialsfh06t" path="res://Tile-RPG/Images/UI/Borders/style_border_metal.png" id="5_o5mnx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4tw2"]
+shader = ExtResource("1_ey8b8")
+shader_parameter/tiling_scale = 3.23900015059262
+
+[node name="TitleContainer" type="PanelContainer" unique_id=66253800]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1040878515]
+layout_mode = 2
+
+[node name="BG" type="TextureRect" parent="CenterContainer" unique_id=1598838232]
+material = SubResource("ShaderMaterial_a4tw2")
+custom_minimum_size = Vector2(275, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_ey8b8")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=56589979]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1008513108]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -1)
+theme = ExtResource("2_ercek")
+theme_override_font_sizes/font_size = 26
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Corners" type="TextureRect" parent="." unique_id=1245429002]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+texture = ExtResource("5_o5mnx")
+expand_mode = 1
+
+[node name="Shadown" type="TextureRect" parent="." unique_id=1095385335]
+self_modulate = Color(0.1, 0.1, 0.1, 0.4392157)
+show_behind_parent = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 0.5)
+offset_transform_scale = Vector2(1.015, 1.05)
+texture = ExtResource("5_o5mnx")
+expand_mode = 1

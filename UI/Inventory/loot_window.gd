@@ -11,7 +11,6 @@ class_name LootWindow
 
 const LOOT_SIZE:int = 10
 const INV_SLOT_SCENE:PackedScene = preload("res://Tile-RPG/UI/Inventory/inventory_slot.tscn")
-const BORDER_TEXTURES:Dictionary[LootContainer.ContainerStyle, Texture2D] = {LootContainer.ContainerStyle.WOOD: preload("uid://dfxc2i7p6w3ay")}
 
 var style_dict:Dictionary[LootContainer.ContainerStyle, TextureRect] = {}
 var loot_window_slots:Array[InventorySlot] = []
@@ -62,7 +61,6 @@ func add_container(container:LootContainer) -> void:
 	self.visible = true
 	player_inventory.visible = true
 	
-	_set_panel_borders(container.container_style)
 	_show_style_bg(container.container_style)
 
 func _add_item(item:Item) -> void:
@@ -91,7 +89,3 @@ func _show_style_bg(style:LootContainer.ContainerStyle) -> void:
 	for key:LootContainer.ContainerStyle in style_dict.keys():
 		if key == style: style_dict[key].show()
 		else: style_dict[key].hide()
-
-func _set_panel_borders(style:LootContainer.ContainerStyle):
-	var stylebox: StyleBoxTexture = panel_container.get_theme_stylebox("panel")
-	stylebox.texture = BORDER_TEXTURES[style]

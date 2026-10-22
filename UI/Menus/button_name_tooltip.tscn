@@ -26,6 +26,7 @@ content_margin_bottom = 4.0
 [node name="ButtonNameToolTip" type="VBoxContainer" unique_id=114877824 node_paths=PackedStringArray("ui_desc", "cost_container", "cost_label", "ore_pic_container")]
 visible = false
 top_level = true
+z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

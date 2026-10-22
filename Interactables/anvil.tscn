@@ -63,6 +63,7 @@ interact_animation = 18
 metadata/_custom_type_script = "uid://dgcve45y3uah7"
 
 [node name="AnvilMesh" type="MeshInstance3D" parent="." unique_id=1502768235]
+lod_bias = 6.176
 mesh = SubResource("ArrayMesh_w1ksw")
 skeleton = NodePath("")
 
