@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://drhisncpw1b5d" path="res://Tile-RPG/Interactables/Doors/wood_door.tscn" id="3_r4bqj"]
 [ext_resource type="Script" uid="uid://chv46rdn2gkni" path="res://Tile-RPG/Levels/tile_manager.gd" id="3_rm3p6"]
 [ext_resource type="Material" uid="uid://dbiyoxw5ohfy7" path="res://Tile-RPG/Materials/TextureMaterials/unshaded_black.tres" id="4_4x7po"]
+[ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_l8lef"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="4_r2niu"]
 [ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="5_r4bqj"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="7_l0bih"]
@@ -36,6 +37,14 @@ enviroment_handler = NodePath("JailStartEnviroment")
 
 [node name="Anvil" parent="Interactables" unique_id=563338212 instance=ExtResource("3_fjhd3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="Chest" parent="Interactables" unique_id=623564092 instance=ExtResource("4_l8lef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+items_to_generate = Dictionary[int, int]({
+0: 0,
+2: 0,
+7: 1
+})
 
 [node name="Breakables" type="Node3D" parent="." unique_id=1785823029]
 

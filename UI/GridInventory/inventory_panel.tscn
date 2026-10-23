@@ -60,7 +60,7 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_myc3p")
-inv_square_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/InvSquareContainer")
+inv_square_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventorySquaresContainer/InvSquareContainer")
 equipment_panel = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/EquipmentPanel")
 currency_amount_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer/CurrencyAmountLabel")
 skill_gem_amount_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CurrencyPanel/MarginContainer/PanelContainer/HBoxContainer/HBoxContainer2/SoulGemAmountLabel")
@@ -151,7 +151,7 @@ size_flags_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=794896025]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(545, 745)
+custom_minimum_size = Vector2(560, 745)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -224,11 +224,11 @@ alignment = 1
 layout_mode = 2
 inventory_panel = NodePath("../../../../../..")
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=999601887]
+[node name="InventorySquaresContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=999601887]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1433822094]
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventorySquaresContainer" unique_id=1433822094]
 self_modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
 offset_transform_enabled = true
@@ -237,13 +237,13 @@ offset_transform_scale = Vector2(1.007, 1)
 texture = SubResource("GradientTexture2D_n5pry")
 expand_mode = 1
 
-[node name="InvSquareContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1234750634]
+[node name="InvSquareContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventorySquaresContainer" unique_id=1234750634]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 10
 
-[node name="InvGridCornerRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1163464751]
+[node name="InvGridCornerRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventorySquaresContainer" unique_id=1163464751]
 self_modulate = Color(3.7045925, 3.7045925, 3.7045925, 1)
 layout_mode = 2
 offset_transform_enabled = true

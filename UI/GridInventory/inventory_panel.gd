@@ -27,6 +27,12 @@ var hovered_inv_item:InventoryItem = null:
 		if !value: shared_tooltip.hide()
 		_show_tooltip(hovered_inv_item)
 
+#For shop
+var shop_panel:ShopPanel = null
+var shop_items:Array[InventoryItem] = []
+var shop_inventory_items:Array[InventoryItem] = []
+var shop_squares_dict:Dictionary[Vector2i, InventorySquare] = {}
+
 var inventory_items:Array[InventoryItem] = []
 var squares_dict:Dictionary[Vector2i, InventorySquare] = {}
 var items_in_inventory:Dictionary[InventoryItem, InventorySquare] = {}
@@ -107,7 +113,7 @@ func _drop_item_on_ground(inv_item_to_drop:InventoryItem) -> bool:
 	var new_ground_drop:GroundDrop = GROUND_DROP.instantiate()
 	new_ground_drop.set_item(selected_item)
 	GlobalSignals.current_level.add_child(new_ground_drop)
-	new_ground_drop.global_position = GlobalSignals.player.global_position + Vector3(0,0.5,0)
+	new_ground_drop.global_position = GlobalSignals.player.char_model_handler.character_mesh.global_position + (GlobalSignals.player.char_model_handler.character_mesh.global_basis.z * 0.5) + Vector3(0,0.5,0)
 	new_ground_drop.shoot_rigidbody()
 	
 	_clear_lifted_inv_item()

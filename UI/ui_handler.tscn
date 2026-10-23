@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cmjamn0h0y14r" path="res://Tile-RPG/UI/Dialogue/dialogue_window.tscn" id="4_pta8b"]
 [ext_resource type="PackedScene" uid="uid://bv3gawru3wf3h" path="res://Tile-RPG/UI/GridInventory/inventory_panel.tscn" id="5_kjs8x"]
 [ext_resource type="PackedScene" uid="uid://cgycswqthcl8v" path="res://Tile-RPG/UI/StatWindow/stat_window.tscn" id="6_4p5fd"]
-[ext_resource type="PackedScene" uid="uid://di1h35368wxtx" path="res://Tile-RPG/UI/Inventory/loot_window.tscn" id="7_coc15"]
 [ext_resource type="PackedScene" uid="uid://cb54b7ildoebk" path="res://Tile-RPG/UI/GridInventory/crafting_panel.tscn" id="8_kjs8x"]
 [ext_resource type="PackedScene" uid="uid://cp3lhfafyqjva" path="res://Tile-RPG/UI/Abilities/abilities_container.tscn" id="8_xlwbf"]
 [ext_resource type="PackedScene" uid="uid://dqq3ue4ejaios" path="res://Tile-RPG/UI/CharacterResources/Combat/combat_ui.tscn" id="9_dra2u"]
@@ -15,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cq63aydedr4fm" path="res://Tile-RPG/UI/Menus/main_menu.tscn" id="12_r4noa"]
 [ext_resource type="PackedScene" uid="uid://bhya384vo3b7b" path="res://Tile-RPG/UI/Menus/loading_screen.tscn" id="14_24ytg"]
 
-[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory_panel", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "loot_window", "black_screen", "crafting_panel")]
+[node name="UiHandler" type="Control" unique_id=1999009851 node_paths=PackedStringArray("inventory_panel", "globe_ui", "stat_window", "dialogue_window", "ability_bar", "abilities_container", "combat_ui", "menu_buttons", "shop_window", "main_menu", "loading_screen", "black_screen", "crafting_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +34,6 @@ menu_buttons = NodePath("MenuButtons")
 shop_window = NodePath("ShopWindow")
 main_menu = NodePath("MainMenu")
 loading_screen = NodePath("LoadingScreen")
-loot_window = NodePath("LootWindow")
 black_screen = NodePath("BlackScreen")
 crafting_panel = NodePath("CraftingPanel")
 
@@ -77,10 +75,6 @@ offset_bottom = 860.0
 grow_horizontal = 1
 grow_vertical = 1
 inventory_panel = NodePath("../InventoryPanel")
-
-[node name="LootWindow" parent="." unique_id=370299907 instance=ExtResource("7_coc15")]
-visible = false
-layout_mode = 1
 
 [node name="CombatUI" parent="." unique_id=635224778 instance=ExtResource("9_dra2u")]
 visible = false

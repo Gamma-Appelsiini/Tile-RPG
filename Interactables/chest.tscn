@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://ciibj20uwiqwu"]
 
 [ext_resource type="Script" uid="uid://bm3xstpfnu02l" path="res://Tile-RPG/Interactables/chest.gd" id="1_vugoh"]
-[ext_resource type="Texture2D" uid="uid://cnjp47v04w6lp" path="res://Tile-RPG/Images/Icons/Chest.png" id="2_lcgj3"]
 [ext_resource type="PackedScene" uid="uid://b7atv28wtwkd3" path="res://Tile-RPG/Models/Interactables/new_chest.glb" id="2_pipw1"]
 [ext_resource type="Script" uid="uid://g6rood38j5ok" path="res://Tile-RPG/Handlers/Outline/outline_handler.gd" id="4_15uek"]
-[ext_resource type="PackedScene" uid="uid://cmgb3ivkgrbqb" path="res://Tile-RPG/Effects/loot_beam/loot_beam.tscn" id="5_evfjl"]
+[ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="4_evfjl"]
+[ext_resource type="Gradient" uid="uid://l2qcvvkjwb5d" path="res://Tile-RPG/Interactables/loot_gradient.tres" id="4_kr0il"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vugoh"]
 size = Vector3(0.499878, 0.346558, 0.462891)
@@ -12,15 +12,60 @@ size = Vector3(0.499878, 0.346558, 0.462891)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pipw1"]
 size = Vector3(0.5, 0.423828, 0.351318)
 
-[node name="Chest" type="Node3D" unique_id=623564092 node_paths=PackedStringArray("animation_player", "loot_beam", "interact_area", "indicator_place")]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vgi3m"]
+gradient = ExtResource("4_kr0il")
+
+[sub_resource type="Curve" id="Curve_1g0in"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14285713, 1), 0.0, 0.0, 0, 0, Vector2(0.34693873, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_l1mr3"]
+curve = SubResource("Curve_1g0in")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaqtt"]
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(0.15, 0.15, 0.15)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+spread = 25.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -6, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_l1mr3")
+color_ramp = SubResource("GradientTexture1D_vgi3m")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.009999977
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx7wl"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_evfjl")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sqolj"]
+material = SubResource("StandardMaterial3D_hx7wl")
+size = Vector2(0.1, 0.1)
+
+[node name="Chest" type="Node3D" unique_id=623564092 node_paths=PackedStringArray("animation_player", "shoot_position", "shoot_target", "gpu_particles_3d", "interact_area", "indicator_place")]
 script = ExtResource("1_vugoh")
-container_image = ExtResource("2_lcgj3")
 animation_player = NodePath("new_chest/AnimationPlayer")
-loot_beam = NodePath("LootBeam")
+shoot_position = NodePath("ShootPosition")
+shoot_target = NodePath("ShootTarget")
+gpu_particles_3d = NodePath("GPUParticles3D")
 disable_movement = true
 interact_area = NodePath("Area3D")
 indicator_place = NodePath("IndicatorPlace")
 interact_text = "Open"
+oneshot = true
 face_interactable = true
 interact_animation = 18
 
@@ -60,7 +105,22 @@ script = ExtResource("4_15uek")
 mesh_to_outline = NodePath("../new_chest/Armature/Skeleton3D/Lid/Lid")
 metadata/_custom_type_script = "uid://g6rood38j5ok"
 
-[node name="LootBeam" parent="." unique_id=1385251438 instance=ExtResource("5_evfjl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10354106, 0)
+[node name="ShootPosition" type="Node3D" parent="." unique_id=1909993116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42866266, 0)
+
+[node name="ShootTarget" type="Node3D" parent="." unique_id=221822031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63621306, 0.4141295)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=514346422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3239746, 0.0233562)
+emitting = false
+amount = 24
+lifetime = 1.8
+one_shot = true
+explosiveness = 0.87
+randomness = 0.2
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_eaqtt")
+draw_pass_1 = SubResource("QuadMesh_sqolj")
 
 [editable path="new_chest"]

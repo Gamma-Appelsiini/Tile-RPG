@@ -12,7 +12,6 @@ class_name LootWindow
 const LOOT_SIZE:int = 10
 const INV_SLOT_SCENE:PackedScene = preload("res://Tile-RPG/UI/Inventory/inventory_slot.tscn")
 
-var style_dict:Dictionary[LootContainer.ContainerStyle, TextureRect] = {}
 var loot_window_slots:Array[InventorySlot] = []
 var loot_container:LootContainer = null
 
@@ -20,7 +19,6 @@ func _ready() -> void:
 	_add_slots()
 	GlobalSignals.show_container.connect(add_container)
 	x_button.x_pressed.connect(_close_window)
-	style_dict[LootContainer.ContainerStyle.WOOD] = wood_bg
 
 func _connect_slots() -> void:
 	for container_slot:InventorySlot in loot_window_slots:
@@ -61,7 +59,6 @@ func add_container(container:LootContainer) -> void:
 	self.visible = true
 	player_inventory.visible = true
 	
-	_show_style_bg(container.container_style)
 
 func _add_item(item:Item) -> void:
 	for slot:InventorySlot in loot_window_slots:
@@ -84,8 +81,3 @@ func _close_window() -> void:
 	player_inventory.visible = false
 	_clear_container()
 	GlobalSignals.close_container.emit(loot_container)
-
-func _show_style_bg(style:LootContainer.ContainerStyle) -> void:
-	for key:LootContainer.ContainerStyle in style_dict.keys():
-		if key == style: style_dict[key].show()
-		else: style_dict[key].hide()

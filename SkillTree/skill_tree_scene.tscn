@@ -133,6 +133,7 @@ fov = 50.0
 light_color = Color(0.9484076, 0.9629324, 0.9948948, 1)
 light_energy = 0.8
 light_cull_mask = 4294950911
+shadow_enabled = true
 
 [node name="EaterModel" parent="." unique_id=1854922571 instance=ExtResource("5_h3wmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.9)
@@ -185,6 +186,7 @@ material = SubResource("FogMaterial_eaqtt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=406066322]
 light_energy = 0.13
+shadow_enabled = true
 sky_mode = 1
 
 [node name="SkillTreeSphere" parent="." unique_id=869234759 instance=ExtResource("11_kwhhi")]

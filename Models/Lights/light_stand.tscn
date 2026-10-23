@@ -117,6 +117,7 @@ radius = 0.1
 [node name="LightStand" type="Node3D" unique_id=173139772]
 
 [node name="Stand" type="MeshInstance3D" parent="." unique_id=1550181358]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_ueejd")
 skeleton = NodePath("")
 

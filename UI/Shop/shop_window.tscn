@@ -101,8 +101,8 @@ layout_mode = 2
 columns = 4
 
 [node name="SellContainer" type="PanelContainer" parent="PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1477973518]
-clip_contents = true
 custom_minimum_size = Vector2(200, 200)
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("2_l02y0")

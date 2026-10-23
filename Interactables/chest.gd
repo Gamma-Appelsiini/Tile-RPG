@@ -1,21 +1,23 @@
 extends Interactable
 class_name LootContainer
 
-enum ContainerStyle {WOOD}
-
+@export_category("Loot Generation")
 @export var chest_lvl:int = -1
 @export var max_tier:int = -1
-@export var container_style:ContainerStyle = ContainerStyle.WOOD
 @export var items_to_generate:Dictionary[Item.ItemRarity, ItemGenerator.LOOT_TYPE]
 @export var abilities_to_add:Array[String] = []
-@export var container_name:String = "Chest"
-@export var container_image:Texture2D = null
+
+@export_category("Nodes")
 @export var animation_player:AnimationPlayer = null
-@export var loot_beam:LootBeam = null
+@export var shoot_position: Node3D
+@export var shoot_target: Node3D
+@export var gpu_particles_3d: GPUParticles3D
 
 const OPEN_ANIM_NAME:String = "Open"
 const CLOSE_ANIM_NAME:String = "Close"
 const CONTAINER_SIZE:int = 10
+const GROUND_DROP := preload("uid://cuocgxmrrsjwt")
+const LOOT_GRADIENT:Gradient = preload("uid://l2qcvvkjwb5d")
 
 var items:Array[Item] = []
 var generated:bool = false
@@ -24,24 +26,25 @@ func interact() -> void:
 	interact_area.monitoring = false
 	_generate_loot()
 	set_highest_rarity()
-	GlobalSignals.close_container.connect(_close_container)
+	gpu_particles_3d.emitting = true
 	
-	loot_beam.show_beam()
 	if animation_player:
 		animation_player.play(OPEN_ANIM_NAME)
 		await animation_player.animation_finished
-	GlobalSignals.show_container.emit(self)
 	
-func _close_container(lootC:LootContainer) -> void:
-	if lootC != self: return
+	await _shoot_loot()
 	interact_complete.emit()
-	GlobalSignals.close_container.disconnect(_close_container)
-	
-	loot_beam.hide_beam()
-	if animation_player:
-		animation_player.play(CLOSE_ANIM_NAME)
-		await animation_player.animation_finished
-	interact_area.monitoring = true
+
+func _shoot_loot() -> bool:
+	for item:Item in items:
+		var ground_drop:GroundDrop = GROUND_DROP.instantiate()
+		ground_drop.set_item(item)
+		GlobalSignals.current_level.add_child(ground_drop)
+		ground_drop.global_position = shoot_position.global_position
+		ground_drop.shoot_rigidbody(shoot_target.global_position, Vector2(1.5,2.5))
+		await get_tree().create_timer(0.25).timeout
+		
+	return true
 
 func _add_abilities() -> void:
 	for path:String in abilities_to_add:
@@ -74,16 +77,26 @@ func _generate_loot() -> void:
 	_add_abilities()
 
 func set_highest_rarity() -> void:
-	if len(items) == 0:
-		loot_beam.hide_beam()
-		return
+	if len(items) == 0: return
 	var highest_rarity:Item.ItemRarity = items[0].item_rarity
+	for item: Item in items:
+		if item.item_rarity > highest_rarity:
+			highest_rarity = item.item_rarity
+	
+	var rarity_color:Color = EnumStrings.RARITY_COLORS[highest_rarity]
+	LOOT_GRADIENT.set_color(1, rarity_color)
+	LOOT_GRADIENT.set_color(2, rarity_color)
+
+	var material := gpu_particles_3d.process_material as ParticleProcessMaterial
+	if material and material.color_ramp:
+		var gradient: Gradient = material.color_ramp.gradient
+		if gradient:
+			gradient.set_color(1, rarity_color)
+			gradient.set_color(2, rarity_color)
 	
 	for item:Item in items:
 		if item.item_rarity > highest_rarity: highest_rarity = item.item_rarity
 	
-	loot_beam.set_rarity(highest_rarity)
-	loot_beam.show_beam()
 
 func add_item(item:Item) -> bool:
 	if len(items) >= CONTAINER_SIZE: return false

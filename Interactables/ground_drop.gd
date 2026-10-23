@@ -86,7 +86,7 @@ func set_item(new_item:Item) -> void:
 func _play_drop_sound() -> void:
 	GlobalSignals.play_audio.emit(DROP_SOUNDS[item_drop.item_rarity], AudioManager.AUDIO_TYPE.SOUND_EFFECT, global_position)
 
-func shoot_rigidbody() -> void:
+func shoot_rigidbody(target_pos:Vector3 = Vector3.ZERO, force_amounts:Vector2 = Vector2(3,5)) -> void:
 	_play_drop_sound()
 	loot_beam.show_beam()
 	
@@ -98,9 +98,11 @@ func shoot_rigidbody() -> void:
 		interact_area.monitoring = true
 		return
 	
-	var force:float = randf_range(5,8)
+	var force:float = randf_range(force_amounts.x,force_amounts.y)
 	var horizontal_dir := Vector3(randf_range(-0.5, 0.5), 0, randf_range(-0.5, 0.5)).normalized()
 	var direction := (Vector3.UP + horizontal_dir * 0.1).normalized()
+	if target_pos != Vector3.ZERO:
+		direction = (target_pos - item_model.global_position + horizontal_dir * 0.05).normalized()
 	
 	item_model.apply_impulse(direction * force)
 	await get_tree().create_timer(1).timeout
