@@ -15,9 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://dk44tml1036ue" path="res://Tile-RPG/Images/UI/Craft2.png" id="12_5iuvs"]
 [ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="13_5fv6l"]
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="14_6yc5g"]
-[ext_resource type="Texture2D" uid="uid://tlfhj0clcf0o" path="res://Tile-RPG/Images/UI/Borders/detail_border2.png" id="18_3u46h"]
+[ext_resource type="PackedScene" uid="uid://dt0uqtplms27k" path="res://Tile-RPG/UI/GridInventory/generic_borders.tscn" id="16_lyqlw"]
 [ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="19_lyqlw"]
-[ext_resource type="Texture2D" uid="uid://b2k2et5ac8274" path="res://Tile-RPG/Images/UI/Borders/border_metal1.png" id="19_nnx66"]
 [ext_resource type="Texture2D" uid="uid://dp2tkdn4vim04" path="res://Tile-RPG/Images/Shaders/SharperStar.png" id="20_b7aj3"]
 [ext_resource type="PackedScene" uid="uid://mt0pu4wufb2e" path="res://Tile-RPG/UI/Menus/button_name_tooltip.tscn" id="20_nnx66"]
 
@@ -47,15 +46,6 @@ texture_margin_bottom = 7.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[sub_resource type="Gradient" id="Gradient_n5emr"]
-offsets = PackedFloat32Array(0, 0.99789476)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lyqlw"]
-gradient = SubResource("Gradient_n5emr")
-fill_from = Vector2(1, 1)
-fill_to = Vector2(1, 0.46438748)
-
 [sub_resource type="Curve" id="Curve_3u46h"]
 _limits = [0.0, 0.2, 0.0, 0.944664]
 _data = [Vector2(0, 0), 0.0, 0.30068958, 0, 0, Vector2(0.1549249, 0), 2.43687, 2.43687, 0, 0, Vector2(0.2852885, 0.02995263), 0.27854544, 0.27854544, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
@@ -68,7 +58,7 @@ colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000
 [node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square", "affix_container", "disable_rect", "button_name_tool_tip", "cpu_particles_2d", "rem_button", "add_a_button", "add_i_button", "add_ma_button", "close_red_button")]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(425, 0)
-custom_maximum_size = Vector2(-1, 700)
+custom_maximum_size = Vector2(-1, 900)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -100,7 +90,10 @@ stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=114811853]
 layout_mode = 2
-theme_override_constants/margin_top = 7
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_top = 55
+theme_override_constants/margin_right = 55
+theme_override_constants/margin_bottom = 55
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1926873058]
 layout_mode = 2
@@ -282,78 +275,19 @@ patch_margin_bottom = 10
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="InnerCornerShadow" type="NinePatchRect" parent="." unique_id=1755366011]
-self_modulate = Color(0, 0, 0, 0.31764707)
+[node name="GenericBorders" parent="." unique_id=1423847941 instance=ExtResource("16_lyqlw")]
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.035, 1.08)
-texture = ExtResource("18_3u46h")
-patch_margin_left = 45
-patch_margin_top = 45
-patch_margin_right = 45
-patch_margin_bottom = 45
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-
-[node name="InnerCornerRect" type="NinePatchRect" parent="." unique_id=742565874]
-self_modulate = Color(0.58932716, 0.59685564, 0.64579093, 1)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.049, 1.088)
-texture = ExtResource("18_3u46h")
-patch_margin_left = 45
-patch_margin_top = 45
-patch_margin_right = 45
-patch_margin_bottom = 45
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
 
 [node name="CloseRedButton" parent="." unique_id=723060951 instance=ExtResource("19_lyqlw")]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(10.5, -30)
+offset_transform_position = Vector2(-12, 12)
 offset_transform_visual_only = false
 
 [node name="ButtonNameToolTip" parent="." unique_id=114877824 instance=ExtResource("20_nnx66")]
 layout_mode = 2
-
-[node name="CornerShadow" type="NinePatchRect" parent="." unique_id=986981701]
-self_modulate = Color(0.16, 0.14533333, 0.12479999, 0.8666667)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.1, 1.115)
-texture = ExtResource("19_nnx66")
-draw_center = false
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 25
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CornerRect" type="NinePatchRect" parent="." unique_id=1043114166]
-self_modulate = Color(0.84705883, 0.76862746, 0.654902, 1)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.12, 1.13)
-texture = ExtResource("19_nnx66")
-draw_center = false
-patch_margin_left = 14
-patch_margin_top = 14
-patch_margin_right = 14
-patch_margin_bottom = 14
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="DarkenRect" type="TextureRect" parent="." unique_id=1979677565]
-self_modulate = Color(1, 1, 1, 0.42745098)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.12, 1.13)
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_lyqlw")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=450448604]
 top_level = true

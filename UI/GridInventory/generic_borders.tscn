@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://dt0uqtplms27k"]
+
+[ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="1_nusmk"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="2_0wj2v"]
+[ext_resource type="Texture2D" uid="uid://tlfhj0clcf0o" path="res://Tile-RPG/Images/UI/Borders/detail_border2.png" id="3_ld5s7"]
+[ext_resource type="Texture2D" uid="uid://b2k2et5ac8274" path="res://Tile-RPG/Images/UI/Borders/border_metal1.png" id="4_1harr"]
+
+[node name="GenericBorders" type="MarginContainer" unique_id=1423847941]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=809486446]
+layout_mode = 2
+theme_override_constants/margin_left = 13
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 13
+theme_override_constants/margin_bottom = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=94204743]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 26
+
+[node name="InnerCornerDarkRect" type="NinePatchRect" parent="MarginContainer/MarginContainer" unique_id=1594884594]
+self_modulate = Color(1.1291975, 1.1291975, 1.1291975, 1)
+layout_mode = 2
+offset_transform_scale = Vector2(0.885, 0.931)
+texture = ExtResource("1_nusmk")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer" unique_id=49887605]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="InnerCornerShadow" type="NinePatchRect" parent="MarginContainer/MarginContainer/MarginContainer" unique_id=1379475948]
+self_modulate = Color(1, 1, 1, 0.25882354)
+layout_mode = 2
+offset_transform_scale = Vector2(0.885, 0.93)
+texture = ExtResource("2_0wj2v")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="InnerCornerDarkShadow" type="NinePatchRect" parent="MarginContainer/MarginContainer" unique_id=647604731]
+layout_mode = 2
+offset_transform_scale = Vector2(0.866, 0.917)
+texture = ExtResource("2_0wj2v")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="MarginContainer" unique_id=1781493301]
+self_modulate = Color(0.58932716, 0.59685564, 0.64579093, 1)
+layout_mode = 2
+offset_transform_scale = Vector2(0.955, 0.983)
+texture = ExtResource("3_ld5s7")
+patch_margin_left = 45
+patch_margin_top = 45
+patch_margin_right = 45
+patch_margin_bottom = 45
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="CornerShadown" type="NinePatchRect" parent="MarginContainer" unique_id=773823128]
+self_modulate = Color(0.10157671, 0.10637324, 0.11185496, 0.33333334)
+layout_mode = 2
+offset_transform_scale = Vector2(0.97, 1)
+texture = ExtResource("4_1harr")
+draw_center = false
+patch_margin_left = 28
+patch_margin_top = 25
+patch_margin_right = 28
+patch_margin_bottom = 25
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=1130819599]
+self_modulate = Color(1, 1, 1, 0.7254902)
+layout_mode = 2
+offset_transform_scale = Vector2(0.98, 0.99)
+texture = ExtResource("2_0wj2v")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CornerRect" type="NinePatchRect" parent="." unique_id=1628716753]
+self_modulate = Color(0.84705883, 0.76862746, 0.654902, 1)
+layout_mode = 2
+texture = ExtResource("4_1harr")
+draw_center = false
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

@@ -32,6 +32,7 @@ var shop_panel:ShopPanel = null
 var shop_items:Array[InventoryItem] = []
 var shop_inventory_items:Array[InventoryItem] = []
 var shop_squares_dict:Dictionary[Vector2i, InventorySquare] = {}
+var items_in_shop:Dictionary[InventoryItem, InventorySquare] = {}
 
 var inventory_items:Array[InventoryItem] = []
 var squares_dict:Dictionary[Vector2i, InventorySquare] = {}
@@ -77,7 +78,7 @@ func _ready() -> void:
 	add_child(shared_tooltip)
 	_add_inv_squares()
 	await get_tree().process_frame
-	hide()
+	#hide()
 	
 	add_item_to_inv(ItemGenerator.get_equipment(0,4,2,Item.ItemRarity.EPIC))
 	while add_item_to_inv(ItemGenerator.get_equipment()):
@@ -423,6 +424,16 @@ func _get_inventory_item(new_item:Item) -> InventoryItem:
 	free_inventory_item.set_item(new_item)
 	return free_inventory_item
 
+func add_item_to_shop(new_item:Item) -> bool:
+	var added_to_inv:bool = false
+	var for_shop:bool = true
+	
+	for square:InventorySquare in shop_squares_dict.values():
+		added_to_inv = _try_to_place_item_on_square(square, new_item, for_shop)
+		if added_to_inv: return true
+	
+	return false
+
 func add_item_to_inv(new_item:Item, override_pos:Vector2i = Vector2i(-1,-1)) -> bool:
 	if new_item is GoldItem:
 		player_currency += new_item.item_value
@@ -437,13 +448,16 @@ func add_item_to_inv(new_item:Item, override_pos:Vector2i = Vector2i(-1,-1)) -> 
 	
 	return false
 
-func _try_to_place_item_on_square(starting_square:InventorySquare, item:Item) -> bool:
-	var squares_to_occupy:Array[InventorySquare] = _get_squares_for_item_placement(starting_square, item)
+func _try_to_place_item_on_square(starting_square:InventorySquare, item:Item, for_shop:bool = false) -> bool:
+	var squares_to_occupy:Array[InventorySquare] = _get_squares_for_item_placement(starting_square, item, for_shop)
 	if squares_to_occupy == []: return false
 	for square in squares_to_occupy: if square.occupied: return false
 	
 	var new_inventory_item:InventoryItem = _get_inventory_item(item)
-	items_in_inventory[new_inventory_item] = starting_square
+	
+	if !for_shop:
+		items_in_inventory[new_inventory_item] = starting_square
+	else: items_in_shop[new_inventory_item] = starting_square
 	
 	for square:InventorySquare in squares_to_occupy:
 		square.inv_item_in_square = new_inventory_item
@@ -454,16 +468,18 @@ func _try_to_place_item_on_square(starting_square:InventorySquare, item:Item) ->
 	
 	return true
 
-func _get_squares_for_item_placement(starting_square:InventorySquare, item:Item) -> Array[InventorySquare]:
+func _get_squares_for_item_placement(starting_square:InventorySquare, item:Item, for_shop:bool = false) -> Array[InventorySquare]:
 	var start_y:int = starting_square.pos_y
 	var start_x:int = starting_square.pos_x
 	var squares_to_occupy:Array[InventorySquare] = []
 	var current_square:InventorySquare = null
+	var dictionary_to_use:Dictionary[Vector2i, InventorySquare] = squares_dict
+	if for_shop: dictionary_to_use = shop_squares_dict
 	
 	for pos_y:int in item.inventory_height:
 		for pos_x:int in item.inventory_width:
-			if !squares_dict.has(Vector2i(start_x + pos_x, start_y + pos_y)): return []
-			current_square = squares_dict[Vector2i(start_x + pos_x, start_y + pos_y)]
+			if !dictionary_to_use.has(Vector2i(start_x + pos_x, start_y + pos_y)): return []
+			current_square = dictionary_to_use[Vector2i(start_x + pos_x, start_y + pos_y)]
 			squares_to_occupy.push_back(current_square)
 	
 	return squares_to_occupy

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends MarginContainer
 class_name DialoguePortrait
 
 @export var name_label: Label = null
