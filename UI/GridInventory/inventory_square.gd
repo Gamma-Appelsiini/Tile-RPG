@@ -6,7 +6,7 @@ class_name InventorySquare
 @export var cant_place_rect: TextureRect
 @export var placement_rect: TextureRect
 
-const SQUARE_SIZE:int = 50
+const SQUARE_SIZE:int = 100
 
 var pos_x:int = 0
 var pos_y:int = 0

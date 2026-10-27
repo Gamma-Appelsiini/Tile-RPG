@@ -7,6 +7,7 @@ class_name ShopPanel
 @export var dialogue_panel: DialoguePanel
 @export var viewport_rect: TextureRect
 @export var close_red_button: CloseButton
+@export var prompt_panel: PromptContainer
 
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
 const INVENTORY_SQUARE := preload("uid://6sfv2oiat16b")
@@ -43,6 +44,15 @@ func _add_squares() -> void:
 		
 		new_inv_square.mouse_entered.connect(func(): inventory_panel.hovered_square = new_inv_square)
 		new_inv_square.mouse_exited.connect(func(): if inventory_panel.hovered_square == new_inv_square: inventory_panel.hovered_square = null)
+
+func set_for_purhcase(shop_inv_item:InventoryItem) -> void:
+	prompt_panel.set_item_for_purchase(shop_inv_item.item)
+	prompt_panel.global_position = shop_inv_item.global_position + Vector2(-prompt_panel.size.x / 2 + shop_inv_item.size.x / 2, shop_inv_item.size.y / 2 - prompt_panel.size.y / 2)
+	prompt_panel.show()
+	prompt_panel.pressed_label.connect(_promp_pressed)
+	
+func _promp_pressed(purchased:bool) -> void:
+	pass
 
 func open_shop(shop_resource:ShopResource) -> void:
 	while _add_item_to_shop(shop_resource.shop_level): pass

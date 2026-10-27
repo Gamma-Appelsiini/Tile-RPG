@@ -43,6 +43,7 @@ func _on_inv_visibility_changed() -> void:
 	if !inventory_panel.visible: self.visible = false
 	if opened_shop:
 		_show_goodbye_text()
+		
 
 func _ready() -> void:
 	_add_slots()

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ca2xbwhnef5ap" path="res://Tile-RPG/UI/Dialogue/dialogue_panel.tscn" id="7_g401p"]
 [ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="7_wggvj"]
 [ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="7_ypcbu"]
+[ext_resource type="PackedScene" uid="uid://coff3ni2603py" path="res://Tile-RPG/UI/GridInventory/prompt_panel.tscn" id="12_ypcbu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ypcbu"]
 resource_local_to_scene = true
@@ -26,7 +27,7 @@ fill_from = Vector2(1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_iqnkb"]
 
-[node name="ShopPanel" type="MarginContainer" unique_id=1389343791 node_paths=PackedStringArray("inv_square_container", "dialogue_portrait", "dialogue_panel", "viewport_rect", "close_red_button")]
+[node name="ShopPanel" type="MarginContainer" unique_id=1389343791 node_paths=PackedStringArray("inv_square_container", "dialogue_portrait", "dialogue_panel", "viewport_rect", "close_red_button", "prompt_panel")]
 anchors_preset = -1
 anchor_top = 0.05
 anchor_right = 0.37
@@ -39,6 +40,7 @@ dialogue_portrait = NodePath("MarginContainer/VBoxContainer/DialogueContainer/Di
 dialogue_panel = NodePath("MarginContainer/VBoxContainer/DialogueContainer/DialoguePanel")
 viewport_rect = NodePath("MarginContainer/VBoxContainer/ViewportContainer/ViewportRect")
 close_red_button = NodePath("CloseRedButton")
+prompt_panel = NodePath("PromptPanel")
 
 [node name="BgImage" type="TextureRect" parent="." unique_id=950900135]
 self_modulate = Color(0.49819997, 0.51039, 0.53, 1)
@@ -148,6 +150,9 @@ custom_minimum_size = Vector2(123, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="NameLabel" parent="MarginContainer/VBoxContainer/DialogueContainer/DialoguePortrait/MarginContainer/MarginContainer2/PanelContainer" parent_id_path=PackedInt32Array(1874576720, 1856805429) index="0" unique_id=511437983]
+theme_override_font_sizes/font_size = 14
+
 [node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/DialogueContainer/DialoguePortrait" unique_id=1040442627]
 self_modulate = Color(1, 1, 1, 0.53333336)
 show_behind_parent = true
@@ -157,9 +162,6 @@ offset_transform_position = Vector2(4, 0)
 offset_transform_scale = Vector2(1.01, 1.05)
 texture = SubResource("GradientTexture2D_1s13s")
 expand_mode = 1
-
-[node name="NameLabel" parent="MarginContainer/VBoxContainer/DialogueContainer/DialoguePortrait/MarginContainer/MarginContainer2/PanelContainer" parent_id_path=PackedInt32Array(1874576720, 1856805429) index="0" unique_id=511437983]
-theme_override_font_sizes/font_size = 14
 
 [node name="DialoguePanel" parent="MarginContainer/VBoxContainer/DialogueContainer" unique_id=773947272 instance=ExtResource("7_g401p")]
 layout_mode = 2
@@ -184,6 +186,11 @@ size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position = Vector2(-12, 12)
 offset_transform_visual_only = false
+
+[node name="PromptPanel" parent="." unique_id=1916793013 instance=ExtResource("12_ypcbu")]
+visible = false
+top_level = true
+layout_mode = 2
 
 [editable path="MarginContainer/VBoxContainer/TitleContainer"]
 [editable path="MarginContainer/VBoxContainer/DialogueContainer/DialoguePortrait"]

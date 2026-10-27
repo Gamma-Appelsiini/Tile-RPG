@@ -353,6 +353,11 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	if lifted_inv_item and !override_inv_item: return
 	if !hovered_inv_item and !override_inv_item: return
 	
+	#Clicking a shop item
+	if shop_inventory_items.has(hovered_inv_item):
+		shop_panel.set_for_purhcase(hovered_inv_item)
+		return
+	
 	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item
 	
@@ -457,7 +462,9 @@ func _try_to_place_item_on_square(starting_square:InventorySquare, item:Item, fo
 	
 	if !for_shop:
 		items_in_inventory[new_inventory_item] = starting_square
-	else: items_in_shop[new_inventory_item] = starting_square
+	else:
+		items_in_shop[new_inventory_item] = starting_square
+		shop_inventory_items.push_back(new_inventory_item)
 	
 	for square:InventorySquare in squares_to_occupy:
 		square.inv_item_in_square = new_inventory_item

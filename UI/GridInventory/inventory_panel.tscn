@@ -89,7 +89,7 @@ size_flags_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=794896025]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(560, 745)
+custom_minimum_size = Vector2(1120, 1490)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

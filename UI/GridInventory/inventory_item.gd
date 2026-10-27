@@ -4,7 +4,7 @@ class_name InventoryItem
 @export var item_image_rect: TextureRect
 @export var hover_image_rect: NinePatchRect
 
-const SQUARE_SIZE:int = 50
+const SQUARE_SIZE:int = InventorySquare.SQUARE_SIZE
 
 var item:Item = null
 
