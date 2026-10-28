@@ -48,7 +48,7 @@ var lifted_item_squares_to_occupy:Array[InventorySquare] = []
 var shared_tooltip:ItemTooltip = null
 
 #Currencies
-var player_currency:int = 0:
+var player_currency:int = 222:
 	set(value):
 		player_currency = max(0, value)
 		currency_amount_label.text = str(player_currency)
@@ -87,7 +87,12 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left Click"): _lift_up_item()
-	elif event.is_action_released("Left Click"): _drop_item()
+	elif event.is_action_released("Left Click"):
+		#Clicked a shop item
+		if hovered_inv_item and shop_inventory_items.has(hovered_inv_item):
+			shop_panel.set_for_purhcase(hovered_inv_item)
+			return
+		_drop_item()
 
 func _process(_delta: float) -> void:
 	if !lifted_inv_item:
@@ -118,8 +123,7 @@ func _drop_item_on_ground(inv_item_to_drop:InventoryItem) -> bool:
 	new_ground_drop.shoot_rigidbody()
 	
 	_clear_lifted_inv_item()
-	inv_item_to_drop.hide()
-	inv_item_to_drop.item = null
+	inv_item_to_drop.remove_item()
 	
 	return true
 
@@ -262,6 +266,11 @@ func _drop_item_on_crafting_square(dropped_inv_item:InventoryItem) -> void:
 	
 	_clear_lifted_inv_item()
 
+func _sell_item(item_to_sell:InventoryItem) -> void:
+	shop_panel.sell_item(item_to_sell.item)
+	_clear_lifted_inv_item()
+	item_to_sell.remove_item()
+
 func _drop_item() -> void:
 	if !lifted_inv_item: return
 
@@ -273,6 +282,11 @@ func _drop_item() -> void:
 	#Can mouse over items again
 	_change_inv_item_mousing(Control.MOUSE_FILTER_STOP)
 	var dropped_inv_item:InventoryItem = lifted_inv_item
+	
+	#Selling
+	if shop_panel.selling_item:
+		_sell_item(dropped_inv_item)
+		return
 	
 	#Placing on crafting panel
 	if crafting_panel:
@@ -354,9 +368,7 @@ func _lift_up_item(override_inv_item:InventoryItem = null) -> void:
 	if !hovered_inv_item and !override_inv_item: return
 	
 	#Clicking a shop item
-	if shop_inventory_items.has(hovered_inv_item):
-		shop_panel.set_for_purhcase(hovered_inv_item)
-		return
+	if shop_inventory_items.has(hovered_inv_item): return
 	
 	GlobalSignals.play_audio.emit(item_place_sound, AudioManager.AUDIO_TYPE.UI)
 	lifted_inv_item = override_inv_item if override_inv_item else hovered_inv_item
@@ -395,6 +407,16 @@ func _is_mouse_in_drop_position() -> bool:
 
 	return mouse_x <= (screen_width * FROM_LEFT)
 
+func _is_mouse_in_sell_position() -> bool:
+	if !shop_panel.visible: return false
+	
+	const FROM_LEFT:float = 0.35
+	var viewport:Viewport = get_viewport()
+	var mouse_x:float = viewport.get_mouse_position().x
+	var screen_width:float = viewport.get_visible_rect().size.x
+	print(mouse_x <= (screen_width * FROM_LEFT))
+	return mouse_x <= (screen_width * FROM_LEFT)
+
 func _add_new_inventory_item() -> void:
 	var new_inventory_item:InventoryItem = INVENTORY_ITEM.instantiate()
 	add_child(new_inventory_item)
@@ -426,6 +448,10 @@ func _get_inventory_item(new_item:Item) -> InventoryItem:
 			free_inventory_item = i_item
 			break
 	
+	if free_inventory_item == null:
+		_add_new_inventory_item()
+		free_inventory_item = inventory_items.back()
+
 	free_inventory_item.set_item(new_item)
 	return free_inventory_item
 
@@ -491,22 +517,30 @@ func _get_squares_for_item_placement(starting_square:InventorySquare, item:Item,
 	
 	return squares_to_occupy
 
-func _remove_item_from_square(starting_square:InventorySquare) -> void:
+func _remove_item_from_square(starting_square:InventorySquare, for_shop:bool = false) -> void:
 	var inv_item:InventoryItem = starting_square.inv_item_in_square
-	var squares_occupied:Array[InventorySquare] = _get_squares_for_item_placement(starting_square, inv_item.item)
+	var squares_occupied:Array[InventorySquare] = _get_squares_for_item_placement(starting_square, inv_item.item, for_shop)
 	
 	for square:InventorySquare in squares_occupied:
 		square.inv_item_in_square = null
 		square.occupied = false
 
-func remove_item_from_inventory(item:Item) -> void:
-	for inv_item:InventoryItem in items_in_inventory.keys():
+func remove_item_from_shop(item:Item) -> void:
+	remove_item_from_inventory(item, true)
+
+func remove_item_from_inventory(item:Item, for_shop:bool = false) -> void:
+	var dict_to_use:Dictionary[InventoryItem, InventorySquare] = items_in_inventory
+	if for_shop: dict_to_use = items_in_shop
+	
+	for inv_item:InventoryItem in dict_to_use.keys():
 		if inv_item.item != item: continue
 		
-		var starting_square:InventorySquare = items_in_inventory[inv_item]
-		_remove_item_from_square(starting_square)
+		var starting_square:InventorySquare = dict_to_use[inv_item]
+		_remove_item_from_square(starting_square, for_shop)
 		inv_item.remove_item()
-		items_in_inventory.erase(inv_item)
+		dict_to_use.erase(inv_item)
+		if for_shop: shop_inventory_items.erase(inv_item)
+		break
 
 func save_inv_to_data(save_data:Dictionary) -> void:
 	var inv_data:Dictionary[Vector2i, Dictionary] = {}

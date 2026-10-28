@@ -1,6 +1,10 @@
 extends MarginContainer
 class_name ShopPanel
 
+@export_category("Sounds")
+@export var gold_sound:AudioStream = null
+
+@export_category("Elements")
 @export var inventory_panel:InventoryPanel = null
 @export var inv_square_container: GridContainer
 @export var dialogue_portrait: DialoguePortrait
@@ -8,29 +12,54 @@ class_name ShopPanel
 @export var viewport_rect: TextureRect
 @export var close_red_button: CloseButton
 @export var prompt_panel: PromptContainer
+@export var squares_container: PanelContainer
+@export var cpu_particles_2d: CPUParticles2D
 
 const INVENTORY_ITEM := preload("uid://cvit4tuvaxa2t")
 const INVENTORY_SQUARE := preload("uid://6sfv2oiat16b")
 const SQUARE_AMOUNT:int = 120
 const TEST_SHOP_RESOURCE := preload("uid://cyp0vy4ph7gsq")
 
-var shop_items:Array[InventoryItem] = []
+var inv_item_to_purchase:InventoryItem = null
+var shop_resource:ShopResource = null
+var selling_item:bool = false
 
 func _ready() -> void:
+	set_process(false)
 	visibility_changed.connect(_on_vis_changed)
 	close_red_button.button.pressed.connect(hide)
 	inventory_panel.shop_panel = self
 	_add_squares()
 	await get_tree().process_frame
-	await get_tree().create_timer(.2).timeout
 	
 	open_shop(TEST_SHOP_RESOURCE)
+
+func _process(_delta: float) -> void:
+	if _is_mouse_outside_of_sell_area():
+		selling_item = false
+		prompt_panel.cancel_prompt()
+		set_process(false)
+
+func _is_mouse_outside_of_sell_area() -> bool:
+	const BUFFER: int = 5
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	var container_pos: Vector2 = inv_square_container.global_position
+	var container_size: Vector2 = inv_square_container.size
+
+	if mouse_pos.x - BUFFER > container_pos.x + container_size.x: return true
+	if mouse_pos.x + BUFFER < container_pos.x: return true
+	if mouse_pos.y - BUFFER > container_pos.y + container_size.y: return true
+	if mouse_pos.y + BUFFER < container_pos.y: return true
+
+	return false
 
 func _on_vis_changed() -> void:
 	if visible:
 		inventory_panel.show()
 		return
-		
+	
+	prompt_panel.cancel_prompt()
+	set_process(false)
 	inventory_panel.hide()
 
 func _add_squares() -> void:
@@ -44,17 +73,57 @@ func _add_squares() -> void:
 		
 		new_inv_square.mouse_entered.connect(func(): inventory_panel.hovered_square = new_inv_square)
 		new_inv_square.mouse_exited.connect(func(): if inventory_panel.hovered_square == new_inv_square: inventory_panel.hovered_square = null)
+		new_inv_square.mouse_entered.connect(set_for_sale)
+
+func set_for_sale() -> void:
+	if !inventory_panel.lifted_inv_item: return
+	if selling_item: return
+	
+	selling_item = true
+	prompt_panel.set_item_for_sale(inventory_panel.lifted_inv_item.item)
+	set_process(true)
+
+func sell_item(item_to_sell:Item) -> void:
+	GlobalSignals.play_audio.emit(gold_sound, AudioManager.AUDIO_TYPE.UI)
+	inventory_panel.player_currency += item_to_sell.item_value
+	prompt_panel.cancel_prompt()
+	
+	cpu_particles_2d.restart()
+	cpu_particles_2d.global_position = get_viewport().get_mouse_position() + Vector2(-cpu_particles_2d.emission_sphere_radius/2, -cpu_particles_2d.emission_sphere_radius/2)
+	cpu_particles_2d.emitting = true
 
 func set_for_purhcase(shop_inv_item:InventoryItem) -> void:
+	inv_item_to_purchase = shop_inv_item
+	if !prompt_panel.pressed_label.is_connected(_prompt_pressed):
+		prompt_panel.pressed_label.connect(_prompt_pressed)
 	prompt_panel.set_item_for_purchase(shop_inv_item.item)
 	prompt_panel.global_position = shop_inv_item.global_position + Vector2(-prompt_panel.size.x / 2 + shop_inv_item.size.x / 2, shop_inv_item.size.y / 2 - prompt_panel.size.y / 2)
 	prompt_panel.show()
-	prompt_panel.pressed_label.connect(_promp_pressed)
 	
-func _promp_pressed(purchased:bool) -> void:
-	pass
+func _prompt_pressed(purchased:bool) -> void:
+	await get_tree().process_frame
+	prompt_panel.pressed_label.disconnect(_prompt_pressed)
+	if !inv_item_to_purchase or !purchased: return
+	
+	if inv_item_to_purchase.item.item_value > inventory_panel.player_currency:
+		prompt_panel.set_error_message("Not enough Bux")
+		prompt_panel.show()
+		return
+	elif !inventory_panel.add_item_to_inv(inv_item_to_purchase.item):
+		prompt_panel.set_error_message("Not enough inventory space")
+		prompt_panel.show()
+		return
+	
+	GlobalSignals.play_audio.emit(gold_sound, AudioManager.AUDIO_TYPE.UI)
+	inventory_panel.player_currency -= inv_item_to_purchase.item.item_value
+	_remove_inv_item_from_shop(inv_item_to_purchase)
+	inv_item_to_purchase = null
 
-func open_shop(shop_resource:ShopResource) -> void:
+func _remove_inv_item_from_shop(to_remove:InventoryItem) -> void:
+	inventory_panel.remove_item_from_shop(to_remove.item)
+
+func open_shop(new_shop_resource:ShopResource) -> void:
+	self.shop_resource = new_shop_resource
 	while _add_item_to_shop(shop_resource.shop_level): pass
 
 func _add_item_to_shop(max_tier:int) -> bool:

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://coff3ni2603py"]
 
 [ext_resource type="Script" uid="uid://dkthsgmnhwe3e" path="res://Tile-RPG/UI/GridInventory/prompt_panel.gd" id="1_v1rhp"]
+[ext_resource type="AudioStream" uid="uid://bn2atasms7ykv" path="res://Tile-RPG/Sounds/UI/open_prompt.wav" id="2_8a6d3"]
 [ext_resource type="FontFile" uid="uid://ci0sovox5ufo" path="res://Tile-RPG/Fonts/GoogleFonts/SpectralSC-Bold.ttf" id="2_b37hd"]
 [ext_resource type="Texture2D" uid="uid://cvc5frosl0s7c" path="res://Tile-RPG/Images/UI/Borders/decorative_borders_simple_256.png" id="2_v1rhp"]
 
@@ -11,7 +12,8 @@ colors = PackedColorArray(0, 0, 0, 1, 0.11366529, 0.11366529, 0.113665275, 1)
 gradient = SubResource("Gradient_v1rhp")
 width = 128
 height = 128
-fill_from = Vector2(1, 1)
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
 
 [node name="PromptPanel" type="MarginContainer" unique_id=1916793013 node_paths=PackedStringArray("prompt_label", "yes_label", "no_label")]
 z_index = 3
@@ -30,6 +32,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_v1rhp")
+open_sound = ExtResource("2_8a6d3")
 prompt_label = NodePath("MarginContainer/VBoxContainer/PromptLabel")
 yes_label = NodePath("MarginContainer/VBoxContainer/VBoxContainer/YesLabel")
 no_label = NodePath("MarginContainer/VBoxContainer/VBoxContainer/NoLabel")
