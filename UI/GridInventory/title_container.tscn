@@ -26,7 +26,7 @@ layout_mode = 2
 
 [node name="BG" type="TextureRect" parent="CenterContainer" unique_id=1598838232]
 material = SubResource("ShaderMaterial_a4tw2")
-custom_minimum_size = Vector2(275, 30)
+custom_minimum_size = Vector2(460, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_ey8b8")
@@ -35,23 +35,23 @@ stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=56589979]
 layout_mode = 2
-theme_override_constants/margin_left = 35
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 35
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 10
 
 [node name="Label" type="Label" parent="MarginContainer" unique_id=1008513108]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -1)
 theme = ExtResource("2_ercek")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 40
 text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Corners" type="TextureRect" parent="." unique_id=1245429002]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 texture = ExtResource("5_o5mnx")
 expand_mode = 1
@@ -59,7 +59,7 @@ expand_mode = 1
 [node name="Shadown" type="TextureRect" parent="." unique_id=1095385335]
 self_modulate = Color(0.1, 0.1, 0.1, 0.4392157)
 show_behind_parent = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 0.5)

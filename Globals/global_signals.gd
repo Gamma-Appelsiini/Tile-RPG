@@ -6,6 +6,7 @@ var combat_manager:CombatManager = null
 var quest_handler:QuestHandler = null
 var ui_handler:UIHandler = null
 var keybinds_loaded:bool = false
+var GAME_SAVE_DATA:Dictionary
 
 signal change_level(new_level_id:String)
 signal load_game

@@ -24,3 +24,8 @@ func _ready() -> void:
 	self.mouse_entered.connect(func(): hover_image.show())
 	self.mouse_exited.connect(func(): hover_image.hide())
 	
+	hidden.connect(func():
+		cant_place_rect.hide()
+		placement_rect.hide()
+		)
+	

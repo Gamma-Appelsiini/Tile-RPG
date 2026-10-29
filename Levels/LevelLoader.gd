@@ -87,7 +87,7 @@ func new_game() -> void:
 	"game_characters": {},
 	"dead_ids": [],
 	"quest_handler": {},
-	"shops": [],
+	"shops": {},
 	"save_date": "",
 	"skills": {},
 	"learned_skills": [],
@@ -125,6 +125,7 @@ func load_game(loading:bool = true) -> void:
 	player.stat_handler.stats_changed.emit()
 
 	load_complete.emit()
+	GlobalSignals.GAME_SAVE_DATA = save_data
 
 func change_levels(new_level_id:String) -> void:
 	loading_screen.load_next_level(new_level_id, false)

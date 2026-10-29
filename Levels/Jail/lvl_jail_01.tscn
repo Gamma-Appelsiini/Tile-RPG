@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://ciibj20uwiqwu" path="res://Tile-RPG/Interactables/chest.tscn" id="4_l8lef"]
 [ext_resource type="Script" uid="uid://cnfn32rw1kkc2" path="res://Tile-RPG/Levels/tile.gd" id="4_r2niu"]
 [ext_resource type="PackedScene" uid="uid://b13c641hp7wjx" path="res://Tile-RPG/Interactables/Doors/bar_door.tscn" id="5_r4bqj"]
+[ext_resource type="PackedScene" uid="uid://kcntsyd64f1k" path="res://Tile-RPG/Interactables/shop.tscn" id="5_xm402"]
+[ext_resource type="Resource" uid="uid://cyp0vy4ph7gsq" path="res://Tile-RPG/Interactables/Shops/test_shop_resource.tres" id="6_f77js"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="7_l0bih"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4x7po"]
@@ -45,6 +47,10 @@ items_to_generate = Dictionary[int, int]({
 2: 0,
 7: 1
 })
+
+[node name="Shop" parent="Interactables" unique_id=1275726709 instance=ExtResource("5_xm402")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+shop_resource = ExtResource("6_f77js")
 
 [node name="Breakables" type="Node3D" parent="." unique_id=1785823029]
 

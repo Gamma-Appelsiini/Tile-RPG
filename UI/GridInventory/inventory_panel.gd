@@ -107,8 +107,14 @@ func _on_vis_changed() -> void:
 	
 	if crafting_panel.visible:
 		crafting_panel.hide()
-		
-	if lifted_inv_item: _drop_item_on_ground(lifted_inv_item)
+	
+	#Holding item while closing
+	if lifted_inv_item:
+		lifted_inv_item.modulate.a = 1
+		lifted_inv_item.z_index = 1
+		_change_inv_item_mousing(Control.MOUSE_FILTER_STOP)
+		_drop_item_on_ground(lifted_inv_item)
+	
 	set_process(false)
 	set_process_input(false)
 
@@ -456,14 +462,13 @@ func _get_inventory_item(new_item:Item) -> InventoryItem:
 	return free_inventory_item
 
 func add_item_to_shop(new_item:Item) -> bool:
-	var added_to_inv:bool = false
-	var for_shop:bool = true
-	
 	for square:InventorySquare in shop_squares_dict.values():
-		added_to_inv = _try_to_place_item_on_square(square, new_item, for_shop)
-		if added_to_inv: return true
-	
+		if _try_to_place_item_on_square(square, new_item, true): return true
 	return false
+
+func add_item_to_specific_spot_on_shop(new_item:Item, pos:Vector2i) -> bool:
+	if !shop_squares_dict.has(pos): return false
+	return _try_to_place_item_on_square(shop_squares_dict[pos], new_item, true)
 
 func add_item_to_inv(new_item:Item, override_pos:Vector2i = Vector2i(-1,-1)) -> bool:
 	if new_item is GoldItem:

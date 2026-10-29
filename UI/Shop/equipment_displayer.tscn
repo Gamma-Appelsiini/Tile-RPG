@@ -4,10 +4,11 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_626gl"]
 
-[node name="EquipmentDisplayer" type="Node3D" unique_id=2146458885 node_paths=PackedStringArray("rotation_node", "sub_viewport")]
+[node name="EquipmentDisplayer" type="Node3D" unique_id=2146458885 node_paths=PackedStringArray("rotation_node", "sub_viewport", "camera_3d")]
 script = ExtResource("1_85tcf")
 rotation_node = NodePath("RotationNode")
 sub_viewport = NodePath("SubViewport")
+camera_3d = NodePath("SubViewport/Camera3D")
 
 [node name="RotationNode" type="Node3D" parent="." unique_id=1595859694]
 transform = Transform3D(0.76604444, -0.6427876, 0, 0.6427876, 0.76604444, 0, 0, 0, 1, 0, 0, 0)

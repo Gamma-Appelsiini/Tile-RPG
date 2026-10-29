@@ -27,7 +27,9 @@ func save_to_data() -> Dictionary:
 		"inventory_image": inventory_image.resource_path,
 		"item_value": item_value,
 		"item_name": item_name,
-		"item_model_path": item_model_path
+		"item_model_path": item_model_path,
+		"inventory_width": inventory_width,
+		"inventory_height": inventory_height,
 	}
 	
 	return equipment_data
@@ -43,6 +45,8 @@ func load_from_data(save_data:Dictionary) -> void:
 	self.item_value = save_data["item_value"]
 	self.item_name = save_data["item_name"]
 	self.item_model_path = save_data["item_model_path"]
+	self.inventory_width = save_data["inventory_width"]
+	self.inventory_height = save_data["inventory_height"]
 	
 func _stomach_suffix() -> void:
 	var new_suffix:Affix = Affix.new()

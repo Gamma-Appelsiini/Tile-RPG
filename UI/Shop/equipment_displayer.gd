@@ -3,6 +3,7 @@ class_name EquipmentDisplayer
 
 @export var rotation_node: Node3D = null
 @export var sub_viewport: SubViewport = null
+@export var camera_3d: Camera3D
 
 const OFFSETS:Dictionary[String, Vector3] = {"res://Tile-RPG/Items/ItemScenes/sword_model.tscn": Vector3(-0.025, -0.425, 0)}
 

@@ -1,7 +1,10 @@
 [gd_resource type="Resource" script_class="ShopResource" format=3 uid="uid://cyp0vy4ph7gsq"]
 
 [ext_resource type="Script" uid="uid://co0gu33tquwt6" path="res://Tile-RPG/UI/GridInventory/shop_resource.gd" id="1_jsc3p"]
+[ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="2_6yaad"]
 
 [resource]
 script = ExtResource("1_jsc3p")
+shop_name = "Test Shop"
+shop_portrait = ExtResource("2_6yaad")
 metadata/_custom_type_script = "uid://co0gu33tquwt6"

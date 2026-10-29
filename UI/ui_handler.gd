@@ -9,12 +9,12 @@ class_name UIHandler
 @export var abilities_container: AbilitiesContainer = null
 @export var combat_ui: CombatUI = null
 @export var menu_buttons: MenuButtonsPanel = null
-@export var shop_window: ShopWindow = null
 @export var main_menu: MainMenu = null
 @export var loading_screen: LoadingScreen = null
 @export var start_menu: StartMenu = null
 @export var black_screen: ColorRect = null
 @export var crafting_panel: CraftingPanel
+@export var shop_panel: ShopPanel
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 const DAMAGE_NUMBER = preload("uid://dac2s2r20qif4")
@@ -53,11 +53,11 @@ func _input(event: InputEvent) -> void:
 
 func _handle_esc() -> void:
 	if main_menu.visible: _toggle_menu()
-	elif stat_window.visible or inventory_panel.visible or shop_window.visible or abilities_container.visible or crafting_panel.visible:
+	elif stat_window.visible or inventory_panel.visible or shop_panel.visible or abilities_container.visible or crafting_panel.visible:
 		if crafting_panel.visible: crafting_panel.hide()
 		stat_window.hide()
 		inventory_panel.hide()
-		shop_window.hide()
+		shop_panel.hide()
 		abilities_container.hide_container()
 	else: _toggle_menu()
 		
@@ -67,7 +67,7 @@ func _toggle_menu() -> void:
 	
 	stat_window.hide()
 	inventory_panel.hide()
-	shop_window.hide()
+	shop_panel.hide()
 	abilities_container.hide_container()
 	
 	if main_menu.settings_panel.visible: main_menu.settings_panel.hide()
@@ -82,11 +82,11 @@ func toggle_inv() -> void:
 	
 	inventory_panel.visible = !inventory_panel.visible
 	if abilities_container.visible and inventory_panel.visible: abilities_container.hide()
-	if shop_window.visible and !inventory_panel.visible:
-		shop_window.hide()
+	if shop_panel.visible and !inventory_panel.visible:
+		shop_panel.hide()
 
 func _toggle_abilities() -> void:
-	if main_menu.visible or shop_window.visible or black_screen.self_modulate.a != 0: return
+	if main_menu.visible or shop_panel.visible or black_screen.self_modulate.a != 0: return
 	if in_combat: return
 
 	if !abilities_container.visible:
@@ -140,7 +140,6 @@ func close_skill_tree() -> void:
 
 func set_player(player:Player) -> void:
 	ability_bar.set_player(player)
-	#inventory.set_player(player)
 	dialogue_window.set_player(player)
 	stat_window.set_game_character(player)
 	abilities_container.set_player(player)

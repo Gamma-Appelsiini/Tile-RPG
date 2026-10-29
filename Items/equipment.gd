@@ -150,6 +150,8 @@ func save_to_data() -> Dictionary:
 		"inventory_image": inventory_image.resource_path,
 		"item_value": item_value,
 		"item_name": item_name,
+		"inventory_width": inventory_width,
+		"inventory_height": inventory_height,
 	}
 
 	return equipment_data
