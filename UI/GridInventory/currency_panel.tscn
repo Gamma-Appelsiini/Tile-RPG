@@ -11,7 +11,7 @@
 [node name="CurrencyPanel" type="PanelContainer" unique_id=861710248]
 self_modulate = Color(1, 1, 1, 0)
 z_index = 1
-custom_minimum_size = Vector2(125, 55)
+custom_minimum_size = Vector2(400, 80)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -63,7 +63,7 @@ custom_minimum_size = Vector2(255, 55)
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 26
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer" unique_id=1397573750]
@@ -73,7 +73,7 @@ alignment = 1
 
 [node name="GoldTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer" unique_id=745345672]
 self_modulate = Color(1.15968, 1.0061659, 0.69913787, 1)
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -88,7 +88,7 @@ offset_transform_position = Vector2(0, -2)
 theme = ExtResource("5_qp8kv")
 theme_override_colors/font_color = Color(0.9, 0.7125, 0.45, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 36
 text = "0"
 vertical_alignment = 1
 
@@ -98,7 +98,7 @@ size_flags_horizontal = 4
 alignment = 1
 
 [node name="GemTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer2" unique_id=1053987514]
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -113,7 +113,7 @@ offset_transform_position = Vector2(0, -2)
 theme = ExtResource("5_qp8kv")
 theme_override_colors/font_color = Color(0.84, 0.13440003, 0.13440003, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 36
 text = "0"
 vertical_alignment = 1
 
@@ -124,7 +124,7 @@ alignment = 1
 
 [node name="GemTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/HBoxContainer3" unique_id=1232933993]
 self_modulate = Color(0, 1.3622323, 1.1831194, 1)
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -139,7 +139,7 @@ offset_transform_position = Vector2(0, -2)
 theme = ExtResource("5_qp8kv")
 theme_override_colors/font_color = Color(0, 0.91864634, 0.79867524, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 36
 text = "0"
 vertical_alignment = 1
 

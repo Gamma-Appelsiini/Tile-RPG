@@ -21,8 +21,8 @@ shader_parameter/tiling_scale = 2.0
 
 [node name="AffixPanel" type="PanelContainer" unique_id=600410156 node_paths=PackedStringArray("affix_text", "affix_name", "glow_effect", "corner_shadow", "right_diamond", "left_diamond")]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(185, 0)
-custom_maximum_size = Vector2(-1, 185)
+custom_minimum_size = Vector2(400, 0)
+custom_maximum_size = Vector2(-1, 370)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -104,7 +104,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("5_juxj7")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "Pyromaniacs"
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -117,7 +117,7 @@ theme_override_colors/font_color = Color(0.24313726, 1, 0.5803922, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 text = "Default Affix Text"
 horizontal_alignment = 1
 

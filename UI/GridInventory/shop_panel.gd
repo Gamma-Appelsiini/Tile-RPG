@@ -34,7 +34,6 @@ func _ready() -> void:
 	_add_squares()
 	await get_tree().process_frame
 	hide()
-	#open_shop(TEST_SHOP_RESOURCE)
 
 func _process(_delta: float) -> void:
 	if _is_mouse_outside_of_sell_area():
@@ -43,7 +42,7 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 func _set_viewport() -> void:
-	viewport_rect.texture.viewport_path = equipment_displayer.sub_viewport.get_path()
+	viewport_rect.texture = equipment_displayer.sub_viewport.get_texture()
 
 func _is_mouse_outside_of_sell_area() -> bool:
 	const BUFFER: int = 5

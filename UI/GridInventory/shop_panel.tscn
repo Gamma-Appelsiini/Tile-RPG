@@ -35,8 +35,6 @@ colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0.32941177)
 gradient = SubResource("Gradient_3v8tr")
 fill_from = Vector2(1, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qebrg"]
-
 [sub_resource type="Curve" id="Curve_qebrg"]
 _limits = [0.0, 0.2, 0.0, 0.944664]
 _data = [Vector2(0, 0), 0.0, 0.30068958, 0, 0, Vector2(0.1549249, 0), 2.43687, 2.43687, 0, 0, Vector2(0.2852885, 0.02995263), 0.27854544, 0.27854544, 0, 0, Vector2(0.944664, 0), 0.0, 0.0, 0, 0]
@@ -199,7 +197,6 @@ stretch_mode = 5
 [node name="ViewportRect" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/HBoxContainer/ViewportContainer" unique_id=733400307]
 z_index = 4
 layout_mode = 2
-texture = SubResource("ViewportTexture_qebrg")
 expand_mode = 1
 stretch_mode = 5
 

@@ -10,8 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_1blo8"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="8_lyqlw"]
 [ext_resource type="Texture2D" uid="uid://4ra4wnv4w7vh" path="res://Tile-RPG/Images/UI/Borders/border_inner256.png" id="9_b7aj3"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="10_3u46h"]
 [ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="10_b7aj3"]
 [ext_resource type="Texture2D" uid="uid://be07mlfa0er5" path="res://Tile-RPG/Images/UI/Craft1.png" id="11_3u46h"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="11_5iuvs"]
 [ext_resource type="Texture2D" uid="uid://dk44tml1036ue" path="res://Tile-RPG/Images/UI/Craft2.png" id="12_5iuvs"]
 [ext_resource type="Texture2D" uid="uid://cstypynx233ao" path="res://Tile-RPG/Images/UI/Craft3.png" id="13_5fv6l"]
 [ext_resource type="Texture2D" uid="uid://bewnhxtj76j41" path="res://Tile-RPG/Images/UI/Craft4.png" id="14_6yc5g"]
@@ -24,6 +26,15 @@
 resource_local_to_scene = true
 shader = ExtResource("2_1blo8")
 shader_parameter/tiling_scale = 3.0000001392401203
+
+[sub_resource type="Gradient" id="Gradient_j1tjm"]
+offsets = PackedFloat32Array(0, 0.99789476)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lyqlw"]
+gradient = SubResource("Gradient_j1tjm")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.46438748)
 
 [sub_resource type="Gradient" id="Gradient_ua4u6"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -57,8 +68,8 @@ colors = PackedColorArray(0.68, 0.49413335, 0.12240001, 0, 1, 1, 1, 1, 1, 0.8000
 
 [node name="CraftingPanel" type="PanelContainer" unique_id=1615179823 node_paths=PackedStringArray("crafting_equipment_square", "affix_container", "disable_rect", "button_name_tool_tip", "cpu_particles_2d", "rem_button", "add_a_button", "add_i_button", "add_ma_button", "close_red_button")]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(425, 0)
-custom_maximum_size = Vector2(-1, 900)
+custom_minimum_size = Vector2(825, 0)
+custom_maximum_size = Vector2(-1, 1800)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -88,6 +99,14 @@ texture = ExtResource("1_0k1u6")
 expand_mode = 1
 stretch_mode = 1
 
+[node name="DarkenRect" type="TextureRect" parent="." unique_id=1448336813]
+self_modulate = Color(1, 1, 1, 0.42745098)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.99, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lyqlw")
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=114811853]
 layout_mode = 2
 theme_override_constants/margin_left = 55
@@ -97,7 +116,7 @@ theme_override_constants/margin_bottom = 55
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1926873058]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 24
 
 [node name="TitleContainer" parent="MarginContainer/VBoxContainer" unique_id=66253800 instance=ExtResource("4_nnx66")]
 layout_mode = 2
@@ -113,10 +132,14 @@ size_flags_vertical = 4
 accepts_all_equipment = true
 equipment_slot = 1
 
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1463990891]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
 [node name="AffixPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=753532286]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(250, 315)
-custom_maximum_size = Vector2(250, 315)
+custom_minimum_size = Vector2(475, 630)
+custom_maximum_size = Vector2(475, 630)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -137,16 +160,38 @@ texture = ExtResource("6_lyqlw")
 expand_mode = 1
 stretch_mode = 1
 
+[node name="InnerCornerDarkRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/AffixPanel" unique_id=1685623846]
+self_modulate = Color(1.1291975, 1.1291975, 1.1291975, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.993, 0.995)
+texture = ExtResource("9_b7aj3")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="DarkenRect" type="TextureRect" parent="MarginContainer/VBoxContainer/AffixPanel" unique_id=744070049]
+self_modulate = Color(1, 1, 1, 0.42745098)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.99, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lyqlw")
+
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/AffixPanel" unique_id=1481370183]
 layout_mode = 2
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 32
 
 [node name="AffixContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/AffixPanel/MarginContainer" unique_id=1093067581]
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 
 [node name="DarkenNinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/AffixPanel" unique_id=1970285573]
 self_modulate = Color(1, 1, 1, 0.14509805)
@@ -171,13 +216,57 @@ patch_margin_bottom = 15
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="InnerCornerDarkRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/AffixPanel" unique_id=1685623846]
-self_modulate = Color(1.1291975, 1.1291975, 1.1291975, 1)
+[node name="AffixTitleContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/AffixPanel" unique_id=25050665]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -22)
+offset_transform_visual_only = false
+
+[node name="BGImage2" type="TextureRect" parent="MarginContainer/VBoxContainer/AffixPanel/AffixTitleContainer" unique_id=423688024]
+unique_name_in_owner = true
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+offset_transform_position = Vector2(0, 7)
+mouse_filter = 2
+texture = ExtResource("10_3u46h")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/AffixPanel/AffixTitleContainer" unique_id=913442698]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AffixPanel/AffixTitleContainer/MarginContainer" unique_id=333002389]
+layout_mode = 2
+theme = ExtResource("11_5iuvs")
+text = "Affixes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/AffixPanel/AffixTitleContainer" unique_id=1571849020]
+self_modulate = Color(1.353256, 1.2086483, 0.68583614, 1)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_lyqlw")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/AffixPanel/AffixTitleContainer" unique_id=1895306065]
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_scale = Vector2(0.993, 0.995)
-texture = ExtResource("9_b7aj3")
-draw_center = false
+texture = ExtResource("5_gctln")
+region_rect = Rect2(6, 6, 501, 501)
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
@@ -198,13 +287,13 @@ self_modulate = Color(1, 1, 1, 0.35686275)
 show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(1, 1)
-offset_transform_scale = Vector2(1.06, 1.3)
+offset_transform_scale = Vector2(1.035, 1.17)
 texture = SubResource("GradientTexture2D_5fv6l")
 expand_mode = 1
 
-[node name="BgRect" type="TextureRect" parent="MarginContainer/VBoxContainer/ButtonsPanel" unique_id=1541920932]
-self_modulate = Color(0.321125, 0.31849998, 0.35, 1)
+[node name="BgImage" type="TextureRect" parent="MarginContainer/VBoxContainer/ButtonsPanel" unique_id=1380098840]
+self_modulate = Color(0.28442502, 0.2821, 0.31, 1)
+material = SubResource("ShaderMaterial_6yc5g")
 layout_mode = 2
 texture = ExtResource("6_lyqlw")
 expand_mode = 1
@@ -217,13 +306,13 @@ mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer" unique_id=2052310864]
 layout_mode = 2
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="ButtonContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer" unique_id=1447291403]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1863051732]
@@ -231,28 +320,72 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="RemButton" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1928547599 instance=ExtResource("10_b7aj3")]
-custom_minimum_size = Vector2(55, 55)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 button_image = ExtResource("11_3u46h")
-image_size = Vector2(40, 40)
+text_size = 40
+button_color = Color(0.87, 0.77488, 0.73080003, 1)
+image_size = Vector2(70, 70)
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/RemButton" unique_id=1114901514]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.05, 1.05)
+texture = SubResource("GradientTexture2D_5fv6l")
+expand_mode = 1
 
 [node name="AddAButton" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=2087571673 instance=ExtResource("10_b7aj3")]
-custom_minimum_size = Vector2(55, 55)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 button_image = ExtResource("12_5iuvs")
-image_size = Vector2(40, 40)
+text_size = 40
+button_color = Color(0.87058824, 0.7764706, 0.7294118, 1)
+image_size = Vector2(70, 70)
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddAButton" unique_id=1013539044]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.05, 1.05)
+texture = SubResource("GradientTexture2D_5fv6l")
+expand_mode = 1
 
 [node name="AddIButton" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1489669812 instance=ExtResource("10_b7aj3")]
-custom_minimum_size = Vector2(55, 55)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 button_image = ExtResource("13_5fv6l")
-image_size = Vector2(40, 40)
+text_size = 40
+button_color = Color(0.87058824, 0.7764706, 0.7294118, 1)
+image_size = Vector2(70, 70)
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddIButton" unique_id=549045274]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.05, 1.05)
+texture = SubResource("GradientTexture2D_5fv6l")
+expand_mode = 1
 
 [node name="AddMAButton" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1869712785 instance=ExtResource("10_b7aj3")]
-custom_minimum_size = Vector2(55, 55)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 button_image = ExtResource("14_6yc5g")
-image_size = Vector2(40, 40)
+text_size = 40
+button_color = Color(0.87058824, 0.7764706, 0.7294118, 1)
+image_size = Vector2(70, 70)
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer/AddMAButton" unique_id=918727962]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.05, 1.05)
+texture = SubResource("GradientTexture2D_5fv6l")
+expand_mode = 1
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/ButtonsPanel/PanelContainer/MarginContainer/ButtonContainer" unique_id=1277144015]
 self_modulate = Color(1, 1, 1, 0)

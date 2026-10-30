@@ -46,8 +46,8 @@ func _reset_tooltip() -> void:
 	ilvl_label.show()
 	name_label.show()
 	affix_separator.show()
-	bux_rect.custom_minimum_size = Vector2(15,15)
-	price_label.add_theme_font_size_override("font_size", 14)
+	bux_rect.custom_minimum_size = Vector2(30,30)
+	price_label.add_theme_font_size_override("font_size", 28)
 
 func generate_tooltip(new_item:Item) -> void:
 	_reset_tooltip()
@@ -76,8 +76,8 @@ func _generate_gold_tooltip(_new_gold:GoldItem) -> void:
 	price_container.scale = Vector2(1.5,1.5)
 	name_label.text = "Pile of Bux"
 	ilvl_label.hide()
-	bux_rect.custom_minimum_size = Vector2(25,25)
-	price_label.add_theme_font_size_override("font_size", 24)
+	bux_rect.custom_minimum_size = Vector2(50,50)
+	price_label.add_theme_font_size_override("font_size", 48)
 
 func _generate_tome_tooltip(new_tome:Tome) -> void:
 	ilvl_label.text = new_tome.ability.ability_desc

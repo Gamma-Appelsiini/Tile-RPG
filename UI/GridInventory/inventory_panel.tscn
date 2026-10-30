@@ -77,11 +77,14 @@ stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=383082773]
 layout_mode = 2
-theme_override_constants/margin_top = 53
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 55
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=669698420]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 24
 
 [node name="TitleContainer" parent="MarginContainer/VBoxContainer" unique_id=66253800 instance=ExtResource("4_3v8tr")]
 layout_mode = 2
@@ -194,6 +197,10 @@ patch_margin_right = 15
 patch_margin_bottom = 15
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1569073715]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 
 [node name="CurrencyPanel" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=861710248 instance=ExtResource("3_n5pry")]
 layout_mode = 2
