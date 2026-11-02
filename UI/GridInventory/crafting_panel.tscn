@@ -288,6 +288,7 @@ show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.035, 1.17)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_5fv6l")
 expand_mode = 1
 
@@ -295,6 +296,7 @@ expand_mode = 1
 self_modulate = Color(0.28442502, 0.2821, 0.31, 1)
 material = SubResource("ShaderMaterial_6yc5g")
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("6_lyqlw")
 expand_mode = 1
 stretch_mode = 1
@@ -333,6 +335,7 @@ show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.05, 1.05)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_5fv6l")
 expand_mode = 1
 
@@ -350,6 +353,7 @@ show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.05, 1.05)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_5fv6l")
 expand_mode = 1
 
@@ -367,6 +371,7 @@ show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.05, 1.05)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_5fv6l")
 expand_mode = 1
 
@@ -384,6 +389,7 @@ show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.05, 1.05)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_5fv6l")
 expand_mode = 1
 
