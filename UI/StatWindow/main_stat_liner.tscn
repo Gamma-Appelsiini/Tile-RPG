@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bkkmsv4r1jb0v"]
+
+[ext_resource type="Script" uid="uid://dl05no1cgw0v" path="res://Tile-RPG/UI/StatWindow/main_stat_liner.gd" id="1_h4yal"]
+[ext_resource type="Texture2D" uid="uid://odqg5ea3oo3m" path="res://Tile-RPG/Images/UI/Crit.png" id="1_pnkq1"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="2_h4yal"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="3_uq6o3"]
+[ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="4_ce64j"]
+[ext_resource type="Texture2D" uid="uid://d2y04m3wxhnx8" path="res://Tile-RPG/Images/UI/Inv/add_point.png" id="5_c6gew"]
+[ext_resource type="Texture2D" uid="uid://drcedgqjk6ocq" path="res://Tile-RPG/Images/UI/Borders/blank_borders.png" id="6_w5v13"]
+
+[node name="MainStatLine" type="MarginContainer" unique_id=1289687495 node_paths=PackedStringArray("stat_pic", "stat_label", "number_label", "increase_stat_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h4yal")
+stat_pic = NodePath("HBoxContainer/StatPic")
+stat_label = NodePath("HBoxContainer/StatLabel")
+number_label = NodePath("HBoxContainer/NumberLabel")
+increase_stat_button = NodePath("HBoxContainer/MarginContainer/IncreaseStatButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=287024432]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="StatPic" type="TextureRect" parent="HBoxContainer" unique_id=1796536059]
+custom_minimum_size = Vector2(65, 65)
+custom_maximum_size = Vector2(65, 65)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_pnkq1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatLabel" type="Label" parent="HBoxContainer" unique_id=394729541]
+layout_mode = 2
+theme = ExtResource("2_h4yal")
+theme_override_font_sizes/font_size = 30
+text = "Agility:"
+
+[node name="NumberLabel" type="Label" parent="HBoxContainer" unique_id=1201802255]
+layout_mode = 2
+theme = ExtResource("3_uq6o3")
+theme_override_font_sizes/font_size = 40
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1076059873]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="IncreaseStatButton" parent="HBoxContainer/MarginContainer" unique_id=723060951 instance=ExtResource("4_ce64j")]
+custom_maximum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="XRect" parent="HBoxContainer/MarginContainer/IncreaseStatButton/MarginContainer" parent_id_path=PackedInt32Array(723060951, 520904745) index="2" unique_id=1482157595]
+texture = ExtResource("5_c6gew")
+
+[node name="Border" parent="HBoxContainer/MarginContainer/IncreaseStatButton" index="3" unique_id=528339197]
+texture = ExtResource("6_w5v13")
+
+[editable path="HBoxContainer/MarginContainer/IncreaseStatButton"]

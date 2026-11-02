@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://b7ih58uwp6kfj"]
+
+[ext_resource type="Script" uid="uid://d4pmudb7ojr3" path="res://Tile-RPG/UI/StatWindow/portrait_panel.gd" id="1_blgtj"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="1_xf2j1"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="2_rjyb4"]
+[ext_resource type="Texture2D" uid="uid://cvw3ohynhqnkj" path="res://Tile-RPG/Images/Portraits/TestPortrait.png" id="3_vvt5l"]
+[ext_resource type="Texture2D" uid="uid://drcedgqjk6ocq" path="res://Tile-RPG/Images/UI/Borders/blank_borders.png" id="4_blgtj"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_rjyb4"]
+[ext_resource type="FontFile" uid="uid://24hmrcin6ag5" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-SemiBold.ttf" id="6_vvt5l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blgtj"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[node name="PortraitPanel" type="MarginContainer" unique_id=1749545140 node_paths=PackedStringArray("name_label", "lvl_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -303.5
+offset_right = 187.5
+offset_bottom = 303.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+script = ExtResource("1_blgtj")
+name_label = NodePath("MarginContainer/VBoxContainer/NameContainer/MarginContainer/HBoxContainer/NameLabel")
+lvl_label = NodePath("MarginContainer/VBoxContainer/NameContainer/MarginContainer/HBoxContainer/LvlLabel")
+game_char_pic_rect = NodePath("MarginContainer/VBoxContainer/PicContainer/GameCharPicRect")
+hp_prog_bar = NodePath("MarginContainer/VBoxContainer/HPContainer/HpProgBar")
+hp_label = NodePath("MarginContainer/VBoxContainer/HPContainer/HPLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1111110615]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=355471506]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="NameContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=823045945]
+layout_mode = 2
+
+[node name="BGImage" type="TextureRect" parent="MarginContainer/VBoxContainer/NameContainer" unique_id=1450034714]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xf2j1")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NameContainer" unique_id=1670523164]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NameContainer/MarginContainer" unique_id=1483395666]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/NameContainer/MarginContainer/HBoxContainer" unique_id=436291836]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Jack, Faithful"
+
+[node name="LvlLabel" type="Label" parent="MarginContainer/VBoxContainer/NameContainer/MarginContainer/HBoxContainer" unique_id=167290393]
+self_modulate = Color(0.9943376, 0.8817401, 0.4269443, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/line_spacing = -2
+theme_override_constants/paragraph_spacing = -3
+theme_override_font_sizes/font_size = 26
+text = "Lvl 5"
+horizontal_alignment = 2
+
+[node name="GoldRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NameContainer" unique_id=2086961935]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("2_rjyb4")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="PicContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2048093109]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="GameCharPicRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=1058194908]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_vvt5l")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=136820796]
+layout_mode = 2
+theme_override_constants/margin_left = 19
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 24
+
+[node name="InnerCornerShadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PicContainer/MarginContainer" unique_id=1394631819]
+layout_mode = 2
+offset_transform_scale = Vector2(0.885, 0.93)
+texture = ExtResource("4_rjyb4")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="StoneRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=70542049]
+self_modulate = Color(0.8, 0.8, 0.8, 1)
+layout_mode = 2
+texture = ExtResource("4_blgtj")
+
+[node name="GoldRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=159186240]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("2_rjyb4")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="HPContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1892777932]
+layout_mode = 2
+
+[node name="BGImage" type="TextureRect" parent="MarginContainer/VBoxContainer/HPContainer" unique_id=220826040]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xf2j1")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="HpProgBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HPContainer" unique_id=2082576691]
+texture_filter = 1
+custom_minimum_size = Vector2(325, 40)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_blgtj")
+value = 55.0
+rounded = true
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="MarginContainer/VBoxContainer/HPContainer" unique_id=1869397191]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_vvt5l")
+theme_override_font_sizes/font_size = 32
+text = "25 / 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HPContainer" unique_id=92643698]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("2_rjyb4")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

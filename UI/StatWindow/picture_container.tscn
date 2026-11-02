@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://p73hmiwkq3cm"]
+[gd_scene format=3 uid="uid://p73hmiwkq3cm"]
 
 [ext_resource type="Script" uid="uid://gc40tv5b62wy" path="res://Tile-RPG/UI/StatWindow/picture_container.gd" id="1_hi05f"]
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="2_kwu2l"]
@@ -46,7 +46,7 @@ texture_margin_bottom = 8.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rc1ih"]
 bg_color = Color(0.3846482, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
+[node name="VBoxContainer" type="VBoxContainer" unique_id=1703353254 node_paths=PackedStringArray("name_label", "level_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
@@ -59,17 +59,17 @@ game_char_pic_rect = NodePath("PanelContainer2/PanelContainer/GameCharPicRect")
 hp_prog_bar = NodePath("PanelContainer/HpProgBar")
 hp_label = NodePath("PanelContainer/HpLabel")
 
-[node name="PanelContainer3" type="PanelContainer" parent="."]
-clip_contents = true
+[node name="PanelContainer3" type="PanelContainer" parent="." unique_id=2109515859]
 custom_minimum_size = Vector2(0, 45)
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_1652o")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer3" unique_id=1177203308]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="PanelContainer3/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="PanelContainer3/HBoxContainer" unique_id=1879655971]
 layout_mode = 2
 theme = ExtResource("2_kwu2l")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -79,7 +79,7 @@ text = "Default Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LvlLabel" type="Label" parent="PanelContainer3/HBoxContainer"]
+[node name="LvlLabel" type="Label" parent="PanelContainer3/HBoxContainer" unique_id=1444152662]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_kwu2l")
@@ -90,19 +90,19 @@ text = "Lvl 1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=592931925]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxTexture_lte2h")
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2" unique_id=628752054]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_kwu2l")
 
-[node name="GameCharPicRect" type="TextureRect" parent="PanelContainer2/PanelContainer"]
+[node name="GameCharPicRect" type="TextureRect" parent="PanelContainer2/PanelContainer" unique_id=402270012]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
@@ -112,11 +112,11 @@ texture = ExtResource("3_ehtug")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/PanelContainer" unique_id=1229503730]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer2/PanelContainer/PanelContainer"]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer2/PanelContainer/PanelContainer" unique_id=1848898146]
 layout_mode = 2
 texture = ExtResource("5_kwu2l")
 patch_margin_left = 10
@@ -124,12 +124,12 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1281625771]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_4rbcs")
 
-[node name="HpProgBar" type="ProgressBar" parent="PanelContainer"]
+[node name="HpProgBar" type="ProgressBar" parent="PanelContainer" unique_id=1272890663]
 unique_name_in_owner = true
 texture_filter = 1
 custom_minimum_size = Vector2(250, 20)
@@ -141,7 +141,7 @@ value = 55.0
 rounded = true
 show_percentage = false
 
-[node name="HpLabel" type="Label" parent="PanelContainer"]
+[node name="HpLabel" type="Label" parent="PanelContainer" unique_id=217067883]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("10_bbh2h")

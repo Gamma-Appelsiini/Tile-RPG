@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://deu2pbwudigdv"]
+
+[ext_resource type="Script" uid="uid://v3ald0wdxt6t" path="res://Tile-RPG/UI/StatWindow/main_stats_panel.gd" id="1_qp3ob"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_0smep"]
+[ext_resource type="Texture2D" uid="uid://bb4pslvdsc2gf" path="res://Tile-RPG/Images/texture_images/Rock023_color.jpg" id="3_8n4oq"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="3_iv5u7"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="3_rg6d2"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="4_8n4oq"]
+
+[node name="MainStatsPanel" type="MarginContainer" unique_id=2083065335 node_paths=PackedStringArray("stats_container")]
+custom_minimum_size = Vector2(500, 500)
+custom_maximum_size = Vector2(500, 1000)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("1_qp3ob")
+stats_container = NodePath("MarginContainer/StatsContainer")
+
+[node name="BGImage" type="TextureRect" parent="." unique_id=1696657322]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_0smep")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MainStatTitleContainer" type="MarginContainer" parent="." unique_id=508513177]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -27)
+offset_transform_visual_only = false
+
+[node name="BGImage2" type="TextureRect" parent="MainStatTitleContainer" unique_id=1049724228]
+self_modulate = Color(0.29, 0.29, 0.29, 1)
+layout_mode = 2
+offset_transform_position = Vector2(0, 7)
+mouse_filter = 2
+texture = ExtResource("3_8n4oq")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MainStatTitleContainer" unique_id=1681521154]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="MainStatTitleContainer/MarginContainer" unique_id=1360141010]
+layout_mode = 2
+theme = ExtResource("3_iv5u7")
+theme_override_font_sizes/font_size = 32
+text = "Main Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainStatTitleContainer" unique_id=436123003]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_8n4oq")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="MainStatTitleContainer" unique_id=662230104]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("3_rg6d2")
+region_rect = Rect2(6, 6, 501, 501)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1179605087]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_bottom = 30
+
+[node name="StatsContainer" type="VBoxContainer" parent="MarginContainer" unique_id=8043305]
+layout_mode = 2
+theme_override_constants/separation = -14
+
+[node name="GoldRect" type="NinePatchRect" parent="." unique_id=986490902]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("3_rg6d2")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
