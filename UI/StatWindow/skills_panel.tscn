@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://cpubrn7bw2l70"]
+
+[ext_resource type="Script" uid="uid://c66yt3kyekpb5" path="res://Tile-RPG/UI/StatWindow/skills_panel.gd" id="1_6mdiq"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="1_8gs2r"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="2_6mdiq"]
+[ext_resource type="Texture2D" uid="uid://bb4pslvdsc2gf" path="res://Tile-RPG/Images/texture_images/Rock023_color.jpg" id="3_pjjs3"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="4_kwbsa"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="5_xhuk5"]
+
+[node name="SkillsPanel" type="MarginContainer" unique_id=244345404 node_paths=PackedStringArray("skills_container")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.5
+offset_top = -45.0
+offset_right = 140.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6mdiq")
+skills_container = NodePath("MarginContainer/SkillsContainer")
+
+[node name="BGImage" type="TextureRect" parent="." unique_id=329312259]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_8gs2r")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GoldRect" type="NinePatchRect" parent="." unique_id=1619946957]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("2_6mdiq")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TitleContainer" type="MarginContainer" parent="." unique_id=1944921827]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -27)
+offset_transform_visual_only = false
+
+[node name="BGImage2" type="TextureRect" parent="TitleContainer" unique_id=1503333737]
+self_modulate = Color(0.29, 0.29, 0.29, 1)
+layout_mode = 2
+offset_transform_position = Vector2(0, 7)
+mouse_filter = 2
+texture = ExtResource("3_pjjs3")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleContainer" unique_id=27864841]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="TitleContainer/MarginContainer" unique_id=43198158]
+layout_mode = 2
+theme = ExtResource("4_kwbsa")
+theme_override_font_sizes/font_size = 32
+text = "Skills"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TitleContainer" unique_id=807362117]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_xhuk5")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="TitleContainer" unique_id=1067124115]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("2_6mdiq")
+region_rect = Rect2(6, 6, 501, 501)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=558797124]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 55
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 35
+
+[node name="SkillsContainer" type="HBoxContainer" parent="MarginContainer" unique_id=424211037]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+alignment = 1

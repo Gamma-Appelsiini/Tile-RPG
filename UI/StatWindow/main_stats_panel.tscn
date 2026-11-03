@@ -8,13 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="4_8n4oq"]
 
 [node name="MainStatsPanel" type="MarginContainer" unique_id=2083065335 node_paths=PackedStringArray("stats_container")]
-custom_minimum_size = Vector2(500, 500)
-custom_maximum_size = Vector2(500, 1000)
+custom_minimum_size = Vector2(200, 500)
+custom_maximum_size = Vector2(700, 1000)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_qp3ob")
 stats_container = NodePath("MarginContainer/StatsContainer")
@@ -87,13 +88,13 @@ axis_stretch_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1179605087]
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 45
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 55
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 35
 
 [node name="StatsContainer" type="VBoxContainer" parent="MarginContainer" unique_id=8043305]
 layout_mode = 2
-theme_override_constants/separation = -14
 
 [node name="GoldRect" type="NinePatchRect" parent="." unique_id=986490902]
 layout_mode = 2

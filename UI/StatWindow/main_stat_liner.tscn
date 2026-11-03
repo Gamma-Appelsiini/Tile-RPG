@@ -2,66 +2,172 @@
 
 [ext_resource type="Script" uid="uid://dl05no1cgw0v" path="res://Tile-RPG/UI/StatWindow/main_stat_liner.gd" id="1_h4yal"]
 [ext_resource type="Texture2D" uid="uid://odqg5ea3oo3m" path="res://Tile-RPG/Images/UI/Crit.png" id="1_pnkq1"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_ce64j"]
 [ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="2_h4yal"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="3_uq6o3"]
 [ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="4_ce64j"]
 [ext_resource type="Texture2D" uid="uid://d2y04m3wxhnx8" path="res://Tile-RPG/Images/UI/Inv/add_point.png" id="5_c6gew"]
 [ext_resource type="Texture2D" uid="uid://drcedgqjk6ocq" path="res://Tile-RPG/Images/UI/Borders/blank_borders.png" id="6_w5v13"]
+[ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="9_c6gew"]
 
 [node name="MainStatLine" type="MarginContainer" unique_id=1289687495 node_paths=PackedStringArray("stat_pic", "stat_label", "number_label", "increase_stat_button")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = -31.5
+offset_right = 151.5
+offset_bottom = 31.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h4yal")
-stat_pic = NodePath("HBoxContainer/StatPic")
-stat_label = NodePath("HBoxContainer/StatLabel")
-number_label = NodePath("HBoxContainer/NumberLabel")
-increase_stat_button = NodePath("HBoxContainer/MarginContainer/IncreaseStatButton")
+stat_pic = NodePath("MarginContainer/HBoxContainer2/StatNamePicContainer/MarginContainer/HBoxContainer/MarginContainer/StatPic")
+stat_label = NodePath("MarginContainer/HBoxContainer2/StatNamePicContainer/MarginContainer/HBoxContainer/StatLabel")
+number_label = NodePath("MarginContainer/HBoxContainer2/StatAmountContainer/NumberLabel")
+increase_stat_button = NodePath("MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=287024432]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1750812805]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer" unique_id=2056262378]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="StatNamePicContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2" unique_id=476264112]
+custom_minimum_size = Vector2(265, 0)
+layout_mode = 2
+
+[node name="BGImage" type="TextureRect" parent="MarginContainer/HBoxContainer2/StatNamePicContainer" unique_id=1341339443]
+self_modulate = Color(0.21, 0.21, 0.21, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ce64j")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2/StatNamePicContainer" unique_id=316597527]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/StatNamePicContainer/MarginContainer" unique_id=287024432]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 12
 
-[node name="StatPic" type="TextureRect" parent="HBoxContainer" unique_id=1796536059]
-custom_minimum_size = Vector2(65, 65)
-custom_maximum_size = Vector2(65, 65)
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2/StatNamePicContainer/MarginContainer/HBoxContainer" unique_id=1550115839]
 layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="StatPic" type="TextureRect" parent="MarginContainer/HBoxContainer2/StatNamePicContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1796536059]
+custom_minimum_size = Vector2(45, 45)
+custom_maximum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
 mouse_filter = 2
 texture = ExtResource("1_pnkq1")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StatLabel" type="Label" parent="HBoxContainer" unique_id=394729541]
+[node name="StatLabel" type="Label" parent="MarginContainer/HBoxContainer2/StatNamePicContainer/MarginContainer/HBoxContainer" unique_id=394729541]
 layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 3)
 theme = ExtResource("2_h4yal")
-theme_override_font_sizes/font_size = 30
-text = "Agility:"
+theme_override_font_sizes/font_size = 26
+text = "Endurance"
+vertical_alignment = 2
 
-[node name="NumberLabel" type="Label" parent="HBoxContainer" unique_id=1201802255]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer2/StatNamePicContainer" unique_id=1863116134]
 layout_mode = 2
+texture = ExtResource("9_c6gew")
+draw_center = false
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="StatAmountContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2" unique_id=1140901515]
+custom_minimum_size = Vector2(90, 45)
+layout_mode = 2
+
+[node name="BGImage" type="TextureRect" parent="MarginContainer/HBoxContainer2/StatAmountContainer" unique_id=93578441]
+self_modulate = Color(0.21, 0.21, 0.21, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ce64j")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="NumberLabel" type="Label" parent="MarginContainer/HBoxContainer2/StatAmountContainer" unique_id=1201802255]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -3)
 theme = ExtResource("3_uq6o3")
 theme_override_font_sizes/font_size = 40
-text = "1"
-horizontal_alignment = 2
+text = "8888"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1076059873]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer2/StatAmountContainer" unique_id=1911903481]
 layout_mode = 2
-size_flags_horizontal = 10
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_right = 30
+texture = ExtResource("9_c6gew")
+draw_center = false
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="IncreaseStatButton" parent="HBoxContainer/MarginContainer" unique_id=723060951 instance=ExtResource("4_ce64j")]
-custom_maximum_size = Vector2(45, 45)
+[node name="ButtonContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2" unique_id=1076059873]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/margin_left = 13
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="IncreaseStatButton" parent="MarginContainer/HBoxContainer2/ButtonContainer" unique_id=723060951 instance=ExtResource("4_ce64j")]
+custom_minimum_size = Vector2(55, 55)
+custom_maximum_size = Vector2(55, 55)
 layout_mode = 2
 
-[node name="XRect" parent="HBoxContainer/MarginContainer/IncreaseStatButton/MarginContainer" parent_id_path=PackedInt32Array(723060951, 520904745) index="2" unique_id=1482157595]
+[node name="BG" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton" index="0" unique_id=864436787]
+offset_transform_enabled = false
+
+[node name="MarginContainer" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton" index="1" unique_id=520904745]
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton/MarginContainer" index="0" unique_id=394209741]
+expand_mode = 1
+
+[node name="XRect" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton/MarginContainer" index="2" unique_id=1482157595]
 texture = ExtResource("5_c6gew")
 
-[node name="Border" parent="HBoxContainer/MarginContainer/IncreaseStatButton" index="3" unique_id=528339197]
+[node name="SelectGlow" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton" index="2" unique_id=165518941]
+offset_transform_scale = Vector2(0.95, 0.95)
+
+[node name="Border" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton" index="3" unique_id=528339197]
+self_modulate = Color(0.73892075, 0.73892075, 0.73892075, 1)
 texture = ExtResource("6_w5v13")
 
-[editable path="HBoxContainer/MarginContainer/IncreaseStatButton"]
+[editable path="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton"]

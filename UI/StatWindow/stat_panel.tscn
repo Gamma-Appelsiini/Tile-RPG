@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cs0lekbgmxbn6"]
+
+[ext_resource type="Script" uid="uid://b7fi17siknnvx" path="res://Tile-RPG/UI/StatWindow/stat_panel.gd" id="1_g5qg3"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_baty6"]
+[ext_resource type="Texture2D" uid="uid://odqg5ea3oo3m" path="res://Tile-RPG/Images/UI/Crit.png" id="3_lur1r"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_qg3m0"]
+[ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="5_wwx3u"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="6_83t1g"]
+
+[node name="StatPanel" type="MarginContainer" unique_id=554032188 node_paths=PackedStringArray("amount_label", "stat_name_label", "stat_pic")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g5qg3")
+amount_label = NodePath("VBoxContainer/StatAmountContainer/AmountLabel")
+stat_name_label = NodePath("VBoxContainer/StatNamePicContainer/MarginContainer/HBoxContainer/StatNameLabel")
+stat_pic = NodePath("VBoxContainer/StatNamePicContainer/MarginContainer/HBoxContainer/MarginContainer/StatPic")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=921423625]
+layout_mode = 2
+
+[node name="StatNamePicContainer" type="MarginContainer" parent="VBoxContainer" unique_id=163839629]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BGImage" type="TextureRect" parent="VBoxContainer/StatNamePicContainer" unique_id=1824018902]
+self_modulate = Color(0.21, 0.21, 0.21, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_baty6")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/StatNamePicContainer" unique_id=868860194]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/StatNamePicContainer/MarginContainer" unique_id=847645112]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/StatNamePicContainer/MarginContainer/HBoxContainer" unique_id=2023818794]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 1
+
+[node name="StatPic" type="TextureRect" parent="VBoxContainer/StatNamePicContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=2016966424]
+custom_minimum_size = Vector2(45, 45)
+custom_maximum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+texture = ExtResource("3_lur1r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatNameLabel" type="Label" parent="VBoxContainer/StatNamePicContainer/MarginContainer/HBoxContainer" unique_id=1848212503]
+layout_mode = 2
+size_flags_horizontal = 6
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 3)
+theme = ExtResource("4_qg3m0")
+theme_override_font_sizes/font_size = 26
+text = "Endurance"
+vertical_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/StatNamePicContainer" unique_id=2088894827]
+layout_mode = 2
+texture = ExtResource("5_wwx3u")
+draw_center = false
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="StatAmountContainer" type="MarginContainer" parent="VBoxContainer" unique_id=951245294]
+custom_minimum_size = Vector2(90, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BGImage" type="TextureRect" parent="VBoxContainer/StatAmountContainer" unique_id=460576479]
+self_modulate = Color(0.21, 0.21, 0.21, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_baty6")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer/StatAmountContainer" unique_id=496700298]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -3)
+theme = ExtResource("6_83t1g")
+theme_override_font_sizes/font_size = 40
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/StatAmountContainer" unique_id=975373944]
+layout_mode = 2
+texture = ExtResource("5_wwx3u")
+draw_center = false
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

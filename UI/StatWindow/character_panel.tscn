@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://d227kb7bii1ko" path="res://Tile-RPG/UI/GridInventory/title_container.tscn" id="3_pahkc"]
 [ext_resource type="PackedScene" uid="uid://b7ih58uwp6kfj" path="res://Tile-RPG/UI/StatWindow/portrait_panel.tscn" id="4_4miw3"]
 [ext_resource type="PackedScene" uid="uid://deu2pbwudigdv" path="res://Tile-RPG/UI/StatWindow/main_stats_panel.tscn" id="5_iwvd0"]
+[ext_resource type="PackedScene" uid="uid://cpubrn7bw2l70" path="res://Tile-RPG/UI/StatWindow/skills_panel.tscn" id="6_7jjme"]
+[ext_resource type="PackedScene" uid="uid://di5dmavoit2d1" path="res://Tile-RPG/UI/StatWindow/defences_panel.tscn" id="7_va55r"]
+[ext_resource type="PackedScene" uid="uid://cvig8jb1sparu" path="res://Tile-RPG/UI/StatWindow/resistances_panel.tscn" id="8_glfm7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iwvd0"]
 resource_local_to_scene = true
@@ -65,13 +68,25 @@ size_flags_vertical = 0
 [node name="Label" parent="MarginContainer/VBoxContainer/TitleContainer/MarginContainer" parent_id_path=PackedInt32Array(66253800, 56589979) index="0" unique_id=1008513108]
 text = "Character"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1450838573]
+[node name="PortraitMainstats" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1450838573]
 layout_mode = 2
 
-[node name="PortraitPanel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1749545140 instance=ExtResource("4_4miw3")]
+[node name="PortraitPanel" parent="MarginContainer/VBoxContainer/PortraitMainstats" unique_id=1749545140 instance=ExtResource("4_4miw3")]
 layout_mode = 2
 
-[node name="MainStatsPanel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2083065335 instance=ExtResource("5_iwvd0")]
+[node name="MainStatsPanel" parent="MarginContainer/VBoxContainer/PortraitMainstats" unique_id=2083065335 instance=ExtResource("5_iwvd0")]
+layout_mode = 2
+
+[node name="SkillsOpenRestStats" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=93235132]
+layout_mode = 2
+
+[node name="SkillsPanel" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats" unique_id=244345404 instance=ExtResource("6_7jjme")]
+layout_mode = 2
+
+[node name="DefencesPanel" parent="MarginContainer/VBoxContainer" unique_id=945658888 instance=ExtResource("7_va55r")]
+layout_mode = 2
+
+[node name="ResistancesPanel" parent="MarginContainer/VBoxContainer" unique_id=1287393770 instance=ExtResource("8_glfm7")]
 layout_mode = 2
 
 [node name="GenericBorders" parent="." unique_id=1423847941 instance=ExtResource("3_4miw3")]

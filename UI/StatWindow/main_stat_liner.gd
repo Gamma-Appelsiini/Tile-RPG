@@ -30,3 +30,8 @@ func _increase_player_stat(stat_to_increase:Stats.MainStat = line_stat_type) -> 
 	
 	player.stat_handler.update_stat(Stats.CharStat.STATS_TO_ALLOCATE, -1)
 	player.stat_handler.update_stat(stat_to_increase, 1)
+
+func update_amount(stat_handler:StatHandler) -> void:
+	number_label.text = str(stat_handler.get_stat_amount(line_stat_type))
+	if stat_handler.get_stat_amount(Stats.CharStat.STATS_TO_ALLOCATE) > 0: increase_stat_button.show()
+	else: increase_stat_button.hide()
