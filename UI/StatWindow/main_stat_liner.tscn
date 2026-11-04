@@ -10,6 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://drcedgqjk6ocq" path="res://Tile-RPG/Images/UI/Borders/blank_borders.png" id="6_w5v13"]
 [ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="9_c6gew"]
 
+[sub_resource type="Gradient" id="Gradient_ua4u6"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ce64j"]
+gradient = SubResource("Gradient_ua4u6")
+fill_from = Vector2(1, 1)
+
 [node name="MainStatLine" type="MarginContainer" unique_id=1289687495 node_paths=PackedStringArray("stat_pic", "stat_label", "number_label", "increase_stat_button")]
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,6 +108,17 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[node name="Shadow" type="TextureRect" parent="MarginContainer/HBoxContainer2/StatNamePicContainer" unique_id=2070492949]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+offset_transform_scale = Vector2(1.018, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ce64j")
+expand_mode = 1
+
 [node name="StatAmountContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2" unique_id=1140901515]
 custom_minimum_size = Vector2(90, 45)
 layout_mode = 2
@@ -135,6 +153,17 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[node name="Shadow" type="TextureRect" parent="MarginContainer/HBoxContainer2/StatAmountContainer" unique_id=709268951]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+offset_transform_scale = Vector2(1.018, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ce64j")
+expand_mode = 1
+
 [node name="ButtonContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2" unique_id=1076059873]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -167,7 +196,18 @@ texture = ExtResource("5_c6gew")
 offset_transform_scale = Vector2(0.95, 0.95)
 
 [node name="Border" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton" index="3" unique_id=528339197]
-self_modulate = Color(0.73892075, 0.73892075, 0.73892075, 1)
+self_modulate = Color(1.3622323, 1.138117, 0.13978544, 1)
 texture = ExtResource("6_w5v13")
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton" unique_id=1360758450]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+offset_transform_scale = Vector2(1.018, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ce64j")
+expand_mode = 1
 
 [editable path="MarginContainer/HBoxContainer2/ButtonContainer/IncreaseStatButton"]

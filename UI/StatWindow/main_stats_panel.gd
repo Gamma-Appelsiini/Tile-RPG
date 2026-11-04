@@ -9,7 +9,6 @@ var main_stat_lines:Array[MainStatLiner] = []
 
 func _ready() -> void:
 	fill_main_stats()
-	#GlobalSignals.player.stat_handler.stats_changed.connect(_update_main_stats)
 
 func fill_main_stats() -> void:
 	for stat:Stats.MainStat in Stats.MainStat.values():
@@ -18,6 +17,6 @@ func fill_main_stats() -> void:
 		stats_container.add_child(new_main_stats_line)
 		main_stat_lines.push_back(new_main_stats_line)
 		
-func _update_main_stats() -> void:
+func update_stats(stat_handler:StatHandler) -> void:
 	for main_stat_line:MainStatLiner in main_stat_lines:
-		main_stat_line.update_amount(GlobalSignals.player.stat_handler)
+		main_stat_line.update_amount(stat_handler)

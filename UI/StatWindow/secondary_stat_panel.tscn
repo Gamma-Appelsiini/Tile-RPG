@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://c4ee8g73y826e"]
+
+[ext_resource type="Script" uid="uid://cdysok57x57w7" path="res://Tile-RPG/UI/StatWindow/secondary_stat_panel.gd" id="1_hddf8"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_lwcs7"]
+[ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="3_30n7i"]
+[ext_resource type="Theme" uid="uid://ccdo4mxej4pk4" path="res://Tile-RPG/UI/StatWindow/number_theme.tres" id="4_u8fd2"]
+[ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="5_7wsup"]
+[ext_resource type="Texture2D" uid="uid://bb4pslvdsc2gf" path="res://Tile-RPG/Images/texture_images/Rock023_color.jpg" id="6_7wsup"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="7_6xcmk"]
+[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="8_203bf"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="9_5t2ky"]
+[ext_resource type="Texture2D" uid="uid://pn56hlyiv6wu" path="res://Tile-RPG/Images/UI/Borders/diamond_button2.png" id="10_6xcmk"]
+
+[sub_resource type="Gradient" id="Gradient_kwbsa"]
+offsets = PackedFloat32Array(0, 0.99789476)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7wsup"]
+gradient = SubResource("Gradient_kwbsa")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.46438748)
+
+[node name="SecondaryStatsPanel" type="MarginContainer" unique_id=1576975181 node_paths=PackedStringArray("stats_container", "hbox_container", "stat_label", "number_label")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.5
+offset_top = -31.0
+offset_right = 212.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hddf8")
+stats_container = NodePath("MarginContainer/StatsContainer")
+hbox_container = NodePath("HBoxContainer")
+stat_label = NodePath("HBoxContainer/StatLabel")
+number_label = NodePath("HBoxContainer/NumberLabel")
+
+[node name="BGImage" type="TextureRect" parent="." unique_id=1034858443]
+self_modulate = Color(0.21, 0.21, 0.21, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_lwcs7")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="DarkenRect" type="TextureRect" parent="." unique_id=1090389519]
+self_modulate = Color(1, 1, 1, 0.25882354)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.99, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_7wsup")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1202958652]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 30
+
+[node name="StatsContainer" type="VBoxContainer" parent="MarginContainer" unique_id=170250655]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=803564282]
+layout_mode = 2
+texture = ExtResource("3_30n7i")
+draw_center = false
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2031287027]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StatLabel" type="Label" parent="HBoxContainer" unique_id=1859046548]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 3)
+theme = ExtResource("4_u8fd2")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9647059)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 26
+text = "Endurance"
+vertical_alignment = 2
+
+[node name="NumberLabel" type="Label" parent="HBoxContainer" unique_id=1750822124]
+layout_mode = 2
+size_flags_horizontal = 10
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -3)
+theme = ExtResource("5_7wsup")
+theme_override_font_sizes/font_size = 40
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleContainer" type="MarginContainer" parent="." unique_id=1597370667]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -27)
+offset_transform_visual_only = false
+
+[node name="BGImage2" type="TextureRect" parent="TitleContainer" unique_id=107440001]
+self_modulate = Color(0.29, 0.29, 0.29, 1)
+layout_mode = 2
+offset_transform_position = Vector2(0, 7)
+mouse_filter = 2
+texture = ExtResource("6_7wsup")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleContainer" unique_id=1948573442]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="TitleContainer/MarginContainer" unique_id=2104188417]
+layout_mode = 2
+theme = ExtResource("7_6xcmk")
+theme_override_font_sizes/font_size = 32
+text = "Secondary Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TitleContainer" unique_id=312847114]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_203bf")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="InnerCornerRect" type="NinePatchRect" parent="TitleContainer" unique_id=1550785808]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("9_5t2ky")
+region_rect = Rect2(6, 6, 501, 501)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="LeftDiamond" type="TextureProgressBar" parent="." unique_id=940421053]
+self_modulate = Color(0.84, 0.75179994, 0.66359997, 1)
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-30, 0)
+offset_transform_scale = Vector2(2, 2)
+mouse_filter = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("10_6xcmk")

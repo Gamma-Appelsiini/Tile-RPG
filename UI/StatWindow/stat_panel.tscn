@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="5_wwx3u"]
 [ext_resource type="Theme" uid="uid://da54lm3jymm33" path="res://Tile-RPG/UI/StatWindow/brown_label_theme.tres" id="6_83t1g"]
 
+[sub_resource type="Gradient" id="Gradient_g5qg3"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g5qg3"]
+gradient = SubResource("Gradient_g5qg3")
+fill_from = Vector2(1, 1)
+
 [node name="StatPanel" type="MarginContainer" unique_id=554032188 node_paths=PackedStringArray("amount_label", "stat_name_label", "stat_pic")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,10 +27,21 @@ stat_pic = NodePath("VBoxContainer/StatNamePicContainer/MarginContainer/HBoxCont
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=921423625]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="StatNamePicContainer" type="MarginContainer" parent="VBoxContainer" unique_id=163839629]
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/StatNamePicContainer" unique_id=713618883]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+offset_transform_scale = Vector2(1.018, 1)
+texture = SubResource("GradientTexture2D_g5qg3")
+expand_mode = 1
 
 [node name="BGImage" type="TextureRect" parent="VBoxContainer/StatNamePicContainer" unique_id=1824018902]
 self_modulate = Color(0.21, 0.21, 0.21, 1)
@@ -118,3 +136,13 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/StatAmountContainer" unique_id=578945406]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+offset_transform_scale = Vector2(1.018, 1)
+texture = SubResource("GradientTexture2D_g5qg3")
+expand_mode = 1

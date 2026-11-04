@@ -6,6 +6,24 @@
 [ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="3_i0v8l"]
 [ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="4_brqea"]
 [ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="5_nmtp0"]
+[ext_resource type="Texture2D" uid="uid://cf6r732vx6cso" path="res://Tile-RPG/Images/UI/Borders/border_inner512.png" id="7_brqea"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="8_nmtp0"]
+
+[sub_resource type="Gradient" id="Gradient_j1tjm"]
+offsets = PackedFloat32Array(0, 0.99789476)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_brqea"]
+gradient = SubResource("Gradient_j1tjm")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.46438748)
+
+[sub_resource type="Gradient" id="Gradient_g5qg3"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nmtp0"]
+gradient = SubResource("Gradient_g5qg3")
+fill_from = Vector2(1, 1)
 
 [node name="ResistancesPanel" type="MarginContainer" unique_id=1287393770 node_paths=PackedStringArray("stats_container")]
 anchors_preset = 8
@@ -24,12 +42,20 @@ use_resistances = true
 stats_container = NodePath("MarginContainer/StatsContainer")
 
 [node name="BGImage" type="TextureRect" parent="." unique_id=520068821]
-self_modulate = Color(0.12, 0.12, 0.12, 1)
+self_modulate = Color(0.47, 0.45057333, 0.43240002, 1)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("1_vxmss")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="DarkenRect" type="TextureRect" parent="." unique_id=742254266]
+self_modulate = Color(1, 1, 1, 0.42745098)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.99, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_brqea")
 
 [node name="TitleContainer" type="MarginContainer" parent="." unique_id=644899795]
 z_index = 1
@@ -93,16 +119,53 @@ axis_stretch_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 55
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 45
 
 [node name="StatsContainer" type="GridContainer" parent="MarginContainer" unique_id=1892946635]
 layout_mode = 2
-theme_override_constants/h_separation = 8
+theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 16
 columns = 3
+
+[node name="InnerCornerContainer" type="MarginContainer" parent="." unique_id=1625499124]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InnerCornerContainer" unique_id=801991222]
+layout_mode = 2
+texture = ExtResource("7_brqea")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InnerCornerContainer" unique_id=1382848162]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InnerCornerContainer/MarginContainer" unique_id=616718306]
+self_modulate = Color(1, 1, 1, 0.8352941)
+layout_mode = 2
+texture = ExtResource("8_nmtp0")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="GoldRect" type="NinePatchRect" parent="." unique_id=1244488079]
 layout_mode = 2
@@ -116,3 +179,13 @@ patch_margin_right = 3
 patch_margin_bottom = 3
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=136089343]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(3, 3)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_nmtp0")
+expand_mode = 1

@@ -8,6 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="4_rjyb4"]
 [ext_resource type="FontFile" uid="uid://24hmrcin6ag5" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-SemiBold.ttf" id="6_vvt5l"]
 
+[sub_resource type="Gradient" id="Gradient_blgtj"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yjus6"]
+gradient = SubResource("Gradient_blgtj")
+fill_from = Vector2(1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blgtj"]
 bg_color = Color(0.6, 0, 0, 1)
 
@@ -92,6 +99,16 @@ patch_margin_bottom = 3
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/NameContainer" unique_id=1494460679]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_yjus6")
+expand_mode = 1
+
 [node name="PicContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2048093109]
 layout_mode = 2
 size_flags_vertical = 0
@@ -139,6 +156,16 @@ patch_margin_bottom = 3
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=502127840]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_yjus6")
+expand_mode = 1
+
 [node name="HPContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1892777932]
 layout_mode = 2
 
@@ -163,6 +190,9 @@ show_percentage = false
 [node name="HPLabel" type="Label" parent="MarginContainer/VBoxContainer/HPContainer" unique_id=1869397191]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("6_vvt5l")
 theme_override_font_sizes/font_size = 32
 text = "25 / 50"
@@ -181,3 +211,13 @@ patch_margin_right = 3
 patch_margin_bottom = 3
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/HPContainer" unique_id=1207792736]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_yjus6")
+expand_mode = 1

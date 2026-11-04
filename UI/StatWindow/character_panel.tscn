@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://nnyads6l8ver"]
 
 [ext_resource type="Shader" uid="uid://btrvf67l50axd" path="res://Tile-RPG/Shaders/texture_scale_shader.gdshader" id="1_21j1f"]
+[ext_resource type="Script" uid="uid://hafvxd2ffp8n" path="res://Tile-RPG/UI/StatWindow/character_panel.gd" id="1_r4w6e"]
 [ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="2_pahkc"]
 [ext_resource type="PackedScene" uid="uid://dt0uqtplms27k" path="res://Tile-RPG/UI/GridInventory/generic_borders.tscn" id="3_4miw3"]
 [ext_resource type="PackedScene" uid="uid://d227kb7bii1ko" path="res://Tile-RPG/UI/GridInventory/title_container.tscn" id="3_pahkc"]
@@ -8,23 +9,43 @@
 [ext_resource type="PackedScene" uid="uid://deu2pbwudigdv" path="res://Tile-RPG/UI/StatWindow/main_stats_panel.tscn" id="5_iwvd0"]
 [ext_resource type="PackedScene" uid="uid://cpubrn7bw2l70" path="res://Tile-RPG/UI/StatWindow/skills_panel.tscn" id="6_7jjme"]
 [ext_resource type="PackedScene" uid="uid://di5dmavoit2d1" path="res://Tile-RPG/UI/StatWindow/defences_panel.tscn" id="7_va55r"]
+[ext_resource type="PackedScene" uid="uid://cqeybhjlalb08" path="res://Tile-RPG/UI/Menus/reusable_button.tscn" id="8_c60lb"]
 [ext_resource type="PackedScene" uid="uid://cvig8jb1sparu" path="res://Tile-RPG/UI/StatWindow/resistances_panel.tscn" id="8_glfm7"]
+[ext_resource type="Texture2D" uid="uid://cf6r732vx6cso" path="res://Tile-RPG/Images/UI/Borders/border_inner512.png" id="8_m4su5"]
+[ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="10_0h0k3"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="10_6h031"]
+[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="10_x201e"]
+[ext_resource type="PackedScene" uid="uid://3i0qvl7uywlk" path="res://Tile-RPG/UI/close_red_button.tscn" id="11_5usix"]
+[ext_resource type="FontFile" uid="uid://24hmrcin6ag5" path="res://Tile-RPG/Fonts/GoogleFonts/Spectral-SemiBold.ttf" id="11_8piby"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="12_c60lb"]
+[ext_resource type="PackedScene" uid="uid://c4ee8g73y826e" path="res://Tile-RPG/UI/StatWindow/secondary_stat_panel.tscn" id="15_8piby"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iwvd0"]
 resource_local_to_scene = true
 shader = ExtResource("1_21j1f")
 shader_parameter/tiling_scale = 3.0000001392401203
 
-[sub_resource type="Gradient" id="Gradient_j1tjm"]
+[sub_resource type="Gradient" id="Gradient_5usix"]
 offsets = PackedFloat32Array(0, 0.99789476)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.24313726)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_iwvd0"]
-gradient = SubResource("Gradient_j1tjm")
+gradient = SubResource("Gradient_5usix")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(1, 0.46438748)
 
-[node name="CharacterPanel" type="MarginContainer" unique_id=361535583]
+[sub_resource type="Gradient" id="Gradient_blgtj"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hgm3r"]
+gradient = SubResource("Gradient_blgtj")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjb1f"]
+bg_color = Color(0.8901961, 0.8666667, 0.7137255, 1)
+corner_detail = 1
+
+[node name="CharacterPanel" type="MarginContainer" unique_id=361535583 node_paths=PackedStringArray("portrait_panel", "main_stats_panel", "skills_panel", "defences_panel", "resistances_panel", "close_red_button", "xp_prog_bar", "xp_label", "secondary_stats_panel", "reusable_button")]
 custom_minimum_size = Vector2(500, 1000)
 anchors_preset = 4
 anchor_top = 0.5
@@ -33,6 +54,17 @@ offset_top = -58.0
 offset_right = 116.0
 offset_bottom = 58.0
 grow_vertical = 2
+script = ExtResource("1_r4w6e")
+portrait_panel = NodePath("MarginContainer/VBoxContainer/PortraitMainstats/PortraitPanel")
+main_stats_panel = NodePath("MarginContainer/VBoxContainer/PortraitMainstats/MainStatsPanel")
+skills_panel = NodePath("MarginContainer/VBoxContainer/SkillsOpenRestStats/SkillsPanel")
+defences_panel = NodePath("MarginContainer/VBoxContainer/DefencesPanel")
+resistances_panel = NodePath("MarginContainer/VBoxContainer/ResistancesPanel")
+close_red_button = NodePath("CloseRedButton")
+xp_prog_bar = NodePath("MarginContainer/VBoxContainer/XPContainer/XPProgBar")
+xp_label = NodePath("MarginContainer/VBoxContainer/XPContainer/XPLabel")
+secondary_stats_panel = NodePath("SecondaryStatsPanel")
+reusable_button = NodePath("MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer/InnerCornerContainer/MarginContainer/ReusableButton")
 
 [node name="BgImage" type="TextureRect" parent="." unique_id=1777520462]
 self_modulate = Color(0.49819997, 0.51039, 0.53, 1)
@@ -77,19 +109,201 @@ layout_mode = 2
 [node name="MainStatsPanel" parent="MarginContainer/VBoxContainer/PortraitMainstats" unique_id=2083065335 instance=ExtResource("5_iwvd0")]
 layout_mode = 2
 
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=109598618]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [node name="SkillsOpenRestStats" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=93235132]
 layout_mode = 2
 
 [node name="SkillsPanel" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats" unique_id=244345404 instance=ExtResource("6_7jjme")]
 layout_mode = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats" unique_id=1771590527]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer" unique_id=816287398]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="InnerCornerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer" unique_id=457783449]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer/InnerCornerContainer" unique_id=560342588]
+self_modulate = Color(0.5, 0.5, 0.5, 1)
+layout_mode = 2
+texture = ExtResource("8_m4su5")
+draw_center = false
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer/InnerCornerContainer" unique_id=1701647598]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ReusableButton" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer/InnerCornerContainer/MarginContainer" unique_id=1928547599 instance=ExtResource("8_c60lb")]
+custom_minimum_size = Vector2(190, 190)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_color = Color(0.71, 0.6816, 0.6532, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer/InnerCornerContainer/MarginContainer" unique_id=880785697]
+layout_mode = 2
+theme = ExtResource("10_x201e")
+theme_override_font_sizes/font_size = 30
+text = "Secondary
+Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer/InnerCornerContainer/MarginContainer" unique_id=1338109251]
+self_modulate = Color(1, 1, 1, 0.8352941)
+layout_mode = 2
+texture = ExtResource("10_0h0k3")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="GoldRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer" unique_id=2033689298]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("12_c60lb")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/SkillsOpenRestStats/MarginContainer" unique_id=273920872]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(4, 4)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_hgm3r")
+expand_mode = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1989214044]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
 [node name="DefencesPanel" parent="MarginContainer/VBoxContainer" unique_id=945658888 instance=ExtResource("7_va55r")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=99850086]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 
 [node name="ResistancesPanel" parent="MarginContainer/VBoxContainer" unique_id=1287393770 instance=ExtResource("8_glfm7")]
 layout_mode = 2
 
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=926203454]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="XPContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=478205441]
+layout_mode = 2
+
+[node name="BGImage" type="TextureRect" parent="MarginContainer/VBoxContainer/XPContainer" unique_id=251997488]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("10_6h031")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="XPProgBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/XPContainer" unique_id=1804019781]
+custom_minimum_size = Vector2(325, 40)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_vjb1f")
+value = 55.0
+rounded = true
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="MarginContainer/VBoxContainer/XPContainer" unique_id=2087894208]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("11_8piby")
+theme_override_font_sizes/font_size = 32
+text = "25 / 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/XPContainer" unique_id=1463940257]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("12_c60lb")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/VBoxContainer/XPContainer" unique_id=1521863605]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_hgm3r")
+expand_mode = 1
+
 [node name="GenericBorders" parent="." unique_id=1423847941 instance=ExtResource("3_4miw3")]
 layout_mode = 2
+
+[node name="CloseRedButton" parent="." unique_id=723060951 instance=ExtResource("11_5usix")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-12, 12)
+offset_transform_visual_only = false
+
+[node name="SecondaryStatsPanel" parent="." unique_id=1576975181 instance=ExtResource("15_8piby")]
+visible = false
+top_level = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_visual_only = false
 
 [editable path="MarginContainer/VBoxContainer/TitleContainer"]

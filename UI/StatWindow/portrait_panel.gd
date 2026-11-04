@@ -14,12 +14,9 @@ func set_character(new_game_character:GameCharacter) -> void:
 	
 	if game_character.picture: game_char_pic_rect.texture = game_character.picture
 	name_label.text = game_character.display_name
-	game_character.stat_handler.stats_changed.connect(update_values)
-	update_values()
+	update_stats(new_game_character.stat_handler)
 
-func update_values() -> void:
-	var stat_handler:StatHandler = game_character.stat_handler
-	
+func update_stats(stat_handler:StatHandler) -> void:
 	lvl_label.text = "Lvl " + str(stat_handler.char_stats[Stats.CharStat.CURRENT_LEVEL])
 	
 	hp_prog_bar.max_value = stat_handler.resources[Stats.ResourceStat.MAX_HP]
