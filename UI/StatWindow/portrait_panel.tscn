@@ -19,25 +19,20 @@ fill_from = Vector2(1, 1)
 bg_color = Color(0.6, 0, 0, 1)
 
 [node name="PortraitPanel" type="MarginContainer" unique_id=1749545140 node_paths=PackedStringArray("name_label", "lvl_label", "game_char_pic_rect", "hp_prog_bar", "hp_label")]
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -187.5
-offset_top = -303.5
 offset_right = 187.5
-offset_bottom = 303.5
+offset_bottom = 607.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 30
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 30
 script = ExtResource("1_blgtj")
 name_label = NodePath("MarginContainer/VBoxContainer/NameContainer/MarginContainer/HBoxContainer/NameLabel")
 lvl_label = NodePath("MarginContainer/VBoxContainer/NameContainer/MarginContainer/HBoxContainer/LvlLabel")
-game_char_pic_rect = NodePath("MarginContainer/VBoxContainer/PicContainer/GameCharPicRect")
+game_char_pic_rect = NodePath("MarginContainer/VBoxContainer/PicContainer/MarginContainer/GameCharPicRect")
 hp_prog_bar = NodePath("MarginContainer/VBoxContainer/HPContainer/HpProgBar")
 hp_label = NodePath("MarginContainer/VBoxContainer/HPContainer/HPLabel")
 
@@ -110,10 +105,19 @@ texture = SubResource("GradientTexture2D_yjus6")
 expand_mode = 1
 
 [node name="PicContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2048093109]
+custom_maximum_size = Vector2(-1, 375)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="GameCharPicRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=1058194908]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=136820796]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="GameCharPicRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PicContainer/MarginContainer" unique_id=1058194908]
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -121,13 +125,6 @@ size_flags_vertical = 4
 texture = ExtResource("3_vvt5l")
 expand_mode = 3
 stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=136820796]
-layout_mode = 2
-theme_override_constants/margin_left = 19
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 19
-theme_override_constants/margin_bottom = 24
 
 [node name="InnerCornerShadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PicContainer/MarginContainer" unique_id=1394631819]
 layout_mode = 2
@@ -142,6 +139,13 @@ patch_margin_bottom = 10
 self_modulate = Color(0.8, 0.8, 0.8, 1)
 layout_mode = 2
 texture = ExtResource("4_blgtj")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="GoldRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/PicContainer" unique_id=159186240]
 layout_mode = 2
@@ -161,7 +165,7 @@ self_modulate = Color(1, 1, 1, 0.35686275)
 show_behind_parent = true
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(2, 2)
+offset_transform_position = Vector2(4, 4)
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_yjus6")
 expand_mode = 1

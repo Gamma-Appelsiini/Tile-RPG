@@ -119,14 +119,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_left = 35
-theme_override_constants/margin_top = 55
+theme_override_constants/margin_top = 42
 theme_override_constants/margin_right = 35
-theme_override_constants/margin_bottom = 45
+theme_override_constants/margin_bottom = 32
 
 [node name="StatsContainer" type="GridContainer" parent="MarginContainer" unique_id=955487010]
 layout_mode = 2
 theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 16
+theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="InnerCornerContainer" type="MarginContainer" parent="." unique_id=17964896]

@@ -3,7 +3,7 @@ class_name UIHandler
 
 @export var inventory_panel: InventoryPanel
 @export var globe_ui: GlobeUI = null
-@export var stat_window: StatWindow = null
+#@export var stat_window: StatWindow = null
 @export var dialogue_window: DialogueWindow = null
 @export var ability_bar: AbilityBar = null
 @export var abilities_container: AbilitiesContainer = null
@@ -15,6 +15,7 @@ class_name UIHandler
 @export var black_screen: ColorRect = null
 @export var crafting_panel: CraftingPanel
 @export var shop_panel: ShopPanel
+@export var character_panel: CharacterPanel
 
 const DAMAGE_NUMBER_SCENE:PackedScene = preload("uid://dac2s2r20qif4")
 const DAMAGE_NUMBER = preload("uid://dac2s2r20qif4")
@@ -53,9 +54,9 @@ func _input(event: InputEvent) -> void:
 
 func _handle_esc() -> void:
 	if main_menu.visible: _toggle_menu()
-	elif stat_window.visible or inventory_panel.visible or shop_panel.visible or abilities_container.visible or crafting_panel.visible:
+	elif character_panel.visible or inventory_panel.visible or shop_panel.visible or abilities_container.visible or crafting_panel.visible:
 		if crafting_panel.visible: crafting_panel.hide()
-		stat_window.hide()
+		character_panel.hide()
 		inventory_panel.hide()
 		shop_panel.hide()
 		abilities_container.hide_container()
@@ -65,7 +66,7 @@ func _handle_esc() -> void:
 func _toggle_menu() -> void:
 	if black_screen.self_modulate.a != 0: return
 	
-	stat_window.hide()
+	character_panel.hide()
 	inventory_panel.hide()
 	shop_panel.hide()
 	abilities_container.hide_container()
@@ -75,7 +76,7 @@ func _toggle_menu() -> void:
 
 func _toggle_character() -> void:
 	if main_menu.visible or black_screen.self_modulate.a != 0: return
-	stat_window.visible = !stat_window.visible
+	character_panel.visible = !character_panel.visible
 
 func toggle_inv() -> void:
 	if main_menu.visible or black_screen.self_modulate.a != 0: return
@@ -91,7 +92,7 @@ func _toggle_abilities() -> void:
 
 	if !abilities_container.visible:
 		inventory_panel.hide()
-		stat_window.hide()
+		character_panel.hide()
 		abilities_container.show_container()
 	else: abilities_container.hide_container()
 
@@ -141,7 +142,7 @@ func close_skill_tree() -> void:
 func set_player(player:Player) -> void:
 	ability_bar.set_player(player)
 	dialogue_window.set_player(player)
-	stat_window.set_game_character(player)
+	character_panel.set_character(player)
 	abilities_container.set_player(player)
 
 func load_from_data(save_data:Dictionary) -> void:

@@ -58,7 +58,7 @@ theme_override_constants/separation = 16
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=511038806]
 layout_mode = 2
 theme = ExtResource("5_qwoml")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 36
 text = "Choose a Save Slot"
 horizontal_alignment = 1
 
@@ -73,7 +73,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme = ExtResource("5_qwoml")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "1."
 
 [node name="FileExistsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=685505320]
@@ -81,17 +81,17 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("5_qwoml")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 28
 text = "File already exists"
 vertical_alignment = 2
 
 [node name="SlotButton1" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1928547599 instance=ExtResource("6_4tvrq")]
-custom_minimum_size = Vector2(85, 30)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 button_text = "Slot 1"
-text_size = 12
+text_size = 24
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=124912478]
 layout_mode = 2
@@ -104,7 +104,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme = ExtResource("5_qwoml")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "2."
 
 [node name="FileExistsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=963103197]
@@ -112,17 +112,17 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("5_qwoml")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 28
 text = "File already exists"
 vertical_alignment = 2
 
 [node name="SlotButton2" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1607149461 instance=ExtResource("6_4tvrq")]
-custom_minimum_size = Vector2(85, 30)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 button_text = "Slot 2"
-text_size = 12
+text_size = 24
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1946807282]
 layout_mode = 2
@@ -135,7 +135,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme = ExtResource("5_qwoml")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "3."
 
 [node name="FileExistsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=268267534]
@@ -143,17 +143,17 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("5_qwoml")
 theme_override_colors/font_color = Color(0.97196335, 0.94743043, 0.87325877, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 28
 text = "File already exists"
 vertical_alignment = 2
 
 [node name="SlotButton3" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1414898700 instance=ExtResource("6_4tvrq")]
-custom_minimum_size = Vector2(85, 30)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 button_text = "Slot 3"
-text_size = 12
+text_size = 24
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1911199291]
 layout_mode = 2
@@ -164,8 +164,8 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1456371010 instance=ExtResource("6_4tvrq")]
-custom_minimum_size = Vector2(120, 45)
+custom_minimum_size = Vector2(240, 90)
 layout_mode = 2
 size_flags_horizontal = 4
 button_text = "Return"
-text_size = 16
+text_size = 32

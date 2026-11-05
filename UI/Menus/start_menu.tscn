@@ -55,44 +55,44 @@ grow_vertical = 2
 theme_override_constants/separation = 26
 
 [node name="NewButton" parent="ButtonsContainer" unique_id=1928547599 instance=ExtResource("2_74t4k")]
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(400, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 button_text = "New Game"
+text_size = 40
 text_color = Color(1, 0.9061642, 0.76638883, 1)
 button_color = Color(0.84015495, 0.80940366, 1, 1)
 
 [node name="LoadButton" parent="ButtonsContainer" unique_id=500526686 instance=ExtResource("2_74t4k")]
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(400, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 button_text = "Load Game"
+text_size = 40
 text_color = Color(1, 0.9061642, 0.76638883, 1)
 button_color = Color(0.84015495, 0.80940366, 1, 1)
 
 [node name="SetButton" parent="ButtonsContainer" unique_id=645839047 instance=ExtResource("2_74t4k")]
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(400, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 button_text = "Options"
+text_size = 40
 text_color = Color(1, 0.9061642, 0.76638883, 1)
 button_color = Color(0.84015495, 0.80940366, 1, 1)
 
 [node name="ExitButton" parent="ButtonsContainer" unique_id=179742578 instance=ExtResource("2_74t4k")]
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(400, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 button_text = "Exit Game"
+text_size = 40
 text_color = Color(1, 0.9061642, 0.76638883, 1)
 button_color = Color(0.84015495, 0.80940366, 1, 1)
 
 [node name="SettingsPanel" parent="." unique_id=2011950495 instance=ExtResource("3_74t4k")]
 visible = false
 layout_mode = 1
-load_settings_on_ready = true
-
-[node name="RebindPanel" parent="SettingsPanel" index="1" unique_id=571106148]
-load_binds = true
 
 [node name="LoadPanel" parent="." unique_id=1229663212 instance=ExtResource("4_425mq")]
 visible = false

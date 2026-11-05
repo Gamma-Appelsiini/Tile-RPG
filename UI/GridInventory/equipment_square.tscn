@@ -45,9 +45,9 @@ script = ExtResource("1_ch42j")
 hover_image = NodePath("HoverImage")
 cant_place_rect = NodePath("CantPlaceRect")
 can_place_rect = NodePath("CanPlaceRect")
-nine_patch_rect = NodePath("NinePatchRect")
+nine_patch_rect = NodePath("MarginContainer/StoneBorder")
 bg_image = NodePath("BGImage")
-nine_patch_rect_2 = NodePath("NinePatchRect2")
+nine_patch_rect_2 = NodePath("GoldRect")
 equipment_shadow = NodePath("EquipmentShadow")
 gradient_rect = NodePath("GradientRect")
 
@@ -117,30 +117,40 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=749488438]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=40823445]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="StoneBorder" type="NinePatchRect" parent="MarginContainer" unique_id=749488438]
 layout_mode = 2
 offset_transform_scale = Vector2(0.996, 0.996)
 offset_transform_visual_only = false
 texture = ExtResource("4_4uy8q")
 draw_center = false
-region_rect = Rect2(2, 2, 252, 252)
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=926555516]
-self_modulate = Color(1.598561, 1.598561, 1.598561, 1)
+[node name="GoldRect" type="NinePatchRect" parent="." unique_id=919870895]
+self_modulate = Color(0.82, 0.82, 0.82, 1)
 layout_mode = 2
 offset_transform_visual_only = false
 texture = ExtResource("6_4q8me")
-region_rect = Rect2(8, 8, 496, 496)
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 25
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="EquipmentShadow" type="TextureRect" parent="." unique_id=2096736368]
 layout_mode = 2

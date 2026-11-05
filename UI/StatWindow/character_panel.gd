@@ -17,9 +17,10 @@ var stat_handler:StatHandler = null
 func _ready() -> void:
 	show()
 	close_red_button.button.pressed.connect(hide)
+	hidden.connect(secondary_stats_panel.hide)
 	reusable_button.texture_button.pressed.connect(func(): secondary_stats_panel.visible = !secondary_stats_panel.visible)
 	await get_tree().process_frame
-	secondary_stats_panel.global_position = Vector2(self.global_position.x, reusable_button.global_position.y) + Vector2(self.size.x - 50, (reusable_button.size.y - secondary_stats_panel.size.y) / 2)
+	secondary_stats_panel.global_position = Vector2(self.global_position.x, reusable_button.global_position.y) + Vector2(self.size.x + 25, (reusable_button.size.y - secondary_stats_panel.size.y) / 2)
 	hide()
 
 func set_character(game_character:GameCharacter) -> void:
@@ -35,6 +36,7 @@ func _update_stats() -> void:
 	defences_panel.update_stats(stat_handler)
 	resistances_panel.update_stats(stat_handler)
 	portrait_panel.update_stats(stat_handler)
+	secondary_stats_panel.update_stats(stat_handler)
 	
 	xp_label.text = str(stat_handler.get_stat_amount(Stats.CharStat.CURRENT_XP)) + "/" + str(stat_handler.get_stat_amount(Stats.CharStat.MAX_XP))
 	xp_prog_bar.max_value = stat_handler.get_stat_amount(Stats.CharStat.MAX_XP)
