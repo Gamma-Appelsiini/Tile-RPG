@@ -16,7 +16,6 @@ func _ready() -> void:
 	GlobalSignals.start_dialogue.connect(start_dialogue)
 	dialogue_panel.start_new_dialogue.connect(start_dialogue)
 	dialogue_panel.check_attempted.connect(_handle_check)
-	dialogue_panel.text_ready.connect(set_process_input.bind(true))
 	set_process_input(false)
 
 func set_player(new_player:Player) -> void:
@@ -24,6 +23,11 @@ func set_player(new_player:Player) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interact") or event.is_action_pressed("Jump"):
+		# Skip typing animation
+		if dialogue_panel.setting_text != "":
+			dialogue_panel.set_text(dialogue_panel.setting_text)
+			return
+		
 		if dialogue_resource == null: start_dialogue(next_dialogue)
 		else: _proceed_dialogue()
 
@@ -38,8 +42,6 @@ func _proceed_dialogue() -> void:
 	var text:String = dialogue_resource.get_next_dialogue()
 	var whos_turn:DialogueResource.SPEAKER = dialogue_resource.get_whos_turn()
 	_set_current_speaker(whos_turn)
-	
-	set_process_input(false)
 	dialogue_panel.set_text(text)
 
 func _set_current_speaker(whos_turn:DialogueResource.SPEAKER ) -> void:

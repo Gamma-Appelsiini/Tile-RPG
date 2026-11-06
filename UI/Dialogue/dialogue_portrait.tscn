@@ -1,16 +1,28 @@
 [gd_scene format=3 uid="uid://6xedavukxk8d"]
 
 [ext_resource type="Script" uid="uid://c0p70k8koyggt" path="res://Tile-RPG/UI/Dialogue/dialogue_portrait.gd" id="1_3ygy6"]
-[ext_resource type="Texture2D" uid="uid://dhdwuto7ljn0u" path="res://Tile-RPG/Images/UI/Borders/border_gold_trim512.png" id="2_j60w1"]
+[ext_resource type="Texture2D" uid="uid://tgf3xp8cwgn5" path="res://Tile-RPG/Materials/Textures/Onyx015.jpg" id="2_jc7i6"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="3_j60w1"]
 [ext_resource type="Texture2D" uid="uid://b4s31t8h2tpo1" path="res://Tile-RPG/Images/Portraits/faithful.png" id="4_j60w1"]
-[ext_resource type="Theme" uid="uid://dm5uk4bvc7516" path="res://Tile-RPG/UI/title_label_theme.tres" id="5_ic3b3"]
-[ext_resource type="FontFile" uid="uid://cd2shkn54kchq" path="res://Tile-RPG/Fonts/GoogleFonts/GrenzeGotisch-VariableFont_wght.ttf" id="6_vv68n"]
+[ext_resource type="Texture2D" uid="uid://cisofinvlb1bs" path="res://Tile-RPG/Images/UI/Borders/inventory_square_border.png" id="6_ic3b3"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="7_uxlqj"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jc7i6"]
-load_path = "res://.godot/imported/border_inner256.png-86d2f8e477edb4fe054c75deed09f818.ctex"
+[sub_resource type="Gradient" id="Gradient_blgtj"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
-[node name="DialoguePortrait" type="MarginContainer" unique_id=1874576720 node_paths=PackedStringArray("name_label", "picture_rect", "color_rect")]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vv68n"]
+gradient = SubResource("Gradient_blgtj")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ua4u6"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uxlqj"]
+gradient = SubResource("Gradient_ua4u6")
+fill_from = Vector2(1, 1)
+
+[node name="DialoguePortrait" type="MarginContainer" unique_id=1874576720 node_paths=PackedStringArray("name_label", "picture_rect", "darken_rect")]
+custom_minimum_size = Vector2(400, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -23,23 +35,70 @@ offset_bottom = 36.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3ygy6")
-name_label = NodePath("MarginContainer/MarginContainer2/PanelContainer/NameLabel")
-picture_rect = NodePath("MarginContainer/MarginContainer2/PictureRect")
-color_rect = NodePath("MarginContainer/ColorRect")
+name_label = NodePath("VBoxContainer/NameContainer/MarginContainer/NameLabel")
+picture_rect = NodePath("VBoxContainer/PortraitContainer/PictureContainer/PictureRect")
+darken_rect = NodePath("VBoxContainer/PortraitContainer/PictureContainer/DarkenRect")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=487134332]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=810811538]
 layout_mode = 2
+
+[node name="NameContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1914904789]
+layout_mode = 2
+
+[node name="BGImage" type="TextureRect" parent="VBoxContainer/NameContainer" unique_id=1596855311]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_jc7i6")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/NameContainer" unique_id=1196981298]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/NameContainer/MarginContainer" unique_id=990287698]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Jack, Faithful"
+
+[node name="GoldRect" type="NinePatchRect" parent="VBoxContainer/NameContainer" unique_id=116322331]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("3_j60w1")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/NameContainer" unique_id=989565946]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 2)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vv68n")
+expand_mode = 1
+
+[node name="PortraitContainer" type="MarginContainer" parent="VBoxContainer" unique_id=487134332]
+custom_minimum_size = Vector2(350, 0)
+custom_maximum_size = Vector2(350, -1)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1088860907]
-unique_name_in_owner = true
-layout_mode = 2
-color = Color(0.07, 0.07, 0.07, 0.3137255)
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer" unique_id=1301257742]
+[node name="PictureContainer" type="MarginContainer" parent="VBoxContainer/PortraitContainer" unique_id=1301257742]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 8
@@ -47,30 +106,26 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="PictureRect" type="TextureRect" parent="MarginContainer/MarginContainer2" unique_id=492663509]
-unique_name_in_owner = true
+[node name="PictureRect" type="TextureRect" parent="VBoxContainer/PortraitContainer/PictureContainer" unique_id=492663509]
 layout_mode = 2
 texture = ExtResource("4_j60w1")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer2" unique_id=1856805429]
+[node name="DarkenRect" type="ColorRect" parent="VBoxContainer/PortraitContainer/PictureContainer" unique_id=1088860907]
+visible = false
 layout_mode = 2
-size_flags_vertical = 0
+color = Color(0.07, 0.07, 0.07, 0.3137255)
 
-[node name="NameLabel" type="Label" parent="MarginContainer/MarginContainer2/PanelContainer" unique_id=511437983]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PortraitContainer" unique_id=1541681489]
 layout_mode = 2
-size_flags_vertical = 0
-theme = ExtResource("5_ic3b3")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_vv68n")
-theme_override_font_sizes/font_size = 24
-text = "Jack, Faithful"
-horizontal_alignment = 1
-vertical_alignment = 1
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="MarginContainer/MarginContainer2" unique_id=42452552]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="VBoxContainer/PortraitContainer/MarginContainer" unique_id=42452552]
 layout_mode = 2
 texture = ExtResource("7_uxlqj")
 patch_margin_left = 10
@@ -78,26 +133,38 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="InnerRect" type="NinePatchRect" parent="MarginContainer" unique_id=1549583377]
-self_modulate = Color(0.859, 0.816, 0.773, 1)
+[node name="GoldRect" type="NinePatchRect" parent="VBoxContainer/PortraitContainer/MarginContainer" unique_id=320014802]
 layout_mode = 2
-texture = SubResource("CompressedTexture2D_jc7i6")
+offset_transform_visual_only = false
+texture = ExtResource("3_j60w1")
 draw_center = false
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="CornerRect" type="NinePatchRect" parent="." unique_id=1175885206]
-self_modulate = Color(0.859, 0.816, 0.773, 1)
+[node name="StoneBorder" type="NinePatchRect" parent="VBoxContainer/PortraitContainer" unique_id=820680952]
 layout_mode = 2
-texture = ExtResource("2_j60w1")
+offset_transform_scale = Vector2(0.996, 0.996)
+offset_transform_visual_only = false
+texture = ExtResource("6_ic3b3")
 draw_center = false
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/PortraitContainer" unique_id=366359978]
+self_modulate = Color(1, 1, 1, 0.35686275)
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(3, 3)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_uxlqj")
+expand_mode = 1

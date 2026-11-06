@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://kcntsyd64f1k" path="res://Tile-RPG/Interactables/shop.tscn" id="5_xm402"]
 [ext_resource type="Resource" uid="uid://cyp0vy4ph7gsq" path="res://Tile-RPG/Interactables/Shops/test_shop_resource.tres" id="6_f77js"]
 [ext_resource type="Script" uid="uid://bp36ikilmc15g" path="res://Tile-RPG/Levels/tile_creator.gd" id="7_l0bih"]
+[ext_resource type="PackedScene" uid="uid://c7br5jtsjalha" path="res://Tile-RPG/Interactables/dialogue_interactable.tscn" id="7_lkcut"]
+[ext_resource type="Resource" uid="uid://ccmrmya1xe72k" path="res://Tile-RPG/Dialogue/Resources/test_dialogue.tres" id="8_dhda3"]
+[ext_resource type="PackedScene" uid="uid://dnw6ibd7fwlqf" path="res://Tile-RPG/Interactables/character_dialogue_interactable.tscn" id="9_6ugls"]
+[ext_resource type="Resource" uid="uid://deu7j6om1wygy" path="res://Tile-RPG/Dialogue/Resources/Jail/choices_test.tres" id="10_u73m3"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4x7po"]
 material = ExtResource("4_4x7po")
@@ -51,6 +55,14 @@ items_to_generate = Dictionary[int, int]({
 [node name="Shop" parent="Interactables" unique_id=1275726709 instance=ExtResource("5_xm402")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
 shop_resource = ExtResource("6_f77js")
+
+[node name="DialogueInteractable" parent="Interactables" unique_id=811687816 instance=ExtResource("7_lkcut")]
+dialogue_resource = ExtResource("8_dhda3")
+dialogue_name = "Test Dialogue"
+
+[node name="CharacterDialogueInteractable" parent="Interactables" unique_id=1656279495 instance=ExtResource("9_6ugls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+dialogue_resource = ExtResource("10_u73m3")
 
 [node name="Breakables" type="Node3D" parent="." unique_id=1785823029]
 

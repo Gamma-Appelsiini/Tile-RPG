@@ -222,3 +222,11 @@ const COMBAT_COLORS := {
 	Stats.CombatStat.HEAL: "50cc5aff",
 	Stats.CombatStat.BUFF: "31c2d1ff",
 }
+
+const STAT_COLOR_TABLES := [MAIN_STAT_COLORS,DEF_COLORS,SKILLS_COLORS, COMBAT_COLORS]
+
+func get_stat_color(stat: int) -> Color:
+	for table:Dictionary in STAT_COLOR_TABLES:
+		if table.has(stat):
+			return Color(table[stat])
+	return Color.WHITE

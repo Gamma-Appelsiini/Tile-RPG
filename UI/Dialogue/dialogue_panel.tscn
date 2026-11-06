@@ -1,22 +1,13 @@
 [gd_scene format=3 uid="uid://ca2xbwhnef5ap"]
 
 [ext_resource type="Script" uid="uid://dxp1yhwpy2dvb" path="res://Tile-RPG/UI/Dialogue/dialogue_panel.gd" id="1_gouk5"]
-[ext_resource type="Texture2D" uid="uid://tlfhj0clcf0o" path="res://Tile-RPG/Images/UI/Borders/detail_border2.png" id="1_xdchr"]
 [ext_resource type="Texture2D" uid="uid://c2exlpdih3h2d" path="res://Tile-RPG/Images/Textures/smooth_rock_bg.png" id="3_qxjsi"]
-[ext_resource type="Texture2D" uid="uid://cs26xk72bt0wu" path="res://Tile-RPG/Images/UI/continue.png" id="3_uq2d7"]
-[ext_resource type="StyleBox" uid="uid://deevthuiearin" path="res://Tile-RPG/UI/StatWindow/dark_innel_panel.tres" id="4_xdchr"]
+[ext_resource type="Texture2D" uid="uid://pn56hlyiv6wu" path="res://Tile-RPG/Images/UI/Borders/diamond_button2.png" id="4_xdchr"]
+[ext_resource type="Texture2D" uid="uid://cf6r732vx6cso" path="res://Tile-RPG/Images/UI/Borders/border_inner512.png" id="5_0ty85"]
 [ext_resource type="Texture2D" uid="uid://cbupnky22v4i4" path="res://Tile-RPG/Images/UI/Borders/border_darken_blur.png" id="5_xdchr"]
+[ext_resource type="Texture2D" uid="uid://buhoav5pguorp" path="res://Tile-RPG/Images/UI/Borders/metal_borders.png" id="6_3ad0s"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uq2d7"]
-texture = ExtResource("1_xdchr")
-texture_margin_left = 15.0
-texture_margin_top = 15.0
-texture_margin_right = 15.0
-texture_margin_bottom = 15.0
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-
-[node name="DialoguePanel" type="PanelContainer" unique_id=773947272 node_paths=PackedStringArray("dialogue_label", "choice_container", "continue_rect")]
+[node name="DialoguePanel" type="MarginContainer" unique_id=679075462 node_paths=PackedStringArray("dialogue_label", "choice_vbox", "continue_mark", "dialogue_container", "options_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,11 +16,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_uq2d7")
 script = ExtResource("1_gouk5")
-dialogue_label = NodePath("PanelContainer/VBoxContainer/MarginContainer/DialogueLabel")
-choice_container = NodePath("PanelContainer/VBoxContainer/MarginContainer3/OptionsContainer")
-continue_rect = NodePath("PanelContainer/MarginContainer/ContinueRect")
+dialogue_label = NodePath("MarginContainer/VBoxContainer/DialogueContainer/DialogueLabel")
+choice_vbox = NodePath("MarginContainer/VBoxContainer/OptionsContainer/OptionsVBox")
+continue_mark = NodePath("ContinueIcon")
+dialogue_container = NodePath("MarginContainer/VBoxContainer/DialogueContainer")
+options_container = NodePath("MarginContainer/VBoxContainer/OptionsContainer")
 
 [node name="BgRect" type="TextureRect" parent="." unique_id=681441225]
 self_modulate = Color(0.124268405, 0.124095805, 0.1419102, 1)
@@ -38,61 +30,114 @@ texture = ExtResource("3_qxjsi")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1340473943]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_xdchr")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=913470708]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=2126492982]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-
-[node name="DialogueLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=175049822]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 26
-text = "This is text"
-autowrap_mode = 3
-
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1153358703]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="OptionsContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3" unique_id=360740713]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2057395260]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 25
-
-[node name="ContinueRect" type="TextureRect" parent="PanelContainer/MarginContainer" unique_id=1110498929]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-mouse_filter = 2
-texture = ExtResource("3_uq2d7")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="DarkenNinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=9128888]
+[node name="DarkenNinePatchRect" type="NinePatchRect" parent="." unique_id=9128888]
 layout_mode = 2
 texture = ExtResource("5_xdchr")
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
+
+[node name="ContinueIcon" type="TextureProgressBar" parent="." unique_id=1922012416]
+self_modulate = Color(1.598561, 1.598561, 1.598561, 1)
+custom_minimum_size = Vector2(70, 70)
+custom_maximum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(-40, -40)
+mouse_filter = 2
+value = 50.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_progress = ExtResource("4_xdchr")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1109523889]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=913470708]
+layout_mode = 2
+
+[node name="DialogueContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2126492982]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DialogueLabel" type="Label" parent="MarginContainer/VBoxContainer/DialogueContainer" unique_id=175049822]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 52
+text = "This is text"
+autowrap_mode = 3
+
+[node name="OptionsContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1153358703]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="OptionsVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/OptionsContainer" unique_id=360740713]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="InnerCornerContainer" type="MarginContainer" parent="." unique_id=243329005]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InnerCornerContainer" unique_id=255429473]
+layout_mode = 2
+texture = ExtResource("5_0ty85")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InnerCornerContainer" unique_id=1250872283]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InnerCornerContainer/MarginContainer" unique_id=2014198914]
+self_modulate = Color(1, 1, 1, 0.8352941)
+layout_mode = 2
+texture = ExtResource("5_xdchr")
+draw_center = false
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="GoldRect" type="NinePatchRect" parent="." unique_id=1756923941]
+layout_mode = 2
+offset_transform_visual_only = false
+texture = ExtResource("6_3ad0s")
+draw_center = false
+region_rect = Rect2(2, 2, 510, 510)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

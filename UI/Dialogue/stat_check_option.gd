@@ -10,6 +10,7 @@ signal option_pressed(pressed_check:StatCheck)
 
 const HOVER_COLOR:Color = Color(0.183, 0.6, 0.604, 1.0)
 const DEFAULT_COLOR:Color = Color(0.915, 0.915, 0.915, 1.0)
+const STAT_ICON_MATERIAL := preload("uid://cb4rkkgxtauot")
 
 var player:Player = null
 var stat_check:StatCheck = null
@@ -25,6 +26,11 @@ func set_check(new_check:StatCheck) -> void:
 	var stat_texture:Texture2D = load(EnumStrings.MAIN_STAT_PICS[new_check.stat_type])
 	stat_pic.texture = stat_texture
 	text_label.text = new_check.line_text
+	
+	var new_material:ShaderMaterial = STAT_ICON_MATERIAL.duplicate()
+	stat_pic.material = new_material
+	new_material.set_shader_parameter("stat_color", EnumStrings.get_stat_color(new_check.stat_type))
+	
 	_set_percentage()
 	
 func _set_percentage() -> void:
